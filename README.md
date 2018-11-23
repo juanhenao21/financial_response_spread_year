@@ -3,7 +3,9 @@
 ### Juan Camilo Henao Londono
 
 Ph . D. Physics - Econophysics
+
 [AG Guhr](http://www.theo.physik.uni-duisburg-essen.de/tp/ags/guhr_dir/index.html)
+
 [Universität Duisburg-Essen](https://www.uni-due.de/)
 
 ## Basic folder
