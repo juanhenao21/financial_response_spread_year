@@ -14,4 +14,4 @@ Contains the first approach to the data and the algorithms used in the group. It
 
 ## Cross response individual stocks
 
-Contains the information of the first work I made in the group. Here is the code I used to obtain the results
+Contains the information of the first work I made in the group. Here is the code I used to obtain the results. All the planification and issues were reported in this [Trello Board](https://trello.com/b/pJfWRI4u/econophysics-ph-d).
