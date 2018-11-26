@@ -106,3 +106,4 @@ venv.bak/
 # Folders
 ITCH_2016
 Cross_response_individual_stock/Data
+.vscode
