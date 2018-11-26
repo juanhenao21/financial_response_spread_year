@@ -83,7 +83,6 @@ def midpoint_data(ticker, day):
     hv_prices = prices[types < 3]
     hv_types = types[types < 3]
     hv_times = times[types < 3]
-    hv_volumes = volumes[types < 3]
 
     # Fill the reference lists where the values of 'T' are 'E','C','F','D'
 
@@ -107,8 +106,6 @@ def midpoint_data(ticker, day):
                                                             # with the time of the order
             index_ref[iii] = insertnr[ids[iii]]             # Fill the values of index_ref with no  prices ('E','C','F','D') 
                                                             # with the position of the sell or buy order
-            volumes_ref[iii] = hv_volumes[newids[ids[iii]]] # Fill the values of volumes_ref with no  prices ('E','C','F', 
-                                                            # 'D') with the volume of the sell or buy order
 
     # Minimum and maximum trade price
 
@@ -291,7 +288,6 @@ def midpoint_plot(ticker):
 # -----------------------------------------------------------------------------------------------------------------------
 
 def trade_signs_data(ticker, day):
-
     '''
     Obtain the trade signs from the ITCH 2016 data. For further calculations we use the whole time range from the 
     opening of the market at 9h30 to the closing at 16h in milliseconds and then convert the values to hours (23.4
@@ -303,19 +299,16 @@ def trade_signs_data(ticker, day):
     
     return None
     '''
-    
-# -----------------------------------------------------------------------------------------------------------------------        
-    
+        
     print('Trade signs data')
     print('Processing data for the stock', ticker, 'the day', day + ' March, 2016')
     
     # Load data
 
-    data = np.genfromtxt(gzip.open('../ITCH_2016/201603%s_%s.csv.gz' % (day,ticker)), 
-                      dtype='str', skip_header = 1, delimiter = ',')
-    
-# -----------------------------------------------------------------------------------------------------------------------        
+    data = np.genfromtxt(gzip.open('../../ITCH_2016/201603%s_%s.csv.gz' % (day,ticker)), 
+                         dtype='str', skip_header = 1, delimiter = ',')
 
+    
     # Lists of times, ids, types, volumes and prices
     # List of all the available information available in the data excluding the last two columns
 
@@ -336,8 +329,6 @@ def trade_signs_data(ticker, day):
     times = times_[types_<7]
     types = types_[types_<7]
 
-# -----------------------------------------------------------------------------------------------------------------------        
-
     # Reference lists
     # Reference lists using the original values or the length of the original lists 
 
@@ -354,8 +345,6 @@ def trade_signs_data(ticker, day):
     hv_times = times[types < 3]
 
     trade_sign = 0 * types
-
-# -----------------------------------------------------------------------------------------------------------------------        
 
     # Fill the reference lists where the values of 'T' are 'E','C','F','D'
 
@@ -394,23 +383,54 @@ def trade_signs_data(ticker, day):
 
             trade_sign[iii] = 0
 
-# -----------------------------------------------------------------------------------------------------------------------        
-
     # Ordering the data in the open market time 
 
     day_times_ind = (1. * times / 3600 / 1000 > 9.5) * (1. * times / 3600 / 1000 < 16) > 0 # This line behaves as an or.
                                                                # The two arrays must achieve a condition, in this case, be
                                                                # in the market trade hours
     trade_signs = trade_sign[day_times_ind]
-    times_signs = times[day_times_ind] / 3600 / 1000
+    times_signs = times[day_times_ind]
 
-# -----------------------------------------------------------------------------------------------------------------------        
+    # Completing the full time entrances
+
+    full_time = np.array(range(34200000,57600000))                  # 34 200 000 ms = 9h30 - 57 600 000 ms = 16h
+    
+    # As there can be several values for the same millisecond, we use the most used trade value of each millisecond in the full time
+    # array as it behaves quiet similar as the original input
+
+    count = 0
+    trade_signs_complete_most = 0. * full_time
+
+    for t_idx, t_val in enumerate(full_time):
+        
+        most = 0
+        
+        if (count < len(times_signs) and t_val == times_signs[count]):
+            
+            most += trade_signs[count]
+            
+            count += 1
+            
+            while (count < len(times_signs) and times_signs[count - 1] == times_signs[count]):
+                
+                most += trade_signs[count]
+                count += 1
+                
+            if (most > 0):
+                
+                trade_signs_complete_most[t_idx] = 1
+                
+            elif (most < 0):
+                
+                trade_signs_complete_most[t_idx] = -1
 
     # Saving data
     
-    pickle.dump(trade_signs, open('../Data/trade_signs_201603%s_%s.pickl' % (day,ticker), 'wb'))
-    #pickle.dump(trade_sign, open('../Data/trade_signs_test%s_%s.pickl' % (day,ticker), 'wb'))
-    pickle.dump(times, open('../Data/trade_signs_time_test%s_%s.pickl' % (day,ticker), 'wb'))
+    pickle.dump(full_time, open('../Data/trade_signs_data/times_trade_signs_201603%s_%s.pickl' % (day,ticker), 'wb'))
+    pickle.dump(trade_signs_complete_most, open('../Data/trade_signs_data/trade_signs_most_201603%s_%s.pickl' % (day,ticker), 'wb'))
+    
+    print('Trade signs data saved')
+    print()
 
     return None
 
@@ -440,7 +460,8 @@ def main():
 
     days = ['07','08','09','10','11']
 
-    midpoint_data('AAPL', '09')
+    #midpoint_data('AAPL', '09')
+    trade_signs_data('AAPL', '09')
 
     print('Ay vamos!!')
     return None
