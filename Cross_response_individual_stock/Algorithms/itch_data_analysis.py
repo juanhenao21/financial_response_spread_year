@@ -279,10 +279,55 @@ def midpoint_log_returns_data(ticker, day):
 
 # -----------------------------------------------------------------------------------------------------------------------
 
-def midpoint_plot(ticker):
+def midpoint_plot(ticker, day):
+    '''
+    Plot the midpoint behavior using the price vs time. The data is loaded from the mipoint data results.
+    
+    ticker -- String of the abbreviation of the stock to be analized (i.e. 'AAPL')
+    day -- String of the day to be analized (i.e '07')
+    
+    return None
+    '''
+    # Load data
 
-    # TO DO
+    print('Processing data for the stock', ticker, 'the day', day + ' March, 2016')
 
+    midpoint = pickle.load(open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker), 'rb'))
+    time = pickle.load(open('../Data/midpoint_data/time_201603%s_%s.pickl' % (day,ticker), 'rb'))
+    
+    # Plotting
+    
+    plt.title('%s' %ticker, fontsize=40)
+    plt.plot(time, midpoint, label=('Day %s' %day))
+    plt.xlabel(r'Time $[hour]$', fontsize=25)
+    plt.ylabel(r'Price $ [\$] $', fontsize=25)
+    plt.legend(loc=0,fontsize=20)
+        
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+def midpoint_plot_week(ticker, days):
+    '''
+    Plot the midpoint behavior using the price vs time during a time period. The data is loaded from the mipoint data
+    results.
+    
+    ticker -- String of the abbreviation of the stock to be analized (i.e. 'AAPL')
+    days -- List of the days that will be plotted (i.e ['07', '08', '09'])
+    
+    return None
+    '''
+        
+    plt.figure(figsize=(16,9))
+    
+    days=['07','08','09','10','11']
+    
+    for day in days:
+        midpoint_plot(ticker, day)
+    
+    plt.tight_layout()
+    plt.savefig('../Data/midpoint_plot/midpoint_plot_%s.png' %ticker)
+    
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
@@ -460,8 +505,9 @@ def main():
 
     days = ['07','08','09','10','11']
 
-    #midpoint_data('AAPL', '09')
-    trade_signs_data('AAPL', '09')
+    #midpoint_data('GOOG', '07')
+    #trade_signs_data('AAPL', '09')
+    midpoint_plot_week('AAPL')
 
     print('Ay vamos!!')
     return None
