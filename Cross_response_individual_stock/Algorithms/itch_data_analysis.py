@@ -1,7 +1,8 @@
 '''
-Script to analyze the ITCH data with the information of 96 stocks during a week in 2016.
+Script to analyze the ITCH data with the information of 96 stocks during a 
+week in 2016.
 
-The 96 stocks are shown in the list used in main and the week values used are from the 
+The 96 stocks are shown in the list used in main and the week values used are from the
 week of the 7 - 11 March, 2016.
 
 For the first proyect I need to obtain the cross response functions between individual
@@ -261,7 +262,7 @@ def midpoint_data(ticker, day):
     pickle.dump(bestAsks_first_val, open('../Data/midpoint_data/bestAsks_201603%s_%s.pickl' % (day,ticker), 'wb'))
     pickle.dump(bestBids_first_val, open('../Data/midpoint_data/bestBids_201603%s_%s.pickl' % (day,ticker), 'wb'))
     pickle.dump(spread_first_val, open('../Data/midpoint_data/spread_201603%s_%s.pickl' % (day,ticker), 'wb'))
-    pickle.dump(full_time, open('../Data/midpoint_data/time_201603%s_%s.pickl' % (day,ticker), 'wb'))
+    pickle.dump(full_time, open('../Data/midpoint_data/time.pickl' % (day,ticker), 'wb'))
     pickle.dump(midpoint_first_val, open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker), 'wb'))
     
     print('Midpoint price data saved')
@@ -293,7 +294,7 @@ def midpoint_plot(ticker, day):
     print('Processing data for the stock', ticker, 'the day', day + ' March, 2016')
 
     midpoint = pickle.load(open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker), 'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time_201603%s_%s.pickl' % (day,ticker), 'rb'))
+    time = pickle.load(open('../Data/midpoint_data/time.pickl' % (day,ticker), 'rb'))
     
     # Plotting
     
@@ -413,11 +414,11 @@ def trade_signs_data(ticker, day):
 
             if (hv_types[newids[ids[iii]]] == 2):
 
-                trade_sign[iii] = -1
+                trade_sign[iii] = -1.
 
             elif (hv_types[newids[ids[iii]]] == 1):
 
-                trade_sign[iii] = 1
+                trade_sign[iii] = 1.
 
         else:
 
@@ -463,15 +464,14 @@ def trade_signs_data(ticker, day):
                 
             if (most > 0):
                 
-                trade_signs_complete_most[t_idx] = 1
+                trade_signs_complete_most[t_idx] = 1.
                 
             elif (most < 0):
                 
-                trade_signs_complete_most[t_idx] = -1
+                trade_signs_complete_most[t_idx] = -1.
 
     # Saving data
-    
-    pickle.dump(full_time, open('../Data/trade_signs_data/times_trade_signs_201603%s_%s.pickl' % (day,ticker), 'wb'))
+
     pickle.dump(trade_signs_complete_most, open('../Data/trade_signs_data/trade_signs_most_201603%s_%s.pickl' % (day,ticker), 'wb'))
     
     print('Trade signs data saved')
@@ -492,28 +492,30 @@ def cross_response_functions(ticker, day):
 def main():
 
     # Tickers and days to analyze
-    tickers = ["AAL", "AAPL","ADBE","ADI", "ADP", "ADSK","AKAM","ALXN","AMAT","AMGN",
-               "AMZN","ATVI","AVGO","BBBY","BIDU","BIIB","BMRN","CA",  "CELG","CERN",
-               "CHKP","CHRW","CHTR","CMCSA","COST","CSCO","CTSH","CTXS","DISCA","DISH",
-               "DLTR","EA",  "EBAY","EQIX","ESRX","EXPD","FAST","FB",  "FISV","FOXA",
-               "GILD","GOOG","GRMN","HSIC","ILMN","INTC","INTU","ISRG","JD",  "KHC",
-               "KLAC","LBTYA","LLTC","LMCA","LRCX","LVNTA","MAR","MAT","MDLZ","MNST",
-               "MSFT","MU",  "MYL", "NFLX","NTAP","NVDA","NXPI","ORLY","PAYX","PCAR",
-               "PCLN","QCOM","REGN","ROST","SBAC","SBUX","SIRI","SNDK","SPLS","SRCL",
-               "STX", "SYMC","TRIP","TSCO","TSLA","TXN", "VIAB","VIP", "VOD", "VRSK",
-               "VRTX","WDC", "WFM", "WYNN","XLNX","YHOO"]
+    # tickers = ["AAL", "AAPL","ADBE","ADI", "ADP", "ADSK","AKAM","ALXN","AMAT","AMGN",
+    #            "AMZN","ATVI","AVGO","BBBY","BIDU","BIIB","BMRN","CA",  "CELG","CERN",
+    #            "CHKP","CHRW","CHTR","CMCSA","COST","CSCO","CTSH","CTXS","DISCA","DISH",
+    #            "DLTR","EA",  "EBAY","EQIX","ESRX","EXPD","FAST","FB",  "FISV","FOXA",
+    #            "GILD","GOOG","GRMN","HSIC","ILMN","INTC","INTU","ISRG","JD",  "KHC",
+    #            "KLAC","LBTYA","LLTC","LMCA","LRCX","LVNTA","MAR","MAT","MDLZ","MNST",
+    #            "MSFT","MU",  "MYL", "NFLX","NTAP","NVDA","NXPI","ORLY","PAYX","PCAR",
+    #            "PCLN","QCOM","REGN","ROST","SBAC","SBUX","SIRI","SNDK","SPLS","SRCL",
+    #            "STX", "SYMC","TRIP","TSCO","TSLA","TXN", "VIAB","VIP", "VOD", "VRSK",
+    #            "VRTX","WDC", "WFM", "WYNN","XLNX","YHOO"]
 
-    days = ['07','08','09','10','11']
+    # days = ['07','08','09','10','11']
 
-    #midpoint_data('GOOG', '07')
-    #trade_signs_data('AAPL', '09')
-    midpoint_plot_week('AAPL')
+    tickers = ['AAPL', 'MSFT']
+    days = ['07']
+
+    #midpoint_data('MSFT', '07')
+    #midpoint_data('AAPL', '07')
+    trade_signs_data('MSFT', '07')
+    trade_signs_data('AAPL', '07')
+    #midpoint_plot_week('AAPL')
 
     print('Ay vamos!!')
     return None
 
 if __name__ == '__main__':
     main()
-    
-
-
