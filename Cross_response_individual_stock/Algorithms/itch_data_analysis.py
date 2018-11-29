@@ -294,7 +294,7 @@ def midpoint_plot(ticker, day):
     print('Processing data for the stock', ticker, 'the day', day + ' March, 2016')
 
     midpoint = pickle.load(open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker), 'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl' % (day,ticker), 'rb'))
+    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
     
     # Plotting
     
@@ -321,12 +321,11 @@ def midpoint_plot_week(ticker, days):
         
     plt.figure(figsize=(16,9))
     
-    days=['07','08','09','10','11']
-    
     for day in days:
         midpoint_plot(ticker, day)
     
     plt.tight_layout()
+    plt.grid(True)
     plt.savefig('../Data/midpoint_plot/midpoint_plot_%s.png' %ticker)
     
     return None
@@ -510,9 +509,9 @@ def main():
 
     #midpoint_data('MSFT', '07')
     #midpoint_data('AAPL', '07')
-    trade_signs_data('MSFT', '07')
-    trade_signs_data('AAPL', '07')
-    #midpoint_plot_week('AAPL')
+    #trade_signs_data('MSFT', '07')
+    #trade_signs_data('AAPL', '07')
+    midpoint_plot_week('AAPL', days)
 
     print('Ay vamos!!')
     return None
