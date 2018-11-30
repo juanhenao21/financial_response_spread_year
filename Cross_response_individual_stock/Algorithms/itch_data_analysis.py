@@ -476,6 +476,7 @@ def trade_signs_data(ticker, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 def cross_response_functions(ticker_i, ticker_j, day, tau_val):
+
     '''
     Obtain the cross response functions using the midpoint log return of ticker i and trade signs of ticker j during
     different time lags. The data is adjusted to use only the values each 1000 ms = 1 s
@@ -489,7 +490,7 @@ def cross_response_functions(ticker_i, ticker_j, day, tau_val):
     '''
     
     print('Cross response functions data')
-    print('Processing data for the stock i', ticker_i, 'and stock j', ticker_j, 'the day', day + ' March, 2016')
+    print('Processing data for the stock i' + ticker_i + 'and stock j' + ticker_j + 'the day' + day + ' March, 2016')
     
     # Load data
     midpoint_i = pickle.load(open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker_i), 'rb'))
@@ -531,6 +532,64 @@ def cross_response_functions(ticker_i, ticker_j, day, tau_val):
 
 # -----------------------------------------------------------------------------------------------------------------------
 
+def avg_return_avg_trade(ticker_i, ticker_j, day, tau_val):
+    '''
+    Obtain the result of the product between the averaged midpoint log return of ticker i and the averaged trade 
+    signs of ticker j during different time lags. The data is adjusted to use only the values each 1000 ms = 1 s
+    
+    ticker_i -- String of the abbreviation of the midpoint stock to be analized (i.e. 'AAPL')
+    ticker_j -- String of the abbreviation of the trade sign stock to be analized (i.e. 'AAPL')
+    day -- String of the day to be analized (i.e '07')
+    tau_val -- Maximum time lag to be analyzed
+    
+    return None
+    '''
+    
+    print('Product between the averaged midpoint log return of ticker i and the averaged trade signs of ticker j data')
+    print('Processing data for the stock i ' + ticker_i + ' and stock j ' + ticker_j + ' the day ' + day + ' March, 2016')
+    
+    # Load data
+    midpoint_i = pickle.load(open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker_i), 'rb'))
+    trade_sign_j = pickle.load(open('../Data/trade_signs_data/trade_signs_most_201603%s_%s.pickl' % (day,ticker_j), 'rb'))
+    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+    
+    # Setting variables to work with 1s accuracy
+
+    avg_return_sign = np.zeros(tau_val)   # Array of the average of each tau. 10^3 s used by Wang
+
+    trade_sign_j_sec = trade_sign_j[::1000] # Using values each second
+    trade_sign_j_sec_not0 = trade_sign_j_sec[trade_sign_j_sec != 0] # Using values != 0
+    trade_sign_j_sec_not0_avg = np.mean(trade_sign_j_sec_not0)
+
+    midpoint_i_sec = midpoint_i[::1000] # Using values each second
+    time_sec = time[::1000] # Changing time from ms to s
+    
+    # Calculating the midpoint log return and the cross response functions
+    
+    for tau in range(1000):
+    
+        log_return_i_sec = 0. * time_sec # Every second have a log-return
+    
+        for t_idx in range(len(time_sec)):
+            if (t_idx + tau < len(time_sec)):
+                log_return_i_sec[t_idx] = np.log(midpoint_i_sec[t_idx + tau] / midpoint_i_sec[t_idx])
+
+        log_return_i_sec_not0 = log_return_i_sec[trade_sign_j_sec != 0]
+        log_return_i_sec_not0_avg = np.mean(log_return_i_sec_not0)
+
+        avg_return_sign[tau] = log_return_i_sec_not0_avg * trade_sign_j_sec_not0_avg
+    
+    # Saving data
+    
+    pickle.dump(avg_return_sign, open('../Data/avg_return_sign_data/avg_201603%s_%si_%sj.pickl' % (day, ticker_i, ticker_j), 'wb'))
+    
+    print('Average product data saved')
+    print()
+    
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
 def main():
 
     # Tickers and days to analyze
@@ -552,10 +611,16 @@ def main():
 
     #midpoint_data('MSFT', '07')
     #midpoint_data('AAPL', '07')
-    trade_signs_data('GOOG', '07')
+    #trade_signs_data('GOOG', '07')
     #trade_signs_data('AAPL', '07')
     #midpoint_plot_week('AAPL', days)
-    cross_response_functions('AAPL', 'GOOG', '07', 1000)
+    #cross_response_functions('AAPL', 'GOOG', '07', 1000)
+
+    avg_return_avg_trade('AAPL', 'MSFT', '07', 1000)
+    avg_return_avg_trade('MSFT', 'AAPL', '07', 1000)
+    avg_return_avg_trade('AAPL', 'AAPL', '07', 1000)
+    avg_return_avg_trade('MSFT', 'MSFT', '07', 1000)
+
     print('Ay vamos!!')
     return None
 
