@@ -262,7 +262,7 @@ def midpoint_data(ticker, day):
     pickle.dump(bestAsks_first_val, open('../Data/midpoint_data/bestAsks_201603%s_%s.pickl' % (day,ticker), 'wb'))
     pickle.dump(bestBids_first_val, open('../Data/midpoint_data/bestBids_201603%s_%s.pickl' % (day,ticker), 'wb'))
     pickle.dump(spread_first_val, open('../Data/midpoint_data/spread_201603%s_%s.pickl' % (day,ticker), 'wb'))
-    pickle.dump(full_time, open('../Data/midpoint_data/time.pickl' % (day,ticker), 'wb'))
+    pickle.dump(full_time, open('../Data/midpoint_data/time.pickl', 'wb'))
     pickle.dump(midpoint_first_val, open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker), 'wb'))
     
     print('Midpoint price data saved')
@@ -476,7 +476,6 @@ def trade_signs_data(ticker, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 def cross_response_functions(ticker_i, ticker_j, day, tau_val):
-
     '''
     Obtain the cross response functions using the midpoint log return of ticker i and trade signs of ticker j during
     different time lags. The data is adjusted to use only the values each 1000 ms = 1 s
@@ -490,7 +489,7 @@ def cross_response_functions(ticker_i, ticker_j, day, tau_val):
     '''
     
     print('Cross response functions data')
-    print('Processing data for the stock i' + ticker_i + 'and stock j' + ticker_j + 'the day' + day + ' March, 2016')
+    print('Processing data for the stock i', ticker_i, 'and stock j', ticker_j, 'the day', day + ' March, 2016')
     
     # Load data
     midpoint_i = pickle.load(open('../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day,ticker_i), 'rb'))
@@ -501,25 +500,29 @@ def cross_response_functions(ticker_i, ticker_j, day, tau_val):
 
     cross_response_tau = np.zeros(tau_val)   # Array of the average of each tau. 10^3 s used by Wang
 
-    trade_sign_j_sec = trade_sign_j[::1000] # Using values each second
-    trade_sign_j_sec_not0 = trade_sign_j_sec[trade_sign_j_sec != 0] # Using values != 0
-
     midpoint_i_sec = midpoint_i[::1000] # Using values each second
     time_sec = time[::1000] # Changing time from ms to s
-    
+
+    trade_sign_j_sec_sum = np.sum(np.reshape(trade_sign_j, (1000, -1)), axis = 0) # Reshape the array in group of values
+                                        # of 1000 (1s) and infer the number of rows, then sum all rows.
+    trade_sign_j_sec_avg = 1 * (trade_sign_j_sec_sum > 0) - 1 * (trade_sign_j_sec_sum < 0) # Reasign the trade sign,
+                                        # if the value of the array is greater than 0 gives a 1 and -1 for the contrary.
+    trade_sign_j_sec_nr = np.sum(np.reshape(np.absolute(trade_sign_j), (1000, -1)), axis = 0) # Reshape the array in group
+                                        # values of 1000 (1s) and infer the number of rows, then sum the absolute value of
+                                        # all rows. This is used to know where a trade sign is cero.
+
     # Calculating the midpoint log return and the cross response functions
-    
-    for tau in range(1000):
-    
+
+    for tau in range(1,tau_val):
+
         log_return_i_sec = 0. * time_sec # Every second have a log-return
-    
-        for t_idx in range(len(time_sec)):
-            if (t_idx + tau < len(time_sec)):
-                log_return_i_sec[t_idx] = np.log(midpoint_i_sec[t_idx + tau] / midpoint_i_sec[t_idx])
+        
+        # Obtain the midpoint log return. Displace the numerator tau values to the right and compute the return,
+        # and append the remaining values of tau with zeros
+        log_return_i_sec = np.append(np.log(midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]),np.zeros(tau))
 
-        log_return_i_sec_not0 = log_return_i_sec[trade_sign_j_sec != 0]
-
-        cross_response_tau[tau] = np.mean(log_return_i_sec_not0 * trade_sign_j_sec_not0)
+        cross_response_tau[tau] = np.mean(log_return_i_sec[trade_sign_j_sec_nr != 0] * 
+                                          trade_sign_j_sec_avg[trade_sign_j_sec_nr!=0])
     
     # Saving data
     
@@ -554,30 +557,32 @@ def avg_return_avg_trade(ticker_i, ticker_j, day, tau_val):
     time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
     
     # Setting variables to work with 1s accuracy
-
+    
     avg_return_sign = np.zeros(tau_val)   # Array of the average of each tau. 10^3 s used by Wang
-
-    trade_sign_j_sec = trade_sign_j[::1000] # Using values each second
-    trade_sign_j_sec_not0 = trade_sign_j_sec[trade_sign_j_sec != 0] # Using values != 0
-    trade_sign_j_sec_not0_avg = np.mean(trade_sign_j_sec_not0)
 
     midpoint_i_sec = midpoint_i[::1000] # Using values each second
     time_sec = time[::1000] # Changing time from ms to s
-    
+
+    trade_sign_j_sec_sum = np.sum(np.reshape(trade_sign_j, (1000, -1)), axis = 0) # Reshape the array in group of values
+                                        # of 1000 (1s) and infer the number of rows, then sum all rows.
+    trade_sign_j_sec_avg = 1 * (trade_sign_j_sec_sum > 0) - 1 * (trade_sign_j_sec_sum < 0) # Reasign the trade sign,
+                                        # if the value of the array is greater than 0 gives a 1 and -1 for the contrary.
+    trade_sign_j_sec_nr = np.sum(np.reshape(np.absolute(trade_sign_j), (1000, -1)), axis = 0) # Reshape the array in group
+                                        # values of 1000 (1s) and infer the number of rows, then sum the absolute value of
+                                        # all rows. This is used to know where a trade sign is cero.
+
     # Calculating the midpoint log return and the cross response functions
     
-    for tau in range(1000):
+    for tau in range(1,tau_val):
     
         log_return_i_sec = 0. * time_sec # Every second have a log-return
-    
-        for t_idx in range(len(time_sec)):
-            if (t_idx + tau < len(time_sec)):
-                log_return_i_sec[t_idx] = np.log(midpoint_i_sec[t_idx + tau] / midpoint_i_sec[t_idx])
+        
+        # Obtain the midpoint log return. Displace the numerator tau values to the right and compute the return,
+        # and append the remaining values of tau with zeros
+        log_return_i_sec = np.append(np.log(midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]),np.zeros(tau))
 
-        log_return_i_sec_not0 = log_return_i_sec[trade_sign_j_sec != 0]
-        log_return_i_sec_not0_avg = np.mean(log_return_i_sec_not0)
-
-        avg_return_sign[tau] = log_return_i_sec_not0_avg * trade_sign_j_sec_not0_avg
+        avg_return_sign[tau] = (np.mean(log_return_i_sec[trade_sign_j_sec_nr != 0]) * 
+                                np.mean(trade_sign_j_sec_avg[trade_sign_j_sec_nr!=0]))
     
     # Saving data
     
@@ -609,17 +614,23 @@ def main():
     tickers = ['AAPL', 'MSFT']
     days = ['07']
 
-    #midpoint_data('MSFT', '07')
-    #midpoint_data('AAPL', '07')
-    #trade_signs_data('GOOG', '07')
-    #trade_signs_data('AAPL', '07')
+    midpoint_data('MSFT', '09')
+    midpoint_data('AAPL', '09')
+    #trade_signs_data('GOOG', '09')
+    trade_signs_data('AAPL', '09')
+    trade_signs_data('MSFT', '09')
     #midpoint_plot_week('AAPL', days)
     #cross_response_functions('AAPL', 'GOOG', '07', 1000)
 
-    avg_return_avg_trade('AAPL', 'MSFT', '07', 1000)
-    avg_return_avg_trade('MSFT', 'AAPL', '07', 1000)
-    avg_return_avg_trade('AAPL', 'AAPL', '07', 1000)
-    avg_return_avg_trade('MSFT', 'MSFT', '07', 1000)
+    avg_return_avg_trade('AAPL', 'MSFT', '09', 1000)
+    avg_return_avg_trade('MSFT', 'AAPL', '09', 1000)
+    avg_return_avg_trade('AAPL', 'AAPL', '09', 1000)
+    avg_return_avg_trade('MSFT', 'MSFT', '09', 1000)
+
+    cross_response_functions('AAPL', 'MSFT', '09', 1000)
+    cross_response_functions('MSFT', 'AAPL', '09', 1000)
+    cross_response_functions('AAPL', 'AAPL', '09', 1000)
+    cross_response_functions('MSFT', 'MSFT', '09', 1000)
 
     print('Ay vamos!!')
     return None
