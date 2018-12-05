@@ -3,7 +3,7 @@ import matplotlib.colors as colors
 import pickle
 import datetime
 
-### List of order types: 
+### List of order types:
 ### "B"=1 -- Add buy order
 ### "S"=2 -- Add sell order
 ### "E"=3 -- Execute outstanding order in part
@@ -41,7 +41,7 @@ for ticker in tickers[5:6]:
     data=genfromtxt("/scratch/skrause/orderbook/data/201603%s_%s.csv"%(day,ticker),dtype='str',skip_header=1,delimiter=',')
     mytime2=datetime.datetime.now()
     print mytime2-mytime1,
-    
+
     ### Lists of times, ids etc.
     times_=array([int(mytime) for mytime in data[:,0]])
     ids_=array([int(myid) for myid in data[:,2]])
@@ -53,7 +53,7 @@ for ticker in tickers[5:6]:
     types=types_[types_<7]
     volumes=volumes_[types_<7]
     prices=prices_[types_<7]
-    
+
     ### reference lists
     prices_ref=1*prices
     types_ref=0*types
@@ -72,7 +72,7 @@ for ticker in tickers[5:6]:
             newids[ids[iii]]=hv
             insertnr[ids[iii]]=iii
             hv+=1
-        else: 
+        else:
             prices_ref[iii]=hv_prices[newids[ids[iii]]]
             types_ref[iii]=hv_types[newids[ids[iii]]]
             times_ref[iii]=hv_times[newids[ids[iii]]]
@@ -86,7 +86,7 @@ for ticker in tickers[5:6]:
     maxP=round(1.1*(1.*prices_ref[types==5]/10000).max(),2)
     valuesP=minP+0.01*arange(int((maxP-minP)/0.01))#arange(minP,maxP,0.01)
     maxP=valuesP.max()
-    
+
     ### construct quotes and spread
     nAsk=0*valuesP
     nAsk[-1]=1
@@ -147,8 +147,8 @@ for ticker in tickers[5:6]:
     deltaP=0.002*mean(midpoint)
     times_spread=1.*timesS [day_times_ind]/3600/1000
     pickle.dump((spread,times_spread,midpoint),open('/scratch/skrause/orderbook/data_/spread_201603%s_%s.pickl'%(day,ticker),'wb'))
-    
+
     mytime4=datetime.datetime.now()
     print mytime4-mytime3
     #show()
-    
+

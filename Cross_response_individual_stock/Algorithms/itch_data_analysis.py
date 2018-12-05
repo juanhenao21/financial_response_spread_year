@@ -680,8 +680,8 @@ def avg_return_avg_trade(ticker_i, ticker_j, day, tau_val):
         :param tau_val: Maximum time lag to be analyzed
     """
 
-    print('Product between the averaged midpoint log return of ticker i and \
-          the averaged trade signs of ticker j data')
+    print('Product between the averaged midpoint log return of ticker i and' +
+          'the averaged trade signs of ticker j data')
     print('Processing data for the stock i ' + ticker_i + ' and stock j ' +
           ticker_j + ' the day ' + day + ' March, 2016')
 
@@ -767,28 +767,38 @@ def main():
     #            "STX", "SYMC", "TRIP", "TSCO", "TSLA", "TXN", "VIAB", "VIP", "VOD", "VRSK",
     #            "VRTX", "WDC", "WFM", "WYNN", "XLNX", "YHOO"]
 
-    # days = ['07', '08', '09', '10', '11']
+    days = ['07', '08', '09', '10', '11']
 
     tickers = ['AAPL', 'MSFT']
-    days = ['07']
+    # days = ['07']
 
-    midpoint_data('MSFT', '09')
-    midpoint_data('AAPL', '09')
+    for day in days:
+        midpoint_data('AAPL', day)
+        midpoint_data('MSFT', day)
+        trade_signs_data('AAPL', day)
+        trade_signs_data('MSFT', day)
+
+    for day in days:
+        cross_response_functions('AAPL', 'MSFT', day, 1000)
+        avg_return_avg_trade('AAPL', 'MSFT', day, 1000)
+
+    #midpoint_data('MSFT', '09')
+    #midpoint_data('AAPL', '09')
     # trade_signs_data('GOOG', '09')
-    trade_signs_data('AAPL', '09')
-    trade_signs_data('MSFT', '09')
+    #trade_signs_data('AAPL', '09')
+    #trade_signs_data('MSFT', '09')
     # midpoint_plot_week('AAPL', days)
     # cross_response_functions('AAPL', 'GOOG', '07', 1000)
 
-    avg_return_avg_trade('AAPL', 'MSFT', '09', 1000)
-    avg_return_avg_trade('MSFT', 'AAPL', '09', 1000)
-    avg_return_avg_trade('AAPL', 'AAPL', '09', 1000)
-    avg_return_avg_trade('MSFT', 'MSFT', '09', 1000)
+    # avg_return_avg_trade('AAPL', 'MSFT', '09', 1000)
+    # avg_return_avg_trade('MSFT', 'AAPL', '09', 1000)
+    # avg_return_avg_trade('AAPL', 'AAPL', '09', 1000)
+    #avg_return_avg_trade('MSFT', 'MSFT', '09', 1000)
 
-    cross_response_functions('AAPL', 'MSFT', '09', 1000)
-    cross_response_functions('MSFT', 'AAPL', '09', 1000)
-    cross_response_functions('AAPL', 'AAPL', '09', 1000)
-    cross_response_functions('MSFT', 'MSFT', '09', 1000)
+    #cross_response_functions('AAPL', 'MSFT', '09', 1000)
+    #cross_response_functions('MSFT', 'AAPL', '09', 1000)
+    #cross_response_functions('AAPL', 'AAPL', '09', 1000)
+    #cross_response_functions('MSFT', 'MSFT', '09', 1000)
 
     print('Ay vamos!!')
     return None
