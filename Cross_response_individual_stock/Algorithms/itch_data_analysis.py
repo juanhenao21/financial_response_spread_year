@@ -656,8 +656,8 @@ def cross_response_functions(ticker_i, ticker_j, day, tau_val):
     # Saving data
 
     pickle.dump(cross_response_tau, open(
-        '../Data/cross_response_functions_data/cross_201603%s_%si_%sj.pickl' %
-        (day, ticker_i, ticker_j), 'wb'))
+        '../Data/cross_response_functions_data_%dms/cross_201603%s_%si_%sj.pickl' %
+        (tau_val, day, ticker_i, ticker_j), 'wb'))
 
     print('Cross response functions data saved')
     print()
@@ -680,10 +680,10 @@ def avg_return_avg_trade(ticker_i, ticker_j, day, tau_val):
         :param tau_val: Maximum time lag to be analyzed
     """
 
-    print('Product between the averaged midpoint log return of ticker i and' +
-          'the averaged trade signs of ticker j data')
-    print('Processing data for the stock i ' + ticker_i + ' and stock j ' +
-          ticker_j + ' the day ' + day + ' March, 2016')
+    print('Product between the averaged midpoint log return of ticker i and '
+          + 'the averaged trade signs of ticker j data')
+    print('Processing data for the stock i ' + ticker_i + ' and stock j '
+          + ticker_j + ' the day ' + day + ' March, 2016')
 
     # Load data
     midpoint_i = pickle.load(open(
@@ -742,8 +742,8 @@ def avg_return_avg_trade(ticker_i, ticker_j, day, tau_val):
     # Saving data
 
     pickle.dump(avg_return_sign,
-                open('../Data/avg_return_sign_data/avg_201603%s_%si_%sj.pickl'
-                     % (day, ticker_i, ticker_j), 'wb'))
+                open('../Data/avg_return_sign_data_%dms/avg_201603%s_%si_%sj.pickl'
+                     % (tau_val, day, ticker_i, ticker_j), 'wb'))
 
     print('Average product data saved')
     print()
@@ -773,32 +773,8 @@ def main():
     # days = ['07']
 
     for day in days:
-        midpoint_data('AAPL', day)
-        midpoint_data('MSFT', day)
-        trade_signs_data('AAPL', day)
-        trade_signs_data('MSFT', day)
-
-    for day in days:
-        cross_response_functions('AAPL', 'MSFT', day, 1000)
-        avg_return_avg_trade('AAPL', 'MSFT', day, 1000)
-
-    #midpoint_data('MSFT', '09')
-    #midpoint_data('AAPL', '09')
-    # trade_signs_data('GOOG', '09')
-    #trade_signs_data('AAPL', '09')
-    #trade_signs_data('MSFT', '09')
-    # midpoint_plot_week('AAPL', days)
-    # cross_response_functions('AAPL', 'GOOG', '07', 1000)
-
-    # avg_return_avg_trade('AAPL', 'MSFT', '09', 1000)
-    # avg_return_avg_trade('MSFT', 'AAPL', '09', 1000)
-    # avg_return_avg_trade('AAPL', 'AAPL', '09', 1000)
-    #avg_return_avg_trade('MSFT', 'MSFT', '09', 1000)
-
-    #cross_response_functions('AAPL', 'MSFT', '09', 1000)
-    #cross_response_functions('MSFT', 'AAPL', '09', 1000)
-    #cross_response_functions('AAPL', 'AAPL', '09', 1000)
-    #cross_response_functions('MSFT', 'MSFT', '09', 1000)
+        cross_response_functions('AAPL', 'AAPL', day, 1000)
+        avg_return_avg_trade('AAPL', 'AAPL', day, 1000)
 
     print('Ay vamos!!')
     return None
