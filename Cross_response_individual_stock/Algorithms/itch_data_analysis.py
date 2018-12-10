@@ -658,7 +658,8 @@ def cross_response_functions(ticker_i, ticker_j, day, tau_val, t_step):
     # Saving data
 
     pickle.dump(cross_response_tau, open(
-     '../Data/cross_response_functions_data_%dms/cross_201603%s_%si_%sj_%dms.pickl'
+     '../Data/cross_response_functions_data_%dms/cross_201603%s_%si_%sj_%dms \
+     .pickl'
      % (t_step, day, ticker_i, ticker_j, t_step), 'wb'))
 
     print('Cross response functions data saved')
@@ -813,10 +814,73 @@ def zero_correlation_model(ticker_i, day, tau_val, t_step):
     # Saving data
 
     pickle.dump(cross_response_tau, open(
-        '../Data/zero_correlation_data_%dms/zero_correlation_201603%s_%si_rand_%dms.pickl'
-        % (t_step, day, ticker_i, t_step), 'wb'))
+     '../Data/zero_correlation_data_%dms/zero_correlation_201603%s_%si_rand \
+     _%dms.pickl'
+     % (t_step, day, ticker_i, t_step), 'wb'))
 
     print('Zero correlation model data saved')
+    print()
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def self_response_abs(ticker_i, day, tau_val, t_step):
+    """
+    Obtain the self response using the average of the absolute value of the
+    midpoint log return of ticker i during different time lags. The data
+    is adjusted to use only the values each t_step ms
+        :param ticker_i: String of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param day: String of the day to be analized (i.e '07')
+        :param tau_val: Maximum time lag to be analyzed
+        :param t_step: Time step in the data in ms
+    """
+
+    print('Self response absolute value data')
+    print('Processing data for the stock i ' + ticker_i + ' the day '
+          + day + ' March, 2016')
+    print('Time step: ', t_step, 'ms')
+
+    # Load data
+    midpoint_i = pickle.load(open(
+                '../Data/midpoint_data/midpoint_201603{}_{}.pickl'.format
+                (day, ticker_i), 'rb'))
+    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+
+    # Setting variables to work with t_step ms accuracy
+
+    # Array of the average of each tau. 10^3 s used by Wang
+    cross_response_tau = np.zeros(tau_val)
+
+    # Using values t_step millisecond
+    midpoint_i_sec = midpoint_i[::t_step]
+    # Changing time from 1 ms to t_step ms
+    time_t_step = time[::t_step]
+
+    # Calculating the midpoint log return and the cross response functions
+
+    for tau in range(1, tau_val):
+
+        # Every second have a log-return
+        log_return_i_sec = 0. * time_t_step
+
+        # Obtain the midpoint log return. Displace the numerator tau values to
+        # the right and compute the return, and append the remaining values of
+        # tau with zeros
+        log_return_i_sec = np.append(np.log(
+            midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]), np.zeros(tau))
+
+        cross_response_tau[tau] = np.mean(np.abs(log_return_i_sec))
+
+    # Saving data
+
+    pickle.dump(cross_response_tau, open(
+     '../Data/self_response_abs_data_{}ms/self_abs_201603{}_{}i_{}ms.pickl'
+     .format(t_step, day, ticker_i, t_step), 'wb'))
+
+    print('Cross response functions data saved')
     print()
 
     return None
@@ -843,15 +907,10 @@ def main():
     tickers = ['AAPL', 'MSFT']
 
     for day in days:
-        cross_response_functions('AAPL', 'MSFT', day, 1000, 100)
-        avg_return_avg_trade('AAPL', 'MSFT', day, 1000, 100)
-        cross_response_functions('AAPL', 'AAPL', day, 1000, 100)
-        avg_return_avg_trade('AAPL', 'AAPL', day, 1000, 100)
-        cross_response_functions('MSFT', 'MSFT', day, 1000, 100)
-        avg_return_avg_trade('MSFT', 'MSFT', day, 1000, 100)
-        zero_correlation_model('AAPL', day, 1000, 100)
+        self_response_abs('AAPL', day, 1000, 100)
 
     print('Ay vamos!!')
+
     return None
 
 
