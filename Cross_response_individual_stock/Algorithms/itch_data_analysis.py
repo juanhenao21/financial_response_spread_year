@@ -813,7 +813,7 @@ def zero_correlation_model(ticker_i, day, tau_val, t_step):
     # Saving data
 
     pickle.dump(cross_response_tau, open(
-        '../Data/nullmodell_data_%dms/null_201603%s_%si_rand_%dms.pickl'
+        '../Data/zero_correlation_data_%dms/zero_correlation_201603%s_%si_rand_%dms.pickl'
         % (t_step, day, ticker_i, t_step), 'wb'))
 
     print('Zero correlation model data saved')
