@@ -772,7 +772,7 @@ def zero_correlation_model(ticker_i, day, tau_val, t_step):
 
     print('Zero correlation model data')
     print('Processing data for the stock i ' + ticker_i + ' and a random'
-          + ' trade sign array the day' + day + ' March, 2016')
+          + ' trade sign array the day ' + day + ' March, 2016')
     print('Time step: ', t_step, 'ms')
 
     # Load data
@@ -814,9 +814,9 @@ def zero_correlation_model(ticker_i, day, tau_val, t_step):
     # Saving data
 
     pickle.dump(cross_response_tau, open(
-     '../Data/zero_correlation_data_%dms/zero_correlation_201603%s_%si_rand \
-     _%dms.pickl'
-     % (t_step, day, ticker_i, t_step), 'wb'))
+     "".join('../Data/zero_correlation_data_{}ms/\
+      zero_correlation_201603{}_{}i_rand_{}ms.pickl'.split())
+     .format(t_step, day, ticker_i, t_step), 'wb'))
 
     print('Zero correlation model data saved')
     print()
@@ -907,7 +907,7 @@ def main():
     tickers = ['AAPL', 'MSFT']
 
     for day in days:
-        self_response_abs('AAPL', day, 1000, 100)
+        zero_correlation_model('AAPL', day, 1000, 100)
 
     print('Ay vamos!!')
 
