@@ -1,4 +1,6 @@
 '''
+ITCH data analysis
+
 Script to analyze the ITCH data with the information of 96 stocks during a
 week in 2016.
 
@@ -16,76 +18,14 @@ juan.henao-londono@stud.uni-due.de
 # -----------------------------------------------------------------------------------------------------------------------
 # Modules
 
-from matplotlib import pyplot as plt
-import numpy as np
 from itertools import product
-import os
 
-import gzip
-import pickle
 import multiprocessing as mp
 
 import itch_data_generator
+import itch_data_plot
 
 # -----------------------------------------------------------------------------------------------------------------------
-
-
-def midpoint_plot(ticker, day):
-    """
-    Plot the midpoint behavior using the price vs time. The data is loaded
-    from the mipoint data results.
-        :param ticker: String of the abbreviation of the stock to be analized
-         (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
-    """
-
-    # Load data
-
-    print('Processing data for the stock', ticker, 'the day', day +
-          ' March, 2016')
-
-    midpoint = pickle.load(open(
-        '../Data/midpoint_data/midpoint_201603%s_%s.pickl' % (day, ticker),
-        'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
-
-    # Plotting
-
-    plt.title('%s' % ticker, fontsize=40)
-    plt.plot(time, midpoint, label=('Day %s' % day))
-    plt.xlabel(r'Time $[hour]$', fontsize=25)
-    plt.ylabel(r'Price $ [\$] $', fontsize=25)
-    plt.legend(loc=0, fontsize=20)
-
-    return None
-
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def midpoint_plot_week(ticker, days):
-    """
-    Plot the midpoint behavior using the price vs time during a time period.
-    The data is loaded from the mipoint data results.
-        :param ticker: String of the abbreviation of the stock to be analized
-        (i.e. 'AAPL')
-        :param days: List of the days that will be plotted (i.e ['07', '08',
-        '09'])
-    """
-
-    print('Plotting the behavior of the stock' + ticker + 'in the week of '
-          + days[1] + '-' + days[-1] + 'March, 2016')
-
-    plt.figure(figsize=(16, 9))
-
-    for day in days:
-        midpoint_plot(ticker, day)
-
-    plt.tight_layout()
-    plt.grid(True)
-    plt.savefig('../Data/midpoint_plot/midpoint_plot_%s.png' % ticker)
-
-    return None
-
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -105,7 +45,13 @@ def main():
 
     days = ['07', '08', '09', '10', '11']
 
-    tickers = ['AAPL', 'MSFT']
+    ticker = 'AAPL'
+
+    day = '07'
+
+    for day in days:
+        itch_data_generator.zero_correlation_model_data(ticker, day, 1000,1000)
+    itch_data_plot.zero_correlation_plot('AAPL', days, 1000)
 
     print('Ay vamos!!')
 

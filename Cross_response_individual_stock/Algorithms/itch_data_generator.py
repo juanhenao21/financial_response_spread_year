@@ -3,10 +3,10 @@ ITCH data generator
 
 Module to compute the following data
 
-- Midpoint price data: using the ICTH data obtain the best bid, best ask,
+- Midpoint price data: using the ITCH data obtain the best bid, best ask,
   quotes and midpoint price data.
 
-- Trade signs data: using the ICTH data obtain the trade signs data.
+- Trade signs data: using the ITCH data obtain the trade signs data.
 
 - Self response function: using the midpoint price and the trade signs
   calculate the midpoint log returns and the self response of a stock.
@@ -53,9 +53,9 @@ def midpoint_data(ticker, day):
     the last value calculated until a change in the price happens. Save in a
     different pickle file the array of each of the following values: best bid,
     best ask, spread, midpoint price and time.
-        :param ticker: String of the abbreviation of the stock to be analized
+        :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
     """
 
     print('Midpoint price data')
@@ -376,9 +376,9 @@ def trade_signs_data(ticker, day):
     million data). To fill the time spaces when nothing happens we just fill
     with zeros indicating that there were neither a buy nor a sell. Save in a
     pickle file the array of the trade signs
-        :param ticker: String of the abbreviation of the stock to be analized
+        :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
     """''
 
     print('Trade signs data')
@@ -554,11 +554,11 @@ def self_response_data(ticker_i, day, tau_val, t_step):
     Obtain the self response function using the midpoint log returns
     and trade signs of ticker i during different time lags. The data
     is adjusted to use only the values each t_step ms
-        :param ticker_i: String of the abbreviation of the midpoint stock to
+        :param ticker_i: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
-        :param tau_val: Maximum time lag to be analyzed
-        :param t_step: Time step in the data in ms
+        :param day: string of the day to be analized (i.e '07')
+        :param tau_val: maximum time lag to be analyzed
+        :param t_step: time step in the data in ms
     """
 
     print('Self response function data')
@@ -641,11 +641,11 @@ def self_response_abs_data(ticker_i, day, tau_val, t_step):
     Obtain the self response using the average of the absolute value of the
     midpoint log return of ticker i during different time lags. The data
     is adjusted to use only the values each t_step ms
-        :param ticker_i: String of the abbreviation of the midpoint stock to
+        :param ticker_i: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
-        :param tau_val: Maximum time lag to be analyzed
-        :param t_step: Time step in the data in ms
+        :param day: string of the day to be analized (i.e '07')
+        :param tau_val: maximum time lag to be analyzed
+        :param t_step: time step in the data in ms
     """
 
     print('Self response absolute value data')
@@ -693,10 +693,10 @@ def self_response_abs_data(ticker_i, day, tau_val, t_step):
         print('Folder to save data created')
 
     pickle.dump(self_response_tau, open(
-        '../Data/self_response_abs_data_{}ms/self_201603{}_{}i_{}ms.pickl'
+        '../Data/self_response_abs_data_{}ms/self_abs_201603{}_{}i_{}ms.pickl'
         .format(t_step, day, ticker_i, t_step), 'wb'))
 
-    print('Cross response functions data saved')
+    print('Self response absolute functions data saved')
     print()
 
     return None
@@ -709,13 +709,13 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
     Obtain the cross response function using the midpoint log returns of
     ticker i and trade signs of ticker j during different time lags. The data
     is adjusted to use only the values each t_step ms
-        :param ticker_i: String of the abbreviation of the midpoint stock to
+        :param ticker_i: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param ticker_j: String of the abbreviation of the trade sign stock to
+        :param ticker_j: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
-        :param tau_val: Maximum time lag to be analyzed
-        :param t_step: Time step in the data in ms
+        :param day: string of the day to be analized (i.e '07')
+        :param tau_val: maximum time lag to be analyzed
+        :param t_step: time step in the data in ms
     """
 
     print('Cross response function data')
@@ -798,13 +798,13 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
     Obtain the result of the product between the averaged midpoint log return
     of ticker i and the averaged trade signs of ticker j during different time
     lags. The data is adjusted to use only the values each t_step ms
-        :param ticker_i: String of the abbreviation of the midpoint stock to
+        :param ticker_i: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param ticker_j: String of the abbreviation of the trade sign stock
+        :param ticker_j: string of the abbreviation of the trade sign stock
          to be analized (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
-        :param tau_val: Maximum time lag to be analyzed
-        :param t_step: Time step in the data in ms
+        :param day: string of the day to be analized (i.e '07')
+        :param tau_val: maximum time lag to be analyzed
+        :param t_step: time step in the data in ms
     """
 
     print('Product between the averaged midpoint log return of ticker i and '
@@ -892,11 +892,11 @@ def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
     Obtain the cross response function using the midpoint log return of
     ticker i and random trade signs during different time lags. The data is
     adjusted to use only the values each t_step ms
-        :param ticker_i: String of the abbreviation of the midpoint stock to
+        :param ticker_i: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param day: String of the day to be analized (i.e '07')
-        :param tau_val: Maximum time lag to be analyzed
-        :param t_step: Time step in the data in ms
+        :param day: string of the day to be analized (i.e '07')
+        :param tau_val: maximum time lag to be analyzed
+        :param t_step: time step in the data in ms
     """
 
     print('Zero correlation model data')
