@@ -49,9 +49,8 @@ def main():
 
     day = '07'
 
-    for day in days:
-        itch_data_generator.zero_correlation_model_data(ticker, day, 1000,1000)
-    itch_data_plot.zero_correlation_plot('AAPL', days, 1000)
+
+    itch_data_plot.self_response_self_abs_zero_corr_plot('AAPL', days, 1000)
 
     print('Ay vamos!!')
 
