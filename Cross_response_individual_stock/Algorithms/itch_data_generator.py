@@ -466,11 +466,11 @@ def trade_signs_data(ticker, day):
 
             if (hv_types[newids[ids[iii]]] == 2):
 
-                trade_sign[iii] = -1.
+                trade_sign[iii] = 1.
 
             elif (hv_types[newids[ids[iii]]] == 1):
 
-                trade_sign[iii] = 1.
+                trade_sign[iii] = - 1.
 
         else:
 
