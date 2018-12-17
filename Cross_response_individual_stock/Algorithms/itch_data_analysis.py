@@ -45,12 +45,16 @@ def main():
 
     days = ['07', '08', '09', '10', '11']
 
-    ticker = 'AAPL'
+    ticker_i = 'AAPL'
+    ticker_j = 'MSFT'
+    tau_val = 1000
 
-    day = '07'
+    for t in [1, 10, 100, 1000]:
+
+        itch_data_plot.self_response_self_abs_zero_corr_plot(ticker_i, days, t)
 
 
-    itch_data_plot.self_response_self_abs_zero_corr_plot('AAPL', days, 1000)
+
 
     print('Ay vamos!!')
 

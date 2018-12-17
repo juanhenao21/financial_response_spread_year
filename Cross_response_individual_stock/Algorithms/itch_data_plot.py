@@ -513,6 +513,8 @@ def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Self response $ R_{ii} (\tau) $')
         plt.legend(loc='best')
+        plt.title('Self res - abs - zero - {}i - {}ms'
+                  .format(ticker, t_step))
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.grid(True)
         plt.tight_layout()

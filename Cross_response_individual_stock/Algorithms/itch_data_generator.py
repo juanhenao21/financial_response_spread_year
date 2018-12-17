@@ -549,6 +549,37 @@ def trade_signs_data(ticker, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
+def trade_sign_reshape(trade_sign, time_t_step):
+    """
+    Reshape the trade sign data according to the t_step used. Returns a tuple
+    with two arrays. A + 1 (- 1) array when the values of the sum is greater
+    (smaller) than zero and an array with the places in the string that are
+    not zero.
+        :param trade_sign: array with the trade sign data
+        :param time_t_step: array with the time adjusted to t_step resolution
+    """
+
+    # Reshape the array in group of values of t_step ms and infer the number
+    # of rows, then sum all rows.
+    trade_sign_j_sec_sum = np.sum(np.reshape(
+                                  trade_sign, (len(time_t_step), -1)),
+                                  axis=1)
+
+    # Reasign the trade sign, if the value of the array is greater than 0
+    # gives a 1 and -1 for the contrary.
+    trade_sign_j_sec_avg = 1 * (trade_sign_j_sec_sum > 0)\
+        - 1 * (trade_sign_j_sec_sum < 0)
+    # Reshape the array in group of values of t_step ms and infer the number
+    # rows, then sum the absolute value of all rows. This is used to know
+    # where a trade sign is cero.
+    trade_sign_j_sec_nr = np.sum(np.reshape(np.absolute(trade_sign),
+                                 (len(time_t_step), -1)), axis=1)
+
+    return (trade_sign_j_sec_avg, trade_sign_j_sec_nr)
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
 def self_response_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the self response function using the midpoint log returns
@@ -570,7 +601,7 @@ def self_response_data(ticker_i, day, tau_val, t_step):
     midpoint_i = pickle.load(open(
                 '../Data/midpoint_data/midpoint_201603{}_{}.pickl'
                 .format(day, ticker_i), 'rb'))
-    trade_sign_j = pickle.load(open(
+    trade_sign_i = pickle.load(open(
                 '../Data/trade_signs_data/trade_signs_most_201603{}_{}.pickl'
                 .format(day, ticker_i), 'rb'))
     time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
@@ -585,20 +616,9 @@ def self_response_data(ticker_i, day, tau_val, t_step):
     # Changing time from 1 ms to t_step ms
     time_t_step = time[::t_step]
 
-    # Reshape the array in group of values of t_step ms and infer the number
-    # of rows, then sum all rows.
-    trade_sign_j_sec_sum = np.sum(np.reshape(trade_sign_j, (t_step, -1)),
-                                  axis=0)
-
-    # Reasign the trade sign, if the value of the array is greater than 0
-    # gives a 1 and -1 for the contrary.
-    trade_sign_j_sec_avg = 1 * (trade_sign_j_sec_sum > 0) \
-        - 1 * (trade_sign_j_sec_sum < 0)
-    # Reshape the array in group of values of t_step ms and infer the number
-    # rows, then sum the absolute value of all rows. This is used to know
-    # where a trade sign is cero.
-    trade_sign_j_sec_nr = np.sum(np.reshape(np.absolute(trade_sign_j),
-                                 (t_step, -1)), axis=0)
+    # reshape and average data of trade signs
+    trade_sign_i_sec_avg, trade_sign_i_sec_nr = trade_sign_reshape(
+                                                trade_sign_i, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
 
@@ -614,8 +634,8 @@ def self_response_data(ticker_i, day, tau_val, t_step):
             midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]), np.zeros(tau))
 
         self_response_tau[tau] = np.mean(
-            log_return_i_sec[trade_sign_j_sec_nr != 0] *
-            trade_sign_j_sec_avg[trade_sign_j_sec_nr != 0])
+            log_return_i_sec[trade_sign_i_sec_nr != 0] *
+            trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0])
 
     # Saving data
 
@@ -742,20 +762,9 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
     # Changing time from 1 ms to t_step ms
     time_t_step = time[::t_step]
 
-    # Reshape the array in group of values of t_step ms and infer the number
-    # of rows, then sum all rows.
-    trade_sign_j_sec_sum = np.sum(np.reshape(trade_sign_j, (t_step, -1)),
-                                  axis=0)
-
-    # Reasign the trade sign, if the value of the array is greater than 0
-    # gives a 1 and -1 for the contrary.
-    trade_sign_j_sec_avg = 1 * (trade_sign_j_sec_sum > 0) \
-        - 1 * (trade_sign_j_sec_sum < 0)
-    # Reshape the array in group of values of t_step ms and infer the number
-    # rows, then sum the absolute value of all rows. This is used to know
-    # where a trade sign is cero.
-    trade_sign_j_sec_nr = np.sum(np.reshape(np.absolute(trade_sign_j),
-                                 (t_step, -1)), axis=0)
+    # reshape and average data of trade signs
+    trade_sign_j_sec_avg, trade_sign_j_sec_nr = trade_sign_reshape(
+                                                trade_sign_j, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
 
@@ -832,21 +841,9 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
     # Changing time from 1 ms to t_step ms
     time_t_step = time[::t_step]
 
-    # Reshape the array in group of values of t_step ms and infer the number
-    # of rows, then sum all rows.
-    trade_sign_j_sec_sum = np.sum(np.reshape(trade_sign_j, (t_step, -1)),
-                                  axis=0)
-
-    # Reasign the trade sign, if the value of the array is greater than 0
-    # gives a 1 and -1 for the contrary.
-    trade_sign_j_sec_avg = 1 * (trade_sign_j_sec_sum > 0) \
-        - 1 * (trade_sign_j_sec_sum < 0)
-
-    # Reshape the array in group of values of t_step ms and infer the number
-    # rows, then sum the absolute value of all rows. This is used to know
-    # where a trade sign is cero.
-    trade_sign_j_sec_nr = np.sum(np.reshape(np.absolute(trade_sign_j),
-                                 (t_step, -1)), axis=0)
+    # reshape and average data of trade signs
+    trade_sign_j_sec_avg, trade_sign_j_sec_nr = trade_sign_reshape(
+                                                trade_sign_j, time_t_step)
 
     # Calculating the midpoint log return and the cross response functions
 
