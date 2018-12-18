@@ -21,6 +21,7 @@ juan.henao-londono@stud.uni-due.de
 from itertools import product
 
 import multiprocessing as mp
+import pickle
 
 import itch_data_generator
 import itch_data_plot
@@ -32,34 +33,18 @@ import itch_data_plot
 def main():
 
     # Tickers and days to analyze
-    # tickers = ["AAL", "AAPL", "ADBE", "ADI", "ADP", "ADSK", "AKAM", "ALXN", "AMAT", "AMGN",
-    #            "AMZN", "ATVI", "AVGO", "BBBY", "BIDU", "BIIB", "BMRN", "CA",  "CELG", "CERN",
-    #            "CHKP", "CHRW", "CHTR", "CMCSA", "COST", "CSCO", "CTSH", "CTXS", "DISCA", "DISH",
-    #            "DLTR", "EA",  "EBAY", "EQIX", "ESRX", "EXPD", "FAST", "FB",  "FISV", "FOXA",
-    #            "GILD", "GOOG", "GRMN", "HSIC", "ILMN", "INTC", "INTU", "ISRG", "JD",  "KHC",
-    #            "KLAC", "LBTYA", "LLTC", "LMCA", "LRCX", "LVNTA", "MAR", "MAT", "MDLZ", "MNST",
-    #            "MSFT", "MU",  "MYL", "NFLX", "NTAP", "NVDA", "NXPI", "ORLY", "PAYX", "PCAR",
-    #            "PCLN", "QCOM", "REGN", "ROST", "SBAC", "SBUX", "SIRI", "SNDK", "SPLS", "SRCL",
-    #            "STX", "SYMC", "TRIP", "TSCO", "TSLA", "TXN", "VIAB", "VIP", "VOD", "VRSK",
-    #            "VRTX", "WDC", "WFM", "WYNN", "XLNX", "YHOO"]
 
-    days = ['07', '08', '09', '10', '11']
+    tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
+    days = pickle.load(open('../Data/days.pickl', 'rb'))
 
     ticker_i = 'AAPL'
     ticker_j = 'MSFT'
     tau_val = 1000
-
-    for t in [1, 10, 100, 1000]:
-
-        itch_data_plot.self_response_self_abs_zero_corr_plot(ticker_i, days, t)
-
-
-
+    ticker = ['AAPL', 'MSFT']
 
     print('Ay vamos!!')
 
     return None
-
 
 if __name__ == '__main__':
     main()

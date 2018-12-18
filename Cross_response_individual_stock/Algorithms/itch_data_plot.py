@@ -31,6 +31,11 @@ set in the module itch_data_generator. The module plot the following data
   and the zero correlation model for every day for a stock in independent
   plots in one figure.
 
+- Trade sign cross correlator: plot the cross trade sign cross correlator for
+  everey day for two stocks in independent pltos in one figure.
+
+Juan Camilo Henao Londono
+juan.henao-londono@stud.uni-due.de
 '''
 
 # -----------------------------------------------------------------------------------------------------------------------
@@ -531,6 +536,61 @@ def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
 
     return None
 # -----------------------------------------------------------------------------------------------------------------------
+
+
+def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
+    """
+    Plot the trade sign cross correlator during an interval of time (days) in
+    independent plots in a figure. The data is loaded from the trade sign cross
+    correlator data results.
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+        :param t_step: time step in the data in ms
+    """
+
+    plt.figure(figsize=(9, 16))
+    plt.subplots_adjust(hspace=0, wspace=0)
+
+    for i, day in enumerate(days):
+
+        print('Processing data for the stock ' + ticker_i + ' and the stock '
+              + ticker_j + ' the day ' + day + ' March, 2016')
+
+        plot = pickle.load(open("".join((
+         '../Data/trade_sign_cross_correlator_data_{}ms/trade_sign_cross_'
+         + 'correlator_201603{}_{}i_{}j_{}ms.pickl').split())
+         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+        plt.subplot(len(days), 1, i+1)
+        plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
+                     .format(ticker_i, ticker_j, day))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
+        plt.legend(loc='best')
+        plt.title(
+            'Trade sign cross correlator - ticker i {} ticker j {} - {}ms'
+            .format(ticker_i, ticker_j, t_step))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+    if (not os.path.isdir('../Data/trade_sign_cross_correlator_plot_{}ms/'
+                          .format(t_step))):
+        os.mkdir('../Data/trade_sign_cross_correlator_plot_{}ms/'
+                 .format(t_step))
+        print('Folder to save plot created')
+
+    plt.savefig("".join((
+        '../Data/trade_sign_cross_correlator_plot_{}ms/trade_sign_cross_'
+        + 'correlator__{}_{}_{}ms.png').split())
+        .format(t_step, ticker_i, ticker_j, t_step))
+
+    return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 
