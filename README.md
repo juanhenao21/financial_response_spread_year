@@ -1,7 +1,7 @@
 # Econophysics
 
 ### Juan Camilo Henao Londono
-
+Student
 Ph . D. Physics - Econophysics
 
 [AG Guhr](http://www.theo.physik.uni-duisburg-essen.de/tp/ags/guhr_dir/index.html)
