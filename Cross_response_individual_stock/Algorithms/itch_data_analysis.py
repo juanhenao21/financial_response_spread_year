@@ -42,6 +42,11 @@ def main():
     tau_val = 1000
     ticker = ['AAPL', 'MSFT']
 
+    for t in [1, 10, 100, 1000]:
+        for day in days:
+            itch_data_generator.trade_sign_self_correlator_data(ticker_i, day, tau_val, t)
+        itch_data_plot.trade_sign_self_correlator_plot(ticker_i, days, t)
+
     print('Ay vamos!!')
 
     return None
