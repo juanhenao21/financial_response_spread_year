@@ -27,6 +27,9 @@ set in the module itch_data_generator. The module plot the following data
   the product of the averaged midpoint log return by the trade signs for every
   day for two stocks in independent figures to compare both results.
 
+- Difference: plot the difference between cross response and average for every
+  day for two stocks in individual plots in one figure.
+
 - Self response behavior: plot the self response, the self response absolute
   and the zero correlation model for every day for a stock in independent
   plots in one figure.
@@ -480,6 +483,77 @@ def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
+def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
+    """
+    Plot the cross response and average product during an interval of time
+    (days) in independent plots in a figure. The data is loaded from the cross
+    response data results and the average data results.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+        :param t_step: time step in the data in ms
+    """
+
+    plt.figure(figsize=(9, 16))
+    plt.subplots_adjust(hspace=0, wspace=0)
+
+    for i, day in enumerate(days):
+
+        print('Processing data for the stock ' + ticker_i + ' and the stock '
+              + ticker_j + ' the day ' + day + ' March, 2016')
+
+        plot_cross = pickle.load(open(
+         '../Data/cross_response_data_{}ms/cross_201603{}_{}i_{}j_{}ms.pickl'
+         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+        plot_avg = pickle.load(open(
+         '../Data/avg_return_sign_data_{}ms/avg_201603{}_{}i_{}j_{}ms.pickl'
+         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+        plot_diff = pickle.load(open("".join((
+         '../Data/difference_cross_response_avg_prod_data_{}ms/diff_201603{}_'
+         + '{}i_{}j_{}ms.pickl').split())
+         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+        plt.subplot(len(days), 1, i+1)
+        plt.semilogx(plot_cross, '-',
+                     label='Cross response Stock i {} - Stock j {} - Day {}'
+                     .format(ticker_i, ticker_j, day))
+        plt.semilogx(plot_avg, '-',
+                     label='Average product Stock i {} - Stock j {} - Day {}'
+                     .format(ticker_i, ticker_j, day))
+        plt.semilogx(plot_diff, '-g',
+                     label='Difference Stock i {} - Stock j {} - Day {}'
+                     .format(ticker_i, ticker_j, day))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Response')
+        plt.legend(loc='best')
+        plt.title('Difference response - ticker i {} ticker j {} - {}ms'
+                  .format(ticker_i, ticker_j, t_step))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+    if (not os.path.isdir(
+            '../Data/difference_cross_response_avg_prod_plot_{}ms/'
+            .format(t_step))):
+        os.mkdir('../Data/difference_cross_response_avg_prod_plot_{}ms/'
+                 .format(t_step))
+        print('Folder to save plot created')
+
+    plt.savefig("".join((
+        '../Data/difference_cross_response_avg_prod_plot_{}ms/diff_response_'
+        + '{}_{}_{}ms.png').split())
+        .format(t_step, ticker_i, ticker_j, t_step))
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
 def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
     """
     Plot the self response, self response absolute and zero correlation model
@@ -538,6 +612,7 @@ def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
         + 'zero_corr{}_{}ms.png').split()).format(t_step, ticker, t_step))
 
     return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 

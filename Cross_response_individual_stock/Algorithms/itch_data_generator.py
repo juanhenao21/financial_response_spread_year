@@ -24,6 +24,9 @@ Module to compute the following data
   product of the averaged midpoint log returns and the averaged trade signs of
   two stocks.
 
+- Difference cross response and average return and average trade sign: using
+  the cross response and the average product calculate its difference.
+
 - Zero correlation model: using the midpoint price of a stock and a random
   trade signs array calculate the midpoint log returns and the response
   between the midpoint log returns and the random array.
@@ -890,6 +893,48 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
+def difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
+
+    print('Difference between the cross response function and the averaged '
+          + 'midpoint log return of ticker i and the averaged trade signs '
+          + 'of ticker j data')
+    print('Processing data for the stock i ' + ticker_i + ' and stock j '
+          + ticker_j + ' the day ' + day + ' March, 2016')
+    print('Time step: ', t_step, 'ms')
+
+    # Load data
+    cross_response = pickle.load(open(
+        '../Data/cross_response_data_{}ms/cross_201603{}_{}i_{}j_{}ms.pickl'
+        .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+    avg_return_avg_trade = pickle.load(open(
+        '../Data/avg_return_sign_data_{}ms/avg_201603{}_{}i_{}j_{}ms.pickl'
+        .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+    difference = cross_response - avg_return_avg_trade
+
+    # Saving data
+
+    if (not os.path.isdir(
+            '../Data/difference_cross_response_avg_prod_data_{}ms/'
+            .format(t_step))):
+
+        os.mkdir('../Data/difference_cross_response_avg_prod_data_{}ms/'
+                 .format(t_step))
+        print('Folder to save data created')
+
+    pickle.dump(difference, open("".join((
+        '../Data/difference_cross_response_avg_prod_data_{}ms/diff_201603{}_'
+        + '{}i_{}j_{}ms.pickl').split())
+        .format(t_step, day, ticker_i, ticker_j, t_step), 'wb'))
+
+    print('Average product data saved')
+    print()
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
 def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the cross response function using the midpoint log return of
@@ -1101,3 +1146,4 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
+
