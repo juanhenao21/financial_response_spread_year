@@ -50,6 +50,8 @@ import os
 import gzip
 import pickle
 
+__tau__ = 1000
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -618,7 +620,7 @@ def self_response_data(ticker_i, day, tau_val, t_step):
     # Setting variables to work with t_step ms accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    self_response_tau = np.zeros(tau_val)
+    self_response_tau = np.zeros(__tau__)
 
     # Using values each second
     midpoint_i_sec = midpoint_i[::t_step]
@@ -631,18 +633,15 @@ def self_response_data(ticker_i, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response function
 
-    for tau in range(1, tau_val):
-
-        # Every second have a log-return
-        log_return_i_sec = 0. * time_t_step
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
         # tau with zeros
         log_return_i_sec = np.append(np.log(
-            midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]), np.zeros(tau))
+            midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
 
-        self_response_tau[tau] = np.mean(
+        self_response_tau[tau_idx] = np.mean(
             log_return_i_sec[trade_sign_i_sec_nr != 0] *
             trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0])
 
@@ -691,7 +690,7 @@ def self_response_abs_data(ticker_i, day, tau_val, t_step):
     # Setting variables to work with t_step ms accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    self_response_tau = np.zeros(tau_val)
+    self_response_tau = np.zeros(__tau__)
 
     # Using values t_step millisecond
     midpoint_i_sec = midpoint_i[::t_step]
@@ -700,18 +699,15 @@ def self_response_abs_data(ticker_i, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response functions
 
-    for tau in range(1, tau_val):
-
-        # Every second have a log-return
-        log_return_i_sec = 0. * time_t_step
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
         # tau with zeros
         log_return_i_sec = np.append(np.log(
-            midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]), np.zeros(tau))
+            midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
 
-        self_response_tau[tau] = np.mean(np.abs(log_return_i_sec))
+        self_response_tau[tau_idx] = np.mean(np.abs(log_return_i_sec))
 
     # Saving data
 
@@ -764,7 +760,7 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
     # Setting variables to work with t_step ms accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    cross_response_tau = np.zeros(tau_val)
+    cross_response_tau = np.zeros(__tau__)
 
     # Using values each second
     midpoint_i_sec = midpoint_i[::t_step]
@@ -777,18 +773,16 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response function
 
-    for tau in range(1, tau_val):
-
-        # Every second have a log-return
-        log_return_i_sec = 0. * time_t_step
+    # Depending on the ta
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
         # tau with zeros
         log_return_i_sec = np.append(np.log(
-            midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]), np.zeros(tau))
+            midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
 
-        cross_response_tau[tau] = np.mean(
+        cross_response_tau[tau_idx] = np.mean(
             log_return_i_sec[trade_sign_j_sec_nr != 0] *
             trade_sign_j_sec_avg[trade_sign_j_sec_nr != 0])
 
@@ -843,7 +837,7 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
     # Setting variables to work with t_step ms accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    avg_return_sign = np.zeros(tau_val)
+    avg_return_sign = np.zeros(__tau__)
 
     # Using values each second
     midpoint_i_sec = midpoint_i[::t_step]
@@ -856,18 +850,15 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response functions
 
-    for tau in range(1, tau_val):
-
-        # Every second have a log-return
-        log_return_i_sec = 0. * time_t_step
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values
         # to the right and compute the return, and append the remaining values
         # of tau with zeros
         log_return_i_sec = np.append(np.log(
-                    midpoint_i_sec[tau:]/midpoint_i_sec[:-tau]), np.zeros(tau))
+                    midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
 
-        avg_return_sign[tau] = (np.mean(
+        avg_return_sign[tau_idx] = (np.mean(
                                 log_return_i_sec[trade_sign_j_sec_nr != 0]) *
                                 np.mean(
                                 trade_sign_j_sec_avg[trade_sign_j_sec_nr != 0]
@@ -961,7 +952,7 @@ def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
     # Setting variables to work with 1s accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    cross_response_tau = np.zeros(tau_val)
+    cross_response_tau = np.zeros(__tau__)
 
     # Using values each second
     midpoint_i_sec = midpoint_i[::t_step]
@@ -970,22 +961,19 @@ def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response functions
 
-    for tau in range(1, tau_val):
-
-        # Every t_step have a log-return
-        log_return_i_sec = 0. * time_t_step
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
         # tau with zeros
         log_return_i_sec = np.append(np.log(
-            midpoint_i_sec[tau:] / midpoint_i_sec[:-tau]), np.zeros(tau))
+            midpoint_i_sec[tau_v:] / midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
 
         trade_sign_rand = np.random.rand(len(time_t_step))
         trade_sign_rand_j = (1 * (trade_sign_rand > 0.5)
                              - 1 * (trade_sign_rand <= 0.5))
 
-        cross_response_tau[tau] = np.mean(
+        cross_response_tau[tau_idx] = np.mean(
             log_return_i_sec * trade_sign_rand_j)
 
     if (not os.path.isdir('../Data/zero_correlation_data_{}ms/'
@@ -1037,7 +1025,7 @@ def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
     # Setting variables to work with t_step ms accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    cross_correlator = np.zeros(tau_val)
+    cross_correlator = np.zeros(__tau__)
 
     # Changing time from 1 ms to t_step ms
     time_t_step = time[::t_step]
@@ -1050,13 +1038,13 @@ def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response function
 
-    for tau in range(1, tau_val):
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
-        trade_sign_product = np.append(trade_sign_i_sec_avg[tau:]
-                                       * trade_sign_j_sec_avg[:-tau],
-                                       np.zeros(tau))
+        trade_sign_product = np.append(trade_sign_i_sec_avg[tau_v:]
+                                       * trade_sign_j_sec_avg[:-tau_v],
+                                       np.zeros(tau_v))
 
-        cross_correlator[tau] = np.mean(
+        cross_correlator[tau_idx] = np.mean(
             trade_sign_product[trade_sign_j_sec_nr != 0])
 
     # Saving data
@@ -1106,7 +1094,7 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
     # Setting variables to work with t_step ms accuracy
 
     # Array of the average of each tau. 10^3 s used by Wang
-    self_correlator = np.zeros(tau_val)
+    self_correlator = np.zeros(__tau__)
 
     # Changing time from 1 ms to t_step ms
     time_t_step = time[::t_step]
@@ -1117,13 +1105,13 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response function
 
-    for tau in range(1, tau_val):
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
 
-        trade_sign_product = np.append(trade_sign_i_sec_avg[tau:]
-                                       * trade_sign_i_sec_avg[:-tau],
-                                       np.zeros(tau))
+        trade_sign_product = np.append(trade_sign_i_sec_avg[tau_v:]
+                                       * trade_sign_i_sec_avg[:-tau_v],
+                                       np.zeros(tau_v))
 
-        self_correlator[tau] = np.mean(
+        self_correlator[tau_idx] = np.mean(
             trade_sign_product[trade_sign_i_sec_nr != 0])
 
     # Saving data

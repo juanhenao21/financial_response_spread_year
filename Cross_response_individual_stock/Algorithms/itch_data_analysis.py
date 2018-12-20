@@ -39,13 +39,16 @@ def main():
 
     ticker_i = 'AAPL'
     ticker_j = 'MSFT'
-    tau_val = 1000
     ticker = ['AAPL', 'MSFT']
+    tau_val = [1000000, 100000, 10000, 1000]
     t_step = [1, 10, 100, 1000]
-    for t in t_step:
+    for t, tau in zip(t_step, tau_val):
         for day in days:
-            itch_data_generator.difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t)
-        itch_data_plot.difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t)
+            itch_data_generator.self_response_data(ticker_i, day, tau, t)
+            itch_data_generator.self_response_abs_data(ticker_i, day, tau, t)
+            itch_data_generator.zero_correlation_model_data(ticker_i, day, tau, t)
+        itch_data_plot.cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t)
+        itch_data_plot.self_response_self_abs_zero_corr_plot(ticker_i, days, t)
 
     print('Ay vamos!!')
 
