@@ -856,7 +856,8 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
         # to the right and compute the return, and append the remaining values
         # of tau with zeros
         log_return_i_sec = np.append(np.log(
-                    midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
+                    midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]),
+                    np.zeros(tau_v))
 
         avg_return_sign[tau_idx] = (np.mean(
                                 log_return_i_sec[trade_sign_j_sec_nr != 0]) *
@@ -1062,6 +1063,86 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
+def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
+    """
+    Obtain the trade sign autocorrelation using the trade signs of ticker i
+    during different time lags. The data is adjusted to use only the values
+    each t_step ms
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param day: string of the day to be analized (i.e '07')
+        :param tau_val: maximum time lag to be analyzed
+        :param t_step: time step in the data in ms
+    """
+    print('Trade sign autocorrelation data')
+    print('Processing data for the stock i ' + ticker_i + ' the day ' + day
+          + ' March, 2016')
+    print('Time step: ', t_step, 'ms')
+
+    # Load data
+    trade_sign_i = pickle.load(open(
+                '../Data/trade_signs_data/trade_signs_most_201603{}_{}.pickl'
+                .format(day, ticker_i), 'rb'))
+    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+
+    # Setting variables to work with t_step ms accuracy
+
+    # Array of the average of each tau. 10^3 s used by Wang
+    trade_sign_autocorrelation = np.zeros(__tau__)
+
+    # Changing time from 1 ms to t_step ms
+    time_t_step = time[::t_step]
+
+    # reshape and average data of trade signs
+    trade_sign_i_sec_avg, trade_sign_i_sec_nr = trade_sign_reshape(
+        trade_sign_i, time_t_step)
+
+    # Calculating the midpoint log return and the cross response function
+
+    trade_mean_square = (np.mean(
+                            trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0])
+                         * np.mean(
+                            trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0]))
+
+    trade_square_mean = np.mean(
+                            trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0]
+                            * trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0])
+
+    for tau_idx, tau_v in enumerate(range(1, tau_val, int(tau_val * 1E-3))):
+
+        trade_sign_product = np.append(trade_sign_i_sec_avg[tau_v:]
+                                       * trade_sign_i_sec_avg[:-tau_v],
+                                       np.zeros(tau_v))
+
+        trade_sign_product_mean = np.mean(
+            trade_sign_product[trade_sign_i_sec_nr != 0])
+
+        trade_sign_autocorrelation[tau_idx] = (
+            (trade_sign_product_mean - trade_mean_square)
+            / (trade_square_mean - trade_mean_square))
+
+    # Saving data
+
+    if (not os.path.isdir('../Data/trade_sign_autocorrelation_data_{}ms/'
+                          .format(t_step))):
+
+        os.mkdir('../Data/trade_sign_autocorrelation_data_{}ms/'
+                 .format(t_step))
+        print('Folder to save data created')
+
+    pickle.dump(trade_sign_autocorrelation, open("".join((
+        '../Data/trade_sign_autocorrelation_data_{}ms/trade_sign_'
+        + 'autocorrelation_201603{}_{}i_{}ms.pickl').split())
+        .format(t_step, day, ticker_i, t_step), 'wb'))
+
+    print('trade sign autocorrelation data saved')
+    print()
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
 def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
     """
     Obtain the trade sign cross correlator using the trade signs of ticker i
@@ -1134,4 +1215,3 @@ def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
-
