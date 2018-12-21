@@ -52,6 +52,8 @@ import os
 
 import pickle
 
+import itch_data_tools
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -85,7 +87,7 @@ def midpoint_plot(ticker, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def midpoint_plot_week(ticker, days):
+def midpoint_plot_week(ticker, days, t_step):
     """
     Plot the midpoint price data during a time period. The data is loaded from
     the mipoint price data results. The time period must be previously knowed
@@ -96,7 +98,7 @@ def midpoint_plot_week(ticker, days):
          (i.e ['07', '08', '09'])
     """
 
-    plt.figure(figsize=(16, 9))
+    figure = plt.figure(figsize=(16, 9))
 
     for day in days:
         midpoint_plot(ticker, day)
@@ -105,21 +107,17 @@ def midpoint_plot_week(ticker, days):
     plt.xlabel(r'Time $[hour]$', fontsize=25)
     plt.ylabel(r'Price $ [\$] $', fontsize=25)
     plt.tight_layout()
+    plt.grid(True)
 
-    if (not os.path.isdir('../Data/midpoint_plot/')):
-
-        os.mkdir('../Data/midpoint_plot/')
-        print('Folder to save plot created')
-
-    plt.savefig('../Data/midpoint_plot/midpoint_plot_week_{}.png'
-                .format(ticker))
+    function_name = midpoint_plot_week.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, 'week', t_step)
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_signs_plot(ticker, day):
+def trade_signs_plot(ticker, day, t_step):
     """
     Plot the trade signs data during one minute (11:00 to 11:01) in one day for
     a ticker. The data is loaded from the trade signs data results.
@@ -133,11 +131,11 @@ def trade_signs_plot(ticker, day):
           + ' March, 2016')
 
     trade_signs = pickle.load(open(
-        '../Data/trade_signs_data/trade_signs_most_201603{}_{}.pickl'
-        .format(day, ticker), 'rb'))
+        '../Data/trade_signs_data_{}ms/trade_signs_data_201603{}_{}i_{}ms.pickl'
+        .format(t_step, day, ticker, t_step), 'rb'))
     time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
-    plt.figure(figsize=(16, 9))
+    figure = plt.figure(figsize=(16, 9))
 
     plt.plot(time[5399964:5457598] / 1000 / 3600,
              trade_signs[5399964:5457598], '-g',
@@ -149,12 +147,8 @@ def trade_signs_plot(ticker, day):
 
     plt.tight_layout()
 
-    if (not os.path.isdir('../Data/trade_signs_plot/')):
-        os.mkdir('../Data/trade_signs_plot/')
-        print('Folder to save plot created')
-
-    plt.savefig('../Data/trade_signs_plot/trade_signs_201603{}_{}.png'
-                .format(day, ticker))
+    function_name = trade_signs_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, day, 1)
 
     return None
 
@@ -172,7 +166,7 @@ def self_response_plot(ticker, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -181,7 +175,7 @@ def self_response_plot(ticker, days, t_step):
               + ' March, 2016')
 
         plot = pickle.load(open(
-            '../Data/self_response_data_{}ms/self_201603{}_{}i_{}ms.pickl'
+            '../Data/self_response_data_{}ms/self_response_data_201603{}_{}i_{}ms.pickl'
             .format(t_step, day, ticker, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -195,12 +189,8 @@ def self_response_plot(ticker, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/self_response_plot_{}ms/'.format(t_step))):
-        os.mkdir('../Data/self_response_plot_{}ms/'.format(t_step))
-        print('Folder to save plot created')
-
-    plt.savefig('../Data/self_response_plot_{}ms/self_response_{}_{}ms.png'
-                .format(t_step, ticker, t_step))
+    function_name = self_response_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, 'week', t_step)
 
     return None
 
