@@ -111,7 +111,7 @@ def midpoint_plot_week(ticker, days, t_step):
 
     # Plotting
     function_name = midpoint_plot_week.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, 'week', t_step)
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
 
     return None
 
@@ -361,35 +361,41 @@ def cross_response_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    figure = plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
+    if (ticker_i == ticker_j):
 
-    for i, day in enumerate(days):
+        return None
 
-        print('Processing data for the stock ' + ticker_i + ' and the stock '
-              + ticker_j + ' the day ' + day + ' March, 2016')
+    else:
 
-        plot = pickle.load(open(
-         '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+        figure = plt.figure(figsize=(9, 16))
+        plt.subplots_adjust(hspace=0, wspace=0)
 
-        plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
-        plt.legend(loc='best')
-        plt.title('Cross response - ticker i {} ticker j {} - {}ms'
-                  .format(ticker_i, ticker_j, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+        for i, day in enumerate(days):
 
-    # Plotting
-    function_name = cross_response_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+            print('Processing data for the stock ' + ticker_i + ' and the stock '
+                + ticker_j + ' the day ' + day + ' March, 2016')
 
-    return None
+            plot = pickle.load(open(
+            '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+            plt.subplot(len(days), 1, i+1)
+            plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
+            plt.legend(loc='best')
+            plt.title('Cross response - ticker i {} ticker j {} - {}ms'
+                    .format(ticker_i, ticker_j, t_step))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+        # Plotting
+        function_name = cross_response_plot.__name__
+        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -408,37 +414,43 @@ def avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    figure = plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
+    if (ticker_i == ticker_j):
 
-    for i, day in enumerate(days):
+        return None
 
-        print('Processing data for the stock ' + ticker_i + ' and the stock '
-              + ticker_j + ' the day ' + day + ' March, 2016')
+    else:
 
-        plot = pickle.load(open(
-         '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+        figure = plt.figure(figsize=(9, 16))
+        plt.subplots_adjust(hspace=0, wspace=0)
 
-        plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel("".join((r'$ \left \langle r_{i}\left ( t, \tau \right )'
-                   + r'\right \rangle \left \langle \epsilon_{j} \left ( t'
-                   + r'\right ) \right \rangle $').split()))
-        plt.legend(loc='best')
-        plt.title('Average - ticker i {} ticker j {} - {}ms'
-                  .format(ticker_i, ticker_j, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+        for i, day in enumerate(days):
 
-    # Plotting
-    function_name = avg_return_avg_trade_prod_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+            print('Processing data for the stock ' + ticker_i + ' and the stock '
+                + ticker_j + ' the day ' + day + ' March, 2016')
 
-    return None
+            plot = pickle.load(open(
+            '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+            plt.subplot(len(days), 1, i+1)
+            plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel("".join((r'$ \left \langle r_{i}\left ( t, \tau \right )'
+                    + r'\right \rangle \left \langle \epsilon_{j} \left ( t'
+                    + r'\right ) \right \rangle $').split()))
+            plt.legend(loc='best')
+            plt.title('Average - ticker i {} ticker j {} - {}ms'
+                    .format(ticker_i, ticker_j, t_step))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+        # Plotting
+        function_name = avg_return_avg_trade_prod_plot.__name__
+        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -458,52 +470,58 @@ def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    figure = plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
+    if (ticker_i == ticker_j):
 
-    for i, day in enumerate(days):
+        return None
 
-        print('Processing data for the stock ' + ticker_i + ' and the stock '
-              + ticker_j + ' the day ' + day + ' March, 2016')
+    else:
 
-        cross = pickle.load(open(
-         '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
-        avg = pickle.load(open(
-         '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+        figure = plt.figure(figsize=(9, 16))
+        plt.subplots_adjust(hspace=0, wspace=0)
 
-        plt.subplot(len(days), 2, 2*i+1)
-        plt.semilogx(cross, '-g', label='Stock i {} and stock j {} - {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
-        plt.legend(loc='best')
-        plt.title('Cross - {}i - {}j - {}ms'
-                  .format(ticker_i, ticker_j, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+        for i, day in enumerate(days):
 
-        plt.subplot(len(days), 2, 2*i+2)
-        plt.semilogx(avg, '-g', label='Stock i {} and stock j {} - {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel("".join((r'$ \left \langle r_{i}\left ( t, \tau \right )'
-                   + r'\right \rangle \left \langle \epsilon_{j} \left ( t'
-                   + r'\right ) \right \rangle $').split()))
-        plt.legend(loc='best')
-        plt.title('Avg - {}i - {}j - {}ms'
-                  .format(ticker_i, ticker_j, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+            print('Processing data for the stock ' + ticker_i + ' and the stock '
+                + ticker_j + ' the day ' + day + ' March, 2016')
 
-    # Plotting
-    function_name = cross_response_avg_return_avg_trade_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+            cross = pickle.load(open(
+            '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+            avg = pickle.load(open(
+            '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
-    return None
+            plt.subplot(len(days), 2, 2*i+1)
+            plt.semilogx(cross, '-g', label='Stock i {} and stock j {} - {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
+            plt.legend(loc='best')
+            plt.title('Cross - {}i - {}j - {}ms'
+                    .format(ticker_i, ticker_j, t_step))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+            plt.subplot(len(days), 2, 2*i+2)
+            plt.semilogx(avg, '-g', label='Stock i {} and stock j {} - {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel("".join((r'$ \left \langle r_{i}\left ( t, \tau \right )'
+                    + r'\right \rangle \left \langle \epsilon_{j} \left ( t'
+                    + r'\right ) \right \rangle $').split()))
+            plt.legend(loc='best')
+            plt.title('Avg - {}i - {}j - {}ms'
+                    .format(ticker_i, ticker_j, t_step))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+        # Plotting
+        function_name = cross_response_avg_return_avg_trade_plot.__name__
+        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -522,51 +540,57 @@ def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    figure = plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
+    if (ticker_i == ticker_j):
 
-    for i, day in enumerate(days):
+        return None
 
-        print('Processing data for the stock ' + ticker_i + ' and the stock '
-              + ticker_j + ' the day ' + day + ' March, 2016')
+    else:
 
-        plot_cross = pickle.load(open(
-         '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+        figure = plt.figure(figsize=(9, 16))
+        plt.subplots_adjust(hspace=0, wspace=0)
 
-        plot_avg = pickle.load(open(
-         '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+        for i, day in enumerate(days):
 
-        plot_diff = pickle.load(open("".join((
-         '../Data/difference_cross_response_avg_prod_data_{}ms/difference_cross_response_avg_prod_data_201603{}_'
-         + '{}i_{}j_{}ms.pickl').split())
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+            print('Processing data for the stock ' + ticker_i + ' and the stock '
+                + ticker_j + ' the day ' + day + ' March, 2016')
 
-        plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot_cross, '-',
-                     label='Cross response Stock i {} - Stock j {} - Day {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.semilogx(plot_avg, '-',
-                     label='Average product Stock i {} - Stock j {} - Day {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.semilogx(plot_diff, '-g',
-                     label='Difference Stock i {} - Stock j {} - Day {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel(r'Response')
-        plt.legend(loc='best')
-        plt.title('Difference response - ticker i {} ticker j {} - {}ms'
-                  .format(ticker_i, ticker_j, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+            plot_cross = pickle.load(open(
+            '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
-    # Plotting
-    function_name = difference_cross_response_avg_prod_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+            plot_avg = pickle.load(open(
+            '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
-    return None
+            plot_diff = pickle.load(open("".join((
+            '../Data/difference_cross_response_avg_prod_data_{}ms/difference_cross_response_avg_prod_data_201603{}_'
+            + '{}i_{}j_{}ms.pickl').split())
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+
+            plt.subplot(len(days), 1, i+1)
+            plt.semilogx(plot_cross, '-',
+                        label='Cross response Stock i {} - Stock j {} - Day {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.semilogx(plot_avg, '-',
+                        label='Average product Stock i {} - Stock j {} - Day {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.semilogx(plot_diff, '-g',
+                        label='Difference Stock i {} - Stock j {} - Day {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel(r'Response')
+            plt.legend(loc='best')
+            plt.title('Difference response - ticker i {} ticker j {} - {}ms'
+                    .format(ticker_i, ticker_j, t_step))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+        # Plotting
+        function_name = difference_cross_response_avg_prod_plot.__name__
+        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -736,37 +760,43 @@ def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    figure = plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
+    if (ticker_i == ticker_j):
 
-    for i, day in enumerate(days):
+        return None
 
-        print('Processing data for the stock ' + ticker_i + ' and the stock '
-              + ticker_j + ' the day ' + day + ' March, 2016')
+    else:
 
-        plot = pickle.load(open("".join((
-         '../Data/trade_sign_cross_correlator_data_{}ms/trade_sign_cross_'
-         + 'correlator_data_201603{}_{}i_{}j_{}ms.pickl').split())
-         .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+        figure = plt.figure(figsize=(9, 16))
+        plt.subplots_adjust(hspace=0, wspace=0)
 
-        plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
-                     .format(ticker_i, ticker_j, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
-        plt.legend(loc='best')
-        plt.title(
-            'Trade sign cross correlator - ticker i {} ticker j {} - {}ms'
-            .format(ticker_i, ticker_j, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+        for i, day in enumerate(days):
 
-    # Plotting
+            print('Processing data for the stock ' + ticker_i + ' and the stock '
+                + ticker_j + ' the day ' + day + ' March, 2016')
 
-    function_name = trade_sign_cross_correlator_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+            plot = pickle.load(open("".join((
+            '../Data/trade_sign_cross_correlator_data_{}ms/trade_sign_cross_'
+            + 'correlator_data_201603{}_{}i_{}j_{}ms.pickl').split())
+            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
-    return None
+            plt.subplot(len(days), 1, i+1)
+            plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
+                        .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
+            plt.legend(loc='best')
+            plt.title(
+                'Trade sign cross correlator - ticker i {} ticker j {} - {}ms'
+                .format(ticker_i, ticker_j, t_step))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+        # Plotting
+
+        function_name = trade_sign_cross_correlator_plot.__name__
+        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
+
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------------
