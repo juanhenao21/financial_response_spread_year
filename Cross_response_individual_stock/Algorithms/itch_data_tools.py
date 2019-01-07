@@ -92,7 +92,7 @@ def save_data(function_name, data, ticker_i, ticker_j, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def save_plot(function_name, figure, ticker_i, ticker_j, day, t_step):
+def save_plot(function_name, figure, ticker_i, ticker_j, t_step):
     """
     Save the plots generated in itch_data_plot module.
         :param function_name: name of the function that generates the data

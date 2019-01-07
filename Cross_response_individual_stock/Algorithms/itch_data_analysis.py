@@ -27,7 +27,6 @@ import itch_data_generator
 import itch_data_plot
 
 # -----------------------------------------------------------------------------------------------------------------------
-# -----------------------------------------------------------------------------------------------------------------------
 
 
 def main():
@@ -43,13 +42,11 @@ def main():
     tau_val = [1000000, 100000, 10000, 1000]
     t_step = [1, 10, 100, 1000]
 
-    print(days[0])
+    #for day in days:
 
-    for day in days:
+    #    itch_data_generator.trade_sign_cross_correlator_data(ticker_i, ticker_j, day, 1000, 1000)
 
-        itch_data_generator.self_response_data(ticker_i, day, 1000, 1000)
-
-    itch_data_plot.self_response_plot(ticker_i, days, 1000)
+    itch_data_plot.trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, 1000)
 
     print('Ay vamos!!')
 

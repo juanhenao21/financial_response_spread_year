@@ -109,6 +109,7 @@ def midpoint_plot_week(ticker, days, t_step):
     plt.tight_layout()
     plt.grid(True)
 
+    # Plotting
     function_name = midpoint_plot_week.__name__
     itch_data_tools.save_plot(function_name, figure, ticker, ticker, 'week', t_step)
 
@@ -147,6 +148,7 @@ def trade_signs_plot(ticker, day, t_step):
 
     plt.tight_layout()
 
+    # Plotting
     function_name = trade_signs_plot.__name__
     itch_data_tools.save_plot(function_name, figure, ticker, ticker, day, 1)
 
@@ -189,8 +191,9 @@ def self_response_plot(ticker, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
+    # Plotting
     function_name = self_response_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, 'week', t_step)
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
 
     return None
 
@@ -209,7 +212,7 @@ def self_response_abs_plot(ticker, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -218,7 +221,7 @@ def self_response_abs_plot(ticker, days, t_step):
               + ' March, 2016')
 
         plot = pickle.load(open(
-         '../Data/self_response_abs_data_{}ms/self_abs_201603{}_{}i_{}ms.pickl'
+         '../Data/self_response_abs_data_{}ms/self_response_abs_data_201603{}_{}i_{}ms.pickl'
          .format(t_step, day, ticker, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -232,14 +235,113 @@ def self_response_abs_plot(ticker, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/self_response_abs_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/self_response_abs_plot_{}ms/'.format(t_step))
-        print('Folder to save plot created')
 
-    plt.savefig(
-        '../Data/self_response_abs_plot_{}ms/self_response_abs_{}_{}ms.png'
-        .format(t_step, ticker, t_step))
+    # Plotting
+    function_name = self_response_abs_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def zero_correlation_model_plot(ticker, days, t_step):
+    """
+    Plot the zero correlation model during an interval of time (days) in
+    independent plots in a figure. The data is loaded from the zero
+    correlation model data results.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+        :param t_step: time step in the data in ms
+    """
+    figure = plt.figure(figsize=(9, 16))
+    plt.subplots_adjust(hspace=0, wspace=0)
+
+    for d, day in enumerate(days):
+
+        print('Processing data for the stock ' + ticker + ' the day ' + day
+              + ' March, 2016')
+
+        plot = pickle.load(open("".join((
+         '../Data/zero_correlation_model_data_{}ms/zero_correlation_model_data_201603{}_{}i'
+         + '_{}ms.pickl').split())
+         .format(t_step, day, ticker, t_step), 'rb'))
+
+        plt.subplot(5, 1, d+1)
+        plt.semilogx(plot, '-g', label='Stock i {} and random trade sign - {}'
+                     .format(ticker, day))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Self response random $ R_{ii} (\tau)_{rand} $')
+        plt.title('Zero correlation - ticker i {} - {}ms'
+                  .format(ticker, t_step))
+        plt.legend(loc='best')
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+    # Plotting
+    function_name = zero_correlation_model_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
+    """
+    Plot the self response, self response absolute and zero correlation model
+    during an interval of time (days) in independent plots in a figure. The
+    data is loaded from the self response data results, the self response
+    absolute data results and zero correlation model data results.
+        :param ticker: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+        :param t_step: time step in the data in ms
+    """
+    figure = plt.figure(figsize=(9, 16))
+    plt.subplots_adjust(hspace=0, wspace=0)
+
+    for d, day in enumerate(days):
+
+        print('Processing data for the stock ' + ticker + ' the day ' + day
+              + ' March, 2016')
+
+        self_ = pickle.load(open(
+         '../Data/self_response_data_{}ms/self_response_data_201603{}_{}i_{}ms.pickl'
+         .format(t_step, day, ticker, t_step), 'rb'))
+        abs_ = pickle.load(open(
+         '../Data/self_response_abs_data_{}ms/self_response_abs_data_201603{}_{}i_{}ms.pickl'
+         .format(t_step, day, ticker, t_step), 'rb'))
+        zero = pickle.load(open("".join((
+         '../Data/zero_correlation_model_data_{}ms/zero_correlation_model_data_201603{}_{}i'
+         + '_{}ms.pickl').split())
+         .format(t_step, day, ticker, t_step), 'rb'))
+
+        plt.subplot(len(days), 1, d+1)
+        plt.semilogx(self_, '-', label='Self response Stock i {} - {}'
+                     .format(ticker, day))
+        plt.semilogx(abs_, '-', label='Self response abs Stock i {} - {}'
+                     .format(ticker, day))
+        plt.semilogx(zero, '-', label='Zero correlation Stock i {} - {}'
+                     .format(ticker, day))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Self response $ R_{ii} (\tau) $')
+        plt.legend(loc='best')
+        plt.title('Self res - abs - zero - {}i - {}ms'
+                  .format(ticker, t_step))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+    # Plotting
+    function_name = self_response_self_abs_zero_corr_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
 
     return None
 
@@ -259,7 +361,7 @@ def cross_response_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -268,7 +370,7 @@ def cross_response_plot(ticker_i, ticker_j, days, t_step):
               + ticker_j + ' the day ' + day + ' March, 2016')
 
         plot = pickle.load(open(
-         '../Data/cross_response_data_{}ms/cross_201603{}_{}i_{}j_{}ms.pickl'
+         '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -283,13 +385,9 @@ def cross_response_plot(ticker_i, ticker_j, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/cross_response_plot_{}ms/'.format(t_step))):
-        os.mkdir('../Data/cross_response_plot_{}ms/'.format(t_step))
-        print('Folder to save plot created')
-
-    plt.savefig(
-        '../Data/cross_response_plot_{}ms/cross_response_{}_{}_{}ms.png'
-        .format(t_step, ticker_i, ticker_j, t_step))
+    # Plotting
+    function_name = cross_response_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
 
     return None
 
@@ -310,7 +408,7 @@ def avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -319,7 +417,7 @@ def avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
               + ticker_j + ' the day ' + day + ' March, 2016')
 
         plot = pickle.load(open(
-         '../Data/avg_return_sign_data_{}ms/avg_201603{}_{}i_{}j_{}ms.pickl'
+         '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -336,68 +434,12 @@ def avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/avg_return_sign_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/avg_return_sign_plot_{}ms/'.format(t_step))
-        print('Folder to save plot created')
-
-    plt.savefig(
-        '../Data/avg_return_sign_plot_{}ms/avg_response_{}_{}_{}ms.png'
-        .format(t_step, ticker_i, ticker_j, t_step))
+    # Plotting
+    function_name = avg_return_avg_trade_prod_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def zero_correlation_plot(ticker, days, t_step):
-    """
-    Plot the zero correlation model during an interval of time (days) in
-    independent plots in a figure. The data is loaded from the zero
-    correlation model data results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param days: string with the days to be analized
-         (i.e ['07', '08', '09'])
-        :param t_step: time step in the data in ms
-    """
-    plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
-
-    for d, day in enumerate(days):
-
-        print('Processing data for the stock ' + ticker + ' the day ' + day
-              + ' March, 2016')
-
-        plot = pickle.load(open("".join((
-         '../Data/zero_correlation_data_{}ms/zero_correlation_201603{}_{}i'
-         + '_rand_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
-
-        plt.subplot(5, 1, d+1)
-        plt.semilogx(plot, '-g', label='Stock i {} and random trade sign - {}'
-                     .format(ticker, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel(r'Self response random $ R_{ii} (\tau)_{rand} $')
-        plt.title('Zero correlation - ticker i {} - {}ms'
-                  .format(ticker, t_step))
-        plt.legend(loc='best')
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
-
-    if (not os.path.isdir('../Data/zero_correlation_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/zero_correlation_plot_{}ms/'.format(t_step))
-        print('Folder to save plot created')
-
-    plt.savefig(
-        '../Data/zero_correlation_plot_{}ms/zero_corr_{}_{}ms.png'
-        .format(t_step, ticker, t_step))
-
-    return None
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -416,7 +458,7 @@ def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -425,10 +467,10 @@ def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
               + ticker_j + ' the day ' + day + ' March, 2016')
 
         cross = pickle.load(open(
-         '../Data/cross_response_data_{}ms/cross_201603{}_{}i_{}j_{}ms.pickl'
+         '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
         avg = pickle.load(open(
-         '../Data/avg_return_sign_data_{}ms/avg_201603{}_{}i_{}j_{}ms.pickl'
+         '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         plt.subplot(len(days), 2, 2*i+1)
@@ -457,19 +499,12 @@ def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir(
-     '../Data/cross_response_avg_return_avg_trade_plot_{}ms/'
-     .format(t_step))):
-            os.mkdir('../Data/cross_response_avg_return_avg_trade_plot_{}ms/'
-                     .format(t_step))
-            print('Folder to save plot created')
-
-    plt.savefig("".join((
-                '../Data/cross_response_avg_return_avg_trade_plot_{}ms/'
-                + 'cross_response_avg_comparison_{}_{}_{}ms.png').split())
-                .format(t_step, ticker_i, ticker_j, t_step))
+    # Plotting
+    function_name = cross_response_avg_return_avg_trade_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
 
     return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -487,7 +522,7 @@ def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -496,15 +531,15 @@ def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
               + ticker_j + ' the day ' + day + ' March, 2016')
 
         plot_cross = pickle.load(open(
-         '../Data/cross_response_data_{}ms/cross_201603{}_{}i_{}j_{}ms.pickl'
+         '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         plot_avg = pickle.load(open(
-         '../Data/avg_return_sign_data_{}ms/avg_201603{}_{}i_{}j_{}ms.pickl'
+         '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         plot_diff = pickle.load(open("".join((
-         '../Data/difference_cross_response_avg_prod_data_{}ms/diff_201603{}_'
+         '../Data/difference_cross_response_avg_prod_data_{}ms/difference_cross_response_avg_prod_data_201603{}_'
          + '{}i_{}j_{}ms.pickl').split())
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
@@ -527,79 +562,9 @@ def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir(
-            '../Data/difference_cross_response_avg_prod_plot_{}ms/'
-            .format(t_step))):
-        os.mkdir('../Data/difference_cross_response_avg_prod_plot_{}ms/'
-                 .format(t_step))
-        print('Folder to save plot created')
-
-    plt.savefig("".join((
-        '../Data/difference_cross_response_avg_prod_plot_{}ms/diff_response_'
-        + '{}_{}_{}ms.png').split())
-        .format(t_step, ticker_i, ticker_j, t_step))
-
-    return None
-
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
-    """
-    Plot the self response, self response absolute and zero correlation model
-    during an interval of time (days) in independent plots in a figure. The
-    data is loaded from the self response data results, the self response
-    absolute data results and zero correlation model data results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param days: string with the days to be analized
-         (i.e ['07', '08', '09'])
-        :param t_step: time step in the data in ms
-    """
-    plt.figure(figsize=(9, 16))
-    plt.subplots_adjust(hspace=0, wspace=0)
-
-    for d, day in enumerate(days):
-
-        print('Processing data for the stock ' + ticker + ' the day ' + day
-              + ' March, 2016')
-
-        self_ = pickle.load(open(
-         '../Data/self_response_data_{}ms/self_201603{}_{}i_{}ms.pickl'
-         .format(t_step, day, ticker, t_step), 'rb'))
-        abs_ = pickle.load(open(
-         '../Data/self_response_abs_data_{}ms/self_abs_201603{}_{}i_{}ms.pickl'
-         .format(t_step, day, ticker, t_step), 'rb'))
-        zero = pickle.load(open("".join((
-         '../Data/zero_correlation_data_{}ms/zero_correlation_201603{}_{}i'
-         + '_rand_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
-
-        plt.subplot(len(days), 1, d+1)
-        plt.semilogx(self_, '-', label='Self response Stock i {} - {}'
-                     .format(ticker, day))
-        plt.semilogx(abs_, '-', label='Self response abs Stock i {} - {}'
-                     .format(ticker, day))
-        plt.semilogx(zero, '-', label='Zero correlation Stock i {} - {}'
-                     .format(ticker, day))
-        plt.xlabel(r'Time lag $[\tau]$')
-        plt.ylabel(r'Self response $ R_{ii} (\tau) $')
-        plt.legend(loc='best')
-        plt.title('Self res - abs - zero - {}i - {}ms'
-                  .format(ticker, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
-
-    if (not os.path.isdir('../Data/self_res_self_abs_zero_corr_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/self_res_self_abs_zero_corr_plot_{}ms/'
-                 .format(t_step))
-        print('Folder to save plot created')
-
-    plt.savefig("".join((
-        '../Data/self_res_self_abs_zero_corr_plot_{}ms/self_res_self_abs_'
-        + 'zero_corr{}_{}ms.png').split()).format(t_step, ticker, t_step))
+    # Plotting
+    function_name = difference_cross_response_avg_prod_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
 
     return None
 
@@ -618,7 +583,7 @@ def trade_sign_self_correlator_plot(ticker_i, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -628,7 +593,7 @@ def trade_sign_self_correlator_plot(ticker_i, days, t_step):
 
         plot = pickle.load(open("".join((
          '../Data/trade_sign_self_correlator_data_{}ms/trade_sign_self_'
-         + 'correlator_201603{}_{}i_{}ms.pickl').split())
+         + 'correlator_data_201603{}_{}i_{}ms.pickl').split())
          .format(t_step, day, ticker_i, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -644,16 +609,10 @@ def trade_sign_self_correlator_plot(ticker_i, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/trade_sign_self_correlator_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/trade_sign_self_correlator_plot_{}ms/'
-                 .format(t_step))
-        print('Folder to save plot created')
+    # Plotting
 
-    plt.savefig("".join((
-        '../Data/trade_sign_self_correlator_plot_{}ms/trade_sign_self_'
-        + 'correlator__{}_{}ms.png').split())
-        .format(t_step, ticker_i, t_step))
+    function_name = trade_sign_self_correlator_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_i, t_step)
 
     return None
 
@@ -672,7 +631,7 @@ def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -682,7 +641,7 @@ def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
 
         plot = pickle.load(open("".join((
          '../Data/trade_sign_autocorrelation_data_{}ms/trade_sign_'
-         + 'autocorrelation_201603{}_{}i_{}ms.pickl').split())
+         + 'autocorrelation_data_201603{}_{}i_{}ms.pickl').split())
          .format(t_step, day, ticker_i, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -698,16 +657,65 @@ def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/trade_sign_autocorrelation_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/trade_sign_autocorrelation_plot_{}ms/'
-                 .format(t_step))
-        print('Folder to save plot created')
+    # Plotting
 
-    plt.savefig("".join((
-        '../Data/trade_sign_autocorrelation_plot_{}ms/trade_sign_'
-        + 'autocorrelation__{}_{}ms.png').split())
-        .format(t_step, ticker_i, t_step))
+    function_name = trade_sign_autocorrelation_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_i, t_step)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
+    """
+    Plot the trade sign autocorrelation during an interval of time (days) in
+    independent plots in a figure. The data is loaded from the trade sign
+    autocorrelation data results.
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+        :param t_step: time step in the data in ms
+    """
+
+    figure = plt.figure(figsize=(9, 16))
+    plt.subplots_adjust(hspace=0, wspace=0)
+
+    for i, day in enumerate(days):
+
+        print('Processing data for the stock ' + ticker_i + ' the day '
+              + day + ' March, 2016')
+
+        plot_self_correlator = pickle.load(open("".join((
+         '../Data/trade_sign_self_correlator_data_{}ms/trade_sign_self_'
+         + 'correlator_data_201603{}_{}i_{}ms.pickl').split())
+         .format(t_step, day, ticker_i, t_step), 'rb'))
+
+        plot_autocorrelation = pickle.load(open("".join((
+         '../Data/trade_sign_autocorrelation_data_{}ms/trade_sign_'
+         + 'autocorrelation_data_201603{}_{}i_{}ms.pickl').split())
+         .format(t_step, day, ticker_i, t_step), 'rb'))
+
+        plt.subplot(len(days), 1, i+1)
+        plt.semilogx(plot_self_correlator, '-', label='Self correlator {} - Day {}'
+                     .format(ticker_i, day))
+        plt.semilogx(plot_autocorrelation, '-', label='Autocorrelation {} - Day {}'
+                     .format(ticker_i, day))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Trade sign autocorrelation - self correlator')
+        plt.legend(loc='best')
+        plt.title(
+            'Trade sign self correlator - autocorrelation - ticker i {} - {}ms'
+            .format(ticker_i, t_step))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+    # Plotting
+
+    function_name = trade_sign_self_correlator_autocorrelation_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_i, t_step)
 
     return None
 
@@ -728,7 +736,7 @@ def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
         :param t_step: time step in the data in ms
     """
 
-    plt.figure(figsize=(9, 16))
+    figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for i, day in enumerate(days):
@@ -738,7 +746,7 @@ def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
 
         plot = pickle.load(open("".join((
          '../Data/trade_sign_cross_correlator_data_{}ms/trade_sign_cross_'
-         + 'correlator_201603{}_{}i_{}j_{}ms.pickl').split())
+         + 'correlator_data_201603{}_{}i_{}j_{}ms.pickl').split())
          .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
@@ -754,16 +762,10 @@ def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
         plt.grid(True)
         plt.tight_layout()
 
-    if (not os.path.isdir('../Data/trade_sign_cross_correlator_plot_{}ms/'
-                          .format(t_step))):
-        os.mkdir('../Data/trade_sign_cross_correlator_plot_{}ms/'
-                 .format(t_step))
-        print('Folder to save plot created')
+    # Plotting
 
-    plt.savefig("".join((
-        '../Data/trade_sign_cross_correlator_plot_{}ms/trade_sign_cross_'
-        + 'correlator__{}_{}_{}ms.png').split())
-        .format(t_step, ticker_i, ticker_j, t_step))
+    function_name = trade_sign_cross_correlator_plot.__name__
+    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j, t_step)
 
     return None
 
