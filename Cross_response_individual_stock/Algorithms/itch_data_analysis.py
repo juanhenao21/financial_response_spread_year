@@ -27,7 +27,6 @@ import itch_data_generator
 import itch_data_plot
 
 # -----------------------------------------------------------------------------------------------------------------------
-# -----------------------------------------------------------------------------------------------------------------------
 
 
 def main():
@@ -39,13 +38,15 @@ def main():
 
     ticker_i = 'AAPL'
     ticker_j = 'MSFT'
-    tau_val = 1000
     ticker = ['AAPL', 'MSFT']
+    tau_val = [1000000, 100000, 10000, 1000]
     t_step = [1, 10, 100, 1000]
-    for t in t_step:
-        for day in days:
-            itch_data_generator.difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t)
-        itch_data_plot.difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t)
+
+    #for day in days:
+
+    #    itch_data_generator.trade_sign_cross_correlator_data(ticker_i, ticker_j, day, 1000, 1000)
+
+    itch_data_plot.trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, 1000)
 
     print('Ay vamos!!')
 
