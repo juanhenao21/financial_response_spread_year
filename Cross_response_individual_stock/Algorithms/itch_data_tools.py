@@ -67,8 +67,14 @@ def save_data(function_name, data, ticker_i, ticker_j, day, t_step):
     if (not os.path.isdir('../Data/{}_{}ms/'
                           .format(function_name, t_step))):
 
-        os.mkdir('../Data/{}_{}ms/'.format(function_name, t_step))
-        print('Folder to save data created')
+        try:
+
+            os.mkdir('../Data/{}_{}ms/'.format(function_name, t_step))
+            print('Folder to save data created')
+
+        except FileExistsError:
+
+            print('Folder exists. The folder was not created')
 
     if (ticker_i != ticker_j):
 
@@ -109,8 +115,14 @@ def save_plot(function_name, figure, ticker_i, ticker_j, t_step):
     if (not os.path.isdir('../Plots/{}_{}ms/'
                           .format(function_name, t_step))):
 
-        os.mkdir('../Plots/{}_{}ms/'.format(function_name, t_step))
-        print('Folder to save data created')
+        try:
+
+            os.mkdir('../Plots/{}_{}ms/'.format(function_name, t_step))
+            print('Folder to save data created')
+
+        except FileExistsError:
+
+            print('Folder exists. The folder was not created')
 
     if (ticker_i != ticker_j):
 
@@ -131,3 +143,12 @@ def save_plot(function_name, figure, ticker_i, ticker_j, t_step):
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
+
+
+def main():
+
+    return None
+
+
+if __name__ == '__main__':
+    main()

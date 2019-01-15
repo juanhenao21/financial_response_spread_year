@@ -577,7 +577,7 @@ def self_response_data(ticker_i, day, tau_val, t_step):
                 .format(day, ticker_i), 'rb'))
     trade_sign_i = pickle.load(open("".join((
                 '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i'
-                '_1ms.pickl').split())
+                + '_1ms.pickl').split())
                 .format(day, ticker_i), 'rb'))
     time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
@@ -592,13 +592,14 @@ def self_response_data(ticker_i, day, tau_val, t_step):
     time_t_step = time[::t_step]
 
     # reshape and average data of trade signs
-    trade_sign_i_sec_avg, \
-    trade_sign_i_sec_nr = itch_data_tools.trade_sign_reshape(
-                                                trade_sign_i, time_t_step)
+    (trade_sign_i_sec_avg,
+     trade_sign_i_sec_nr) = itch_data_tools.trade_sign_reshape(
+                                                 trade_sign_i, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
 
-    for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+    for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                    int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
@@ -656,7 +657,8 @@ def self_response_abs_data(ticker_i, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response functions
 
-    for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+    for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                    int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
@@ -712,7 +714,8 @@ def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
 
     # Calculating the midpoint log return and the cross response functions
 
-    for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+    for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                    int(tau_val * 1E-3))):
 
         # Obtain the midpoint log return. Displace the numerator tau values to
         # the right and compute the return, and append the remaining values of
@@ -759,15 +762,16 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
 
         print('Cross response function data')
         print('Processing data for the stock i ' + ticker_i + ' and stock j ' +
-            ticker_j + ' the day ' + day + ' March, 2016')
+              ticker_j + ' the day ' + day + ' March, 2016')
         print('Time step: ', t_step, 'ms')
 
         # Load data
         midpoint_i = pickle.load(open(
                     '../Data/midpoint_data/midpoint_201603{}_{}.pickl'
                     .format(day, ticker_i), 'rb'))
-        trade_sign_j = pickle.load(open(
-                    '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i_1ms.pickl'
+        trade_sign_j = pickle.load(open(''.join((
+                    '../Data/trade_signs_data_1ms/trade_signs_data_201603{}'
+                    + '_{}i_1ms.pickl').split())
                     .format(day, ticker_j), 'rb'))
         time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
@@ -782,19 +786,22 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
         time_t_step = time[::t_step]
 
         # reshape and average data of trade signs
-        trade_sign_j_sec_avg, trade_sign_j_sec_nr = itch_data_tools.trade_sign_reshape(
+        (trade_sign_j_sec_avg,
+         trade_sign_j_sec_nr) = itch_data_tools.trade_sign_reshape(
                                                     trade_sign_j, time_t_step)
 
         # Calculating the midpoint log return and the cross response function
 
         # Depending on the ta
-        for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+        for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                        int(tau_val * 1E-3))):
 
-            # Obtain the midpoint log return. Displace the numerator tau values to
-            # the right and compute the return, and append the remaining values of
-            # tau with zeros
+            # Obtain the midpoint log return. Displace the numerator tau
+            # values to the right and compute the return, and append the
+            # remaining values of tau with zeros
             log_return_i_sec = np.append(np.log(
-                midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]), np.zeros(tau_v))
+                midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]),
+                np.zeros(tau_v))
 
             cross_response_tau[tau_idx] = np.mean(
                 log_return_i_sec[trade_sign_j_sec_nr != 0] *
@@ -804,7 +811,7 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
 
         function_name = cross_response_data.__name__
         itch_data_tools.save_data(function_name, cross_response_tau, ticker_i,
-                                ticker_j, day, t_step)
+                                  ticker_j, day, t_step)
 
         return None
 
@@ -831,18 +838,19 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
 
     else:
 
-        print('Product between the averaged midpoint log return of ticker i and '
-            + 'the averaged trade signs of ticker j data')
+        print('Product between the averaged midpoint log return of ticker i '
+              + 'and the averaged trade signs of ticker j data')
         print('Processing data for the stock i ' + ticker_i + ' and stock j '
-            + ticker_j + ' the day ' + day + ' March, 2016')
+              + ticker_j + ' the day ' + day + ' March, 2016')
         print('Time step: ', t_step, 'ms')
 
         # Load data
         midpoint_i = pickle.load(open(
             '../Data/midpoint_data/midpoint_201603{}_{}.pickl'
             .format(day, ticker_i), 'rb'))
-        trade_sign_j = pickle.load(open(
-            '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i_1ms.pickl'
+        trade_sign_j = pickle.load(open(''.join((
+            '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i'
+            + '_1ms.pickl').split())
             .format(day, ticker_j), 'rb'))
         time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
@@ -857,31 +865,31 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
         time_t_step = time[::t_step]
 
         # reshape and average data of trade signs
-        trade_sign_j_sec_avg, trade_sign_j_sec_nr = itch_data_tools.trade_sign_reshape(
+        (trade_sign_j_sec_avg,
+         trade_sign_j_sec_nr) = itch_data_tools.trade_sign_reshape(
                                                     trade_sign_j, time_t_step)
 
         # Calculating the midpoint log return and the cross response functions
 
-        for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+        for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                        int(tau_val * 1E-3))):
 
             # Obtain the midpoint log return. Displace the numerator tau values
-            # to the right and compute the return, and append the remaining values
-            # of tau with zeros
+            # to the right and compute the return, and append the remaining
+            # values of tau with zeros
             log_return_i_sec = np.append(np.log(
                         midpoint_i_sec[tau_v:]/midpoint_i_sec[:-tau_v]),
                         np.zeros(tau_v))
 
-            avg_return_sign[tau_idx] = (np.mean(
-                                    log_return_i_sec[trade_sign_j_sec_nr != 0]) *
-                                    np.mean(
-                                    trade_sign_j_sec_avg[trade_sign_j_sec_nr != 0]
-                                    ))
+            avg_return_sign[tau_idx] = (
+                np.mean(log_return_i_sec[trade_sign_j_sec_nr != 0]) *
+                np.mean(trade_sign_j_sec_avg[trade_sign_j_sec_nr != 0]))
 
         # Saving data
 
         function_name = avg_return_avg_trade_prod_data.__name__
         itch_data_tools.save_data(function_name, avg_return_sign, ticker_i,
-                                ticker_j, day, t_step)
+                                  ticker_j, day, t_step)
 
         return None
 
@@ -896,19 +904,21 @@ def difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
 
     else:
 
-        print('Difference between the cross response function and the averaged '
-            + 'midpoint log return of ticker i and the averaged trade signs '
-            + 'of ticker j data')
+        print('Difference between the cross response function and the '
+              + 'averaged midpoint log return of ticker i and the averaged '
+              + 'trade signs of ticker j data')
         print('Processing data for the stock i ' + ticker_i + ' and stock j '
-            + ticker_j + ' the day ' + day + ' March, 2016')
+              + ticker_j + ' the day ' + day + ' March, 2016')
         print('Time step: ', t_step, 'ms')
 
         # Load data
-        cross_response = pickle.load(open(
-            '../Data/cross_response_data_{}ms/cross_response_data_201603{}_{}i_{}j_{}ms.pickl'
+        cross_response = pickle.load(open(''.join((
+            '../Data/cross_response_data_{}ms/cross_response_data_201603{}_'
+            + '{}i_{}j_{}ms.pickl').split())
             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
-        avg_return_avg_trade = pickle.load(open(
-            '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade_prod_data_201603{}_{}i_{}j_{}ms.pickl'
+        avg_return_avg_trade = pickle.load(open(''.join((
+            '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade'
+            + '_prod_data_201603{}_{}i_{}j_{}ms.pickl').split())
             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
         difference = cross_response - avg_return_avg_trade
@@ -916,8 +926,8 @@ def difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
         # Saving data
 
         function_name = difference_cross_response_avg_prod_data.__name__
-        itch_data_tools.save_data(function_name, difference, ticker_i, ticker_j,
-                                day, t_step)
+        itch_data_tools.save_data(function_name, difference, ticker_i,
+                                  ticker_j, day, t_step)
 
         return None
 
@@ -941,8 +951,9 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
     print('Time step: ', t_step, 'ms')
 
     # Load data
-    trade_sign_i = pickle.load(open(
-                '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i_1ms.pickl'
+    trade_sign_i = pickle.load(open(''.join((
+                '../Data/trade_signs_data_1ms/trade_signs_data_201603{}'
+                + '_{}i_1ms.pickl').split())
                 .format(day, ticker_i), 'rb'))
     time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
@@ -955,12 +966,14 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
     time_t_step = time[::t_step]
 
     # reshape and average data of trade signs
-    trade_sign_i_sec_avg, trade_sign_i_sec_nr = itch_data_tools.trade_sign_reshape(
+    (trade_sign_i_sec_avg,
+     trade_sign_i_sec_nr) = itch_data_tools.trade_sign_reshape(
         trade_sign_i, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
 
-    for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+    for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                    int(tau_val * 1E-3))):
 
         trade_sign_product = np.append(trade_sign_i_sec_avg[tau_v:]
                                        * trade_sign_i_sec_avg[:-tau_v],
@@ -972,7 +985,8 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
     # Saving data
 
     function_name = trade_sign_self_correlator_data.__name__
-    itch_data_tools.save_data(function_name, self_correlator, ticker_i, ticker_i, day, t_step)
+    itch_data_tools.save_data(function_name, self_correlator, ticker_i,
+                              ticker_i, day, t_step)
 
     return None
 
@@ -996,8 +1010,9 @@ def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
     print('Time step: ', t_step, 'ms')
 
     # Load data
-    trade_sign_i = pickle.load(open(
-                '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i_1ms.pickl'
+    trade_sign_i = pickle.load(open(''.join((
+                '../Data/trade_signs_data_1ms/trade_signs_data_201603{}'
+                + '_{}i_1ms.pickl').split())
                 .format(day, ticker_i), 'rb'))
     time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
@@ -1010,7 +1025,8 @@ def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
     time_t_step = time[::t_step]
 
     # reshape and average data of trade signs
-    trade_sign_i_sec_avg, trade_sign_i_sec_nr = itch_data_tools.trade_sign_reshape(
+    (trade_sign_i_sec_avg,
+     trade_sign_i_sec_nr) = itch_data_tools.trade_sign_reshape(
         trade_sign_i, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
@@ -1024,7 +1040,8 @@ def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
                             trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0]
                             * trade_sign_i_sec_avg[trade_sign_i_sec_nr != 0])
 
-    for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+    for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                    int(tau_val * 1E-3))):
 
         trade_sign_product = np.append(trade_sign_i_sec_avg[tau_v:]
                                        * trade_sign_i_sec_avg[:-tau_v],
@@ -1040,8 +1057,8 @@ def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
     # Saving data
 
     function_name = trade_sign_autocorrelation_data.__name__
-    itch_data_tools.save_data(function_name, trade_sign_autocorrelation, ticker_i,
-                              ticker_i, day, t_step)
+    itch_data_tools.save_data(function_name, trade_sign_autocorrelation,
+                              ticker_i, ticker_i, day, t_step)
 
     return None
 
@@ -1068,16 +1085,18 @@ def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
     else:
 
         print('trade sign cross correlator data')
-        print('Processing data for the stock i ' + ticker_i + ' and stock j ' +
-            ticker_j + ' the day ' + day + ' March, 2016')
+        print('Processing data for the stock i ' + ticker_i + ' and stock j '
+              + ticker_j + ' the day ' + day + ' March, 2016')
         print('Time step: ', t_step, 'ms')
 
         # Load data
-        trade_sign_i = pickle.load(open(
-                    '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i_1ms.pickl'
+        trade_sign_i = pickle.load(open(''.join((
+                    '../Data/trade_signs_data_1ms/trade_signs_data_201603{}'
+                    + '_{}i_1ms.pickl').split())
                     .format(day, ticker_i), 'rb'))
-        trade_sign_j = pickle.load(open(
-                    '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i_1ms.pickl'
+        trade_sign_j = pickle.load(open(''.join((
+                    '../Data/trade_signs_data_1ms/trade_signs_data_201603{}'
+                    + '_{}i_1ms.pickl').split())
                     .format(day, ticker_j), 'rb'))
         time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
 
@@ -1092,16 +1111,18 @@ def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
         # reshape and average data of trade signs
         trade_sign_i_sec_avg, _ = itch_data_tools.trade_sign_reshape(
             trade_sign_i, time_t_step)
-        trade_sign_j_sec_avg, trade_sign_j_sec_nr = itch_data_tools.trade_sign_reshape(
+        (trade_sign_j_sec_avg,
+         trade_sign_j_sec_nr) = itch_data_tools.trade_sign_reshape(
             trade_sign_j, time_t_step)
 
         # Calculating the midpoint log return and the cross response function
 
-        for tau_idx, tau_v in enumerate(range(1, tau_val + 1, int(tau_val * 1E-3))):
+        for tau_idx, tau_v in enumerate(range(1, tau_val + 1,
+                                        int(tau_val * 1E-3))):
 
             trade_sign_product = np.append(trade_sign_i_sec_avg[tau_v:]
-                                        * trade_sign_j_sec_avg[:-tau_v],
-                                        np.zeros(tau_v))
+                                           * trade_sign_j_sec_avg[:-tau_v],
+                                           np.zeros(tau_v))
 
             cross_correlator[tau_idx] = np.mean(
                 trade_sign_product[trade_sign_j_sec_nr != 0])
@@ -1109,9 +1130,17 @@ def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
         # Saving data
 
         function_name = trade_sign_cross_correlator_data.__name__
-        itch_data_tools.save_data(function_name, cross_correlator, ticker_i, ticker_j,
-                                day, t_step)
+        itch_data_tools.save_data(function_name, cross_correlator, ticker_i,
+                                  ticker_j, day, t_step)
 
         return None
 
 # -----------------------------------------------------------------------------------------------------------------------
+
+def main():
+
+    return None
+
+
+if __name__ == '__main__':
+    main()

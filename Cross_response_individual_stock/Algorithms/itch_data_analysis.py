@@ -38,32 +38,53 @@ def data_plot_generator():
     #tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
     tickers = ['AAPL', 'MSFT']
     days = pickle.load(open('../Data/days.pickl', 'rb'))
-    tau_val = [1000000, 100000, 10000, 1000]
-    t_step = [1, 10, 100, 1000]
+    tau_val = [1000, 10000, 100000, 1000000]
+    t_step = [1000, 100, 10, 1]
 
     # Parallel computing
-    pool = mp.Pool(processes=8)
+    pool = mp.Pool(processes=mp.cpu_count())
+
     # Basic functions
     #pool.starmap(itch_data_generator.midpoint_data, product(tickers, days))
     #pool.starmap(itch_data_generator.trade_signs_data, product(tickers, days))
-    # Especific functions
-    #pool.starmap(itch_data_generator.self_response_data, product(tickers, days, [1000], [1000]))
-    #pool.starmap(itch_data_generator.self_response_abs_data, product(tickers, days, [1000], [1000]))
-    #pool.starmap(itch_data_generator.zero_correlation_model_data, product(tickers, days, [1000], [1000]))
-    pool.starmap(itch_data_generator.cross_response_data, product(tickers, tickers, days, [1000], [1000]))
-    pool.starmap(itch_data_generator.avg_return_avg_trade_prod_data, product(tickers, tickers, days, [1000], [1000]))
-    pool.starmap(itch_data_generator.difference_cross_response_avg_prod_data, product(tickers, tickers, days, [1000]))
-    pool.starmap(itch_data_generator.trade_sign_self_correlator_data, product(tickers, days, [1000], [1000]))
-    pool.starmap(itch_data_generator.trade_sign_autocorrelation_data, product(tickers, days, [1000], [1000]))
-    pool.starmap(itch_data_generator.trade_sign_cross_correlator_data, product(tickers, tickers, days, [1000], [1000]))
 
-    # Plot
-    pool.starmap(itch_data_plot.midpoint_plot_week, product(tickers, [days], [1000]))
-    pool.starmap(itch_data_plot.self_response_self_abs_zero_corr_plot, product(tickers, [days], [1000]))
-    pool.starmap(itch_data_plot.cross_response_avg_return_avg_trade_plot, product(tickers, tickers, [days], [1000]))
-    pool.starmap(itch_data_plot.difference_cross_response_avg_prod_plot, product(tickers, tickers, [days], [1000]))
-    pool.starmap(itch_data_plot.trade_sign_self_correlator_autocorrelation_plot, product(tickers, [days], [1000]))
-    pool.starmap(itch_data_plot.trade_sign_cross_correlator_plot, product(tickers, tickers, [days], [1000]))
+    for tau, t in zip(tau_val, t_step):
+
+        # Especific functions
+        pool.starmap(itch_data_generator.self_response_data,
+                     product(tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.self_response_abs_data,
+                     product(tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.zero_correlation_model_data,
+                     product(tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.cross_response_data,
+                     product(tickers, tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.avg_return_avg_trade_prod_data,
+                     product(tickers, tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.
+                     difference_cross_response_avg_prod_data,
+                     product(tickers, tickers, days, [t]))
+        pool.starmap(itch_data_generator.trade_sign_self_correlator_data,
+                     product(tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.trade_sign_autocorrelation_data,
+                     product(tickers, days, [tau], [t]))
+        pool.starmap(itch_data_generator.trade_sign_cross_correlator_data,
+                     product(tickers, tickers, days, [tau], [t]))
+
+        # Plot
+        pool.starmap(itch_data_plot.midpoint_plot_week,
+                     product(tickers, [days], [t]))
+        pool.starmap(itch_data_plot.self_response_self_abs_zero_corr_plot,
+                     product(tickers, [days], [t]))
+        pool.starmap(itch_data_plot.cross_response_avg_return_avg_trade_plot,
+                     product(tickers, tickers, [days], [t]))
+        pool.starmap(itch_data_plot.difference_cross_response_avg_prod_plot,
+                     product(tickers, tickers, [days], [t]))
+        pool.starmap(itch_data_plot.
+                     trade_sign_self_correlator_autocorrelation_plot,
+                     product(tickers, [days], [t]))
+        pool.starmap(itch_data_plot.trade_sign_cross_correlator_plot,
+                     product(tickers, tickers, [days], [t]))
 
     pool.close()
     pool.join()
@@ -78,26 +99,20 @@ def main():
 
     # Tickers and days to analyze
 
-    tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
-    days = pickle.load(open('../Data/days.pickl', 'rb'))
+    #tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
+    #days = pickle.load(open('../Data/days.pickl', 'rb'))
 
-    ticker_i = 'AAPL'
-    ticker_j = 'MSFT'
-    ticker = ['AAPL', 'MSFT']
-    tau_val = [1000000, 100000, 10000, 1000]
-    t_step = [1, 10, 100, 1000]
-
-    #for day in days:
-
-    #    itch_data_generator.trade_sign_cross_correlator_data(ticker_i, ticker_j, day, 1000, 1000)
-
-    #itch_data_plot.trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, 1000)
+    #ticker_i = 'AAPL'
+    #ticker_j = 'MSFT'
+    #tau_val = [1000000, 100000, 10000, 1000]
+    #t_step = [1, 10, 100, 1000]
 
     data_plot_generator()
 
     print('Ay vamos!!')
 
     return None
+
 
 if __name__ == '__main__':
     main()
