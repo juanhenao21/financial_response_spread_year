@@ -45,8 +45,8 @@ def data_plot_generator():
     pool = mp.Pool(processes=mp.cpu_count())
 
     # Basic functions
-    #pool.starmap(itch_data_generator.midpoint_data, product(tickers, days))
-    #pool.starmap(itch_data_generator.trade_signs_data, product(tickers, days))
+    pool.starmap(itch_data_generator.midpoint_data, product(tickers, days))
+    pool.starmap(itch_data_generator.trade_signs_data, product(tickers, days))
 
     for tau, t in zip(tau_val, t_step):
 
@@ -100,14 +100,20 @@ def main():
     # Tickers and days to analyze
 
     #tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
-    #days = pickle.load(open('../Data/days.pickl', 'rb'))
+    days = pickle.load(open('../Data/days.pickl', 'rb'))
 
-    #ticker_i = 'AAPL'
-    #ticker_j = 'MSFT'
+    ticker_i = 'AAPL'
+    ticker_j = 'MSFT'
     #tau_val = [1000000, 100000, 10000, 1000]
-    #t_step = [1, 10, 100, 1000]
+    t_step = [1, 10, 100, 1000]
 
-    data_plot_generator()
+    #data_plot_generator()
+
+    for t in t_step:
+        itch_data_plot.trade_sign_self_correlator_plot(ticker_i, days, t)
+        itch_data_plot.trade_sign_autocorrelation_plot(ticker_i, days, t)
+        itch_data_plot.trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t)
+        itch_data_plot.trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t)
 
     print('Ay vamos!!')
 
