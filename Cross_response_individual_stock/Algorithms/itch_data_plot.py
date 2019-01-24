@@ -639,7 +639,7 @@ def trade_sign_self_correlator_plot(ticker_i, days, t_step):
          .format(t_step, day, ticker_i, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot, '-g', label='Stock i {} - Day {}'
+        plt.loglog(plot, '-g', label='Stock i {} - Day {}'
                      .format(ticker_i, day))
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign self correlator $ \Theta_{ii} (\tau) $')
@@ -647,7 +647,7 @@ def trade_sign_self_correlator_plot(ticker_i, days, t_step):
         plt.title(
             'Trade sign self correlator - ticker i {} - {}ms'
             .format(ticker_i, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.ylim([10E-6,10])
         plt.grid(True)
         plt.tight_layout()
 
@@ -688,7 +688,7 @@ def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
          .format(t_step, day, ticker_i, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot, '-g', label='Stock i {} - Day {}'
+        plt.loglog(plot, '-g', label='Stock i {} - Day {}'
                      .format(ticker_i, day))
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign autocorrelation')
@@ -696,7 +696,7 @@ def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
         plt.title(
             'Trade sign autocorrelation - ticker i {} - {}ms'
             .format(ticker_i, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.ylim([10E-6,10])
         plt.grid(True)
         plt.tight_layout()
 
@@ -742,10 +742,10 @@ def trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
          .format(t_step, day, ticker_i, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
-        plt.semilogx(plot_self_correlator, '-',
+        plt.loglog(plot_self_correlator, '-',
                      label='Self correlator {} - Day {}'
                      .format(ticker_i, day))
-        plt.semilogx(plot_autocorrelation, '-',
+        plt.loglog(plot_autocorrelation, '-',
                      label='Autocorrelation {} - Day {}'
                      .format(ticker_i, day))
         plt.xlabel(r'Time lag $[\tau]$')
@@ -754,7 +754,8 @@ def trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
         plt.title(
             'Trade sign self correlator - autocorrelation - ticker i {} - {}ms'
             .format(ticker_i, t_step))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.ylim([10E-6,10])
+        #plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.grid(True)
         plt.tight_layout()
 
@@ -803,7 +804,7 @@ def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
              .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
 
             plt.subplot(len(days), 1, i+1)
-            plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
+            plt.loglog(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
                          .format(ticker_i, ticker_j, day))
             plt.xlabel(r'Time lag $[\tau]$')
             plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
@@ -811,7 +812,8 @@ def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
             plt.title(
                 'Trade sign cross correlator - ticker i {} ticker j {} - {}ms'
                 .format(ticker_i, ticker_j, t_step))
-            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.ylim([10E-6,10])
+            #plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             plt.grid(True)
             plt.tight_layout()
 
