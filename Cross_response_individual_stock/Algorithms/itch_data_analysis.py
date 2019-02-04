@@ -31,11 +31,12 @@ import itch_data_plot
 
 def data_plot_generator():
     """
-    Generates all the data and plots from ITCH data
+    Generates all the data and relevant plots from ITCH data. It uses
+    the multiprocessing module to parallelize functions.
     """
 
     # Basic data
-    #tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
+    # tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
     tickers = ['AAPL', 'MSFT']
     days = pickle.load(open('../Data/days.pickl', 'rb'))
     tau_val = [1000, 10000, 100000, 1000000]
@@ -99,21 +100,15 @@ def main():
 
     # Tickers and days to analyze
 
-    #tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
-    days = pickle.load(open('../Data/days.pickl', 'rb'))
+    # tickers = pickle.load(open('../Data/tickers.pickl', 'rb'))
+    # days = pickle.load(open('../Data/days.pickl', 'rb'))
 
-    ticker_i = 'AAPL'
-    ticker_j = 'MSFT'
-    #tau_val = [1000000, 100000, 10000, 1000]
-    t_step = [1, 10, 100, 1000]
+    # ticker_i = 'AAPL'
+    # ticker_j = 'MSFT'
+    # tau_val = [1000000, 100000, 10000, 1000]
+    # t_step = [1, 10, 100, 1000]
 
-    #data_plot_generator()
-
-    for t in t_step:
-        itch_data_plot.trade_sign_self_correlator_plot(ticker_i, days, t)
-        itch_data_plot.trade_sign_autocorrelation_plot(ticker_i, days, t)
-        itch_data_plot.trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t)
-        itch_data_plot.trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t)
+    # data_plot_generator()
 
     print('Ay vamos!!')
 
