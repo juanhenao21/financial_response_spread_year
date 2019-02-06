@@ -315,28 +315,23 @@ def midpoint_data(ticker, day):
     # easier way to obtain the value and it behaves quiet equal as the
     # original input
 
-    midpoint_first_val = 0. * full_time
-    midpoint_first_val[-1] = midpoint[0]
+    midpoint_last_val = 0. * full_time
+    midpoint_last_val[-1] = midpoint[0]
 
-    bestAsks_first_val = 0. * full_time
-    bestAsks_first_val[-1] = midpoint[0]
+    bestAsks_last_val = 0. * full_time
+    bestAsks_last_val[-1] = midpoint[0]
 
-    bestBids_first_val = 0. * full_time
-    bestBids_first_val[-1] = midpoint[0]
+    bestBids_last_val = 0. * full_time
+    bestBids_last_val[-1] = midpoint[0]
 
-    spread_first_val = 0. * full_time
-    spread_first_val[-1] = midpoint[0]
+    spread_last_val = 0. * full_time
+    spread_last_val[-1] = midpoint[0]
 
     count = 0
 
     for t_idx, t_val in enumerate(full_time):
 
         if (count < len(times_spread) and t_val == times_spread[count]):
-
-            midpoint_first_val[t_idx] = midpoint[count]
-            bestAsks_first_val[t_idx] = bestAsks[count]
-            bestBids_first_val[t_idx] = bestBids[count]
-            spread_first_val[t_idx] = spread[count]
 
             count += 1
 
@@ -345,12 +340,17 @@ def midpoint_data(ticker, day):
 
                 count += 1
 
+            midpoint_last_val[t_idx] = midpoint[count - 1]
+            bestAsks_last_val[t_idx] = bestAsks[count - 1]
+            bestBids_last_val[t_idx] = bestBids[count - 1]
+            spread_last_val[t_idx] = spread[count - 1]
+
         else:
 
-            midpoint_first_val[t_idx] = midpoint_first_val[t_idx - 1]
-            bestAsks_first_val[t_idx] = bestAsks_first_val[t_idx - 1]
-            bestBids_first_val[t_idx] = bestBids_first_val[t_idx - 1]
-            spread_first_val[t_idx] = spread_first_val[t_idx - 1]
+            midpoint_last_val[t_idx] = midpoint_last_val[t_idx - 1]
+            bestAsks_last_val[t_idx] = bestAsks_last_val[t_idx - 1]
+            bestBids_last_val[t_idx] = bestBids_last_val[t_idx - 1]
+            spread_last_val[t_idx] = spread_last_val[t_idx - 1]
 
     # Saving data
 
@@ -359,17 +359,17 @@ def midpoint_data(ticker, day):
         os.mkdir('../Data/midpoint_data/')
         print('Folder to save data created')
 
-    pickle.dump(bestAsks_first_val,
+    pickle.dump(bestAsks_last_val,
                 open('../Data/midpoint_data/bestAsks_201603{}_{}.pickl'
                      .format(day, ticker), 'wb'))
-    pickle.dump(bestBids_first_val,
+    pickle.dump(bestBids_last_val,
                 open('../Data/midpoint_data/bestBids_201603{}_{}.pickl'
                      .format(day, ticker), 'wb'))
-    pickle.dump(spread_first_val,
+    pickle.dump(spread_last_val,
                 open('../Data/midpoint_data/spread_201603{}_{}.pickl'
                      .format(day, ticker), 'wb'))
     pickle.dump(full_time, open('../Data/midpoint_data/time.pickl', 'wb'))
-    pickle.dump(midpoint_first_val,
+    pickle.dump(midpoint_last_val,
                 open('../Data/midpoint_data/midpoint_201603{}_{}.pickl'
                      .format(day, ticker), 'wb'))
 
@@ -377,7 +377,6 @@ def midpoint_data(ticker, day):
     print()
 
     return None
-
 # -----------------------------------------------------------------------------------------------------------------------
 
 
