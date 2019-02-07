@@ -108,6 +108,7 @@ Universitaet Duisburg-Essen, Duisburg, Germany
 \begin_layout Abstract
 Document to set some rules to name files, folders, python functions and
  jupyter notebooks in the [Find a good name for the econophysics project].
+ Basically, the style guide for code.
 \end_layout
 
 \begin_layout Keywords
@@ -183,7 +184,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-In this case data_name can be ITCH or TAQ, kind can be algorithms, data
+In this case data_name can be itch or taq, kind can be algorithms, data
  or plot, and year is the year of the data.
  Year is optional as algorithm is a general folder and do not depend of
  the year.
@@ -198,12 +199,12 @@ status open
 
 \begin_layout Plain Layout
 
-/TAQ_data_2008/
+/taq_data_2008/
 \end_layout
 
 \begin_layout Plain Layout
 
-/ITCH_algorithms
+/itch_algorithms
 \end_layout
 
 \end_inset
@@ -247,12 +248,12 @@ status open
 
 \begin_layout Plain Layout
 
-/TAQ_midpoint_data/
+/taq_midpoint_data/
 \end_layout
 
 \begin_layout Plain Layout
 
-/ITCH_cross_response_data_1ms/
+/itch_cross_response_data_1ms/
 \end_layout
 
 \end_inset
@@ -301,17 +302,17 @@ status open
 
 \begin_layout Plain Layout
 
-/ITCH_cross_response_data_20160307_AAPL_MSFT_10ms.pickle
+/itch_cross_response_data_20160307_aapl_msft_10ms.pickle
 \end_layout
 
 \begin_layout Plain Layout
 
-/TAQ_midpoint_data_ask_20080310_AAPL.pickle
+/taq_midpoint_data_ask_20080310_aapl.pickle
 \end_layout
 
 \begin_layout Plain Layout
 
-/ITCH_self_response_data_20160307_AAPL_1ms.pickle
+/itch_self_response_data_20160307_aapl_1ms.pickle
 \end_layout
 
 \end_inset
@@ -349,7 +350,7 @@ data_name_function_name_type(params)
 \end_layout
 
 \begin_layout Standard
-In this case data_name can be ITCH or TAQ, function_name is the name related
+In this case data_name can be itch or taq, function_name is the name related
  with its functionality and type can be data or plot depending on what is
  the result of the function
 \end_layout
@@ -362,7 +363,7 @@ status open
 
 \begin_layout Plain Layout
 
-TAQ_midpoint_data(ticker, year, month, day)
+taq_midpoint_data(ticker, year, month, day)
 \end_layout
 
 \end_inset
@@ -424,6 +425,39 @@ ticker_j
  tau_val and tau_step are optional as they are used only with the ITCH data.
 \end_layout
 
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+itch_cross_response_data(ticker_i, ticker_j, year, month, day, tau_val,
+ t_step)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+itch_zero_correlation_model_data(ticker, year, month, day, tau_val, t_step)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Body
 \end_layout
@@ -455,13 +489,38 @@ def function_name():
 
 \begin_layout Plain Layout
 
-	print('Small description of the function')
+	print('TAQ / ITCH data')
 \end_layout
 
 \begin_layout Plain Layout
 
-	print('Processing data for the stock' + ticker + ' the ' + year + '.' +
- month + '.' + day)
+	print('Function name')
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Processing data for the stock' + ticker + ' the ' + year + '.'
+\end_layout
+
+\begin_layout Plain Layout
+
+		  + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+	# or
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Processing data for the stock i ' + ticker_i + ' and stock j ' 
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+           + ticker_j + ' the ' + year + '.' + month + '.' + day)
 \end_layout
 
 \begin_layout Plain Layout
@@ -482,6 +541,297 @@ def function_name():
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Examples of functions with one or two stocks are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+	Obtain the cross response function using the midpoint log returns of
+\end_layout
+
+\begin_layout Plain Layout
+
+	ticker i and trade signs of ticker j during different time lags.
+ The data
+\end_layout
+
+\begin_layout Plain Layout
+
+    is adjusted to use only the values each t_step ms
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param ticker_i: string of the abbreviation of the midpoint stock to
+\end_layout
+
+\begin_layout Plain Layout
+
+	     be analized (i.e.
+ 'AAPL')
+\end_layout
+
+\begin_layout Plain Layout
+
+	    :param ticker_j: string of the abbreviation of the trade sign stock
+ to
+\end_layout
+
+\begin_layout Plain Layout
+
+    	 be analized (i.e.
+ 'AAPL')  
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param year: string of the year to be analized (i.e '2008')
+\end_layout
+
+\begin_layout Plain Layout
+
+		:param month: string of the month to be analized (i.e '07')
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param day: string of the day to be analized (i.e '07')
+\end_layout
+
+\begin_layout Plain Layout
+
+	    :param tau_val: maximum time lag to be analyzed  
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param t_step: time step in the data in ms
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (ticker_i == ticker_j):
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+		return None
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    else:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        print('ITCH data')
+\end_layout
+
+\begin_layout Plain Layout
+
+		print('Cross response function data')
+\end_layout
+
+\begin_layout Plain Layout
+
+        print('Processing data for the stock i ' + ticker_i + ' and stock
+ j ' +  
+\end_layout
+
+\begin_layout Plain Layout
+
+            ticker_j + ' the ' + year + '.' + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+		print('Time step: ', t_step, 'ms')
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+		# Body
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+		return None 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def zero_correlation_model_data(ticker, year, month, day, tau_val, t_step):
+\end_layout
+
+\begin_layout Plain Layout
+
+	"""     
+\end_layout
+
+\begin_layout Plain Layout
+
+	Obtain the cross response function using the midpoint log return of
+\end_layout
+
+\begin_layout Plain Layout
+
+	ticker i and random trade signs during different time lags.
+ The data is
+\end_layout
+
+\begin_layout Plain Layout
+
+    adjusted to use only the values each t_step ms
+\end_layout
+
+\begin_layout Plain Layout
+
+		:param ticker: string of the abbreviation of the midpoint stock to
+\end_layout
+
+\begin_layout Plain Layout
+
+         be analized (i.e.
+ 'AAPL')
+\end_layout
+
+\begin_layout Plain Layout
+
+        :param day: string of the day to be analized (i.e '07')
+\end_layout
+
+\begin_layout Plain Layout
+
+        :param tau_val: maximum time lag to be analyzed
+\end_layout
+
+\begin_layout Plain Layout
+
+        :param t_step: time step in the data in ms
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('ITCH data')
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('Zero correlation model data')
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('Processing data for the stock ' + ticker + ' and a random'
+\end_layout
+
+\begin_layout Plain Layout
+
+          + ' trade sign array the '  + year + '.' + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('Time step: ', t_step, 'ms')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # Body
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return None 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general the code must follow the PEP8 – Style guide for Python code.
 \end_layout
 
 \end_body
