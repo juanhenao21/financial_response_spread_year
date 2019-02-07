@@ -29,7 +29,7 @@ import itch_data_plot
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def data_plot_generator():
+def itch_data_plot_generator():
     """
     Generates all the data and relevant plots from ITCH data. It uses
     the multiprocessing module to parallelize functions.
@@ -41,6 +41,8 @@ def data_plot_generator():
     days = pickle.load(open('../Data/days.pickl', 'rb'))
     tau_val = [1000, 10000, 100000, 1000000]
     t_step = [1000, 100, 10, 1]
+
+    # TO DO: function to make new dir (itch_data_2016 and itch_plot_2016)
 
     # Parallel computing
     pool = mp.Pool(processes=mp.cpu_count())

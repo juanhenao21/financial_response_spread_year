@@ -107,9 +107,9 @@ venv.bak/
 ITCH_2016/
 TAQ_2008/
 Cross_response_individual_stock/itch_data_2016/
-Cross_response_individual_stock/itch_plots_2016/
+Cross_response_individual_stock/itch_plot_2016/
 Cross_response_individual_stock/taq_data_2008/
-Cross_response_individual_stock/TAQ_Plots_2008/
+Cross_response_individual_stock/taq_plot_2008/
 .vscode/
 
 # Other

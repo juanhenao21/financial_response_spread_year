@@ -574,32 +574,38 @@ def itch_trade_signs_data(ticker, year, month, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_self_response_data(ticker_i, day, tau_val, t_step):
+def itch_self_response_data(ticker, year, month, day, tau_val, t_step):
     """
     Obtain the self response function using the midpoint log returns
     and trade signs of ticker i during different time lags. The data
     is adjusted to use only the values each t_step ms
         :param ticker_i: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
         :param tau_val: maximum time lag to be analyzed
         :param t_step: time step in the data in ms
     """
 
-    print('Self response function data')
-    print('Processing data for the stock i ' + ticker_i + ' the day ' + day
-          + ' March, 2016')
-    print('Time step: ', t_step, 'ms')
+    function_name = itch_self_response_data.__name__
+    itch_data_tools.itch_function_header_print_data(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    str(t_step))
 
     # Load data
-    midpoint_i = pickle.load(open(
-                '../Data/midpoint_data/midpoint_201603{}_{}.pickl'
-                .format(day, ticker_i), 'rb'))
+    midpoint_i = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_midpoint_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
     trade_sign_i = pickle.load(open("".join((
-                '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i'
-                + '_1ms.pickl').split())
-                .format(day, ticker_i), 'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+                '../itch_data_{1}/itch_trade_signs_data_1ms/itch_trade_signs'
+                + '_data_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_time_1ms.pickle').split())
+                .format(year), 'rb'))
 
     # Setting variables to work with t_step ms accuracy
 
@@ -613,7 +619,7 @@ def itch_self_response_data(ticker_i, day, tau_val, t_step):
 
     # reshape and average data of trade signs
     (trade_sign_i_sec_avg,
-     trade_sign_i_sec_nr) = itch_data_tools.trade_sign_reshape(
+     trade_sign_i_sec_nr) = itch_data_tools.itch_trade_sign_reshape(
                                                  trade_sign_i, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
@@ -633,9 +639,8 @@ def itch_self_response_data(ticker_i, day, tau_val, t_step):
 
     # Saving data
 
-    function_name = self_response_data.__name__
-    itch_data_tools.save_data(function_name, self_response_tau, ticker_i,
-                              ticker_i, day, t_step)
+    itch_data_tools.itch_save_data(function_name, self_response_tau, ticker,
+                                   ticker, year, month, day, str(t_step))
 
     return None
 
@@ -691,7 +696,7 @@ def itch_self_response_abs_data(ticker_i, day, tau_val, t_step):
     # Saving data
 
     function_name = self_response_abs_data.__name__
-    itch_data_tools.save_data(function_name, self_response_tau, ticker_i,
+    itch_data_tools.itch_save_data(function_name, self_response_tau, ticker_i,
                               ticker_i, day, t_step)
 
     return None
