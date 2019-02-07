@@ -1,0 +1,488 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass elsarticle
+\begin_preamble
+% specify here the journal
+\journal{Example: Nuclear Physics B}
+
+% use this if you need line numbers
+%\usepackage{lineno}
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-std
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 0
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle headings
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout BeginFrontmatter
+
+\end_layout
+
+\begin_layout Title
+Econophysics
+\end_layout
+
+\begin_layout Author
+Juan Camilo Henao Londono
+\end_layout
+
+\begin_layout Email
+juan.henao-londono@stud.uni-due.de
+\end_layout
+
+\begin_layout Address
+Universitaet Duisburg-Essen, Duisburg, Germany
+\end_layout
+
+\begin_layout Abstract
+Document to set some rules to name files, folders, python functions and
+ jupyter notebooks in the [Find a good name for the econophysics project].
+\end_layout
+
+\begin_layout Keywords
+Econophysics 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+sep
+\end_layout
+
+\end_inset
+
+ Python 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+sep
+\end_layout
+
+\end_inset
+
+ Jupyter 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+sep
+\end_layout
+
+\end_inset
+
+ [Project name]
+\end_layout
+
+\begin_layout EndFrontmatter
+
+\end_layout
+
+\begin_layout Section
+Files and folders names
+\end_layout
+
+\begin_layout Standard
+In general all the files and folder will be created inside of one of three
+ possible folders
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/data_name_kind[_year]/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case data_name can be ITCH or TAQ, kind can be algorithms, data
+ or plot, and year is the year of the data.
+ Year is optional as algorithm is a general folder and do not depend of
+ the year.
+ Then, Examples of folders names are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/TAQ_data_2008/
+\end_layout
+
+\begin_layout Plain Layout
+
+/ITCH_algorithms
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When a folder is created by a function, its name must follow the following
+ sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/function_name[_time_step]/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, function_name is the name of the function that creates the
+ folder and time_step is the time step taken to do the analysis.
+ time_step is optional as it is only used in the ITCH data.
+ Examples of folders names are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/TAQ_midpoint_data/
+\end_layout
+
+\begin_layout Plain Layout
+
+/ITCH_cross_response_data_1ms/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, when a file is created by a function, it name must follow the following
+ sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/function_name_year_month_day_ticker(s)[_time_step].ext
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, function name is the name of the function that creates the
+ file; year, month and day is the date of the data, ticker is the stock
+ analyzed, time_step is the time step taken to do the analysis and ext is
+ the extension of the file.
+ In ticker can be used one or two tickers depending on the function.
+ time_step is optional as it is only used in the ITCH data.
+ For functions that save more than one file, it must be used the name of
+ the variable saved after the function name.
+ Examples of files names are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/ITCH_cross_response_data_20160307_AAPL_MSFT_10ms.pickle
+\end_layout
+
+\begin_layout Plain Layout
+
+/TAQ_midpoint_data_ask_20080310_AAPL.pickle
+\end_layout
+
+\begin_layout Plain Layout
+
+/ITCH_self_response_data_20160307_AAPL_1ms.pickle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Functions
+\end_layout
+
+\begin_layout Subsection
+Names
+\end_layout
+
+\begin_layout Standard
+The functions take the name of the data and a name related with its functionalit
+y
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+data_name_function_name_type(params)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case data_name can be ITCH or TAQ, function_name is the name related
+ with its functionality and type can be data or plot depending on what is
+ the result of the function
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+TAQ_midpoint_data(ticker, year, month, day)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Parameters
+\end_layout
+
+\begin_layout Standard
+The order of the parameters must be
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+params -> ticker, year, month, day [,tau_val, tau_step]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When only one ticker is used in the function, the parameter must be 
+\begin_inset Quotes eld
+\end_inset
+
+ticker
+\begin_inset Quotes erd
+\end_inset
+
+.
+ If two tickers are used in the function, they must be named 
+\begin_inset Quotes eld
+\end_inset
+
+ticker_i
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+ticker_j
+\begin_inset Quotes erd
+\end_inset
+
+.
+ tau_val and tau_step are optional as they are used only with the ITCH data.
+\end_layout
+
+\begin_layout Subsection
+Body
+\end_layout
+
+\begin_layout Standard
+The body of the functions must follow the following order
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def function_name():
+\end_layout
+
+\begin_layout Plain Layout
+
+	'''Docstrings: description and parameters explanation'''
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Opening message
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Small description of the function')
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Processing data for the stock' + ticker + ' the ' + year + '.' +
+ month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Time step: ' + t_step + 'ms')
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Body
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Saving data
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
