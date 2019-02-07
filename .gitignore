@@ -106,9 +106,9 @@ venv.bak/
 # Folders
 ITCH_2016/
 TAQ_2008/
-Cross_response_individual_stock/Data/
-Cross_response_individual_stock/Plots/
-Cross_response_individual_stock/TAQ_Data_2008/
+Cross_response_individual_stock/itch_data_2016/
+Cross_response_individual_stock/itch_plots_2016/
+Cross_response_individual_stock/taq_data_2008/
 Cross_response_individual_stock/TAQ_Plots_2008/
 .vscode/
 
