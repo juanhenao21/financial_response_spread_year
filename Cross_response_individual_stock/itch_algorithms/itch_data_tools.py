@@ -150,9 +150,31 @@ def itch_save_plot(function_name, figure, ticker_i, ticker_j, year, month,
 # -----------------------------------------------------------------------------------------------------------------------
 
 
+def itch_function_header_print_data(function_name, ticker_i, ticker_j, year,
+                                    month, day, t_step):
+
+    print('ITCH data')
+    print(function_name)
+
+    if (ticker_i != ticker_j):
+        print('Processing data for the stock i ' + ticker_i + ' and stock j '
+              + ticker_j + ' the ' + year + '.' + month + '.' + day)
+    else:
+        print('Processing data for the stock ' + ticker_i + ' the ' + year
+              + '.' + month + '.' + day)
+
+    print('Time step: ' + t_step + 'ms')
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
 def main():
 
     return None
+
+# -----------------------------------------------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':

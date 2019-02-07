@@ -57,7 +57,7 @@ __tau__ = 1000
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def midpoint_data(ticker, day):
+def itch_midpoint_data(ticker, year, month, day, t_step):
     """
     Obtain the midpoint price from the ITCH 2016 data. For further calculations
     we use the full time range from the opening of the market at 9h30 to the
@@ -68,18 +68,22 @@ def midpoint_data(ticker, day):
     best ask, spread, midpoint price and time.
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
+        :param t_step: time step in the data in ms
     """
 
-    print('Midpoint price data')
-    print('Processing data for the stock', ticker, 'the day', day +
-          ' March, 2016')
+    function_name = itch_midpoint_data.__name__
+    itch_data_tools.itch_function_header_print_data(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    t_step)
 
     # Load data
 
-    data = np.genfromtxt(gzip.open('../../ITCH_2016/201603{}_{}.csv.gz'
-                         .format(day, ticker)), dtype='str', skip_header=1,
-                         delimiter=',')
+    data = np.genfromtxt(gzip.open('../../ITCH_{1}/{1}{2}{3}_{0}.csv.gz'
+                         .format(ticker, year, month, day)), dtype='str',
+                         skip_header=1, delimiter=',')
 
     # Lists of times, ids, types, volumes and prices
     # List of all the available information available in the data excluding
@@ -354,26 +358,39 @@ def midpoint_data(ticker, day):
 
     # Saving data
 
-    if (not os.path.isdir('../Data/midpoint_data/')):
+    if (not os.path.isdir('../itch_data_{2}/{0}_{5}ms/'
+                          .format(function_name, ticker, year, month, day,
+                                  t_step))):
 
-        os.mkdir('../Data/midpoint_data/')
+        os.mkdir('../itch_data_{2}/{0}_{5}ms/'
+                 .format(function_name, ticker, year, month, day, t_step))
         print('Folder to save data created')
 
     pickle.dump(bestAsks_last_val,
-                open('../Data/midpoint_data/bestAsks_201603{}_{}.pickl'
-                     .format(day, ticker), 'wb'))
+                open(''.join(('../itch_data_{2}/{0}_{5}ms/{0}_ask_{2}{3}{4}'
+                     + '_{1}_{5}ms.pickle').split())
+                     .format(function_name, ticker, year, month, day, t_step),
+                     'wb'))
     pickle.dump(bestBids_last_val,
-                open('../Data/midpoint_data/bestBids_201603{}_{}.pickl'
-                     .format(day, ticker), 'wb'))
+                open(''.join(('../itch_data_{2}/{0}_{5}ms/{0}_bid_{2}{3}{4}'
+                     + '_{1}_{5}ms.pickle').split())
+                     .format(function_name, ticker, year, month, day, t_step),
+                     'wb'))
     pickle.dump(spread_last_val,
-                open('../Data/midpoint_data/spread_201603{}_{}.pickl'
-                     .format(day, ticker), 'wb'))
-    pickle.dump(full_time, open('../Data/midpoint_data/time.pickl', 'wb'))
+                open(''.join(('../itch_data_{2}/{0}_{5}ms/{0}_spread_{2}{3}{4}'
+                     + '_{1}_{5}ms.pickle').split())
+                     .format(function_name, ticker, year, month, day, t_step),
+                     'wb'))
+    pickle.dump(full_time,
+                open('../itch_data_{1}/{0}_{2}ms/{0}_time_{2}ms.pickle'
+                     .format(function_name, year, t_step), 'wb'))
     pickle.dump(midpoint_last_val,
-                open('../Data/midpoint_data/midpoint_201603{}_{}.pickl'
-                     .format(day, ticker), 'wb'))
+                open(''.join(('../itch_data_{2}/{0}_{5}ms/{0}_midpoint'
+                     + '_{2}{3}{4}_{1}_{5}ms.pickle').split())
+                     .format(function_name, ticker, year, month, day, t_step),
+                     'wb'))
 
-    print('Midpoint price data saved')
+    print('Data saved')
     print()
 
     return None
@@ -381,9 +398,9 @@ def midpoint_data(ticker, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_signs_data(ticker, day):
+def itch_trade_signs_data(ticker, year, month, day, t_step):
     """
-    Obtain the trade signs from the ITCH 2016 data. For further calculations
+    Obtain the trade signs from the ITCH data. For further calculations
     we use the whole time range from the opening of the market at 9h30 to the
     closing at 16h in milliseconds and then convert the values to hours (23.4
     million data). To fill the time spaces when nothing happens we just fill
@@ -391,17 +408,21 @@ def trade_signs_data(ticker, day):
     pickle file the array of the trade signs
         :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
+        :param t_step: time step in the data in ms
     """''
 
-    print('Trade signs data')
-    print('Processing data for the stock', ticker, 'the day', day +
-          ' March, 2016')
+    function_name = itch_trade_signs_data.__name__
+    itch_data_tools.itch_function_header_print_data(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    t_step)
 
     # Load data
 
-    data = np.genfromtxt(gzip.open('../../ITCH_2016/201603{}_{}.csv.gz'
-                         .format(day, ticker)),
+    data = np.genfromtxt(gzip.open('../../ITCH_{1}/{1}{2}{3}_{0}.csv.gz'
+                         .format(ticker, year, month, day)),
                          dtype='str', skip_header=1, delimiter=',')
 
     # Lists of times, ids, types, volumes and prices
@@ -545,16 +566,15 @@ def trade_signs_data(ticker, day):
 
     # Saving data
 
-    function_name = trade_signs_data.__name__
-    itch_data_tools.save_data(function_name, trade_signs_complete_most, ticker,
-                              ticker, day, 1)
+    itch_data_tools.itch_save_data(function_name, trade_signs_complete_most,
+                                   ticker, ticker, year, month, day, t_step)
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def self_response_data(ticker_i, day, tau_val, t_step):
+def itch_self_response_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the self response function using the midpoint log returns
     and trade signs of ticker i during different time lags. The data
@@ -622,7 +642,7 @@ def self_response_data(ticker_i, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def self_response_abs_data(ticker_i, day, tau_val, t_step):
+def itch_self_response_abs_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the self response using the average of the absolute value of the
     midpoint log return of ticker i during different time lags. The data
@@ -679,7 +699,7 @@ def self_response_abs_data(ticker_i, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
+def itch_zero_correlation_model_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the cross response function using the midpoint log return of
     ticker i and random trade signs during different time lags. The data is
@@ -741,7 +761,7 @@ def zero_correlation_model_data(ticker_i, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
+def itch_cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
     """
     Obtain the cross response function using the midpoint log returns of
     ticker i and trade signs of ticker j during different time lags. The data
@@ -818,7 +838,7 @@ def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
+def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
     """
     Obtain the result of the product between the averaged midpoint log return
     of ticker i and the averaged trade signs of ticker j during different time
@@ -896,7 +916,7 @@ def avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
+def itch_difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
 
     if (ticker_i == ticker_j):
 
@@ -934,7 +954,7 @@ def difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
+def itch_trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the trade sign self correlator using the trade signs of ticker i
     during different time lags. The data is adjusted to use only the values
@@ -993,7 +1013,7 @@ def trade_sign_self_correlator_data(ticker_i, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
+def itch_trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
     """
     Obtain the trade sign autocorrelation using the trade signs of ticker i
     during different time lags. The data is adjusted to use only the values
@@ -1065,7 +1085,7 @@ def trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
+def itch_trade_sign_cross_correlator_data(ticker_i, ticker_j, day, tau_val, t_step):
     """
     Obtain the trade sign cross correlator using the trade signs of ticker i
     and j during different time lags. The data is adjusted to use only the
