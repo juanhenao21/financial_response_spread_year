@@ -19,7 +19,7 @@ import pickle
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_reshape(trade_sign, time_t_step):
+def itch_trade_sign_reshape(trade_sign, time_t_step):
     """
     Reshape the trade sign data according to the t_step used. Returns a tuple
     with two arrays. A + 1 (- 1) array when the values of the sum is greater
@@ -50,7 +50,8 @@ def trade_sign_reshape(trade_sign, time_t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def save_data(function_name, data, ticker_i, ticker_j, day, t_step):
+def itch_save_data(function_name, data, ticker_i, ticker_j, year, month, day,
+                   t_step):
     """
     Save the data generated in itch_data_generator module.
         :param function_name: name of the function that generates the data
@@ -59,17 +60,20 @@ def save_data(function_name, data, ticker_i, ticker_j, day, t_step):
          (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
         :param t_step: time step in the data in ms
     """
     # Saving data
 
-    if (not os.path.isdir('../Data/{}_{}ms/'
-                          .format(function_name, t_step))):
+    if (not os.path.isdir('../itch_data_{1}/{0}_{2}ms/'
+                          .format(function_name, year, t_step))):
 
         try:
 
-            os.mkdir('../Data/{}_{}ms/'.format(function_name, t_step))
+            os.mkdir('../itch_data_{1}/{0}_{2}ms/'.
+                     format(function_name, year, t_step))
             print('Folder to save data created')
 
         except FileExistsError:
@@ -79,15 +83,15 @@ def save_data(function_name, data, ticker_i, ticker_j, day, t_step):
     if (ticker_i != ticker_j):
 
         pickle.dump(data, open(
-            '../Data/{}_{}ms/{}_201603{}_{}i_{}j_{}ms.pickl'
-            .format(function_name, t_step, function_name, day, ticker_i,
-                    ticker_j, t_step), 'wb'))
+            '../itch_data_{3}/{0}_{6}ms/{0}_{3}{4}{5}_{1}i_{2}j_{6}ms.pickle'
+            .format(function_name, ticker_i, ticker_j, year, month, day,
+                    t_step), 'wb'))
 
     else:
 
         pickle.dump(data, open(
-            '../Data/{}_{}ms/{}_201603{}_{}i_{}ms.pickl'
-            .format(function_name, t_step, function_name, day, ticker_i,
+            '../itch_data_{2}/{0}_{5}ms/{0}_{2}{3}{4}_{1}_{5}ms.pickle'
+            .format(function_name, ticker_i, year, month, day,
                     t_step), 'wb'))
 
     print('Data Saved')
@@ -98,7 +102,8 @@ def save_data(function_name, data, ticker_i, ticker_j, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def save_plot(function_name, figure, ticker_i, ticker_j, t_step):
+def itch_save_plot(function_name, figure, ticker_i, ticker_j, year, month,
+                   t_step):
     """
     Save the plots generated in itch_data_plot module.
         :param function_name: name of the function that generates the data
@@ -112,12 +117,13 @@ def save_plot(function_name, figure, ticker_i, ticker_j, t_step):
     """
     # Saving data
 
-    if (not os.path.isdir('../Plots/{}_{}ms/'
-                          .format(function_name, t_step))):
+    if (not os.path.isdir('../itch_plot_{1}/{0}_{2}ms/'
+                          .format(function_name, year, t_step))):
 
         try:
 
-            os.mkdir('../Plots/{}_{}ms/'.format(function_name, t_step))
+            os.mkdir('../itch_plot_{1}/{0}_{2}ms/'
+                     .format(function_name, year, t_step))
             print('Folder to save data created')
 
         except FileExistsError:
@@ -127,15 +133,14 @@ def save_plot(function_name, figure, ticker_i, ticker_j, t_step):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../Plots/{}_{}ms/{}_{}i_{}j_{}ms.png'
-            .format(function_name, t_step, function_name, ticker_i,
-                    ticker_j, t_step))
+            '../itch_plot_{3}/{0}_{5}ms/{0}_{3}{4}_{1}i_{2}j_{5}ms.png'
+            .format(function_name, ticker_i, ticker_j, year, month, t_step))
 
     else:
 
         figure.savefig(
-            '../Plots/{}_{}ms/{}_{}i_{}ms.png'
-            .format(function_name, t_step, function_name, ticker_i, t_step))
+            '../itch_plot_{2}/{0}_{4}ms/{0}_{2}{3}_{1}i_{4}ms.png'
+            .format(function_name, ticker_i, year, month, t_step))
 
     print('Plot saved')
     print()

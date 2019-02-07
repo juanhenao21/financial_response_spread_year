@@ -387,12 +387,8 @@ status open
 
 \begin_layout Plain Layout
 
-params -> function_name, data, figure, ticker(s), year, month, day,
-\end_layout
-
-\begin_layout Plain Layout
-
-		  tau_val, tau_step
+params -> function_name, data, figure, ticker(s), year, month, day ,tau_val,
+ tau_step
 \end_layout
 
 \end_inset
