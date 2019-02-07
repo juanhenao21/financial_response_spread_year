@@ -709,7 +709,8 @@ def itch_self_response_abs_data(ticker, year, month, day, tau_val, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_zero_correlation_model_data(ticker_i, day, tau_val, t_step):
+def itch_zero_correlation_model_data(ticker, year, month, day, tau_val,
+                                     t_step):
     """
     Obtain the cross response function using the midpoint log return of
     ticker i and random trade signs during different time lags. The data is
@@ -721,16 +722,20 @@ def itch_zero_correlation_model_data(ticker_i, day, tau_val, t_step):
         :param t_step: time step in the data in ms
     """
 
-    print('Zero correlation model data')
-    print('Processing data for the stock i ' + ticker_i + ' and a random'
-          + ' trade sign array the day ' + day + ' March, 2016')
-    print('Time step: ', t_step, 'ms')
+    function_name = itch_zero_correlation_model_data.__name__
+    itch_data_tools.itch_function_header_print_data(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    str(t_step))
 
     # Load data
-    midpoint_i = pickle.load(open(
-        '../Data/midpoint_data/midpoint_201603{}_{}.pickl'
-        .format(day, ticker_i), 'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+    midpoint_i = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_midpoint_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_time_1ms.pickle').split())
+                .format(year), 'rb'))
 
     # Setting variables to work with 1s accuracy
 
@@ -762,9 +767,8 @@ def itch_zero_correlation_model_data(ticker_i, day, tau_val, t_step):
 
     # Saving data
 
-    function_name = zero_correlation_model_data.__name__
-    itch_data_tools.save_data(function_name, cross_response_tau, ticker_i,
-                              ticker_i, day, t_step)
+    itch_data_tools.itch_save_data(function_name, cross_response_tau, ticker,
+                                   ticker, year, month, day, t_step)
 
     return None
 
