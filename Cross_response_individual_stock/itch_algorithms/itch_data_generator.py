@@ -1003,7 +1003,7 @@ def itch_trade_sign_self_correlator_data(ticker, year, month, day, tau_val,
     Obtain the trade sign self correlator using the trade signs of ticker i
     during different time lags. The data is adjusted to use only the values
     each t_step ms
-        :param ticker_i: string of the abbreviation of the trade sign stock to
+        :param ticker: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
@@ -1061,28 +1061,34 @@ def itch_trade_sign_self_correlator_data(ticker, year, month, day, tau_val,
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
+def itch_trade_sign_autocorrelation_data(ticker, year, month, day, tau_val,
+                                         t_step):
     """
     Obtain the trade sign autocorrelation using the trade signs of ticker i
     during different time lags. The data is adjusted to use only the values
     each t_step ms
-        :param ticker_i: string of the abbreviation of the trade sign stock to
+        :param ticker: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
         :param tau_val: maximum time lag to be analyzed
         :param t_step: time step in the data in ms
     """
-    print('Trade sign autocorrelation data')
-    print('Processing data for the stock i ' + ticker_i + ' the day ' + day
-          + ' March, 2016')
-    print('Time step: ', t_step, 'ms')
+    function_name = itch_trade_sign_autocorrelation_data.__name__
+    itch_data_tools.itch_function_header_print_data(function_name, ticker,
+                                                    ticker, year, month,
+                                                    day, str(t_step))
 
     # Load data
-    trade_sign_i = pickle.load(open(''.join((
-                '../Data/trade_signs_data_1ms/trade_signs_data_201603{}'
-                + '_{}i_1ms.pickl').split())
-                .format(day, ticker_i), 'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+    trade_sign_i = pickle.load(open("".join((
+                '../itch_data_{1}/itch_trade_signs_data_1ms/itch_trade_signs'
+                + '_data_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+            '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+            + '_time_1ms.pickle').split())
+            .format(year), 'rb'))
 
     # Setting variables to work with t_step ms accuracy
 
@@ -1094,7 +1100,7 @@ def itch_trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
 
     # reshape and average data of trade signs
     (trade_sign_i_sec_avg,
-     trade_sign_i_sec_nr) = itch_data_tools.trade_sign_reshape(
+     trade_sign_i_sec_nr) = itch_data_tools.itch_trade_sign_reshape(
         trade_sign_i, time_t_step)
 
     # Calculating the midpoint log return and the cross response function
@@ -1124,9 +1130,9 @@ def itch_trade_sign_autocorrelation_data(ticker_i, day, tau_val, t_step):
 
     # Saving data
 
-    function_name = trade_sign_autocorrelation_data.__name__
-    itch_data_tools.save_data(function_name, trade_sign_autocorrelation,
-                              ticker_i, ticker_i, day, t_step)
+    itch_data_tools.itch_save_data(function_name, trade_sign_autocorrelation,
+                                   ticker, ticker, year, month, day,
+                                   str(t_step))
 
     return None
 
