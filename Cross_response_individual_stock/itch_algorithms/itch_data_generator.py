@@ -945,7 +945,8 @@ def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, year, month, day,
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step):
+def itch_difference_cross_response_avg_prod_data(ticker_i, ticker_j, year,
+                                                 month, day, t_step):
 
     if (ticker_i == ticker_j):
 
@@ -953,30 +954,29 @@ def itch_difference_cross_response_avg_prod_data(ticker_i, ticker_j, day, t_step
 
     else:
 
-        print('Difference between the cross response function and the '
-              + 'averaged midpoint log return of ticker i and the averaged '
-              + 'trade signs of ticker j data')
-        print('Processing data for the stock i ' + ticker_i + ' and stock j '
-              + ticker_j + ' the day ' + day + ' March, 2016')
-        print('Time step: ', t_step, 'ms')
+        function_name = itch_difference_cross_response_avg_prod_data.__name__
+        itch_data_tools.itch_function_header_print_data(function_name,
+                                                        ticker_i, ticker_j,
+                                                        year, month, day,
+                                                        str(t_step))
 
         # Load data
         cross_response = pickle.load(open(''.join((
-            '../Data/cross_response_data_{}ms/cross_response_data_201603{}_'
-            + '{}i_{}j_{}ms.pickl').split())
-            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+            '../itch_data_{2}/itch_cross_response_data_{5}ms/itch_cross'
+            + '_response_data_{2}{3}{4}_{0}i_{1}j_{5}ms.pickle').split())
+            .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
         avg_return_avg_trade = pickle.load(open(''.join((
-            '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade'
-            + '_prod_data_201603{}_{}i_{}j_{}ms.pickl').split())
-            .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+            '../itch_data_{2}/itch_avg_return_avg_trade_prod_data_{5}ms/itch'
+            + '_avg_return_avg_trade_prod_data_{2}{3}{4}_{0}i_{1}j_{5}ms.'
+            + 'pickle').split())
+            .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
         difference = cross_response - avg_return_avg_trade
 
         # Saving data
 
-        function_name = difference_cross_response_avg_prod_data.__name__
-        itch_data_tools.save_data(function_name, difference, ticker_i,
-                                  ticker_j, day, t_step)
+        itch_data_tools.itch_save_data(function_name, difference, ticker_i,
+                                       ticker_j, year, month, day, str(t_step))
 
         return None
 
