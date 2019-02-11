@@ -57,20 +57,24 @@ import itch_data_tools
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def midpoint_plot(ticker, day):
+def itch_midpoint_plot(ticker, year, month, day, t_step):
     """
     Plot the midpoint price data during a open market day. The data is loaded
     from the mipoint price data results. Function to be used in the function
     midpoint_plot_week.
         :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
+        :param t_step: time step in the data in ms
     """
 
     # Load data
 
-    print('Processing data for the stock ' + ticker + ' the day ' + day
-          + ' March, 2016')
+    function_name = itch_midpoint_plot.__name__
+    itch_function_header_print_plot(function_name, ticker, ticker, year,
+                                    month, day, t_step)
 
     midpoint = pickle.load(open(
         '../Data/midpoint_data/midpoint_201603{}_{}.pickl'.format(day, ticker),
@@ -87,7 +91,7 @@ def midpoint_plot(ticker, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def midpoint_plot_week(ticker, days, t_step):
+def itch_midpoint_plot_week(ticker, days, t_step):
     """
     Plot the midpoint price data during a time period. The data is loaded from
     the mipoint price data results. The time period must be previously knowed
@@ -118,7 +122,7 @@ def midpoint_plot_week(ticker, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_signs_plot(ticker, day, t_step):
+def itch_trade_signs_plot(ticker, day, t_step):
     """
     Plot the trade signs data during one minute (11:00 to 11:01) in one day for
     a ticker. The data is loaded from the trade signs data results.
@@ -157,7 +161,7 @@ def trade_signs_plot(ticker, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def self_response_plot(ticker, days, t_step):
+def itch_self_response_plot(ticker, days, t_step):
     """
     Plot the self response during an interval of time (days) in independent
     plots in a figure. The data is loaded from the self response data results.
@@ -201,7 +205,7 @@ def self_response_plot(ticker, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def self_response_abs_plot(ticker, days, t_step):
+def itch_self_response_abs_plot(ticker, days, t_step):
     """
     Plot the self response absolute during an interval of time (days) in
     independent plots in a figure. The data is loaded from the self response
@@ -246,7 +250,7 @@ def self_response_abs_plot(ticker, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def zero_correlation_model_plot(ticker, days, t_step):
+def itch_zero_correlation_model_plot(ticker, days, t_step):
     """
     Plot the zero correlation model during an interval of time (days) in
     independent plots in a figure. The data is loaded from the zero
@@ -293,7 +297,7 @@ def zero_correlation_model_plot(ticker, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
+def itch_self_response_self_abs_zero_corr_plot(ticker, days, t_step):
     """
     Plot the self response, self response absolute and zero correlation model
     during an interval of time (days) in independent plots in a figure. The
@@ -351,7 +355,7 @@ def self_response_self_abs_zero_corr_plot(ticker, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def cross_response_plot(ticker_i, ticker_j, days, t_step):
+def itch_cross_response_plot(ticker_i, ticker_j, days, t_step):
     """
     Plot the cross response during an interval of time (days) in independent
     plots in a figure. The data is loaded from the cross response data results.
@@ -405,7 +409,7 @@ def cross_response_plot(ticker_i, ticker_j, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
+def itch_avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
     """
     Plot the average midpoint log return price multiplied by the average trade
     signs during an interval of time (days) in independent plots in a figure.
@@ -463,7 +467,7 @@ def avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
+def itch_cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
     """
     Plot the cross response and the avg return and trade  during an interval
     of time (days) in independent plots in a figure to compare the behavior of
@@ -538,7 +542,7 @@ def cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
+def itch_difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
     """
     Plot the cross response and average product during an interval of time
     (days) in independent plots in a figure. The data is loaded from the cross
@@ -613,7 +617,7 @@ def difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_self_correlator_plot(ticker_i, days, t_step):
+def itch_trade_sign_self_correlator_plot(ticker_i, days, t_step):
     """
     Plot the trade sign self correlator during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign self
@@ -662,7 +666,7 @@ def trade_sign_self_correlator_plot(ticker_i, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
+def itch_trade_sign_autocorrelation_plot(ticker_i, days, t_step):
     """
     Plot the trade sign autocorrelation during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign
@@ -711,7 +715,7 @@ def trade_sign_autocorrelation_plot(ticker_i, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
+def itch_trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
     """
     Plot the trade sign autocorrelation during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign
@@ -770,7 +774,7 @@ def trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
+def itch_trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
     """
     Plot the trade sign cross correlator during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign cross
@@ -832,6 +836,8 @@ def main():
 
     return None
 
+
+# -----------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     main()

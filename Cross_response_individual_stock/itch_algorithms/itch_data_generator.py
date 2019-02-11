@@ -358,12 +358,11 @@ def itch_midpoint_data(ticker, year, month, day, t_step):
 
     # Saving data
 
-    if (not os.path.isdir('../itch_data_{2}/{0}_{5}ms/'
-                          .format(function_name, ticker, year, month, day,
-                                  t_step))):
+    if (not os.path.isdir('../itch_data_{1}/{0}_{2}ms/'
+                          .format(function_name, year, t_step))):
 
-        os.mkdir('../itch_data_{2}/{0}_{5}ms/'
-                 .format(function_name, ticker, year, month, day, t_step))
+        os.mkdir('../itch_data_{1}/{0}_{2}ms/'
+                          .format(function_name, year, t_step))
         print('Folder to save data created')
 
     pickle.dump(bestAsks_last_val,
@@ -683,8 +682,6 @@ def itch_self_response_abs_data(ticker, year, month, day, tau_val, t_step):
 
     # Using values t_step millisecond
     midpoint_i_sec = midpoint_i[::t_step]
-    # Changing time from 1 ms to t_step ms
-    time_t_step = time[::t_step]
 
     # Calculating the midpoint log return and the cross response functions
 
