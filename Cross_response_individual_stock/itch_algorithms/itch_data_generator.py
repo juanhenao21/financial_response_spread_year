@@ -860,7 +860,8 @@ def itch_cross_response_data(ticker_i, ticker_j, year, month, day, tau_val,
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step):
+def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, year, month, day,
+                                        tau_val, t_step):
     """
     Obtain the result of the product between the averaged midpoint log return
     of ticker i and the averaged trade signs of ticker j during different time
@@ -869,6 +870,8 @@ def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step
          be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the trade sign stock
          to be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
         :param tau_val: maximum time lag to be analyzed
         :param t_step: time step in the data in ms
@@ -880,21 +883,25 @@ def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step
 
     else:
 
-        print('Product between the averaged midpoint log return of ticker i '
-              + 'and the averaged trade signs of ticker j data')
-        print('Processing data for the stock i ' + ticker_i + ' and stock j '
-              + ticker_j + ' the day ' + day + ' March, 2016')
-        print('Time step: ', t_step, 'ms')
+        function_name = itch_avg_return_avg_trade_prod_data.__name__
+        itch_data_tools.itch_function_header_print_data(function_name,
+                                                        ticker_i, ticker_j,
+                                                        year, month, day,
+                                                        str(t_step))
 
         # Load data
-        midpoint_i = pickle.load(open(
-            '../Data/midpoint_data/midpoint_201603{}_{}.pickl'
-            .format(day, ticker_i), 'rb'))
-        trade_sign_j = pickle.load(open(''.join((
-            '../Data/trade_signs_data_1ms/trade_signs_data_201603{}_{}i'
-            + '_1ms.pickl').split())
-            .format(day, ticker_j), 'rb'))
-        time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+        midpoint_i = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_midpoint_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker_i, year, month, day), 'rb'))
+        trade_sign_j = pickle.load(open("".join((
+                '../itch_data_{1}/itch_trade_signs_data_1ms/itch_trade_signs'
+                + '_data_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker_j, year, month, day), 'rb'))
+        time = pickle.load(open(''.join((
+                '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_time_1ms.pickle').split())
+                .format(year), 'rb'))
 
         # Setting variables to work with t_step ms accuracy
 
@@ -908,7 +915,7 @@ def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step
 
         # reshape and average data of trade signs
         (trade_sign_j_sec_avg,
-         trade_sign_j_sec_nr) = itch_data_tools.trade_sign_reshape(
+         trade_sign_j_sec_nr) = itch_data_tools.itch_trade_sign_reshape(
                                                     trade_sign_j, time_t_step)
 
         # Calculating the midpoint log return and the cross response functions
@@ -929,9 +936,9 @@ def itch_avg_return_avg_trade_prod_data(ticker_i, ticker_j, day, tau_val, t_step
 
         # Saving data
 
-        function_name = avg_return_avg_trade_prod_data.__name__
-        itch_data_tools.save_data(function_name, avg_return_sign, ticker_i,
-                                  ticker_j, day, t_step)
+        itch_data_tools.itch_save_data(function_name, avg_return_sign,
+                                       ticker_i, ticker_j, year, month, day,
+                                       str(t_step))
 
         return None
 
