@@ -73,7 +73,7 @@ def itch_midpoint_plot(ticker, year, month, day, t_step):
     function_name = itch_midpoint_plot.__name__
     itch_data_tools.itch_function_header_print_plot(function_name, ticker,
                                                     ticker, year, month, day,
-                                                    t_step)
+                                                    str(t_step))
 
     # Load data
     midpoint = pickle.load(open(''.join((
@@ -124,7 +124,7 @@ def itch_midpoint_week_plot(ticker, year, month, days, t_step):
     # Plotting
     function_name = itch_midpoint_week_plot.__name__
     itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
-                                   month, t_step)
+                                   month, str(t_step))
 
     return None
 
@@ -146,7 +146,7 @@ def itch_ask_bid_midpoint_spread_plot(ticker, year, month, day, t_step):
     function_name = itch_ask_bid_midpoint_spread_plot.__name__
     itch_data_tools.itch_function_header_print_plot(function_name, ticker,
                                                     ticker, year, month, day,
-                                                    t_step)
+                                                    str(t_step))
 
     # Load data
     ask = pickle.load(open(''.join((
@@ -170,10 +170,11 @@ def itch_ask_bid_midpoint_spread_plot(ticker, year, month, day, t_step):
                 + '_time_1ms.pickle').split())
                 .format(year), 'rb'))
 
-    fig = plt.figure(figsize=(9, 16))
-    fig.suptitle('{} - {}.{}.{}'.format(ticker, year, month, day), fontsize=16)
-    fig.tight_layout()
-    fig.subplots_adjust(top=0.95, wspace=0.3)
+    figure = plt.figure(figsize=(9, 16))
+    figure.suptitle('{} - {}.{}.{}'.format(ticker, year, month, day),
+                    fontsize=16)
+    figure.tight_layout()
+    figure.subplots_adjust(top=0.95, wspace=0.3)
 
     plt.subplot(4, 2, 1)
     plt.plot(time[::100] / 1000 / 3600, midpoint[::100], label='Midpoint')
@@ -221,9 +222,9 @@ def itch_ask_bid_midpoint_spread_plot(ticker, year, month, day, t_step):
 
             print('Folder exists. The folder was not created')
 
-    fig.savefig(
+    figure.savefig(
             '../itch_plot_{2}/{0}_{4}ms/{0}_{2}{3}_{1}i_{4}ms.png'
-            .format(function_name, ticker, year, month, t_step))
+            .format(function_name, ticker, year, month, str(t_step)))
 
     print('Plot saved')
     print()
@@ -233,23 +234,31 @@ def itch_ask_bid_midpoint_spread_plot(ticker, year, month, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_trade_signs_plot(ticker, day, t_step):
+def itch_trade_signs_plot(ticker, year, month, day, t_step):
     """
     Plot the trade signs data during one minute (11:00 to 11:01) in one day for
     a ticker. The data is loaded from the trade signs data results.
-        :param ticker: string of the abbreviation of the stock to be analized
-         (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
+        :param t_step: time step in the data in ms
     """
+
+    function_name = itch_trade_signs_plot.__name__
+    itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    str(t_step))
+
     # Load data
 
-    print('Processing data for the stock ' + ticker + ' the day ' + day
-          + ' March, 2016')
-
-    trade_signs = pickle.load(open(
-     '../Data/trade_signs_data_{}ms/trade_signs_data_201603{}_{}i_{}ms.pickl'
-     .format(t_step, day, ticker, t_step), 'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+    trade_signs = pickle.load(open("".join((
+                '../itch_data_{1}/itch_trade_signs_data_1ms/itch_trade_signs'
+                + '_data_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_time_1ms.pickle').split())
+                .format(year), 'rb'))
 
     figure = plt.figure(figsize=(16, 9))
 
@@ -264,22 +273,23 @@ def itch_trade_signs_plot(ticker, day, t_step):
     plt.tight_layout()
 
     # Plotting
-    function_name = trade_signs_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, day)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_self_response_plot(ticker, days, t_step):
+def itch_self_response_plot(ticker, year, month, days, t_step):
     """
     Plot the self response during an interval of time (days) in independent
     plots in a figure. The data is loaded from the self response data results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param days: string with the days to be analized
-         (i.e ['07', '08', '09'])
+        :param ticker: string of the abbreviation of the stock to be analized
+         (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
         :param t_step: time step in the data in ms
     """
 
@@ -288,13 +298,15 @@ def itch_self_response_plot(ticker, days, t_step):
 
     for i, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker + ' the day ' + day
-              + ' March, 2016')
+        function_name = itch_self_response_plot.__name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
         plot = pickle.load(open(''.join((
-            '../Data/self_response_data_{}ms/self_response_data_201603{}'
-            + '_{}i_{}ms.pickl').split())
-            .format(t_step, day, ticker, t_step), 'rb'))
+            '../itch_data_{1}/itch_self_response_data_{4}ms/itch_self_response'
+            + '_data_{1}{2}{3}_{0}_{4}ms.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
         plt.semilogx(plot, '-g', label='Stock i {} - Day {}'
@@ -308,23 +320,24 @@ def itch_self_response_plot(ticker, days, t_step):
         plt.tight_layout()
 
     # Plotting
-    function_name = self_response_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_self_response_abs_plot(ticker, days, t_step):
+def itch_self_response_abs_plot(ticker, year, month, days, t_step):
     """
     Plot the self response absolute during an interval of time (days) in
     independent plots in a figure. The data is loaded from the self response
     data results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param days: string with the days to be analized
-         (i.e ['07', '08', '09'])
+        :param ticker: string of the abbreviation of the stock to be analized
+         (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
         :param t_step: time step in the data in ms
     """
 
@@ -333,13 +346,15 @@ def itch_self_response_abs_plot(ticker, days, t_step):
 
     for i, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker + ' the day ' + day
-              + ' March, 2016')
+        function_name = itch_self_response_abs_plot.__name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
         plot = pickle.load(open(''.join((
-         '../Data/self_response_abs_data_{}ms/self_response_abs_data_201603{}'
-         + '_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
+            '../itch_data_{1}/itch_self_response_abs_data_{4}ms/itch_self_'
+            + 'response_abs_data_{1}{2}{3}_{0}_{4}ms.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
         plt.semilogx(plot, '-g', label='Stock i {} - Day {}'
@@ -353,25 +368,24 @@ def itch_self_response_abs_plot(ticker, days, t_step):
         plt.tight_layout()
 
     # Plotting
-    function_name = self_response_abs_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_zero_correlation_model_plot(ticker, days, t_step):
+def itch_zero_correlation_model_plot(ticker, year, month, days, t_step):
     """
     Plot the zero correlation model during an interval of time (days) in
     independent plots in a figure. The data is loaded from the zero
     correlation model data results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
+        :param ticker: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param days: string with the days to be analized
-         (i.e ['07', '08', '09'])
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
         :param t_step: time step in the data in ms
     """
     figure = plt.figure(figsize=(9, 16))
@@ -379,13 +393,15 @@ def itch_zero_correlation_model_plot(ticker, days, t_step):
 
     for d, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker + ' the day ' + day
-              + ' March, 2016')
+        function_name = itch_zero_correlation_model_plot.__name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
-        plot = pickle.load(open("".join((
-         '../Data/zero_correlation_model_data_{}ms/zero_correlation_model_data'
-         + '_201603{}_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
+        plot = pickle.load(open(''.join((
+            '../itch_data_{1}/itch_zero_correlation_model_data_{4}ms/itch'
+            + '_zero_correlation_model_data_{1}{2}{3}_{0}_{4}ms.pickle')
+            .split()).format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(5, 1, d+1)
         plt.semilogx(plot, '-g', label='Stock i {} and random trade sign - {}'
@@ -400,15 +416,16 @@ def itch_zero_correlation_model_plot(ticker, days, t_step):
         plt.tight_layout()
 
     # Plotting
-    function_name = zero_correlation_model_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_self_response_self_abs_zero_corr_plot(ticker, days, t_step):
+def itch_self_response_self_abs_zero_corr_plot(ticker, year, month, days,
+                                               t_step):
     """
     Plot the self response, self response absolute and zero correlation model
     during an interval of time (days) in independent plots in a figure. The
@@ -416,30 +433,35 @@ def itch_self_response_self_abs_zero_corr_plot(ticker, days, t_step):
     absolute data results and zero correlation model data results.
         :param ticker: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
     """
+
     figure = plt.figure(figsize=(9, 16))
     plt.subplots_adjust(hspace=0, wspace=0)
 
     for d, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker + ' the day ' + day
-              + ' March, 2016')
+        function_name = itch_self_response_self_abs_zero_corr_plot.__name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
         self_ = pickle.load(open(''.join((
-         '../Data/self_response_data_{}ms/self_response_data_201603{}'
-         + '_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
+            '../itch_data_{1}/itch_self_response_data_{4}ms/itch_self_response'
+            + '_data_{1}{2}{3}_{0}_{4}ms.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
         abs_ = pickle.load(open(''.join((
-         '../Data/self_response_abs_data_{}ms/self_response_abs_data_201603{}'
-         + '_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
-        zero = pickle.load(open("".join((
-         '../Data/zero_correlation_model_data_{}ms/zero_correlation_model'
-         + '_data_201603{}_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker, t_step), 'rb'))
+            '../itch_data_{1}/itch_self_response_abs_data_{4}ms/itch_self_'
+            + 'response_abs_data_{1}{2}{3}_{0}_{4}ms.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
+        zero = pickle.load(open(''.join((
+            '../itch_data_{1}/itch_zero_correlation_model_data_{4}ms/itch'
+            + '_zero_correlation_model_data_{1}{2}{3}_{0}_{4}ms.pickle')
+            .split()).format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(len(days), 1, d+1)
         plt.semilogx(self_, '-', label='Self response Stock i {} - {}'
@@ -458,15 +480,15 @@ def itch_self_response_self_abs_zero_corr_plot(ticker, days, t_step):
         plt.tight_layout()
 
     # Plotting
-    function_name = self_response_self_abs_zero_corr_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_cross_response_plot(ticker_i, ticker_j, days, t_step):
+def itch_cross_response_plot(ticker_i, ticker_j, year, month, days, t_step):
     """
     Plot the cross response during an interval of time (days) in independent
     plots in a figure. The data is loaded from the cross response data results.
@@ -474,6 +496,8 @@ def itch_cross_response_plot(ticker_i, ticker_j, days, t_step):
          be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -490,13 +514,16 @@ def itch_cross_response_plot(ticker_i, ticker_j, days, t_step):
 
         for i, day in enumerate(days):
 
-            print('Processing data for the stock ' + ticker_i + ' and the '
-                  + 'stock ' + ticker_j + ' the day ' + day + ' March, 2016')
+            function_name = itch_cross_response_plot.__name__
+            itch_data_tools.itch_function_header_print_plot(function_name,
+                                                            ticker_i, ticker_j,
+                                                            year, month, day,
+                                                            str(t_step))
 
             plot = pickle.load(open(''.join((
-                '../Data/cross_response_data_{}ms/cross_response_data_201603{}'
-                + '_{}i_{}j_{}ms.pickl').split())
-                .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+                '../itch_data_{2}/itch_cross_response_data_{5}ms/itch_cross'
+                + '_response_data_{2}{3}{4}_{0}i_{1}j_{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
             plt.subplot(len(days), 1, i+1)
             plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
@@ -511,16 +538,16 @@ def itch_cross_response_plot(ticker_i, ticker_j, days, t_step):
             plt.tight_layout()
 
         # Plotting
-        function_name = cross_response_plot.__name__
-        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j,
-                                  t_step)
+        itch_data_tools.itch_save_plot(function_name, figure, ticker_i,
+                                       ticker_j, year, month, str(t_step))
 
         return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
+def itch_avg_return_avg_trade_prod_plot(ticker_i, ticker_j, year, month, days,
+                                        t_step):
     """
     Plot the average midpoint log return price multiplied by the average trade
     signs during an interval of time (days) in independent plots in a figure.
@@ -529,6 +556,8 @@ def itch_avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
          be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -545,13 +574,17 @@ def itch_avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
 
         for i, day in enumerate(days):
 
-            print('Processing data for the stock ' + ticker_i + ' and the '
-                  + 'stock ' + ticker_j + ' the day ' + day + ' March, 2016')
+            function_name = itch_avg_return_avg_trade_prod_plot.__name__
+            itch_data_tools.itch_function_header_print_plot(function_name,
+                                                            ticker_i, ticker_j,
+                                                            year, month, day,
+                                                            str(t_step))
 
             plot = pickle.load(open(''.join((
-             '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade'
-             '_prod_data_201603{}_{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+                '../itch_data_{2}/itch_avg_return_avg_trade_prod_data_{5}ms/'
+                + 'itch_avg_return_avg_trade_prod_data_{2}{3}{4}_{0}i_{1}j_'
+                + '{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
             plt.subplot(len(days), 1, i+1)
             plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
@@ -569,16 +602,16 @@ def itch_avg_return_avg_trade_prod_plot(ticker_i, ticker_j, days, t_step):
             plt.tight_layout()
 
         # Plotting
-        function_name = avg_return_avg_trade_prod_plot.__name__
-        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j,
-                                  t_step)
+        itch_data_tools.itch_save_plot(function_name, figure, ticker_i,
+                                       ticker_j, year, month, str(t_step))
 
         return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_step):
+def itch_cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, year,
+                                                  month, days, t_step):
     """
     Plot the cross response and the avg return and trade  during an interval
     of time (days) in independent plots in a figure to compare the behavior of
@@ -588,6 +621,8 @@ def itch_cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_st
          be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -604,17 +639,22 @@ def itch_cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_st
 
         for i, day in enumerate(days):
 
-            print('Processing data for the stock ' + ticker_i + ' and the '
-                  + 'stock ' + ticker_j + ' the day ' + day + ' March, 2016')
+            function_name = itch_cross_response_avg_return_avg_trade_plot.\
+                            __name__
+            itch_data_tools.itch_function_header_print_plot(function_name,
+                                                            ticker_i, ticker_j,
+                                                            year, month, day,
+                                                            str(t_step))
 
             cross = pickle.load(open(''.join((
-             '../Data/cross_response_data_{}ms/cross_response_data_201603{}'
-             + '_{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+                '../itch_data_{2}/itch_cross_response_data_{5}ms/itch_cross'
+                + '_response_data_{2}{3}{4}_{0}i_{1}j_{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
             avg = pickle.load(open(''.join((
-             '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade'
-             + '_prod_data_201603{}_{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+                '../itch_data_{2}/itch_avg_return_avg_trade_prod_data_{5}ms/'
+                + 'itch_avg_return_avg_trade_prod_data_{2}{3}{4}_{0}i_{1}j_'
+                + '{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
             plt.subplot(len(days), 2, 2*i+1)
             plt.semilogx(cross, '-g', label='Stock i {} and stock j {} - {}'
@@ -644,16 +684,16 @@ def itch_cross_response_avg_return_avg_trade_plot(ticker_i, ticker_j, days, t_st
             plt.tight_layout()
 
         # Plotting
-        function_name = cross_response_avg_return_avg_trade_plot.__name__
-        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j,
-                                  t_step)
+        itch_data_tools.itch_save_plot(function_name, figure, ticker_i,
+                                       ticker_j, year, month, str(t_step))
 
         return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_step):
+def itch_difference_cross_response_avg_prod_plot(ticker_i, ticker_j, year,
+                                                 month, days, t_step):
     """
     Plot the cross response and average product during an interval of time
     (days) in independent plots in a figure. The data is loaded from the cross
@@ -662,6 +702,8 @@ def itch_difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_ste
          be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -678,24 +720,29 @@ def itch_difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_ste
 
         for i, day in enumerate(days):
 
-            print('Processing data for the stock ' + ticker_i + ' and the '
-                  + 'stock ' + ticker_j + ' the day ' + day + ' March, 2016')
+            function_name = itch_difference_cross_response_avg_prod_plot.\
+                            __name__
+            itch_data_tools.itch_function_header_print_plot(function_name,
+                                                            ticker_i, ticker_j,
+                                                            year, month, day,
+                                                            str(t_step))
 
             plot_cross = pickle.load(open(''.join((
-             '../Data/cross_response_data_{}ms/cross_response_data_201603{}'
-             + '_{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+                '../itch_data_{2}/itch_cross_response_data_{5}ms/itch_cross'
+                + '_response_data_{2}{3}{4}_{0}i_{1}j_{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
             plot_avg = pickle.load(open(''.join((
-             '../Data/avg_return_avg_trade_prod_data_{}ms/avg_return_avg_trade'
-             + '_prod_data_201603{}_{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+                '../itch_data_{2}/itch_avg_return_avg_trade_prod_data_{5}ms/'
+                + 'itch_avg_return_avg_trade_prod_data_{2}{3}{4}_{0}i_{1}j_'
+                + '{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
-            plot_diff = pickle.load(open("".join((
-             '../Data/difference_cross_response_avg_prod_data_{}ms/difference'
-             + '_cross_response_avg_prod_data_201603{}_'
-             + '{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+            plot_diff = pickle.load(open(''.join((
+                '../itch_data_{2}/itch_difference_cross_response_avg_prod_'
+                + 'data_{5}ms/itch_difference_cross_response_avg_prod_data_'
+                + '{2}{3}{4}_{0}i_{1}j_{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
             plt.subplot(len(days), 1, i+1)
             plt.semilogx(plot_cross, '-',
@@ -719,22 +766,23 @@ def itch_difference_cross_response_avg_prod_plot(ticker_i, ticker_j, days, t_ste
             plt.tight_layout()
 
         # Plotting
-        function_name = difference_cross_response_avg_prod_plot.__name__
-        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j,
-                                  t_step)
+        itch_data_tools.itch_save_plot(function_name, figure, ticker_i,
+                                       ticker_j, year, month, str(t_step))
 
         return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_trade_sign_self_correlator_plot(ticker_i, days, t_step):
+def itch_trade_sign_self_correlator_plot(ticker, year, month, days, t_step):
     """
     Plot the trade sign self correlator during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign self
     correlator data results.
-        :param ticker_i: string of the abbreviation of the trade sign stock to
+        :param ticker: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -745,45 +793,47 @@ def itch_trade_sign_self_correlator_plot(ticker_i, days, t_step):
 
     for i, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker_i + ' the day '
-              + day + ' March, 2016')
+        function_name = itch_trade_sign_self_correlator_plot.__name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
-        plot = pickle.load(open("".join((
-         '../Data/trade_sign_self_correlator_data_{}ms/trade_sign_self_'
-         + 'correlator_data_201603{}_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker_i, t_step), 'rb'))
+        plot = pickle.load(open(''.join((
+            '../itch_data_{1}/itch_trade_sign_self_correlator_data_{4}ms/'
+            + 'itch_trade_sign_self_correlator_data_{1}{2}{3}_{0}_{4}ms'
+            + '.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
         plt.loglog(plot, '-g', label='Stock i {} - Day {}'
-                     .format(ticker_i, day))
+                   .format(ticker, day))
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign self correlator $ \Theta_{ii} (\tau) $')
         plt.legend(loc='best')
-        plt.title(
-            'Trade sign self correlator - ticker i {} - {}ms'
-            .format(ticker_i, t_step))
-        plt.ylim([10E-6,10])
+        plt.title('Trade sign self correlator - ticker i {} - {}ms'
+                  .format(ticker, t_step))
+        plt.ylim([10E-6, 10])
         plt.grid(True)
         plt.tight_layout()
 
     # Plotting
-
-    function_name = trade_sign_self_correlator_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_i,
-                              t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_trade_sign_autocorrelation_plot(ticker_i, days, t_step):
+def itch_trade_sign_autocorrelation_plot(ticker, year, month, days, t_step):
     """
     Plot the trade sign autocorrelation during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign
     autocorrelation data results.
-        :param ticker_i: string of the abbreviation of the trade sign stock to
+        :param ticker: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -794,45 +844,49 @@ def itch_trade_sign_autocorrelation_plot(ticker_i, days, t_step):
 
     for i, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker_i + ' the day '
-              + day + ' March, 2016')
+        function_name = itch_trade_sign_autocorrelation_plot.__name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
-        plot = pickle.load(open("".join((
-         '../Data/trade_sign_autocorrelation_data_{}ms/trade_sign_'
-         + 'autocorrelation_data_201603{}_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker_i, t_step), 'rb'))
+        plot = pickle.load(open(''.join((
+            '../itch_data_{1}/itch_trade_sign_autocorrelation_data_{4}ms/'
+            + 'itch_trade_sign_autocorrelation_data_{1}{2}{3}_{0}_{4}ms'
+            + '.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
         plt.loglog(plot, '-g', label='Stock i {} - Day {}'
-                     .format(ticker_i, day))
+                   .format(ticker, day))
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign autocorrelation')
         plt.legend(loc='best')
         plt.title(
             'Trade sign autocorrelation - ticker i {} - {}ms'
-            .format(ticker_i, t_step))
-        plt.ylim([10E-6,10])
+            .format(ticker, t_step))
+        plt.ylim([10E-6, 10])
         plt.grid(True)
         plt.tight_layout()
 
     # Plotting
-
-    function_name = trade_sign_autocorrelation_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_i,
-                              t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step):
+def itch_trade_sign_self_correlator_autocorrelation_plot(ticker, year, month,
+                                                         days, t_step):
     """
     Plot the trade sign autocorrelation during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign
     autocorrelation data results.
-        :param ticker_i: string of the abbreviation of the trade sign stock to
+        :param ticker: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -843,49 +897,52 @@ def itch_trade_sign_self_correlator_autocorrelation_plot(ticker_i, days, t_step)
 
     for i, day in enumerate(days):
 
-        print('Processing data for the stock ' + ticker_i + ' the day '
-              + day + ' March, 2016')
+        function_name = itch_trade_sign_self_correlator_autocorrelation_plot.\
+                        __name__
+        itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                        ticker, year, month,
+                                                        day, str(t_step))
 
-        plot_self_correlator = pickle.load(open("".join((
-         '../Data/trade_sign_self_correlator_data_{}ms/trade_sign_self_'
-         + 'correlator_data_201603{}_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker_i, t_step), 'rb'))
+        plot_self_correlator = pickle.load(open(''.join((
+            '../itch_data_{1}/itch_trade_sign_self_correlator_data_{4}ms/'
+            + 'itch_trade_sign_self_correlator_data_{1}{2}{3}_{0}_{4}ms'
+            + '.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
 
-        plot_autocorrelation = pickle.load(open("".join((
-         '../Data/trade_sign_autocorrelation_data_{}ms/trade_sign_'
-         + 'autocorrelation_data_201603{}_{}i_{}ms.pickl').split())
-         .format(t_step, day, ticker_i, t_step), 'rb'))
+        plot_autocorrelation = pickle.load(open(''.join((
+            '../itch_data_{1}/itch_trade_sign_autocorrelation_data_{4}ms/'
+            + 'itch_trade_sign_autocorrelation_data_{1}{2}{3}_{0}_{4}ms'
+            + '.pickle').split())
+            .format(ticker, year, month, day, t_step), 'rb'))
 
         plt.subplot(len(days), 1, i+1)
         plt.loglog(plot_self_correlator, '-',
-                     label='Self correlator {} - Day {}'
-                     .format(ticker_i, day))
+                   label='Self correlator {} - Day {}'
+                   .format(ticker, day))
         plt.loglog(plot_autocorrelation, '-',
-                     label='Autocorrelation {} - Day {}'
-                     .format(ticker_i, day))
+                   label='Autocorrelation {} - Day {}'
+                   .format(ticker, day))
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign autocorrelation - self correlator')
         plt.legend(loc='best')
         plt.title(
             'Trade sign self correlator - autocorrelation - ticker i {} - {}ms'
-            .format(ticker_i, t_step))
-        plt.ylim([10E-6,10])
-        #plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            .format(ticker, t_step))
+        plt.ylim([10E-6, 10])
         plt.grid(True)
         plt.tight_layout()
 
     # Plotting
-
-    function_name = trade_sign_self_correlator_autocorrelation_plot.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_i,
-                              t_step)
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, str(t_step))
 
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
+def itch_trade_sign_cross_correlator_plot(ticker_i, ticker_j, year, month,
+                                          days, t_step):
     """
     Plot the trade sign cross correlator during an interval of time (days) in
     independent plots in a figure. The data is loaded from the trade sign cross
@@ -894,6 +951,8 @@ def itch_trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
          be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
         :param t_step: time step in the data in ms
@@ -910,33 +969,34 @@ def itch_trade_sign_cross_correlator_plot(ticker_i, ticker_j, days, t_step):
 
         for i, day in enumerate(days):
 
-            print('Processing data for the stock ' + ticker_i + ' and the '
-                  + 'stock ' + ticker_j + ' the day ' + day + ' March, 2016')
+            function_name = itch_trade_sign_cross_correlator_plot.__name__
+            itch_data_tools.itch_function_header_print_plot(function_name,
+                                                            ticker_i, ticker_j,
+                                                            year, month, day,
+                                                            str(t_step))
 
-            plot = pickle.load(open("".join((
-             '../Data/trade_sign_cross_correlator_data_{}ms/trade_sign_cross_'
-             + 'correlator_data_201603{}_{}i_{}j_{}ms.pickl').split())
-             .format(t_step, day, ticker_i, ticker_j, t_step), 'rb'))
+            plot = pickle.load(open(''.join((
+                '../itch_data_{2}/itch_trade_sign_cross_correlator_data_{5}ms'
+                + '/itch_trade_sign_cross_correlator_data_{2}{3}{4}_{0}i_{1}j'
+                + '_{5}ms.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day, t_step), 'rb'))
 
             plt.subplot(len(days), 1, i+1)
             plt.loglog(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
-                         .format(ticker_i, ticker_j, day))
+                       .format(ticker_i, ticker_j, day))
             plt.xlabel(r'Time lag $[\tau]$')
             plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
             plt.legend(loc='best')
             plt.title(
                 'Trade sign cross correlator - ticker i {} ticker j {} - {}ms'
                 .format(ticker_i, ticker_j, t_step))
-            plt.ylim([10E-6,10])
-            #plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.ylim([10E-6, 10])
             plt.grid(True)
             plt.tight_layout()
 
         # Plotting
-
-        function_name = trade_sign_cross_correlator_plot.__name__
-        itch_data_tools.save_plot(function_name, figure, ticker_i, ticker_j,
-                                  t_step)
+        itch_data_tools.itch_save_plot(function_name, figure, ticker_i,
+                                       ticker_j, year, month, str(t_step))
 
         return None
 
@@ -947,8 +1007,8 @@ def main():
 
     return None
 
-
 # -----------------------------------------------------------------------------------------------------------------------
+
 
 if __name__ == '__main__':
     main()
