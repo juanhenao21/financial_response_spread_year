@@ -70,20 +70,25 @@ def itch_midpoint_plot(ticker, year, month, day, t_step):
         :param t_step: time step in the data in ms
     """
 
-    # Load data
-
     function_name = itch_midpoint_plot.__name__
-    itch_function_header_print_plot(function_name, ticker, ticker, year,
-                                    month, day, t_step)
+    itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    t_step)
 
-    midpoint = pickle.load(open(
-        '../Data/midpoint_data/midpoint_201603{}_{}.pickl'.format(day, ticker),
-        'rb'))
-    time = pickle.load(open('../Data/midpoint_data/time.pickl', 'rb'))
+    # Load data
+    midpoint = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_midpoint_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_time_1ms.pickle').split())
+                .format(year), 'rb'))
 
     # Plotting
 
-    plt.plot(time[::100], midpoint[::100], label=('Day {}'.format(day)))
+    plt.plot(time[::100] / 1000 / 3600, midpoint[::100],
+             label=('Day {}'.format(day)))
     plt.legend(loc=0, fontsize=20)
 
     return None
@@ -91,21 +96,24 @@ def itch_midpoint_plot(ticker, year, month, day, t_step):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_midpoint_plot_week(ticker, days, t_step):
+def itch_midpoint_week_plot(ticker, year, month, days, t_step):
     """
     Plot the midpoint price data during a time period. The data is loaded from
     the mipoint price data results. The time period must be previously knowed
     and set to the function.
         :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
         :param days: string with the days to be analized
          (i.e ['07', '08', '09'])
+        :param t_step: time step in the data in ms
     """
 
     figure = plt.figure(figsize=(16, 9))
 
     for day in days:
-        midpoint_plot(ticker, day)
+        itch_midpoint_plot(ticker, year, month, day, t_step)
 
     plt.title('{}'.format(ticker), fontsize=40)
     plt.xlabel(r'Time $[hour]$', fontsize=25)
@@ -114,8 +122,111 @@ def itch_midpoint_plot_week(ticker, days, t_step):
     plt.grid(True)
 
     # Plotting
-    function_name = midpoint_plot_week.__name__
-    itch_data_tools.save_plot(function_name, figure, ticker, ticker, t_step)
+    function_name = itch_midpoint_week_plot.__name__
+    itch_data_tools.itch_save_plot(function_name, figure, ticker, ticker, year,
+                                   month, t_step)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def itch_ask_bid_midpoint_spread_plot(ticker, year, month, day, t_step):
+    """
+    Plot the ask, bid, midpoint price and spread data during a open market
+    day. The data is loaded from the mipoint price data results.
+        :param ticker: string of the abbreviation of the stock to be analized
+         (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+        :param t_step: time step in the data in ms
+    """
+
+    function_name = itch_ask_bid_midpoint_spread_plot.__name__
+    itch_data_tools.itch_function_header_print_plot(function_name, ticker,
+                                                    ticker, year, month, day,
+                                                    t_step)
+
+    # Load data
+    ask = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_ask_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    bid = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_bid_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    midpoint = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_midpoint_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    spread = pickle.load(open(''.join((
+                '../itch_data_{1}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_spread_{1}{2}{3}_{0}_1ms.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                '../itch_data_{}/itch_midpoint_data_1ms/itch_midpoint_data'
+                + '_time_1ms.pickle').split())
+                .format(year), 'rb'))
+
+    fig = plt.figure(figsize=(9, 16))
+    fig.suptitle('{} - {}.{}.{}'.format(ticker, year, month, day), fontsize=16)
+    fig.tight_layout()
+    fig.subplots_adjust(top=0.95, wspace=0.3)
+
+    plt.subplot(4, 2, 1)
+    plt.plot(time[::100] / 1000 / 3600, midpoint[::100], label='Midpoint')
+    plt.xlabel('Time')
+    plt.ylabel('Price')
+    plt.legend(loc='best')
+    plt.grid(True)
+
+    plt.subplot(4, 2, 2)
+    plt.plot(time[500::100] / 1000 / 3600, spread[500::100], label='Spread')
+    plt.xlabel('Time')
+    plt.ylabel('Spread')
+    plt.legend(loc='best')
+    plt.ylim(0, 0.1)
+    plt.grid(True)
+
+    plt.subplot(4, 2, 3)
+    plt.plot(time[::100] / 1000 / 3600, bid[::100], label='Bid quotes')
+    plt.plot(time[::100] / 1000 / 3600, ask[::100], label='Ask quotes')
+    plt.xlabel('Time')
+    plt.ylabel('Price')
+    plt.legend(loc='best')
+    plt.grid(True)
+
+    plt.subplot(4, 2, 4)
+    plt.scatter(time[::100] / 1000 / 3600, ask[::100], marker='.', s=5,
+                label='Ask trades')
+    plt.xlabel('Time')
+    plt.ylabel('Price')
+    plt.legend(loc='best')
+    plt.grid(True)
+
+    # Saving data
+
+    if (not os.path.isdir('../itch_plot_{1}/{0}_{2}ms/'
+                          .format(function_name, year, t_step))):
+
+        try:
+
+            os.mkdir('../itch_plot_{1}/{0}_{2}ms/'
+                     .format(function_name, year, t_step))
+            print('Folder to save data created')
+
+        except FileExistsError:
+
+            print('Folder exists. The folder was not created')
+
+    fig.savefig(
+            '../itch_plot_{2}/{0}_{4}ms/{0}_{2}{3}_{1}i_{4}ms.png'
+            .format(function_name, ticker, year, month, t_step))
+
+    print('Plot saved')
+    print()
 
     return None
 
