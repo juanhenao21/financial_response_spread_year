@@ -7,6 +7,8 @@ Juan Camilo Henao Londono
 juan.henao-londono@stud.uni-due.de
 '''
 
+# TO DO: Docstrings!
+
 # -----------------------------------------------------------------------------------------------------------------------
 # Modules
 
@@ -163,7 +165,7 @@ def itch_function_header_print_data(function_name, ticker_i, ticker_j, year,
         print('Processing data for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)
 
-    print('Time step: ' + t_step + 'ms')
+    print('Time step: ' + str(t_step) + 'ms')
 
     return None
 
@@ -189,6 +191,23 @@ def itch_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
 # -----------------------------------------------------------------------------------------------------------------------
 
+def itch_start_folders(year):
+
+    if (not os.path.isdir('../itch_data_{}/'.format(year))
+        and not os.path.isdir('../itch_plot_{}/'.format(year))):
+
+        try:
+
+            os.mkdir('../itch_data_{}/'
+                     .format(year))
+            print('Folder to save data created')
+            os.mkdir('../itch_plot_{}/'
+                     .format(year))
+            print('Folder to save data created')
+
+        except FileExistsError:
+
+            print('Folder exists. The folder was not created')
 
 def main():
 
