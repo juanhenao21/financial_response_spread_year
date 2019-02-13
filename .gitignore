@@ -104,6 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # Folders
+ITCH_2008/
 ITCH_2016/
 TAQ_2008/
 Cross_response_individual_stock/itch_data_2016/
