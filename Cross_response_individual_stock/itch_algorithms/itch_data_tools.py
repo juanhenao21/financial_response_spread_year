@@ -191,6 +191,7 @@ def itch_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
 # -----------------------------------------------------------------------------------------------------------------------
 
+
 def itch_start_folders(year):
 
     if (not os.path.isdir('../itch_data_{}/'.format(year))
@@ -208,6 +209,21 @@ def itch_start_folders(year):
         except FileExistsError:
 
             print('Folder exists. The folder was not created')
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def itch_taq_accuracy_msg(teo, exp):
+
+    print('Accuracy of the classification:',
+          round(sum(teo == exp) / len(exp) * 100, 2), '%')
+    print('Number of identified trades:', len(teo))
+    print('Number of matches:', sum(teo == exp))
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
 
 def main():
 
