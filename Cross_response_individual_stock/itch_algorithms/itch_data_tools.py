@@ -55,7 +55,7 @@ def itch_trade_sign_reshape(trade_sign, time_t_step):
 def itch_save_data(function_name, data, ticker_i, ticker_j, year, month, day,
                    t_step):
     """
-    Save the data generated in itch_data_generator module.
+    Save the data generated in itch_data_analysis module.
         :param function_name: name of the function that generates the data
         :param data: python data to be saved
         :param ticker_i: string of the abbreviation of the stock to be analized

@@ -2,7 +2,7 @@
 ITCH data plot
 
 Module to plot different ITCH results based on the results of the functions
-set in the module itch_data_generator. The module plot the following data
+set in the module itch_data_analysis. The module plot the following data
 
 - Midpoint price data: plot the midpoint price for every day for a stock in
   one figure.
