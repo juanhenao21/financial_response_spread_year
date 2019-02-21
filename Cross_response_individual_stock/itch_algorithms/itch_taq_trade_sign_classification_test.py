@@ -73,13 +73,13 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
                        6 * (mytype == 'D') +
                        7 * (mytype == 'X') +
                        8 * (mytype == 'T') for mytype in data[:, 3]])
-    volumes_ = np.array([int(myvolume) for myvolume in data[:,4]])
+    volumes_ = np.array([int(myvolume) for myvolume in data[:, 4]])
     prices_ = np.array([int(myprice) for myprice in data[:, 5]])
 
     ids = ids_[types_ < 7]
     times = times_[types_ < 7]
     types = types_[types_ < 7]
-    volumes = volumes_[types_<7]
+    volumes = volumes_[types_ < 7]
     prices = prices_[types_ < 7]
 
     # Reference lists
@@ -204,7 +204,7 @@ def itch_taq_trade_signs_consecutive_trades_ms(ticker, price_signs,
 
     print('Accuracy of the trade sign classification for consecutive trades in'
           ' ms for the stock ' + ticker + ' the ' + year + '.' + month + '.'
-           + day)
+          + day)
 
     # trades with values different to zero to obtain the theoretical value
     price_no_0 = price_signs[trade_signs != 0]
@@ -242,9 +242,11 @@ def itch_taq_trade_signs_consecutive_trades_ms(ticker, price_signs,
 
 # -----------------------------------------------------------------------------------------------------------------------
 
-def itch_taq_trade_signs_eq2_ms(ticker, trade_signs, times_signs, identified_trades, year, month, day):
+
+def itch_taq_trade_signs_eq2_ms(ticker, trade_signs, times_signs,
+                                identified_trades, year, month, day):
     """
-    Implementation of the eq. (2) to obtain the trade signs with a stamp of 
+    Implementation of the eq. (2) to obtain the trade signs with a stamp of
     1 millisecond
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
@@ -258,10 +260,10 @@ def itch_taq_trade_signs_eq2_ms(ticker, trade_signs, times_signs, identified_tra
 
     print('Accuracy of the trade sign classification for number imbalance of '
           ' trades in ms for the stock ' + ticker + ' the ' + year + '.'
-           + month + '.' + day)
+          + month + '.' + day)
 
-    trades_no_0 = trade_signs[trade_signs!= 0]
-    time_no_0 = times_signs[trade_signs!= 0]
+    trades_no_0 = trade_signs[trade_signs != 0]
+    time_no_0 = times_signs[trade_signs != 0]
     time_no_0_set = np.array(list(sorted(set(time_no_0))))
 
     trades_exp_ms = np.zeros(len(time_no_0_set))
@@ -288,7 +290,8 @@ def itch_taq_trade_signs_eq2_ms(ticker, trade_signs, times_signs, identified_tra
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_taq_trade_signs_eq3_ms(ticker, trade_signs, volume_signs, times_signs, identified_trades, year, month, day):
+def itch_taq_trade_signs_eq3_ms(ticker, trade_signs, volume_signs, times_signs,
+                                identified_trades, year, month, day):
     """
     Implementation of the eq. (3) to obtain the trade signs with a stamp of
     1 millisecond.
@@ -306,11 +309,11 @@ def itch_taq_trade_signs_eq3_ms(ticker, trade_signs, volume_signs, times_signs, 
 
     print('Accuracy of the trade sign classification for volume imbalance of '
           ' trades in ms for the stock ' + ticker + ' the ' + year + '.'
-           + month + '.' + day)
+          + month + '.' + day)
 
-    trades_no_0 = trade_signs[trade_signs!= 0]
-    volumes_no_0 = volume_signs[trade_signs!= 0]
-    time_no_0 = times_signs[trade_signs!= 0]
+    trades_no_0 = trade_signs[trade_signs != 0]
+    volumes_no_0 = volume_signs[trade_signs != 0]
+    time_no_0 = times_signs[trade_signs != 0]
     time_no_0_set = np.array(list(sorted(set(time_no_0))))
 
     trades_exp_ms = np.zeros(len(time_no_0_set))
@@ -338,7 +341,8 @@ def itch_taq_trade_signs_eq3_ms(ticker, trade_signs, volume_signs, times_signs, 
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_taq_trade_signs_s(ticker, trades_teo_ms, trades_exp_ms, trade_signs, times_signs, year, month, day):
+def itch_taq_trade_signs_s(ticker, trades_teo_ms, trades_exp_ms, trade_signs,
+                           times_signs, year, month, day):
     """
     Trades signs with a stamp of 1 second.
         :param ticker: string of the abbreviation of the stock to be analized
@@ -362,8 +366,12 @@ def itch_taq_trade_signs_s(ticker, trades_teo_ms, trades_exp_ms, trade_signs, ti
     trades_exp_s_0 = 0. * full_time
 
     for t_idx, t_val in enumerate(full_time):
-        trades_teo_s_0[t_idx] = np.sign(np.sum(trades_teo_ms[(time_no_0_set > t_val * 1000) & (time_no_0_set < (t_val + 1) * 1000)]))
-        trades_exp_s_0[t_idx] = np.sign(np.sum(trades_exp_ms[(time_no_0_set > t_val * 1000) & (time_no_0_set < (t_val + 1) * 1000)]))
+        trades_teo_s_0[t_idx] = np.sign(np.sum(
+            trades_teo_ms[(time_no_0_set > t_val * 1000)
+                          & (time_no_0_set < (t_val + 1) * 1000)]))
+        trades_exp_s_0[t_idx] = np.sign(np.sum(
+            trades_exp_ms[(time_no_0_set > t_val * 1000)
+                          & (time_no_0_set < (t_val + 1) * 1000)]))
 
     trades_teo_s = trades_teo_s_0[trades_teo_s_0 != 0]
     trades_exp_s = trades_exp_s_0[trades_teo_s_0 != 0]
@@ -375,6 +383,7 @@ def itch_taq_trade_signs_s(ticker, trades_teo_ms, trades_exp_ms, trade_signs, ti
 
 # -----------------------------------------------------------------------------------------------------------------------
 
+
 def main():
 
     ticker = ['AAPL', 'AAPL', 'GS', 'GS', 'XOM', 'XOM']
@@ -383,37 +392,53 @@ def main():
     day = ['07', '02', '07', '10', '11', '04']
 
     file = open('../../Basic/stats.csv', 'a+')
-    file.write('No. Id. Trades, No. Matches, Accuracy, No. Id. Trades, Matches eq. (2), Acc. eq. (2), Matches eq. (3), Acc. eq. (3) \n')
+    file.write('Date,No_Id_Trades,No_Matches,Accuracy,No_Id_Trades,'
+               + 'Matches_eq_2,Acc_eq_2,Matches_eq_3,Acc_eq_3\n')
 
     for (t, m, d) in zip(ticker, month, day):
 
         (price_signs, trade_signs,
-        volume_signs, times_signs) = itch_taq_trade_signs_load_test(t, year,
-                                                                    m, d)
+         volume_signs, times_signs) = itch_taq_trade_signs_load_test(t, year,
+                                                                     m, d)
 
-        identified_trades = itch_taq_trade_signs_consecutive_trades_ms(t,
-                                price_signs, trade_signs, times_signs, year,
-                                m, d)
+        identified_trades = \
+            itch_taq_trade_signs_consecutive_trades_ms(t, price_signs,
+                                                       trade_signs,
+                                                       times_signs, year, m, d)
 
-        teo_eq2_ms, exp_eq2_ms = itch_taq_trade_signs_eq2_ms(t, trade_signs,
-                                times_signs, identified_trades, year, m, d)
+        teo_eq2_ms, exp_eq2_ms = \
+            itch_taq_trade_signs_eq2_ms(t, trade_signs, times_signs,
+                                        identified_trades, year, m, d)
 
-        teo_eq2_s, exp_eq2_s = itch_taq_trade_signs_s(t, teo_eq2_ms, exp_eq2_ms, trade_signs, times_signs, year, m, d)
+        teo_eq2_s, exp_eq2_s = \
+            itch_taq_trade_signs_s(t, teo_eq2_ms, exp_eq2_ms, trade_signs,
+                                   times_signs, year, m, d)
 
-        teo_eq3_ms, exp_eq3_ms = itch_taq_trade_signs_eq3_ms(t, trade_signs, volume_signs,
-                                times_signs, identified_trades, year, m, d)
+        teo_eq3_ms, exp_eq3_ms = \
+            itch_taq_trade_signs_eq3_ms(t, trade_signs, volume_signs,
+                                        times_signs, identified_trades, year,
+                                        m, d)
 
-        teo_eq3_s, exp_eq3_s = itch_taq_trade_signs_s(t, teo_eq3_ms, exp_eq3_ms, trade_signs, times_signs, year, m, d)
+        teo_eq3_s, exp_eq3_s = \
+            itch_taq_trade_signs_s(t, teo_eq3_ms, exp_eq3_ms, trade_signs,
+                                   times_signs, year, m, d)
 
-        file.write('{}, {}, {}, {}, {}, {}, {}, {} \n'
-                .format(len(trade_signs[trade_signs != 0]),
-                sum(trade_signs[trade_signs != 0] == identified_trades),
-                round(sum(trade_signs[trade_signs != 0] == identified_trades) / len(trade_signs[trade_signs != 0]), 3),
-                len(teo_eq2_s),
-                sum(teo_eq2_s == exp_eq2_s),
-                round(sum(teo_eq2_s == exp_eq2_s) / len(teo_eq2_s),3),
-                sum(teo_eq3_s == exp_eq3_s),
-                round(sum(teo_eq3_s == exp_eq3_s) / len(teo_eq3_s),3)))
+        file.write('{}, {}, {}, {}, {}, {}, {}, {}, {}, {} \n'
+                   .format(t,
+                           year + m + d,
+                           len(trade_signs[trade_signs != 0]),
+                           sum(trade_signs[trade_signs != 0]
+                               == identified_trades),
+                           round(sum(trade_signs[trade_signs != 0]
+                                 == identified_trades)
+                                 / len(trade_signs[trade_signs != 0]), 4),
+                           len(teo_eq2_s),
+                           sum(teo_eq2_s == exp_eq2_s),
+                           round(sum(teo_eq2_s == exp_eq2_s)
+                                 / len(teo_eq2_s), 4),
+                           sum(teo_eq3_s == exp_eq3_s),
+                           round(sum(teo_eq3_s == exp_eq3_s)
+                                 / len(teo_eq3_s), 4)))
 
     file.close()
 
@@ -422,4 +447,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
