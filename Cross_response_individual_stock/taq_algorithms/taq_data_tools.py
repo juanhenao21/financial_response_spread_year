@@ -53,7 +53,8 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
         pickle.dump(data, open(
             '../taq_data_{3}/{0}/{0}_{3}{4}{5}_{1}i_{2}j.pickle'
-            .format(function_name, ticker_i, ticker_j, year, month, day), 'wb'))
+            .format(function_name, ticker_i, ticker_j, year, month, day),
+            'wb'))
 
     else:
 
@@ -105,7 +106,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     else:
 
         figure.savefig(
-            '../taq_plot_{2}/{0}_{4}ms/{0}_{2}{3}_{1}i.png'
+            '../taq_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
             .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
@@ -117,7 +118,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
 
 def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
-                                    month, day):
+                                   month, day):
 
     print('TAQ data')
     print(function_name)
@@ -135,7 +136,7 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
 
 def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
-                                    month, day):
+                                   month, day):
 
     print('TAQ data')
     print(function_name)

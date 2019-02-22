@@ -47,7 +47,6 @@ juan.henao-londono@stud.uni-due.de
 import numpy as np
 import os
 
-import gzip
 import pickle
 
 import taq_data_tools
@@ -76,6 +75,8 @@ def taq_midpoint_data(ticker, year, month, day):
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
+    # Load data
+
     time_q, bid_q, ask_q = pickle.load(open(
         '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickl'
         .format(ticker, year, month, day), 'rb'))
@@ -84,7 +85,7 @@ def taq_midpoint_data(ticker, year, month, day):
     spread = ask_q - bid_q
 
     # 34800 s = 9h40 - 57000 s = 15h50
-    full_time = np.array(range(34800, 57000))
+    full_time = np.array(range(34800, 57001))
 
     # As there can be several values for the same second, we use the
     # last value of each second in the full time array as it behaves
@@ -135,18 +136,18 @@ def taq_midpoint_data(ticker, year, month, day):
         print('Folder to save data created')
 
     pickle.dump(ask_last_val,
-                open('../taq_data_{2}/{0}/{0}_ask_{2}{3}{4}_{1}.pickl'
+                open('../taq_data_{2}/{0}/{0}_ask_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
     pickle.dump(bid_last_val,
-                open('../taq_data_{2}/{0}/{0}_bid_{2}{3}{4}_{1}.pickl'
+                open('../taq_data_{2}/{0}/{0}_bid_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
     pickle.dump(spread_last_val,
-                open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickl'
+                open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(full_time, open('../taq_data_{2}/{0}/{0}_time.pickl'
+    pickle.dump(full_time, open('../taq_data_{2}/{0}/{0}_time.pickle'
                                 .format(function_name, year), 'wb'))
     pickle.dump(midpoint_last_val,
-                open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickl'
+                open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
 
     print('Data saved')
@@ -154,5 +155,158 @@ def taq_midpoint_data(ticker, year, month, day):
 
     return None
 
+# -----------------------------------------------------------------------------------------------------------------------
 
 
+def taq_trade_signs_data(ticker, year, month, day):
+    """
+    Obtain the trade signs from the TAQ data. The trade signs are calculated
+    using the equation (1) and (2) of https://arxiv.org/pdf/1603.01580.pdf.
+    As the trades signs are not directly given by the TAQ data, they must be
+    infered by the trades prices. For further calculations we use the whole
+    time range from the opening of the market at 9h30 to the closing at 16h
+    in seconds and then convert the values to hours (22200 seconds). To fill
+    the time spaces when nothing happens we just fill with zeros indicating
+    that there were neither a buy nor a sell. Save in a pickle file the array
+    of the trade signs.
+        :param ticker: string of the abbreviation of the stock to be analized
+         (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """''
+
+    function_name = taq_trade_signs_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, month, day)
+
+    # Load data
+
+    time_t, ask_t = pickle.load(open(
+        '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
+        .format(ticker, year, month, day), 'rb'))
+
+    time_t_set = np.array(list(sorted(set(time_t))))
+    identified_trades = np.zeros(len(time_t))
+    trades_exp_s = np.zeros(len(time_t_set))
+
+    # Implementation of equation (1). Sign of the price change between
+    # consecutive trades
+
+    count_eq1 = 0
+
+    for t_idx, t_val in enumerate(time_t_set):
+
+        while (count_eq1 < len(time_t) and time_t[count_eq1] == t_val):
+
+            diff = ask_t[count_eq1] - ask_t[count_eq1 - 1]
+
+            if (diff):
+
+                identified_trades[count_eq1] = np.sign(diff)
+                count_eq1 += 1
+
+            else:
+
+                identified_trades[count_eq1] = identified_trades[count_eq1 - 1]
+                count_eq1 += 1
+
+    # Implementation of equation (2). Trade sign in each second
+    for t_idx, t_val in enumerate(time_t_set):
+
+        # Experimental
+        trades_same_t_exp = identified_trades[time_t == t_val]
+        sign_exp = np.sign(np.sum(trades_same_t_exp))
+        trades_exp_s[t_idx] = sign_exp
+
+    # 34800 s = 9h40 - 57000 s = 15h50
+    full_time = np.array(range(34800, 57001))
+    trade_signs = 0. * full_time
+
+    count_full = 0
+
+    for t_idx, t_val in enumerate(full_time):
+
+        if (count_full < len(time_t_set) and t_val == time_t_set[count_full]):
+
+            trade_signs[t_idx] = trades_exp_s[count_full]
+            count_full += 1
+
+    # Saving data
+
+    taq_data_tools.taq_save_data(function_name, trade_signs, ticker, ticker,
+                                 year, month, day)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
+    """
+    Obtain the cross response function using the midpoint log returns of
+    ticker i and trade signs of ticker j during different time lags. The data
+    is adjusted to use only the values each second
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """
+    if (ticker_i == ticker_j):
+
+        return None
+
+    else:
+
+        function_name = taq_cross_response_data.__name__
+        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
+                                                      ticker_j, year, month,
+                                                      day)
+
+        # Load data
+        midpoint_i = pickle.load(open(''.join((
+                '../taq_data_{1}/taq_midpoint_data/taq_midpoint_data'
+                + '_midpoint_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker_i, year, month, day), 'rb'))
+        trade_sign_j = pickle.load(open("".join((
+                '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
+                + '_data_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker_j, year, month, day), 'rb'))
+        time = pickle.load(open(''.join((
+                '../taq_data_{}/taq_midpoint_data/taq_midpoint_data'
+                + '_time.pickle').split())
+                .format(year), 'rb'))
+
+        # Setting variables to work with t_step ms accuracy
+
+        # Array of the average of each tau. 10^3 s used by Wang
+        cross_response_tau = np.zeros(__tau__)
+
+        # Calculating the midpoint log return and the cross response function
+
+        # Depending on the ta
+        for tau_idx in range(__tau__):
+
+            # Obtain the midpoint log return. Displace the numerator tau
+            # values to the right and compute the return, and append the
+            # remaining values of tau with zeros
+            log_return_i_sec = np.append(np.log(
+                midpoint_i[tau_idx:]/midpoint_i[:-tau_idx]),
+                np.zeros(tau_idx))
+
+            cross_response_tau[tau_idx] = np.mean(
+                log_return_i_sec[trade_sign_j != 0] *
+                trade_sign_j[trade_sign_j != 0])
+
+        # Saving data
+
+        taq_data_tools.taq_save_data(function_name, cross_response_tau,
+                                       ticker_i, ticker_j, year, month, day)
+
+        return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------

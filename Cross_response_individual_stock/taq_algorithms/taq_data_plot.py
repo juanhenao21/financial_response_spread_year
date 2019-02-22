@@ -71,19 +71,21 @@ def taq_midpoint_plot(ticker, year, month, day):
 
     function_name = taq_midpoint_plot.__name__
     taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                    ticker, year, month, day)
+                                                  ticker, year, month, day)
     # Load data
 
-    midpoint = pickle.load(open(
-        '../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickl'
-        .format(function_name, ticker, year, month, day),
-        'rb'))
-    time = pickle.load(open('../taq_data_{1}/{0}/{0}_time.pickl'
-                            .format(function_name, year), 'rb'))
+    midpoint = pickle.load(open(''.join((
+                                '../taq_data_{1}/taq_midpoint_data/taq_'
+                                + 'midpoint_data_midpoint_{1}{2}{3}_{0}.pickl'
+                                ).split())
+                                .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                            '../taq_data_{}/taq_midpoint_data/taq_midpoint_'
+                            + 'data_time.pickl').split()).format(year), 'rb'))
 
     # Plotting
 
-    plt.plot(time, midpoint, label=('Day {}'.format(day)))
+    plt.plot(time / 3600, midpoint, label=('Day {}'.format(day)))
     plt.legend(loc=0, fontsize=20)
 
     return None
@@ -104,7 +106,7 @@ def taq_midpoint_plot_week(ticker, year, month, days):
          (i.e ['07', '08', '09'])
     """
 
-    plt.figure(figsize=(16, 9))
+    figure = plt.figure(figsize=(16, 9))
 
     for day in days:
         taq_midpoint_plot(ticker, year, month, day)
@@ -139,52 +141,61 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
 
     function_name = taq_ask_bid_midpoint_spread_plot.__name__
     taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                    ticker, year, month, day)
+                                                  ticker, year, month, day)
 
     # Load data
 
+    ask = pickle.load(open(''.join((
+                           '../taq_data_{1}/taq_midpoint_data/taq_midpoint_'
+                           + 'data_ask_{1}{2}{3}_{0}.pickl').split())
+                           .format(ticker, year, month, day), 'rb'))
+    bid = pickle.load(open(''.join((
+                           '../taq_data_{1}/taq_midpoint_data/taq_midpoint_'
+                           + 'data_bid_{1}{2}{3}_{0}.pickl').split())
+                           .format(ticker, year, month, day), 'rb'))
+    midpoint = pickle.load(open(''.join((
+                                '../taq_data_{1}/taq_midpoint_data/taq_'
+                                + 'midpoint_data_midpoint_{1}{2}{3}_{0}.pickl'
+                                ).split())
+                                .format(ticker, year, month, day), 'rb'))
+    spread = pickle.load(open(''.join((
+                              '../taq_data_{1}/taq_midpoint_data/taq_midpoint'
+                              + '_data_spread_{1}{2}{3}_{0}.pickl').split())
+                              .format(ticker, year, month, day), 'rb'))
+    time = pickle.load(open(''.join((
+                            '../taq_data_{}/taq_midpoint_data/taq_midpoint_'
+                            + 'data_time.pickl').split()).format(year), 'rb'))
 
-    ask = pickle.load(open('../taq_data_{1}/taq_midpoint_data/taq_midpoint_data_ask_{1}{2}{3}_{0}.pickl'
-                          .format(ticker, year, month, day), 'rb'))
-    bid = pickle.load(open('../taq_data_{1}/taq_midpoint_data/taq_midpoint_data_bid_{1}{2}{3}_{0}.pickl'
-                          .format(ticker, year, month, day), 'rb'))
-    midpoint = pickle.load(open('../taq_data_{1}/taq_midpoint_data/taq_midpoint_data_midpoint_{1}{2}{3}_{0}.pickl'
-                          .format(ticker, year, month, day), 'rb'))
-    spread = pickle.load(open('../taq_data_{1}/taq_midpoint_data/taq_midpoint_data_spread_{1}{2}{3}_{0}.pickl'
-                          .format(ticker, year, month, day), 'rb'))
-    time = pickle.load(open('../taq_data_{}/taq_midpoint_data/taq_midpoint_data_time.pickl'
-                          .format(year), 'rb'))
-
-
-    fig = plt.figure(figsize=(9,16))
-    fig.suptitle('{} - {}.{}.{}'.format(ticker, year, month, day), fontsize=16)
-    fig.tight_layout()
-    fig.subplots_adjust(top=0.95, wspace=0.3)
+    figure = plt.figure(figsize=(16, 9))
+    figure.suptitle('{} - {}.{}.{}'.format(ticker, year, month, day),
+                    fontsize=16)
+    figure.tight_layout()
+    figure.subplots_adjust(top=0.95, wspace=0.3)
 
     plt.subplot(4, 2, 1)
-    plt.plot(time, midpoint, label='Midpoint')
+    plt.plot(time / 3600, midpoint, label='Midpoint')
     plt.xlabel('Time')
     plt.ylabel('Price')
     plt.legend(loc='best')
     plt.grid(True)
 
     plt.subplot(4, 2, 2)
-    plt.plot(time, spread, label='Spread')
+    plt.plot(time / 3600, spread, label='Spread')
     plt.xlabel('Time')
     plt.ylabel('Spread')
     plt.legend(loc='best')
     plt.grid(True)
 
     plt.subplot(4, 2, 3)
-    plt.plot(time, bid, label='Bid quotes')
-    plt.plot(time, ask, label='Ask quotes')
+    plt.plot(time / 3600, bid, label='Bid quotes')
+    plt.plot(time / 3600, ask, label='Ask quotes')
     plt.xlabel('Time')
     plt.ylabel('Price')
     plt.legend(loc='best')
     plt.grid(True)
 
     plt.subplot(4, 2, 4)
-    plt.scatter(time, ask, markersize=5, label='Ask trades')
+    plt.scatter(time / 3600, ask, marker='.', s=5, label='Ask trades')
     plt.xlabel('Time')
     plt.ylabel('Price')
     plt.legend(loc='best')
@@ -192,12 +203,12 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
 
     # Saving data
 
-    if (not os.path.isdir('../itch_plot_{1}/{0}/'
+    if (not os.path.isdir('../taq_plot_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../itch_plot_{1}/{0}/'
+            os.mkdir('../taq_plot_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -206,8 +217,8 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
             print('Folder exists. The folder was not created')
 
     figure.savefig(
-            '../itch_plot_{2}/{0}_{4}ms/{0}_{2}{3}_{1}i.png'
-            .format(function_name, ticker, year, month)
+            '../taq_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
+            .format(function_name, ticker, year, month))
 
     print('Plot saved')
     print()

@@ -312,7 +312,7 @@ def itch_midpoint_data(ticker, year, month, day, t_step):
     # Completing the full time entrances
 
     # 34 200 000 ms = 9h30 - 57 600 000 ms = 16h
-    full_time = np.array(range(34200000, 57600000))
+    full_time = np.array(range(34200000, 57600001))
 
     # As there can be several values for the same millisecond, we use the
     # first value of each millisecond in the full time array as is the
@@ -530,7 +530,7 @@ def itch_trade_signs_data(ticker, year, month, day, t_step):
     # Completing the full time entrances
 
     # 34 200 000 ms = 9h30 - 57 600 000 ms = 16h
-    full_time = np.array(range(34200000, 57600000))
+    full_time = np.array(range(34200000, 57600001))
 
     # As there can be several values for the same millisecond, we use the most
     # used trade value of each millisecond in the full time array as it
