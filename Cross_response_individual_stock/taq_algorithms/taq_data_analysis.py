@@ -78,14 +78,14 @@ def taq_midpoint_data(ticker, year, month, day):
     # Load data
 
     time_q, bid_q, ask_q = pickle.load(open(
-        '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickl'
+        '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     midpoint = (bid_q + ask_q) / 2
     spread = ask_q - bid_q
 
     # 34800 s = 9h40 - 57000 s = 15h50
-    full_time = np.array(range(34800, 57001))
+    full_time = np.array(range(34800, 57000))
 
     # As there can be several values for the same second, we use the
     # last value of each second in the full time array as it behaves
@@ -128,6 +128,9 @@ def taq_midpoint_data(ticker, year, month, day):
             bid_last_val[t_idx] = bid_last_val[t_idx - 1]
             spread_last_val[t_idx] = spread_last_val[t_idx - 1]
 
+    # The should not be 0 values in the midpoint array
+    assert not len(midpoint_last_val[midpoint_last_val == 0])
+
     # Saving data
 
     if (not os.path.isdir('../taq_data_{1}/{0}/'.format(function_name, year))):
@@ -144,7 +147,7 @@ def taq_midpoint_data(ticker, year, month, day):
     pickle.dump(spread_last_val,
                 open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(full_time, open('../taq_data_{2}/{0}/{0}_time.pickle'
+    pickle.dump(full_time, open('../taq_data_{1}/{0}/{0}_time.pickle'
                                 .format(function_name, year), 'wb'))
     pickle.dump(midpoint_last_val,
                 open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickle'
@@ -154,7 +157,6 @@ def taq_midpoint_data(ticker, year, month, day):
     print()
 
     return None
-
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -186,30 +188,28 @@ def taq_trade_signs_data(ticker, year, month, day):
         '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
-    time_t_set = np.array(list(sorted(set(time_t))))
+    time_t_set = np.array(sorted(set(time_t)))
+    # Trades identified using equation (1)
     identified_trades = np.zeros(len(time_t))
-    trades_exp_s = np.zeros(len(time_t_set))
 
     # Implementation of equation (1). Sign of the price change between
     # consecutive trades
 
-    count_eq1 = 0
+    for t_idx, t_val in enumerate(time_t):
 
-    for t_idx, t_val in enumerate(time_t_set):
+        diff = ask_t[t_idx] - ask_t[t_idx - 1]
 
-        while (count_eq1 < len(time_t) and time_t[count_eq1] == t_val):
+        if (diff):
 
-            diff = ask_t[count_eq1] - ask_t[count_eq1 - 1]
+            identified_trades[t_idx] = np.sign(diff)
 
-            if (diff):
+        else:
 
-                identified_trades[count_eq1] = np.sign(diff)
-                count_eq1 += 1
+            identified_trades[t_idx] = identified_trades[t_idx - 1]
 
-            else:
+    assert not len(identified_trades[identified_trades == 0])
 
-                identified_trades[count_eq1] = identified_trades[count_eq1 - 1]
-                count_eq1 += 1
+    trades_exp_s = np.zeros(len(time_t_set))
 
     # Implementation of equation (2). Trade sign in each second
     for t_idx, t_val in enumerate(time_t_set):
@@ -220,7 +220,7 @@ def taq_trade_signs_data(ticker, year, month, day):
         trades_exp_s[t_idx] = sign_exp
 
     # 34800 s = 9h40 - 57000 s = 15h50
-    full_time = np.array(range(34800, 57001))
+    full_time = np.array(range(34800, 57000))
     trade_signs = 0. * full_time
 
     count_full = 0
@@ -231,6 +231,9 @@ def taq_trade_signs_data(ticker, year, month, day):
 
             trade_signs[t_idx] = trades_exp_s[count_full]
             count_full += 1
+
+    assert (len(trades_exp_s[trades_exp_s != 0])
+            == len(trade_signs[trade_signs != 0]))
 
     # Saving data
 
@@ -304,7 +307,7 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         # Saving data
 
         taq_data_tools.taq_save_data(function_name, cross_response_tau,
-                                       ticker_i, ticker_j, year, month, day)
+                                     ticker_i, ticker_j, year, month, day)
 
         return None
 
