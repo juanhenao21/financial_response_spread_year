@@ -151,3 +151,24 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_start_folders(year):
+
+    if (not os.path.isdir('../taq_data_{}/'.format(year))
+        and not os.path.isdir('../taq_plot_{}/'.format(year))):
+
+        try:
+
+            os.mkdir('../taq_data_{}/'
+                     .format(year))
+            print('Folder to save data created')
+            os.mkdir('../taq_plot_{}/'
+                     .format(year))
+            print('Folder to save data created')
+
+        except FileExistsError:
+
+            print('Folder exists. The folder was not created')
+
+# -----------------------------------------------------------------------------------------------------------------------

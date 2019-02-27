@@ -1,5 +1,5 @@
 '''
-ITCH data analysis
+ITCH data main
 
 Script to analyze the ITCH data with the information of 96 stocks during a
 week in 2016.
@@ -47,32 +47,32 @@ def itch_data_plot_generator(tickers, year, month, days):
     pool = mp.Pool(processes=mp.cpu_count())
 
     # Basic functions
-    pool.starmap(itch_data_generator.itch_midpoint_data,
+    pool.starmap(itch_data_analysis.itch_midpoint_data,
                  product(tickers, [year], [month], days, [1]))
-    pool.starmap(itch_data_generator.itch_trade_signs_data,
+    pool.starmap(itch_data_analysis.itch_trade_signs_data,
                  product(tickers, [year], [month], days, [1]))
 
     for tau, t in zip(tau_val, t_step):
 
         # Especific functions
-        pool.starmap(itch_data_generator.itch_self_response_data,
+        pool.starmap(itch_data_analysis.itch_self_response_data,
                      product(tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.itch_self_response_abs_data,
+        pool.starmap(itch_data_analysis.itch_self_response_abs_data,
                      product(tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.itch_zero_correlation_model_data,
+        pool.starmap(itch_data_analysis.itch_zero_correlation_model_data,
                      product(tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.itch_cross_response_data,
+        pool.starmap(itch_data_analysis.itch_cross_response_data,
                      product(tickers, tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.itch_avg_return_avg_trade_prod_data,
+        pool.starmap(itch_data_analysis.itch_avg_return_avg_trade_prod_data,
                      product(tickers, tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.
+        pool.starmap(itch_data_analysis.
                      itch_difference_cross_response_avg_prod_data,
                      product(tickers, tickers, [year], [month], days, [t]))
-        pool.starmap(itch_data_generator.itch_trade_sign_self_correlator_data,
+        pool.starmap(itch_data_analysis.itch_trade_sign_self_correlator_data,
                      product(tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.itch_trade_sign_autocorrelation_data,
+        pool.starmap(itch_data_analysis.itch_trade_sign_autocorrelation_data,
                      product(tickers, [year], [month], days, [tau], [t]))
-        pool.starmap(itch_data_generator.itch_trade_sign_cross_correlator_data,
+        pool.starmap(itch_data_analysis.itch_trade_sign_cross_correlator_data,
                      product(tickers, tickers, [year], [month], days, [tau], [t]))
 
         # Plot

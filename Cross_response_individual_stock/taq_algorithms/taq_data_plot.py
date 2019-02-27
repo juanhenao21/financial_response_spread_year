@@ -150,24 +150,24 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
 
     ask = pickle.load(open(''.join((
                            '../taq_data_{1}/taq_midpoint_data/taq_midpoint_'
-                           + 'data_ask_{1}{2}{3}_{0}.pickl').split())
+                           + 'data_ask_{1}{2}{3}_{0}.pickle').split())
                            .format(ticker, year, month, day), 'rb'))
     bid = pickle.load(open(''.join((
                            '../taq_data_{1}/taq_midpoint_data/taq_midpoint_'
-                           + 'data_bid_{1}{2}{3}_{0}.pickl').split())
+                           + 'data_bid_{1}{2}{3}_{0}.pickle').split())
                            .format(ticker, year, month, day), 'rb'))
     midpoint = pickle.load(open(''.join((
                                 '../taq_data_{1}/taq_midpoint_data/taq_'
-                                + 'midpoint_data_midpoint_{1}{2}{3}_{0}.pickl'
+                                + 'midpoint_data_midpoint_{1}{2}{3}_{0}.pickle'
                                 ).split())
                                 .format(ticker, year, month, day), 'rb'))
     spread = pickle.load(open(''.join((
                               '../taq_data_{1}/taq_midpoint_data/taq_midpoint'
-                              + '_data_spread_{1}{2}{3}_{0}.pickl').split())
+                              + '_data_spread_{1}{2}{3}_{0}.pickle').split())
                               .format(ticker, year, month, day), 'rb'))
     time = pickle.load(open(''.join((
                             '../taq_data_{}/taq_midpoint_data/taq_midpoint_'
-                            + 'data_time.pickl').split()).format(year), 'rb'))
+                            + 'data_time.pickle').split()).format(year), 'rb'))
 
     figure = plt.figure(figsize=(16, 9))
     figure.suptitle('{} - {}.{}.{}'.format(ticker, year, month, day),
@@ -284,5 +284,210 @@ def taq_cross_response_plot(ticker_i, ticker_j, year, month, days):
 
         return None
 
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_cross_response_week_avg_plot(ticker_i, ticker_j, year, month, days):
+    """
+    Plot the average cross response during a week and the dayly cross-response
+    contributions in a figure. The data is loaded from the cross response data
+    results.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param days: List of strings with the days to be analized
+         (i.e ['07', '08', '09'])
+    """
+
+    if (ticker_i == ticker_j):
+
+        return None
+
+    else:
+
+        figure = plt.figure(figsize=(16, 9))
+
+        plot_data = np.zeros(__tau__)
+
+        for i, day in enumerate(days):
+
+            function_name = taq_cross_response_week_avg_plot.__name__
+            taq_data_tools.taq_function_header_print_plot(function_name,
+                                                          ticker_i, ticker_j,
+                                                          year, month, day)
+
+            load_day = pickle.load(open(''.join((
+                '../taq_data_{2}/taq_cross_response_data/taq_cross'
+                + '_response_data_{2}{3}{4}_{0}i_{1}j.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day), 'rb'))
+
+            plot_data += load_day
+
+            plt.semilogx(load_day, '-', alpha=0.4,
+                         label='Stock i {} - Stock j {} - Day {}'
+                         .format(ticker_i, ticker_j, day))
+
+        plot_data = plot_data / len(days)
+
+        plt.semilogx(plot_data, '-g', linewidth=5,
+                     label='Stock i {} - Stock j {} - Week Average'
+                     .format(ticker_i, ticker_j))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
+        plt.legend(loc='best')
+        plt.title('Cross response - ticker i {} ticker j {} - {}.{}-{}'
+                  .format(ticker_i, ticker_j, month, days[0], days[-1]))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+        # Plotting
+        taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
+                                     ticker_j, year, month)
+
+        return None
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
+    """
+    Plot the average cross response during a month and the dayly cross-response
+    contributions in a figure. The data is loaded from the cross response data
+    results.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param days: List of strings with the days to be analized
+         (i.e ['07', '08', '09'])
+    """
+
+    if (ticker_i == ticker_j):
+
+        return None
+
+    else:
+
+        figure = plt.figure(figsize=(16, 9))
+
+        plot_data = np.zeros(__tau__)
+
+        for i, day in enumerate(days):
+
+            function_name = taq_cross_response_month_avg_plot.__name__
+            taq_data_tools.taq_function_header_print_plot(function_name,
+                                                          ticker_i, ticker_j,
+                                                          year, month, day)
+
+            load_day = pickle.load(open(''.join((
+                '../taq_data_{2}/taq_cross_response_data/taq_cross'
+                + '_response_data_{2}{3}{4}_{0}i_{1}j.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day), 'rb'))
+
+            plot_data += load_day
+
+            plt.semilogx(load_day, '-', alpha=0.4)
+
+        plot_data = plot_data / len(days)
+
+        plt.semilogx(plot_data, '-g', linewidth=5,
+                     label='Stock i {} - Stock j {} - Month Average'
+                     .format(ticker_i, ticker_j))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
+        plt.legend(loc='best')
+        plt.title('Cross response - ticker i {} ticker j {} - Month {}'
+                  .format(ticker_i, ticker_j, month))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+        # Plotting
+        taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
+                                     ticker_j, year, month)
+
+        return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
+    """
+    Plot the average cross response during a month and the dayly cross-response
+    contributions in a figure. The data is loaded from the cross response data
+    results.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: List of strings of the months to be analized
+         (i.e ['07', '08', '09'])
+        :param days: List of lists of strings with the days to be analized
+         (i.e [['07', '08', '09'], ['01', '02']])
+    """
+
+    if (ticker_i == ticker_j):
+
+        return None
+
+    else:
+
+        figure = plt.figure(figsize=(16, 9))
+
+        plot_data_year = np.zeros(__tau__)
+
+        for month in months:
+
+            plot_data_month = np.zeros(__tau__)
+
+            for i, day in enumerate(days[int(month) - 1]):
+
+                function_name = taq_cross_response_month_avg_plot.__name__
+                taq_data_tools.taq_function_header_print_plot(function_name,
+                                                              ticker_i, ticker_j,
+                                                              year, month, day)
+
+                load_day = pickle.load(open(''.join((
+                    '../taq_data_{2}/taq_cross_response_data/taq_cross'
+                    + '_response_data_{2}{3}{4}_{0}i_{1}j.pickle').split())
+                    .format(ticker_i, ticker_j, year, month, day), 'rb'))
+
+                plot_data_month += load_day
+
+                plt.semilogx(load_day, '-', alpha=0.1)
+
+            plot_data_month = plot_data_month / len(days[int(month) - 1])
+
+            plt.semilogx(plot_data_month, '-', alpha=0.5,
+                         label='Stock i {} - Stock j {} - Month {}'
+                         .format(ticker_i, ticker_j, month))
+
+            plot_data_year += plot_data_month
+
+        plot_data_year = plot_data_year / len(months)
+        plt.semilogx(plot_data_year, '-', linewidth=5,
+                         label='Stock i {} - Stock j {} - Year'
+                         .format(ticker_i, ticker_j, month))
+
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
+        plt.legend(loc='best')
+        plt.title('Cross response - ticker i {} ticker j {} - Month {}'
+                  .format(ticker_i, ticker_j, month))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+        # Plotting
+        taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
+                                     ticker_j, year, month)
+
+        return None
 # -----------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------

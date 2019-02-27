@@ -81,6 +81,12 @@ def taq_midpoint_data(ticker, year, month, day):
         '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
+    time_q = time_q[ask_q != 0.]
+    bid_q = bid_q[bid_q != 0.]
+    ask_q = ask_q[ask_q != 0.]
+
+    assert len(bid_q) == len(ask_q)
+
     midpoint = (bid_q + ask_q) / 2
     spread = ask_q - bid_q
 
@@ -157,6 +163,7 @@ def taq_midpoint_data(ticker, year, month, day):
     print()
 
     return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -191,6 +198,7 @@ def taq_trade_signs_data(ticker, year, month, day):
     time_t_set = np.array(sorted(set(time_t)))
     # Trades identified using equation (1)
     identified_trades = np.zeros(len(time_t))
+    identified_trades[-1] = 1
 
     # Implementation of equation (1). Sign of the price change between
     # consecutive trades
