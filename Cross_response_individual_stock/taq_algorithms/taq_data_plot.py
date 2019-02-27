@@ -398,6 +398,7 @@ def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
         plt.semilogx(plot_data, '-g', linewidth=5,
                      label='Stock i {} - Stock j {} - Month Average'
                      .format(ticker_i, ticker_j))
+        plt.ylim(0, 8 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
@@ -448,7 +449,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
 
             for i, day in enumerate(days[int(month) - 1]):
 
-                function_name = taq_cross_response_month_avg_plot.__name__
+                function_name = taq_cross_response_year_avg_plot.__name__
                 taq_data_tools.taq_function_header_print_plot(function_name,
                                                               ticker_i, ticker_j,
                                                               year, month, day)
@@ -475,6 +476,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
                          label='Stock i {} - Stock j {} - Year'
                          .format(ticker_i, ticker_j, month))
 
+        plt.ylim(0, 2 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')

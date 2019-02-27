@@ -50,13 +50,13 @@ def taq_data_plot_generator(tickers, year, months, days):
     for month in months:
 
         # Especific functions
-        pool.starmap(taq_data_analysis.taq_midpoint_data,
-                    product(tickers, [year], [month], days[int(month) - 1]))
-        pool.starmap(taq_data_analysis.taq_trade_signs_data,
-                    product(tickers, [year], [month], days[int(month) - 1]))
-        pool.starmap(taq_data_analysis.taq_cross_response_data,
-                     product(tickers, tickers, [year], [month],
-                             days[int(month) - 1]))
+        # pool.starmap(taq_data_analysis.taq_midpoint_data,
+        #             product(tickers, [year], [month], days[int(month) - 1]))
+        # pool.starmap(taq_data_analysis.taq_trade_signs_data,
+        #             product(tickers, [year], [month], days[int(month) - 1]))
+        # pool.starmap(taq_data_analysis.taq_cross_response_data,
+        #              product(tickers, tickers, [year], [month],
+        #                      days[int(month) - 1]))
 
         # Plot
         pool.starmap(taq_data_plot.taq_cross_response_month_avg_plot,
