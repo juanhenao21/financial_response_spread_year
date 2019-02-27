@@ -100,7 +100,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../taq_plot_{3}/{0}_{5}ms/{0}_{3}{4}_{1}i_{2}j.png'
+            '../taq_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
             .format(function_name, ticker_i, ticker_j, year, month))
 
     else:

@@ -278,27 +278,24 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
                 '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
                 + '_data_{1}{2}{3}_{0}.pickle').split())
                 .format(ticker_j, year, month, day), 'rb'))
-        time = pickle.load(open(''.join((
-                '../taq_data_{}/taq_midpoint_data/taq_midpoint_data'
-                + '_time.pickle').split())
-                .format(year), 'rb'))
 
-        # Setting variables to work with t_step ms accuracy
+        assert len(midpoint_i) == len(trade_sign_j)
 
         # Array of the average of each tau. 10^3 s used by Wang
         cross_response_tau = np.zeros(__tau__)
 
         # Calculating the midpoint log return and the cross response function
 
-        # Depending on the ta
+        # Depending on the tau value
         for tau_idx in range(__tau__):
 
             # Obtain the midpoint log return. Displace the numerator tau
             # values to the right and compute the return, and append the
             # remaining values of tau with zeros
+
             log_return_i_sec = np.append(np.log(
-                midpoint_i[tau_idx:]/midpoint_i[:-tau_idx]),
-                np.zeros(tau_idx))
+                midpoint_i[tau_idx + 1:]/midpoint_i[:-tau_idx - 1]),
+                np.zeros(tau_idx + 1))
 
             cross_response_tau[tau_idx] = np.mean(
                 log_return_i_sec[trade_sign_j != 0] *
@@ -307,9 +304,9 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         # Saving data
 
         taq_data_tools.taq_save_data(function_name, cross_response_tau,
-                                     ticker_i, ticker_j, year, month, day)
+                                       ticker_i, ticker_j, year, month, day)
 
-        return None
+        return cross_response_tau
 
 # -----------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------

@@ -47,12 +47,15 @@ juan.henao-londono@stud.uni-due.de
 # -----------------------------------------------------------------------------------------------------------------------
 # Modules
 
+import numpy as np
 from matplotlib import pyplot as plt
 import os
 
 import pickle
 
 import taq_data_tools
+
+__tau__ = 1000
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -226,5 +229,60 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
     return None
 
 # -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_cross_response_plot(ticker_i, ticker_j, year, month, days):
+    """
+    Plot the cross response during an interval of time (days) in independent
+    plots in a figure. The data is loaded from the cross response data results.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+    """
+
+    if (ticker_i == ticker_j):
+
+        return None
+
+    else:
+
+        figure = plt.figure(figsize=(9, 16))
+        plt.subplots_adjust(hspace=0, wspace=0)
+
+        for i, day in enumerate(days):
+
+            function_name = taq_cross_response_plot.__name__
+            taq_data_tools.taq_function_header_print_plot(function_name,
+                                                          ticker_i, ticker_j,
+                                                          year, month, day)
+
+            plot = pickle.load(open(''.join((
+                '../taq_data_{2}/taq_cross_response_data/taq_cross'
+                + '_response_data_{2}{3}{4}_{0}i_{1}j.pickle').split())
+                .format(ticker_i, ticker_j, year, month, day), 'rb'))
+
+            plt.subplot(len(days), 1, i+1)
+            plt.semilogx(plot, '-g', label='Stock i {} - Stock j {} - Day {}'
+                         .format(ticker_i, ticker_j, day))
+            plt.xlabel(r'Time lag $[\tau]$')
+            plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
+            plt.legend(loc='best')
+            plt.title('Cross response - ticker i {} ticker j {}'
+                      .format(ticker_i, ticker_j))
+            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            plt.grid(True)
+            plt.tight_layout()
+
+        # Plotting
+        taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
+                                     ticker_j, year, month)
+
+        return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------
