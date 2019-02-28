@@ -576,9 +576,9 @@ def itch_trade_signs_data(ticker, year, month, day, t_step):
 def itch_self_response_data(ticker, year, month, day, tau_val, t_step):
     """
     Obtain the self response function using the midpoint log returns
-    and trade signs of ticker i during different time lags. The data
-    is adjusted to use only the values each t_step ms
-        :param ticker_i: string of the abbreviation of the midpoint stock to
+    and trade signs of the ticker during different time lags. The data
+    is adjusted to use only the values each t_step in milliseconds.
+        :param ticker: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
