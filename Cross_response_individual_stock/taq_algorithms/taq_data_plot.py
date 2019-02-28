@@ -231,6 +231,236 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
+def taq_self_response_plot(ticker, year, month, days):
+    """
+    Plot the self response during an interval of time (days) in independent
+    plots in a figure. The data is loaded from the self response data results.
+        :param ticker: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param days: string with the days to be analized
+         (i.e ['07', '08', '09'])
+    """
+
+    figure = plt.figure(figsize=(9, 16))
+    plt.subplots_adjust(hspace=0, wspace=0)
+
+    for i, day in enumerate(days):
+
+        function_name = taq_self_response_plot.__name__
+        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
+                                                      ticker, year, month, day)
+
+        plot = pickle.load(open(''.join((
+            '../taq_data_{1}/taq_self_response_data/taq_self'
+            + '_response_data_{1}{2}{3}_{0}.pickle').split())
+            .format(ticker, year, month, day), 'rb'))
+
+        plt.subplot(len(days), 1, i+1)
+        plt.semilogx(plot, '-g', label='Stock i {} - Day {}'
+                     .format(ticker, ticker, day))
+        plt.xlabel(r'Time lag $[\tau]$')
+        plt.ylabel(r'Self response $ R_{ij} (\tau) $')
+        plt.legend(loc='best')
+        plt.title('Self response - ticker {}'
+                  .format(ticker, ticker))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        plt.grid(True)
+        plt.tight_layout()
+
+    # Plotting
+    taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker,
+                                 year, month)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_self_response_week_avg_plot(ticker, year, month, days):
+    """
+    Plot the average self response during a week and the dayly self response
+    contributions in a figure. The data is loaded from the self response data
+    results.
+        :param ticker: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param days: List of strings with the days to be analized
+         (i.e ['07', '08', '09'])
+    """
+
+    figure = plt.figure(figsize=(16, 9))
+
+    plot_data = np.zeros(__tau__)
+
+    for i, day in enumerate(days):
+
+        function_name = taq_self_response_week_avg_plot.__name__
+        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
+                                                      ticker, year, month, day)
+
+        load_day = pickle.load(open(''.join((
+            '../taq_data_{1}/taq_self_response_data/taq_self'
+            + '_response_data_{1}{2}{3}_{0}.pickle').split())
+            .format(ticker, year, month, day), 'rb'))
+
+        plot_data += load_day
+
+        plt.semilogx(load_day, '-', alpha=0.4,
+                     label='Stock {} - Day {}'
+                     .format(ticker, day))
+
+    plot_data = plot_data / len(days)
+
+    plt.semilogx(plot_data, '-g', linewidth=5,
+                 label='Stock {} - Week Average'
+                 .format(ticker,))
+    plt.xlabel(r'Time lag $[\tau]$')
+    plt.ylabel(r'Self response $ R_{ij} (\tau) $')
+    plt.legend(loc='best')
+    plt.title('Self response - ticker {} - {}.{}-{}'
+              .format(ticker, month, days[0], days[-1]))
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Plotting
+    taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker, year,
+                                 month)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_self_response_month_avg_plot(ticker, year, month, days):
+    """
+    Plot the average self response during a month and the dayly self response
+    contributions in a figure. The data is loaded from the self response data
+    results.
+        :param ticker: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param days: List of strings with the days to be analized
+         (i.e ['07', '08', '09'])
+    """
+
+    figure = plt.figure(figsize=(16, 9))
+
+    plot_data = np.zeros(__tau__)
+
+    for i, day in enumerate(days):
+
+        function_name = taq_self_response_month_avg_plot.__name__
+        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
+                                                      ticker, year, month, day)
+
+        load_day = pickle.load(open(''.join((
+            '../taq_data_{1}/taq_self_response_data/taq_self'
+            + '_response_data_{1}{2}{3}_{0}.pickle').split())
+            .format(ticker, year, month, day), 'rb'))
+
+        plot_data += load_day
+
+        plt.semilogx(load_day, '-', alpha=0.4)
+
+    plot_data = plot_data / len(days)
+
+    plt.semilogx(plot_data, '-g', linewidth=5,
+                 label='Stock {} - Month Average'
+                 .format(ticker,))
+    plt.ylim(0, 8 * 10 ** -5)
+    plt.xlabel(r'Time lag $[\tau]$')
+    plt.ylabel(r'Self response $ R_{ij} (\tau) $')
+    plt.legend(loc='best')
+    plt.title('Self response - ticker {} - Month {}'
+              .format(ticker, month, days[0], days[-1]))
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Plotting
+    taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker, year,
+                                 month)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_self_response_year_avg_plot(ticker, year, months, days):
+    """
+    Plot the average cross response during a year and the dayly cross-response
+    contributions in a figure. The data is loaded from the cross response data
+    results.
+        :param ticker: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: List of strings of the months to be analized
+         (i.e ['07', '08', '09'])
+        :param days: List of lists of strings with the days to be analized
+         (i.e [['07', '08', '09'], ['01', '02']])
+    """
+
+    figure = plt.figure(figsize=(16, 9))
+
+    plot_data_year = np.zeros(__tau__)
+
+    for month in months:
+
+        plot_data_month = np.zeros(__tau__)
+
+        for i, day in enumerate(days[int(month) - 1]):
+
+            function_name = taq_self_response_year_avg_plot.__name__
+            taq_data_tools.taq_function_header_print_plot(function_name,
+                                                          ticker, ticker,
+                                                          year, month, day)
+
+            load_day = pickle.load(open(''.join((
+                '../taq_data_{1}/taq_self_response_data/taq_self'
+                + '_response_data_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+
+            plot_data_month += load_day
+
+            plt.semilogx(load_day, '-', alpha=0.1)
+
+        plot_data_month = plot_data_month / len(days[int(month) - 1])
+
+        plt.semilogx(plot_data_month, '-', alpha=0.5,
+                     label='Stock i {} - Month {}'
+                     .format(ticker, month))
+
+        plot_data_year += plot_data_month
+
+    plot_data_year = plot_data_year / len(months)
+    plt.semilogx(plot_data_year, '-', linewidth=5,
+                 label='Stock {} - Year {}'
+                 .format(ticker, year))
+
+    plt.ylim(0, 2 * 10 ** -5)
+    plt.xlabel(r'Time lag $[\tau]$')
+    plt.ylabel(r'Self response $ R_{ij} (\tau) $')
+    plt.legend(loc='best')
+    plt.title('Self response - ticker {} - Year {}'
+              .format(ticker, year))
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Plotting
+    taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker, year,
+                                 month)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
 def taq_cross_response_plot(ticker_i, ticker_j, year, month, days):
     """
     Plot the cross response during an interval of time (days) in independent
@@ -349,6 +579,7 @@ def taq_cross_response_week_avg_plot(ticker_i, ticker_j, year, month, days):
                                      ticker_j, year, month)
 
         return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 
 
@@ -451,7 +682,8 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
 
                 function_name = taq_cross_response_year_avg_plot.__name__
                 taq_data_tools.taq_function_header_print_plot(function_name,
-                                                              ticker_i, ticker_j,
+                                                              ticker_i,
+                                                              ticker_j,
                                                               year, month, day)
 
                 load_day = pickle.load(open(''.join((
@@ -473,8 +705,8 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
 
         plot_data_year = plot_data_year / len(months)
         plt.semilogx(plot_data_year, '-', linewidth=5,
-                         label='Stock i {} - Stock j {} - Year'
-                         .format(ticker_i, ticker_j, month))
+                     label='Stock i {} - Stock j {} - Year'
+                     .format(ticker_i, ticker_j, month))
 
         plt.ylim(0, 2 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
@@ -491,5 +723,6 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
                                      ticker_j, year, month)
 
         return None
+
 # -----------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------

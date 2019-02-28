@@ -54,16 +54,16 @@ def taq_data_plot_generator(tickers, year, months, days):
         #             product(tickers, [year], [month], days[int(month) - 1]))
         # pool.starmap(taq_data_analysis.taq_trade_signs_data,
         #             product(tickers, [year], [month], days[int(month) - 1]))
-        # pool.starmap(taq_data_analysis.taq_cross_response_data,
-        #              product(tickers, tickers, [year], [month],
-        #                      days[int(month) - 1]))
+        pool.starmap(taq_data_analysis.taq_self_response_data,
+                     product([tickers], [year], [month],
+                             days[int(month) - 1]))
 
         # Plot
-        pool.starmap(taq_data_plot.taq_cross_response_month_avg_plot,
-                     product(tickers, tickers, [year], [month], [days[int(month) - 1]]))
+        pool.starmap(taq_data_plot.taq_self_response_month_avg_plot,
+                     product([tickers], [year], [month], [days[int(month) - 1]]))
 
-    pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
-                     product(tickers, tickers, [year], [months], [days]))
+    pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
+                     product([tickers], [year], [months], [days]))
 
     pool.close()
     pool.join()
@@ -77,8 +77,8 @@ def main():
 
     # Tickers and days to analyze
 
-    tickers = ['AAPL', 'MSFT']
-
+    # tickers = ['AAPL', 'MSFT']
+    ticker = 'MSFT'
     months_list = []
     days_list = []
 
@@ -93,7 +93,7 @@ def main():
         m = pickle.load(open('../../Basic/days_{}.pickle'.format(month), 'rb'))
         days_list += [m]
 
-    taq_data_plot_generator(tickers, '2008', months_list, days_list)
+    taq_data_plot_generator(ticker, '2008', months_list, days_list)
 
     print('Ay vamos!!')
 
