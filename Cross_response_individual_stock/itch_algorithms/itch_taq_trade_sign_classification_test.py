@@ -21,6 +21,7 @@ import numpy as np
 import os
 
 import gzip
+import pandas as pd
 
 import itch_data_tools
 
@@ -44,152 +45,107 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
                                                     ticker, year, month, day,
                                                     t_step)
 
-    # Load data
+    # Load full data using cols with values time, order, type, shares and price
+    data = pd.read_csv(gzip.open('../../ITCH_{1}/{1}{2}{3}_{0}.csv.gz'
+                       .format(ticker, year, month, day), 'rt'),
+                       usecols=(0, 2, 3, 4, 5))
 
-    data = np.genfromtxt(gzip.open('../../ITCH_{1}/{1}{2}{3}_{0}.csv.gz'
-                         .format(ticker, year, month, day)),
-                         dtype='str', skip_header=1, delimiter=',')
+    data['Price'] = data['Price'] / 10000
 
-    # Lists of times, ids, types, volumes and prices
-    # List of all the available information available in the data excluding
-    # the last two columns
+    # Select only trade orders
+    trade_pos = np.array(data['T'] == 'E') + np.array(data['T'] == 'F')
+    trade_data = data[trade_pos]
+    # Converting the data in numpy arrays
+    trade_data_time = trade_data['Time'].values
+    trade_data_order = trade_data['Order'].values
+    trade_data_types = 3 * np.array(trade_data['T'] == 'E') \
+        + 4 * np.array(trade_data['T'] == 'F')
+    trade_data_volume = trade_data['Shares'].values
 
-    # List of order types:
-    # "B" = 1 - > Add buy order
-    # "S" = 2 - > Add sell order
-    # "E" = 3 - > Execute outstanding order in part
-    # "C" = 4 - > Cancel outstanding order in part
-    # "F" = 5 - > Execute outstanding order in full
-    # "D" = 6 - > Delete outstanding order in full
-    # "X" = 7 - > Bulk volume for the cross event
-    # "T" = 8 - > Execute non-displayed order
-    times_ = np.array([int(mytime) for mytime in data[:, 0]])
-    ids_ = np.array([int(myid) for myid in data[:, 2]])
-    types_ = np.array([1 * (mytype == 'B') +
-                       2 * (mytype == 'S') +
-                       3 * (mytype == 'E') +
-                       4 * (mytype == 'C') +
-                       5 * (mytype == 'F') +
-                       6 * (mytype == 'D') +
-                       7 * (mytype == 'X') +
-                       8 * (mytype == 'T') for mytype in data[:, 3]])
-    volumes_ = np.array([int(myvolume) for myvolume in data[:, 4]])
-    prices_ = np.array([int(myprice) for myprice in data[:, 5]])
+    # Select only limit orders
+    limit_pos = np.array(data['T'] == 'B') + np.array(data['T'] == 'S')
+    limit_data = data[limit_pos]
+    # Reduce the values to only the ones that have the same order number
+    # as trade orders
+    limit_data = limit_data[limit_data.Order.isin(trade_data['Order'])]
+    # Converting the data in numpy arrays
+    limit_data_order = limit_data['Order'].values
+    limit_data_types = 1 * np.array(limit_data['T'] == 'S') \
+        - 1 * np.array(limit_data['T'] == 'B')
+    limit_data_volume = limit_data['Shares'].values
+    limit_data_price = limit_data['Price'].values
 
-    ids = ids_[types_ < 7]
-    times = times_[types_ < 7]
-    types = types_[types_ < 7]
-    volumes = volumes_[types_ < 7]
-    prices = prices_[types_ < 7]
+    # Arrays to store the info of the identified trades
+    length_trades = len(trade_data)
+    trade_times = 1 * trade_data_time
+    trade_signs = np.zeros(length_trades)
+    trade_volumes = np.zeros(length_trades, dtype='uint16')
+    trade_price = np.zeros(length_trades)
 
-    # Reference lists
-    # Reference lists using the original values or the length of the original
-    # lists
+    for t_idx in range(len(trade_data)):
+        # limit orders that have the same order as the trade order
+        l_idx = np.where(limit_data_order == trade_data_order[t_idx])[0][0]
 
-    prices_ref = 1 * prices
-    types_ref = 0 * types
-    times_ref = 0 * times
-    volumes_ref = 0 * types
-    newids = {}
-    hv = 0
+        # Save values that are independent of the type
 
-    # Help lists with the data of the buy orders and sell orders
+        # Price of the trade (Limit data)
+        trade_price[t_idx] = limit_data_price[l_idx]
 
-    hv_prices = prices[types < 3]
-    hv_types = types[types < 3]
-    hv_times = times[types < 3]
-    hv_volumes = volumes[types < 3]
+        # Trade sign identification
 
-    trade_sign = 0 * types
-    price_sign = 0 * types
-    volume_sign = 0 * types
-    time_sign = 0 * types
+        trade = limit_data_types[l_idx]
 
-    # Fill the reference lists where the values of 'T' are 'E', 'C', 'F', 'D'
+        if (trade == 1):
+            trade_signs[t_idx] = 1.
+        else:
+            trade_signs[t_idx] = -1.
 
-    # For the data in the length of the ids list (all data)
-    for iii in range(len(ids)):
+        # The volume depends on the trade type. If it is 4 the
+        # value is taken from the limit data and the order number
+        # is deleted from the data. If it is 3 the
+        # value is taken from the trade data and then the
+        # value of the volume in the limit data must be
+        # reduced with the value of the trade data
 
-        # If the data is a sell or buy order
-        if (types[iii] < 3):
+        volume_type = trade_data_types[t_idx]
 
-            # Insert in the dictionary newids a key with the valor of the id
-            # and the value of hv (a counter) that is the index in hv_types
-            newids[ids[iii]] = hv
+        if (volume_type == 4):
 
-            # Increase the value of hv
-            hv += 1
-
-        # If the data is not a sell or buy order
-        elif (types[iii] == 3 or
-                types[iii] == 5):
-
-            # Fill the values of prices_ref with no prices ('E', 'C', 'F', 'D')
-            # with the price of the order
-            prices_ref[iii] = hv_prices[newids[ids[iii]]]
-
-            # Fill the values of types_ref with no  prices ('E', 'C', 'F', 'D')
-            # with the type of the order
-            types_ref[iii] = hv_types[newids[ids[iii]]]
-
-            # Fill the values of time_ref with no  prices ('E', 'C', 'F', 'D')
-            # with the time of the order
-            times_ref[iii] = hv_times[newids[ids[iii]]]
-
-            # Fill the values of volumes_ref with no  prices ('E','C','F', 'D')
-            # with the volume of the order
-            volumes_ref[iii] = hv_volumes[newids[ids[iii]]]
-
-            if (hv_types[newids[ids[iii]]] == 2):
-
-                trade_sign[iii] = 1.
-                price_sign[iii] = prices_ref[iii]
-                volume_sign[iii] = volumes_ref[iii]
-                time_sign[iii] = times_ref[iii]
-
-            elif (hv_types[newids[ids[iii]]] == 1):
-
-                trade_sign[iii] = - 1.
-                price_sign[iii] = prices_ref[iii]
-                volume_sign[iii] = volumes_ref[iii]
-                time_sign[iii] = times_ref[iii]
+            trade_volumes[t_idx] = limit_data_volume[l_idx]
+            limit_data_order[l_idx] = 0
 
         else:
 
-            # Fill the values of types_ref with no  prices ('E', 'C', 'F', 'D')
-            # with the type of the order
-            types_ref[iii] = hv_types[newids[ids[iii]]]
+            trade_volumes[t_idx] = trade_data_volume[t_idx]
+            diff_volumes = limit_data_volume[l_idx] - trade_data_volume[t_idx]
+            assert diff_volumes > 0
 
-            # Fill the values of time_ref with no  prices ('E', 'C', 'F', 'D')
-            # with the time of the order
-            times_ref[iii] = hv_times[newids[ids[iii]]]
+            limit_data_volume[l_idx] = diff_volumes
 
-    # Ordering the data in the open market time
+    assert not sum(trade_signs == 0)
 
-    # This line behaves as an or.the two arrays must achieve a condition, in
-    # this case, be in the market trade hours (09:40 - 15:50)
-    day_times_ind = (1. * time_sign / 3600 / 1000 > 9.666666) * \
-                    (1. * time_sign / 3600 / 1000 < 15.833333) > 0
+    market_time = (trade_times / 3600 / 1000 >= 9.666666) & \
+                  (trade_times / 3600 / 1000 < 15.833333)
 
-    price_signs = price_sign[day_times_ind]
-    trade_signs = trade_sign[day_times_ind]
-    volume_signs = volume_sign[day_times_ind]
-    times_signs = time_sign[day_times_ind]
+    trade_times_market = trade_times[market_time]
+    trade_signs_market = trade_signs[market_time]
+    trade_volumes_market = trade_volumes[market_time]
+    trade_price_market = trade_price[market_time]
 
     # The length of the executed oustanding order in part and in full must
     # be the same as the length of the identified trade signs
-    assert (len(types[types == 3]) + len(types[types == 5]
-            == len(trade_signs[trade_signs != 0])))
+    assert (len(trade_data_types) == len(trade_signs[trade_signs != 0]))
     # The length of the price, volume and time must be equal to the length of
     # the identified trade signs
-    assert (len(price_signs[price_signs != 0])
-            == len(trade_signs[trade_signs != 0]))
-    assert (len(volume_signs[volume_signs != 0])
-            == len(trade_signs[trade_signs != 0]))
-    assert (len(times_signs[times_signs != 0])
-            == len(trade_signs[trade_signs != 0]))
+    assert (len(trade_price_market[trade_price_market != 0])
+            == len(trade_signs_market[trade_signs_market != 0]))
+    assert (len(trade_volumes_market[trade_volumes_market != 0])
+            == len(trade_signs_market[trade_signs_market != 0]))
+    assert (len(trade_times_market[trade_times_market != 0])
+            == len(trade_signs_market[trade_signs_market != 0]))
 
-    return (price_signs, trade_signs, volume_signs, times_signs)
+    return (trade_times_market, trade_signs_market, trade_volumes_market,
+            trade_price_market)
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -411,8 +367,8 @@ def main():
 
     for (t, m, d) in zip(ticker, month, day):
 
-        (price_signs, trade_signs,
-         volume_signs, times_signs) = itch_taq_trade_signs_load_test(t, year,
+        (times_signs, trade_signs,
+         volume_signs, price_signs) = itch_taq_trade_signs_load_test(t, year,
                                                                      m, d)
 
         identified_trades = \
