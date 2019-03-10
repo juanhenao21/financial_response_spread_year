@@ -360,27 +360,25 @@ def main():
                                                                      m, d)
 
         identified_trades = \
-            itch_taq_trade_signs_consecutive_trades_ms_test(t, price_signs,
-                                                            trade_signs,
-                                                            times_signs, year,
-                                                            m, d)
+            itch_taq_trade_signs_eq1_ms_test(t, trade_signs, price_signs,
+                                             year, m, d)
 
         teo_eq2_ms, exp_eq2_ms = \
-            itch_taq_trade_signs_eq2_ms_test(t, trade_signs, times_signs,
+            itch_taq_trade_signs_eq2_ms_test(t, times_signs, trade_signs,
                                              identified_trades, year, m, d)
 
         teo_eq2_s, exp_eq2_s = \
-            itch_taq_trade_signs_s_test(t, teo_eq2_ms, exp_eq2_ms, trade_signs,
-                                        times_signs, year, m, d)
+            itch_taq_trade_signs_s_test(t, times_signs, trade_signs,
+                                        teo_eq2_ms, exp_eq2_ms, year, m, d)
 
         teo_eq3_ms, exp_eq3_ms = \
-            itch_taq_trade_signs_eq3_ms_test(t, trade_signs, volume_signs,
-                                             times_signs, identified_trades,
+            itch_taq_trade_signs_eq3_ms_test(t, times_signs, trade_signs,
+                                             volume_signs, identified_trades,
                                              year, m, d)
 
         teo_eq3_s, exp_eq3_s = \
-            itch_taq_trade_signs_s_test(t, teo_eq3_ms, exp_eq3_ms, trade_signs,
-                                        times_signs, year, m, d)
+            itch_taq_trade_signs_s_test(t, times_signs, trade_signs,
+                                        teo_eq3_ms, exp_eq3_ms, year, m, d)
 
         file.write('{}, {}, {}, {}, {}, {}, {}, {}, {}, {} \n'
                    .format(t,
