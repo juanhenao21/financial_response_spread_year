@@ -427,13 +427,13 @@ def taq_self_response_year_avg_plot(ticker, year, months, days):
 
             plot_data_month += load_day
 
-            plt.semilogx(load_day, '-', alpha=0.1)
+            #plt.semilogx(load_day, '-', alpha=0.1)
 
         plot_data_month = plot_data_month / len(days[int(month) - 1])
 
-        plt.semilogx(plot_data_month, '-', alpha=0.5,
-                     label='Stock i {} - Month {}'
-                     .format(ticker, month))
+        #plt.semilogx(plot_data_month, '-', alpha=0.5,
+        #             label='Stock i {} - Month {}'
+        #             .format(ticker, month))
 
         plot_data_year += plot_data_month
 
@@ -442,7 +442,7 @@ def taq_self_response_year_avg_plot(ticker, year, months, days):
                  label='Stock {} - Year {}'
                  .format(ticker, year))
 
-    plt.ylim(0, 2 * 10 ** -5)
+    #plt.ylim(0, 8 * 10 ** -5)
     plt.xlabel(r'Time lag $[\tau]$')
     plt.ylabel(r'Self response $ R_{ij} (\tau) $')
     plt.legend(loc='best')
@@ -693,13 +693,13 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
 
                 plot_data_month += load_day
 
-                plt.semilogx(load_day, '-', alpha=0.1)
+                #plt.semilogx(load_day, '-', alpha=0.1)
 
             plot_data_month = plot_data_month / len(days[int(month) - 1])
 
-            plt.semilogx(plot_data_month, '-', alpha=0.5,
-                         label='Stock i {} - Stock j {} - Month {}'
-                         .format(ticker_i, ticker_j, month))
+            #plt.semilogx(plot_data_month, '-', alpha=0.5,
+            #             label='Stock i {} - Stock j {} - Month {}'
+            #             .format(ticker_i, ticker_j, month))
 
             plot_data_year += plot_data_month
 
@@ -708,7 +708,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
                      label='Stock i {} - Stock j {} - Year'
                      .format(ticker_i, ticker_j, month))
 
-        plt.ylim(0, 2 * 10 ** -5)
+        #plt.ylim(0, 8 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
