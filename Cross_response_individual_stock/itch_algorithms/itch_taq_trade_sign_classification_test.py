@@ -152,7 +152,7 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
 
 
 def itch_taq_trade_signs_consecutive_trades_ms_test(ticker, price_signs,
-                                                    trade_signs, times_signs,
+                                                    trade_signs,
                                                     year, month, day):
     """
     Obtain the experimental trade signs based on the change of prices. To
@@ -173,17 +173,16 @@ def itch_taq_trade_signs_consecutive_trades_ms_test(ticker, price_signs,
           + day)
 
     # trades with values different to zero to obtain the theoretical value
-    price_no_0 = price_signs[trade_signs != 0]
-    trades_no_0 = trade_signs[trade_signs != 0]
-    time_no_0 = times_signs[trade_signs != 0]
+    assert not len(price_signs[price_signs == 0])
+    assert not len(trade_signs[trade_signs == 0])
 
-    identified_trades = np.zeros(len(time_no_0))
+    identified_trades = np.zeros(len(trade_signs))
 
     # Implementation of equation (1). Sign of the price change between
     # consecutive trades
-    for t_idx, t_val in enumerate(time_no_0):
+    for t_idx, t_val in enumerate(trade_signs):
 
-        diff = price_no_0[t_idx] - price_no_0[t_idx - 1]
+        diff = price_signs[t_idx] - price_signs[t_idx - 1]
 
         if (diff):
 
@@ -194,11 +193,10 @@ def itch_taq_trade_signs_consecutive_trades_ms_test(ticker, price_signs,
             identified_trades[t_idx] = identified_trades[t_idx - 1]
 
     assert not len(identified_trades[identified_trades == 0])
-    assert len(identified_trades) == len(trades_no_0[trades_no_0 != 0])
 
     # Accuracy of the classification
     print('For consecutive trades in ms:')
-    itch_data_tools.itch_taq_accuracy_msg(trades_no_0, identified_trades)
+    itch_data_tools.itch_taq_accuracy_msg(trade_signs, identified_trades)
 
     return identified_trades
 
