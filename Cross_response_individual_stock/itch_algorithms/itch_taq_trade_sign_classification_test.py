@@ -298,8 +298,9 @@ def itch_taq_trade_signs_eq3_ms_test(ticker, times_signs, trade_signs,
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def itch_taq_trade_signs_s_test(ticker, trades_teo_ms, trades_exp_ms,
-                                trade_signs, times_signs, year, month, day):
+def itch_taq_trade_signs_s_test(ticker, times_signs, trade_signs,
+                                trades_teo_ms, trades_exp_ms, year, month,
+                                day):
     """
     Trades signs with a stamp of 1 second.
         :param ticker: string of the abbreviation of the stock to be analized
@@ -315,8 +316,7 @@ def itch_taq_trade_signs_s_test(ticker, trades_teo_ms, trades_exp_ms,
     print('Accuracy of the trade sign classification for trades in s for the'
           + ' stock  ' + ticker + ' the ' + year + '.' + month + '.' + day)
 
-    time_no_0 = times_signs[trade_signs != 0]
-    time_no_0_set = np.array(sorted(set(time_no_0)))
+    times_signs_set = np.array(sorted(set(times_signs)))
 
     full_time = np.array(range(34800, 57000))
     trades_teo_s_0 = 0. * full_time
@@ -324,12 +324,12 @@ def itch_taq_trade_signs_s_test(ticker, trades_teo_ms, trades_exp_ms,
 
     for t_idx, t_val in enumerate(full_time):
 
+        condition = (times_signs_set > t_val * 1000) \
+                    * (times_signs_set < (t_val + 1) * 1000)
         trades_teo_s_0[t_idx] = np.sign(np.sum(
-            trades_teo_ms[(time_no_0_set > t_val * 1000)
-                          & (time_no_0_set < (t_val + 1) * 1000)]))
+                                        trades_teo_ms[condition]))
         trades_exp_s_0[t_idx] = np.sign(np.sum(
-            trades_exp_ms[(time_no_0_set > t_val * 1000)
-                          & (time_no_0_set < (t_val + 1) * 1000)]))
+                                        trades_exp_ms[condition]))
 
     trades_teo_s = trades_teo_s_0[trades_teo_s_0 != 0]
     trades_exp_s = trades_exp_s_0[trades_teo_s_0 != 0]
