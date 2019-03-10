@@ -118,6 +118,7 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
 
             trade_volumes[t_idx] = trade_data_volume[t_idx]
             diff_volumes = limit_data_volume[l_idx] - trade_data_volume[t_idx]
+
             assert diff_volumes > 0
 
             limit_data_volume[l_idx] = diff_volumes
