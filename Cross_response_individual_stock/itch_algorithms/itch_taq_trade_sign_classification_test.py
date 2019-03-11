@@ -171,8 +171,8 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
           + day)
 
     # trades with values different to zero to obtain the theoretical value
-    assert not len(price_signs[price_signs == 0])
-    assert not len(trade_signs[trade_signs == 0])
+    assert not np.sum(price_signs == 0)
+    assert not np.sum(trade_signs == 0)
 
     identified_trades = np.zeros(len(trade_signs))
 
@@ -190,7 +190,7 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
 
             identified_trades[t_idx] = identified_trades[t_idx - 1]
 
-    assert not len(identified_trades[identified_trades == 0])
+    assert not np.sum(identified_trades == 0)
 
     # Accuracy of the classification
     print('For consecutive trades in ms:')

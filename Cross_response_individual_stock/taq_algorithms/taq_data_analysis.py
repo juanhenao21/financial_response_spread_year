@@ -123,7 +123,7 @@ def taq_midpoint_data(ticker, year, month, day):
             spread_last_val[t_idx] = spread_last_val[t_idx - 1]
 
     # There should not be 0 values in the midpoint array
-    assert not sum(midpoint_last_val == 0)
+    assert not np.sum(midpoint_last_val == 0)
 
     # Saving data
 
@@ -161,9 +161,9 @@ def taq_trade_signs_data(ticker, year, month, day):
     using the equation (1) and (2) of https://arxiv.org/pdf/1603.01580.pdf.
     As the trades signs are not directly given by the TAQ data, they must be
     infered by the trades prices. For further calculations we use the whole
-    time range from the opening of the market at 9h30 to the closing at 16h
+    time range from the opening of the market at 9h40 to the closing at 15h50
     in seconds and then convert the values to hours (22200 seconds). To fill
-    the time spaces when nothing happens we just fill with zeros indicating
+    the time spaces when nothing happens we just add zeros indicating
     that there were neither a buy nor a sell. Save in a pickle file the array
     of the trade signs.
         :param ticker: string of the abbreviation of the stock to be analized
@@ -182,6 +182,9 @@ def taq_trade_signs_data(ticker, year, month, day):
     time_t, ask_t = pickle.load(open(
         '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
+
+    # All the trades must have a price different to zero
+    assert not np.sum(ask_t == 0)
 
     time_t_set = np.array(sorted(set(time_t)))
     # Trades identified using equation (1)
@@ -203,7 +206,8 @@ def taq_trade_signs_data(ticker, year, month, day):
 
             identified_trades[t_idx] = identified_trades[t_idx - 1]
 
-    assert not len(identified_trades[identified_trades == 0])
+    # All the identified trades must be different to zero
+    assert not np.sum(identified_trades == 0)
 
     trades_exp_s = np.zeros(len(time_t_set))
 
@@ -223,11 +227,15 @@ def taq_trade_signs_data(ticker, year, month, day):
 
     for t_idx, t_val in enumerate(full_time):
 
-        if (count_full < len(time_t_set) and t_val == time_t_set[count_full]):
+        length = len(time_t_set)
+
+        if (count_full < length and t_val == time_t_set[count_full]):
 
             trade_signs[t_idx] = trades_exp_s[count_full]
             count_full += 1
 
+    # The number of trade signs before and after the completation must
+    # be equal
     assert (len(trades_exp_s[trades_exp_s != 0])
             == len(trade_signs[trade_signs != 0]))
 
