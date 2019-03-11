@@ -11,25 +11,9 @@ Module to compute the following data
 - Self response function: using the midpoint price and the trade signs
   calculate the midpoint log returns and the self response of a stock.
 
-- Self response absolute function: using the midpoint price and the trade
-  signs calculate the midpoint log returns and the self response with the
-  absolute value of the midpoint log returns of a stock.
-
 - Cross response function: using the midpoint price and the trade signs
   calculate the midpoint log returns and the cross response between two
   stocks.
-
-- Average return and average trade sign: using the midpoint price and the
-  trade signs calculate the midpoint log returns and the response between the
-  product of the averaged midpoint log returns and the averaged trade signs of
-  two stocks.
-
-- Difference cross response and average return and average trade sign: using
-  the cross response and the average product calculate its difference.
-
-- Zero correlation model: using the midpoint price of a stock and a random
-  trade signs array calculate the midpoint log returns and the response
-  between the midpoint log returns and the random array.
 
 - Trade sign cross correlator: using the trade signs of two stocks calculate
   the trade sign cross correlator.
@@ -81,6 +65,8 @@ def taq_midpoint_data(ticker, year, month, day):
         '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
+    # Some files are corrupted, so there are some zero values that
+    # does not have sense
     time_q = time_q[ask_q != 0.]
     bid_q = bid_q[bid_q != 0.]
     ask_q = ask_q[ask_q != 0.]
@@ -113,11 +99,13 @@ def taq_midpoint_data(ticker, year, month, day):
 
     for t_idx, t_val in enumerate(full_time):
 
-        if (count < len(time_q) and t_val == time_q[count]):
+        length = len(time_q)
+
+        if (count < length and t_val == time_q[count]):
 
             count += 1
 
-            while (count < len(time_q) and
+            while (count < length and
                    time_q[count - 1] == time_q[count]):
 
                 count += 1
@@ -134,8 +122,8 @@ def taq_midpoint_data(ticker, year, month, day):
             bid_last_val[t_idx] = bid_last_val[t_idx - 1]
             spread_last_val[t_idx] = spread_last_val[t_idx - 1]
 
-    # The should not be 0 values in the midpoint array
-    assert not len(midpoint_last_val[midpoint_last_val == 0])
+    # There should not be 0 values in the midpoint array
+    assert not sum(midpoint_last_val == 0)
 
     # Saving data
 
@@ -294,7 +282,7 @@ def taq_self_response_data(ticker, year, month, day):
         # remaining values of tau with zeros
 
         log_return_sec = np.append(
-            midpoint[tau_idx + 1:]/midpoint[:-tau_idx - 1],
+            (midpoint[tau_idx + 1:] - midpoint[:-tau_idx - 1])/midpoint[:-tau_idx - 1],
             np.zeros(tau_idx + 1))
 
         self_response_tau[tau_idx] = np.mean(
@@ -360,7 +348,7 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
             # remaining values of tau with zeros
 
             log_return_i_sec = np.append(
-                midpoint_i[tau_idx + 1:]/midpoint_i[:-tau_idx - 1],
+                (midpoint_i[tau_idx + 1:] - midpoint_i[:-tau_idx - 1])/midpoint_i[:-tau_idx - 1],
                 np.zeros(tau_idx + 1))
 
             cross_response_tau[tau_idx] = np.mean(
