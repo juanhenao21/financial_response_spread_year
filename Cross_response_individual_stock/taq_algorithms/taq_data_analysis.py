@@ -322,6 +322,8 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
     """
     if (ticker_i == ticker_j):
 
+        # Self-response
+
         return None
 
     else:
@@ -355,8 +357,8 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
             # values to the right and compute the return, and append the
             # remaining values of tau with zeros
 
-            log_return_i_sec = np.append(
-                (midpoint_i[tau_idx + 1:] - midpoint_i[:-tau_idx - 1])/midpoint_i[:-tau_idx - 1],
+            log_return_i_sec = np.append(np.log(
+                midpoint_i[tau_idx + 1:]/midpoint_i[:-tau_idx - 1]),
                 np.zeros(tau_idx + 1))
 
             cross_response_tau[tau_idx] = np.mean(
@@ -366,7 +368,7 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         # Saving data
 
         taq_data_tools.taq_save_data(function_name, cross_response_tau,
-                                       ticker_i, ticker_j, year, month, day)
+                                     ticker_i, ticker_j, year, month, day)
 
         return cross_response_tau
 
