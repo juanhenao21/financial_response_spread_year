@@ -289,8 +289,8 @@ def taq_self_response_data(ticker, year, month, day):
         # values to the right and compute the return, and append the
         # remaining values of tau with zeros
 
-        log_return_sec = np.append(
-            (midpoint[tau_idx + 1:] - midpoint[:-tau_idx - 1])/midpoint[:-tau_idx - 1],
+        log_return_sec = np.append(np.log(
+            midpoint[tau_idx + 1:]/midpoint[:-tau_idx - 1]),
             np.zeros(tau_idx + 1))
 
         self_response_tau[tau_idx] = np.mean(
@@ -300,7 +300,7 @@ def taq_self_response_data(ticker, year, month, day):
     # Saving data
 
     taq_data_tools.taq_save_data(function_name, self_response_tau,
-                                   ticker, ticker, year, month, day)
+                                 ticker, ticker, year, month, day)
 
     return self_response_tau
 
@@ -369,6 +369,5 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
                                        ticker_i, ticker_j, year, month, day)
 
         return cross_response_tau
-
 
 # -----------------------------------------------------------------------------------------------------------------------
