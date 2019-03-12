@@ -373,3 +373,121 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         return cross_response_tau
 
 # -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_trade_sign_self_correlator_data(ticker, year, month, day):
+    """
+    Obtain the trade sign self correlator using the trade signs of ticker i
+    during different time lags.
+        :param ticker: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """
+
+    function_name = taq_trade_sign_self_correlator_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, month, day)
+
+    # Load data
+    trade_sign_i = pickle.load(open("".join((
+                '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
+                + '_data_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+
+    # Array of the average of each tau. 10^3 s used by Wang
+    self_correlator = np.zeros(__tau__)
+
+    # Calculating the midpoint log return and the trade sign cross-correlator
+
+    for tau_idx in range(__tau__):
+
+        try:
+
+            trade_sign_product = np.append(trade_sign_i[tau_idx:]
+                                           * trade_sign_i[:-tau_idx],
+                                           np.zeros(tau_idx))
+
+        except ValueError:
+
+                trade_sign_product = trade_sign_i * trade_sign_i
+
+        self_correlator[tau_idx] = np.mean(
+            trade_sign_product[trade_sign_i != 0])
+
+    # Saving data
+
+    taq_data_tools.taq_save_data(function_name, self_correlator, ticker,
+                                 ticker, year, month, day)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
+    """
+    Obtain the trade sign cross correlator using the trade signs of ticker i
+    and trade signs of ticker j during different time lags.
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """
+
+    if (ticker_i == ticker_j):
+
+        # Self-response
+
+        return None
+
+    else:
+
+        function_name = taq_trade_sign_cross_correlator_data.__name__
+        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
+                                                      ticker_j, year, month,
+                                                      day)
+
+        # Load data
+        trade_sign_i = pickle.load(open("".join((
+                    '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
+                    + '_data_{1}{2}{3}_{0}.pickle').split())
+                    .format(ticker_i, year, month, day), 'rb'))
+        trade_sign_j = pickle.load(open("".join((
+                    '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
+                    + '_data_{1}{2}{3}_{0}.pickle').split())
+                    .format(ticker_j, year, month, day), 'rb'))
+
+        # Array of the average of each tau. 10^3 s used by Wang
+        self_correlator = np.zeros(__tau__)
+
+        # Calculating the midpoint log return and the trade sign cross
+        # correlator
+
+        for tau_idx in range(__tau__):
+
+            try:
+
+                trade_sign_product = np.append(trade_sign_i[tau_idx:]
+                                               * trade_sign_j[:-tau_idx],
+                                               np.zeros(tau_idx))
+
+            except ValueError:
+
+                trade_sign_product = trade_sign_i * trade_sign_j
+
+            self_correlator[tau_idx] = np.mean(
+                trade_sign_product[trade_sign_j != 0])
+
+        # Saving data
+
+        taq_data_tools.taq_save_data(function_name, self_correlator, ticker_i,
+                                     ticker_j, year, month, day)
+
+        return None
+
+# -----------------------------------------------------------------------------------------------------------------------
