@@ -891,8 +891,8 @@ def taq_trade_sign_self_correlator_year_avg_plot(ticker, year, months, days):
     plt.xlabel(r'Time lag $[\tau]$')
     plt.ylabel(r'Trade sign self-correlator $ \Theta_{ij} (\tau) $')
     plt.legend(loc='best')
-    plt.title('Trade sign self-correlator - ticker {} - {}.{}-{}'
-              .format(ticker, month, days[0], days[-1]))
+    plt.title('Trade sign self-correlator - ticker {} -  Year {}'
+              .format(ticker, year))
     plt.grid(True)
     plt.tight_layout()
 
@@ -1030,7 +1030,7 @@ def taq_trade_sign_cross_correlator_week_avg_plot(ticker_i, ticker_j, year, mont
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, month, days):
+def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, months, days):
     """
     Plot the average trade sign cross correlator during a year and the dayly self response
     contributions in a figure. The data is loaded from the trade sign cross correlator data
@@ -1062,7 +1062,7 @@ def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, mont
 
             for i, day in enumerate(days[int(month) - 1]):
 
-                function_name = taq_cross_response_year_avg_plot.__name__
+                function_name = taq_trade_sign_cross_correlator_year_avg_plot.__name__
                 taq_data_tools.taq_function_header_print_plot(function_name,
                                                               ticker_i,
                                                               ticker_j,
@@ -1088,15 +1088,15 @@ def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, mont
 
         plot_data_year = plot_data_year / len(months)
         plt.loglog(plot_data_year, '-', linewidth=5,
-                     label='Stock i {} - Stock j {} - Year'
-                     .format(ticker_i, ticker_j, month))
+                     label='Stock i {} - Stock j {} - Year {}'
+                     .format(ticker_i, ticker_j, year))
 
         plt.ylim([10E-6, 10])
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
         plt.legend(loc='best')
-        plt.title('Cross response - ticker i {} ticker j {} - {}.{}-{}'
-                  .format(ticker_i, ticker_j, month, days[0], days[-1]))
+        plt.title('Cross response - ticker i {} ticker j {} - Year {}'
+                  .format(ticker_i, ticker_j, year))
         plt.grid(True)
         plt.tight_layout()
 
