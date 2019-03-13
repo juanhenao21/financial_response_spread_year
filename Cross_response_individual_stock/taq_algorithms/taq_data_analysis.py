@@ -60,16 +60,17 @@ def taq_midpoint_data(ticker, year, month, day):
                                                   ticker, year, month, day)
 
     # Load data
-
-    time_q, bid_q, ask_q = pickle.load(open(
+    # TAQ data gives directly the quotes data in every second that there is
+    # a change in the quotes
+    time_q_, bid_q_, ask_q_ = pickle.load(open(
         '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     # Some files are corrupted, so there are some zero values that
     # does not have sense
-    time_q = time_q[ask_q != 0.]
-    bid_q = bid_q[bid_q != 0.]
-    ask_q = ask_q[ask_q != 0.]
+    time_q = time_q_[ask_q_ != 0.]
+    bid_q = bid_q_[bid_q_ != 0.]
+    ask_q = ask_q_[ask_q_ != 0.]
 
     assert len(bid_q) == len(ask_q)
 
