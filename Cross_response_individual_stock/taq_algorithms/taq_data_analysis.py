@@ -225,10 +225,9 @@ def taq_trade_signs_data(ticker, year, month, day):
     trade_signs = 0. * full_time
 
     count_full = 0
+    length = len(time_t_set)
 
     for t_idx, t_val in enumerate(full_time):
-
-        length = len(time_t_set)
 
         if (count_full < length and t_val == time_t_set[count_full]):
 
@@ -245,7 +244,7 @@ def taq_trade_signs_data(ticker, year, month, day):
     taq_data_tools.taq_save_data(function_name, trade_signs, ticker, ticker,
                                  year, month, day)
 
-    return None
+    return trade_signs
 
 # -----------------------------------------------------------------------------------------------------------------------
 
