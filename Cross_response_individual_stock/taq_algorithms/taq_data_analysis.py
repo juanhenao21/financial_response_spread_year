@@ -151,7 +151,7 @@ def taq_midpoint_data(ticker, year, month, day):
     print('Data saved')
     print()
 
-    return None
+    return midpoint_last_val
 
 # -----------------------------------------------------------------------------------------------------------------------
 
