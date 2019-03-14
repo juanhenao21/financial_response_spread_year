@@ -285,17 +285,17 @@ def taq_self_response_data(ticker, year, month, day):
     # Depending on the tau value
     for tau_idx in range(__tau__):
 
+        trade_sign_tau = trade_sign[:-tau_idx - 1]
+        trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
         # Obtain the midpoint log return. Displace the numerator tau
         # values to the right and compute the return, and append the
         # remaining values of tau with zeros
+        log_return_sec = np.log(midpoint[tau_idx + 1:]
+                                / midpoint[:-tau_idx - 1])
 
-        log_return_sec = np.append(np.log(
-            midpoint[tau_idx + 1:]/midpoint[:-tau_idx - 1]),
-            np.zeros(tau_idx + 1))
-
-        self_response_tau[tau_idx] = np.mean(
-            log_return_sec[trade_sign != 0] *
-            trade_sign[trade_sign != 0])
+        # Obtain the self response value
+        product = log_return_sec * trade_sign[:-tau_idx - 1]
+        self_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
 
     # Saving data
 
