@@ -280,7 +280,7 @@ def taq_self_response_data(ticker, year, month, day):
     # Array of the average of each tau. 10^3 s used by Wang
     self_response_tau = np.zeros(__tau__)
 
-    # Calculating the midpoint log return and the cross response function
+    # Calculating the midpoint log return and the self response function
 
     # Depending on the tau value
     for tau_idx in range(__tau__):
@@ -288,8 +288,8 @@ def taq_self_response_data(ticker, year, month, day):
         trade_sign_tau = trade_sign[:-tau_idx - 1]
         trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
         # Obtain the midpoint log return. Displace the numerator tau
-        # values to the right and compute the return, and append the
-        # remaining values of tau with zeros
+        # values to the right and compute the return
+
         log_return_sec = np.log(midpoint[tau_idx + 1:]
                                 / midpoint[:-tau_idx - 1])
 
@@ -353,17 +353,17 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         # Depending on the tau value
         for tau_idx in range(__tau__):
 
+            trade_sign_tau = trade_sign_j[:-tau_idx - 1]
+            trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
             # Obtain the midpoint log return. Displace the numerator tau
-            # values to the right and compute the return, and append the
-            # remaining values of tau with zeros
+            # values to the right and compute the return
 
-            log_return_i_sec = np.append(np.log(
-                midpoint_i[tau_idx + 1:]/midpoint_i[:-tau_idx - 1]),
-                np.zeros(tau_idx + 1))
+            log_return_i_sec = np.log(midpoint_i[tau_idx + 1:]
+                                      / midpoint_i[:-tau_idx - 1])
 
-            cross_response_tau[tau_idx] = np.mean(
-                log_return_i_sec[trade_sign_j != 0] *
-                trade_sign_j[trade_sign_j != 0])
+            # Obtain the cross response value
+            product = log_return_i_sec * trade_sign_j[:-tau_idx - 1]
+            cross_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
 
         # Saving data
 
