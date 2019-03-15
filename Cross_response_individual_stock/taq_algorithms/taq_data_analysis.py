@@ -403,25 +403,21 @@ def taq_trade_sign_self_correlator_data(ticker, year, month, day):
 
     for tau_idx in range(__tau__):
 
-        try:
+        trade_sign_tau = trade_sign_i[:-tau_idx - 1]
+        trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
 
-            trade_sign_product = np.append(trade_sign_i[tau_idx:]
-                                           * trade_sign_i[:-tau_idx],
-                                           np.zeros(tau_idx))
+        trade_sign_product = (trade_sign_i[tau_idx + 1:]
+                              * trade_sign_i[:-tau_idx - 1])
 
-        except ValueError:
-
-                trade_sign_product = trade_sign_i * trade_sign_i
-
-        self_correlator[tau_idx] = np.mean(
-            trade_sign_product[trade_sign_i != 0])
+        self_correlator[tau_idx] = (np.sum(trade_sign_product)
+                                    / trade_sign_no_0_len)
 
     # Saving data
 
     taq_data_tools.taq_save_data(function_name, self_correlator, ticker,
                                  ticker, year, month, day)
 
-    return None
+    return self_correlator
 
 # -----------------------------------------------------------------------------------------------------------------------
 
