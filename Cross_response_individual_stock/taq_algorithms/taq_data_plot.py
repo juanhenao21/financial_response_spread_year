@@ -704,11 +704,11 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
             plot_data_year += plot_data_month
 
         plot_data_year = plot_data_year / len(months)
-        plt.semilogx(plot_data_year, '-', linewidth=5,
+        plt.semilogx(5 * 10 ** -5 + plot_data_year, '-', linewidth=5,
                      label='Stock i {} - Stock j {} - Year'
                      .format(ticker_i, ticker_j, month))
 
-        #plt.ylim(0, 8 * 10 ** -5)
+        plt.ylim(2 * 10 ** -5, 12 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
