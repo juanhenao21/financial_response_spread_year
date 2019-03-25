@@ -1,0 +1,1208 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass elsarticle
+\begin_preamble
+% specify here the journal
+\journal{Example: Nuclear Physics B}
+
+% use this if you need line numbers
+%\usepackage{lineno}
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-std
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 0
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle headings
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout BeginFrontmatter
+
+\end_layout
+
+\begin_layout Title
+Econophysics
+\end_layout
+
+\begin_layout Author
+Juan Camilo Henao Londono
+\end_layout
+
+\begin_layout Email
+juan.henao-londono@stud.uni-due.de
+\end_layout
+
+\begin_layout Address
+Universitaet Duisburg-Essen, Duisburg, Germany
+\end_layout
+
+\begin_layout Abstract
+Document to set some rules to name files, folders, python functions and
+ jupyter notebooks in the [Find a good name for the econophysics project].
+ Basically, the style guide for code.
+\end_layout
+
+\begin_layout Keywords
+Econophysics 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+sep
+\end_layout
+
+\end_inset
+
+ Python 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+sep
+\end_layout
+
+\end_inset
+
+ Jupyter 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+sep
+\end_layout
+
+\end_inset
+
+ [Project name]
+\end_layout
+
+\begin_layout EndFrontmatter
+
+\end_layout
+
+\begin_layout Section
+Files and folders names
+\end_layout
+
+\begin_layout Standard
+In general all the files and folder will be created inside of one of three
+ possible folders
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/data_name_kind[_year]/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case data_name can be itch or taq, kind can be algorithms, data
+ or plot, and year is the year of the data.
+ Year is optional as algorithm is a general folder and do not depend of
+ the year.
+ Then, Examples of folders names are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/taq_data_2008/
+\end_layout
+
+\begin_layout Plain Layout
+
+/itch_algorithms
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When a folder is created by a function, its name must follow the following
+ sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/function_name[_time_step]/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, function_name is the name of the function that creates the
+ folder and time_step is the time step taken to do the analysis.
+ time_step is optional as it is only used in the ITCH data.
+ Examples of folders names are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/taq_midpoint_data/
+\end_layout
+
+\begin_layout Plain Layout
+
+/itch_cross_response_data_1ms/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, when a file is created by a function, it name must follow the following
+ sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/function_name_year_month_day_ticker(s)[_time_step].ext
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, function name is the name of the function that creates the
+ file; year, month and day is the date of the data, ticker is the stock
+ analyzed, time_step is the time step taken to do the analysis and ext is
+ the extension of the file.
+ In ticker can be used one or two tickers depending on the function.
+ time_step is optional as it is only used in the ITCH data.
+ For functions that save more than one file, it must be used the name of
+ the variable saved after the function name.
+ Examples of files names are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+/itch_cross_response_data_20160307_aapl_msft_10ms.pickle
+\end_layout
+
+\begin_layout Plain Layout
+
+/taq_midpoint_data_ask_20080310_aapl.pickle
+\end_layout
+
+\begin_layout Plain Layout
+
+/itch_self_response_data_20160307_aapl_1ms.pickle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Functions
+\end_layout
+
+\begin_layout Subsection
+Names
+\end_layout
+
+\begin_layout Standard
+The functions take the name of the data and a name related with its functionalit
+y
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+data_name_function_name_type(params)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case data_name can be itch or taq, function_name is the name related
+ with its functionality and type can be data or plot depending on what is
+ the result of the function
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+taq_midpoint_data(ticker, year, month, day)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Parameters
+\end_layout
+
+\begin_layout Standard
+The order of the parameters must be
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+params -> function_name, data, figure, ticker(s), year, month, day,
+\end_layout
+
+\begin_layout Plain Layout
+
+		  tau_val, tau_step
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When only one ticker is used in the function, the parameter must be 
+\begin_inset Quotes eld
+\end_inset
+
+ticker
+\begin_inset Quotes erd
+\end_inset
+
+.
+ If two tickers are used in the function, they must be named 
+\begin_inset Quotes eld
+\end_inset
+
+ticker_i
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+ticker_j
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Not all the parameters are mandatory in all functions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+itch_cross_response_data(ticker_i, ticker_j, year, month, day, tau_val,
+ t_step)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+itch_zero_correlation_model_data(ticker, year, month, day, tau_val, t_step)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Body
+\end_layout
+
+\begin_layout Standard
+The body of the functions must follow the following order
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def function_name():
+\end_layout
+
+\begin_layout Plain Layout
+
+	'''Docstrings: description and parameters explanation'''
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Opening message
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('TAQ / ITCH data')
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Function name')
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Processing data for the stock' + ticker + ' the ' + year + '.'
+\end_layout
+
+\begin_layout Plain Layout
+
+		  + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+	# or
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Processing data for the stock i ' + ticker_i + ' and stock j ' 
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+           + ticker_j + ' the ' + year + '.' + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+	print('Time step: ' + t_step + 'ms')
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Body
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Saving data
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Examples of functions with one or two stocks are
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def cross_response_data(ticker_i, ticker_j, day, tau_val, t_step):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+	Obtain the cross response function using the midpoint log returns of
+\end_layout
+
+\begin_layout Plain Layout
+
+	ticker i and trade signs of ticker j during different time lags.
+ The data
+\end_layout
+
+\begin_layout Plain Layout
+
+    is adjusted to use only the values each t_step ms
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param ticker_i: string of the abbreviation of the midpoint stock to
+\end_layout
+
+\begin_layout Plain Layout
+
+	     be analized (i.e.
+ 'AAPL')
+\end_layout
+
+\begin_layout Plain Layout
+
+	    :param ticker_j: string of the abbreviation of the trade sign stock
+ to
+\end_layout
+
+\begin_layout Plain Layout
+
+    	 be analized (i.e.
+ 'AAPL')  
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param year: string of the year to be analized (i.e '2008')
+\end_layout
+
+\begin_layout Plain Layout
+
+		:param month: string of the month to be analized (i.e '07')
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param day: string of the day to be analized (i.e '07')
+\end_layout
+
+\begin_layout Plain Layout
+
+	    :param tau_val: maximum time lag to be analyzed  
+\end_layout
+
+\begin_layout Plain Layout
+
+    	:param t_step: time step in the data in ms
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (ticker_i == ticker_j):
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+		return None
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    else:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        print('ITCH data')
+\end_layout
+
+\begin_layout Plain Layout
+
+		print('Cross response function data')
+\end_layout
+
+\begin_layout Plain Layout
+
+        print('Processing data for the stock i ' + ticker_i + ' and stock
+ j ' +  
+\end_layout
+
+\begin_layout Plain Layout
+
+            ticker_j + ' the ' + year + '.' + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+		print('Time step: ', t_step, 'ms')
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+		# Body
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+		return None 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def zero_correlation_model_data(ticker, year, month, day, tau_val, t_step):
+\end_layout
+
+\begin_layout Plain Layout
+
+	"""     
+\end_layout
+
+\begin_layout Plain Layout
+
+	Obtain the cross response function using the midpoint log return of
+\end_layout
+
+\begin_layout Plain Layout
+
+	ticker i and random trade signs during different time lags.
+ The data is
+\end_layout
+
+\begin_layout Plain Layout
+
+    adjusted to use only the values each t_step ms
+\end_layout
+
+\begin_layout Plain Layout
+
+		:param ticker: string of the abbreviation of the midpoint stock to
+\end_layout
+
+\begin_layout Plain Layout
+
+         be analized (i.e.
+ 'AAPL')
+\end_layout
+
+\begin_layout Plain Layout
+
+        :param day: string of the day to be analized (i.e '07')
+\end_layout
+
+\begin_layout Plain Layout
+
+        :param tau_val: maximum time lag to be analyzed
+\end_layout
+
+\begin_layout Plain Layout
+
+        :param t_step: time step in the data in ms
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('ITCH data')
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('Zero correlation model data')
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('Processing data for the stock ' + ticker + ' and a random'
+\end_layout
+
+\begin_layout Plain Layout
+
+          + ' trade sign array the '  + year + '.' + month + '.' + day)
+\end_layout
+
+\begin_layout Plain Layout
+
+    print('Time step: ', t_step, 'ms')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # Body
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return None 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general the code must follow the PEP8 – Style guide for Python code.
+\end_layout
+
+\begin_layout Section
+Modules
+\end_layout
+
+\begin_layout Standard
+The python modules created for the project muss follow the following rules
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+''' 
+\end_layout
+
+\begin_layout Plain Layout
+
+Module_name
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Module objective
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+small description of each function
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Juan Camilo Henao Londono
+\end_layout
+
+\begin_layout Plain Layout
+
+juan.henao-londono@stud.uni-due.de
+\end_layout
+
+\begin_layout Plain Layout
+
+'''
+\end_layout
+
+\begin_layout Plain Layout
+
+#-------------------------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+# Modules
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#-------------------------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Body
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#-------------------------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def main():
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return None
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+if __name__ == '__main__':
+\end_layout
+
+\begin_layout Plain Layout
+
+    main()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An example is
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+''' 
+\end_layout
+
+\begin_layout Plain Layout
+
+ITCH data generator
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Module to compute the following data
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Midpoint price data: using the ITCH data obtain the best bid, best ask,
+\end_layout
+
+\begin_layout Plain Layout
+
+  quotes and midpoint price data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Trade signs data: using the ITCH data obtain the trade signs data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Self response function: using the midpoint price and the trade signs
+\end_layout
+
+\begin_layout Plain Layout
+
+  calculate the midpoint log returns and the self response of a stock.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Juan Camilo Henao Londono
+\end_layout
+
+\begin_layout Plain Layout
+
+juan.henao-londono@stud.uni-due.de
+\end_layout
+
+\begin_layout Plain Layout
+
+'''
+\end_layout
+
+\begin_layout Plain Layout
+
+#-------------------------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Modules
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#-------------------------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Body
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#-------------------------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def main():
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return None
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+if __name__ == '__main__':
+\end_layout
+
+\begin_layout Plain Layout
+
+    main()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Jupyter notebook
+\end_layout
+
+\begin_layout Standard
+The jupyter notebook must have the following structure (markdown)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# function_name
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+#### Juan Camilo Henao Londono - DD.MM.YYYY
+\end_layout
+
+\begin_layout Plain Layout
+
+#### AG Guhr - Universitaet Duisburg-Essen
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% For data
+\end_layout
+
+\begin_layout Plain Layout
+
+In the following link can be seen the plot of the function's results
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% For plot
+\end_layout
+
+\begin_layout Plain Layout
+
+In the following link can be seen the function that generates the data of
+ this plot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
