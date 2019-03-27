@@ -2,6 +2,8 @@
 
 cd ..
 
+cd ..
+
 cd TAQ_2008/Data
 
 echo 'Extracting quotes'
