@@ -14,7 +14,7 @@ Juan Camilo Henao Londono
 juan.henao-londono@stud.uni-due.de
 '''
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Modules
 
 import numpy as np
@@ -25,7 +25,7 @@ import pandas as pd
 
 import itch_data_tools
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_taq_trade_signs_load_test(ticker, year, month, day):
@@ -40,7 +40,7 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
     """
 
     function_name = itch_taq_trade_signs_load_test.__name__
-    t_step = 'irrelevant '
+    t_step = '-'
     itch_data_tools.itch_function_header_print_data(function_name, ticker,
                                                     ticker, year, month, day,
                                                     t_step)
@@ -148,7 +148,7 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
     return (trade_times_market, trade_signs_market, trade_volumes_market,
             trade_price_market)
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
@@ -156,7 +156,7 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
     """
     Obtain the experimental trade signs based on the change of prices. To
     compute the trades signs are used consecutive trades in the ITCH data.
-    Implementatio of the equation (1)
+    Implementation of the equation (1)
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
         :param trade_signs: theoric trade signs from ITCH data
@@ -198,14 +198,14 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
 
     return identified_trades
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
-def itch_taq_trade_signs_eq2_ms_test(ticker, times_signs, trade_signs,
-                                     identified_trades, year, month, day):
+def itch_taq_trade_signs_eq2_s_test(ticker, times_signs, trade_signs,
+                                    identified_trades, year, month, day):
     """
     Implementation of the eq. (2) to obtain the trade signs with a stamp of
-    1 millisecond
+    1 second
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
         :param times_signs: time of the trades
@@ -217,45 +217,48 @@ def itch_taq_trade_signs_eq2_ms_test(ticker, times_signs, trade_signs,
     """
 
     print('Accuracy of the trade sign classification for number imbalance of '
-          ' trades in ms for the stock ' + ticker + ' the ' + year + '.'
+          ' trades in seconds for the stock ' + ticker + ' the ' + year + '.'
           + month + '.' + day)
-
-    times_signs_set = np.array(sorted(set(times_signs)))
 
     assert not len(trade_signs[trade_signs == 0])
     assert not len(identified_trades[identified_trades == 0])
 
-    trades_exp_ms = np.zeros(len(times_signs_set))
-    trades_teo_ms = np.zeros(len(times_signs_set))
+    full_time = np.array(range(34800, 57000))
+    trades_teo_s_ = 0. * full_time
+    trades_exp_s_ = 0. * full_time
 
-    # Implementation of equation (2). Trade sign in each millisecond
-    for t_idx, t_val in enumerate(times_signs_set):
+    # Implementation of equation (2). Trade sign in each second
+    for t_idx, t_val in enumerate(full_time):
 
+        condition = (times_signs / 1000 >= t_val) \
+                    * (times_signs / 1000 < t_val + 1)
         # Experimental
-        trades_same_t_exp = identified_trades[times_signs == t_val]
+        trades_same_t_exp = identified_trades[condition]
         sign_exp = np.sign(np.sum(trades_same_t_exp))
-        trades_exp_ms[t_idx] = sign_exp
+        trades_exp_s_[t_idx] = sign_exp
 
         # Theoric
-        trades_same_t_teo = trade_signs[times_signs == t_val]
+        trades_same_t_teo = trade_signs[condition]
         sign_teo = np.sign(np.sum(trades_same_t_teo))
-        trades_teo_ms[t_idx] = sign_teo
+        trades_teo_s_[t_idx] = sign_teo
 
-    print('Reducing the trades to 1 per millisecond:')
-    itch_data_tools.itch_taq_accuracy_msg(trades_teo_ms, trades_exp_ms)
+    trades_teo_s = trades_teo_s_[trades_teo_s_ != 0]
+    trades_exp_s = trades_exp_s_[trades_teo_s_ != 0]
 
-    return (trades_teo_ms, trades_exp_ms)
+    print('Reducing the trades to 1 per second:')
+    itch_data_tools.itch_taq_accuracy_msg(trades_teo_s, trades_exp_s)
 
-# -----------------------------------------------------------------------------------------------------------------------
+    return (trades_teo_s, trades_exp_s)
+
+# ----------------------------------------------------------------------------
 
 
-def itch_taq_trade_signs_eq3_ms_test(ticker, times_signs, trade_signs,
-                                     volume_signs, identified_trades, year,
-                                     month, day):
+def itch_taq_trade_signs_eq3_s_test(ticker, times_signs, trade_signs,
+                                    volume_signs, identified_trades, year,
+                                    month, day):
     """
     Implementation of the eq. (3) to obtain the trade signs with a stamp of
-    1 millisecond.
-    Volume imbalance
+    1 second. Volume imbalance
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
         :param times_signs: time of the trades
@@ -271,75 +274,40 @@ def itch_taq_trade_signs_eq3_ms_test(ticker, times_signs, trade_signs,
           ' trades in ms for the stock ' + ticker + ' the ' + year + '.'
           + month + '.' + day)
 
-    times_signs_set = np.array(sorted(set(times_signs)))
-
-    trades_exp_ms = np.zeros(len(times_signs_set))
-    trades_teo_ms = np.zeros(len(times_signs_set))
-
-    # Implementation of equation (3). Trade sign in each millisecond
-    for t_idx, t_val in enumerate(times_signs_set):
-
-        # Experimental
-        trades_same_t_exp = identified_trades[times_signs == t_val]
-        volumes_same_t = volume_signs[times_signs == t_val]
-        sign_exp = np.sign(np.sum(trades_same_t_exp * volumes_same_t))
-        trades_exp_ms[t_idx] = sign_exp
-
-        # Theoric
-        trades_same_t_teo = trade_signs[times_signs == t_val]
-        sign_teo = np.sign(np.sum(trades_same_t_teo))
-        trades_teo_ms[t_idx] = sign_teo
-
-    print('Reducing the trades to 1 per millisecond:')
-    itch_data_tools.itch_taq_accuracy_msg(trades_teo_ms, trades_exp_ms)
-
-    return (trades_teo_ms, trades_exp_ms)
-
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def itch_taq_trade_signs_s_test(ticker, times_signs, trade_signs,
-                                trades_teo_ms, trades_exp_ms, year, month,
-                                day):
-    """
-    Trades signs with a stamp of 1 second.
-        :param ticker: string of the abbreviation of the stock to be analized
-                       (i.e. 'AAPL')
-        :param trades_teo_ms: theoric trade signs in milliseconds (array)
-        :param trades_exp_ms: experimental trade signs in milliseconds (array)
-        :param times_signs: :param times_signs: time of the trades
-        :param year: string of the year to be analized (i.e '2008')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
-    """
-
-    print('Accuracy of the trade sign classification for trades in s for the'
-          + ' stock  ' + ticker + ' the ' + year + '.' + month + '.' + day)
-
-    times_signs_set = np.array(sorted(set(times_signs)))
+    assert not len(trade_signs[trade_signs == 0])
+    assert not len(identified_trades[identified_trades == 0])
 
     full_time = np.array(range(34800, 57000))
-    trades_teo_s_0 = 0. * full_time
-    trades_exp_s_0 = 0. * full_time
+    trades_teo_s_ = 0. * full_time
+    trades_exp_s_ = 0. * full_time
 
+    # Implementation of equation (3). Trade sign in each second
     for t_idx, t_val in enumerate(full_time):
 
-        condition = (times_signs_set > t_val * 1000) \
-                    * (times_signs_set < (t_val + 1) * 1000)
-        trades_teo_s_0[t_idx] = np.sign(np.sum(
-                                        trades_teo_ms[condition]))
-        trades_exp_s_0[t_idx] = np.sign(np.sum(
-                                        trades_exp_ms[condition]))
+        condition = (times_signs / 1000 >= t_val) \
+                    * (times_signs / 1000 < t_val + 1)
+        # Experimental
+        trades_same_t_exp = identified_trades[condition]
+        volumes_same_t = volume_signs[condition]
+        sign_exp = np.sign(np.sum(trades_same_t_exp * volumes_same_t))
+        trades_exp_s_[t_idx] = sign_exp
 
-    trades_teo_s = trades_teo_s_0[trades_teo_s_0 != 0]
-    trades_exp_s = trades_exp_s_0[trades_teo_s_0 != 0]
+        # Theoric
+        trades_same_t_teo = trade_signs[condition]
+        sign_teo = np.sign(np.sum(trades_same_t_teo))
+        trades_teo_s_[t_idx] = sign_teo
 
-    print('Reducing the trades to 1 per second:')
+    trades_teo_s = trades_teo_s_[trades_teo_s_ != 0]
+    trades_exp_s = trades_exp_s_[trades_teo_s_ != 0]
+
+    print('Reducing the trades to 1 per millisecond:')
     itch_data_tools.itch_taq_accuracy_msg(trades_teo_s, trades_exp_s)
 
     return (trades_teo_s, trades_exp_s)
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
 
 
 def main():
@@ -363,22 +331,14 @@ def main():
             itch_taq_trade_signs_eq1_ms_test(t, trade_signs, price_signs,
                                              year, m, d)
 
-        teo_eq2_ms, exp_eq2_ms = \
-            itch_taq_trade_signs_eq2_ms_test(t, times_signs, trade_signs,
-                                             identified_trades, year, m, d)
-
         teo_eq2_s, exp_eq2_s = \
-            itch_taq_trade_signs_s_test(t, times_signs, trade_signs,
-                                        teo_eq2_ms, exp_eq2_ms, year, m, d)
-
-        teo_eq3_ms, exp_eq3_ms = \
-            itch_taq_trade_signs_eq3_ms_test(t, times_signs, trade_signs,
-                                             volume_signs, identified_trades,
-                                             year, m, d)
+            itch_taq_trade_signs_eq2_s_test(t, times_signs, trade_signs,
+                                            identified_trades, year, m, d)
 
         teo_eq3_s, exp_eq3_s = \
-            itch_taq_trade_signs_s_test(t, times_signs, trade_signs,
-                                        teo_eq3_ms, exp_eq3_ms, year, m, d)
+            itch_taq_trade_signs_eq3_s_test(t, times_signs, trade_signs,
+                                            volume_signs, identified_trades,
+                                            year, m, d)
 
         file.write('{}, {}, {}, {}, {}, {}, {}, {}, {}, {} \n'
                    .format(t,
@@ -399,7 +359,7 @@ def main():
 
     file.close()
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 if __name__ == '__main__':

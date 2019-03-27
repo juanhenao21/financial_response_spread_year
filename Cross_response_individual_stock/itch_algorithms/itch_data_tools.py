@@ -9,7 +9,7 @@ juan.henao-londono@stud.uni-due.de
 
 # TO DO: Docstrings!
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Modules
 
 from matplotlib import pyplot as plt
@@ -18,7 +18,7 @@ import os
 
 import pickle
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_trade_sign_reshape(trade_sign, time_t_step):
@@ -49,7 +49,7 @@ def itch_trade_sign_reshape(trade_sign, time_t_step):
 
     return (trade_sign_j_sec_avg, trade_sign_j_sec_nr)
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_save_data(function_name, data, ticker_i, ticker_j, year, month, day,
@@ -101,7 +101,7 @@ def itch_save_data(function_name, data, ticker_i, ticker_j, year, month, day,
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_save_plot(function_name, figure, ticker_i, ticker_j, year, month,
@@ -149,7 +149,7 @@ def itch_save_plot(function_name, figure, ticker_i, ticker_j, year, month,
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_function_header_print_data(function_name, ticker_i, ticker_j, year,
@@ -169,7 +169,7 @@ def itch_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_function_header_print_plot(function_name, ticker_i, ticker_j, year,
@@ -189,7 +189,7 @@ def itch_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_start_folders(year):
@@ -210,26 +210,26 @@ def itch_start_folders(year):
 
             print('Folder exists. The folder was not created')
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def itch_taq_accuracy_msg(teo, exp):
 
     print('Accuracy of the classification:',
-          round(sum(teo == exp) / len(exp) * 100, 2), '%')
+          round(np.sum(teo == exp) / len(teo) * 100, 2), '%')
     print('Number of identified trades:', len(teo))
-    print('Number of matches:', sum(teo == exp))
+    print('Number of matches:', np.sum(teo == exp))
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def main():
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 if __name__ == '__main__':
