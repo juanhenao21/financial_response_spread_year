@@ -1,7 +1,7 @@
 '''
 ITCH - TAQ trade sign classification
 
-Module to make the trade sign classification in the TAQ data and test the
+Module to test the trade sign classification in the ITCH data and compute the
 accuracy of the classification.
 
 Two models will be validated. They can be seen in
@@ -30,7 +30,7 @@ import itch_data_tools
 
 def itch_taq_trade_signs_load_test(ticker, year, month, day):
     """
-    Obtain the reference trade signs, prices, volumes and time from an ITCH
+    Obtain the reference time, trade signs, volumes and prices from an ITCH
     file. These data is used to test the trade sign classification models.
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
@@ -159,8 +159,8 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
     Implementation of the equation (1)
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
-        :param trade_signs: theoric trade signs from ITCH data
-        :param price_signs: price of the trades
+        :param trade_signs: array of theoric trade signs from ITCH data
+        :param price_signs: array of price of the trades
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
@@ -208,9 +208,9 @@ def itch_taq_trade_signs_eq2_s_test(ticker, times_signs, trade_signs,
     1 second
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
-        :param times_signs: time of the trades
-        :param trade_signs: theoric trade signs from ITCH data
-        :param identified_trades: trades signs from eq. (1)
+        :param times_signs: array of the time of the trades
+        :param trade_signs: array of the theoric trade signs from ITCH data
+        :param identified_trades: array of the trades signs from eq. (1)
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
@@ -261,10 +261,10 @@ def itch_taq_trade_signs_eq3_s_test(ticker, times_signs, trade_signs,
     1 second. Volume imbalance
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
-        :param times_signs: time of the trades
-        :param trade_signs: theoric trade signs from ITCH data
-        :param volume_signs: volume of the trades
-        :param identified_trades: trades signs from eq. (1)
+        :param times_signs: array of the time of the trades
+        :param trade_signs: array of the theoric trade signs from ITCH data
+        :param volume_signs: array of the volume of the trades
+        :param identified_trades: array of the trades signs from eq. (1)
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
@@ -304,8 +304,6 @@ def itch_taq_trade_signs_eq3_s_test(ticker, times_signs, trade_signs,
     itch_data_tools.itch_taq_accuracy_msg(trades_teo_s, trades_exp_s)
 
     return (trades_teo_s, trades_exp_s)
-
-# ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
 
@@ -359,8 +357,9 @@ def main():
 
     file.close()
 
-# ----------------------------------------------------------------------------
+    return None
 
+# ----------------------------------------------------------------------------
 
 if __name__ == '__main__':
     main()
