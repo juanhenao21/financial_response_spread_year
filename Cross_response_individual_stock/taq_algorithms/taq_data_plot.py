@@ -1,50 +1,29 @@
 '''
 TAQ data plot
 
-Module to plot different TAQ results based on the results of the functions
+Module to plot different TAQ data results based on the results of the functions
 set in the module taq_data_analysis. The module plot the following data
 
-- Midpoint price data: plot the midpoint price for every day for a stock in
-  one figure.
+- Midpoint price data: it is possible to plot a day or a group of days in a week
+  in the same figure.
 
-- Trade signs data: plot the trade signs in a minute of the open market
-  (11:00 to 11:01).
+- Self response data: it is possible to plot a day, or a group of days in a week
+  and the average, a month and the average or the year and the average.
 
-- Self response data: plot the self response function for every day for a
-  stock in individual plots in one figure.
-
-- Cross response data: plot the cross response function for every day for
-  two stock in individual plots in one figure.
-
-- Average return average trade sign return data: plot the product between the
-  averaged midpoint log retun and the trade signs for every day for two stocks
-  in individual plots in one figure.
-
-- Zero correlation model data: plot the zero correlation model for every day
-  for a stock in individual plots in one figure.
-
-- Cross response - average return/sign: plot the cross response function and
-  the product of the averaged midpoint log return by the trade signs for every
-  day for two stocks in independent figures to compare both results.
-
-- Difference: plot the difference between cross response and average for every
-  day for two stocks in individual plots in one figure.
-
-- Self response behavior: plot the self response, the self response absolute
-  and the zero correlation model for every day for a stock in independent
-  plots in one figure.
-
-- Trade sign cross correlator: plot the trade sign cross correlator for
-  every day for two stocks in independent pltos in one figure.
+- Cross response data: it is possible to plot a day, or a group of days in a week
+  and the average, a month and the average or the year and the average.
 
 - Trade sign self correlator: plot the trade sign self correlator for
   every day for one stock in independent plots in one figure.
+
+- Trade sign cross correlator: plot the trade sign cross correlator for
+  every day for two stocks in independent pltos in one figure.
 
 Juan Camilo Henao Londono
 juan.henao-londono@stud.uni-due.de
 '''
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Modules
 
 import numpy as np
@@ -57,7 +36,7 @@ import taq_data_tools
 
 __tau__ = 1000
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_midpoint_plot(ticker, year, month, day):
@@ -93,7 +72,7 @@ def taq_midpoint_plot(ticker, year, month, day):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_midpoint_plot_week(ticker, year, month, days):
@@ -128,7 +107,7 @@ def taq_midpoint_plot_week(ticker, year, month, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
@@ -228,7 +207,7 @@ def taq_ask_bid_midpoint_spread_plot(ticker, year, month, day):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_self_response_plot(ticker, year, month, days):
@@ -275,7 +254,7 @@ def taq_self_response_plot(ticker, year, month, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_self_response_week_avg_plot(ticker, year, month, days):
@@ -332,7 +311,7 @@ def taq_self_response_week_avg_plot(ticker, year, month, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_self_response_month_avg_plot(ticker, year, month, days):
@@ -388,7 +367,7 @@ def taq_self_response_month_avg_plot(ticker, year, month, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_self_response_year_avg_plot(ticker, year, months, days):
@@ -458,7 +437,7 @@ def taq_self_response_year_avg_plot(ticker, year, months, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_cross_response_plot(ticker_i, ticker_j, year, month, days):
@@ -514,7 +493,7 @@ def taq_cross_response_plot(ticker_i, ticker_j, year, month, days):
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_cross_response_week_avg_plot(ticker_i, ticker_j, year, month, days):
@@ -580,7 +559,7 @@ def taq_cross_response_week_avg_plot(ticker_i, ticker_j, year, month, days):
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
@@ -645,7 +624,7 @@ def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
@@ -724,7 +703,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_trade_sign_self_correlator_plot(ticker, year, month, days):
@@ -774,7 +753,7 @@ def taq_trade_sign_self_correlator_plot(ticker, year, month, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_trade_sign_self_correlator_week_avg_plot(ticker, year, month, days):
@@ -832,7 +811,7 @@ def taq_trade_sign_self_correlator_week_avg_plot(ticker, year, month, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_trade_sign_self_correlator_year_avg_plot(ticker, year, months, days):
@@ -902,7 +881,7 @@ def taq_trade_sign_self_correlator_year_avg_plot(ticker, year, months, days):
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_trade_sign_cross_correlator_plot(ticker_i, ticker_j, year, month, days):
@@ -961,7 +940,7 @@ def taq_trade_sign_cross_correlator_plot(ticker_i, ticker_j, year, month, days):
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_trade_sign_cross_correlator_week_avg_plot(ticker_i, ticker_j, year, month, days):
@@ -1027,7 +1006,7 @@ def taq_trade_sign_cross_correlator_week_avg_plot(ticker_i, ticker_j, year, mont
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 
 def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, months, days):
@@ -1106,4 +1085,4 @@ def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, mont
 
         return None
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
