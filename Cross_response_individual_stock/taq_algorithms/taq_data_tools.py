@@ -119,6 +119,15 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
 def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
                                    month, day):
+    """
+    docstring here
+        :param function_name:
+        :param ticker_i:
+        :param ticker_j:
+        :param year:
+        :param month:
+        :param day:
+    """
 
     print('TAQ data')
     print(function_name)
@@ -137,6 +146,13 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
 def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
                                    month, day):
+    """
+    docstring here
+        :param function_name:
+        :param ticker_i:
+        :param ticker_j:
+        :param year:
+    """
 
     print('TAQ data')
     print(function_name)
@@ -154,9 +170,12 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
 
 def taq_start_folders(year):
-
+    """
+    docstring here
+        :param year:
+    """
     if (not os.path.isdir('../taq_data_{}/'.format(year))
-        and not os.path.isdir('../taq_plot_{}/'.format(year))):
+            and not os.path.isdir('../taq_plot_{}/'.format(year))):
 
         try:
 
@@ -172,3 +191,37 @@ def taq_start_folders(year):
             print('Folder exists. The folder was not created')
 
 # -----------------------------------------------------------------------------------------------------------------------
+
+
+def get_sec(time_str):
+    """
+    Convert time format from hh:mm:ss to seconds
+        :param time_str: string with the format hh:mm:ss (i. e. '09:40:00')
+    """
+    h, m, s = time_str.split(':')
+    return int(h) * 3600 + int(m) * 60 + int(s)
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def months_days_list():
+    """
+    Generate two lists with the string with the numbers of the months
+    (from '01' to '12') and the days (from '01' to '31').
+    """
+    days_list = []
+    months_list = []
+
+    for i in range(1, 32):
+        if (i < 10):
+            days_list.append('0' + str(i))
+        else:
+            days_list.append(str(i))
+
+    for i in range(1, 13):
+        if (i < 10):
+            months_list.append('0' + str(i))
+        else:
+            months_list.append(str(i))
+
+    return(months_list, days_list)
