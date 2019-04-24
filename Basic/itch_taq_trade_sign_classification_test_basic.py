@@ -54,8 +54,6 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
                        .format(ticker, year, month, day), 'rt'),
                        usecols=(0, 2, 3, 4, 5))
 
-    data['Price'] = data['Price'] / 10000
-
     # Select only trade orders
     trade_pos = np.array(data['T'] == 'E') + np.array(data['T'] == 'F')
     trade_data = data[trade_pos]
