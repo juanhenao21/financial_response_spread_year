@@ -313,7 +313,7 @@ def itch_taq_trade_signs_eq3_s_test(ticker, times_signs, trade_signs,
     trades_teo_s = trades_teo_s_[trades_teo_s_ != 0]
     trades_exp_s = trades_exp_s_[trades_teo_s_ != 0]
 
-    print('Reducing the trades to 1 per millisecond:')
+    print('Reducing the trades to 1 per second:')
     itch_data_tools.itch_taq_accuracy_msg(trades_teo_s, trades_exp_s)
 
     return (trades_teo_s, trades_exp_s)
