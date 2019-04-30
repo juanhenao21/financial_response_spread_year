@@ -23,11 +23,7 @@ import os
 import gzip
 import pandas as pd
 
-import sys
-
-sys.path.append('../Cross_response_individual_stock/itch_algorithms/')
-
-import itch_data_tools
+#import itch_data_tools
 
 # ----------------------------------------------------------------------------
 
@@ -43,26 +39,27 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
         :param day: string of the day to be analized (i.e '07')
     """
 
-    function_name = itch_taq_trade_signs_load_test.__name__
-    t_step = '-'
-    itch_data_tools.itch_function_header_print_data(function_name, ticker,
-                                                    ticker, year, month, day,
-                                                    t_step)
-
     # Load full data using cols with values time, order, type, shares and price
     data = pd.read_csv(gzip.open('../ITCH_{1}/{1}{2}{3}_{0}.csv.gz'
                        .format(ticker, year, month, day), 'rt'),
-                       usecols=(0, 2, 3, 4, 5))
+                       usecols=(0, 2, 3, 4, 5), dtype={'Time': 'uint32',
+                       'Order': 'uint64', 'T': str, 'Shares': 'uint16',
+                                                       'Price': 'float64'})
 
-    # Select only trade orders
-    trade_pos = np.array(data['T'] == 'E') + np.array(data['T'] == 'F')
+    data['Price'] = data['Price'] / 10000
+
+    # Select only trade orders. Visible ('E' and 'F') and hidden ('T')
+    trade_pos = np.array(data['T'] == 'E') + np.array(data['T'] == 'F') \
+        + np.array(data['T'] == 'T')
     trade_data = data[trade_pos]
     # Converting the data in numpy arrays
     trade_data_time = trade_data['Time'].values
     trade_data_order = trade_data['Order'].values
     trade_data_types = 3 * np.array(trade_data['T'] == 'E') \
-        + 4 * np.array(trade_data['T'] == 'F')
+        + 4 * np.array(trade_data['T'] == 'F') \
+        + 5 * np.array(trade_data['T'] == 'T')
     trade_data_volume = trade_data['Shares'].values
+    trade_data_price = trade_data['Price'].values
 
     # Select only limit orders
     limit_pos = np.array(data['T'] == 'B') + np.array(data['T'] == 'S')
@@ -85,67 +82,70 @@ def itch_taq_trade_signs_load_test(ticker, year, month, day):
     trade_price = np.zeros(length_trades)
 
     for t_idx in range(len(trade_data)):
-        # limit orders that have the same order as the trade order
-        l_idx = np.where(limit_data_order == trade_data_order[t_idx])[0][0]
 
-        # Save values that are independent of the type
+        try:
 
-        # Price of the trade (Limit data)
-        trade_price[t_idx] = limit_data_price[l_idx]
+            # limit orders that have the same order as the trade order
+            l_idx = np.where(limit_data_order == trade_data_order[t_idx])[0][0]
 
-        # Trade sign identification
+            # Save values that are independent of the type
 
-        trade = limit_data_types[l_idx]
+            # Price of the trade (Limit data)
+            trade_price[t_idx] = limit_data_price[l_idx]
 
-        if (trade == 1):
-            trade_signs[t_idx] = 1.
-        else:
-            trade_signs[t_idx] = -1.
+            # Trade sign identification
 
-        # The volume depends on the trade type. If it is 4 the
-        # value is taken from the limit data and the order number
-        # is deleted from the data. If it is 3 the
-        # value is taken from the trade data and then the
-        # value of the volume in the limit data must be
-        # reduced with the value of the trade data
+            trade = limit_data_types[l_idx]
 
-        volume_type = trade_data_types[t_idx]
+            if (trade == 1):
+                trade_signs[t_idx] = 1.
+            else:
+                trade_signs[t_idx] = -1.
 
-        if (volume_type == 4):
+            # The volume depends on the trade type. If it is 4 the
+            # value is taken from the limit data and the order number
+            # is deleted from the data. If it is 3 the
+            # value is taken from the trade data and then the
+            # value of the volume in the limit data must be
+            # reduced with the value of the trade data
 
-            trade_volumes[t_idx] = limit_data_volume[l_idx]
-            limit_data_order[l_idx] = 0
+            volume_type = trade_data_types[t_idx]
 
-        else:
+            if (volume_type == 4):
 
-            trade_volumes[t_idx] = trade_data_volume[t_idx]
-            diff_volumes = limit_data_volume[l_idx] - trade_data_volume[t_idx]
+                trade_volumes[t_idx] = limit_data_volume[l_idx]
+                limit_data_order[l_idx] = 0
 
-            assert diff_volumes > 0
+            else:
 
-            limit_data_volume[l_idx] = diff_volumes
+                trade_volumes[t_idx] = trade_data_volume[t_idx]
+                diff_volumes = limit_data_volume[l_idx] \
+                    - trade_data_volume[t_idx]
 
-    assert not sum(trade_signs == 0)
+                assert diff_volumes > 0
+
+                limit_data_volume[l_idx] = diff_volumes
+
+        except IndexError:
+
+            pass
+
+    assert len(trade_signs != 0) == len(trade_data_types != 5)
+
+    # To use the hidden trades, I change the values in the computed arrays with
+    # the information of visible trades to have the hidden information.
+
+    hidden_pos = trade_data_types == 5
+    trade_volumes[hidden_pos] = trade_data_volume[hidden_pos]
+    trade_price[hidden_pos] = trade_data_price[hidden_pos]
 
     market_time = (trade_times / 3600 / 1000 >= 9.666666) & \
-                  (trade_times / 3600 / 1000 < 15.833333)
+        (trade_times / 3600 / 1000 < 15.833333)
 
     trade_times_market = trade_times[market_time]
     trade_signs_market = trade_signs[market_time]
     trade_volumes_market = trade_volumes[market_time]
     trade_price_market = trade_price[market_time]
-
-    # The length of the executed oustanding order in part and in full must
-    # be the same as the length of the identified trade signs
-    assert (len(trade_data_types) == len(trade_signs[trade_signs != 0]))
-    # The length of the price, volume and time must be equal to the length of
-    # the identified trade signs
-    assert (len(trade_price_market[trade_price_market != 0])
-            == len(trade_signs_market[trade_signs_market != 0]))
-    assert (len(trade_volumes_market[trade_volumes_market != 0])
-            == len(trade_signs_market[trade_signs_market != 0]))
-    assert (len(trade_times_market[trade_times_market != 0])
-            == len(trade_signs_market[trade_signs_market != 0]))
 
     return (trade_times_market, trade_signs_market, trade_volumes_market,
             trade_price_market)
@@ -172,10 +172,6 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
           ' ms for the stock ' + ticker + ' the ' + year + '.' + month + '.'
           + day)
 
-    # trades with values different to zero to obtain the theoretical value
-    assert not np.sum(price_signs == 0)
-    assert not np.sum(trade_signs == 0)
-
     identified_trades = np.zeros(len(trade_signs))
 
     # Implementation of equation (1). Sign of the price change between
@@ -192,11 +188,9 @@ def itch_taq_trade_signs_eq1_ms_test(ticker, trade_signs, price_signs,
 
             identified_trades[t_idx] = identified_trades[t_idx - 1]
 
-    assert not np.sum(identified_trades == 0)
-
-    # Accuracy of the classification
-    print('For consecutive trades in ms:')
-    itch_data_tools.itch_taq_accuracy_msg(trade_signs, identified_trades)
+    trades_pos = trade_signs != 0
+    identified_trades = identified_trades[trades_pos]
+    trades_no_0 = trade_signs[trades_pos]
 
     return identified_trades
 
@@ -222,12 +216,15 @@ def itch_taq_trade_signs_eq2_s_test(ticker, times_signs, trade_signs,
           ' trades in seconds for the stock ' + ticker + ' the ' + year + '.'
           + month + '.' + day)
 
-    assert not len(trade_signs[trade_signs == 0])
-    assert not len(identified_trades[identified_trades == 0])
+    trade_signs_no_0 = trade_signs != 0
+    trade_signs = trade_signs[trade_signs_no_0]
+    times_signs = times_signs[trade_signs_no_0]
+
+    assert (len(trade_signs) == len(identified_trades))
 
     full_time = np.array(range(34800, 57000))
-    trades_teo_s = 0. * full_time
-    trades_exp_s = 0. * full_time
+    trades_teo_s_ = 0. * full_time
+    trades_exp_s_ = 0. * full_time
 
     # Implementation of equation (2). Trade sign in each second
     for t_idx, t_val in enumerate(full_time):
@@ -237,17 +234,14 @@ def itch_taq_trade_signs_eq2_s_test(ticker, times_signs, trade_signs,
         # Experimental
         trades_same_t_exp = identified_trades[condition]
         sign_exp = np.sign(np.sum(trades_same_t_exp))
-        trades_exp_s[t_idx] = sign_exp
+        trades_exp_s_[t_idx] = sign_exp
 
         # Theoric
         trades_same_t_teo = trade_signs[condition]
         sign_teo = np.sign(np.sum(trades_same_t_teo))
-        trades_teo_s[t_idx] = sign_teo
+        trades_teo_s_[t_idx] = sign_teo
 
-    print('Reducing the trades to 1 per second:')
-    itch_data_tools.itch_taq_accuracy_msg(trades_teo_s, trades_exp_s)
-
-    return (trades_teo_s, trades_exp_s, full_time)
+    return (trades_teo_s_, trades_exp_s_, full_time)
 
 # ----------------------------------------------------------------------------
 
@@ -273,12 +267,16 @@ def itch_taq_trade_signs_eq3_s_test(ticker, times_signs, trade_signs,
           ' trades in ms for the stock ' + ticker + ' the ' + year + '.'
           + month + '.' + day)
 
-    assert not len(trade_signs[trade_signs == 0])
-    assert not len(identified_trades[identified_trades == 0])
+    trade_signs_no_0 = trade_signs != 0
+    trade_signs = trade_signs[trade_signs_no_0]
+    times_signs = times_signs[trade_signs_no_0]
+    volume_signs = volume_signs[trade_signs_no_0]
+
+    assert (len(trade_signs) == len(identified_trades))
 
     full_time = np.array(range(34800, 57000))
-    trades_teo_s = 0. * full_time
-    trades_exp_s = 0. * full_time
+    trades_teo_s_ = 0. * full_time
+    trades_exp_s_ = 0. * full_time
 
     # Implementation of equation (3). Trade sign in each second
     for t_idx, t_val in enumerate(full_time):
@@ -289,17 +287,14 @@ def itch_taq_trade_signs_eq3_s_test(ticker, times_signs, trade_signs,
         trades_same_t_exp = identified_trades[condition]
         volumes_same_t = volume_signs[condition]
         sign_exp = np.sign(np.sum(trades_same_t_exp * volumes_same_t))
-        trades_exp_s[t_idx] = sign_exp
+        trades_exp_s_[t_idx] = sign_exp
 
         # Theoric
         trades_same_t_teo = trade_signs[condition]
         sign_teo = np.sign(np.sum(trades_same_t_teo))
-        trades_teo_s[t_idx] = sign_teo
+        trades_teo_s_[t_idx] = sign_teo
 
-    print('Reducing the trades to 1 per millisecond:')
-    itch_data_tools.itch_taq_accuracy_msg(trades_teo_s, trades_exp_s)
-
-    return (trades_teo_s, trades_exp_s, full_time)
+    return (trades_teo_s_, trades_exp_s_, full_time)
 
 # ----------------------------------------------------------------------------
 
@@ -356,6 +351,7 @@ def main():
     return None
 
 # ----------------------------------------------------------------------------
+
 
 if __name__ == '__main__':
     main()
