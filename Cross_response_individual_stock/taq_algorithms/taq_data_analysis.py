@@ -53,6 +53,7 @@ def taq_data_extract(ticker, year, month):
     function_name = taq_data_extract.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, '-')
+    print()
 
     # Load data
     data_quotes = dd.read_csv('../../TAQ_{1}/Data/{0}_{1}_NASDAQ_quotes.csv'
@@ -103,10 +104,10 @@ def taq_data_to_array(ticker, quotes, trades, year, month, day):
     data_t.loc[:, 'Time'] = data_t['Time'].apply(taq_data_tools.get_sec)
 
     # Data in the market time (from 9:40 to 15:30)
-    data_q = data_q.loc[(data_q['Time'] >= 34800)
-                        & (data_q['Time'] < 57000)]
-    data_t = data_t.loc[(data_t['Time'] >= 34800)
-                        & (data_t['Time'] < 57000)]
+    data_q = data_q.loc[(data_q['Time'] >= 34801)
+                        & (data_q['Time'] <= 57000)]
+    data_t = data_t.loc[(data_t['Time'] >= 34801)
+                        & (data_t['Time'] <= 57000)]
 
     # Data to arrays
     time_q = np.array(data_q['Time'])
