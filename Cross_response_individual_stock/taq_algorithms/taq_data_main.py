@@ -38,25 +38,17 @@ def taq_data_source(tickers, year):
     months_list, days_list = taq_data_tools.months_days_list()
 
     # Parallel computing
-    #pool = mp.Pool(processes=mp.cpu_count()-4)
+    pool = mp.Pool(processes=mp.cpu_count())
 
-    for ticker in tickers:
-        for month in months_list:
+    try:
+        pool.starmap(taq_data_analysis.taq_data_extract,
+                product(tickers, [year], months_list, days_list))
+    except AssertionError:
+        print('No data')
+        print()
 
-            data_quotes, data_trades = taq_data_analysis \
-                                    .taq_data_extract(ticker, year, month)
-
-            for day in days_list:
-
-                try:
-                    taq_data_analysis.taq_data_to_array(ticker, data_quotes, data_trades,
-                                        year, month, day)
-                except KeyError:
-                    print('No data')
-                    print()
-
-    #pool.close()
-    #pool.join()
+    pool.close()
+    pool.join()
 
     return None
 

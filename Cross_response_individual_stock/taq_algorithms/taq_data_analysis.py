@@ -31,8 +31,8 @@ juan.henao-londono@stud.uni-due.de
 import numpy as np
 import os
 
+import pandas as pd
 import pickle
-import dask.dataframe as dd
 
 import taq_data_tools
 
@@ -41,84 +41,61 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_data_extract(ticker, year, month):
+def taq_data_extract(ticker, year, month, day):
     """
-    Extract the trades and quotes (TAQ) data for a month from a CSV file with
+    Extract the trades and quotes (TAQ) data for a day from a CSV file with
     the full information of a year.
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
+        :param month: string of the day to be analized (i.e '07')
     """
     function_name = taq_data_extract.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, month, '-')
-    print()
-
-    # Load data
-    data_quotes = dd.read_csv('../../TAQ_{1}/Data/{0}_{1}_NASDAQ_quotes.csv'
-                              .format(ticker, year),
-                              usecols=range(4),
-                              sep=' ',
-                              names=['Date', 'Time', 'Bid', 'Ask'],
-                              parse_dates=['Date']).set_index('Date')
-    data_quotes = data_quotes['{}-{}'.format(year, month)]
-    data_quotes = data_quotes.compute()
-
-    data_trades = dd.read_csv('../../TAQ_{1}/Data/{0}_{1}_NASDAQ_trades.csv'
-                              .format(ticker, year),
-                              usecols=range(3),
-                              sep=' ',
-                              names=['Date', 'Time', 'Ask'],
-                              parse_dates=['Date']).set_index('Date')
-    data_trades = data_trades['{}-{}'.format(year, month)]
-    data_trades = data_trades.compute()
-
-    return (data_quotes, data_trades)
-
-# ----------------------------------------------------------------------------
-
-
-def taq_data_to_array(ticker, quotes, trades, year, month, day):
-    """
-    Convert the pandas dataframe information of a month in numpy arrays of a
-    day to be used later in the analysis.
-        :param ticker: string of the abbreviation of the stock to be analized
-                       (i.e. 'AAPL')
-        :param quotes: pandas dataframe with the quotes information
-        :param trades: pandas dataframe with the trades information
-        :param year: string of the year to be analized (i.e '2008')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
-    """
-    function_name = taq_data_to_array.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
-    # Copy from the original data to avoid pandas warning
-    data_q = quotes.loc[year + '-' + month + '-' + day].copy()
-    data_t = trades.loc[year + '-' + month + '-' + day].copy()
+    # Load data
+    date = '{}-{}-{}'.format(year, month, day)
+    quotes_filename = '../../TAQ_{1}/Data/{0}_{1}_NASDAQ_quotes.csv' \
+                      .format(ticker, year)
+    trades_filename = '../../TAQ_{1}/Data/{0}_{1}_NASDAQ_trades.csv' \
+                      .format(ticker, year)
+    quotes_day_list = []
+    trades_day_list = []
 
-    # Change the time format from hh:dd:ss to seconds
-    data_q.loc[:, 'Time'] = data_q['Time'].apply(taq_data_tools.get_sec)
-    data_t.loc[:, 'Time'] = data_t['Time'].apply(taq_data_tools.get_sec)
+    with open(quotes_filename) as f_quotes:
+        for idx, line in enumerate(f_quotes):
+            list_line = line.split()
+            if (list_line[0] == date
+                    and list_line[1] >= '34801'
+                    and list_line[1] <= '57000'):
+                quotes_day_list.append(list_line[:4])
 
-    # Data in the market time (from 9:40 to 15:30)
-    data_q = data_q.loc[(data_q['Time'] >= 34801)
-                        & (data_q['Time'] <= 57000)]
-    data_t = data_t.loc[(data_t['Time'] >= 34801)
-                        & (data_t['Time'] <= 57000)]
+    assert len(quotes_day_list) != 0
+
+    with open(trades_filename) as f_trades:
+        for idx, line in enumerate(f_trades):
+            list_line = line.split()
+            if (list_line[0] == date
+                    and list_line[1] >= '34801'
+                    and list_line[1] <= '57000'):
+                trades_day_list.append(list_line[:3])
+
+    assert len(trades_day_list) != 0
+
+    quotes_df = pd.DataFrame(quotes_day_list,
+                             columns=['Date', 'Time', 'Bid', 'Ask'])
+    trades_df = pd.DataFrame(trades_day_list,
+                             columns=['Date', 'Time', 'Ask'])
 
     # Data to arrays
-    time_q = np.array(data_q['Time'])
-    bid_q = np.array(data_q['Bid'])
-    ask_q = np.array(data_q['Ask'])
+    time_q = np.array(quotes_df['Time']).astype(int)
+    bid_q = np.array(quotes_df['Bid']).astype(int)
+    ask_q = np.array(quotes_df['Ask']).astype(int)
 
-    time_t = np.array(data_t['Time'])
-    ask_t = np.array(data_t['Ask'])
-    time_t, ask_t = zip(*sorted(zip(time_t, ask_t)))
-    time_t = np.asarray(time_t)
-    ask_t = np.asarray(ask_t)
+    time_t = np.array(trades_df['Time']).astype(int)
+    ask_t = np.array(trades_df['Ask']).astype(int)
 
     if (not os.path.isdir('../../TAQ_{}/TAQ_py/'.format(year))):
 
