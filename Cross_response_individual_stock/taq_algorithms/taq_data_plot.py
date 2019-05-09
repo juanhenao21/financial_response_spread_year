@@ -58,12 +58,12 @@ def taq_midpoint_plot(ticker, year, month, day):
 
     midpoint = pickle.load(open(''.join((
                                 '../taq_data_{1}/taq_midpoint_data/taq_'
-                                + 'midpoint_data_midpoint_{1}{2}{3}_{0}.pickl'
+                                + 'midpoint_data_midpoint_{1}{2}{3}_{0}.pickle'
                                 ).split())
                                 .format(ticker, year, month, day), 'rb'))
     time = pickle.load(open(''.join((
                             '../taq_data_{}/taq_midpoint_data/taq_midpoint_'
-                            + 'data_time.pickl').split()).format(year), 'rb'))
+                            + 'data_time.pickle').split()).format(year), 'rb'))
 
     # Plotting
 
@@ -608,7 +608,6 @@ def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
         plt.semilogx(plot_data, '-g', linewidth=5,
                      label='Stock i {} - Stock j {} - Month Average'
                      .format(ticker_i, ticker_j))
-        plt.ylim(0, 8 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
@@ -672,22 +671,22 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
 
                 plot_data_month += load_day
 
-                #plt.semilogx(load_day, '-', alpha=0.1)
+                plt.semilogx(load_day, '-', alpha=0.1)
 
             plot_data_month = plot_data_month / len(days[int(month) - 1])
 
-            #plt.semilogx(plot_data_month, '-', alpha=0.5,
-            #             label='Stock i {} - Stock j {} - Month {}'
-            #             .format(ticker_i, ticker_j, month))
+            plt.semilogx(plot_data_month, '-', alpha=0.5,
+                         label='Stock i {} - Stock j {} - Month {}'
+                         .format(ticker_i, ticker_j, month))
 
             plot_data_year += plot_data_month
 
         plot_data_year = plot_data_year / len(months)
-        plt.semilogx(5 * 10 ** -5 + plot_data_year, '-', linewidth=5,
+        plt.semilogx(plot_data_year, '-', linewidth=5,
                      label='Stock i {} - Stock j {} - Year'
                      .format(ticker_i, ticker_j, month))
 
-        plt.ylim(2 * 10 ** -5, 12 * 10 ** -5)
+        plt.ylim(-2 * 10 ** -5, 10 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
@@ -978,7 +977,7 @@ def taq_trade_sign_cross_correlator_week_avg_plot(ticker_i, ticker_j, year, mont
                 + '/taq_trade_sign_cross_correlator_data_{2}{3}{4}_{0}i_{1}j'
                 + '.pickle').split())
                 .format(ticker_i, ticker_j, year, month, day), 'rb'))
-            
+
             plot_data += load_day
 
             plt.loglog(load_day, '-', alpha=0.4,
@@ -996,7 +995,7 @@ def taq_trade_sign_cross_correlator_week_avg_plot(ticker_i, ticker_j, year, mont
         plt.legend(loc='best')
         plt.title('Cross response - ticker i {} ticker j {} - {}.{}-{}'
                   .format(ticker_i, ticker_j, month, days[0], days[-1]))
-        
+
         plt.grid(True)
         plt.tight_layout()
 

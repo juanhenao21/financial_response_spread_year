@@ -162,7 +162,7 @@ def taq_midpoint_data(ticker, year, month, day):
     spread = ask_q - bid_q
 
     # 34800 s = 9h40 - 57000 s = 15h50
-    full_time = np.array(range(34800, 57000))
+    full_time = np.array(range(34801, 57001))
 
     # As there can be several values for the same second, we use the
     # last value of each second in the full time array as it behaves
@@ -217,18 +217,18 @@ def taq_midpoint_data(ticker, year, month, day):
         os.mkdir('../taq_data_{1}/{0}/'.format(function_name, year))
         print('Folder to save data created')
 
-    pickle.dump(ask_last_val,
+    pickle.dump(ask_last_val / 10000,
                 open('../taq_data_{2}/{0}/{0}_ask_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(bid_last_val,
+    pickle.dump(bid_last_val / 10000,
                 open('../taq_data_{2}/{0}/{0}_bid_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(spread_last_val,
+    pickle.dump(spread_last_val / 10000,
                 open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
     pickle.dump(full_time, open('../taq_data_{1}/{0}/{0}_time.pickle'
                                 .format(function_name, year), 'wb'))
-    pickle.dump(midpoint_last_val,
+    pickle.dump(midpoint_last_val / 10000,
                 open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickle'
                      .format(function_name, ticker, year, month, day), 'wb'))
 
@@ -293,14 +293,14 @@ def taq_trade_signs_data(ticker, year, month, day):
     # All the identified trades must be different to zero
     assert not np.sum(identified_trades == 0)
 
-    full_time = np.array(range(34800, 57000))
+    full_time = np.array(range(34801, 57001))
     trade_signs = 0. * full_time
 
     # Implementation of equation (2). Trade sign in each second
     for t_idx, t_val in enumerate(full_time):
 
-        condition = (time_t / 1000 >= t_val) \
-                    * (time_t / 1000 < t_val + 1)
+        condition = (time_t >= t_val) \
+                    * (time_t < t_val + 1)
         # Experimental
         trades_same_t_exp = identified_trades[condition]
         sign_exp = np.sign(np.sum(trades_same_t_exp))
@@ -362,8 +362,9 @@ def taq_self_response_data(ticker, year, month, day):
                                 / midpoint[:-tau_idx - 1])
 
         # Obtain the self response value
-        product = log_return_sec * trade_sign_tau
-        self_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
+        if (trade_sign_no_0_len != 0):
+            product = log_return_sec * trade_sign_tau
+            self_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
 
     # Saving data
 
@@ -371,7 +372,6 @@ def taq_self_response_data(ticker, year, month, day):
                                  ticker, ticker, year, month, day)
 
     return self_response_tau
-
 # ----------------------------------------------------------------------------
 
 
@@ -427,12 +427,14 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
             # Obtain the midpoint log return. Displace the numerator tau
             # values to the right and compute the return
 
-            log_return_i_sec = np.log(midpoint_i[tau_idx + 1:]
-                                      / midpoint_i[:-tau_idx - 1])
+            log_return_i_sec = (midpoint_i[tau_idx + 1:]
+                                - midpoint_i[:-tau_idx - 1]) \
+                                / midpoint_i[:-tau_idx - 1]
 
             # Obtain the cross response value
-            product = log_return_i_sec * trade_sign_tau
-            cross_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
+            if (trade_sign_no_0_len != 0):
+                product = log_return_i_sec * trade_sign_tau
+                cross_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
 
         # Saving data
 
