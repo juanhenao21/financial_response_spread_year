@@ -34,7 +34,7 @@ import os
 import pandas as pd
 import pickle
 
-import taq_data_tools
+import taq_data_tools_basic
 
 __tau__ = 1000
 
@@ -282,13 +282,13 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
     """''
 
     function_name = taq_trade_signs_all_transactions_data.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     # Load data
 
     time_t, ask_t = pickle.load(open(
-        '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
+        '../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     # All the trades must have a price different to zero
@@ -343,7 +343,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
     """''
 
     function_name = taq_trade_signs_full_time_data.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     time_t, ask_t, identified_trades = taq_trade_signs_all_transactions_data(ticker, year, month, day)
@@ -365,11 +365,6 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
             price_signs[t_idx] = ask_t[condition][-1]
         except IndexError:
             full_time[t_idx] = 0
-
-    # Saving data
-
-    taq_data_tools.taq_save_data(function_name, trade_signs, ticker, ticker,
-                                 year, month, day)
 
     return (full_time, price_signs, trade_signs)
 
