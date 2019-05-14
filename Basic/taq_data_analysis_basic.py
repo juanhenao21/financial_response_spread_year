@@ -34,7 +34,7 @@ import os
 import pandas as pd
 import pickle
 
-import taq_data_tools_basic
+import taq_data_tools
 
 __tau__ = 1000
 
@@ -124,30 +124,27 @@ def taq_data_extract(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_midpoint_data(ticker, year, month, day):
+def taq_midpoint_all_transactions_data(ticker, year, month, day):
     """
     Obtain the midpoint price from the TAQ data. For further calculations
     we use the full time range from 9h40 to 15h50 in seconds (22200 seconds).
-    To fill the time spaces when nothing happens we replicate
-    the last value calculated until a change in the price happens. Save in a
-    different pickle file the array of each of the following values: best bid,
-    best ask, spread, midpoint price and time. Return midpoint price array.
+    Return best bid, best ask, spread, midpoint price and time.
         :param ticker: string of the abbreviation of the stock to be analized
-                       (i.e. 'AAPL')
+                       (i.e. 'AAPL')sys
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
     """
 
-    function_name = taq_midpoint_data.__name__
-    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
+    function_name = taq_midpoint_all_transactions_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
     time_q_, bid_q_, ask_q_ = pickle.load(open(
-        '../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
+        '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     # Some files are corrupted, so there are some zero values that
@@ -160,6 +157,32 @@ def taq_midpoint_data(ticker, year, month, day):
 
     midpoint = (bid_q + ask_q) / 2
     spread = ask_q - bid_q
+
+    return time_q, bid_q, ask_q, midpoint, spread
+
+# ----------------------------------------------------------------------------
+
+
+def taq_midpoint_full_time_data(ticker, year, month, day):
+    """
+    Obtain the midpoint price from the TAQ data. For further calculations
+    we use the full time range from 9h40 to 15h50 in seconds (22200 seconds).
+    To fill the time spaces when nothing happens we replicate
+    the last value calculated until a change in the price happens. Save in a
+    different pickle file the array of each of the following values: best bid,
+    best ask, spread, midpoint price and time. Return midpoint price array.
+        :param ticker: string of the abbreviation of the stock to be analized
+                       (i.e. 'AAPL')sys
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """
+
+    function_name = taq_midpoint_full_time_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, month, day)
+
+    time_q, bid_q, ask_q, midpoint, spread = taq_midpoint_all_transactions_data(ticker, year, month, day)
 
     # 34800 s = 9h40 - 57000 s = 15h50
     full_time = np.array(range(34801, 57001))
@@ -210,6 +233,31 @@ def taq_midpoint_data(ticker, year, month, day):
     # There should not be 0 values in the midpoint array
     assert not np.sum(midpoint_last_val == 0)
 
+    # Saving data
+
+    if (not os.path.isdir('../taq_data_{1}/{0}/'.format(function_name, year))):
+
+        os.mkdir('../taq_data_{1}/{0}/'.format(function_name, year))
+        print('Folder to save data created')
+
+    pickle.dump(ask_last_val / 10000,
+                open('../taq_data_{2}/{0}/{0}_ask_{2}{3}{4}_{1}.pickle'
+                     .format(function_name, ticker, year, month, day), 'wb'))
+    pickle.dump(bid_last_val / 10000,
+                open('../taq_data_{2}/{0}/{0}_bid_{2}{3}{4}_{1}.pickle'
+                     .format(function_name, ticker, year, month, day), 'wb'))
+    pickle.dump(spread_last_val / 10000,
+                open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickle'
+                     .format(function_name, ticker, year, month, day), 'wb'))
+    pickle.dump(full_time, open('../taq_data_{1}/{0}/{0}_time.pickle'
+                                .format(function_name, year), 'wb'))
+    pickle.dump(midpoint_last_val / 10000,
+                open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickle'
+                     .format(function_name, ticker, year, month, day), 'wb'))
+
+    print('Data saved')
+    print()
+
     return midpoint_last_val
 
 # ----------------------------------------------------------------------------
@@ -234,13 +282,13 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
     """''
 
     function_name = taq_trade_signs_all_transactions_data.__name__
-    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     # Load data
 
     time_t, ask_t = pickle.load(open(
-        '../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
+        '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     # All the trades must have a price different to zero
@@ -295,7 +343,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
     """''
 
     function_name = taq_trade_signs_full_time_data.__name__
-    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     time_t, ask_t, identified_trades = taq_trade_signs_all_transactions_data(ticker, year, month, day)
@@ -317,6 +365,11 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
             price_signs[t_idx] = ask_t[condition][-1]
         except IndexError:
             full_time[t_idx] = 0
+
+    # Saving data
+
+    taq_data_tools.taq_save_data(function_name, trade_signs, ticker, ticker,
+                                 year, month, day)
 
     return (full_time, price_signs, trade_signs)
 

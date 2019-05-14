@@ -124,22 +124,19 @@ def taq_data_extract(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_midpoint_data(ticker, year, month, day):
+def taq_midpoint_all_transactions_data(ticker, year, month, day):
     """
     Obtain the midpoint price from the TAQ data. For further calculations
     we use the full time range from 9h40 to 15h50 in seconds (22200 seconds).
-    To fill the time spaces when nothing happens we replicate
-    the last value calculated until a change in the price happens. Save in a
-    different pickle file the array of each of the following values: best bid,
-    best ask, spread, midpoint price and time. Return midpoint price array.
+    Return best bid, best ask, spread, midpoint price and time.
         :param ticker: string of the abbreviation of the stock to be analized
-                       (i.e. 'AAPL')
+                       (i.e. 'AAPL')sys
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
     """
 
-    function_name = taq_midpoint_data.__name__
+    function_name = taq_midpoint_all_transactions_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
@@ -160,6 +157,32 @@ def taq_midpoint_data(ticker, year, month, day):
 
     midpoint = (bid_q + ask_q) / 2
     spread = ask_q - bid_q
+
+    return time_q, bid_q, ask_q, midpoint, spread
+
+# ----------------------------------------------------------------------------
+
+
+def taq_midpoint_full_time_data(ticker, year, month, day):
+    """
+    Obtain the midpoint price from the TAQ data. For further calculations
+    we use the full time range from 9h40 to 15h50 in seconds (22200 seconds).
+    To fill the time spaces when nothing happens we replicate
+    the last value calculated until a change in the price happens. Save in a
+    different pickle file the array of each of the following values: best bid,
+    best ask, spread, midpoint price and time. Return midpoint price array.
+        :param ticker: string of the abbreviation of the stock to be analized
+                       (i.e. 'AAPL')sys
+        :param year: string of the year to be analized (i.e '2008')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """
+
+    function_name = taq_midpoint_full_time_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, month, day)
+
+    time_q, bid_q, ask_q, midpoint, spread = taq_midpoint_all_transactions_data(ticker, year, month, day)
 
     # 34800 s = 9h40 - 57000 s = 15h50
     full_time = np.array(range(34801, 57001))
