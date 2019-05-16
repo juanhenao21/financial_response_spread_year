@@ -137,14 +137,14 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     """
 
     function_name = taq_midpoint_all_transactions_data.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
     time_q_, bid_q_, ask_q_ = pickle.load(open(
-        '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
+        '../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     # Some files are corrupted, so there are some zero values that
@@ -179,13 +179,13 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
     """
 
     function_name = taq_midpoint_full_time_data.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+    taq_data_tools_basic.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     time_q, bid_q, ask_q, midpoint, spread = taq_midpoint_all_transactions_data(ticker, year, month, day)
 
     # 34800 s = 9h40 - 57000 s = 15h50
-    full_time = np.array(range(34801, 57001))
+    full_time = np.array(range(34800, 57000))
 
     # As there can be several values for the same second, we use the
     # last value of each second in the full time array as it behaves
@@ -232,31 +232,6 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
 
     # There should not be 0 values in the midpoint array
     assert not np.sum(midpoint_last_val == 0)
-
-    # Saving data
-
-    if (not os.path.isdir('../taq_data_{1}/{0}/'.format(function_name, year))):
-
-        os.mkdir('../taq_data_{1}/{0}/'.format(function_name, year))
-        print('Folder to save data created')
-
-    pickle.dump(ask_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_ask_{2}{3}{4}_{1}.pickle'
-                     .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(bid_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_bid_{2}{3}{4}_{1}.pickle'
-                     .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(spread_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickle'
-                     .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(full_time, open('../taq_data_{1}/{0}/{0}_time.pickle'
-                                .format(function_name, year), 'wb'))
-    pickle.dump(midpoint_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickle'
-                     .format(function_name, ticker, year, month, day), 'wb'))
-
-    print('Data saved')
-    print()
 
     return midpoint_last_val
 
