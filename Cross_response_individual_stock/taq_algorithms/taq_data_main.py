@@ -35,26 +35,40 @@ def taq_data_source(tickers, year):
         :param tickers:
         :param year:
     """
-    months_list, days_list = taq_data_tools.months_days_list()
+    days_list = []
+    months_list = []
+
+    for i in range(1, 32):
+        if (i < 10):
+            days_list.append('0' + str(i))
+        else:
+            days_list.append(str(i))
+
+    for m in range(1, 13):
+        if (m < 10):
+            months_list.append('0' + str(m))
+        else:
+            months_list.append(str(m))
 
     # Parallel computing
-    pool = mp.Pool(processes=mp.cpu_count())
+
+    """ try:
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            pool.starmap(taq_data_analysis.taq_data_extract,
+                    product(tickers, [year], months_list, days_list))
+    except AssertionError:
+        print('No data')
+        print() """
 
     for ticker in tickers:
         for month in months_list:
-
-            data_quotes, data_trades = taq_data_analysis \
-                                       .taq_data_extract(ticker, year, month)
-
-            try:
-                pool.starmap(taq_data_analysis.taq_data_to_array,
-                             product([ticker], [data_quotes], [data_trades],
-                                     [year], [month], days_list))
-            except KeyError:
-                print('No data')
-
-    pool.close()
-    pool.join()
+            for day in days_list:
+                try:
+                    taq_data_analysis.taq_data_extract(ticker, year,
+                                                       month, day)
+                except AssertionError:
+                    print('No data')
+                    print()
 
     return None
 
@@ -77,45 +91,50 @@ def taq_data_plot_generator(tickers, year, months, days):
     taq_data_tools.taq_start_folders(year)
 
     # Parallel computing
-    pool = mp.Pool(processes=mp.cpu_count())
+    with mp.Pool(processes=mp.cpu_count()) as pool:
 
-    # Basic functions
-    # pool.starmap(taq_data_analysis.taq_midpoint_data,
-    #              product(tickers, [year], months, days[int(month) - 1]))
-    # pool.starmap(taq_data_analysis.taq_trade_signs_data,
-    #              product(tickers, [year], months, days[int(month) - 1]))
+        for month in months:
 
-    # Especific functions
-    # pool.starmap(taq_data_analysis.taq_self_response_data,
-    #              product(tickers, [year], months,
-    #                      days[int(month) - 1]))
-    # pool.starmap(taq_data_analysis.taq_cross_response_data,
-    #              product(tickers, tickers, [year], months,
-    #                      days[int(month) - 1]))
-    # pool.starmap(taq_data_analysis.taq_trade_sign_self_correlator_data,
-    #              product(tickers, [year], months, days[int(month) - 1]))
-    # pool.starmap(taq_data_analysis.taq_trade_sign_cross_correlator_data,
-    #              product(tickers, tickers, [year], months,
-    #                      days[int(month) - 1]))
+            # Basic functions
+            pool.starmap(taq_data_analysis.taq_midpoint_full_time_data,
+                         product(tickers, [year], [month],
+                                 days[int(month) - 1]))
+            pool.starmap(taq_data_analysis.taq_trade_signs_full_time_data,
+                         product(tickers, [year], [month],
+                                 days[int(month) - 1]))
 
-    # Plot
-    # pool.starmap(taq_data_plot.taq_self_response_month_avg_plot,
-    #              product(tickers, [year], months, [days[int(month) - 1]]))
-    # pool.starmap(taq_data_plot.taq_cross_response_month_avg_plot,
-    #              product(tickers, tickers, [year], months,
-    #                      [days[int(month) - 1]]))
+        for month in months:
 
-    # pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
-    #                  product(tickers, [year], [months], [days]))
-    # pool.starmap(taq_data_plot.taq_trade_sign_self_correlator_year_avg_plot,
-    #                  product(tickers, [year], [months], [days]))
-    pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
-                 product(tickers, tickers, [year], [months], [days]))
-    # pool.starmap(taq_data_plot.taq_trade_sign_cross_correlator_year_avg_plot,
-    #                  product(tickers, tickers, [year], [months], [days]))
+            # Especific functions
+            pool.starmap(taq_data_analysis.taq_self_response_data,
+                         product(tickers, [year], [month],
+                                 days[int(month) - 1]))
+            pool.starmap(taq_data_analysis.taq_cross_response_data,
+                         product(tickers, tickers, [year], [month],
+                                 days[int(month) - 1]))
+            # pool.starmap(taq_data_analysis.taq_trade_sign_self_correlator_data,
+            #              product(tickers, [year], [month],
+            #                      days[int(month) - 1]))
+            # pool.starmap(taq_data_analysis.taq_trade_sign_cross_correlator_data,
+            #              product(tickers, tickers, [year], [month],
+            #                     days[int(month) - 1]))
 
-    pool.close()
-    pool.join()
+            # Plot
+            pool.starmap(taq_data_plot.taq_self_response_month_avg_plot,
+                         product(tickers, [year], [month],
+                                 [days[int(month) - 1]]))
+            pool.starmap(taq_data_plot.taq_cross_response_month_avg_plot,
+                         product(tickers, tickers, [year], [month],
+                                 [days[int(month) - 1]]))
+
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
+                     product(tickers, [year], [months], [days]))
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
+                     product(tickers, tickers, [year], [months], [days]))
+        # pool.starmap(taq_data_plot.taq_trade_sign_self_correlator_year_avg_plot,
+        #              product(tickers, [year], [months], [days]))
+        # pool.starmap(taq_data_plot.taq_trade_sign_cross_correlator_year_avg_plot,
+        #              product(tickers, tickers, [year], [months], [days]))
 
     return None
 
@@ -130,17 +149,13 @@ def main():
 
     # subprocess.call(['./TAQ_extraction.sh'])
 
-    taq_data_source(tickers, '2008')
+    # taq_data_source(tickers, '2008')
 
-    # months_list, days_list = taq_data_tools.months_days_list()
+    folder_path = '../../TAQ_2008/TAQ_py/'
+    (months_list,
+     days_list) = taq_data_tools.months_days_list(folder_path, tickers[0])
 
-    # for month in months_list:
-
-    #     m = pickle.load(open('../../Basic/days_{}.pickle'
-    #                          .format(month), 'rb'))
-    #     days_list += [m]
-
-    # taq_data_plot_generator(tickers, '2008', months_list, days_list)
+    taq_data_plot_generator(tickers, '2008', months_list, days_list)
 
     print('Ay vamos!!')
 

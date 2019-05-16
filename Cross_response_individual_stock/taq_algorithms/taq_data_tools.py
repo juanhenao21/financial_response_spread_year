@@ -204,24 +204,52 @@ def get_sec(time_str):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def months_days_list():
+def months_days_list(folder_path, ticker):
     """
     Generate two lists with the string with the numbers of the months
-    (from '01' to '12') and the days (from '01' to '31').
+    (from '01' to '12') and the days of the data to be analyzed.
     """
+    days = []
     days_list = []
     months_list = []
 
     for i in range(1, 32):
         if (i < 10):
-            days_list.append('0' + str(i))
+            days.append('0' + str(i))
         else:
-            days_list.append(str(i))
+            days.append(str(i))
 
-    for i in range(1, 13):
-        if (i < 10):
-            months_list.append('0' + str(i))
+    for m in range(1, 13):
+        if (m < 10):
+            months_list.append('0' + str(m))
         else:
-            months_list.append(str(i))
+            months_list.append(str(m))
+
+    files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+
+    for month in months_list:
+        days_month = []
+        for d in days:
+            for file in files:
+                val_split = file.split('_')
+                date = val_split[-1].split('.')[0]
+                val = val_split[1] + val_split[2] + date
+                if (val == '{}quotes2008{}{}'.format(ticker, month, d)):
+                    days_month.append(d)
+        days_list += [days_month]
 
     return(months_list, days_list)
+
+# -----------------------------------------------------------------------------
+
+def main():
+    folder_path = '../../TAQ_2008/TAQ_py/'
+    a, b = months_days_list(folder_path, 'AAPL')
+    print(a)
+    print(b)
+
+# -----------------------------------------------------------------------------
+
+
+if __name__ == '__main__':
+    main()
