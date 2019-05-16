@@ -43,13 +43,14 @@ __tau__ = 1000
 
 def taq_data_extract(ticker, year, month, day):
     """
-    Extract the trades and quotes (TAQ) data for a day from a CSV file with
-    the full information of a year.
+    Extract the trades and quotes (TAQ) data for a day, from a CSV file with
+    the full information of a year. The time range for each day is from 9:40
+    to 15:50 (including both).
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
-        :param month: string of the day to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
     """
     function_name = taq_data_extract.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
@@ -68,7 +69,7 @@ def taq_data_extract(ticker, year, month, day):
         for idx, line in enumerate(f_quotes):
             list_line = line.split()
             if (list_line[0] == date
-                    and list_line[1] >= '34801'
+                    and list_line[1] >= '34800'
                     and list_line[1] <= '57000'):
                 quotes_day_list.append(list_line[:4])
 
@@ -78,7 +79,7 @@ def taq_data_extract(ticker, year, month, day):
         for idx, line in enumerate(f_trades):
             list_line = line.split()
             if (list_line[0] == date
-                    and list_line[1] >= '34801'
+                    and list_line[1] >= '34800'
                     and list_line[1] <= '57000'):
                 trades_day_list.append(list_line[:3])
 
@@ -126,8 +127,9 @@ def taq_data_extract(ticker, year, month, day):
 
 def taq_midpoint_all_transactions_data(ticker, year, month, day):
     """
-    Obtain the midpoint price from the TAQ data. For further calculations
-    we use the full time range from 9h40 to 15h50 in seconds (22200 seconds).
+    Obtain the midpoint price from the TAQ data for all the transactions.
+    For further calculations we use the full time range from 9h40 to 15h50 in
+    seconds (22200 seconds).
     Return best bid, best ask, spread, midpoint price and time.
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')sys
@@ -149,9 +151,16 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
 
     # Some files are corrupted, so there are some zero values that
     # does not have sense
-    time_q = time_q_[ask_q_ != 0.]
-    bid_q = bid_q_[bid_q_ != 0.]
-    ask_q = ask_q_[ask_q_ != 0.]
+    condition_1 = ask_q_ != 0.
+    time_q = time_q_[condition_1]
+    bid_q = bid_q_[condition_1]
+    ask_q = ask_q_[condition_1]
+    # Reproducing S. Wang values. In her results the time interval for the
+    # midpoint is [34800, 56999]
+    condition_2 = time_q != 57000
+    time_q = time_q[condition_2]
+    bid_q = bid_q[condition_2]
+    ask_q = ask_q[condition_2]
 
     assert len(bid_q) == len(ask_q)
 
@@ -165,14 +174,14 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
 
 def taq_midpoint_full_time_data(ticker, year, month, day):
     """
-    Obtain the midpoint price from the TAQ data. For further calculations
-    we use the full time range from 9h40 to 15h50 in seconds (22200 seconds).
-    To fill the time spaces when nothing happens we replicate
+    Obtain the midpoint price from the TAQ data for a complete day. For further
+    calculations we use the full time range from 9h40 to 15h50 in seconds
+    (22200 seconds). To fill the time spaces when nothing happens we replicate
     the last value calculated until a change in the price happens. Save in a
     different pickle file the array of each of the following values: best bid,
     best ask, spread, midpoint price and time. Return midpoint price array.
         :param ticker: string of the abbreviation of the stock to be analized
-                       (i.e. 'AAPL')sys
+                       (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2008')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
@@ -182,10 +191,14 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
-    time_q, bid_q, ask_q, midpoint, spread = taq_midpoint_all_transactions_data(ticker, year, month, day)
+    (time_q, bid_q, ask_q,
+     midpoint, spread) = taq_midpoint_all_transactions_data(ticker, year,
+                                                            month, day)
 
     # 34800 s = 9h40 - 57000 s = 15h50
-    full_time = np.array(range(34801, 57001))
+    # Reproducing S. Wang values. In her results the time interval for the
+    # midpoint is [34800, 56999]
+    full_time = np.array(range(34800, 57000))
 
     # As there can be several values for the same second, we use the
     # last value of each second in the full time array as it behaves
@@ -270,10 +283,7 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
     As the trades signs are not directly given by the TAQ data, they must be
     infered by the trades prices. For further calculations we use the whole
     time range from the opening of the market at 9h40 to the closing at 15h50
-    in seconds and then convert the values to hours (22200 seconds). To fill
-    the time spaces when nothing happens we just add zeros indicating that
-    there were neither a buy nor a sell. Save in a pickle file the array
-    of the trade signs. Return the trade signs for all the transactions.
+    in seconds (22200 seconds).
         :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2016')
@@ -290,6 +300,12 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
     time_t, ask_t = pickle.load(open(
         '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
         .format(ticker, year, month, day), 'rb'))
+
+    # Reproducing S. Wang values. In her results the time interval for the
+    # trade signs is [34801, 57000]
+    condition = time_t != 34800
+    time_t = time_t[condition]
+    ask_t = ask_t[condition]
 
     # All the trades must have a price different to zero
     assert not np.sum(ask_t == 0)
@@ -329,10 +345,10 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
     As the trades signs are not directly given by the TAQ data, they must be
     infered by the trades prices. For further calculations we use the whole
     time range from the opening of the market at 9h40 to the closing at 15h50
-    in seconds and then convert the values to hours (22200 seconds). To fill
-    the time spaces when nothing happens we just add zeros indicating that
-    there were neither a buy nor a sell. Save in a pickle file the array
-    of the trade signs. Return the full time trade signs.
+    in seconds (22200 seconds). To fill the time spaces when nothing happens
+    we just add zeros indicating that there were neither a buy nor a sell. Save
+    in a pickle file the array of the trade signs.
+    Return the full time trade signs.
         :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
         :param identified_trades: array of the trade signs from all the
@@ -346,8 +362,12 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
-    time_t, ask_t, identified_trades = taq_trade_signs_all_transactions_data(ticker, year, month, day)
+    (time_t, ask_t,
+     identified_trades) = taq_trade_signs_all_transactions_data(ticker, year,
+                                                                month, day)
 
+    # Reproducing S. Wang values. In her results the time interval for the
+    # trade signs is [34801, 57000]
     full_time = np.array(range(34801, 57001))
     trade_signs = 0. * full_time
     price_signs = 0. * full_time
@@ -356,7 +376,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
     for t_idx, t_val in enumerate(full_time):
 
         condition = (time_t >= t_val) \
-                * (time_t  < t_val + 1)
+                    * (time_t < t_val + 1)
         # Experimental
         trades_same_t_exp = identified_trades[condition]
         sign_exp = int(np.sign(np.sum(trades_same_t_exp)))
@@ -395,12 +415,12 @@ def taq_self_response_data(ticker, year, month, day):
 
     # Load data
     midpoint = pickle.load(open(''.join((
-            '../taq_data_{1}/taq_midpoint_data/taq_midpoint_data'
-            + '_midpoint_{1}{2}{3}_{0}.pickle').split())
+            '../taq_data_{1}/taq_midpoint_full_time_data/taq_midpoint_full'
+            + '_time_data_midpoint_{1}{2}{3}_{0}.pickle').split())
             .format(ticker, year, month, day), 'rb'))
     trade_sign = pickle.load(open("".join((
-            '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
-            + '_data_{1}{2}{3}_{0}.pickle').split())
+            '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade_signs'
+            + '_full_time_data_{1}{2}{3}_{0}.pickle').split())
             .format(ticker, year, month, day), 'rb'))
 
     assert len(midpoint) == len(trade_sign)
@@ -432,6 +452,7 @@ def taq_self_response_data(ticker, year, month, day):
                                  ticker, ticker, year, month, day)
 
     return self_response_tau
+
 # ----------------------------------------------------------------------------
 
 
@@ -464,12 +485,12 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
 
         # Load data
         midpoint_i = pickle.load(open(''.join((
-                '../taq_data_{1}/taq_midpoint_data/taq_midpoint_data'
-                + '_midpoint_{1}{2}{3}_{0}.pickle').split())
+                '../taq_data_{1}/taq_midpoint_full_time_data/taq_midpoint_full'
+                + '_time_data_midpoint_{1}{2}{3}_{0}.pickle').split())
                 .format(ticker_i, year, month, day), 'rb'))
         trade_sign_j = pickle.load(open("".join((
-                '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
-                + '_data_{1}{2}{3}_{0}.pickle').split())
+                '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
+                + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
                 .format(ticker_j, year, month, day), 'rb'))
 
         assert len(midpoint_i) == len(trade_sign_j)
@@ -482,19 +503,20 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         # Depending on the tau value
         for tau_idx in range(__tau__):
 
-            trade_sign_tau = trade_sign_j[:-tau_idx - 1]
+            trade_sign_tau = 1 * trade_sign_j[:-tau_idx - 1]
             trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
             # Obtain the midpoint log return. Displace the numerator tau
             # values to the right and compute the return
 
             log_return_i_sec = (midpoint_i[tau_idx + 1:]
                                 - midpoint_i[:-tau_idx - 1]) \
-                                / midpoint_i[:-tau_idx - 1]
+                / midpoint_i[:-tau_idx - 1]
 
             # Obtain the cross response value
             if (trade_sign_no_0_len != 0):
                 product = log_return_i_sec * trade_sign_tau
-                cross_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
+                cross_response_tau[tau_idx] = (np.sum(product)
+                                               / trade_sign_no_0_len)
 
         # Saving data
 

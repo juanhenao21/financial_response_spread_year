@@ -421,7 +421,7 @@ def taq_self_response_year_avg_plot(ticker, year, months, days):
                  label='Stock {} - Year {}'
                  .format(ticker, year))
 
-    #plt.ylim(0, 8 * 10 ** -5)
+    plt.ylim(0, 3 * 10 ** -4)
     plt.xlabel(r'Time lag $[\tau]$')
     plt.ylabel(r'Self response $ R_{ij} (\tau) $')
     plt.legend(loc='best')
@@ -686,7 +686,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
                      label='Stock i {} - Stock j {} - Year'
                      .format(ticker_i, ticker_j, month))
 
-        plt.ylim(-2 * 10 ** -5, 10 * 10 ** -5)
+        plt.ylim(2 * 10 ** -5, 9 * 10 ** -5)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
