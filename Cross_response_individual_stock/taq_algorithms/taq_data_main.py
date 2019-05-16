@@ -88,53 +88,56 @@ def taq_data_plot_generator(tickers, year, months, days):
     """
 
     # Basic folders
-    taq_data_tools.taq_start_folders(year)
+    # taq_data_tools.taq_start_folders(year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
-        for month in months:
+        # for month in months:
 
             # Basic functions
-            pool.starmap(taq_data_analysis.taq_midpoint_full_time_data,
-                         product(tickers, [year], [month],
-                                 days[int(month) - 1]))
-            pool.starmap(taq_data_analysis.taq_trade_signs_full_time_data,
-                         product(tickers, [year], [month],
-                                 days[int(month) - 1]))
+            # pool.starmap(taq_data_analysis.taq_midpoint_full_time_data,
+            #              product(tickers, [year], [month],
+            #                      days[int(month) - 1]))
+            # pool.starmap(taq_data_analysis.taq_trade_signs_full_time_data,
+            #              product(tickers, [year], [month],
+            #                      days[int(month) - 1]))
 
         for month in months:
 
             # Especific functions
-            pool.starmap(taq_data_analysis.taq_self_response_data,
-                         product(tickers, [year], [month],
-                                 days[int(month) - 1]))
-            pool.starmap(taq_data_analysis.taq_cross_response_data,
-                         product(tickers, tickers, [year], [month],
-                                 days[int(month) - 1]))
-            # pool.starmap(taq_data_analysis.taq_trade_sign_self_correlator_data,
+            # pool.starmap(taq_data_analysis.taq_self_response_data,
             #              product(tickers, [year], [month],
             #                      days[int(month) - 1]))
-            # pool.starmap(taq_data_analysis.taq_trade_sign_cross_correlator_data,
+            # pool.starmap(taq_data_analysis.taq_cross_response_data,
             #              product(tickers, tickers, [year], [month],
-            #                     days[int(month) - 1]))
+            #                      days[int(month) - 1]))
+            pool.starmap(taq_data_analysis.taq_trade_sign_self_correlator_data,
+                         product(tickers, [year], [month],
+                                 days[int(month) - 1]))
+            pool.starmap(taq_data_analysis
+                         .taq_trade_sign_cross_correlator_data,
+                         product(tickers, tickers, [year], [month],
+                                 days[int(month) - 1]))
 
             # Plot
-            pool.starmap(taq_data_plot.taq_self_response_month_avg_plot,
-                         product(tickers, [year], [month],
-                                 [days[int(month) - 1]]))
-            pool.starmap(taq_data_plot.taq_cross_response_month_avg_plot,
-                         product(tickers, tickers, [year], [month],
-                                 [days[int(month) - 1]]))
+            # pool.starmap(taq_data_plot.taq_self_response_month_avg_plot,
+            #              product(tickers, [year], [month],
+            #                      [days[int(month) - 1]]))
+            # pool.starmap(taq_data_plot.taq_cross_response_month_avg_plot,
+            #              product(tickers, tickers, [year], [month],
+            #                      [days[int(month) - 1]]))
 
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
-                     product(tickers, [year], [months], [days]))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
-                     product(tickers, tickers, [year], [months], [days]))
-        # pool.starmap(taq_data_plot.taq_trade_sign_self_correlator_year_avg_plot,
+        # pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
         #              product(tickers, [year], [months], [days]))
-        # pool.starmap(taq_data_plot.taq_trade_sign_cross_correlator_year_avg_plot,
+        # pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
         #              product(tickers, tickers, [year], [months], [days]))
+        pool.starmap(taq_data_plot
+                     .taq_trade_sign_self_correlator_year_avg_plot,
+                     product(tickers, [year], [months], [days]))
+        pool.starmap(taq_data_plot
+                     .taq_trade_sign_cross_correlator_year_avg_plot,
+                     product(tickers, tickers, [year], [months], [days]))
 
     return None
 

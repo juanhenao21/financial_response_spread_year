@@ -545,8 +545,8 @@ def taq_trade_sign_self_correlator_data(ticker, year, month, day):
 
     # Load data
     trade_sign_i = pickle.load(open("".join((
-                '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
-                + '_data_{1}{2}{3}_{0}.pickle').split())
+                '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
+                + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
 
     # Array of the average of each tau. 10^3 s used by Wang
@@ -603,19 +603,19 @@ def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
 
         # Load data
         trade_sign_i = pickle.load(open("".join((
-                    '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
-                    + '_data_{1}{2}{3}_{0}.pickle').split())
+                    '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
+                    + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
         trade_sign_j = pickle.load(open("".join((
-                    '../taq_data_{1}/taq_trade_signs_data/taq_trade_signs'
-                    + '_data_{1}{2}{3}_{0}.pickle').split())
+                    '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
+                    + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_j, year, month, day), 'rb'))
 
         # Array of the average of each tau. 10^3 s used by Wang
-        self_correlator = np.zeros(__tau__)
+        cross_correlator = np.zeros(__tau__)
 
-        # Calculating the midpoint log return and the trade sign cross
-        # correlator
+        # Calculating the midpoint log return and the trade sign
+        # cross-correlator
 
         for tau_idx in range(__tau__):
 
@@ -629,14 +629,14 @@ def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
 
                 trade_sign_product = trade_sign_i * trade_sign_j
 
-            self_correlator[tau_idx] = np.mean(
+            cross_correlator[tau_idx] = np.mean(
                 trade_sign_product[trade_sign_j != 0])
 
         # Saving data
 
-        taq_data_tools.taq_save_data(function_name, self_correlator, ticker_i,
+        taq_data_tools.taq_save_data(function_name, cross_correlator, ticker_i,
                                      ticker_j, year, month, day)
 
-        return None
+        return cross_correlator
 
 # ----------------------------------------------------------------------------

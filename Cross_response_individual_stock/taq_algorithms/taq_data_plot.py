@@ -865,7 +865,7 @@ def taq_trade_sign_self_correlator_year_avg_plot(ticker, year, months, days):
                  label='Stock {} - Year {}'
                  .format(ticker, year))
 
-    plt.ylim([10E-6, 10])
+    plt.ylim(10 ** -6, 1)
     plt.xlabel(r'Time lag $[\tau]$')
     plt.ylabel(r'Trade sign self-correlator $ \Theta_{ij} (\tau) $')
     plt.legend(loc='best')
@@ -1069,7 +1069,7 @@ def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year, mont
                      label='Stock i {} - Stock j {} - Year {}'
                      .format(ticker_i, ticker_j, year))
 
-        plt.ylim([10E-6, 10])
+        plt.ylim(10 ** -6, 1)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Trade sign cross correlator $ \Theta_{ij} (\tau) $')
         plt.legend(loc='best')
