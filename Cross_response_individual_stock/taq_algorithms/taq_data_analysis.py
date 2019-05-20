@@ -396,7 +396,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_data(ticker, year, month, day):
+def taq_self_response_data(ticker, year, month, day, *, mod='ret'):
     """
     Obtain the self response function using the midpoint log returns
     and trade signs of the ticker during different time lags. Return an
@@ -406,6 +406,8 @@ def taq_self_response_data(ticker, year, month, day):
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
+        :param mod='log': select the midpoint price return. 'ret' for midpoint
+         price return and 'log' for midpoint price log return. Default 'log'
     """
 
     function_name = taq_self_response_data.__name__
@@ -438,8 +440,17 @@ def taq_self_response_data(ticker, year, month, day):
         # Obtain the midpoint log return. Displace the numerator tau
         # values to the right and compute the return
 
-        log_return_sec = np.log(midpoint[tau_idx + 1:]
-                                / midpoint[:-tau_idx - 1])
+        # midpoint price log returns
+        if (mod == 'log'):
+            log_return_sec = np.log(midpoint[tau_idx + 1:]
+                                    / midpoint[:-tau_idx - 1])
+
+        # midpoint price returns
+        elif (mod == 'ret'):
+
+            log_return_sec = (midpoint[tau_idx + 1:]
+                              - midpoint[:-tau_idx - 1]) \
+                / midpoint[:-tau_idx - 1]
 
         # Obtain the self response value
         if (trade_sign_no_0_len != 0):
@@ -447,16 +458,24 @@ def taq_self_response_data(ticker, year, month, day):
             self_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
 
     # Saving data
-
-    taq_data_tools.taq_save_data(function_name, self_response_tau,
-                                 ticker, ticker, year, month, day)
+    # midpoint price log returns
+    if (mod == 'log'):
+        taq_data_tools.taq_save_data(function_name + '_' + mod,
+                                     self_response_tau, ticker, ticker, year,
+                                     month, day)
+    # midpoint price returns
+    elif (mod == 'ret'):
+        taq_data_tools.taq_save_data(function_name + '_' + mod,
+                                     self_response_tau, ticker, ticker, year,
+                                     month, day)
 
     return self_response_tau
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
+def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
+                            *, mod='ret'):
     """
     Obtain the cross response function using the midpoint log returns of
     ticker i and trade signs of ticker j during different time lags. The data
@@ -469,6 +488,8 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
+        :param mod='log': select the midpoint price return. 'ret' for midpoint
+         price return and 'log' for midpoint price log return. Default 'log'
     """
     if (ticker_i == ticker_j):
 
@@ -508,9 +529,17 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
             # Obtain the midpoint log return. Displace the numerator tau
             # values to the right and compute the return
 
-            log_return_i_sec = (midpoint_i[tau_idx + 1:]
-                                - midpoint_i[:-tau_idx - 1]) \
-                / midpoint_i[:-tau_idx - 1]
+            # midpoint price log returns
+            if (mod == 'log'):
+                log_return_i_sec = np.log(midpoint_i[tau_idx + 1:]
+                                          / midpoint_i[:-tau_idx - 1])
+
+            # midpoint price returns
+            elif (mod == 'ret'):
+
+                log_return_i_sec = (midpoint_i[tau_idx + 1:]
+                                    - midpoint_i[:-tau_idx - 1]) \
+                    / midpoint_i[:-tau_idx - 1]
 
             # Obtain the cross response value
             if (trade_sign_no_0_len != 0):
@@ -519,9 +548,16 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
                                                / trade_sign_no_0_len)
 
         # Saving data
-
-        taq_data_tools.taq_save_data(function_name, cross_response_tau,
-                                     ticker_i, ticker_j, year, month, day)
+        # midpoint price log returns
+        if (mod == 'log'):
+            taq_data_tools.taq_save_data(function_name + '_' + mod,
+                                         cross_response_tau, ticker_i,
+                                         ticker_j, year, month, day)
+        # midpoint price returns
+        elif (mod == 'ret'):
+            taq_data_tools.taq_save_data(function_name + '_' + mod,
+                                         cross_response_tau, ticker_i,
+                                         ticker_j, year, month, day)
 
         return cross_response_tau
 
