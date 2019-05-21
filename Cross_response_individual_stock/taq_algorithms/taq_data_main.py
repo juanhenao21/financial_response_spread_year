@@ -155,8 +155,9 @@ def main():
     # taq_data_source(tickers, '2008')
 
     folder_path = '../../TAQ_2008/TAQ_py/'
+    year = '2008'
     (months_list,
-     days_list) = taq_data_tools.months_days_list(folder_path, tickers[0])
+     days_list) = taq_data_tools.months_days_list(folder_path, tickers[0], year)
 
     taq_data_plot_generator(tickers, '2008', months_list, days_list)
 

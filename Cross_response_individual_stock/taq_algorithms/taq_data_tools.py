@@ -204,7 +204,7 @@ def get_sec(time_str):
 # -----------------------------------------------------------------------------------------------------------------------
 
 
-def months_days_list(folder_path, ticker):
+def months_days_list(folder_path, ticker, year):
     """
     Generate two lists with the string with the numbers of the months
     (from '01' to '12') and the days of the data to be analyzed.
@@ -234,7 +234,7 @@ def months_days_list(folder_path, ticker):
                 val_split = file.split('_')
                 date = val_split[-1].split('.')[0]
                 val = val_split[1] + val_split[2] + date
-                if (val == '{}quotes2008{}{}'.format(ticker, month, d)):
+                if (val == '{}quotes{}{}{}'.format(ticker, month, d)):
                     days_month.append(d)
         days_list += [days_month]
 
