@@ -234,7 +234,7 @@ def months_days_list(folder_path, ticker, year):
                 val_split = file.split('_')
                 date = val_split[-1].split('.')[0]
                 val = val_split[1] + val_split[2] + date
-                if (val == '{}quotes{}{}{}'.format(ticker, month, d)):
+                if (val == '{}quotes{}{}{}'.format(ticker, year, month, d)):
                     days_month.append(d)
         days_list += [days_month]
 

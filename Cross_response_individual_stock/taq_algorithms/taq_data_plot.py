@@ -370,7 +370,7 @@ def taq_self_response_month_avg_plot(ticker, year, month, days):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_plot(ticker, year, months, days, *, mod='log'):
+def taq_self_response_year_avg_plot(ticker, year, months, days, *, mod='ret', model='juan'):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -400,19 +400,19 @@ def taq_self_response_year_avg_plot(ticker, year, months, days, *, mod='log'):
                                                           year, month, day)
 
             load_day = pickle.load(open(''.join((
-                '../taq_data_{1}/taq_self_response_data_' +  mod + '/taq_self'
-                + '_response_data_' + mod + '_{1}{2}{3}_{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
+                '../taq_data_{1}/taq_self_response_data_{4}_{5}/taq_self'
+                + '_response_data_{4}_{5}_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker, year, month, day, mod, model), 'rb'))
 
             plot_data_month += load_day
 
-            #plt.semilogx(load_day, '-', alpha=0.1)
+            plt.semilogx(load_day, '-', alpha=0.1)
 
         plot_data_month = plot_data_month / len(days[int(month) - 1])
 
-        #plt.semilogx(plot_data_month, '-', alpha=0.5,
-        #             label='Stock i {} - Month {}'
-        #             .format(ticker, month))
+        plt.semilogx(plot_data_month, '-', alpha=0.5,
+                     label='Stock i {} - Month {}'
+                     .format(ticker, month))
 
         plot_data_year += plot_data_month
 
@@ -432,7 +432,7 @@ def taq_self_response_year_avg_plot(ticker, year, months, days, *, mod='log'):
     plt.tight_layout()
 
     # Plotting
-    taq_data_tools.taq_save_plot(function_name + '_' + mod, figure, ticker, ticker, year,
+    taq_data_tools.taq_save_plot(function_name + '_' + mod + '_' + model, figure, ticker, ticker, year,
                                  month)
 
     return None
@@ -627,7 +627,7 @@ def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
 
 
 def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days,
-                                     *, mod='log'):
+                                     *, mod='ret', model='juan'):
     """
     Plot the average cross response during a month and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -668,10 +668,10 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days,
                                                               year, month, day)
 
                 load_day = pickle.load(open(''.join((
-                    '../taq_data_{2}/taq_cross_response_data_' + mod
-                    + '/taq_cross_response_data_' + mod + '_{2}{3}{4}_{0}i'
-                    + '_{1}j.pickle').split())
-                    .format(ticker_i, ticker_j, year, month, day), 'rb'))
+                    '../taq_data_{2}/taq_cross_response_data_{5}_{6}/taq_cross'
+                    + '_response_data_{5}_{6}_{2}{3}{4}_{0}i_{1}j.pickle')
+                    .split())
+                    .format(ticker_i, ticker_j, year, month, day, mod, model), 'rb'))
 
                 plot_data_month += load_day
 
@@ -701,7 +701,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days,
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools.taq_save_plot(function_name + '_' + mod, figure, ticker_i,
+        taq_data_tools.taq_save_plot(function_name + '_' + mod + '_' + model, figure, ticker_i,
                                      ticker_j, year, month)
 
         return None
