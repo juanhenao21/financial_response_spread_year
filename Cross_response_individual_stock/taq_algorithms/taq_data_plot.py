@@ -35,6 +35,8 @@ import pickle
 import taq_data_tools
 
 __tau__ = 1000
+__case__ = 'wang' # 'wang' or 'juan'
+__returns__ = 'ret' # 'ret' or 'log'
 
 # ----------------------------------------------------------------------------
 
@@ -370,7 +372,7 @@ def taq_self_response_month_avg_plot(ticker, year, month, days):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_plot(ticker, year, months, days, *, mod='ret', model='juan'):
+def taq_self_response_year_avg_plot(ticker, year, months, days, *, mod=__returns__, model=__case__):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -627,7 +629,7 @@ def taq_cross_response_month_avg_plot(ticker_i, ticker_j, year, month, days):
 
 
 def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days,
-                                     *, mod='ret', model='juan'):
+                                     *, mod=__returns__, model=__case__):
     """
     Plot the average cross response during a month and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data

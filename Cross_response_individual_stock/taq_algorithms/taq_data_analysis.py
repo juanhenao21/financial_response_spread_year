@@ -37,6 +37,8 @@ import pickle
 import taq_data_tools
 
 __tau__ = 1000
+__case__ = 'wang' # 'wang' or 'juan'
+__returns__ = 'ret' # 'ret' or 'log'
 
 # ----------------------------------------------------------------------------
 
@@ -276,7 +278,7 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_all_transactions_data(ticker, year, month, day, model='juan'):
+def taq_trade_signs_all_transactions_data(ticker, year, month, day, model=__case__):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (1) of https://arxiv.org/pdf/1603.01580.pdf.
@@ -342,7 +344,7 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day, model='juan'
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_full_time_data(ticker, year, month, day, model='juan'):
+def taq_trade_signs_full_time_data(ticker, year, month, day, model=__case__):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (2) and the identified trades obtained with equation (1)
@@ -408,8 +410,8 @@ def taq_trade_signs_full_time_data(ticker, year, month, day, model='juan'):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_data(ticker, year, month, day, *, mod='ret',
-                           model='juan'):
+def taq_self_response_data(ticker, year, month, day, *, mod=__returns__,
+                           model=__case__):
     """
     Obtain the self response function using the midpoint log returns
     and trade signs of the ticker during different time lags. Return an
@@ -482,7 +484,7 @@ def taq_self_response_data(ticker, year, month, day, *, mod='ret',
 
 
 def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
-                            *, mod='ret', model='juan'):
+                            *, mod=__returns__, model=__case__):
     """
     Obtain the cross response function using the midpoint log returns of
     ticker i and trade signs of ticker j during different time lags. The data

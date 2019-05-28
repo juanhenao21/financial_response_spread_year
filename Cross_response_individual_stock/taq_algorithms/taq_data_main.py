@@ -88,7 +88,7 @@ def taq_data_plot_generator(tickers, year, months, days):
     """
 
     # Basic folders
-    # taq_data_tools.taq_start_folders(year)
+    taq_data_tools.taq_start_folders(year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
