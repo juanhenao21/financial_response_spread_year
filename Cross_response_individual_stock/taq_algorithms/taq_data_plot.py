@@ -35,7 +35,7 @@ import pickle
 import taq_data_tools
 
 __tau__ = 1000
-__case__ = 'wang' # 'wang' or 'juan'
+__case__ = 'juan' # 'wang' or 'juan'
 __returns__ = 'ret' # 'ret' or 'log'
 
 # ----------------------------------------------------------------------------
