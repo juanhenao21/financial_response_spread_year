@@ -104,9 +104,8 @@ venv.bak/
 .mypy_cache/
 
 # Folders
-taq_data/csv_data_2008
-taq_data/hdf5_dayly_data_2008
-taq_data/pickle_dayly_data_2008
+taq_data/
+itch_data/
 
 itch_data/
 

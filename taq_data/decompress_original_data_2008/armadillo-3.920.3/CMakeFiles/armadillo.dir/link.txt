@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC   -Wl,--no-as-needed -shared -Wl,-soname,libarmadillo.so.3 -o libarmadillo.so.3.920.3 CMakeFiles/armadillo.dir/src/wrap_libs.cpp.o -lblas -llapack 

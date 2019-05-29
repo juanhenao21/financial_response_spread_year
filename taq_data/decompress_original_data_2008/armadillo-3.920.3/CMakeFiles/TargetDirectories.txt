@@ -1,0 +1,7 @@
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/install/strip.dir
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/install/local.dir
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/armadillo.dir
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/install.dir
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/list_install_components.dir
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/edit_cache.dir
+/scratch/jchenaol/econophysics/TAQ_2008/Program4DecompressData/armadillo-3.920.3/CMakeFiles/rebuild_cache.dir
