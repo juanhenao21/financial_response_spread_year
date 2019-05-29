@@ -104,16 +104,12 @@ venv.bak/
 .mypy_cache/
 
 # Folders
-ITCH_2008/
-ITCH_2016/
-TAQ_2008/
-Wang_results/
-Cross_response_individual_stock/itch_data_2008/
-Cross_response_individual_stock/itch_plot_2008/
-Cross_response_individual_stock/itch_data_2016/
-Cross_response_individual_stock/itch_plot_2016/
-Cross_response_individual_stock/taq_data_2008/
-Cross_response_individual_stock/taq_plot_2008/
+taq_data/csv_data_2008
+taq_data/hdf5_dayly_data_2008
+taq_data/pickle_dayly_data_2008
+
+itch_data/
+
 .vscode/
 
 # Other
