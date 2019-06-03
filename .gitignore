@@ -107,6 +107,9 @@ venv.bak/
 taq_data/
 itch_data/
 
+taq_plot/
+itch_plot/
+
 .vscode/
 
 # Other
