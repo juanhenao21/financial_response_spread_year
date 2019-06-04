@@ -37,8 +37,6 @@ import pickle
 import taq_data_tools
 
 __tau__ = 1000
-__case__ = 'juan' # 'wang' or 'juan'
-__returns__ = 'ret' # 'ret' or 'log'
 
 # ----------------------------------------------------------------------------
 
@@ -46,8 +44,8 @@ __returns__ = 'ret' # 'ret' or 'log'
 def taq_data_extract(ticker, year, month, day):
     """
     Extract the trades and quotes (TAQ) data for a day, from a CSV file with
-    the full information of a year. The time range for each day is from 9:40
-    to 15:50 (including both).
+    the full information of a year. The time range for each day is from 9:30
+    to 16:00 (including both).
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2008')
@@ -60,9 +58,11 @@ def taq_data_extract(ticker, year, month, day):
 
     # Load data
     date = '{}-{}-{}'.format(year, month, day)
-    quotes_filename = '../../TAQ_{1}/Data/{0}_{1}_NASDAQ_quotes.csv' \
+    quotes_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
+                               + '_NASDAQ_quotes.csv').split()) \
                       .format(ticker, year)
-    trades_filename = '../../TAQ_{1}/Data/{0}_{1}_NASDAQ_trades.csv' \
+    trades_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
+                               + '_NASDAQ_trades.csv').split()) \
                       .format(ticker, year)
     quotes_day_list = []
     trades_day_list = []
@@ -71,9 +71,9 @@ def taq_data_extract(ticker, year, month, day):
         for idx, line in enumerate(f_quotes):
             list_line = line.split()
             if (list_line[0] == date
-                    and list_line[1] >= '34800'
-                    and list_line[1] <= '57000'):
-                quotes_day_list.append(list_line[:4])
+                    and list_line[1] >= '34200'
+                    and list_line[1] <= '57600'):
+                quotes_day_list.append(list_line[:6])
 
     assert len(quotes_day_list) != 0
 
@@ -81,48 +81,55 @@ def taq_data_extract(ticker, year, month, day):
         for idx, line in enumerate(f_trades):
             list_line = line.split()
             if (list_line[0] == date
-                    and list_line[1] >= '34800'
-                    and list_line[1] <= '57000'):
-                trades_day_list.append(list_line[:3])
+                    and list_line[1] >= '34200'
+                    and list_line[1] <= '57600'):
+                trades_day_list.append(list_line[:4])
 
     assert len(trades_day_list) != 0
 
     quotes_df = pd.DataFrame(quotes_day_list,
-                             columns=['Date', 'Time', 'Bid', 'Ask'])
+                             columns=['Date', 'Time', 'Bid', 'Ask',
+                                      'Vol_Bid', 'Vol_Ask'])
     trades_df = pd.DataFrame(trades_day_list,
-                             columns=['Date', 'Time', 'Ask'])
+                             columns=['Date', 'Time', 'Ask', 'Vol_Ask'])
 
     # Data to arrays
     time_q = np.array(quotes_df['Time']).astype(int)
     bid_q = np.array(quotes_df['Bid']).astype(int)
     ask_q = np.array(quotes_df['Ask']).astype(int)
+    vol_bid_q = np.array(quotes_df['Vol_Bid']).astype(int)
+    vol_ask_q = np.array(quotes_df['Vol_Ask']).astype(int)
 
     time_t = np.array(trades_df['Time']).astype(int)
     ask_t = np.array(trades_df['Ask']).astype(int)
+    vol_ask_t = np.array(trades_df['Vol_Ask']).astype(int)
 
     if (not os.path.isdir('../../TAQ_{}/TAQ_py/'.format(year))):
 
         try:
 
-            os.mkdir('../../TAQ_{}/TAQ_py/'.format(year))
+            os.mkdir('../../taq_data/pickle_dayly_data_{}/'.format(year))
             print('Folder to save data created')
 
         except FileExistsError:
 
             print('Folder exists. The folder was not created')
 
-    pickle.dump((time_q, bid_q, ask_q),
-                open('../../TAQ_{1}/TAQ_py/TAQ_{0}_quotes_{1}{2}{3}.pickle'
+    pickle.dump((time_q, bid_q, ask_q, vol_bid_q, vol_ask_q),
+                open(''.join(('../../taq_data/pickle_dayly_data_2008/TAQ_{0}'
+                     + '_quotes_{1}{2}{3}.pickle').split())
                      .format(ticker, year, month, day), 'wb'))
 
-    pickle.dump((time_t, ask_t),
-                open('../../TAQ_{1}/TAQ_py/TAQ_{0}_trades_{1}{2}{3}.pickle'
+    pickle.dump((time_t, ask_t, vol_ask_t),
+                open(''.join(('../../taq_data/pickle_dayly_data_2008/TAQ_{0}'
+                     + '_trades_{1}{2}{3}.pickle').split())
                      .format(ticker, year, month, day), 'wb'))
 
     print('Data Saved')
     print()
 
-    return (time_q, bid_q, ask_q, time_t, ask_t)
+    return (time_q, bid_q, ask_q, vol_bid_q, vol_ask_q,
+            time_t, ask_t, vol_ask_t)
 
 # ----------------------------------------------------------------------------
 
@@ -148,7 +155,7 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
     time_q_, bid_q_, ask_q_ = pickle.load(open(
-        '../../TAQ_2008/TAQ_py/TAQ_{}_quotes_{}{}{}.pickle'
+        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_quotes_{1}{2}{3}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
     # Some files are corrupted, so there are some zero values that
@@ -170,7 +177,6 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     spread = ask_q - bid_q
 
     return time_q, bid_q, ask_q, midpoint, spread
-
 # ----------------------------------------------------------------------------
 
 
@@ -278,7 +284,7 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_all_transactions_data(ticker, year, month, day, model=__case__):
+def taq_trade_signs_all_transactions_data(ticker, year, month, day):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (1) of https://arxiv.org/pdf/1603.01580.pdf.
