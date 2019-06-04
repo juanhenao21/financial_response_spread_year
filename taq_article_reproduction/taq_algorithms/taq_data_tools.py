@@ -176,15 +176,17 @@ def taq_start_folders(year):
     docstring here
         :param year:
     """
-    if (not os.path.isdir('../taq_data_{}/'.format(year))
-            and not os.path.isdir('../taq_plot_{}/'.format(year))):
+    if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}'
+                          .format(year))
+            and not os.path.isdir('../taq_plot/taq_article_reproduction_{}'
+                                  .format(year))):
 
         try:
 
-            os.mkdir('../taq_data_{}/'
+            os.mkdir('../../taq_data/pickle_dayly_data_{}'
                      .format(year))
             print('Folder to save data created')
-            os.mkdir('../taq_plot_{}/'
+            os.mkdir('../taq_plot/taq_article_reproduction_{}'
                      .format(year))
             print('Folder to save data created')
 

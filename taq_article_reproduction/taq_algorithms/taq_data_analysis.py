@@ -111,7 +111,7 @@ def taq_data_extract(ticker, year, month, day):
     vol_ask_t = np.array(trades_df['Vol_Ask']).astype(int)
 
     # Save data
-    if (not os.path.isdir('../../TAQ_{}/TAQ_py/'.format(year))):
+    if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}/'.format(year))):
 
         try:
 

@@ -128,10 +128,10 @@ def taq_data_plot_generator(tickers, year, months, days):
             #              product(tickers, tickers, [year], [month],
             #                      [days[int(month) - 1]]))
 
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
-                     product(tickers, [year], [months], [days]))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
-                     product(tickers, tickers, [year], [months], [days]))
+        # pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
+        #              product(tickers, [year], [months], [days]))
+        # pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
+        #              product(tickers, tickers, [year], [months], [days]))
         # pool.starmap(taq_data_plot
         #              .taq_trade_sign_self_correlator_year_avg_plot,
         #              product(tickers, [year], [months], [days]))
