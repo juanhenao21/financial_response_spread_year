@@ -481,8 +481,7 @@ def taq_self_response_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
-                            *, mod=__returns__, model=__case__):
+def taq_cross_response_data(ticker_i, ticker_j, year, month, day):
     """
     Obtain the cross response function using the midpoint log returns of
     ticker i and trade signs of ticker j during different time lags. The data
@@ -495,8 +494,6 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
-        :param mod='log': select the midpoint price return. 'ret' for midpoint
-         price return and 'log' for midpoint price log return. Default 'log'
     """
     if (ticker_i == ticker_j):
 
@@ -513,20 +510,22 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
 
         # Load data
         midpoint_i = pickle.load(open(''.join((
-                '../taq_data_{1}/taq_midpoint_full_time_data/taq_midpoint_full'
-                + '_time_data_midpoint_{1}{2}{3}_{0}.pickle').split())
+                '../../taq_data/article_reproduction_data_{1}/taq_midpoint_'
+                + 'full_time_data/taq_midpoint_full_time_data_midpoint_{1}{2}'
+                + '{3}_{0}.pickle').split())
                 .format(ticker_i, year, month, day), 'rb'))
         trade_sign_j = pickle.load(open("".join((
-                '../taq_data_{1}/taq_trade_signs_full_time_data_{4}/taq_trade'
-                + '_signs_full_time_data_{4}_{1}{2}{3}_{0}.pickle').split())
-                .format(ticker_j, year, month, day, model), 'rb'))
+                '../../taq_data/article_reproduction_data_2008/taq_trade_'
+                + 'signs_full_time_data/taq_trade_signs_full_time_data'
+                + '_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker_j, year, month, day), 'rb'))
 
         assert len(midpoint_i) == len(trade_sign_j)
 
         # Array of the average of each tau. 10^3 s used by Wang
         cross_response_tau = np.zeros(__tau__)
 
-        # Calculating the midpoint log return and the cross response function
+        # Calculating the midpoint return and the cross response function
 
         # Depending on the tau value
         for tau_idx in range(__tau__):
@@ -536,17 +535,9 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
             # Obtain the midpoint log return. Displace the numerator tau
             # values to the right and compute the return
 
-            # midpoint price log returns
-            if (mod == 'log'):
-                log_return_i_sec = np.log(midpoint_i[tau_idx + 1:]
-                                          / midpoint_i[:-tau_idx - 1])
-
-            # midpoint price returns
-            elif (mod == 'ret'):
-
-                log_return_i_sec = (midpoint_i[tau_idx + 1:]
-                                    - midpoint_i[:-tau_idx - 1]) \
-                    / midpoint_i[:-tau_idx - 1]
+            log_return_i_sec = (midpoint_i[tau_idx + 1:]
+                                - midpoint_i[:-tau_idx - 1]) \
+                / midpoint_i[:-tau_idx - 1]
 
             # Obtain the cross response value
             if (trade_sign_no_0_len != 0):
@@ -556,9 +547,8 @@ def taq_cross_response_data(ticker_i, ticker_j, year, month, day,
 
         # Saving data
 
-        taq_data_tools.taq_save_data(function_name + '_' + mod + '_' + model,
-                                     cross_response_tau, ticker_i, ticker_j,
-                                     year, month, day)
+        taq_data_tools.taq_save_data(function_name, cross_response_tau,
+                                     ticker_i, ticker_j, year, month, day)
 
         return cross_response_tau
 
