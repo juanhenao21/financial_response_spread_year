@@ -161,7 +161,7 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
-    time_q_, bid_q_, ask_q_ = pickle.load(open(
+    time_q_, bid_q_, ask_q_, _, _ = pickle.load(open(
         '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_quotes_{1}{2}{3}.pickle'
         .format(ticker, year, month, day), 'rb'))
 
@@ -171,13 +171,6 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     time_q = time_q_[condition_1]
     bid_q = bid_q_[condition_1]
     ask_q = ask_q_[condition_1]
-    # Reproducing S. Wang values. In her results the time interval for the
-    # midpoint is [34800, 56999]
-    condition_2 = (time_q >= 34800) * \
-                  (time_q < 57000)
-    time_q = time_q[condition_2]
-    bid_q = bid_q[condition_2]
-    ask_q = ask_q[condition_2]
 
     assert len(bid_q) == len(ask_q)
 
@@ -313,8 +306,8 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
     using the equation (1) of https://arxiv.org/pdf/1603.01580.pdf.
     As the trades signs are not directly given by the TAQ data, they must be
     infered by the trades prices. For further calculations we use the whole
-    time range from the opening of the market at 9h40 to the closing at 15h50
-    in seconds (22200 seconds).
+    time range from the opening of the market at 9h30 to the closing at 16h00
+    in transactions.
         :param ticker: string of the abbreviation of the stock to be analized
          (i.e. 'AAPL')
         :param year: string of the year to be analized (i.e '2016')
@@ -328,19 +321,9 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
 
     # Load data
 
-    time_t, ask_t = pickle.load(open(
-        '../../TAQ_2008/TAQ_py/TAQ_{}_trades_{}{}{}.pickle'
+    time_t, ask_t, _ = pickle.load(open(
+        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_trades_{1}{2}{3}.pickle'
         .format(ticker, year, month, day), 'rb'))
-
-    # Reproducing S. Wang values. In her results the time interval for the
-    # trade signs is [34801, 57000]
-    if (model == 'juan'):
-        condition = time_t != 57000
-    elif (model == 'wang'):
-        condition = time_t != 34800
-
-    time_t = time_t[condition]
-    ask_t = ask_t[condition]
 
     # All the trades must have a price different to zero
     assert not np.sum(ask_t == 0)
@@ -369,7 +352,6 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
 
     return (time_t, ask_t, identified_trades)
 
-
 # ----------------------------------------------------------------------------
 
 
@@ -392,9 +374,6 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
-        :param model: time used in the trade signs, 'juan' means [34800, 56999]
-         and wang means [34801, 57000]
-
     """''
 
     function_name = taq_trade_signs_full_time_data.__name__
@@ -407,10 +386,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
 
     # Reproducing S. Wang values. In her results the time interval for the
     # trade signs is [34801, 57000]
-    if (model == 'juan'):
-        full_time = np.array(range(34800, 57000))
-    elif (model == 'wang'):
-        full_time = np.array(range(34801, 57001))
+    full_time = np.array(range(34801, 57001))
 
     trade_signs = 0. * full_time
     price_signs = 0. * full_time
@@ -431,8 +407,8 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
 
     # Saving data
 
-    taq_data_tools.taq_save_data(function_name + '_' + model, trade_signs,
-                                 ticker, ticker, year, month, day)
+    taq_data_tools.taq_save_data(function_name, trade_signs, ticker, ticker,
+                                 year, month, day)
 
     return (full_time, price_signs, trade_signs)
 
