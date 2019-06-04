@@ -380,6 +380,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
+    # Calculate the values of the trade signs for all the transactions
     (time_t, ask_t,
      identified_trades) = taq_trade_signs_all_transactions_data(ticker, year,
                                                                 month, day)
