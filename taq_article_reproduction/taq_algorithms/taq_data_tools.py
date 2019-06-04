@@ -36,13 +36,13 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     """
     # Saving data
 
-    if (not os.path.isdir('../taq_data_{1}/{0}/'
+    if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../taq_data_{1}/{0}/'.
-                     format(function_name, year))
+            os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+                     .format(function_name, year))
             print('Folder to save data created')
 
         except FileExistsError:
@@ -51,15 +51,17 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     if (ticker_i != ticker_j):
 
-        pickle.dump(data, open(
-            '../taq_data_{3}/{0}/{0}_{3}{4}{5}_{1}i_{2}j.pickle'
+        pickle.dump(data, open(''.join((
+            '../../taq_data/article_reproduction_data_{3}/{0}/{0}_{3}{4}{5}'
+            + '_{1}i_{2}j.pickle').split())
             .format(function_name, ticker_i, ticker_j, year, month, day),
             'wb'))
 
     else:
 
-        pickle.dump(data, open(
-            '../taq_data_{2}/{0}/{0}_{2}{3}{4}_{1}.pickle'
+        pickle.dump(data, open(''.join((
+            '../../taq_data/article_reproduction_data_{2}/{0}/{0}_{2}{3}{4}'
+            '_{1}.pickle').split())
             .format(function_name, ticker_i, year, month, day), 'wb'))
 
     print('Data Saved')
