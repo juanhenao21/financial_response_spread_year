@@ -416,8 +416,7 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_data(ticker, year, month, day, *, mod=__returns__,
-                           model=__case__):
+def taq_self_response_data(ticker, year, month, day):
     """
     Obtain the self response function using the midpoint log returns
     and trade signs of the ticker during different time lags. Return an
@@ -427,8 +426,6 @@ def taq_self_response_data(ticker, year, month, day, *, mod=__returns__,
         :param year: string of the year to be analized (i.e '2016')
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
-        :param mod='log': select the midpoint price return. 'ret' for midpoint
-         price return and 'log' for midpoint price log return. Default 'log'
     """
 
     function_name = taq_self_response_data.__name__
@@ -438,13 +435,15 @@ def taq_self_response_data(ticker, year, month, day, *, mod=__returns__,
 
     # Load data
     midpoint = pickle.load(open(''.join((
-            '../taq_data_{1}/taq_midpoint_full_time_data/taq_midpoint_full'
-            + '_time_data_midpoint_{1}{2}{3}_{0}.pickle').split())
+            '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
+            + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
+            + '{2}{3}_{0}.pickle').split())
             .format(ticker, year, month, day), 'rb'))
     trade_sign = pickle.load(open("".join((
-            '../taq_data_{1}/taq_trade_signs_full_time_data_{4}/taq_trade'
-            + '_signs_full_time_data_{4}_{1}{2}{3}_{0}.pickle').split())
-            .format(ticker, year, month, day, model), 'rb'))
+            '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
+            + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
+            + '{0}.pickle').split())
+            .format(ticker, year, month, day), 'rb'))
 
     assert len(midpoint) == len(trade_sign)
 
@@ -461,17 +460,11 @@ def taq_self_response_data(ticker, year, month, day, *, mod=__returns__,
         # Obtain the midpoint log return. Displace the numerator tau
         # values to the right and compute the return
 
-        # midpoint price log returns
-        if (mod == 'log'):
-            log_return_sec = np.log(midpoint[tau_idx + 1:]
-                                    / midpoint[:-tau_idx - 1])
-
         # midpoint price returns
-        elif (mod == 'ret'):
 
-            log_return_sec = (midpoint[tau_idx + 1:]
-                              - midpoint[:-tau_idx - 1]) \
-                / midpoint[:-tau_idx - 1]
+        log_return_sec = (midpoint[tau_idx + 1:]
+                          - midpoint[:-tau_idx - 1]) \
+            / midpoint[:-tau_idx - 1]
 
         # Obtain the self response value
         if (trade_sign_no_0_len != 0):
@@ -480,9 +473,8 @@ def taq_self_response_data(ticker, year, month, day, *, mod=__returns__,
 
     # Saving data
     # midpoint price log returns
-    taq_data_tools.taq_save_data(function_name + '_' + mod + '_' + model,
-                                 self_response_tau, ticker, ticker, year,
-                                 month, day)
+    taq_data_tools.taq_save_data(function_name, self_response_tau, ticker,
+                                 ticker, year, month, day)
 
     return self_response_tau
 
