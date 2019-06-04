@@ -52,11 +52,13 @@ def taq_data_extract(ticker, year, month, day):
         :param month: string of the month to be analized (i.e '07')
         :param day: string of the day to be analized (i.e '07')
     """
+
     function_name = taq_data_extract.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
     # Load data
+    # Date of the day to be saved
     date = '{}-{}-{}'.format(year, month, day)
     quotes_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
                                + '_NASDAQ_quotes.csv').split()) \
@@ -67,6 +69,7 @@ def taq_data_extract(ticker, year, month, day):
     quotes_day_list = []
     trades_day_list = []
 
+    # Read line per line
     with open(quotes_filename) as f_quotes:
         for idx, line in enumerate(f_quotes):
             list_line = line.split()
@@ -87,13 +90,14 @@ def taq_data_extract(ticker, year, month, day):
 
     assert len(trades_day_list) != 0
 
+    # Pandas dataframes with the filtered data
     quotes_df = pd.DataFrame(quotes_day_list,
                              columns=['Date', 'Time', 'Bid', 'Ask',
                                       'Vol_Bid', 'Vol_Ask'])
     trades_df = pd.DataFrame(trades_day_list,
                              columns=['Date', 'Time', 'Ask', 'Vol_Ask'])
 
-    # Data to arrays
+    # Dataframes to arrays
     time_q = np.array(quotes_df['Time']).astype(int)
     bid_q = np.array(quotes_df['Bid']).astype(int)
     ask_q = np.array(quotes_df['Ask']).astype(int)
@@ -104,6 +108,7 @@ def taq_data_extract(ticker, year, month, day):
     ask_t = np.array(trades_df['Ask']).astype(int)
     vol_ask_t = np.array(trades_df['Vol_Ask']).astype(int)
 
+    # Save data
     if (not os.path.isdir('../../TAQ_{}/TAQ_py/'.format(year))):
 
         try:
