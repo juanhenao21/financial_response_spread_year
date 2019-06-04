@@ -37,6 +37,8 @@ import pickle
 import taq_data_tools
 
 __tau__ = 1000
+__case__ = 'a'
+__returns__ = 'b'
 
 # ----------------------------------------------------------------------------
 
@@ -142,8 +144,8 @@ def taq_data_extract(ticker, year, month, day):
 def taq_midpoint_all_transactions_data(ticker, year, month, day):
     """
     Obtain the midpoint price from the TAQ data for all the transactions.
-    For further calculations we use the full time range from 9h40 to 15h50 in
-    seconds (22200 seconds).
+    For further calculations, the function returns the values for the time
+    range from 9h40 to 15h50 in transactions.
     Return best bid, best ask, spread, midpoint price and time.
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')sys
@@ -171,7 +173,8 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     ask_q = ask_q_[condition_1]
     # Reproducing S. Wang values. In her results the time interval for the
     # midpoint is [34800, 56999]
-    condition_2 = time_q != 57000
+    condition_2 = (time_q >= 34800) * \
+                  (time_q < 57000)
     time_q = time_q[condition_2]
     bid_q = bid_q[condition_2]
     ask_q = ask_q[condition_2]
@@ -182,6 +185,7 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     spread = ask_q - bid_q
 
     return time_q, bid_q, ask_q, midpoint, spread
+
 # ----------------------------------------------------------------------------
 
 
@@ -204,6 +208,7 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
+    # Calculate the values of the midpoint price for all the transactions
     (time_q, bid_q, ask_q,
      midpoint, spread) = taq_midpoint_all_transactions_data(ticker, year,
                                                             month, day)
@@ -261,24 +266,37 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
 
     # Saving data
 
-    if (not os.path.isdir('../taq_data_{1}/{0}/'.format(function_name, year))):
+    if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+                          .format(function_name, year))):
 
-        os.mkdir('../taq_data_{1}/{0}/'.format(function_name, year))
+        os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+                 .format(function_name, year))
         print('Folder to save data created')
 
     pickle.dump(ask_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_ask_{2}{3}{4}_{1}.pickle'
+                open(''.join((
+                     '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                     + '_ask_{2}{3}{4}_{1}.pickle').split())
                      .format(function_name, ticker, year, month, day), 'wb'))
     pickle.dump(bid_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_bid_{2}{3}{4}_{1}.pickle'
+                open(''.join((
+                     '../../taq_data/article_reproduction_data_{2}/{0}/{0}_bid'
+                     + '_{2}{3}{4}_{1}.pickle').split())
                      .format(function_name, ticker, year, month, day), 'wb'))
     pickle.dump(spread_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_spread_{2}{3}{4}_{1}.pickle'
+                open(''.join((
+                     '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                     + '_spread_{2}{3}{4}_{1}.pickle').split())
                      .format(function_name, ticker, year, month, day), 'wb'))
-    pickle.dump(full_time, open('../taq_data_{1}/{0}/{0}_time.pickle'
-                                .format(function_name, year), 'wb'))
+    pickle.dump(full_time,
+                open(''.join((
+                     '../../taq_data/article_reproduction_data_{1}/{0}/{0}'
+                     + '_time.pickle').split())
+                     .format(function_name, year), 'wb'))
     pickle.dump(midpoint_last_val / 10000,
-                open('../taq_data_{2}/{0}/{0}_midpoint_{2}{3}{4}_{1}.pickle'
+                open(''.join((
+                     '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                     '_midpoint_{2}{3}{4}_{1}.pickle').split())
                      .format(function_name, ticker, year, month, day), 'wb'))
 
     print('Data saved')
@@ -355,7 +373,7 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_full_time_data(ticker, year, month, day, model=__case__):
+def taq_trade_signs_full_time_data(ticker, year, month, day):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (2) and the identified trades obtained with equation (1)
