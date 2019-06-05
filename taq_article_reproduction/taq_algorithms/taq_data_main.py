@@ -41,13 +41,9 @@ def taq_data_source(tickers, year):
 
     # Parallel computing
 
-    try:
-        with mp.Pool(processes=mp.cpu_count()) as pool:
-            pool.starmap(taq_data_analysis.taq_data_extract,
-                    product(tickers, date_list))
-    except AssertionError:
-        print('No data')
-        print()
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_analysis.taq_data_extract,
+                product(tickers, date_list))
 
     # for ticker in tickers:
     #     for date in date_list:
@@ -139,7 +135,7 @@ def main():
 
     # subprocess.call(['./TAQ_extraction.sh'])
 
-    taq_data_source(tickers, '2008')
+    # taq_data_source(tickers, '2008')
 
     folder_path = '../../taq_data/pickle_dayly_data_2008/'
     year = '2008'
