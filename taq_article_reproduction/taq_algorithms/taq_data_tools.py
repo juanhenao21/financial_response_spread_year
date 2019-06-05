@@ -15,6 +15,7 @@ juan.henao-londono@stud.uni-due.de
 from matplotlib import pyplot as plt
 import numpy as np
 import os
+import pandas as pd
 
 import pickle
 
@@ -243,6 +244,24 @@ def months_days_list(folder_path, ticker, year):
         days_list += [days_month]
 
     return(months_list, days_list)
+
+# -----------------------------------------------------------------------------
+
+
+def taq_bussiness_days(year):
+    """
+    Generate a list with the dates of the bussiness days in a year
+        :param year: string of the year to be analized (i.e '2008')
+    """
+    init_date = '01/01/{}'.format(year)
+    last_date = '12/31/{}'.format(year)
+
+    # Use only the bussiness days
+    dt = pd.date_range(start=init_date, end=last_date, freq='B')
+    dt_df = dt.to_frame(index=False)
+    date_list = dt_df[0].astype(str).tolist()
+
+    return date_list
 
 # -----------------------------------------------------------------------------
 

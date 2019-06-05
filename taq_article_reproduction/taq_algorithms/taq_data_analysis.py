@@ -187,7 +187,7 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_midpoint_full_time_data(ticker, year, month, day):
+def taq_midpoint_full_time_data(ticker, date):
     """
     Obtain the midpoint price from the TAQ data for a complete day. For further
     calculations we use the full time range from 9h40 to 15h50 in seconds
@@ -197,10 +197,15 @@ def taq_midpoint_full_time_data(ticker, year, month, day):
     best ask, spread, midpoint price and time. Return midpoint price array.
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
+        :param date: string with the date of the data to be extracted
+         (i.e. '2008-01-02')
     """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
 
     function_name = taq_midpoint_full_time_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
@@ -360,7 +365,7 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_full_time_data(ticker, year, month, day):
+def taq_trade_signs_full_time_data(ticker, date):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (2) and the identified trades obtained with equation (1)
@@ -376,10 +381,15 @@ def taq_trade_signs_full_time_data(ticker, year, month, day):
          (i.e. 'AAPL')
         :param identified_trades: array of the trade signs from all the
          transactions (i.e. numpy.array())
-        :param year: string of the year to be analized (i.e '2016')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
-    """''
+        :param date: string with the date of the data to be extracted
+         (i.e. '2008-01-02')
+    """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
 
     function_name = taq_trade_signs_full_time_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
