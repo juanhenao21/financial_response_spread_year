@@ -43,17 +43,22 @@ __returns__ = 'b'
 # ----------------------------------------------------------------------------
 
 
-def taq_data_extract(ticker, year, month, day):
+def taq_data_extract(ticker, date):
     """
     Extract the trades and quotes (TAQ) data for a day, from a CSV file with
     the full information of a year. The time range for each day is from 9:30
     to 16:00 (including both).
         :param ticker: string of the abbreviation of the stock to be analized
                        (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
+        :param date: string with the date of the data to be extracted
+         (i.e. '2008-01-02')
     """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
 
     function_name = taq_data_extract.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
