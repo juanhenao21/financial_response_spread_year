@@ -87,12 +87,12 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     """
     # Saving data
 
-    if (not os.path.isdir('../taq_plot_{1}/{0}/'
+    if (not os.path.isdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../taq_plot_{1}/{0}/'
+            os.mkdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -103,13 +103,13 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../taq_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
+            '../../taq_plot/article_reproduction_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
             .format(function_name, ticker_i, ticker_j, year, month))
 
     else:
 
         figure.savefig(
-            '../taq_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
+            '../../taq_plot/article_reproduction_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
             .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
