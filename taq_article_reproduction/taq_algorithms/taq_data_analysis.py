@@ -68,11 +68,11 @@ def taq_data_extract(ticker, date):
         # Date of the day to be saved
         date = '{}-{}-{}'.format(year, month, day)
         quotes_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
-                                + '_NASDAQ_quotes.csv').split()) \
-                        .format(ticker, year)
+                                   + '_NASDAQ_quotes.csv')
+                                  .split()).format(ticker, year)
         trades_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
-                                + '_NASDAQ_trades.csv').split()) \
-                        .format(ticker, year)
+                                   + '_NASDAQ_trades.csv')
+                                  .split()).format(ticker, year)
         quotes_day_list = []
         trades_day_list = []
 
@@ -99,10 +99,10 @@ def taq_data_extract(ticker, date):
 
         # Pandas dataframes with the filtered data
         quotes_df = pd.DataFrame(quotes_day_list,
-                                columns=['Date', 'Time', 'Bid', 'Ask',
-                                        'Vol_Bid', 'Vol_Ask'])
+                                 columns=['Date', 'Time', 'Bid', 'Ask',
+                                          'Vol_Bid', 'Vol_Ask'])
         trades_df = pd.DataFrame(trades_day_list,
-                                columns=['Date', 'Time', 'Ask', 'Vol_Ask'])
+                                 columns=['Date', 'Time', 'Ask', 'Vol_Ask'])
 
         # Dataframes to arrays
         time_q = np.array(quotes_df['Time']).astype(int)
@@ -116,7 +116,8 @@ def taq_data_extract(ticker, date):
         vol_ask_t = np.array(trades_df['Vol_Ask']).astype(int)
 
         # Save data
-        if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}/'.format(year))):
+        if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}/'
+                              .format(year))):
 
             try:
 
@@ -128,14 +129,14 @@ def taq_data_extract(ticker, date):
                 print('Folder exists. The folder was not created')
 
         pickle.dump((time_q, bid_q, ask_q, vol_bid_q, vol_ask_q),
-                    open(''.join(('../../taq_data/pickle_dayly_data_2008/TAQ_{0}'
-                        + '_quotes_{1}{2}{3}.pickle').split())
-                        .format(ticker, year, month, day), 'wb'))
+                    open(''.join(('../../taq_data/pickle_dayly_data_2008/'
+                         + 'TAQ_{0}_quotes_{1}{2}{3}.pickle').split())
+                         .format(ticker, year, month, day), 'wb'))
 
         pickle.dump((time_t, ask_t, vol_ask_t),
-                    open(''.join(('../../taq_data/pickle_dayly_data_2008/TAQ_{0}'
-                        + '_trades_{1}{2}{3}.pickle').split())
-                        .format(ticker, year, month, day), 'wb'))
+                    open(''.join(('../../taq_data/pickle_dayly_data_2008/'
+                         + 'TAQ_{0}_trades_{1}{2}{3}.pickle').split())
+                         .format(ticker, year, month, day), 'wb'))
 
         print('Data Saved')
         print()
@@ -220,7 +221,7 @@ def taq_midpoint_full_time_data(ticker, date):
 
         # Calculate the values of the midpoint price for all the transactions
         (time_q, bid_q, ask_q,
-        midpoint, spread) = taq_midpoint_all_transactions_data(ticker, year,
+         midpoint, spread) = taq_midpoint_all_transactions_data(ticker, year,
                                                                 month, day)
 
         # 34800 s = 9h40 - 57000 s = 15h50
@@ -244,25 +245,16 @@ def taq_midpoint_full_time_data(ticker, date):
         spread_last_val = 0. * full_time
         spread_last_val[-1] = spread[0]
 
-        count = 0
-
         for t_idx, t_val in enumerate(full_time):
 
-            length = len(time_q)
+            condition = time_q == t_val
 
-            if (count < length and t_val == time_q[count]):
+            if (np.sum(condition)):
 
-                count += 1
-
-                while (count < length and
-                    time_q[count - 1] == time_q[count]):
-
-                    count += 1
-
-                midpoint_last_val[t_idx] = midpoint[count - 1]
-                ask_last_val[t_idx] = ask_q[count - 1]
-                bid_last_val[t_idx] = bid_q[count - 1]
-                spread_last_val[t_idx] = spread[count - 1]
+                midpoint_last_val[t_idx] = midpoint[condition][-1]
+                ask_last_val[t_idx] = ask_q[condition][-1]
+                bid_last_val[t_idx] = bid_q[condition][-1]
+                spread_last_val[t_idx] = spread[condition][-1]
 
             else:
 
@@ -276,38 +268,43 @@ def taq_midpoint_full_time_data(ticker, date):
 
         # Saving data
 
-        if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
-                            .format(function_name, year))):
+        if (not os.path.isdir(''.join(('../../taq_data/article_reproduction'
+                                       + '_data_{1}/{0}/').split())
+                              .format(function_name, year))):
 
             os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
-                    .format(function_name, year))
+                     .format(function_name, year))
             print('Folder to save data created')
 
         pickle.dump(ask_last_val / 10000,
                     open(''.join((
-                        '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                        + '_ask_{2}{3}{4}_{1}.pickle').split())
-                        .format(function_name, ticker, year, month, day), 'wb'))
+                         '../../taq_data/article_reproduction_data_{2}/{0}/'
+                         + '{0}_ask_{2}{3}{4}_{1}.pickle').split())
+                         .format(function_name, ticker, year, month, day),
+                         'wb'))
         pickle.dump(bid_last_val / 10000,
                     open(''.join((
-                        '../../taq_data/article_reproduction_data_{2}/{0}/{0}_bid'
-                        + '_{2}{3}{4}_{1}.pickle').split())
-                        .format(function_name, ticker, year, month, day), 'wb'))
+                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                         + '_bid_{2}{3}{4}_{1}.pickle').split())
+                         .format(function_name, ticker, year, month, day),
+                         'wb'))
         pickle.dump(spread_last_val / 10000,
                     open(''.join((
-                        '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                        + '_spread_{2}{3}{4}_{1}.pickle').split())
-                        .format(function_name, ticker, year, month, day), 'wb'))
+                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                         + '_spread_{2}{3}{4}_{1}.pickle').split())
+                         .format(function_name, ticker, year, month, day),
+                         'wb'))
         pickle.dump(full_time,
                     open(''.join((
-                        '../../taq_data/article_reproduction_data_{1}/{0}/{0}'
-                        + '_time.pickle').split())
-                        .format(function_name, year), 'wb'))
+                         '../../taq_data/article_reproduction_data_{1}/{0}/{0}'
+                         + '_time.pickle').split())
+                         .format(function_name, year), 'wb'))
         pickle.dump(midpoint_last_val / 10000,
                     open(''.join((
-                        '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                        '_midpoint_{2}{3}{4}_{1}.pickle').split())
-                        .format(function_name, ticker, year, month, day), 'wb'))
+                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                         '_midpoint_{2}{3}{4}_{1}.pickle').split())
+                         .format(function_name, ticker, year, month, day),
+                         'wb'))
 
         print('Data saved')
         print()
@@ -411,8 +408,10 @@ def taq_trade_signs_full_time_data(ticker, date):
 
         # Calculate the values of the trade signs for all the transactions
         (time_t, ask_t,
-        identified_trades) = taq_trade_signs_all_transactions_data(ticker, year,
-                                                                    month, day)
+         identified_trades) = taq_trade_signs_all_transactions_data(ticker,
+                                                                    year,
+                                                                    month,
+                                                                    day)
 
         # Reproducing S. Wang values. In her results the time interval for the
         # trade signs is [34801, 57000]
@@ -437,8 +436,8 @@ def taq_trade_signs_full_time_data(ticker, date):
 
         # Saving data
 
-        taq_data_tools.taq_save_data(function_name, trade_signs, ticker, ticker,
-                                    year, month, day)
+        taq_data_tools.taq_save_data(function_name, trade_signs, ticker,
+                                     ticker, year, month, day)
 
         return (full_time, price_signs, trade_signs)
 
@@ -469,8 +468,8 @@ def taq_self_response_data(ticker, date):
 
     function_name = taq_self_response_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                ticker, year, month,
-                                                day)
+                                                  ticker, year, month,
+                                                  day)
 
     try:
 
@@ -504,18 +503,19 @@ def taq_self_response_data(ticker, date):
             # midpoint price returns
 
             log_return_sec = (midpoint[tau_idx + 1:]
-                            - midpoint[:-tau_idx - 1]) \
+                              - midpoint[:-tau_idx - 1]) \
                 / midpoint[:-tau_idx - 1]
 
             # Obtain the self response value
             if (trade_sign_no_0_len != 0):
                 product = log_return_sec * trade_sign_tau
-                self_response_tau[tau_idx] = np.sum(product) / trade_sign_no_0_len
+                self_response_tau[tau_idx] = (np.sum(product)
+                                              / trade_sign_no_0_len)
 
         # Saving data
         # midpoint price log returns
         taq_data_tools.taq_save_data(function_name, self_response_tau, ticker,
-                                    ticker, year, month, day)
+                                     ticker, year, month, day)
 
         return self_response_tau
 
@@ -558,15 +558,15 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
         try:
 
             function_name = taq_cross_response_data.__name__
-            taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
-                                                        ticker_j, year, month,
-                                                        day)
+            taq_data_tools.taq_function_header_print_data(function_name,
+                                                          ticker_i, ticker_j,
+                                                          year, month, day)
 
             # Load data
             midpoint_i = pickle.load(open(''.join((
-                    '../../taq_data/article_reproduction_data_{1}/taq_midpoint_'
-                    + 'full_time_data/taq_midpoint_full_time_data_midpoint_{1}{2}'
-                    + '{3}_{0}.pickle').split())
+                    '../../taq_data/article_reproduction_data_{1}/taq'
+                    + '_midpoint_full_time_data/taq_midpoint_full_time_data'
+                    + '_midpoint_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
             trade_sign_j = pickle.load(open("".join((
                     '../../taq_data/article_reproduction_data_2008/taq_trade_'
@@ -597,12 +597,12 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
                 if (trade_sign_no_0_len != 0):
                     product = log_return_i_sec * trade_sign_tau
                     cross_response_tau[tau_idx] = (np.sum(product)
-                                                / trade_sign_no_0_len)
+                                                   / trade_sign_no_0_len)
 
             # Saving data
 
             taq_data_tools.taq_save_data(function_name, cross_response_tau,
-                                        ticker_i, ticker_j, year, month, day)
+                                         ticker_i, ticker_j, year, month, day)
 
             return cross_response_tau
 
