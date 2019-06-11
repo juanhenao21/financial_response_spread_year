@@ -427,7 +427,7 @@ def taq_self_response_year_avg_plot(ticker, year, months, days):
                  .format(ticker, year))
 
     plt.ylim(0, 2 * 10 ** -4)
-    plt.xlim(0, __tau__)
+    plt.xlim(1, __tau__)
     plt.xlabel(r'Time lag $[\tau]$')
     plt.ylabel(r'Self response $ R_{ij} (\tau) $')
     plt.legend(loc='best')
@@ -697,7 +697,7 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year, months, days):
                      .format(ticker_i, ticker_j, month))
 
         plt.ylim(0, 10 ** -4)
-        plt.xlim(0, __tau__)
+        plt.xlim(1, __tau__)
         plt.xlabel(r'Time lag $[\tau]$')
         plt.ylabel(r'Cross response $ R_{ij} (\tau) $')
         plt.legend(loc='best')
