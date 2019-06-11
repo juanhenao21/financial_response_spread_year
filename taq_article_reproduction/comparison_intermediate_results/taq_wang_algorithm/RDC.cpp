@@ -13,6 +13,20 @@
  Run Command: ./a.out XXX YYY (e.g. ./a.out AAPL MSFT)
 
  @author Shanshan Wang (shanshan.wang@uni-due.de)
+
+ -.-.-
+
+ This file was modified to make clear the computing process and to compare results of small parts of the code.
+
+ Compile Command:
+
+    g++ RDC.cpp -std=c++11 -lboost_date_time -lz -Iarmadillo-3.920.3/include -o cross.out
+
+ Run Command
+
+    ./cross.out XXX YYY (eg. ./cross.out AAPL MSFT)
+
+ @modified Juan Henao (juan.henao-londono@stud.uni-due.de)
 **/
 
 
@@ -75,10 +89,10 @@ int main(int argc, const char *argv[])
         exit(0);
     }
 
-    std::string filename1_trades = filename1 + "_2008_NASDAQ.trades";
-    std::string filename1_quotes = filename1 + "_2008_NASDAQ.quotes";
-    std::string filename2_trades = filename2 + "_2008_NASDAQ.trades";
-    std::string filename2_quotes = filename2 + "_2008_NASDAQ.quotes";
+    std::string filename1_trades = "../../../taq_data/original_year_data_2008/" + filename1 + "_2008_NASDAQ.trades";
+    std::string filename1_quotes = "../../../taq_data/original_year_data_2008/" + filename1 + "_2008_NASDAQ.quotes";
+    std::string filename2_trades = "../../../taq_data/original_year_data_2008/" + filename2 + "_2008_NASDAQ.trades";
+    std::string filename2_quotes = "../../../taq_data/original_year_data_2008/" + filename2 + "_2008_NASDAQ.quotes";
 
     tas::TASIndexMap index1_trades;
     tas::TASIndexMap index1_quotes;
@@ -99,7 +113,10 @@ int main(int argc, const char *argv[])
 
     std::vector<vector<double> >Date1_t, Price1_t, Volume1_t, E1;
 
-    std::string nameP = "/scratch/jchenaol/econophysics/Wang_results/Data/Detail/" + filename1 + "prices_all_transactions.txt";
+    // Name of the folder and the file with the data of all the transactions for one day. I took the
+    // first day in the data (2008-01-02) to simplify the analysis. However the code can be modified
+    // to analyze other days.
+    std::string nameP = "/scratch/jchenaol/econophysics/taq_data/article_reproduction_data_2008/wang/" + filename1 + "trade_signs_transactions.txt";
     cout.open(nameP.c_str());
 
     int count_juan = 0;
@@ -153,17 +170,13 @@ int main(int argc, const char *argv[])
             Volume1_t.push_back(volume1_t);
             E1.push_back(e1);
 
-            //std::cout << "Day " << Date1_t.size() << endl;
-
-            //std::cout << count_juan << endl;
             count_juan = 0;
 
             if (Date1_t.size() == pos)
             {
-                std::string name1t = "/scratch/jchenaol/econophysics/Wang_results/Data/Detail/" + filename1 + "trade_signs.txt";
+                // Trade signs all trading day
+                std::string name1t = "/scratch/jchenaol/econophysics/taq_data/article_reproduction_data_2008/wang/" + filename1 + "trade_signs_seconds.txt";
                 cout.open(name1t.c_str());
-
-                //std::cout << "I am in day " << Date1_t.size() << endl;
 
                 for (int i = 0; i < day1_t.size(); i++){
                     cout << i << "   " << Date1_t[pos - 1][i] <<"   "<< Price1_t[pos - 1][i] <<"   "<< E1[pos - 1][i] << endl;
@@ -184,7 +197,7 @@ int main(int argc, const char *argv[])
 
     std::vector<vector<double> >Date1_q, Mid1_q, Spread1_q;
 
-    std::string nameM = "/scratch/jchenaol/econophysics/Wang_results/Data/Detail/" + filename1 + "midpoint_all_transactions.txt";
+    std::string nameM = "/scratch/jchenaol/econophysics/taq_data/article_reproduction_data_2008/wang/" + filename1 + "midpoint_transactions.txt";
     cout.open(nameM.c_str());
 
 
@@ -237,7 +250,7 @@ int main(int argc, const char *argv[])
 
     // Print midpoint
 
-    std::string name1q = "/scratch/jchenaol/econophysics/Wang_results/Data/Detail/" + filename1 + "midpoint.txt";
+    std::string name1q = "/scratch/jchenaol/econophysics/taq_data/article_reproduction_data_2008/wang/" + filename1 + "midpoint_seconds.txt";
 
     cout.open(name1q.c_str());
 
@@ -341,13 +354,13 @@ int main(int argc, const char *argv[])
 
     //caculate the response function, sign correlation------------------------------------------------
 
-    int L=1000, ix=0;
+    int L=1000;
     unsigned long num = 0;
     double Rm, Cor;
     double R = 0;
     double C0 = 0;
 
-    std::string name = "/scratch/jchenaol/econophysics/Wang_results/Data/Detail/" + filename1 + "-2" + filename2 + "_2008_RDC_L=1000.txt";
+    std::string name = "/scratch/jchenaol/econophysics/taq_data/article_reproduction_data_2008/wang/" + filename1 + "_" + filename2 + "_2008_RDC_L=1000.txt";
 
     cout.open(name.c_str());
 
@@ -362,14 +375,8 @@ int main(int argc, const char *argv[])
 
                     num++;
                 }
-            if (i > 1){ix++;}
             }
-
-        if(ix < 2){
-            std::cout << R << "   " << num << endl;
-                }
         }
-
 
         Rm = R / num;
         Cor = C0 / num;
@@ -389,4 +396,3 @@ int main(int argc, const char *argv[])
 
     return 0;
 }
-
