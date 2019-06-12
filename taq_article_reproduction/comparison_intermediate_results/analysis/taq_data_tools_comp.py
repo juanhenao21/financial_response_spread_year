@@ -1,0 +1,113 @@
+'''
+TAQ data tools
+
+Module with functions that help to make more readable the modules.
+
+Juan Camilo Henao Londono
+juan.henao-londono@stud.uni-due.de
+'''
+
+# TO DO: Docstrings!
+
+# -----------------------------------------------------------------------------------------------------------------------
+# Modules
+
+from matplotlib import pyplot as plt
+import numpy as np
+import os
+import pandas as pd
+
+import pickle
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
+    """
+    Save the data generated in taq_data_analysis module.
+        :param function_name: name of the function that generates the data
+        :param data: python data to be saved
+        :param ticker_i: string of the abbreviation of the stock to be analized
+         (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the stock to be analized
+         (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+    """
+    # Saving data
+
+    if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+                          .format(function_name, year))):
+
+        try:
+
+            os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+                     .format(function_name, year))
+            print('Folder to save data created')
+
+        except FileExistsError:
+
+            print('Folder exists. The folder was not created')
+
+    if (ticker_i != ticker_j):
+
+        pickle.dump(data, open(''.join((
+            '../../taq_data/article_reproduction_data_{3}/{0}/{0}_{3}{4}{5}'
+            + '_{1}i_{2}j.pickle').split())
+            .format(function_name, ticker_i, ticker_j, year, month, day),
+            'wb'))
+
+    else:
+
+        pickle.dump(data, open(''.join((
+            '../../taq_data/article_reproduction_data_{2}/{0}/{0}_{2}{3}{4}'
+            '_{1}.pickle').split())
+            .format(function_name, ticker_i, year, month, day), 'wb'))
+
+    print('Data Saved')
+    print()
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
+                                   month, day):
+    """
+    docstring here
+        :param function_name:
+        :param ticker_i:
+        :param ticker_j:
+        :param year:
+        :param month:
+        :param day:
+    """
+
+    print('TAQ data')
+    print(function_name)
+
+    if (ticker_i != ticker_j):
+        print('Processing data for the stock i ' + ticker_i + ' and stock j '
+              + ticker_j + ' the ' + year + '.' + month + '.' + day)
+    else:
+        print('Processing data for the stock ' + ticker_i + ' the ' + year
+              + '.' + month + '.' + day)
+
+    return None
+
+# -----------------------------------------------------------------------------------------------------------------------
+
+
+def main():
+    folder_path = '../../TAQ_2008/TAQ_py/'
+    a, b = months_days_list(folder_path, 'AAPL')
+    print(a)
+    print(b)
+
+# -----------------------------------------------------------------------------
+
+
+if __name__ == '__main__':
+    main()
