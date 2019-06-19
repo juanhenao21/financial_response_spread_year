@@ -381,7 +381,7 @@ int main(int argc, const char *argv[])
         Rm = R / num;
         Cor = C0 / num;
 
-        cout << l << "   " << fixed << setprecision(10) << Rm<<"   "<< Cor << "   " << num << endl;
+        cout << l << "   " << fixed << setprecision(10) << Rm <<"   "<< Cor << "   " << num << endl;
 
         R = 0;
         C0 = 0;

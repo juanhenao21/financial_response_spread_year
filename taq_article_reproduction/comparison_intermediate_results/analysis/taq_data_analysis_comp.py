@@ -61,9 +61,9 @@ def taq_midpoint_all_transactions_data(ticker, year, month, day):
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
-    time_q_, bid_q_, ask_q_, _, _ = pickle.load(open(__n_path__ +
-        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_quotes_{1}{2}{3}.pickle'
-        .format(ticker, year, month, day), 'rb'))
+    time_q_, bid_q_, ask_q_, _, _ = pickle.load(open(
+        '{4}../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_quotes_{1}{2}{3}.pickle'
+        .format(ticker, year, month, day, __n_path__), 'rb'))
 
     # Some files are corrupted, so there are some zero values that
     # does not have sense
@@ -188,9 +188,9 @@ def taq_trade_signs_all_transactions_data(ticker, year, month, day):
 
     # Load data
 
-    time_t, ask_t, _ = pickle.load(open(__n_path__ +
-        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_trades_{1}{2}{3}.pickle'
-        .format(ticker, year, month, day), 'rb'))
+    time_t, ask_t, _ = pickle.load(open(
+        '{4}../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_trades_{1}{2}{3}.pickle'
+        .format(ticker, year, month, day, __n_path__), 'rb'))
 
     # All the trades must have a price different to zero
     assert not np.sum(ask_t == 0)
@@ -309,29 +309,30 @@ def taq_self_response_data(ticker, date):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_self_response_data.__name__
-    taq_data_tools_comp.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, month,
-                                                  day)
+    # function_name = taq_self_response_data.__name__
+    # taq_data_tools_comp.taq_function_header_print_data(function_name, ticker,
+    #                                                    ticker, year, month,
+    #                                                    day)
 
     try:
 
         # Load data
         midpoint = pickle.load(open(''.join((
-                '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
+                '{4}../../taq_data/article_reproduction_data_{1}/taq_midpoint'
                 + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
                 + '{2}{3}_{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
+                .format(ticker, year, month, day, __n_path__), 'rb'))
         trade_sign = pickle.load(open("".join((
-                '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
+                '{4}../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
                 + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
                 + '{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
+                .format(ticker, year, month, day, __n_path__), 'rb'))
 
         assert len(midpoint) == len(trade_sign)
 
         # Array of the average of each tau. 10^3 s used by Wang
         self_response_tau = np.zeros(__tau__)
+        num = np.zeros(__tau__)
 
         # Calculating the midpoint log return and the self response function
 
@@ -340,6 +341,7 @@ def taq_self_response_data(ticker, date):
 
             trade_sign_tau = trade_sign[:-tau_idx - 1]
             trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            num[tau_idx] = trade_sign_no_0_len
             # Obtain the midpoint log return. Displace the numerator tau
             # values to the right and compute the return
 
@@ -352,19 +354,14 @@ def taq_self_response_data(ticker, date):
             # Obtain the self response value
             if (trade_sign_no_0_len != 0):
                 product = log_return_sec * trade_sign_tau
-                self_response_tau[tau_idx] = (np.sum(product)
-                                              / trade_sign_no_0_len)
+                self_response_tau[tau_idx] = np.sum(product)
 
-        # Saving data
-        # midpoint price log returns
-        taq_data_tools_comp.taq_save_data(function_name, self_response_tau, ticker,
-                                     ticker, year, month, day)
+        return self_response_tau, num
 
-        return self_response_tau
-
-    except FileNotFoundError:
-            print('No data')
-            print()
+    except FileNotFoundError as err:
+            # print('No data')
+            # print("error: {0}".format(err))
+            # print()
             return None
 
 # ----------------------------------------------------------------------------
@@ -406,12 +403,12 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
                                                           year, month, day)
 
             # Load data
-            midpoint_i = pickle.load(open(''.join((
+            midpoint_i = pickle.load(open(''.join((__n_path__ +
                     '../../taq_data/article_reproduction_data_{1}/taq'
                     + '_midpoint_full_time_data/taq_midpoint_full_time_data'
                     + '_midpoint_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
-            trade_sign_j = pickle.load(open("".join((
+            trade_sign_j = pickle.load(open("".join((__n_path__ +
                     '../../taq_data/article_reproduction_data_2008/taq_trade_'
                     + 'signs_full_time_data/taq_trade_signs_full_time_data'
                     + '_{1}{2}{3}_{0}.pickle').split())
@@ -421,6 +418,7 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
 
             # Array of the average of each tau. 10^3 s used by Wang
             cross_response_tau = np.zeros(__tau__)
+            num = np.zeros(__tau__)
 
             # Calculating the midpoint return and the cross response function
 
@@ -429,6 +427,7 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
 
                 trade_sign_tau = 1 * trade_sign_j[:-tau_idx - 1]
                 trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+                num[tau_idx] = trade_sign_no_0_len
                 # Obtain the midpoint log return. Displace the numerator tau
                 # values to the right and compute the return
 
@@ -442,12 +441,7 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
                     cross_response_tau[tau_idx] = (np.sum(product)
                                                    / trade_sign_no_0_len)
 
-            # Saving data
-
-            taq_data_tools_comp.taq_save_data(function_name, cross_response_tau,
-                                         ticker_i, ticker_j, year, month, day)
-
-            return cross_response_tau
+            return cross_response_tau, num
 
         except FileNotFoundError:
             print('No data')
@@ -493,11 +487,6 @@ def taq_trade_sign_self_correlator_data(ticker, year, month, day):
 
         self_correlator[tau_idx] = (np.sum(trade_sign_product)
                                     / trade_sign_no_0_len)
-
-    # Saving data
-
-    taq_data_tools_comp.taq_save_data(function_name, self_correlator, ticker,
-                                 ticker, year, month, day)
 
     return self_correlator
 
@@ -560,11 +549,6 @@ def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
 
             cross_correlator[tau_idx] = np.mean(
                 trade_sign_product[trade_sign_j != 0])
-
-        # Saving data
-
-        taq_data_tools_comp.taq_save_data(function_name, cross_correlator, ticker_i,
-                                     ticker_j, year, month, day)
 
         return cross_correlator
 
