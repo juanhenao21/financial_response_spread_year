@@ -741,7 +741,8 @@ def taq_trade_sign_self_correlator_day_data(ticker, date):
         self_correlator = np.zeros(__tau__)
         num = np.zeros(__tau__)
 
-        # Calculating the midpoint log return and the trade sign cross-correlator
+        # Calculating the midpoint log return and the trade sign
+        # cross-correlator
 
         for tau_idx in range(__tau__):
 
@@ -750,7 +751,7 @@ def taq_trade_sign_self_correlator_day_data(ticker, date):
             num[tau_idx] = trade_sign_no_0_len
 
             trade_sign_product = (trade_sign_i[tau_idx + 1:]
-                                * trade_sign_i[:-tau_idx - 1])
+                                  * trade_sign_i[:-tau_idx - 1])
 
             self_correlator[tau_idx] = np.sum(trade_sign_product)
 
@@ -786,7 +787,8 @@ def taq_trade_sign_self_correlator_year_data(ticker, year):
 
         try:
 
-            data, avg_num = taq_trade_sign_self_correlator_day_data(ticker, date)
+            (data,
+             avg_num) = taq_trade_sign_self_correlator_day_data(ticker, date)
 
             self_ += data
 
@@ -837,9 +839,9 @@ def taq_trade_sign_cross_correlator_day_data(ticker_i, ticker_j, date):
         try:
 
             function_name = taq_trade_sign_cross_correlator_day_data.__name__
-            taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
-                                                        ticker_j, year, month,
-                                                        day)
+            taq_data_tools.taq_function_header_print_data(function_name,
+                                                          ticker_i, ticker_j,
+                                                          year, month, day)
 
             # Load data
             trade_sign_i = pickle.load(open("".join((
@@ -877,6 +879,7 @@ def taq_trade_sign_cross_correlator_day_data(ticker_i, ticker_j, date):
             print('No data')
             print()
             return None
+
 # ----------------------------------------------------------------------------
 
 
