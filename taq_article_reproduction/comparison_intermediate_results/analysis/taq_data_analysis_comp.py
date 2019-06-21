@@ -397,22 +397,22 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
 
         try:
 
-            function_name = taq_cross_response_data.__name__
-            taq_data_tools_comp.taq_function_header_print_data(function_name,
-                                                          ticker_i, ticker_j,
-                                                          year, month, day)
+            # function_name = taq_cross_response_data.__name__
+            # taq_data_tools_comp.taq_function_header_print_data(function_name,
+            #                                               ticker_i, ticker_j,
+            #                                               year, month, day)
 
             # Load data
-            midpoint_i = pickle.load(open(''.join((__n_path__ +
-                    '../../taq_data/article_reproduction_data_{1}/taq'
+            midpoint_i = pickle.load(open(''.join((
+                    '{4}../../taq_data/article_reproduction_data_{1}/taq'
                     + '_midpoint_full_time_data/taq_midpoint_full_time_data'
                     + '_midpoint_{1}{2}{3}_{0}.pickle').split())
-                    .format(ticker_i, year, month, day), 'rb'))
-            trade_sign_j = pickle.load(open("".join((__n_path__ +
-                    '../../taq_data/article_reproduction_data_2008/taq_trade_'
+                    .format(ticker_i, year, month, day, __n_path__), 'rb'))
+            trade_sign_j = pickle.load(open("".join((
+                    '{4}../../taq_data/article_reproduction_data_2008/taq_trade_'
                     + 'signs_full_time_data/taq_trade_signs_full_time_data'
                     + '_{1}{2}{3}_{0}.pickle').split())
-                    .format(ticker_j, year, month, day), 'rb'))
+                    .format(ticker_j, year, month, day, __n_path__), 'rb'))
 
             assert len(midpoint_i) == len(trade_sign_j)
 
@@ -438,14 +438,14 @@ def taq_cross_response_data(ticker_i, ticker_j, date):
                 # Obtain the cross response value
                 if (trade_sign_no_0_len != 0):
                     product = log_return_i_sec * trade_sign_tau
-                    cross_response_tau[tau_idx] = (np.sum(product)
-                                                   / trade_sign_no_0_len)
+                    cross_response_tau[tau_idx] = np.sum(product)
 
             return cross_response_tau, num
 
-        except FileNotFoundError:
-            print('No data')
-            print()
+        except FileNotFoundError as err:
+            # print('No data')
+            # print("error: {0}".format(err))
+            # print()
             return None
 
 # ----------------------------------------------------------------------------
@@ -521,11 +521,11 @@ def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
 
         # Load data
         trade_sign_i = pickle.load(open("".join((
-                    '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
+                    '{4}../../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
                     + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
         trade_sign_j = pickle.load(open("".join((
-                    '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
+                    '{4}../../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
                     + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_j, year, month, day), 'rb'))
 
