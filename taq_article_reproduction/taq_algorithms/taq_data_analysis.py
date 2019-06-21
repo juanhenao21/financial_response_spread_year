@@ -469,8 +469,7 @@ def taq_self_response_day_data(ticker, date):
 
     function_name = taq_self_response_day_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, month,
-                                                  day)
+                                                  ticker, year, month, day)
 
     try:
 
@@ -517,9 +516,9 @@ def taq_self_response_day_data(ticker, date):
         return self_response_tau, num
 
     except FileNotFoundError:
-            print('No data')
-            print()
-            return None
+        print('No data')
+        print()
+        return None
 
 # ----------------------------------------------------------------------------
 
@@ -561,7 +560,6 @@ def taq_self_response_year_data(ticker, year):
     num_s_t = np.sum(num_s, axis=0)
 
     # Saving data
-    # midpoint price log returns
     taq_data_tools.taq_save_data(function_name, self_ / num_s_t, ticker,
                                  ticker, year, '', '')
 
@@ -710,54 +708,106 @@ def taq_cross_response_year_data(ticker_i, ticker_j, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_self_correlator_data(ticker, year, month, day):
+def taq_trade_sign_self_correlator_day_data(ticker, date):
     """
     Obtain the trade sign self correlator using the trade signs of ticker i
-    during different time lags.
+    during different time lags for a day.
         :param ticker: string of the abbreviation of the trade sign stock to
          be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
+        :param date: string with the date of the data to be extracted
+         (i.e. '2008-01-02')
     """
 
-    function_name = taq_trade_sign_self_correlator_data.__name__
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
+    function_name = taq_trade_sign_self_correlator_day_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
-    # Load data
-    trade_sign_i = pickle.load(open("".join((
-                '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
-                + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
+    try:
+
+        # Load data
+        trade_sign_i = pickle.load(open("".join((
+                '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
+                + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
+                + '{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
 
-    # Array of the average of each tau. 10^3 s used by Wang
-    self_correlator = np.zeros(__tau__)
+        # Array of the average of each tau. 10^3 s used by Wang
+        self_correlator = np.zeros(__tau__)
+        num = np.zeros(__tau__)
 
-    # Calculating the midpoint log return and the trade sign cross-correlator
+        # Calculating the midpoint log return and the trade sign cross-correlator
 
-    for tau_idx in range(__tau__):
+        for tau_idx in range(__tau__):
 
-        trade_sign_tau = trade_sign_i[:-tau_idx - 1]
-        trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            trade_sign_tau = trade_sign_i[:-tau_idx - 1]
+            trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            num[tau_idx] = trade_sign_no_0_len
 
-        trade_sign_product = (trade_sign_i[tau_idx + 1:]
-                              * trade_sign_i[:-tau_idx - 1])
+            trade_sign_product = (trade_sign_i[tau_idx + 1:]
+                                * trade_sign_i[:-tau_idx - 1])
 
-        self_correlator[tau_idx] = (np.sum(trade_sign_product)
-                                    / trade_sign_no_0_len)
+            self_correlator[tau_idx] = np.sum(trade_sign_product)
 
-    # Saving data
+        return self_correlator, num
 
-    taq_data_tools.taq_save_data(function_name, self_correlator, ticker,
-                                 ticker, year, month, day)
-
-    return self_correlator
+    except FileNotFoundError:
+        print('No data')
+        print()
+        return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
+def taq_trade_sign_self_correlator_year_data(ticker, year):
+    """
+    Obtain the year average trade sign self correlator using the trade signs
+    of ticker i during different time lags.
+        :param ticker: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+    """
+
+    function_name = taq_trade_sign_self_correlator_year_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, '', '')
+
+    dates = taq_data_tools.taq_bussiness_days(year)
+
+    self_ = np.zeros(__tau__)
+    num_s = []
+
+    for date in dates:
+
+        try:
+
+            data, avg_num = taq_trade_sign_self_correlator_day_data(ticker, date)
+
+            self_ += data
+
+            num_s.append(avg_num)
+
+        except TypeError:
+            pass
+
+    num_s = np.asarray(num_s)
+    num_s_t = np.sum(num_s, axis=0)
+
+    # Saving data
+    taq_data_tools.taq_save_data(function_name, self_ / num_s_t, ticker,
+                                 ticker, year, '', '')
+
+    return self_ / num_s_t, num_s_t
+
+# ----------------------------------------------------------------------------
+
+
+def taq_trade_sign_cross_correlator_day_data(ticker_i, ticker_j, date):
     """
     Obtain the trade sign cross correlator using the trade signs of ticker i
     and trade signs of ticker j during different time lags.
@@ -770,6 +820,12 @@ def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
         :param day: string of the day to be analized (i.e '07')
     """
 
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
     if (ticker_i == ticker_j):
 
         # Self-response
@@ -778,47 +834,105 @@ def taq_trade_sign_cross_correlator_data(ticker_i, ticker_j, year, month, day):
 
     else:
 
-        function_name = taq_trade_sign_cross_correlator_data.__name__
-        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
-                                                      ticker_j, year, month,
-                                                      day)
+        try:
 
-        # Load data
-        trade_sign_i = pickle.load(open("".join((
-                    '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
-                    + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
+            function_name = taq_trade_sign_cross_correlator_day_data.__name__
+            taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
+                                                        ticker_j, year, month,
+                                                        day)
+
+            # Load data
+            trade_sign_i = pickle.load(open("".join((
+                    '../../taq_data/article_reproduction_data_2008/taq_trade_'
+                    + 'signs_full_time_data/taq_trade_signs_full_time_data'
+                    + '_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
-        trade_sign_j = pickle.load(open("".join((
-                    '../taq_data_{1}/taq_trade_signs_full_time_data/taq_trade'
-                    + '_signs_full_time_data_{1}{2}{3}_{0}.pickle').split())
+            trade_sign_j = pickle.load(open("".join((
+                    '../../taq_data/article_reproduction_data_2008/taq_trade_'
+                    + 'signs_full_time_data/taq_trade_signs_full_time_data'
+                    + '_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_j, year, month, day), 'rb'))
 
-        # Array of the average of each tau. 10^3 s used by Wang
-        cross_correlator = np.zeros(__tau__)
+            # Array of the average of each tau. 10^3 s used by Wang
+            cross_correlator = np.zeros(__tau__)
+            num = np.zeros(__tau__)
 
-        # Calculating the midpoint log return and the trade sign
-        # cross-correlator
+            # Calculating the midpoint return and the trade sign
+            # cross-correlator
 
-        for tau_idx in range(__tau__):
+            for tau_idx in range(__tau__):
+
+                trade_sign_tau = 1 * trade_sign_j[:-tau_idx - 1]
+                trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+                num[tau_idx] = trade_sign_no_0_len
+
+                trade_sign_product = (trade_sign_i[tau_idx + 1:]
+                                      * trade_sign_j[:-tau_idx - 1])
+
+                cross_correlator[tau_idx] = np.sum(trade_sign_product)
+
+            return cross_correlator, num
+
+        except FileNotFoundError:
+            print('No data')
+            print()
+            return None
+# ----------------------------------------------------------------------------
+
+
+def taq_trade_sign_cross_correlator_year_data(ticker_i, ticker_j, year):
+    """
+    Obtain the trade sign cross correlator using the trade signs of ticker i
+    and trade signs of ticker j during different time lags.
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_i: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+    """
+
+    if (ticker_i == ticker_j):
+
+        # Self-response
+
+        return None
+
+    else:
+
+        function_name = taq_trade_sign_cross_correlator_year_data.__name__
+        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
+                                                      ticker_j, year, '',
+                                                      '')
+
+        dates = taq_data_tools.taq_bussiness_days(year)
+
+        cross = np.zeros(__tau__)
+        num_c = []
+
+        for date in dates:
 
             try:
 
-                trade_sign_product = np.append(trade_sign_i[tau_idx:]
-                                               * trade_sign_j[:-tau_idx],
-                                               np.zeros(tau_idx))
+                (data,
+                 avg_num) = taq_trade_sign_cross_correlator_day_data(ticker_i,
+                                                                     ticker_j,
+                                                                     date)
 
-            except ValueError:
+                cross += data
 
-                trade_sign_product = trade_sign_i * trade_sign_j
+                num_c.append(avg_num)
 
-            cross_correlator[tau_idx] = np.mean(
-                trade_sign_product[trade_sign_j != 0])
+            except TypeError:
+                pass
+
+        num_c = np.asarray(num_c)
+        num_c_t = np.sum(num_c, axis=0)
 
         # Saving data
+        # midpoint price log returns
+        taq_data_tools.taq_save_data(function_name, cross / num_c_t, ticker_i,
+                                     ticker_j, year, '', '')
 
-        taq_data_tools.taq_save_data(function_name, cross_correlator, ticker_i,
-                                     ticker_j, year, month, day)
-
-        return cross_correlator
+        return cross / num_c_t, num_c_t
 
 # ----------------------------------------------------------------------------

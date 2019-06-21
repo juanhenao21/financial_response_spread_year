@@ -148,7 +148,9 @@ def main():
     #                  product(tickers, [year], [months], [days]))
     #     pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
     #                  product(tickers, tickers, [year], [months], [days]))
-    taq_data_analysis.taq_cross_response_year_data(tickers[0], tickers[1], year)
+    taq_data_analysis.taq_trade_sign_self_correlator_year_data(tickers[0], year)
+    taq_data_analysis.taq_trade_sign_self_correlator_year_data(tickers[1], year)
+    taq_data_analysis.taq_trade_sign_cross_correlator_year_data(tickers[0], tickers[1],                                                                  year)
 
     print('Ay vamos!!')
 
