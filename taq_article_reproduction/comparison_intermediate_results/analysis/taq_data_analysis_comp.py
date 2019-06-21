@@ -292,13 +292,14 @@ def taq_trade_signs_full_time_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_data(ticker, date):
+def taq_self_response_day_data(ticker, date):
     """
-    Obtain the self response function using the midpoint log returns
+    Obtain the self response function using the midpoint price returns
     and trade signs of the ticker during different time lags. Return an
-    array with the self response.
+    array with the self response for a day and an array of the number of
+    trades for each value of tau.
         :param ticker: string of the abbreviation of the midpoint stock to
-        be analized (i.e. 'AAPL')
+         be analized (i.e. 'AAPL')
         :param date: string with the date of the data to be extracted
          (i.e. '2008-01-02')
     """
@@ -366,6 +367,73 @@ def taq_self_response_data(ticker, date):
 
 # ----------------------------------------------------------------------------
 
+
+def taq_self_response_year_data(ticker, dates):
+    """
+    Obtain the self response function using the midpoint log returns
+    and trade signs of the ticker during different time lags. Return an
+    array with the self response.
+        :param ticker: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+    """
+
+    # function_name = taq_self_response_data.__name__
+    # taq_data_tools_comp.taq_function_header_print_data(function_name, ticker,
+    #                                                    ticker, year, month,
+    #                                                    day)
+
+    try:
+
+        # Load data
+        midpoint = pickle.load(open(''.join((
+                '{4}../../taq_data/article_reproduction_data_{1}/taq_midpoint'
+                + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
+                + '{2}{3}_{0}.pickle').split())
+                .format(ticker, year, month, day, __n_path__), 'rb'))
+        trade_sign = pickle.load(open("".join((
+                '{4}../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
+                + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
+                + '{0}.pickle').split())
+                .format(ticker, year, month, day, __n_path__), 'rb'))
+
+        assert len(midpoint) == len(trade_sign)
+
+        # Array of the average of each tau. 10^3 s used by Wang
+        self_response_tau = np.zeros(__tau__)
+        num = np.zeros(__tau__)
+
+        # Calculating the midpoint log return and the self response function
+
+        # Depending on the tau value
+        for tau_idx in range(__tau__):
+
+            trade_sign_tau = trade_sign[:-tau_idx - 1]
+            trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            num[tau_idx] = trade_sign_no_0_len
+            # Obtain the midpoint log return. Displace the numerator tau
+            # values to the right and compute the return
+
+            # midpoint price returns
+
+            log_return_sec = (midpoint[tau_idx + 1:]
+                              - midpoint[:-tau_idx - 1]) \
+                / midpoint[:-tau_idx - 1]
+
+            # Obtain the self response value
+            if (trade_sign_no_0_len != 0):
+                product = log_return_sec * trade_sign_tau
+                self_response_tau[tau_idx] = np.sum(product)
+
+        return self_response_tau, num
+
+    except FileNotFoundError as err:
+            # print('No data')
+            # print("error: {0}".format(err))
+            # print()
+            return None
+
+# ----------------------------------------------------------------------------
 
 def taq_cross_response_data(ticker_i, ticker_j, date):
     """
