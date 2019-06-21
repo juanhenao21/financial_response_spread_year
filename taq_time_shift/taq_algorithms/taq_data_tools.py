@@ -15,6 +15,7 @@ juan.henao-londono@stud.uni-due.de
 from matplotlib import pyplot as plt
 import numpy as np
 import os
+import pandas as pd
 
 import pickle
 
@@ -36,13 +37,13 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     """
     # Saving data
 
-    if (not os.path.isdir('../taq_data_{1}/{0}/'
+    if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../taq_data_{1}/{0}/'.
-                     format(function_name, year))
+            os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+                     .format(function_name, year))
             print('Folder to save data created')
 
         except FileExistsError:
@@ -51,15 +52,17 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     if (ticker_i != ticker_j):
 
-        pickle.dump(data, open(
-            '../taq_data_{3}/{0}/{0}_{3}{4}{5}_{1}i_{2}j.pickle'
+        pickle.dump(data, open(''.join((
+            '../../taq_data/article_reproduction_data_{3}/{0}/{0}_{3}{4}{5}'
+            + '_{1}i_{2}j.pickle').split())
             .format(function_name, ticker_i, ticker_j, year, month, day),
             'wb'))
 
     else:
 
-        pickle.dump(data, open(
-            '../taq_data_{2}/{0}/{0}_{2}{3}{4}_{1}.pickle'
+        pickle.dump(data, open(''.join((
+            '../../taq_data/article_reproduction_data_{2}/{0}/{0}_{2}{3}{4}'
+            '_{1}.pickle').split())
             .format(function_name, ticker_i, year, month, day), 'wb'))
 
     print('Data Saved')
@@ -84,12 +87,12 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     """
     # Saving data
 
-    if (not os.path.isdir('../taq_plot_{1}/{0}/'
+    if (not os.path.isdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../taq_plot_{1}/{0}/'
+            os.mkdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -100,13 +103,13 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../taq_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
+            '../../taq_plot/article_reproduction_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
             .format(function_name, ticker_i, ticker_j, year, month))
 
     else:
 
         figure.savefig(
-            '../taq_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
+            '../../taq_plot/article_reproduction_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
             .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
@@ -174,15 +177,17 @@ def taq_start_folders(year):
     docstring here
         :param year:
     """
-    if (not os.path.isdir('../taq_data_{}/'.format(year))
-            and not os.path.isdir('../taq_plot_{}/'.format(year))):
+    if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}'
+                          .format(year))
+            and not os.path.isdir('../taq_plot/taq_article_reproduction_{}'
+                                  .format(year))):
 
         try:
 
-            os.mkdir('../taq_data_{}/'
+            os.mkdir('../../taq_data/pickle_dayly_data_{}'
                      .format(year))
             print('Folder to save data created')
-            os.mkdir('../taq_plot_{}/'
+            os.mkdir('../taq_plot/taq_article_reproduction_{}'
                      .format(year))
             print('Folder to save data created')
 
@@ -239,6 +244,24 @@ def months_days_list(folder_path, ticker, year):
         days_list += [days_month]
 
     return(months_list, days_list)
+
+# -----------------------------------------------------------------------------
+
+
+def taq_bussiness_days(year):
+    """
+    Generate a list with the dates of the bussiness days in a year
+        :param year: string of the year to be analized (i.e '2008')
+    """
+    init_date = '01/01/{}'.format(year)
+    last_date = '12/31/{}'.format(year)
+
+    # Use only the bussiness days
+    dt = pd.date_range(start=init_date, end=last_date, freq='B')
+    dt_df = dt.to_frame(index=False)
+    date_list = dt_df[0].astype(str).tolist()
+
+    return date_list
 
 # -----------------------------------------------------------------------------
 

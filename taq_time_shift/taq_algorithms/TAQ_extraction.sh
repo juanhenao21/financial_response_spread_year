@@ -4,7 +4,7 @@ cd ..
 
 cd ..
 
-cd TAQ_2008/Data
+cd taq_data/original_year_data_2008/
 
 echo 'Extracting quotes'
 
