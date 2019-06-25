@@ -79,7 +79,7 @@ def taq_data_plot_generator(tickers, year):
     date_list = taq_data_tools.taq_bussiness_days(year)
 
     # Basic folders
-    taq_data_tools.taq_start_folders(year)
+    # taq_data_tools.taq_start_folders(year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
@@ -91,10 +91,10 @@ def taq_data_plot_generator(tickers, year):
                         product(tickers, date_list))
 
         # Especific functions
-        pool.starmap(taq_data_analysis.taq_self_response_data,
-                        product(tickers, date_list))
-        pool.starmap(taq_data_analysis.taq_cross_response_data,
-                        product(tickers, tickers, date_list))
+        # pool.starmap(taq_data_analysis.taq_self_response_data,
+        #                 product(tickers, date_list))
+        # pool.starmap(taq_data_analysis.taq_cross_response_data,
+        #                 product(tickers, tickers, date_list))
         # pool.starmap(taq_data_analysis.taq_trade_sign_self_correlator_data,
         #              product(tickers, [year], [month],
         #                      days[int(month) - 1]))
@@ -142,13 +142,13 @@ def main():
     # (months,
     #  days) = taq_data_tools.months_days_list(folder_path, tickers[0], year)
 
-    # taq_data_plot_generator(tickers, year)
-    # with mp.Pool(processes=mp.cpu_count()) as pool:
-    #     pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
-    #                  product(tickers, [year], [months], [days]))
-    #     pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
-    #                  product(tickers, tickers, [year], [months], [days]))
+    taq_data_plot_generator(tickers, year)
+    
     with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_analysis.taq_self_response_year_data,
+                     product(tickers, [year]))
+        pool.starmap(taq_data_analysis.taq_cross_response_year_data,
+                     product(tickers, tickers, [year]))
         pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
                      product(tickers, [year]))
         pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
