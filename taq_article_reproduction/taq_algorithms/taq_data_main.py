@@ -142,13 +142,13 @@ def main():
     # (months,
     #  days) = taq_data_tools.months_days_list(folder_path, tickers[0], year)
 
-    taq_data_plot_generator(tickers, year)
+    # taq_data_plot_generator(tickers, year)
     
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_analysis.taq_self_response_year_data,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_analysis.taq_cross_response_year_data,
-                     product(tickers, tickers, [year]))
+        # pool.starmap(taq_data_analysis.taq_self_response_year_data,
+        #              product(tickers, [year]))
+        # pool.starmap(taq_data_analysis.taq_cross_response_year_data,
+        #              product(tickers, tickers, [year]))
         pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
                      product(tickers, [year]))
         pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
