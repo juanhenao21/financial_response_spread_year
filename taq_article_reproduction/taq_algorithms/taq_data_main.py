@@ -148,9 +148,15 @@ def main():
     #                  product(tickers, [year], [months], [days]))
     #     pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
     #                  product(tickers, tickers, [year], [months], [days]))
-    taq_data_analysis.taq_trade_sign_self_correlator_year_data(tickers[0], year)
-    taq_data_analysis.taq_trade_sign_self_correlator_year_data(tickers[1], year)
-    taq_data_analysis.taq_trade_sign_cross_correlator_year_data(tickers[0], tickers[1],                                                                  year)
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
+                     product(tickers, [year]))
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
+                     product(tickers, tickers, [year]))
+        pool.starmap(taq_data_plot.taq_trade_sign_self_correlator_year_avg_plot,
+                     product(tickers, [year]))
+        pool.starmap(taq_data_plot.taq_trade_sign_cross_correlator_year_avg_plot,
+                     product(tickers, tickers, [year]))
 
     print('Ay vamos!!')
 
