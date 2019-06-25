@@ -30,7 +30,7 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_plot(ticker, year):
+def taq_self_response_year_avg_returns_plot(ticker, year):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -42,20 +42,27 @@ def taq_self_response_year_avg_plot(ticker, year):
 
     try:
 
-        function_name = taq_self_response_year_avg_plot.__name__
+        function_name = taq_self_response_year_avg_returns_plot.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
-        self_ = pickle.load(open(''.join((
-                        '../../taq_data/article_reproduction_data_{1}/taq_self'
-                        + '_response_year_data/taq_self_response_year_data'
-                        + '_{1}_{0}.pickle').split())
+        norm = pickle.load(open(''.join((
+                        '../../taq_data/returns_test_data_{1}/taq_self'
+                        + '_response_year_returns_data_norm/taq_self_response'
+                        + '_year_returns_data_norm_{1}_{0}.pickle').split())
+                        .format(ticker, year), 'rb'))
+
+        log = pickle.load(open(''.join((
+                        '../../taq_data/returns_test_data_{1}/taq_self'
+                        + '_response_year_returns_data_log/taq_self_response'
+                        + '_year_returns_data_log_{1}_{0}.pickle').split())
                         .format(ticker, year), 'rb'))
 
         figure = plt.figure(figsize=(16, 9))
-        plt.semilogx(self_, linewidth=5, label='{}'.format(ticker))
+        plt.semilogx(norm, linewidth=5, label='Midpoint price returns')
+        plt.semilogx(log, linewidth=5, label='Midpoint price log-returns')
         plt.legend(loc='best', fontsize=25)
-        plt.title('Self-response', fontsize=40)
+        plt.title('Self-response - {}'.format(ticker), fontsize=40)
         plt.xlabel(r'$\tau \, [s]$', fontsize=35)
         plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
         plt.xticks(fontsize=25)
@@ -80,7 +87,7 @@ def taq_self_response_year_avg_plot(ticker, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
+def taq_cross_response_year_avg_returns_plot(ticker_i, ticker_j, year):
     """
     Plot the average cross response during a month and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -100,21 +107,30 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
 
         try:
 
-            function_name = taq_cross_response_year_avg_plot.__name__
+            function_name = taq_cross_response_year_avg_returns_plot.__name__
             taq_data_tools.taq_function_header_print_plot(function_name,
                                                           ticker_i, ticker_j,
                                                           year, '', '')
-            cross = pickle.load(open(''.join((
-                            '../../taq_data/article_reproduction_data_{2}/taq'
-                            + '_cross_response_year_data/taq_cross_response'
-                            + '_year_data_{2}_{0}i_{1}j.pickle').split())
+            norm = pickle.load(open(''.join((
+                            '../../taq_data/returns_test_data_{2}/taq_cross'
+                            + '_response_year_returns_data_norm/taq_cross'
+                            + '_response_year_returns_data_norm_{2}_{0}i_{1}j'
+                            + '.pickle').split())
+                            .format(ticker_i, ticker_j, year), 'rb'))
+
+            log = pickle.load(open(''.join((
+                            '../../taq_data/returns_test_data_{2}/taq_cross'
+                            + '_response_year_returns_data_log/taq_cross'
+                            + '_response_year_returns_data_log_{2}_{0}i_{1}j'
+                            + '.pickle').split())
                             .format(ticker_i, ticker_j, year), 'rb'))
 
             figure = plt.figure(figsize=(16, 9))
-            plt.semilogx(cross, linewidth=5, label='{} - {}'.format(ticker_i,
-                                                                    ticker_j))
+            plt.semilogx(norm, linewidth=5, label='Midpoint price returns')
+            plt.semilogx(log, linewidth=5, label='Midpoint price log-returns')
             plt.legend(loc='best', fontsize=25)
-            plt.title('Cross-response', fontsize=40)
+            plt.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
+                      fontsize=40)
             plt.xlabel(r'$\tau \, [s]$', fontsize=35)
             plt.ylabel(r'$R_{ij}(\tau)$', fontsize=35)
             plt.xticks(fontsize=25)
