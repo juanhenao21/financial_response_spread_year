@@ -37,12 +37,12 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     """
     # Saving data
 
-    if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+    if (not os.path.isdir('../../taq_data/returns_test_data_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
+            os.mkdir('../../taq_data/returns_test_data_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -53,7 +53,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     if (ticker_i != ticker_j):
 
         pickle.dump(data, open(''.join((
-            '../../taq_data/article_reproduction_data_{3}/{0}/{0}_{3}{4}{5}'
+            '../../taq_data/returns_test_data_{3}/{0}/{0}_{3}{4}{5}'
             + '_{1}i_{2}j.pickle').split())
             .format(function_name, ticker_i, ticker_j, year, month, day),
             'wb'))
@@ -61,7 +61,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     else:
 
         pickle.dump(data, open(''.join((
-            '../../taq_data/article_reproduction_data_{2}/{0}/{0}_{2}{3}{4}'
+            '../../taq_data/returns_test_data_{2}/{0}/{0}_{2}{3}{4}'
             '_{1}.pickle').split())
             .format(function_name, ticker_i, year, month, day), 'wb'))
 
@@ -87,12 +87,12 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     """
     # Saving data
 
-    if (not os.path.isdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
+    if (not os.path.isdir('../../taq_plot/returns_test_plot_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
 
-            os.mkdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
+            os.mkdir('../../taq_plot/returns_test_plot_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -103,13 +103,13 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../../taq_plot/article_reproduction_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
+            '../../taq_plot/returns_test_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
             .format(function_name, ticker_i, ticker_j, year, month))
 
     else:
 
         figure.savefig(
-            '../../taq_plot/article_reproduction_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
+            '../../taq_plot/returns_test_plot_{2}/{0}/{0}_{2}{3}_{1}.png'
             .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
@@ -169,82 +169,6 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
     return None
 
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def taq_start_folders(year):
-    """
-    docstring here
-        :param year:
-    """
-    if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}'
-                          .format(year))
-            and not os.path.isdir('../taq_plot/taq_article_reproduction_{}'
-                                  .format(year))):
-
-        try:
-
-            os.mkdir('../../taq_data/pickle_dayly_data_{}'
-                     .format(year))
-            print('Folder to save data created')
-            os.mkdir('../taq_plot/taq_article_reproduction_{}'
-                     .format(year))
-            print('Folder to save data created')
-
-        except FileExistsError:
-
-            print('Folder exists. The folder was not created')
-
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def get_sec(time_str):
-    """
-    Convert time format from hh:mm:ss to seconds
-        :param time_str: string with the format hh:mm:ss (i. e. '09:40:00')
-    """
-    h, m, s = time_str.split(':')
-    return int(h) * 3600 + int(m) * 60 + int(s)
-
-# -----------------------------------------------------------------------------------------------------------------------
-
-
-def months_days_list(folder_path, ticker, year):
-    """
-    Generate two lists with the string with the numbers of the months
-    (from '01' to '12') and the days of the data to be analyzed.
-    """
-    days = []
-    days_list = []
-    months_list = []
-
-    for i in range(1, 32):
-        if (i < 10):
-            days.append('0' + str(i))
-        else:
-            days.append(str(i))
-
-    for m in range(1, 13):
-        if (m < 10):
-            months_list.append('0' + str(m))
-        else:
-            months_list.append(str(m))
-
-    files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
-
-    for month in months_list:
-        days_month = []
-        for d in days:
-            for file in files:
-                val_split = file.split('_')
-                date = val_split[-1].split('.')[0]
-                val = val_split[1] + val_split[2] + date
-                if (val == '{}quotes{}{}{}'.format(ticker, year, month, d)):
-                    days_month.append(d)
-        days_list += [days_month]
-
-    return(months_list, days_list)
-
 # -----------------------------------------------------------------------------
 
 
@@ -264,6 +188,7 @@ def taq_bussiness_days(year):
     return date_list
 
 # -----------------------------------------------------------------------------
+
 
 def main():
     folder_path = '../../TAQ_2008/TAQ_py/'
