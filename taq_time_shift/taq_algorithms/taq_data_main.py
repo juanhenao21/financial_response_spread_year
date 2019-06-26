@@ -35,25 +35,29 @@ def main():
     # Tickers and days to analyze
 
     tickers = ['AAPL', 'MSFT']
-
-    # subprocess.call(['./TAQ_extraction.sh'])
-
-    # taq_data_source(tickers, '2008')
-
-    folder_path = '../../taq_data/pickle_dayly_data_2008/'
+    ticker_i = 'AAPL'
+    ticker_j = 'MSFT'
     year = '2008'
-    # (months,
-    #  days) = taq_data_tools.months_days_list(folder_path, tickers[0], year)
 
-    # taq_data_plot_generator(tickers, year)
-    # with mp.Pool(processes=mp.cpu_count()) as pool:
-    #     pool.starmap(taq_data_plot.taq_self_response_year_avg_plot,
-    #                  product(tickers, [year], [months], [days]))
-    #     pool.starmap(taq_data_plot.taq_cross_response_year_avg_plot,
-    #                  product(tickers, tickers, [year], [months], [days]))
-    taq_data_analysis.taq_trade_sign_self_correlator_year_data(tickers[0], year)
-    taq_data_analysis.taq_trade_sign_self_correlator_year_data(tickers[1], year)
-    taq_data_analysis.taq_trade_sign_cross_correlator_year_data(tickers[0], tickers[1],                                                                  year)
+    taus = [1, 10, 100, 1000]
+
+    for ticker in tickers:
+        for tau in taus:
+            taq_data_analysis.taq_self_response_year_time_shift_data(ticker,
+                                                                     year, tau)
+
+    for tau in taus:
+        taq_data_analysis.taq_cross_response_year_time_shift_data(ticker_i,
+                                                                  ticker_j,
+                                                                  year, tau)
+
+    taq_data_plot.taq_cross_response_year_avg_time_shift_plot(ticker_i,
+                                                              ticker_j, year,
+                                                              taus)
+
+    for ticker in tickers:
+        taq_data_plot.taq_self_response_year_avg_time_shift_plot(ticker, year,
+                                                                 taus)
 
     print('Ay vamos!!')
 
