@@ -1,14 +1,20 @@
 '''
-TAQ data plot
+TAQ data analysis
 
-Module to plot different TAQ data results based on the results of the functions
-set in the module taq_data_analysis. The module plot the following data
+Module to compute the following data
 
-- Self response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+- Self response function: using the midpoint price and the trade signs
+  calculate the midpoint log returns and the self response of a stock.
 
-- Cross response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+- Cross response function: using the midpoint price and the trade signs
+  calculate the midpoint log returns and the cross response between two
+  stocks.
+
+Compare the differences between the two definitions of returns (midpoint price
+returns and midpoint price log-returns).
+
+The parameter ret can be 'norm' for normalized returns and 'log' for
+logarithmic returns.
 
 Juan Camilo Henao Londono
 juan.henao-londono@stud.uni-due.de
@@ -18,9 +24,9 @@ juan.henao-londono@stud.uni-due.de
 # Modules
 
 import numpy as np
-from matplotlib import pyplot as plt
 import os
 
+import pandas as pd
 import pickle
 
 import taq_data_tools
@@ -30,54 +36,75 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_returns_plot(ticker, year):
+def taq_self_response_day_returns_data(ticker, date, ret):
     """
-    Plot the average cross response during a year and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
+    Obtain the self response function using the midpoint price returns
+    and trade signs of the ticker during different time lags. Return an
+    array with the self response for a day and an array of the number of
+    trades for each value of tau.
         :param ticker: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+        :param date: string with the date of the data to be extracted
+         (i.e. '2008-01-02')
     """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
+    function_name = taq_self_response_day_returns_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, month, day)
 
     try:
 
-        function_name = taq_self_response_year_avg_returns_plot.__name__
-        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                      ticker, year, '', '')
+        # Load data
+        midpoint = pickle.load(open(''.join((
+                '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
+                + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
+                + '{2}{3}_{0}.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+        trade_sign = pickle.load(open("".join((
+                '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
+                + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
+                + '{0}.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
 
-        norm = pickle.load(open(''.join((
-                        '../../taq_data/returns_test_data_{1}/taq_self'
-                        + '_response_year_returns_data_norm/taq_self_response'
-                        + '_year_returns_data_norm_{1}_{0}.pickle').split())
-                        .format(ticker, year), 'rb'))
+        assert len(midpoint) == len(trade_sign)
 
-        log = pickle.load(open(''.join((
-                        '../../taq_data/returns_test_data_{1}/taq_self'
-                        + '_response_year_returns_data_log/taq_self_response'
-                        + '_year_returns_data_log_{1}_{0}.pickle').split())
-                        .format(ticker, year), 'rb'))
+        # Array of the average of each tau. 10^3 s used by Wang
+        self_response_tau = np.zeros(__tau__)
+        num = np.zeros(__tau__)
 
-        figure = plt.figure(figsize=(16, 9))
-        plt.semilogx(norm, linewidth=5, label='Midpoint price returns')
-        plt.semilogx(log, linewidth=5, label='Midpoint price log-returns')
-        plt.legend(loc='best', fontsize=25)
-        plt.title('Self-response - {}'.format(ticker), fontsize=40)
-        plt.xlabel(r'$\tau \, [s]$', fontsize=35)
-        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
-        plt.xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        plt.grid(True)
-        plt.tight_layout()
+        # Calculating the midpoint log return and the self response function
 
-        # Plotting
-        taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker,
-                                     year, '')
+        # Depending on the tau value
+        for tau_idx in range(__tau__):
 
-        return None
+            trade_sign_tau = trade_sign[:-tau_idx - 1]
+            trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            num[tau_idx] = trade_sign_no_0_len
+            # Obtain the midpoint log return. Displace the numerator tau
+            # values to the right and compute the return
+
+            # Midpoint price returns
+            if (ret == 'norm'):
+                log_return_sec = (midpoint[tau_idx + 1:]
+                                  - midpoint[:-tau_idx - 1]) \
+                    / midpoint[:-tau_idx - 1]
+            # Midpoint log-returns
+            elif (ret == 'log'):
+                log_return_sec = np.log(midpoint[tau_idx + 1:]
+                                        / midpoint[:-tau_idx - 1])
+
+            # Obtain the self response value
+            if (trade_sign_no_0_len != 0):
+                product = log_return_sec * trade_sign_tau
+                self_response_tau[tau_idx] = np.sum(product)
+
+        return self_response_tau, num
 
     except FileNotFoundError:
         print('No data')
@@ -87,19 +114,75 @@ def taq_self_response_year_avg_returns_plot(ticker, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_returns_plot(ticker_i, ticker_j, year):
+def taq_self_response_year_returns_data(ticker, year, ret):
     """
-    Plot the average cross response during a month and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
+    Obtain the year average self response function using the midpoint
+    price returns and trade signs of the ticker during different time
+    lags. Return an array with the year average self response.
+        :param ticker: string of the abbreviation of the midpoint stock to
          be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+        :param year: string of the year to be analized (i.e '2016')
     """
 
+    function_name = taq_self_response_year_returns_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, '',
+                                                  '')
+
+    dates = taq_data_tools.taq_bussiness_days(year)
+
+    self_ = np.zeros(__tau__)
+    num_s = []
+
+    for date in dates:
+
+        try:
+
+            data, avg_num = taq_self_response_day_returns_data(ticker, date, ret)
+
+            self_ += data
+
+            num_s.append(avg_num)
+
+        except TypeError:
+            pass
+
+    num_s = np.asarray(num_s)
+    num_s_t = np.sum(num_s, axis=0)
+
+    # Saving data
+    taq_data_tools.taq_save_data('{}_{}'.format(function_name, ret),
+                                 self_ / num_s_t, ticker, ticker,
+                                 year, '', '')
+
+    return self_ / num_s_t, num_s_t
+
+# ----------------------------------------------------------------------------
+
+
+def taq_cross_response_day_returns_data(ticker_i, ticker_j, date, ret):
+    """
+    Obtain the cross response function using the midpoint price returns of
+    ticker i and trade signs of ticker j during different time lags. The data
+    is adjusted to use only the values each second. Return an array with the
+    cross response function for a day.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param date: string with the date of the data to be extracted
+         (i.e. '2008-01-02')
+    """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
     if (ticker_i == ticker_j):
+
+        # Self-response
 
         return None
 
@@ -107,45 +190,56 @@ def taq_cross_response_year_avg_returns_plot(ticker_i, ticker_j, year):
 
         try:
 
-            function_name = taq_cross_response_year_avg_returns_plot.__name__
-            taq_data_tools.taq_function_header_print_plot(function_name,
+            function_name = taq_cross_response_day_returns_data.__name__
+            taq_data_tools.taq_function_header_print_data(function_name,
                                                           ticker_i, ticker_j,
-                                                          year, '', '')
-            norm = pickle.load(open(''.join((
-                            '../../taq_data/returns_test_data_{2}/taq_cross'
-                            + '_response_year_returns_data_norm/taq_cross'
-                            + '_response_year_returns_data_norm_{2}_{0}i_{1}j'
-                            + '.pickle').split())
-                            .format(ticker_i, ticker_j, year), 'rb'))
+                                                          year, month, day)
 
-            log = pickle.load(open(''.join((
-                            '../../taq_data/returns_test_data_{2}/taq_cross'
-                            + '_response_year_returns_data_log/taq_cross'
-                            + '_response_year_returns_data_log_{2}_{0}i_{1}j'
-                            + '.pickle').split())
-                            .format(ticker_i, ticker_j, year), 'rb'))
+            # Load data
+            midpoint_i = pickle.load(open(''.join((
+                    '../../taq_data/article_reproduction_data_{1}/taq'
+                    + '_midpoint_full_time_data/taq_midpoint_full_time_data'
+                    + '_midpoint_{1}{2}{3}_{0}.pickle').split())
+                    .format(ticker_i, year, month, day), 'rb'))
+            trade_sign_j = pickle.load(open("".join((
+                    '../../taq_data/article_reproduction_data_2008/taq_trade_'
+                    + 'signs_full_time_data/taq_trade_signs_full_time_data'
+                    + '_{1}{2}{3}_{0}.pickle').split())
+                    .format(ticker_j, year, month, day), 'rb'))
 
-            figure = plt.figure(figsize=(16, 9))
-            plt.semilogx(norm, linewidth=5, label='Midpoint price returns')
-            plt.semilogx(log, linewidth=5, label='Midpoint price log-returns')
-            plt.legend(loc='best', fontsize=25)
-            plt.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
-                      fontsize=40)
-            plt.xlabel(r'$\tau \, [s]$', fontsize=35)
-            plt.ylabel(r'$R_{ij}(\tau)$', fontsize=35)
-            plt.xticks(fontsize=25)
-            plt.yticks(fontsize=25)
-            plt.xlim(1, 1000)
-            # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-            plt.grid(True)
-            plt.tight_layout()
+            assert len(midpoint_i) == len(trade_sign_j)
 
-            # Plotting
-            taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
-                                         ticker_j, year, '')
+            # Array of the average of each tau. 10^3 s used by Wang
+            cross_response_tau = np.zeros(__tau__)
+            num = np.zeros(__tau__)
 
-            return None
+            # Calculating the midpoint return and the cross response function
+
+            # Depending on the tau value
+            for tau_idx in range(__tau__):
+
+                trade_sign_tau = 1 * trade_sign_j[:-tau_idx - 1]
+                trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+                num[tau_idx] = trade_sign_no_0_len
+                # Obtain the midpoint log return. Displace the numerator tau
+                # values to the right and compute the return
+
+                # Midpoint price returns
+                if (ret == 'norm'):
+                    log_return_i_sec = (midpoint_i[tau_idx + 1:]
+                                        - midpoint_i[:-tau_idx - 1]) \
+                        / midpoint_i[:-tau_idx - 1]
+                # Midpoint log-returns
+                elif (ret == 'log'):
+                    log_return_i_sec = np.log(midpoint_i[tau_idx + 1:]
+                                              / midpoint_i[:-tau_idx - 1])
+
+                # Obtain the cross response value
+                if (trade_sign_no_0_len != 0):
+                    product = log_return_i_sec * trade_sign_tau
+                    cross_response_tau[tau_idx] = np.sum(product)
+
+            return cross_response_tau, num
 
         except FileNotFoundError:
             print('No data')
@@ -155,11 +249,59 @@ def taq_cross_response_year_avg_returns_plot(ticker_i, ticker_j, year):
 # ----------------------------------------------------------------------------
 
 
-def main():
-    pass
+def taq_cross_response_year_returns_data(ticker_i, ticker_j, year, ret):
+    """
+    Obtain the year average cross response function using the midpoint
+    price returns and trade signs of the tickers during different time
+    lags. Return an array with the year average cross response.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+    """
 
-# -----------------------------------------------------------------------------
+    if (ticker_i == ticker_j):
 
+        # Self-response
 
-if __name__ == '__main__':
-    main()
+        return None
+
+    else:
+
+        function_name = taq_cross_response_year_returns_data.__name__
+        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
+                                                      ticker_j, year, '',
+                                                      '')
+
+        dates = taq_data_tools.taq_bussiness_days(year)
+
+        cross = np.zeros(__tau__)
+        num_c = []
+
+        for date in dates:
+
+            try:
+
+                data, avg_num = taq_cross_response_day_returns_data(ticker_i, ticker_j,
+                                                            date, ret)
+
+                cross += data
+
+                num_c.append(avg_num)
+
+            except TypeError:
+                pass
+
+        num_c = np.asarray(num_c)
+        num_c_t = np.sum(num_c, axis=0)
+
+        # Saving data
+        # midpoint price log returns
+        taq_data_tools.taq_save_data('{}_{}'.format(function_name, ret),
+                                     cross / num_c_t, ticker_i, ticker_j,
+                                     year, '', '')
+
+        return cross / num_c_t, num_c_t
+
+# ----------------------------------------------------------------------------
