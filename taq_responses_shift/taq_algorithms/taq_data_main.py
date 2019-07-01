@@ -35,18 +35,18 @@ def main():
     # Tickers and days to analyze
 
     tickers = ['AAPL', 'MSFT']
-    returns = ['norm', 'log']
+    shifts = [0, 1, 2]
     year = '2008'
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        # pool.starmap(taq_data_analysis.taq_self_response_year_returns_data,
-        #              product(tickers, [year], returns))
-        # pool.starmap(taq_data_analysis.taq_cross_response_year_returns_data,
-        #              product(tickers, tickers, [year], returns))
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_returns_plot,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_returns_plot,
-                     product(tickers, tickers, [year]))
+        pool.starmap(taq_data_analysis.taq_self_response_year_returns_data,
+                     product(tickers, [year], shifts))
+        pool.starmap(taq_data_analysis.taq_cross_response_year_returns_data,
+                     product(tickers, tickers, [year], shifts))
+        # pool.starmap(taq_data_plot.taq_self_response_year_avg_returns_plot,
+        #              product(tickers, [year]))
+        # pool.starmap(taq_data_plot.taq_cross_response_year_avg_returns_plot,
+        #              product(tickers, tickers, [year]))
 
 
     print('Ay vamos!!')
