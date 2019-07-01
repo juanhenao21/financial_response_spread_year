@@ -30,7 +30,7 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_returns_plot(ticker, year):
+def taq_self_response_year_avg_responses_shift_plot(ticker, year, shifts):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -42,25 +42,33 @@ def taq_self_response_year_avg_returns_plot(ticker, year):
 
     try:
 
-        function_name = taq_self_response_year_avg_returns_plot.__name__
+        function_name = taq_self_response_year_avg_responses_shift_plot. \
+                        __name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
-        norm = pickle.load(open(''.join((
-                        '../../taq_data/returns_test_data_{1}/taq_self'
-                        + '_response_year_returns_data_norm/taq_self_response'
-                        + '_year_returns_data_norm_{1}_{0}.pickle').split())
-                        .format(ticker, year), 'rb'))
-
-        log = pickle.load(open(''.join((
-                        '../../taq_data/returns_test_data_{1}/taq_self'
-                        + '_response_year_returns_data_log/taq_self_response'
-                        + '_year_returns_data_log_{1}_{0}.pickle').split())
-                        .format(ticker, year), 'rb'))
-
         figure = plt.figure(figsize=(16, 9))
-        plt.semilogx(norm, linewidth=5, label='Midpoint price returns')
-        plt.semilogx(log, linewidth=5, label='Midpoint price log-returns')
+
+        for shift in shifts:
+
+            self_ = pickle.load(open(''.join((
+                            '../../taq_data/responses_shift_data_{1}/taq_self'
+                            + '_response_year_responses_shift_data_shift_{2}/'
+                            + 'taq_self_response_year_responses_shift_data'
+                            + '_shift_{2}_{1}_{0}.pickle').split())
+                            .format(ticker, year, shift), 'rb'))
+
+            plt.semilogx(self_, linewidth=5, label='Shift {} s'.format(shift))
+
+        self_ = pickle.load(open(''.join((
+                            '../../taq_data/responses_shift_data_{1}/taq_self'
+                            + '_response_year_responses_shift_data_shift_tau/'
+                            + 'taq_self_response_year_responses_shift_data'
+                            + '_shift_tau_{1}_{0}.pickle').split())
+                            .format(ticker, year, shift), 'rb'))
+
+        plt.semilogx(self_, linewidth=5, label=r'Shift $\tau / 2$')
+
         plt.legend(loc='best', fontsize=25)
         plt.title('Self-response - {}'.format(ticker), fontsize=40)
         plt.xlabel(r'$\tau \, [s]$', fontsize=35)
@@ -79,15 +87,17 @@ def taq_self_response_year_avg_returns_plot(ticker, year):
 
         return None
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_returns_plot(ticker_i, ticker_j, year):
+def taq_cross_response_year_avg_responses_shift_plot(ticker_i, ticker_j, year,
+                                                     shifts):
     """
     Plot the average cross response during a month and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -107,27 +117,36 @@ def taq_cross_response_year_avg_returns_plot(ticker_i, ticker_j, year):
 
         try:
 
-            function_name = taq_cross_response_year_avg_returns_plot.__name__
+            function_name = taq_cross_response_year_avg_responses_shift_plot. \
+                            __name__
             taq_data_tools.taq_function_header_print_plot(function_name,
                                                           ticker_i, ticker_j,
                                                           year, '', '')
-            norm = pickle.load(open(''.join((
-                            '../../taq_data/returns_test_data_{2}/taq_cross'
-                            + '_response_year_returns_data_norm/taq_cross'
-                            + '_response_year_returns_data_norm_{2}_{0}i_{1}j'
-                            + '.pickle').split())
-                            .format(ticker_i, ticker_j, year), 'rb'))
-
-            log = pickle.load(open(''.join((
-                            '../../taq_data/returns_test_data_{2}/taq_cross'
-                            + '_response_year_returns_data_log/taq_cross'
-                            + '_response_year_returns_data_log_{2}_{0}i_{1}j'
-                            + '.pickle').split())
-                            .format(ticker_i, ticker_j, year), 'rb'))
-
             figure = plt.figure(figsize=(16, 9))
-            plt.semilogx(norm, linewidth=5, label='Midpoint price returns')
-            plt.semilogx(log, linewidth=5, label='Midpoint price log-returns')
+
+            for shift in shifts:
+
+                cross = pickle.load(open(''.join((
+                                '../../taq_data/responses_shift_data_{2}/taq'
+                                + '_cross_response_year_responses_shift_data'
+                                + '_shift_{3}/taq_cross_response_year'
+                                + '_responses_shift_data_shift_{3}_{2}_{0}i'
+                                + '_{1}j.pickle').split())
+                                .format(ticker_i, ticker_j, year, shift),
+                                'rb'))
+
+                plt.semilogx(cross, linewidth=5, label='Shift {} s'
+                             .format(shift))
+
+            cross = pickle.load(open(''.join((
+                                '../../taq_data/responses_shift_data_{2}/taq'
+                                + '_cross_response_year_responses_shift_data'
+                                + '_shift_tau/taq_cross_response_year'
+                                + '_responses_shift_data_shift_tau_{2}_{0}i'
+                                + '_{1}j.pickle').split())
+                                .format(ticker_i, ticker_j, year), 'rb'))
+
+            plt.semilogx(cross, linewidth=5, label=r'Shift $\tau / 2$')
             plt.legend(loc='best', fontsize=25)
             plt.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
                       fontsize=40)
