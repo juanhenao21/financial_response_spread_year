@@ -41,19 +41,19 @@ def main():
 
     taus = [1, 10, 100, 1000]
 
-    for ticker in tickers:
-        for tau in taus:
-            taq_data_analysis.taq_self_response_year_time_shift_data(ticker,
-                                                                     year, tau)
+    # for ticker in tickers:
+    #     for tau in taus:
+    #         taq_data_analysis.taq_self_response_year_time_shift_data(ticker,
+    #                                                                  year, tau)
 
-    for tau in taus:
-        taq_data_analysis.taq_cross_response_year_time_shift_data(ticker_i,
-                                                                  ticker_j,
-                                                                  year, tau)
+    # for tau in taus:
+    #     taq_data_analysis.taq_cross_response_year_time_shift_data(ticker_i,
+    #                                                               ticker_j,
+    #                                                               year, tau)
 
-    taq_data_plot.taq_cross_response_year_avg_time_shift_plot(ticker_i,
-                                                              ticker_j, year,
-                                                              taus)
+    # taq_data_plot.taq_cross_response_year_avg_time_shift_plot(ticker_i,
+    #                                                           ticker_j, year,
+    #                                                           taus)
 
     for ticker in tickers:
         taq_data_plot.taq_self_response_year_avg_time_shift_plot(ticker, year,
