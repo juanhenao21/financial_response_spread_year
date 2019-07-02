@@ -42,8 +42,8 @@ def main():
     with mp.Pool(processes=mp.cpu_count()) as pool:
         # pool.starmap(taq_data_analysis.taq_trade_signs_transactions_responses_data,
         #              product(tickers, dates))
-        pool.starmap(taq_data_analysis.taq_self_response_year_transactions_responses_data,
-                     product(tickers, [year], shifts))
+        # pool.starmap(taq_data_analysis.taq_self_response_year_transactions_responses_data,
+        #              product(tickers, [year], shifts))
         pool.starmap(taq_data_analysis.taq_cross_response_year_transactions_responses_data,
                      product(tickers, tickers, [year], shifts))
 

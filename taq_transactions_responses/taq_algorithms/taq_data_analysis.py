@@ -69,7 +69,7 @@ def taq_trade_signs_transactions_responses_data(ticker, date):
 
         # Reproducing S. Wang values. In her results the time interval for the
         # trade signs is [34801, 57000]
-        condition = (time_t >= 34801) * (time_t <= 57000)
+        condition = (time_t >= 34801) * (time_t < 57000)
 
         time_t = time_t[condition]
         ask_t = ask_t[condition]
@@ -358,8 +358,9 @@ def taq_cross_response_day_transactions_responses_data(ticker_i, ticker_j, date,
 
             return cross_response_tau, num
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             print('No data')
+            print(e)
             print()
             return None
 
@@ -387,7 +388,7 @@ def taq_cross_response_year_transactions_responses_data(ticker_i, ticker_j, year
 
     else:
 
-        function_name = taq_cross_response_year_responses_shift_data.__name__
+        function_name = taq_cross_response_year_transactions_responses_data.__name__
         taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
                                                       ticker_j, year, '', '')
 
@@ -401,7 +402,7 @@ def taq_cross_response_year_transactions_responses_data(ticker_i, ticker_j, year
             try:
 
                 (data,
-                 avg_num) = taq_self_response_day_transactions_responses_data(
+                 avg_num) = taq_cross_response_day_transactions_responses_data(
                      ticker_i, ticker_j, date, shift)
 
                 cross += data
