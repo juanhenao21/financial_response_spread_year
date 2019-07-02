@@ -36,7 +36,7 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_all_transactions_data(ticker, date):
+def taq_trade_signs_transactions_responses_data(ticker, date):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (1) of https://arxiv.org/pdf/1603.01580.pdf.
@@ -60,68 +60,169 @@ def taq_trade_signs_all_transactions_data(ticker, date):
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
-    # Load data
-    time_t, ask_t, _ = pickle.load(open(
-        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_trades_{1}{2}{3}.pickle'
-        .format(ticker, year, month, day), 'rb'))
+    try:
 
-    # Reproducing S. Wang values. In her results the time interval for the
-    # trade signs is [34801, 57000]
+        # Load data
+        time_t, ask_t, _ = pickle.load(open(
+            '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_trades_{1}{2}{3}.pickle'
+            .format(ticker, year, month, day), 'rb'))
+
+        # Reproducing S. Wang values. In her results the time interval for the
+        # trade signs is [34801, 57000]
+        condition = (time_t >= 34801) * (time_t <= 57000)
+
+        time_t = time_t[condition]
+        ask_t = ask_t[condition]
+
+        # All the trades must have a price different to zero
+        assert not np.sum(ask_t == 0)
+
+        # Trades identified using equation (1)
+        identified_trades = np.zeros(len(time_t))
+        identified_trades[-1] = 1
+
+        # Implementation of equation (1). Sign of the price change between
+        # consecutive trades
+
+        for t_idx, t_val in enumerate(time_t):
+
+            diff = ask_t[t_idx] - ask_t[t_idx - 1]
+
+            if (diff):
+
+                identified_trades[t_idx] = np.sign(diff)
+
+            else:
+
+                identified_trades[t_idx] = identified_trades[t_idx - 1]
+
+        # All the identified trades must be different to zero
+        assert not np.sum(identified_trades == 0)
+
+        # Saving data
+
+        taq_data_tools.taq_save_data(function_name, (time_t, ask_t,
+                                     identified_trades), ticker,
+                                     ticker, year, month, day)
+
+        return (time_t, ask_t, identified_trades)
+
+    except FileNotFoundError:
+        print('No data')
+        print()
+        return None
+
+# ----------------------------------------------------------------------------
+
+
+def taq_self_response_day_transactions_responses_data(ticker, year, month, day,
+                                        *, mod=__returns__, model=__case__):
+    """
+    Obtain the cross response function using the midpoint log returns of
+    ticker i and trade signs of ticker j during different time lags. The data
+    is adjusted to use only the values each second. Return an array with the
+    cross response function.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+         be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the trade sign stock to
+         be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param month: string of the month to be analized (i.e '07')
+        :param day: string of the day to be analized (i.e '07')
+        :param mod='log': select the midpoint price return. 'ret' for midpoint
+         price return and 'log' for midpoint price log return. Default 'log'
+    """
+
+    function_name = taq_self_response_transactions_data.__name__
+
+    print('TAQ data')
+    print(function_name)
+    print('Processing data for the stock ' + ticker + ' the ' +
+          year + '.' + month + '.' + day)
+
+    midpoint_i = pickle.load(open(''.join((
+                '../Cross_response_individual_stock/taq_data_{1}/taq_midpoint'
+                + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}{2}'
+                + '{3}_{0}.pickle').split())
+                .format(ticker, year, month, day), 'rb'))
+
     if (model == 'juan'):
-        condition = time_t != 57000
+        time_m = np.array(range(34800, 57000))
     elif (model == 'wang'):
-        condition = time_t != 34800
+        time_m = np.array(range(34801, 57001))
 
-    time_t = time_t[condition]
-    ask_t = ask_t[condition]
+    time_t, trade_sign_j = pickle.load(open("".join((
+                '../Cross_response_individual_stock/taq_data_{1}/taq_trade_signs'
+                + '_all_transactions_data_{4}/taq_trade_signs_all_transactions_data_{4}'
+                + '_{1}{2}{3}_{0}.pickle').split())
+                .format(ticker, year, month, day, model), 'rb'))
 
-    # All the trades must have a price different to zero
-    assert not np.sum(ask_t == 0)
+    assert not np.sum(trade_sign_j == 0)
+    assert not np.sum(midpoint_i == 0)
 
-    # Trades identified using equation (1)
-    identified_trades = np.zeros(len(time_t))
-    identified_trades[-1] = 1
+    # Array of the average of each tau. 10^3 s used by Wang
+    self_response_tau = np.zeros(__tau__)
 
-    # Implementation of equation (1). Sign of the price change between
-    # consecutive trades
+    # Calculating the midpoint log return and the cross response function
 
-    for t_idx, t_val in enumerate(time_t):
+    midpoint_t = 0. * trade_sign_j
 
-        diff = ask_t[t_idx] - ask_t[t_idx - 1]
+    for t_idx, t_val in enumerate(time_m):
+        condition = time_t == t_val
+        len_c = np.sum(condition)
+        midpoint_t[condition] = midpoint_i[t_idx] * np.ones(len_c)
 
-        if (diff):
+    assert not np.sum(midpoint_t == 0)
 
-            identified_trades[t_idx] = np.sign(diff)
+    # Depending on the tau value
+    for tau_idx in range(__tau__):
 
-        else:
+        trade_sign_tau = 1 * trade_sign_j[1:-tau_idx-1]
+        trade_sign_no_0_len = len(trade_sign_tau)
+        # Obtain the midpoint log return. Displace the numerator tau
+        # values to the right and compute the return
 
-            identified_trades[t_idx] = identified_trades[t_idx - 1]
+        # midpoint price log returns
+        if (mod == 'log'):
+            log_return_i_sec = np.log(midpoint_t[tau_idx + 1: -1]
+                                      / midpoint_t[:-tau_idx - 2])
 
-    # All the identified trades must be different to zero
-    assert not np.sum(identified_trades == 0)
+        # midpoint price returns
+        elif (mod == 'ret'):
+
+            log_return_i_sec = (midpoint_t[tau_idx + 1: -1]
+                                - midpoint_t[:-tau_idx - 2]) \
+                / midpoint_t[:-tau_idx - 2]
+
+        # Obtain the cross response value
+        if (trade_sign_no_0_len != 0):
+            product = log_return_i_sec * trade_sign_tau
+            self_response_tau[tau_idx] = (np.sum(product)
+                                           / trade_sign_no_0_len)
 
     if (not os.path.isdir('../Cross_response_individual_stock/taq_data_{1}/{0}/'
-                          .format(function_name + '_' + model, year))):
+                          .format(function_name + '_' + mod + '_' + model, year))):
 
         try:
 
             os.mkdir('../Cross_response_individual_stock/taq_data_{1}/{0}/'.
-                     format(function_name + '_' + model, year))
+                     format(function_name + '_' + mod + '_' + model, year))
             print('Folder to save data created')
 
         except FileExistsError:
 
             print('Folder exists. The folder was not created')
 
-    pickle.dump((time_t, identified_trades), open(
+    pickle.dump(self_response_tau, open(
         '../Cross_response_individual_stock/taq_data_{2}/{0}/{0}_{2}{3}{4}_{1}.pickle'
-        .format(function_name + '_' + model, ticker, year, month, day),
+        .format(function_name + '_' + mod + '_' + model, ticker, year, month, day),
         'wb'))
 
     print('Data Saved')
     print()
 
-    return (time_t, ask_t, identified_trades)
+
+    return self_response_tau
 
 # ----------------------------------------------------------------------------
 
