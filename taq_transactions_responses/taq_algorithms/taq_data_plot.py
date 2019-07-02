@@ -30,7 +30,8 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_transactions_responses_plot(ticker, year, shifts):
+def taq_self_response_year_avg_transactions_responses_plot(ticker, year,
+                                                           shifts):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -42,8 +43,8 @@ def taq_self_response_year_avg_transactions_responses_plot(ticker, year, shifts)
 
     try:
 
-        function_name = taq_self_response_year_avg_transactions_responses_plot. \
-                        __name__
+        function_name = taq_self_response_year_avg_transactions_responses_plot\
+                        .__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
@@ -52,16 +53,17 @@ def taq_self_response_year_avg_transactions_responses_plot(ticker, year, shifts)
         for shift in shifts:
 
             self_ = pickle.load(open(''.join((
-                            '../../taq_data/transactions_responses_data_{1}/taq_self'
-                            + '_response_year_transactions_responses_data_shift_{2}/'
-                            + 'taq_self_response_year_transactions_responses_data'
-                            + '_shift_{2}_{1}_{0}.pickle').split())
+                            '../../taq_data/transactions_responses_data_{1}/'
+                            + 'taq_self_response_year_transactions_responses'
+                            + '_data_shift_{2}/taq_self_response_year'
+                            + '_transactions_responses_data_shift_{2}_{1}_{0}'
+                            + '.pickle').split())
                             .format(ticker, year, shift), 'rb'))
 
             plt.semilogx(self_, linewidth=5, label='Shift {} s'.format(shift))
 
         plt.legend(loc='best', fontsize=25)
-        plt.title('Self-response - {}'.format(ticker), fontsize=40)
+        plt.title('Self-response transactions {}'.format(ticker), fontsize=40)
         plt.xlabel(r'$\tau \, [s]$', fontsize=35)
         plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
         plt.xticks(fontsize=25)
@@ -87,8 +89,8 @@ def taq_self_response_year_avg_transactions_responses_plot(ticker, year, shifts)
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_transactions_responses_plot(ticker_i, ticker_j, year,
-                                                     shifts):
+def taq_cross_response_year_avg_transactions_responses_plot(ticker_i, ticker_j,
+                                                            year, shifts):
     """
     Plot the average cross response during a month and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -108,8 +110,9 @@ def taq_cross_response_year_avg_transactions_responses_plot(ticker_i, ticker_j, 
 
         try:
 
-            function_name = taq_cross_response_year_avg_transactions_responses_plot. \
-                            __name__
+            function_name = \
+                taq_cross_response_year_avg_transactions_responses_plot. \
+                __name__
             taq_data_tools.taq_function_header_print_plot(function_name,
                                                           ticker_i, ticker_j,
                                                           year, '', '')
@@ -118,20 +121,20 @@ def taq_cross_response_year_avg_transactions_responses_plot(ticker_i, ticker_j, 
             for shift in shifts:
 
                 cross = pickle.load(open(''.join((
-                                '../../taq_data/transactions_responses_data_{2}/taq'
-                                + '_cross_response_year_transactions_responses_data'
-                                + '_shift_{3}/taq_cross_response_year'
-                                + '_transactions_responses_data_shift_{3}_{2}_{0}i'
-                                + '_{1}j.pickle').split())
-                                .format(ticker_i, ticker_j, year, shift),
-                                'rb'))
+                            '../../taq_data/transactions_responses_data_{2}/'
+                            + 'taq_cross_response_year_transactions_responses'
+                            + '_data_shift_{3}/taq_cross_response_year'
+                            + '_transactions_responses_data_shift_{3}_{2}_{0}i'
+                            + '_{1}j.pickle').split())
+                            .format(ticker_i, ticker_j, year, shift),
+                            'rb'))
 
                 plt.semilogx(cross, linewidth=5, label='Shift {} s'
                              .format(shift))
 
             plt.legend(loc='best', fontsize=25)
-            plt.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
-                      fontsize=40)
+            plt.title('Cross-response transactions {} - {}'.format(ticker_i,
+                      ticker_j), fontsize=40)
             plt.xlabel(r'$\tau \, [s]$', fontsize=35)
             plt.ylabel(r'$R_{ij}(\tau)$', fontsize=35)
             plt.xticks(fontsize=25)
