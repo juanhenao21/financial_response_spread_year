@@ -37,23 +37,21 @@ def main():
     tickers = ['AAPL', 'MSFT']
     shifts = [0, 1, 2,]
     year = '2008'
-
-    # with mp.Pool(processes=mp.cpu_count()) as pool:
-    #     pool.starmap(taq_data_analysis.taq_self_response_year_responses_shift_data,
-    #                  product(tickers, [year], shifts))
-    #     pool.starmap(taq_data_analysis.taq_cross_response_year_responses_shift_data,
-    #                  product(tickers, tickers, [year], shifts))
-
-    # taq_data_analysis.taq_self_response_year_responses_shift_data(tickers[0], year, 0, tau='on')
-    # taq_data_analysis.taq_self_response_year_responses_shift_data(tickers[1], year, 0, tau='on')
-    # taq_data_analysis.taq_cross_response_year_responses_shift_data(tickers[0], tickers[1], year, 0, tau='on')
-    # taq_data_analysis.taq_cross_response_year_responses_shift_data(tickers[1], tickers[0], year, 0, tau='on')
+    dates = taq_data_tools.taq_bussiness_days(year)
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_shift_plot,
-                     product(tickers, [year], [shifts]))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_shift_plot,
-                     product(tickers, tickers, [year], [shifts]))
+        # pool.starmap(taq_data_analysis.taq_trade_signs_transactions_responses_data,
+        #              product(tickers, dates))
+        pool.starmap(taq_data_analysis.taq_self_response_year_transactions_responses_data,
+                     product(tickers, [year], shifts))
+        pool.starmap(taq_data_analysis.taq_cross_response_year_transactions_responses_data,
+                     product(tickers, tickers, [year], shifts))
+
+    # with mp.Pool(processes=mp.cpu_count()) as pool:
+    #     pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_shift_plot,
+    #                  product(tickers, [year], [shifts]))
+    #     pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_shift_plot,
+    #                  product(tickers, tickers, [year], [shifts]))
 
 
     print('Ay vamos!!')
