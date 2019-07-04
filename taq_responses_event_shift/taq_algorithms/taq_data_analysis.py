@@ -36,7 +36,7 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_transactions_responses_data(ticker, date):
+def taq_trade_signs_responses_event_shift_data(ticker, date):
     """
     Obtain the trade signs from the TAQ data. The trade signs are calculated
     using the equation (1) of https://arxiv.org/pdf/1603.01580.pdf.
@@ -56,7 +56,7 @@ def taq_trade_signs_transactions_responses_data(ticker, date):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_trade_signs_transactions_responses_data.__name__
+    function_name = taq_trade_signs_responses_event_shift_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
@@ -116,7 +116,7 @@ def taq_trade_signs_transactions_responses_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_day_transactions_responses_data(ticker, date, shift):
+def taq_self_response_day_responses_event_shift_data(ticker, date, shift):
     """
     Obtain the self response function using the midpoint price returns
     and trade signs of the ticker during different time lags. Return an
@@ -134,7 +134,7 @@ def taq_self_response_day_transactions_responses_data(ticker, date, shift):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_self_response_day_transactions_responses_data.__name__
+    function_name = taq_self_response_day_responses_event_shift_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
@@ -147,9 +147,9 @@ def taq_self_response_day_transactions_responses_data(ticker, date, shift):
                 + '{2}{3}_{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
         time_t, _, trade_sign_i = pickle.load(open("".join((
-                '../../taq_data/transactions_responses_data_{1}/taq_trade'
-                + '_signs_transactions_responses_data/taq_trade_signs'
-                + '_transactions_responses_data_{1}{2}{3}_{0}.pickle')
+                '../../taq_data/responses_event_shift_data_{1}/taq_trade'
+                + '_signs_responses_event_shift_data/taq_trade_signs'
+                + '_responses_event_shift_data_{1}{2}{3}_{0}.pickle')
                 .split())
                 .format(ticker, year, month, day), 'rb'))
         # As the data is loaded from the original reproduction data from the
@@ -204,15 +204,16 @@ def taq_self_response_day_transactions_responses_data(ticker, date, shift):
 
         return self_response_tau, num
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_transactions_responses_data(ticker, year, shift):
+def taq_self_response_year_responses_event_shift_data(ticker, year, shift):
     """
     Obtain the year average self response function using the midpoint
     price returns and trade signs of the ticker during different time
@@ -222,7 +223,7 @@ def taq_self_response_year_transactions_responses_data(ticker, year, shift):
         :param year: string of the year to be analized (i.e '2016')
     """
 
-    function_name = taq_self_response_year_transactions_responses_data.__name__
+    function_name = taq_self_response_year_responses_event_shift_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, '', '')
 
@@ -236,7 +237,7 @@ def taq_self_response_year_transactions_responses_data(ticker, year, shift):
         try:
 
             (data,
-             avg_num) = taq_self_response_day_transactions_responses_data(
+             avg_num) = taq_self_response_day_responses_event_shift_data(
                                 ticker, date, shift)
 
             self_ += data
@@ -258,8 +259,8 @@ def taq_self_response_year_transactions_responses_data(ticker, year, shift):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_day_transactions_responses_data(ticker_i, ticker_j,
-                                                       date, shift):
+def taq_cross_response_day_responses_event_shift_data(ticker_i, ticker_j,
+                                                      date, shift):
     """
     Obtain the cross response function using the midpoint price returns of
     ticker i and trade signs of ticker j during different time lags. The data
@@ -289,7 +290,7 @@ def taq_cross_response_day_transactions_responses_data(ticker_i, ticker_j,
             month = date_sep[1]
             day = date_sep[2]
 
-            function_name = taq_cross_response_day_transactions_responses_data\
+            function_name = taq_cross_response_day_responses_event_shift_data\
                 .__name__
             taq_data_tools.taq_function_header_print_data(function_name,
                                                           ticker_i, ticker_j,
@@ -303,9 +304,9 @@ def taq_cross_response_day_transactions_responses_data(ticker_i, ticker_j,
                     .format(ticker_i, year, month, day), 'rb'))
 
             time_t, _, trade_sign_j = pickle.load(open("".join((
-                '../../taq_data/transactions_responses_data_{1}/taq_trade'
-                + '_signs_transactions_responses_data/taq_trade_signs'
-                + '_transactions_responses_data_{1}{2}{3}_{0}.pickle')
+                '../../taq_data/responses_event_shift_data_{1}/taq_trade'
+                + '_signs_responses_event_shift_data/taq_trade_signs'
+                + '_responses_event_shift_data_{1}{2}{3}_{0}.pickle')
                 .split())
                 .format(ticker_j, year, month, day), 'rb'))
 
@@ -372,8 +373,8 @@ def taq_cross_response_day_transactions_responses_data(ticker_i, ticker_j,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_transactions_responses_data(ticker_i, ticker_j,
-                                                        year, shift):
+def taq_cross_response_year_responses_event_shift_data(ticker_i, ticker_j,
+                                                       year, shift):
     """
     Obtain the year average cross response function using the midpoint
     price returns and trade signs of the tickers during different time
@@ -393,7 +394,7 @@ def taq_cross_response_year_transactions_responses_data(ticker_i, ticker_j,
 
     else:
 
-        function_name = taq_cross_response_year_transactions_responses_data \
+        function_name = taq_cross_response_year_responses_event_shift_data \
             .__name__
         taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
                                                       ticker_j, year, '', '')
@@ -408,7 +409,7 @@ def taq_cross_response_year_transactions_responses_data(ticker_i, ticker_j,
             try:
 
                 (data,
-                 avg_num) = taq_cross_response_day_transactions_responses_data(
+                 avg_num) = taq_cross_response_day_responses_event_shift_data(
                      ticker_i, ticker_j, date, shift)
 
                 cross += data
@@ -428,5 +429,4 @@ def taq_cross_response_year_transactions_responses_data(ticker_i, ticker_j,
                                      ticker_j, year, '', '')
 
         return cross / num_c_t, num_c_t
-
 # ----------------------------------------------------------------------------
