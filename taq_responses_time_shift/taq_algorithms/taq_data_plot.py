@@ -61,7 +61,7 @@ def taq_self_response_year_avg_responses_time_shift_plot(ticker, year, shifts):
             plt.semilogx(self_, linewidth=5, label='Shift {} s'.format(shift))
 
         self_ = pickle.load(open(''.join((
-                            '../../taq_data/responses__time_shift_data_{1}/taq'
+                            '../../taq_data/responses_time_shift_data_{1}/taq'
                             + '_self_response_year_responses_time_shift_data'
                             + '_shift_tau/taq_self_response_year_responses'
                             + '_time_shift_data_shift_tau_{1}_{0}.pickle')
