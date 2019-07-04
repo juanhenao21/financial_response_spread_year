@@ -39,20 +39,20 @@ def main():
     year = '2008'
 
     # with mp.Pool(processes=mp.cpu_count()) as pool:
-    #     pool.starmap(taq_data_analysis.taq_self_response_year_responses_shift_data,
+    #     pool.starmap(taq_data_analysis.taq_self_response_year_responses_time_shift_data,
     #                  product(tickers, [year], shifts))
-    #     pool.starmap(taq_data_analysis.taq_cross_response_year_responses_shift_data,
+    #     pool.starmap(taq_data_analysis.taq_cross_response_year_responses_time_shift_data,
     #                  product(tickers, tickers, [year], shifts))
 
-    # taq_data_analysis.taq_self_response_year_responses_shift_data(tickers[0], year, 0, tau='on')
-    # taq_data_analysis.taq_self_response_year_responses_shift_data(tickers[1], year, 0, tau='on')
-    # taq_data_analysis.taq_cross_response_year_responses_shift_data(tickers[0], tickers[1], year, 0, tau='on')
-    # taq_data_analysis.taq_cross_response_year_responses_shift_data(tickers[1], tickers[0], year, 0, tau='on')
+    # taq_data_analysis.taq_self_response_year_responses_time_shift_data(tickers[0], year, 0, tau='on')
+    # taq_data_analysis.taq_self_response_year_responses_time_shift_data(tickers[1], year, 0, tau='on')
+    # taq_data_analysis.taq_cross_response_year_responses_time_shift_data(tickers[0], tickers[1], year, 0, tau='on')
+    # taq_data_analysis.taq_cross_response_year_responses_time_shift_data(tickers[1], tickers[0], year, 0, tau='on')
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_shift_plot,
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_time_shift_plot,
                      product(tickers, [year], [shifts]))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_shift_plot,
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_time_shift_plot,
                      product(tickers, tickers, [year], [shifts]))
 
 

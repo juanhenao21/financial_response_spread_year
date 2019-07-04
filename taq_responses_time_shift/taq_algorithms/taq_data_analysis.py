@@ -36,8 +36,8 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_day_responses_shift_data(ticker, date, shift, *,
-                                               tau='off'):
+def taq_self_response_day_responses_time_shift_data(ticker, date, shift, *,
+                                                    tau='off'):
     """
     Obtain the self response function using the midpoint price returns
     and trade signs of the ticker during different time lags. Return an
@@ -55,7 +55,7 @@ def taq_self_response_day_responses_shift_data(ticker, date, shift, *,
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_self_response_day_responses_shift_data.__name__
+    function_name = taq_self_response_day_responses_time_shift_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
@@ -143,16 +143,17 @@ def taq_self_response_day_responses_shift_data(ticker, date, shift, *,
 
         return self_response_tau, num
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_responses_shift_data(ticker, year, shift, *,
-                                                tau='off'):
+def taq_self_response_year_responses_time_shift_data(ticker, year, shift, *,
+                                                     tau='off'):
     """
     Obtain the year average self response function using the midpoint
     price returns and trade signs of the ticker during different time
@@ -162,7 +163,7 @@ def taq_self_response_year_responses_shift_data(ticker, year, shift, *,
         :param year: string of the year to be analized (i.e '2016')
     """
 
-    function_name = taq_self_response_year_responses_shift_data.__name__
+    function_name = taq_self_response_year_responses_time_shift_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, '',
                                                   '')
@@ -177,9 +178,8 @@ def taq_self_response_year_responses_shift_data(ticker, year, shift, *,
         try:
 
             (data,
-             avg_num) = taq_self_response_day_responses_shift_data(ticker,
-                                                                   date, shift,
-                                                                   tau=tau)
+             avg_num) = taq_self_response_day_responses_time_shift_data(
+                 ticker, date, shift, tau=tau)
 
             self_ += data
 
@@ -206,8 +206,8 @@ def taq_self_response_year_responses_shift_data(ticker, year, shift, *,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_day_responses_shift_data(ticker_i, ticker_j, date,
-                                                shift, *, tau='off'):
+def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
+                                                     shift, *, tau='off'):
     """
     Obtain the cross response function using the midpoint price returns of
     ticker i and trade signs of ticker j during different time lags. The data
@@ -237,7 +237,7 @@ def taq_cross_response_day_responses_shift_data(ticker_i, ticker_j, date,
 
         try:
 
-            function_name = taq_cross_response_day_responses_shift_data. \
+            function_name = taq_cross_response_day_responses_time_shift_data. \
                             __name__
             taq_data_tools.taq_function_header_print_data(function_name,
                                                           ticker_i, ticker_j,
@@ -323,16 +323,17 @@ def taq_cross_response_day_responses_shift_data(ticker_i, ticker_j, date,
 
             return cross_response_tau, num
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             print('No data')
+            print(e)
             print()
             return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_responses_shift_data(ticker_i, ticker_j, year,
-                                                 shift, *, tau='off'):
+def taq_cross_response_year_responses_time_shift_data(ticker_i, ticker_j, year,
+                                                      shift, *, tau='off'):
     """
     Obtain the year average cross response function using the midpoint
     price returns and trade signs of the tickers during different time
@@ -352,7 +353,8 @@ def taq_cross_response_year_responses_shift_data(ticker_i, ticker_j, year,
 
     else:
 
-        function_name = taq_cross_response_year_responses_shift_data.__name__
+        function_name = taq_cross_response_year_responses_time_shift_data\
+                        .__name__
         taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
                                                       ticker_j, year, '',
                                                       '')
@@ -367,7 +369,7 @@ def taq_cross_response_year_responses_shift_data(ticker_i, ticker_j, year,
             try:
 
                 (data,
-                 avg_num) = taq_cross_response_day_responses_shift_data(
+                 avg_num) = taq_cross_response_day_responses_time_shift_data(
                      ticker_i, ticker_j, date, shift, tau=tau)
 
                 cross += data
