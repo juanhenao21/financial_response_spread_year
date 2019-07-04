@@ -53,14 +53,19 @@ def taq_self_response_year_avg_time_shift_plot(ticker, year, taus):
             ax = plt.subplot(len(taus), 1, tau_idx + 1)
 
             times = np.array(range(- 10 * tau_val, 10 * tau_val, 1))
-            self = pickle.load(open(''.join((
+            self_ = pickle.load(open(''.join((
                                '../../taq_data/time_shift_data_{1}/taq_self'
-                               + '_response_year_time_shift_data_tau_{2}/taq_self'
-                               + '_response_year_time_shift_data_tau_{2}_{1}'
-                               + '_{0}.pickle').split())
+                               + '_response_year_time_shift_data_tau_{2}/taq'
+                               + '_self_response_year_time_shift_data_tau_{2}'
+                               + '_{1}_{0}.pickle').split())
                                .format(ticker, year, tau_val), 'rb'))
 
-            ax.plot(times, self, linewidth=5, label=r'{}'.format(ticker))
+            max_pos = np.where(max(self_) == self_)[0][0]
+
+            ax.plot(times, self_, linewidth=5, label=r'{}'.format(ticker))
+            ax.plot((times[max_pos], times[max_pos]), (0, self_[max_pos]),
+                    '--', label=r'Max position $t$ = {}'
+                    .format(max_pos - 10 * tau_val))
             ax.legend(loc='best', fontsize=15)
             ax.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
             ax.set_xlabel(r'Time shift $[s]$', fontsize=15)
@@ -79,6 +84,7 @@ def taq_self_response_year_avg_time_shift_plot(ticker, year, taus):
 
     except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
@@ -128,8 +134,13 @@ def taq_cross_response_year_avg_time_shift_plot(ticker_i, ticker_j, year,
                                    .format(ticker_i, ticker_j, year, tau_val),
                                    'rb'))
 
+                max_pos = np.where(max(cross) == cross)[0][0]
+
                 ax.plot(times, cross, linewidth=5, label=r'{} - {}'
                         .format(ticker_i, ticker_j))
+                ax.plot((times[max_pos], times[max_pos]), (0, cross[max_pos]),
+                        '--', label=r'Max position $t$ = {}'
+                        .format(max_pos - 10 * tau_val))
                 ax.legend(loc='best', fontsize=15)
                 ax.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
                 ax.set_xlabel(r'Time shift $[s]$', fontsize=15)
@@ -146,8 +157,9 @@ def taq_cross_response_year_avg_time_shift_plot(ticker_i, ticker_j, year,
 
             return None
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             print('No data')
+            print(e)
             print()
             return None
 
