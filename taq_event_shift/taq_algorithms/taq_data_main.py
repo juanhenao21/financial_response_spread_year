@@ -35,29 +35,22 @@ def main():
     # Tickers and days to analyze
 
     tickers = ['AAPL', 'MSFT']
-    ticker_i = 'AAPL'
-    ticker_j = 'MSFT'
-    year = '2008'
-
     taus = [1, 10, 100, 1000]
+    year = '2008'
+    dates = taq_data_tools.taq_bussiness_days(year)
 
-    # for ticker in tickers:
-    #     for tau in taus:
-    #         taq_data_analysis.taq_self_response_year_time_shift_data(ticker,
-    #                                                                  year, tau)
+    # with mp.Pool(processes=mp.cpu_count()) as pool:
+    #     pool.starmap(taq_data_analysis.taq_self_response_year_event_shift_data,
+    #                  product(tickers, [year], taus))
+    #     pool.starmap(taq_data_analysis.taq_cross_response_year_event_shift_data,
+    #                  product(tickers, tickers, [year], taus))
 
-    # for tau in taus:
-    #     taq_data_analysis.taq_cross_response_year_time_shift_data(ticker_i,
-    #                                                               ticker_j,
-    #                                                               year, tau)
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_event_shift_plot,
+                     product(tickers, [year], [taus]))
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_event_shift_plot,
+                     product(tickers, tickers, [year], [taus]))
 
-    # taq_data_plot.taq_cross_response_year_avg_time_shift_plot(ticker_i,
-    #                                                           ticker_j, year,
-    #                                                           taus)
-
-    for ticker in tickers:
-        taq_data_plot.taq_self_response_year_avg_time_shift_plot(ticker, year,
-                                                                 taus)
 
     print('Ay vamos!!')
 

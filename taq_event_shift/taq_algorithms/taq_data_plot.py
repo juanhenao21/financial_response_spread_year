@@ -30,7 +30,7 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_time_shift_plot(ticker, year, taus):
+def taq_self_response_year_avg_event_shift_plot(ticker, year, taus):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -42,7 +42,7 @@ def taq_self_response_year_avg_time_shift_plot(ticker, year, taus):
 
     try:
 
-        function_name = taq_self_response_year_avg_time_shift_plot.__name__
+        function_name = taq_self_response_year_avg_event_shift_plot.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
@@ -54,9 +54,9 @@ def taq_self_response_year_avg_time_shift_plot(ticker, year, taus):
 
             times = np.array(range(- 10 * tau_val, 10 * tau_val, 1))
             self_ = pickle.load(open(''.join((
-                               '../../taq_data/time_shift_data_{1}/taq_self'
-                               + '_response_year_time_shift_data_tau_{2}/taq'
-                               + '_self_response_year_time_shift_data_tau_{2}'
+                               '../../taq_data/event_shift_data_{1}/taq_self'
+                               + '_response_year_event_shift_data_tau_{2}/taq'
+                               + '_self_response_year_event_shift_data_tau_{2}'
                                + '_{1}_{0}.pickle').split())
                                .format(ticker, year, tau_val), 'rb'))
 
@@ -91,7 +91,7 @@ def taq_self_response_year_avg_time_shift_plot(ticker, year, taus):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_time_shift_plot(ticker_i, ticker_j, year,
+def taq_cross_response_year_avg_event_shift_plot(ticker_i, ticker_j, year,
                                                 taus):
     """
     Plot the average cross response during a month and the dayly cross-response
@@ -112,7 +112,7 @@ def taq_cross_response_year_avg_time_shift_plot(ticker_i, ticker_j, year,
 
         try:
 
-            function_name = taq_cross_response_year_avg_time_shift_plot. \
+            function_name = taq_cross_response_year_avg_event_shift_plot. \
                             __name__
             taq_data_tools.taq_function_header_print_plot(function_name,
                                                           ticker_i, ticker_j,
@@ -126,9 +126,9 @@ def taq_cross_response_year_avg_time_shift_plot(ticker_i, ticker_j, year,
 
                 times = np.array(range(- 10 * tau_val, 10 * tau_val, 1))
                 cross = pickle.load(open(''.join((
-                                   '../../taq_data/time_shift_data_{2}/taq'
-                                   + '_cross_response_year_time_shift_data_tau'
-                                   + '_{3}/taq_cross_response_year_time_shift'
+                                   '../../taq_data/event_shift_data_{2}/taq'
+                                   + '_cross_response_year_event_shift_data_tau'
+                                   + '_{3}/taq_cross_response_year_event_shift'
                                    + '_data_tau_{3}_{2}_{0}i_{1}j.pickle')
                                    .split())
                                    .format(ticker_i, ticker_j, year, tau_val),
