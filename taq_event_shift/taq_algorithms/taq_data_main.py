@@ -39,11 +39,11 @@ def main():
     year = '2008'
     dates = taq_data_tools.taq_bussiness_days(year)
 
-    # with mp.Pool(processes=mp.cpu_count()) as pool:
-    #     pool.starmap(taq_data_analysis.taq_self_response_year_event_shift_data,
-    #                  product(tickers, [year], taus))
-    #     pool.starmap(taq_data_analysis.taq_cross_response_year_event_shift_data,
-    #                  product(tickers, tickers, [year], taus))
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_analysis.taq_self_response_year_event_shift_data,
+                     product(tickers, [year], taus))
+        pool.starmap(taq_data_analysis.taq_cross_response_year_event_shift_data,
+                     product(tickers, tickers, [year], taus))
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
         pool.starmap(taq_data_plot.taq_self_response_year_avg_event_shift_plot,
