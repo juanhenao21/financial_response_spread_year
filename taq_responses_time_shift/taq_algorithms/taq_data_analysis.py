@@ -221,12 +221,6 @@ def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
          (i.e. '2008-01-02')
     """
 
-    date_sep = date.split('-')
-
-    year = date_sep[0]
-    month = date_sep[1]
-    day = date_sep[2]
-
     if (ticker_i == ticker_j):
 
         # Self-response
@@ -236,6 +230,12 @@ def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
     else:
 
         try:
+
+            date_sep = date.split('-')
+
+            year = date_sep[0]
+            month = date_sep[1]
+            day = date_sep[2]
 
             function_name = taq_cross_response_day_responses_time_shift_data. \
                             __name__
