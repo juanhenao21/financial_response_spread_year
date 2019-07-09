@@ -35,7 +35,7 @@ def main():
     # Tickers and days to analyze
 
     tickers = ['AAPL', 'MSFT']
-    shifts = [0, 1, 2, 3, 4, 5, 6, 7]
+    shifts = [0, 1, 5, 10, 100, 1000]
     year = '2008'
 
     with mp.Pool(processes=mp.cpu_count()) as pool:

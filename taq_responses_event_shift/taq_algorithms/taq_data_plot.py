@@ -62,6 +62,15 @@ def taq_self_response_year_avg_responses_event_shift_plot(ticker, year,
 
             plt.semilogx(self_, linewidth=5, label='Shift {} s'.format(shift))
 
+        self_ = pickle.load(open(''.join((
+                            '../../taq_data/responses_event_shift_data_{1}/taq'
+                            + '_self_response_year_responses_event_shift_data'
+                            + '_shift_tau/taq_self_response_year_responses'
+                            + '_event_shift_data_shift_tau_{1}_{0}.pickle')
+                            .split()).format(ticker, year), 'rb'))
+
+        plt.semilogx(self_, linewidth=5, label=r'Shift $\tau / 2$')
+
         plt.legend(loc='best', fontsize=25)
         plt.title('Self-response transactions {}'.format(ticker), fontsize=40)
         plt.xlabel(r'$\tau \, [s]$', fontsize=35)
@@ -131,6 +140,16 @@ def taq_cross_response_year_avg_responses_event_shift_plot(ticker_i, ticker_j,
 
                 plt.semilogx(cross, linewidth=5, label='Shift {} s'
                              .format(shift))
+
+            cross = pickle.load(open(''.join((
+                                '../../taq_data/responses_event_shift_data'
+                                + '_{2}/taq_cross_response_year_responses'
+                                + '_event_shift_data_shift_tau/taq_cross'
+                                + '_response_year_responses_event_shift_data'
+                                + '_shift_tau_{2}_{0}i_{1}j.pickle').split())
+                                .format(ticker_i, ticker_j, year), 'rb'))
+
+            plt.semilogx(cross, linewidth=5, label=r'Shift $\tau / 2$')
 
             plt.legend(loc='best', fontsize=25)
             plt.title('Cross-response transactions {} - {}'.format(ticker_i,
