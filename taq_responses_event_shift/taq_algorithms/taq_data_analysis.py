@@ -265,13 +265,14 @@ def taq_self_response_year_responses_event_shift_data(ticker, year, shift, *,
 
             (data,
              avg_num) = taq_self_response_day_responses_event_shift_data(
-                                ticker, date, shift)
+                                ticker, date, shift, tau=tau)
 
             self_ += data
 
             num_s.append(avg_num)
 
         except TypeError:
+            print('error')
             pass
 
     num_s = np.asarray(num_s)
@@ -288,7 +289,6 @@ def taq_self_response_year_responses_event_shift_data(ticker, year, shift, *,
                                      year, '', '')
 
     return self_ / num_s_t, num_s_t
-
 # ----------------------------------------------------------------------------
 
 
@@ -470,7 +470,7 @@ def taq_cross_response_year_responses_event_shift_data(ticker_i, ticker_j,
 
                 (data,
                  avg_num) = taq_cross_response_day_responses_event_shift_data(
-                     ticker_i, ticker_j, date, shift)
+                     ticker_i, ticker_j, date, shift, tau=tau)
 
                 cross += data
 
