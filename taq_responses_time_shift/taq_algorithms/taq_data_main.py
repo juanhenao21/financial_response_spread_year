@@ -25,7 +25,7 @@ import taq_data_analysis
 import taq_data_plot
 import taq_data_tools
 
-__tau__ = 1000
+__tau__ = 10000
 
 # -----------------------------------------------------------------------------
 
@@ -35,19 +35,19 @@ def main():
     # Tickers and days to analyze
 
     tickers = ['AAPL', 'MSFT']
-    shifts = [0, 1, 5, 10, 100, 1000]
+    shifts = [1, 5, 10, 50, 100, 500, 1000, 5000]
     year = '2008'
 
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_analysis.taq_self_response_year_responses_time_shift_data,
-                     product(tickers, [year], shifts))
-        pool.starmap(taq_data_analysis.taq_cross_response_year_responses_time_shift_data,
-                     product(tickers, tickers, [year], shifts))
+    # with mp.Pool(processes=mp.cpu_count()) as pool:
+    #     pool.starmap(taq_data_analysis.taq_self_response_year_responses_time_shift_data,
+    #                  product(tickers, [year], shifts))
+    #     pool.starmap(taq_data_analysis.taq_cross_response_year_responses_time_shift_data,
+    #                  product(tickers, tickers, [year], shifts))
 
-    taq_data_analysis.taq_self_response_year_responses_time_shift_data(tickers[0], year, 0, tau='on')
-    taq_data_analysis.taq_self_response_year_responses_time_shift_data(tickers[1], year, 0, tau='on')
-    taq_data_analysis.taq_cross_response_year_responses_time_shift_data(tickers[0], tickers[1], year, 0, tau='on')
-    taq_data_analysis.taq_cross_response_year_responses_time_shift_data(tickers[1], tickers[0], year, 0, tau='on')
+    # taq_data_analysis.taq_self_response_year_responses_time_shift_data(tickers[0], year, 0, tau='on')
+    # taq_data_analysis.taq_self_response_year_responses_time_shift_data(tickers[1], year, 0, tau='on')
+    # taq_data_analysis.taq_cross_response_year_responses_time_shift_data(tickers[0], tickers[1], year, 0, tau='on')
+    # taq_data_analysis.taq_cross_response_year_responses_time_shift_data(tickers[1], tickers[0], year, 0, tau='on')
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
         pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_time_shift_plot,

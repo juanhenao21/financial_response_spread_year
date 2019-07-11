@@ -25,7 +25,7 @@ import pickle
 
 import taq_data_tools
 
-__tau__ = 1000
+__tau__ = 10000
 
 # ----------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ def taq_self_response_year_avg_responses_time_shift_plot(ticker, year, shifts):
                             + '_time_shift_data_shift_tau_{1}_{0}.pickle')
                             .split()).format(ticker, year, shift), 'rb'))
 
-        plt.semilogx(self_, linewidth=5, label=r'Shift $\tau / 2$')
+        # plt.semilogx(self_, linewidth=5, label=r'Shift $\tau / 2$')
 
         plt.legend(loc='best', fontsize=25)
         plt.title('Self-response - {}'.format(ticker), fontsize=40)
@@ -75,7 +75,7 @@ def taq_self_response_year_avg_responses_time_shift_plot(ticker, year, shifts):
         plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
         plt.xticks(fontsize=25)
         plt.yticks(fontsize=25)
-        plt.xlim(1, 1000)
+        # plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.grid(True)
@@ -146,7 +146,7 @@ def taq_cross_response_year_avg_responses_time_shift_plot(ticker_i, ticker_j,
                                 + '_{2}_{0}i_{1}j.pickle').split())
                                 .format(ticker_i, ticker_j, year), 'rb'))
 
-            plt.semilogx(cross, linewidth=5, label=r'Shift $\tau / 2$')
+            # plt.semilogx(cross, linewidth=5, label=r'Shift $\tau / 2$')
             plt.legend(loc='best', fontsize=25)
             plt.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
                       fontsize=40)
@@ -154,7 +154,7 @@ def taq_cross_response_year_avg_responses_time_shift_plot(ticker_i, ticker_j,
             plt.ylabel(r'$R_{ij}(\tau)$', fontsize=35)
             plt.xticks(fontsize=25)
             plt.yticks(fontsize=25)
-            plt.xlim(1, 1000)
+            # plt.xlim(1, 1000)
             # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
             plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             plt.grid(True)
