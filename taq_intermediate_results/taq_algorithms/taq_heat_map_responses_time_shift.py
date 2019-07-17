@@ -123,6 +123,7 @@ def main():
     taq_heat_map_cross_responses_time_shift_plot(tickers[1], tickers[0],
                                             year, shifts)
 
+    return None
 
 if __name__ == "__main__":
     main()
