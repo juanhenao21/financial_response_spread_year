@@ -180,6 +180,42 @@ def taq_self_response_year_responses_event_trades_minute_data(ticker, year,
 
 # ----------------------------------------------------------------------------
 
+def taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
+                                                                  tau):
+    """
+    Load the list of tuples with the rate of trades per minute and the
+    responses. Average the responses and return an array with the averaged
+    responses.
+        :param ticker: string of the abbreviation of the midpoint stock to
+            be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param tau: int of the tau value to be analized (i. e. 50)
+    """
+
+    function_name = \
+        taq_self_response_year_avg_responses_event_trades_minute_data.__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, '', '')
+
+    try:
+
+        # Load data
+        responses = pickle.load(open(''.join((
+                '../../taq_data/responses_event_trades_minute_data_{1}/taq'
+                + '_self_response_year_responses_event_trades_minute_data'
+                + '_tau_{2}/taq_self_response_year_responses_event_trades'
+                + '_minute_data_tau_{2}_{1}_{0}.pickle').split())
+                .format(ticker, year, tau), 'rb'))
+
+        responses.sort(key=lambda tup: tup[0])
+        print(responses[-1])
+
+    except TypeError:
+        print('error')
+        pass
+
+    return None
+
 
 def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
                                                               ticker_j, date,
@@ -190,11 +226,11 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
     is adjusted to use only the values each second. Return an array with the
     cross response function for a day.
         :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
+            be analized (i.e. 'AAPL')
         :param ticker_j: string of the abbreviation of the trade sign stock to
-         be analized (i.e. 'AAPL')
+            be analized (i.e. 'AAPL')
         :param date: string with the date of the data to be extracted
-         (i.e. '2008-01-02')
+            (i.e. '2008-01-02')
     """
 
     if (ticker_i == ticker_j):
@@ -351,3 +387,15 @@ def taq_cross_response_year_responses_event_trades_minute_data(ticker_i,
         return None
 
 # ----------------------------------------------------------------------------
+
+def main():
+
+    ticker = 'AAPL'
+    year = '2008'
+    tau = 50
+
+    taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
+                                                                  tau)
+
+if __name__ == "__main__":
+    main()
