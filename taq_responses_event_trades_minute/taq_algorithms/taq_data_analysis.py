@@ -28,7 +28,7 @@ import os
 
 import pandas as pd
 import pickle
-
+import traceback
 import taq_data_tools
 
 __tau__ = 10000
@@ -180,6 +180,7 @@ def taq_self_response_year_responses_event_trades_minute_data(ticker, year,
 
 # ----------------------------------------------------------------------------
 
+
 def taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
                                                                   tau):
     """
@@ -208,13 +209,62 @@ def taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
                 .format(ticker, year, tau), 'rb'))
 
         responses.sort(key=lambda tup: tup[0])
-        print(responses[-1])
+        res_list = [list(i) for i in zip(*responses)]
+        rate = np.asarray(res_list[0])
+        res = np.asarray(res_list[1])
 
-    except TypeError:
-        print('error')
+        res_avg = []
+        time = []
+
+        for i in range(1, 11):
+            condition = rate == i
+            if (np.sum(condition)):
+                res_avg.append(np.mean(res[condition]))
+                time.append(i)
+        inter1 = list(range(10, 101, 10))
+        for i, v in enumerate(inter1):
+            if (v == 10):
+                pass
+            else:
+                condition = (rate <= inter1[i]) \
+                            * (rate > inter1[i - 1])
+                if (np.sum(condition)):
+                    res_avg.append(np.mean(res[condition]))
+                    time.append(v)
+        inter2 = list(range(100, 1001, 100))
+        for i, v in enumerate(inter2):
+            if (v == 100):
+                pass
+            else:
+                condition = (rate <= inter2[i]) \
+                            * (rate > inter2[i-1])
+                if (np.sum(condition)):
+                    res_avg.append(np.mean(res[condition]))
+                    time.append(v)
+        inter3 = list(range(1000, 10001, 1000))
+        for i, v in enumerate(inter3):
+            if (v == 1000):
+                pass
+            else:
+                condition = (rate <= inter3[i]) \
+                            * (rate > inter3[i-1])
+                if (np.sum(condition)):
+                    res_avg.append(np.mean(res[condition]))
+                    time.append(v)
+
+    except TypeError as e:
+        print(e)
+        print(traceback.format_exc())
         pass
 
-    return None
+    assert len(res_avg) == len(time)
+    # Saving data
+    taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
+                                 (time, res_avg), ticker, ticker, year, '', '')
+
+    return (time, res_avg)
+
+# ----------------------------------------------------------------------------
 
 
 def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
@@ -388,14 +438,120 @@ def taq_cross_response_year_responses_event_trades_minute_data(ticker_i,
 
 # ----------------------------------------------------------------------------
 
+
+def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
+                                                                   ticker_j,
+                                                                   year, tau):
+    """
+    Load the list of tuples with the rate of trades per minute and the
+    responses. Average the responses and return an array with the averaged
+    responses.
+        :param ticker_i: string of the abbreviation of the midpoint stock to
+            be analized (i.e. 'AAPL')
+        :param ticker_j: string of the abbreviation of the midpoint stock to
+            be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param tau: int of the tau value to be analized (i. e. 50)
+    """
+
+    if (ticker_i == ticker_j):
+
+        # Self-response
+
+        return None
+
+    else:
+
+        function_name = \
+            taq_cross_response_year_avg_responses_event_trades_minute_data \
+            .__name__
+        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
+                                                      ticker_j, year, '', '')
+
+        try:
+
+            # Load data
+            responses = pickle.load(open(''.join((
+                    '../../taq_data/responses_event_trades_minute_data_{2}/taq'
+                    + '_cross_response_year_responses_event_trades_minute_data'
+                    + '_tau_{3}/taq_cross_response_year_responses_event_trades'
+                    + '_minute_data_tau_{3}_{2}_{0}i_{1}j.pickle').split())
+                    .format(ticker_i, ticker_j, year, tau), 'rb'))
+
+            responses.sort(key=lambda tup: tup[0])
+            res_list = [list(i) for i in zip(*responses)]
+            rate = np.asarray(res_list[0])
+            res = np.asarray(res_list[1])
+
+            res_avg = []
+            time = []
+
+            for i in range(1, 11):
+                condition = rate == i
+                if (np.sum(condition)):
+                    res_avg.append(np.mean(res[condition]))
+                    time.append(i)
+            inter1 = list(range(10, 101, 10))
+            for i, v in enumerate(inter1):
+                if (v == 10):
+                    pass
+                else:
+                    condition = (rate <= inter1[i]) \
+                                * (rate > inter1[i - 1])
+                    if (np.sum(condition)):
+                        res_avg.append(np.mean(res[condition]))
+                        time.append(v)
+            inter2 = list(range(100, 1001, 100))
+            for i, v in enumerate(inter2):
+                if (v == 100):
+                    pass
+                else:
+                    condition = (rate <= inter2[i]) \
+                                * (rate > inter2[i-1])
+                    if (np.sum(condition)):
+                        res_avg.append(np.mean(res[condition]))
+                        time.append(v)
+            inter3 = list(range(1000, 10001, 1000))
+            for i, v in enumerate(inter3):
+                if (v == 1000):
+                    pass
+                else:
+                    condition = (rate <= inter3[i]) \
+                                * (rate > inter3[i-1])
+                    if (np.sum(condition)):
+                        res_avg.append(np.mean(res[condition]))
+                        time.append(v)
+
+        except TypeError as e:
+            print(e)
+            print(traceback.format_exc())
+            pass
+
+        assert len(res_avg) == len(time)
+        # Saving data
+        taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
+                                    (time, res_avg), ticker_i, ticker_j, year, '', '')
+
+        return (time, res_avg)
+
+# ----------------------------------------------------------------------------
+
+
 def main():
 
     ticker = 'AAPL'
+    ticker_i = 'AAPL'
+    ticker_j = 'MSFT'
     year = '2008'
     tau = 50
 
-    taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
-                                                                  tau)
+    x, y = \
+     taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i, ticker_j,
+                                                                   year, tau)
+
+    print(x)
+    print(y)
+
 
 if __name__ == "__main__":
     main()

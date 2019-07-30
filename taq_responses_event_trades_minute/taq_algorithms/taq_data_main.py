@@ -46,12 +46,22 @@ def main():
     #     taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
     #     taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
 
-    for tau in taus:
+    # for tau in taus:
 
-        taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot(tickers[0], year, tau)
-        taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot(tickers[1], year, tau)
-        taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
-        taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
+    #     taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[0], year, tau)
+    #     taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[1], year, tau)
+    #     taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
+    #     taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
+    #     taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data(tickers[0], year, tau)
+    #     taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data(tickers[1], year, tau)
+    #     taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
+    #     taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
+
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot,
+        product(tickers, [year], taus))
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot,
+        product(tickers, tickers, [year], taus))
 
     print('Ay vamos!!')
 
