@@ -267,6 +267,94 @@ def taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
 # ----------------------------------------------------------------------------
 
 
+def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
+                                                                     year, tau):
+    """
+    Load the list of tuples with the rate of trades per minute and the
+    responses. Average the responses and return an array with the averaged
+    responses.
+        :param ticker: string of the abbreviation of the midpoint stock to
+            be analized (i.e. 'AAPL')
+        :param year: string of the year to be analized (i.e '2016')
+        :param tau: int of the tau value to be analized (i. e. 50)
+    """
+
+    function_name = \
+        taq_self_response_year_avg_responses_event_trades_minute_data_v2 \
+            .__name__
+    taq_data_tools.taq_function_header_print_data(function_name, ticker,
+                                                  ticker, year, '', '')
+
+    try:
+
+        # Load data
+        responses = pickle.load(open(''.join((
+                '../../taq_data/responses_event_trades_minute_data_{1}/taq'
+                + '_self_response_year_responses_event_trades_minute_data'
+                + '_tau_{2}/taq_self_response_year_responses_event_trades'
+                + '_minute_data_tau_{2}_{1}_{0}.pickle').split())
+                .format(ticker, year, tau), 'rb'))
+
+        responses.sort(key=lambda tup: tup[0])
+        res_list = [list(i) for i in zip(*responses)]
+        rate = np.asarray(res_list[0])
+        res = np.asarray(res_list[1])
+
+        res_avg = []
+        time = []
+        avg_num = len(res)
+
+        for i in range(1, 11):
+            condition = rate == i
+            if (np.sum(condition)):
+                res_avg.append(np.sum(res[condition]) / avg_num)
+                time.append(i)
+        inter1 = list(range(10, 101, 10))
+        for i, v in enumerate(inter1):
+            if (v == 10):
+                pass
+            else:
+                condition = (rate <= inter1[i]) \
+                            * (rate > inter1[i - 1])
+                if (np.sum(condition)):
+                    res_avg.append(np.sum(res[condition]) / avg_num)
+                    time.append(v)
+        inter2 = list(range(100, 1001, 100))
+        for i, v in enumerate(inter2):
+            if (v == 100):
+                pass
+            else:
+                condition = (rate <= inter2[i]) \
+                            * (rate > inter2[i-1])
+                if (np.sum(condition)):
+                    res_avg.append(np.sum(res[condition]) / avg_num)
+                    time.append(v)
+        inter3 = list(range(1000, 10001, 1000))
+        for i, v in enumerate(inter3):
+            if (v == 1000):
+                pass
+            else:
+                condition = (rate <= inter3[i]) \
+                            * (rate > inter3[i-1])
+                if (np.sum(condition)):
+                    res_avg.append(np.sum(res[condition]) / avg_num)
+                    time.append(v)
+
+    except TypeError as e:
+        print(e)
+        print(traceback.format_exc())
+        pass
+
+    assert len(res_avg) == len(time)
+    # Saving data
+    taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
+                                 (time, res_avg), ticker, ticker, year, '', '')
+
+    return (time, res_avg)
+
+# ----------------------------------------------------------------------------
+
+
 def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
                                                               ticker_j, date,
                                                               tau):
@@ -439,9 +527,10 @@ def taq_cross_response_year_responses_event_trades_minute_data(ticker_i,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
-                                                                   ticker_j,
-                                                                   year, tau):
+def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
+                                                                      ticker_j,
+                                                                      year,
+                                                                      tau):
     """
     Load the list of tuples with the rate of trades per minute and the
     responses. Average the responses and return an array with the averaged
@@ -463,7 +552,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
     else:
 
         function_name = \
-            taq_cross_response_year_avg_responses_event_trades_minute_data \
+            taq_cross_response_year_avg_responses_event_trades_minute_data_v2 \
             .__name__
         taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
                                                       ticker_j, year, '', '')
@@ -485,11 +574,12 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
 
             res_avg = []
             time = []
+            avg_num = len(res)
 
             for i in range(1, 11):
                 condition = rate == i
                 if (np.sum(condition)):
-                    res_avg.append(np.mean(res[condition]))
+                    res_avg.append(np.sum(res[condition]) / avg_num)
                     time.append(i)
             inter1 = list(range(10, 101, 10))
             for i, v in enumerate(inter1):
@@ -499,7 +589,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
                     condition = (rate <= inter1[i]) \
                                 * (rate > inter1[i - 1])
                     if (np.sum(condition)):
-                        res_avg.append(np.mean(res[condition]))
+                        res_avg.append(np.sum(res[condition]) / avg_num)
                         time.append(v)
             inter2 = list(range(100, 1001, 100))
             for i, v in enumerate(inter2):
@@ -509,7 +599,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
                     condition = (rate <= inter2[i]) \
                                 * (rate > inter2[i-1])
                     if (np.sum(condition)):
-                        res_avg.append(np.mean(res[condition]))
+                        res_avg.append(np.sum(res[condition]) / avg_num)
                         time.append(v)
             inter3 = list(range(1000, 10001, 1000))
             for i, v in enumerate(inter3):
@@ -519,7 +609,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
                     condition = (rate <= inter3[i]) \
                                 * (rate > inter3[i-1])
                     if (np.sum(condition)):
-                        res_avg.append(np.mean(res[condition]))
+                        res_avg.append(np.sum(res[condition]) / avg_num)
                         time.append(v)
 
         except TypeError as e:
@@ -546,7 +636,7 @@ def main():
     tau = 50
 
     x, y = \
-     taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i, ticker_j,
+     taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i, ticker_j,
                                                                    year, tau)
 
     print(x)
