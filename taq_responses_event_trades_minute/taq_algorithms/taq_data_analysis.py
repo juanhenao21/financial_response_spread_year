@@ -75,13 +75,12 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
                 .split())
                 .format(ticker, year, month, day), 'rb'))
         # As the data is loaded from the original reproduction data from the
-        # article, the data have a shift of 1 second. To correct this I made
-        # both data to have the same time [34801, 56999]
-        midpoint_i = midpoint_i[1:]
-        time_m = np.array(range(34801, 57000))
+        # article, the data have a shift of 1 second.
+        time_m = np.array(range(34801, 57001))
 
         assert not np.sum(trade_sign_i == 0)
         assert not np.sum(midpoint_i == 0)
+        assert len(midpoint_i) == len(time_m)
 
         # Array of the average of each tau. 10^3 s used by Wang
         # List to save the tuples with the response and rates.
@@ -409,13 +408,12 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
                 .format(ticker_j, year, month, day), 'rb'))
 
             # As the data is loaded from the original reproduction data from
-            # the article, the data have a shift of 1 second. To correct this
-            # I made both data to have the same time [34801, 56999]
-            midpoint_i = midpoint_i[1:]
-            time_m = np.array(range(34801, 57000))
+            # the article, the data have a shift of 1 second.
+            time_m = np.array(range(34801, 57001))
 
             assert not np.sum(trade_sign_j == 0)
             assert not np.sum(midpoint_i == 0)
+            assert len(midpoint_i) == len(time_m)
 
             # List to save the tuples with the response and rates
             points = []
@@ -635,12 +633,11 @@ def main():
     year = '2008'
     tau = 50
 
-    x, y = \
-     taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i, ticker_j,
-                                                                   year, tau)
+    taq_self_response_day_responses_event_trades_minute_data(ticker,
+                                                              '2008-01-02', tau)
 
-    print(x)
-    print(y)
+#    print(x)
+#    print(y)
 
 
 if __name__ == "__main__":

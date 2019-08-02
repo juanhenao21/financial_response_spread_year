@@ -63,26 +63,20 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
     try:
 
         # Load data
-        midpoint_i = pickle.load(open(''.join((
+        midpoint = pickle.load(open(''.join((
                 '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
                 + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
                 + '{2}{3}_{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
-        time_t, _, trade_sign_i = pickle.load(open("".join((
-                '../../taq_data/responses_event_shift_data_{1}/taq_trade'
-                + '_signs_responses_event_shift_data/taq_trade_signs'
-                + '_responses_event_shift_data_{1}{2}{3}_{0}.pickle')
-                .split())
+        time_t, _, trade_sign = pickle.load(open("".join((
+                '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
+                + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
+                + '{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
         # As the data is loaded from the original reproduction data from the
-        # article, the data have a shift of 1 second. To correct this I made
-        # both data to have the same time [34801, 56999]
-        midpoint_i = midpoint_i[1:]
-        time_m = np.array(range(34801, 57000))
+        # article, the data have a shift of 1 second.
 
-        assert not np.sum(trade_sign_i == 0)
-        assert not np.sum(midpoint_i == 0)
-
+        assert len(midpoint) == len(trade_sign)
         # Array of the average of each tau. 10^3 s used by Wang
         # List to save the tuples with the response and rates.
         points = []
@@ -92,12 +86,12 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
 
         # Calculating the midpoint log return and the self response function
 
-        midpoint_t = 0. * trade_sign_i
+        midpoint_t = 0. * trade_sign
 
         for t_idx, t_val in enumerate(time_m):
             condition = time_t == t_val
             len_c = np.sum(condition)
-            midpoint_t[condition] = midpoint_i[t_idx] * np.ones(len_c)
+            midpoint_t[condition] = midpoint[t_idx] * np.ones(len_c)
 
         assert not np.sum(midpoint_t == 0)
 
@@ -108,7 +102,7 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
                           - midpoint_t[:-tau - 1]) \
             / midpoint_t[:-tau - 1]
 
-        trade_sign_tau_ = trade_sign_i[:-tau - 1]
+        trade_sign_tau_ = trade_sign[:-tau - 1]
         time_t = time_t[:- tau - 1]
         assert len(trade_sign_tau_) == len(log_return_sec)
 
