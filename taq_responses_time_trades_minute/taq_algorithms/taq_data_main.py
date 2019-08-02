@@ -37,30 +37,40 @@ def main():
     tickers = ['AAPL', 'MSFT']
     year = '2008'
     taus = [5, 10, 50, 100, 500, 1000]
+    for ticker in tickers:
+        for tau in taus:
+            taq_data_analysis.taq_self_response_year_responses_time_trades_minute_data(ticker, year, tau)
 
-    # for ticker in tickers:
-    #     for tau in taus:
-    #         taq_data_analysis.taq_self_response_year_responses_event_trades_minute_data(ticker, year, tau)
+    for tau in taus:
+        taq_data_analysis.taq_cross_response_year_responses_time_trades_minute_data(tickers[0], tickers[1], year, tau)
+        taq_data_analysis.taq_cross_response_year_responses_time_trades_minute_data(tickers[1], tickers[0], year, tau)
 
-    # for tau in taus:
-    #     taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
-    #     taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
+    for tau in taus:
 
-    # for tau in taus:
+        taq_data_plot.taq_self_response_year_responses_time_trades_minute_plot(tickers[0], year, tau)
+        taq_data_plot.taq_self_response_year_responses_time_trades_minute_plot(tickers[1], year, tau)
+        taq_data_plot.taq_cross_response_year_responses_time_trades_minute_plot(tickers[0], tickers[1], year, tau)
+        taq_data_plot.taq_cross_response_year_responses_time_trades_minute_plot(tickers[1], tickers[0], year, tau)
 
-    #     taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[0], year, tau)
-    #     taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[1], year, tau)
-    #     taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
-    #     taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
-        # taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data_v2(tickers[0], year, tau)
-        # taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data_v2(tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data_v2(tickers[0], tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data_v2(tickers[1], tickers[0], year, tau)
+        taq_data_analysis.taq_self_response_year_avg_responses_time_trades_minute_data(tickers[0], year, tau)
+        taq_data_analysis.taq_self_response_year_avg_responses_time_trades_minute_data(tickers[1], year, tau)
+        taq_data_analysis.taq_cross_response_year_avg_responses_time_trades_minute_data(tickers[0], tickers[1], year, tau)
+        taq_data_analysis.taq_cross_response_year_avg_responses_time_trades_minute_data(tickers[1], tickers[0], year, tau)
+
+        taq_data_plot.taq_self_response_year_avg_responses_time_trades_minute_plot(tickers[0], year, tau)
+        taq_data_plot.taq_self_response_year_avg_responses_time_trades_minute_plot(tickers[1], year, tau)
+        taq_data_plot.taq_cross_response_year_avg_responses_time_trades_minute_plot(tickers[0], tickers[1], year, tau)
+        taq_data_plot.taq_cross_response_year_avg_responses_time_trades_minute_plot(tickers[1], tickers[0], year, tau)
+
+        taq_data_analysis.taq_self_response_year_avg_responses_time_trades_minute_data_v2(tickers[0], year, tau)
+        taq_data_analysis.taq_self_response_year_avg_responses_time_trades_minute_data_v2(tickers[1], year, tau)
+        taq_data_analysis.taq_cross_response_year_avg_responses_time_trades_minute_data_v2(tickers[0], tickers[1], year, tau)
+        taq_data_analysis.taq_cross_response_year_avg_responses_time_trades_minute_data_v2(tickers[1], tickers[0], year, tau)
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot_v2,
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_time_trades_minute_plot_v2,
         product(tickers, [year], taus))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot_v2,
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_time_trades_minute_plot_v2,
         product(tickers, tickers, [year], taus))
 
     print('Ay vamos!!')

@@ -30,7 +30,7 @@ __tau__ = 10000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_responses_event_trades_minute_plot(ticker, year,
+def taq_self_response_year_responses_time_trades_minute_plot(ticker, year,
                                                                   tau):
     """
     Plot the self response during a year and the dayly self-response
@@ -44,17 +44,17 @@ def taq_self_response_year_responses_event_trades_minute_plot(ticker, year,
     try:
 
         function_name = \
-         taq_self_response_year_responses_event_trades_minute_plot.__name__
+         taq_self_response_year_responses_time_trades_minute_plot.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
         figure = plt.figure(figsize=(16, 9))
 
         points = pickle.load(open(''.join((
-                            '../../taq_data/responses_event_trades_minute_data'
+                            '../../taq_data/responses_time_trades_minute_data'
                             + '_{1}/taq_self_response_year_responses_event'
                             + '_trades_minute_data_tau_{2}/taq_self_response'
-                            + '_year_responses_event_trades_minute_data_tau'
+                            + '_year_responses_time_trades_minute_data_tau'
                             + '_{2}_{1}_{0}.pickle').split())
                             .format(ticker, year, tau), 'rb'))
 
@@ -87,7 +87,7 @@ def taq_self_response_year_responses_event_trades_minute_plot(ticker, year,
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_responses_event_trades_minute_plot(ticker, year,
+def taq_self_response_year_avg_responses_time_trades_minute_plot(ticker, year,
                                                                   tau):
     """
     Plot the self response during a year and the dayly self-response
@@ -101,17 +101,17 @@ def taq_self_response_year_avg_responses_event_trades_minute_plot(ticker, year,
     try:
 
         function_name = \
-         taq_self_response_year_avg_responses_event_trades_minute_plot.__name__
+         taq_self_response_year_avg_responses_time_trades_minute_plot.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
         figure = plt.figure(figsize=(16, 9))
 
         x, y = pickle.load(open(''.join((
-                            '../../taq_data/responses_event_trades_minute_data'
+                            '../../taq_data/responses_time_trades_minute_data'
                             + '_{1}/taq_self_response_year_avg_responses_event'
                             + '_trades_minute_data_tau_{2}/taq_self_response'
-                            + '_year_avg_responses_event_trades_minute_data_tau'
+                            + '_year_avg_responses_time_trades_minute_data_tau'
                             + '_{2}_{1}_{0}.pickle').split())
                             .format(ticker, year, tau), 'rb'))
 
@@ -145,7 +145,7 @@ def taq_self_response_year_avg_responses_event_trades_minute_plot(ticker, year,
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_responses_event_trades_minute_plot_v2(ticker, year,
+def taq_self_response_year_avg_responses_time_trades_minute_plot_v2(ticker, year,
                                                                      tau):
     """
     Plot the self response during a year and the dayly self-response
@@ -159,17 +159,17 @@ def taq_self_response_year_avg_responses_event_trades_minute_plot_v2(ticker, yea
     try:
 
         function_name = \
-         taq_self_response_year_avg_responses_event_trades_minute_plot_v2.__name__
+         taq_self_response_year_avg_responses_time_trades_minute_plot_v2.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
         figure = plt.figure(figsize=(16, 9))
 
         x, y = pickle.load(open(''.join((
-                            '../../taq_data/responses_event_trades_minute_data'
+                            '../../taq_data/responses_time_trades_minute_data'
                             + '_{1}/taq_self_response_year_avg_responses_event'
                             + '_trades_minute_data_v2_tau_{2}/taq_self_response'
-                            + '_year_avg_responses_event_trades_minute_data_v2_tau'
+                            + '_year_avg_responses_time_trades_minute_data_v2_tau'
                             + '_{2}_{1}_{0}.pickle').split())
                             .format(ticker, year, tau), 'rb'))
 
@@ -203,7 +203,7 @@ def taq_self_response_year_avg_responses_event_trades_minute_plot_v2(ticker, yea
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_responses_event_trades_minute_plot(ticker_i,
+def taq_cross_response_year_responses_time_trades_minute_plot(ticker_i,
                                                                    ticker_j,
                                                                    year, tau):
     """
@@ -226,7 +226,7 @@ def taq_cross_response_year_responses_event_trades_minute_plot(ticker_i,
         try:
 
             function_name = \
-              taq_cross_response_year_responses_event_trades_minute_plot. \
+              taq_cross_response_year_responses_time_trades_minute_plot. \
               __name__
             taq_data_tools.taq_function_header_print_plot(function_name,
                                                           ticker_i, ticker_j,
@@ -234,10 +234,10 @@ def taq_cross_response_year_responses_event_trades_minute_plot(ticker_i,
             figure = plt.figure(figsize=(16, 9))
 
             points = pickle.load(open(''.join((
-                        '../../taq_data/responses_event_trades_minute_data_{2}'
-                        + '/taq_cross_response_year_responses_event_trades'
+                        '../../taq_data/responses_time_trades_minute_data_{2}'
+                        + '/taq_cross_response_year_responses_time_trades'
                         + '_minute_data_tau_{3}/taq_cross_response_year'
-                        + '_responses_event_trades_minute_data_tau_{3}_{2}'
+                        + '_responses_time_trades_minute_data_tau_{3}_{2}'
                         + '_{0}i_{1}j.pickle').split())
                         .format(ticker_i, ticker_j, year, tau), 'rb'))
 
@@ -272,7 +272,7 @@ def taq_cross_response_year_responses_event_trades_minute_plot(ticker_i,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_responses_event_trades_minute_plot(ticker_i,
+def taq_cross_response_year_avg_responses_time_trades_minute_plot(ticker_i,
                                                                    ticker_j,
                                                                    year, tau):
     """
@@ -287,17 +287,17 @@ def taq_cross_response_year_avg_responses_event_trades_minute_plot(ticker_i,
     try:
 
         function_name = \
-         taq_cross_response_year_avg_responses_event_trades_minute_plot.__name__
+         taq_cross_response_year_avg_responses_time_trades_minute_plot.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker_i,
                                                       ticker_j, year, '', '')
 
         figure = plt.figure(figsize=(16, 9))
 
         x, y = pickle.load(open(''.join((
-                            '../../taq_data/responses_event_trades_minute_data'
+                            '../../taq_data/responses_time_trades_minute_data'
                             + '_{2}/taq_cross_response_year_avg_responses_event'
                             + '_trades_minute_data_tau_{3}/taq_cross_response'
-                            + '_year_avg_responses_event_trades_minute_data_tau'
+                            + '_year_avg_responses_time_trades_minute_data_tau'
                             + '_{3}_{2}_{0}i_{1}j.pickle').split())
                             .format(ticker_i, ticker_j, year, tau), 'rb'))
 
@@ -332,7 +332,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_plot(ticker_i,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_responses_event_trades_minute_plot_v2(ticker_i,
+def taq_cross_response_year_avg_responses_time_trades_minute_plot_v2(ticker_i,
                                                                    ticker_j,
                                                                    year, tau):
     """
@@ -347,17 +347,17 @@ def taq_cross_response_year_avg_responses_event_trades_minute_plot_v2(ticker_i,
     try:
 
         function_name = \
-         taq_cross_response_year_avg_responses_event_trades_minute_plot_v2.__name__
+         taq_cross_response_year_avg_responses_time_trades_minute_plot_v2.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker_i,
                                                       ticker_j, year, '', '')
 
         figure = plt.figure(figsize=(16, 9))
 
         x, y = pickle.load(open(''.join((
-                            '../../taq_data/responses_event_trades_minute_data'
+                            '../../taq_data/responses_time_trades_minute_data'
                             + '_{2}/taq_cross_response_year_avg_responses_event'
                             + '_trades_minute_data_v2_tau_{3}/taq_cross_response'
-                            + '_year_avg_responses_event_trades_minute_data_v2_tau'
+                            + '_year_avg_responses_time_trades_minute_data_v2_tau'
                             + '_{3}_{2}_{0}i_{1}j.pickle').split())
                             .format(ticker_i, ticker_j, year, tau), 'rb'))
 
@@ -400,7 +400,7 @@ def main():
     year = '2008'
     tau = 50
 
-    taq_cross_response_year_avg_responses_event_trades_minute_plot_v2(ticker_i,
+    taq_cross_response_year_avg_responses_time_trades_minute_plot_v2(ticker_i,
                                                                    ticker_j,
                                                                    year, tau)
 
