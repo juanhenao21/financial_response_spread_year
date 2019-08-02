@@ -605,12 +605,8 @@ def main():
     year = '2008'
     tau = 50
 
-    x, y = \
-     taq_cross_response_year_avg_responses_time_trades_minute_data_v2(ticker_i, ticker_j,
-                                                                   year, tau)
-
-    print(x)
-    print(y)
+    taq_self_response_day_responses_time_trades_minute_data(ticker,
+                                                            '2008-01-02', tau)
 
 
 if __name__ == "__main__":

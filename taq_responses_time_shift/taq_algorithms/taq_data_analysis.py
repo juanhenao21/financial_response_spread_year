@@ -67,7 +67,7 @@ def taq_self_response_day_responses_time_shift_data(ticker, date, shift, *,
                 + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
                 + '{2}{3}_{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
-        trade_sign = pickle.load(open("".join((
+        _, _, trade_sign = pickle.load(open("".join((
                 '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
                 + '_full_time_data/taq_trade_signs_full_time_data_{1}{2}{3}_'
                 + '{0}.pickle').split())
@@ -249,7 +249,7 @@ def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
                     + '_midpoint_full_time_data/taq_midpoint_full_time_data'
                     + '_midpoint_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
-            trade_sign_j = pickle.load(open("".join((
+            _, _, trade_sign_j = pickle.load(open("".join((
                     '../../taq_data/article_reproduction_data_2008/taq_trade_'
                     + 'signs_full_time_data/taq_trade_signs_full_time_data'
                     + '_{1}{2}{3}_{0}.pickle').split())
