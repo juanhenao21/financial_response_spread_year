@@ -40,13 +40,13 @@ def main():
 
     for ticker in tickers:
         for tau in taus:
+
             taq_data_analysis.taq_self_response_year_responses_event_trades_minute_data(ticker, year, tau)
 
     for tau in taus:
+
         taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
         taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
-
-    for tau in taus:
 
         taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[0], year, tau)
         taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[1], year, tau)
