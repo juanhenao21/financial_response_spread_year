@@ -549,7 +549,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
     else:
 
         function_name = \
-            taq_cross_response_year_avg_responses_event_trades_minute_data_v2 \
+            taq_cross_response_year_avg_responses_event_trades_minute_data \
             .__name__
         taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
                                                       ticker_j, year, '', '')
