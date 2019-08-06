@@ -52,7 +52,7 @@ def taq_self_response_year_responses_time_trades_minute_plot(ticker, year,
 
         points = pickle.load(open(''.join((
                             '../../taq_data/responses_time_trades_minute_data'
-                            + '_{1}/taq_self_response_year_responses_event'
+                            + '_{1}/taq_self_response_year_responses_time'
                             + '_trades_minute_data_tau_{2}/taq_self_response'
                             + '_year_responses_time_trades_minute_data_tau'
                             + '_{2}_{1}_{0}.pickle').split())
@@ -109,7 +109,7 @@ def taq_self_response_year_avg_responses_time_trades_minute_plot(ticker, year,
 
         x, y = pickle.load(open(''.join((
                             '../../taq_data/responses_time_trades_minute_data'
-                            + '_{1}/taq_self_response_year_avg_responses_event'
+                            + '_{1}/taq_self_response_year_avg_responses_time'
                             + '_trades_minute_data_tau_{2}/taq_self_response'
                             + '_year_avg_responses_time_trades_minute_data_tau'
                             + '_{2}_{1}_{0}.pickle').split())
@@ -167,7 +167,7 @@ def taq_self_response_year_avg_responses_time_trades_minute_plot_v2(ticker, year
 
         x, y = pickle.load(open(''.join((
                             '../../taq_data/responses_time_trades_minute_data'
-                            + '_{1}/taq_self_response_year_avg_responses_event'
+                            + '_{1}/taq_self_response_year_avg_responses_time'
                             + '_trades_minute_data_v2_tau_{2}/taq_self_response'
                             + '_year_avg_responses_time_trades_minute_data_v2_tau'
                             + '_{2}_{1}_{0}.pickle').split())
@@ -295,7 +295,7 @@ def taq_cross_response_year_avg_responses_time_trades_minute_plot(ticker_i,
 
         x, y = pickle.load(open(''.join((
                             '../../taq_data/responses_time_trades_minute_data'
-                            + '_{2}/taq_cross_response_year_avg_responses_event'
+                            + '_{2}/taq_cross_response_year_avg_responses_time'
                             + '_trades_minute_data_tau_{3}/taq_cross_response'
                             + '_year_avg_responses_time_trades_minute_data_tau'
                             + '_{3}_{2}_{0}i_{1}j.pickle').split())
@@ -355,7 +355,7 @@ def taq_cross_response_year_avg_responses_time_trades_minute_plot_v2(ticker_i,
 
         x, y = pickle.load(open(''.join((
                             '../../taq_data/responses_time_trades_minute_data'
-                            + '_{2}/taq_cross_response_year_avg_responses_event'
+                            + '_{2}/taq_cross_response_year_avg_responses_time'
                             + '_trades_minute_data_v2_tau_{3}/taq_cross_response'
                             + '_year_avg_responses_time_trades_minute_data_v2_tau'
                             + '_{3}_{2}_{0}i_{1}j.pickle').split())
