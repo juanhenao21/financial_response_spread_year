@@ -36,7 +36,7 @@ __tau__ = 1000
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_plot(ticker, year):
+def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
     """
     Plot the average cross response during a year and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -48,15 +48,15 @@ def taq_self_response_year_avg_plot(ticker, year):
 
     try:
 
-        function_name = taq_self_response_year_avg_plot.__name__
+        function_name = taq_self_response_year_avg_time_short_long_plot.__name__
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
         self_ = pickle.load(open(''.join((
-                        '../../taq_data/article_reproduction_data_{1}/taq_self'
-                        + '_response_year_data/taq_self_response_year_data'
+                        '../../taq_data/responses_time_short_long_data_{1}/taq_self'
+                        + '_response_year_time_short_long_tau_data_tau_{2}_tau_p_{3}/taq_self_response_year_time_short_long_tau_data_tau_{2}_tau_p_{3}'
                         + '_{1}_{0}.pickle').split())
-                        .format(ticker, year), 'rb'))
+                        .format(ticker, year, tau, tau_p), 'rb'))
 
         figure = plt.figure(figsize=(16, 9))
         plt.semilogx(self_, linewidth=5, label='{}'.format(ticker))
@@ -86,7 +86,7 @@ def taq_self_response_year_avg_plot(ticker, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
+def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year, tau, tau_p):
     """
     Plot the average cross response during a month and the dayly cross-response
     contributions in a figure. The data is loaded from the cross response data
@@ -106,15 +106,15 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
 
         try:
 
-            function_name = taq_cross_response_year_avg_plot.__name__
+            function_name =  taq_cross_response_year_avg_time_short_long_plot.__name__
             taq_data_tools.taq_function_header_print_plot(function_name,
                                                           ticker_i, ticker_j,
                                                           year, '', '')
             cross = pickle.load(open(''.join((
-                            '../../taq_data/article_reproduction_data_{2}/taq'
-                            + '_cross_response_year_data/taq_cross_response'
-                            + '_year_data_{2}_{0}i_{1}j.pickle').split())
-                            .format(ticker_i, ticker_j, year), 'rb'))
+                            '../../taq_data/responses_time_short_long_data_{2}/taq_cross'
+                            + '_response_year_time_short_long_tau_data_tau_{3}_tau_p_{4}/taq_cross_response_year_time_short_long_tau_data_tau_{3}_tau_p_{4}'
+                            + '_{2}_{0}i_{1}j.pickle').split())
+                            .format(ticker_i, ticker_j, year, tau, tau_p), 'rb'))
 
             figure = plt.figure(figsize=(16, 9))
             plt.semilogx(cross, linewidth=5, label='{} - {}'.format(ticker_i,
@@ -146,7 +146,8 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
 
 
 def main():
-    pass
+    taq_cross_response_year_avg_time_short_long_plot('AAPL', 'MSFT', '2008', 1000, 10)
+    taq_self_response_year_avg_time_short_long_plot('AAPL', '2008', 1000, 10)
 
 # -----------------------------------------------------------------------------
 
