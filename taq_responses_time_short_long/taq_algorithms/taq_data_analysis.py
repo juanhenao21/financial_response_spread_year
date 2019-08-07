@@ -42,7 +42,7 @@ import taq_data_tools
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_day_time_short_long_data(ticker, date, tau, tau_p):
+def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
     """
     Obtain the self response function using the midpoint price returns
     and trade signs of the ticker during different time lags. Return an
@@ -60,7 +60,7 @@ def taq_self_response_day_time_short_long_data(ticker, date, tau, tau_p):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_self_response_day_time_short_long_data.__name__
+    function_name = taq_self_response_day_time_short_long_tau_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, month, day)
 
@@ -83,67 +83,56 @@ def taq_self_response_day_time_short_long_data(ticker, date, tau, tau_p):
         assert len(midpoint) == len(trade_sign)
 
         # Array of the average of each tau
-        self_response_short = np.zeros(tau_p + 1)
-        self_response_long = np.zeros(tau - tau_p - 1)
-        num_short = np.zeros(tau_p + 1)
-        num_long = np.zeros(tau - tau_p - 1)
+        self_response= np.zeros(tau)
+        num = np.zeros(tau)
 
         # Calculating the midpoint log return and the self response function
+        # Short response
+        trade_sign_tau_short = trade_sign[:-tau_p]
+        trade_sign_no_0_len_short = len(trade_sign_tau_short
+                                        [trade_sign_tau_short != 0])
+        num[:tau_p + 1] = trade_sign_no_0_len_short * np.ones(tau_p + 1)
+        # Obtain the midpoint log return. Displace the numerator tau
+        # values to the right and compute the return
+
+        # midpoint price returns
+
+        log_return_sec_short = (midpoint[tau_p:]
+                                - midpoint[:-tau_p]) \
+            / midpoint[:-tau_p]
+
+        # Obtain the self response value
+        if (trade_sign_no_0_len_short != 0):
+            product_short = log_return_sec_short * trade_sign_tau_short
+            self_response[:tau_p + 1] = np.sum(product_short) * np.ones(tau_p + 1)
 
         # Depending on the tau value
         for tau_idx in range(tau):
 
             if (tau_idx <= tau_p):
-
-                trade_sign_tau_short = trade_sign[:-tau_idx - 1]
-                trade_sign_no_0_len_short = len(trade_sign_tau_short
-                                                [trade_sign_tau_short != 0])
-                num_short[tau_idx] = trade_sign_no_0_len_short
-                # Obtain the midpoint log return. Displace the numerator tau
-                # values to the right and compute the return
-
-                # midpoint price returns
-
-                log_return_sec_short = (midpoint[tau_idx + 1:]
-                                        - midpoint[:-tau_idx - 1]) \
-                    / midpoint[:-tau_idx - 1]
-
-                # Obtain the self response value
-                if (trade_sign_no_0_len_short != 0):
-                    product_short = log_return_sec_short * trade_sign_tau_short
-                    self_response_short[tau_idx] = np.sum(product_short)
+                pass
 
             else:
-
+                # Long response
                 trade_sign_tau_long = trade_sign[tau_p:-tau_idx - 1]
                 trade_sign_no_0_len_long = len(trade_sign_tau_long
-                                               [trade_sign_tau_long != 0])
-                num_long[tau_idx - tau_p - 1] = trade_sign_no_0_len_long
+                                                [trade_sign_tau_long != 0])
+                num[tau_idx] = trade_sign_no_0_len_long + trade_sign_no_0_len_short
                 # Obtain the midpoint log return. Displace the numerator tau
                 # values to the right and compute the return
 
                 # midpoint price returns
 
                 log_return_sec_long = (midpoint[tau_idx + 1:-tau_p]
-                                       - midpoint[tau_p:-tau_idx - 1]) \
+                                        - midpoint[tau_p:-tau_idx - 1]) \
                     / midpoint[tau_p:-tau_idx - 1]
 
                 # Obtain the self response value
                 if (trade_sign_no_0_len_long != 0):
                     product_long = log_return_sec_long * trade_sign_tau_long
-                    self_response_long[tau_idx - tau_p - 1] = np.sum(
-                                                                product_long)
+                    self_response[tau_idx] = np.sum(product_long) + np.sum(product_short)
 
-        self_response_total = np.concatenate((self_response_short,
-                                              self_response_long))
-        num_total = np.concatenate((num_short, num_long))
-
-        assert tau == len(self_response_total)
-        assert tau == len(num_total)
-
-        return (self_response_short, num_short,
-                self_response_long, num_long,
-                self_response_total, num_total)
+        return (self_response, num)
 
     except FileNotFoundError:
         print('No data')
@@ -153,7 +142,7 @@ def taq_self_response_day_time_short_long_data(ticker, date, tau, tau_p):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_time_short_long_data(ticker, year, tau, tau_p):
+def taq_self_response_year_time_short_long_tau_data(ticker, year, tau, tau_p):
     """
     Obtain the year average self response function using the midpoint
     price returns and trade signs of the ticker during different time
@@ -163,62 +152,44 @@ def taq_self_response_year_time_short_long_data(ticker, year, tau, tau_p):
         :param year: string of the year to be analized (i.e '2016')
     """
 
-    function_name = taq_self_response_year_time_short_long_data.__name__
+    function_name = taq_self_response_year_time_short_long_tau_data.__name__
     taq_data_tools.taq_function_header_print_data(function_name, ticker,
                                                   ticker, year, '',
                                                   '')
 
     dates = taq_data_tools.taq_bussiness_days(year)
 
-    self_short = np.zeros(tau_p + 1)
-    self_long = np.zeros(tau - tau_p - 1)
-    self_total = np.zeros(tau)
-    num_short = []
-    num_long = []
-    num_total = []
+    self_response = np.zeros(tau)
+    num = []
 
     for date in dates:
 
         try:
 
-            (data_short, avg_num_short,
-             data_long, avg_num_long,
-             data_total, avg_num_total) = \
-                 taq_self_response_day_time_short_long_data(ticker, date, tau,
+            data, avg_num = \
+                 taq_self_response_day_time_short_long_tau_data(ticker, date, tau,
                                                             tau_p)
 
-            self_short += data_short
-            self_long += data_long
-            self_total += data_total
-
-            num_short.append(avg_num_short)
-            num_long.append(avg_num_long)
-            num_total.append(avg_num_total)
+            self_response += data
+            num.append(avg_num)
 
         except TypeError:
             pass
 
-    num_short = np.asarray(num_short)
-    num_long = np.asarray(num_long)
-    num_total = np.asarray(num_total)
-    num_short_t = np.sum(num_short, axis=0)
-    num_long_t = np.sum(num_long, axis=0)
-    num_total_t = np.sum(num_total, axis=0)
+    num = np.asarray(num)
+    num_t = np.sum(num, axis=0)
 
     # Saving data
-    taq_data_tools.taq_save_data(function_name,
-                                 (self_short / num_short_t,
-                                  self_long / num_long_t,
-                                  self_total / num_total_t),
+    taq_data_tools.taq_save_data('{}_tau_{}_tau_p_{}'.format(function_name, tau, tau_p),
+                                 self_response / num_t,
                                  ticker, ticker, year, '', '')
 
-    return (self_short / num_short_t, self_long / num_long_t,
-            self_total / num_total_t)
+    return self_response / num_t
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_day_time_short_long_data(ticker_i, ticker_j, date, tau,
+def taq_cross_response_day_time_short_long_tau_data(ticker_i, ticker_j, date, tau,
                                                 tau_p):
     """
     Obtain the cross response function using the midpoint price returns of
@@ -249,7 +220,7 @@ def taq_cross_response_day_time_short_long_data(ticker_i, ticker_j, date, tau,
 
         try:
 
-            function_name = taq_cross_response_day_time_short_long_data. \
+            function_name = taq_cross_response_day_time_short_long_tau_data. \
                             __name__
             taq_data_tools.taq_function_header_print_data(function_name,
                                                           ticker_i, ticker_j,
@@ -272,65 +243,54 @@ def taq_cross_response_day_time_short_long_data(ticker_i, ticker_j, date, tau,
             assert len(midpoint_i) == len(trade_sign_j)
 
             # Array of the average of each tau. 10^3 s used by Wang
-            cross_response_short = np.zeros(tau_p + 1)
-            cross_response_long = np.zeros(tau - tau_p - 1)
-            num_short = np.zeros(tau_p + 1)
-            num_long = np.zeros(tau - tau_p - 1)
+            cross_response = np.zeros(tau)
+            num = np.zeros(tau)
 
             # Calculating the midpoint return and the cross response function
+            # Short response
+            trade_sign_tau_short = trade_sign_j[:-tau_p]
+            trade_sign_no_0_len_short = \
+                len(trade_sign_tau_short[trade_sign_tau_short != 0])
+            num[:tau_p + 1] = trade_sign_no_0_len_short * np.ones(tau_p + 1)
+            # Obtain the midpoint log return. Displace the numerator
+            # tau values to the right and compute the return
+
+            log_return_i_sec_short = (midpoint_i[tau_p:]
+                                        - midpoint_i[:-tau_p]) \
+                / midpoint_i[:-tau_p]
+
+            # Obtain the cross response value
+            if (trade_sign_no_0_len_short != 0):
+                product_short = log_return_i_sec_short \
+                                * trade_sign_tau_short
+                cross_response[:tau_p + 1] = np.sum(product_short) * np.ones(tau_p + 1)
 
             # Depending on the tau value
             for tau_idx in range(tau):
 
                 if (tau_idx <= tau_p):
-
-                    trade_sign_tau_short = trade_sign_j[:-tau_idx - 1]
-                    trade_sign_no_0_len_short = \
-                        len(trade_sign_tau_short[trade_sign_tau_short != 0])
-                    num_short[tau_idx] = trade_sign_no_0_len_short
-                    # Obtain the midpoint log return. Displace the numerator
-                    # tau values to the right and compute the return
-
-                    log_return_i_sec_short = (midpoint_i[tau_idx + 1:]
-                                              - midpoint_i[:-tau_idx - 1]) \
-                        / midpoint_i[:-tau_idx - 1]
-
-                    # Obtain the cross response value
-                    if (trade_sign_no_0_len_short != 0):
-                        product_short = log_return_i_sec_short \
-                                        * trade_sign_tau_short
-                        cross_response_short[tau_idx] = np.sum(product_short)
+                    pass
 
                 else:
-
+                    # Long response
                     trade_sign_tau_long = trade_sign_j[tau_p:-tau_idx - 1]
                     trade_sign_no_0_len_long = len(trade_sign_tau_long
-                                                   [trade_sign_tau_long != 0])
-                    num_long[tau_idx - tau_p - 1] = trade_sign_no_0_len_long
+                                                    [trade_sign_tau_long != 0])
+                    num[tau_idx] = trade_sign_no_0_len_long + trade_sign_no_0_len_short
                     # Obtain the midpoint log return. Displace the numerator
                     # tau values to the right and compute the return
 
                     log_return_i_sec_long = (midpoint_i[tau_idx + 1:-tau_p]
-                                             - midpoint_i[tau_p:-tau_idx - 1])\
+                                                - midpoint_i[tau_p:-tau_idx - 1])\
                         / midpoint_i[tau_p:-tau_idx - 1]
 
                     # Obtain the cross response value
                     if (trade_sign_no_0_len_long != 0):
                         product_long = log_return_i_sec_long \
                                         * trade_sign_tau_long
-                        cross_response_long[tau_idx - tau_p - 1] = \
-                            np.sum(product_long)
+                        cross_response[tau_idx] = np.sum(product_long) + np.sum(product_short)
 
-            cross_response_total = np.concatenate((cross_response_short,
-                                                   cross_response_long))
-            num_total = np.concatenate((num_short, num_long))
-
-            assert tau == len(cross_response_total)
-            assert tau == len(num_total)
-
-            return (cross_response_short, num_short,
-                    cross_response_long, num_long,
-                    cross_response_total, num_total)
+            return (cross_response, num)
 
         except FileNotFoundError:
             print('No data')
@@ -340,7 +300,7 @@ def taq_cross_response_day_time_short_long_data(ticker_i, ticker_j, date, tau,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_time_short_long_data(ticker_i, ticker_j, year, tau,
+def taq_cross_response_year_time_short_long_tau_data(ticker_i, ticker_j, year, tau,
                                                  tau_p):
     """
     Obtain the year average cross response function using the midpoint
@@ -361,58 +321,40 @@ def taq_cross_response_year_time_short_long_data(ticker_i, ticker_j, year, tau,
 
     else:
 
-        function_name = taq_cross_response_year_time_short_long_data.__name__
+        function_name = taq_cross_response_year_time_short_long_tau_data.__name__
         taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
                                                       ticker_j, year, '',
                                                       '')
 
         dates = taq_data_tools.taq_bussiness_days(year)
 
-        cross_short = np.zeros(tau_p + 1)
-        cross_long = np.zeros(tau - tau_p - 1)
-        cross_total = np.zeros(tau)
-        num_short = []
-        num_long = []
-        num_total = []
+        cross_response = np.zeros(tau)
+        num = []
 
         for date in dates:
 
             try:
 
-                (data_short, avg_num_short,
-                 data_long, avg_num_long,
-                 data_total, avg_num_total) = \
-                    taq_cross_response_day_time_short_long_data(ticker_i,
+                data, avg_num = \
+                    taq_cross_response_day_time_short_long_tau_data(ticker_i,
                                                                 ticker_j, date,
                                                                 tau, tau_p)
 
-                cross_short += data_short
-                cross_long += data_long
-                cross_total += data_total
-
-                num_short.append(avg_num_short)
-                num_long.append(avg_num_long)
-                num_total.append(avg_num_total)
+                cross_response += data
+                num.append(avg_num)
 
             except TypeError:
                 pass
 
-        num_short = np.asarray(num_short)
-        num_long = np.asarray(num_long)
-        num_total = np.asarray(num_total)
-        num_short_t = np.sum(num_short, axis=0)
-        num_long_t = np.sum(num_long, axis=0)
-        num_total_t = np.sum(num_total, axis=0)
+        num = np.asarray(num)
+        num_t = np.sum(num, axis=0)
 
         # Saving data
-        taq_data_tools.taq_save_data(function_name,
-                                     (cross_short / num_short_t,
-                                      cross_long / num_long_t,
-                                      cross_total / num_total_t),
+        taq_data_tools.taq_save_data('{}_tau_{}_tau_p_{}'.format(function_name, tau, tau_p),
+                                     cross_response / num_t,
                                      ticker_i, ticker_j, year, '', '')
 
-        return (cross_short / num_short_t, cross_long / num_long_t,
-                cross_total / num_total_t)
+        return cross_response / num_t
 
 # ----------------------------------------------------------------------------
 
@@ -422,7 +364,7 @@ def main():
     tickers = ['AAPL', 'MSFT']
     year = '2008'
 
-    taq_cross_response_year_time_short_long_data('AAPL', 'MSFT', '2008', 1000,
+    taq_cross_response_year_time_short_long_tau_data('AAPL', 'MSFT', '2008', 1000,
                                                  10)
 
 
