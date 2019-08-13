@@ -52,14 +52,23 @@ def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
         taq_data_tools.taq_function_header_print_plot(function_name, ticker,
                                                       ticker, year, '', '')
 
-        self_ = pickle.load(open(''.join((
+        self_short, self_long, self_response, self_shuffle = pickle.load(open(''.join((
                         '../../taq_data/responses_time_short_long_data_{1}/taq_self'
                         + '_response_year_time_short_long_tau_data_tau_{2}_tau_p_{3}/taq_self_response_year_time_short_long_tau_data_tau_{2}_tau_p_{3}'
                         + '_{1}_{0}.pickle').split())
                         .format(ticker, year, tau, tau_p), 'rb'))
+        sum = np.zeros(tau)
+        sum[:tau_p + 1] = self_short[:tau_p + 1]
+        sum[tau_p + 1:] = self_short[tau_p + 1:] + self_long[tau_p + 1:]
 
         figure = plt.figure(figsize=(16, 9))
-        plt.semilogx(self_, linewidth=5, label='{}'.format(ticker))
+        plt.semilogx(self_short, linewidth=5, label='{} - Short'.format(ticker))
+        plt.semilogx(self_long, linewidth=5, label='{} - Long'.format(ticker))
+        plt.semilogx(sum, linewidth=5, label='{} - Sum'.format(ticker))
+        plt.semilogx(self_response, linewidth=5, label='{} - Self-response'.format(ticker))
+        plt.semilogx(self_shuffle, linewidth=5, label='{} - Shuffle'.format(ticker))
+        plt.plot((tau_p, tau_p), (0, max(self_short)), '--', label=r"$\tau' $ = {}"
+                    .format(tau_p))
         plt.legend(loc='best', fontsize=25)
         plt.title('Self-response', fontsize=40)
         plt.xlabel(r'$\tau \, [s]$', fontsize=35)
@@ -67,7 +76,7 @@ def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
         plt.xticks(fontsize=25)
         plt.yticks(fontsize=25)
         plt.xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        # plt.ylim(1.35 * 10 ** -4, 1.53 * 10 ** -4)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.grid(True)
         plt.tight_layout()
@@ -146,7 +155,7 @@ def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year, t
 
 
 def main():
-    taq_cross_response_year_avg_time_short_long_plot('AAPL', 'MSFT', '2008', 1000, 10)
+    # taq_cross_response_year_avg_time_short_long_plot('AAPL', 'MSFT', '2008', 1000, 10)
     taq_self_response_year_avg_time_short_long_plot('AAPL', '2008', 1000, 10)
 
 # -----------------------------------------------------------------------------

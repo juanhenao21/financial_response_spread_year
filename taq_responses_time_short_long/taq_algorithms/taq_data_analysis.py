@@ -83,56 +83,123 @@ def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
         assert len(midpoint) == len(trade_sign)
 
         # Array of the average of each tau
-        self_response= np.zeros(tau)
-        num = np.zeros(tau)
+        self_short= np.zeros(tau)
+        self_long = np.zeros(tau)
+        self_response = np.zeros(tau)
+        self_shuffle = np.zeros(tau)
+        num_short = np.zeros(tau)
+        num_long = np.zeros(tau)
+        num_response = np.zeros(tau)
+        num_shuffle = np.zeros(tau)
 
         # Calculating the midpoint log return and the self response function
-        # Short response
-        trade_sign_tau_short = trade_sign[:-tau_p]
+        # Short response after tau_p
+        trade_sign_tau_short = trade_sign[:-tau_p - 1]
         trade_sign_no_0_len_short = len(trade_sign_tau_short
                                         [trade_sign_tau_short != 0])
-        num[:tau_p + 1] = trade_sign_no_0_len_short * np.ones(tau_p + 1)
+        num_short[tau_p:] = trade_sign_no_0_len_short * np.ones(tau - tau_p)
         # Obtain the midpoint log return. Displace the numerator tau
         # values to the right and compute the return
 
         # midpoint price returns
 
-        log_return_sec_short = (midpoint[tau_p:]
-                                - midpoint[:-tau_p]) \
-            / midpoint[:-tau_p]
+        log_return_sec_short = (midpoint[tau_p + 1:]
+                                - midpoint[:-tau_p - 1]) \
+            / midpoint[:-tau_p - 1]
 
         # Obtain the self response value
         if (trade_sign_no_0_len_short != 0):
             product_short = log_return_sec_short * trade_sign_tau_short
-            self_response[:tau_p + 1] = np.sum(product_short) * np.ones(tau_p + 1)
+            self_short[tau_p:] = np.sum(product_short) * np.ones(tau - tau_p)
 
         # Depending on the tau value
         for tau_idx in range(tau):
 
             if (tau_idx <= tau_p):
-                pass
-
-            else:
-                # Long response
-                trade_sign_tau_long = trade_sign[tau_p:-tau_idx - 1]
-                trade_sign_no_0_len_long = len(trade_sign_tau_long
-                                                [trade_sign_tau_long != 0])
-                num[tau_idx] = trade_sign_no_0_len_long + trade_sign_no_0_len_short
+                # Short response
+                trade_sign_tau_short = trade_sign[:-tau_idx - 1]
+                trade_sign_tau_shuffle = 1 * trade_sign_tau_short
+                trade_sign_no_0_len_short = len(trade_sign_tau_short
+                                                [trade_sign_tau_short != 0])
+                num_short[tau_idx] = trade_sign_no_0_len_short
+                num_long[tau_idx] = trade_sign_no_0_len_short
+                num_response[tau_idx] = trade_sign_no_0_len_short
+                num_shuffle[tau_idx] = trade_sign_no_0_len_short
                 # Obtain the midpoint log return. Displace the numerator tau
                 # values to the right and compute the return
 
                 # midpoint price returns
 
-                log_return_sec_long = (midpoint[tau_idx + 1:-tau_p]
-                                        - midpoint[tau_p:-tau_idx - 1]) \
-                    / midpoint[tau_p:-tau_idx - 1]
+                log_return_sec_short = (midpoint[tau_idx + 1:]
+                                        - midpoint[:-tau_idx - 1]) \
+                    / midpoint[:-tau_idx - 1]
+
+                # Obtain the self response value
+                if (trade_sign_no_0_len_short != 0):
+                    product_short = log_return_sec_short * trade_sign_tau_short
+                    np.random.shuffle(trade_sign_tau_shuffle)
+                    product_shuffle = log_return_sec_short * trade_sign_tau_shuffle
+                    self_short[tau_idx] = np.sum(product_short)
+                    self_long[tau_idx] = np.sum(product_short)
+                    self_response[tau_idx] = np.sum(product_short)
+                    self_shuffle[tau_idx] = np.sum(product_shuffle)
+
+            else:
+
+
+                # Long response
+                trade_sign_tau_long = trade_sign[:-(tau_idx + tau_p)]
+                trade_sign_no_0_len_long = len(trade_sign_tau_long
+                                                [trade_sign_tau_long != 0])
+                num_long[tau_idx] = trade_sign_no_0_len_long
+                # Obtain the midpoint log return. Displace the numerator tau
+                # values to the right and compute the return
+
+                # midpoint price returns
+
+                log_return_sec_long = (midpoint[tau_idx:-tau_p]
+                                        - midpoint[tau_p:-tau_idx]) \
+                    / midpoint[tau_p:-tau_idx]
 
                 # Obtain the self response value
                 if (trade_sign_no_0_len_long != 0):
                     product_long = log_return_sec_long * trade_sign_tau_long
-                    self_response[tau_idx] = np.sum(product_long) + np.sum(product_short)
+                    self_long[tau_idx] = np.sum(product_long)
 
-        return (self_response, num)
+                # Normal response
+                trade_sign_tau_resp = trade_sign[:-tau_idx - 1]
+                trade_sign_no_0_len_resp = len(trade_sign_tau_resp
+                                                [trade_sign_tau_resp != 0])
+                num_response[tau_idx] = trade_sign_no_0_len_resp
+                # Obtain the midpoint log return. Displace the numerator tau
+                # values to the right and compute the return
+
+                # midpoint price returns
+
+                log_return_sec_resp = (midpoint[tau_idx + 1:]
+                                        - midpoint[:-tau_idx - 1]) \
+                    / midpoint[:-tau_idx - 1]
+
+                # Obtain the self response value
+                if (trade_sign_no_0_len_resp != 0):
+                    product = log_return_sec_resp * trade_sign_tau_resp
+                    self_response[tau_idx] = np.sum(product)
+
+                # Shuffle response
+                trade_sign_tau_shuffle = 1 * trade_sign_tau_resp
+                num_shuffle[tau_idx] = trade_sign_no_0_len_resp
+
+                # Obtain the self response value
+                if (trade_sign_no_0_len_resp != 0):
+                    np.random.shuffle(trade_sign_tau_shuffle)
+                    product_shuffle = log_return_sec_resp \
+                        * trade_sign_tau_shuffle
+                    self_shuffle[tau_idx] = np.sum(product_shuffle)
+
+        return (self_short, num_short,
+                self_long, num_long,
+                self_response, num_response,
+                self_shuffle, num_shuffle)
 
     except FileNotFoundError:
         print('No data')
@@ -159,32 +226,59 @@ def taq_self_response_year_time_short_long_tau_data(ticker, year, tau, tau_p):
 
     dates = taq_data_tools.taq_bussiness_days(year)
 
+    self_short = np.zeros(tau)
+    self_long = np.zeros(tau)
     self_response = np.zeros(tau)
-    num = []
+    self_shuffle = np.zeros(tau)
+    num_short = []
+    num_long = []
+    num_response = []
+    num_shuffle = []
 
     for date in dates:
 
         try:
 
-            data, avg_num = \
+            (data_short, avg_num_short,
+             data_long, avg_num_long,
+             data_resp, avg_num_resp,
+             data_shuffle, avg_num_shuffle) = \
                  taq_self_response_day_time_short_long_tau_data(ticker, date, tau,
-                                                            tau_p)
+                                                                tau_p)
 
-            self_response += data
-            num.append(avg_num)
+            self_short += data_short
+            self_long += data_long
+            self_response += data_resp
+            self_shuffle += data_shuffle
+            num_short.append(avg_num_short)
+            num_long.append(avg_num_long)
+            num_response.append(avg_num_resp)
+            num_shuffle.append(avg_num_shuffle)
 
         except TypeError:
             pass
 
-    num = np.asarray(num)
-    num_t = np.sum(num, axis=0)
+    num_short = np.asarray(num_short)
+    num_long = np.asarray(num_long)
+    num_response = np.asarray(num_response)
+    num_shuffle = np.asarray(num_shuffle)
+    num_short_t = np.sum(num_short, axis=0)
+    num_long_t = np.sum(num_long, axis=0)
+    num_response_t = np.sum(num_response, axis=0)
+    num_shuffle_t = np.sum(num_shuffle, axis=0)
 
     # Saving data
     taq_data_tools.taq_save_data('{}_tau_{}_tau_p_{}'.format(function_name, tau, tau_p),
-                                 self_response / num_t,
+                                 (self_short / num_short_t,
+                                  self_long / num_long_t,
+                                  self_response / num_response_t,
+                                  self_shuffle / num_shuffle_t),
                                  ticker, ticker, year, '', '')
 
-    return self_response / num_t
+    return (self_short / num_short_t,
+            self_long / num_long_t,
+            self_response / num_response_t,
+            self_shuffle / num_shuffle_t)
 
 # ----------------------------------------------------------------------------
 
@@ -364,8 +458,10 @@ def main():
     tickers = ['AAPL', 'MSFT']
     year = '2008'
 
-    taq_cross_response_year_time_short_long_tau_data('AAPL', 'MSFT', '2008', 1000,
-                                                 10)
+    # taq_self_response_day_time_short_long_tau_data('AAPL', '2008-01-02', 1000,
+    #                                                10)
+    taq_self_response_year_time_short_long_tau_data('AAPL', '2008', 1000,
+                                                    10)
 
 
 if __name__ == "__main__":
