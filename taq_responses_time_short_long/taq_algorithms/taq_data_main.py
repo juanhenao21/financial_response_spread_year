@@ -40,13 +40,13 @@ def main():
     tau = 1000
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_analysis.taq_self_response_year_time_short_long_tau_data,
+        # pool.starmap(taq_data_analysis.taq_self_response_year_time_short_long_tau_data,
+        #              product(tickers, [year], [tau], taus_p))
+        # pool.starmap(taq_data_analysis.taq_cross_response_year_time_short_long_tau_data,
+        #              product(tickers, tickers, [year], [tau], taus_p))
+        pool.starmap(taq_data_plot.taq_self_response_year_avg_time_short_long_plot,
                      product(tickers, [year], [tau], taus_p))
-        pool.starmap(taq_data_analysis.taq_cross_response_year_time_short_long_tau_data,
-                     product(tickers, tickers, [year], [tau], taus_p))
-        pool.starmap(taq_data_analysis.taq_self_response_year_avg_time_short_long_plot,
-                     product(tickers, [year], [tau], taus_p))
-        pool.starmap(taq_data_analysis.taq_cross_response_year_avg_time_short_long_plot,
+        pool.starmap(taq_data_plot.taq_cross_response_year_avg_time_short_long_plot,
                      product(tickers, tickers, [year], [tau], taus_p))
 
     print('Ay vamos!!')

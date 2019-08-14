@@ -93,8 +93,9 @@ def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker,
-                                     year, '')
+        taq_data_tools.taq_save_plot('{}_tau_{}_tau_p_{}'
+                                     .format(function_name, tau, tau_p),
+                                     figure, ticker, ticker, year, '')
 
         return None
 
@@ -177,8 +178,9 @@ def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year,
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
-                                         ticker_j, year, '')
+            taq_data_tools.taq_save_plot('{}_tau_{}_tau_p_{}'
+                                         .format(function_name, tau, tau_p),
+                                         figure, ticker_i, ticker_j, year, '')
 
             return None
 
