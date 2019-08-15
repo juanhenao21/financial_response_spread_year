@@ -21,9 +21,9 @@ import multiprocessing as mp
 import pickle
 import pandas as pd
 
-import taq_data_analysis
-import taq_data_plot
-import taq_data_tools
+import taq_data_analysis_article_reproduction
+import taq_data_plot_article_reproduction
+import taq_data_tools_article_reproduction
 
 __tau__ = 1000
 
