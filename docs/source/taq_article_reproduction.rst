@@ -1,10 +1,7 @@
 TAQ Article Reproduction
 ========================
 
-tools
+Tools
 -----
-.. automodule:: taq_data_tools
-   :members:
-  
-.. automodule:: taq_data_main
+.. automodule:: taq_data_tools_article_reproduction
    :members:
