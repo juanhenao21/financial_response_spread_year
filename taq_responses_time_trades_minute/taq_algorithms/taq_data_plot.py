@@ -58,9 +58,10 @@ def taq_self_response_year_responses_time_trades_minute_plot(ticker, year,
                             + '_{2}_{1}_{0}.pickle').split())
                             .format(ticker, year, tau), 'rb'))
 
-        plt.scatter(*zip(*points))
+        plt.scatter(*zip(*points), label=r'$\tau = {}$'.format(tau))
 
-        plt.title('Self-response events {}'.format(ticker), fontsize=40)
+        plt.legend(loc='best', fontsize=25)
+        plt.title('Self-response time {}'.format(ticker), fontsize=40)
         plt.xlabel(r'Trades per minute', fontsize=35)
         plt.ylabel(''.join((r'$r_{i} \left(t - 1, \tau \right) \cdot'
                    + r'\varepsilon_j \left( t \right)$').split()), fontsize=35)
@@ -118,7 +119,7 @@ def taq_self_response_year_avg_responses_time_trades_minute_plot(ticker, year,
         plt.semilogx(x, y, linewidth=5, label=r'$\tau = {}$'.format(tau))
 
         plt.legend(loc='best', fontsize=25)
-        plt.title('Self-response events {}'.format(ticker), fontsize=40)
+        plt.title('Self-response time {}'.format(ticker), fontsize=40)
         plt.xlabel(r'Trades per minute', fontsize=35)
         plt.ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)\cdot'
                    + r'\varepsilon_{i}\left(t\right)\right\rangle _{t}$').split()), fontsize=35)
@@ -176,7 +177,7 @@ def taq_self_response_year_avg_responses_time_trades_minute_plot_v2(ticker, year
         plt.semilogx(x, y, linewidth=5, label=r'$\tau = {}$'.format(tau))
 
         plt.legend(loc='best', fontsize=25)
-        plt.title('Self-response events {}'.format(ticker), fontsize=40)
+        plt.title('Self-response time {}'.format(ticker), fontsize=40)
         plt.xlabel(r'Trades per minute', fontsize=35)
         plt.ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)\cdot'
                    + r'\varepsilon_{i}\left(t\right)\right\rangle _{t}$').split()), fontsize=35)
@@ -241,9 +242,10 @@ def taq_cross_response_year_responses_time_trades_minute_plot(ticker_i,
                         + '_{0}i_{1}j.pickle').split())
                         .format(ticker_i, ticker_j, year, tau), 'rb'))
 
-            plt.scatter(*zip(*points))
+            plt.scatter(*zip(*points), label=r'$\tau = {}$'.format(tau))
 
-            plt.title('Cross-response events {} - {}'.format(ticker_i,
+            plt.legend(loc='best', fontsize=25)
+            plt.title('Cross-response time {} - {}'.format(ticker_i,
                       ticker_j), fontsize=40)
             plt.xlabel(r'Trades per minute', fontsize=35)
             plt.ylabel(''.join((r'$r_{i} \left(t - 1, \tau \right)'
@@ -304,7 +306,7 @@ def taq_cross_response_year_avg_responses_time_trades_minute_plot(ticker_i,
         plt.semilogx(x, y, linewidth=5, label=r'$\tau = {}$'.format(tau))
 
         plt.legend(loc='best', fontsize=25)
-        plt.title('Cross-response events {} - {}'.format(ticker_i, ticker_j),
+        plt.title('Cross-response time {} - {}'.format(ticker_i, ticker_j),
                   fontsize=40)
         plt.xlabel(r'Trades per minute', fontsize=35)
         plt.ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)\cdot'
@@ -364,7 +366,7 @@ def taq_cross_response_year_avg_responses_time_trades_minute_plot_v2(ticker_i,
         plt.semilogx(x, y, linewidth=5, label=r'$\tau = {}$'.format(tau))
 
         plt.legend(loc='best', fontsize=25)
-        plt.title('Cross-response events {} - {}'.format(ticker_i, ticker_j),
+        plt.title('Cross-response time {} - {}'.format(ticker_i, ticker_j),
                   fontsize=40)
         plt.xlabel(r'Trades per minute', fontsize=35)
         plt.ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)\cdot'
@@ -400,9 +402,10 @@ def main():
     year = '2008'
     tau = 50
 
-    taq_cross_response_year_avg_responses_time_trades_minute_plot_v2(ticker_i,
-                                                                   ticker_j,
-                                                                   year, tau)
+    taq_self_response_year_responses_time_trades_minute_plot(ticker, year, tau)
+    taq_cross_response_year_responses_time_trades_minute_plot(ticker_i,
+                                                              ticker_j,
+                                                              year, tau)
 
 # -----------------------------------------------------------------------------
 
