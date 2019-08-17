@@ -38,16 +38,20 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     Saves the data generated in the functions of the
     taq_data_analysis_article_reproduction module in pickle files.
-        :param function_name: name of the function that generates the data
-        :param data: python data to be saved
-        :param ticker_i: string of the abbreviation of the stock to be analized
-         (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the stock to be analized
-         (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
-        :param month: string of the month to be analized (i.e '07')
-        :param day: string of the day to be analized (i.e '07')
+
+    :param function_name: name of the function that generates the data.
+    :param data: data to be saved. The data can be of different types.
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param month: string of the month to be analized (i.e '07').
+    :param day: string of the day to be analized (i.e '07').
+    :rtype: None. The function save the data in a file and does not return a
+     value.
     """
+
     # Saving data
 
     if (not os.path.isdir('../../taq_data/article_reproduction_data_{1}/{0}/'
@@ -63,6 +67,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
             print('Folder exists. The folder was not created')
 
+    # Cross-response data
     if (ticker_i != ticker_j):
 
         pickle.dump(data, open(''.join((
@@ -71,6 +76,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
             .format(function_name, ticker_i, ticker_j, year, month, day),
             'wb'))
 
+    # Self-response data
     else:
 
         pickle.dump(data, open(''.join((
@@ -87,18 +93,24 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
 
 def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
+    """Saves plot in png files.
+
+    Saves the plot generated in the functions of the
+    taq_data_plot_article_reproduction module in png files.
+
+    :param function_name: name of the function that generates the plot.
+    :param figure: figure object that is going to be save.
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param month: string of the month to be analized (i.e '07').
+    :rtype: None. The function save the plot in a file and does not return
+     a value.
     """
-    Save the plots generated in itch_data_plot module.
-        :param function_name: name of the function that generates the data
-        :param figure: figure object that is going to be save
-        :param ticker_i: string of the abbreviation of the stock to be analized
-         (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the stock to be analized
-         (i.e. 'AAPL')
-        :param day: string of the day to be analized (i.e '07')
-        :param t_step: time step in the data in ms
-    """
-    # Saving data
+
+    # Saving plot
 
     if (not os.path.isdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                           .format(function_name, year))):
@@ -113,16 +125,20 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
             print('Folder exists. The folder was not created')
 
+    # Cross-response
     if (ticker_i != ticker_j):
 
-        figure.savefig(
-            '../../taq_plot/article_reproduction_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
+        figure.savefig(''.join((
+            '../../taq_plot/article_reproduction_plot_{3}/{0}/{0}_{3}{4}_{1}i'
+            + '_{2}j.png').split())
             .format(function_name, ticker_i, ticker_j, year, month))
 
+    # Self-response
     else:
 
-        figure.savefig(
-            '../../taq_plot/article_reproduction_plot_{2}/{0}/{0}_{2}{3}_{1}i.png'
+        figure.savefig(''.join((
+            '../../taq_plot/article_reproduction_plot_{2}/{0}/{0}_{2}{3}_{1}i'
+            + '.png').split())
             .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
@@ -135,22 +151,28 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
 def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
                                    month, day):
-    """
-    docstring here
-        :param function_name:
-        :param ticker_i:
-        :param ticker_j:
-        :param year:
-        :param month:
-        :param day:
+    """Prints a header of a function that generates data when it is running.
+
+    :param function_name: name of the function that generates the data.
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param month: string of the month to be analized (i.e '07').
+    :param day: string of the day to be analized (i.e '07').
+    :rtype: None. The function prints a message and does not return a
+     value.
     """
 
     print('TAQ data')
     print(function_name)
 
+    # Cross-response
     if (ticker_i != ticker_j):
         print('Processing data for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
+    # Self-response
     else:
         print('Processing data for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)
@@ -162,12 +184,18 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
 def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
                                    month, day):
-    """
-    docstring here
-        :param function_name:
-        :param ticker_i:
-        :param ticker_j:
-        :param year:
+    """Prints a header of a function that generates a plot when it is running.
+
+    :param function_name: name of the function that generates the plot.
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param month: string of the month to be analized (i.e '07').
+    :param day: string of the day to be analized (i.e '07').
+    :rtype: None. The function prints a message and does not return a
+     value.
     """
 
     print('TAQ data')
@@ -186,36 +214,47 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
 
 def taq_start_folders(year):
+    """Creates the initial folders to save the data and plots.
+
+    :param year: string of the year to be analized (i.e '2016').
+    :rtype: None. The function create folders and does not return a
+     value.
     """
-    docstring here
-        :param year:
-    """
-    if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}'
-                          .format(year))
-            and not os.path.isdir('../taq_plot/taq_article_reproduction_{}'
-                                  .format(year))):
+
+    if (not os.path.isdir('../../taq_data/article_reproduction_data_{}'
+                          .format(year))):
 
         try:
-
-            os.mkdir('../../taq_data/pickle_dayly_data_{}'
-                     .format(year))
-            print('Folder to save data created')
-            os.mkdir('../taq_plot/taq_article_reproduction_{}'
+            os.mkdir('../../taq_data/article_reproduction_data_{}'
                      .format(year))
             print('Folder to save data created')
 
         except FileExistsError:
-
             print('Folder exists. The folder was not created')
+
+    if (not os.path.isdir('../taq_plot/article_reproduction__plot{}'
+                          .format(year))):
+
+        try:
+            os.mkdir('../taq_plot/taq_article_reproduction_plot_{}'
+                     .format(year))
+            print('Folder to save plot created')
+
+        except FileExistsError:
+            print('Folder exists. The folder was not created')
+
+    return None
 
 # -----------------------------------------------------------------------------
 
 
 def taq_bussiness_days(year):
+    """Generate a list with the dates of the bussiness days in a year
+
+    :param year: string of the year to be analized (i.e '2008').
+    :rtype: list.
     """
-    Generate a list with the dates of the bussiness days in a year
-        :param year: string of the year to be analized (i.e '2008')
-    """
+
     init_date = '01/01/{}'.format(year)
     last_date = '12/31/{}'.format(year)
 
@@ -228,11 +267,18 @@ def taq_bussiness_days(year):
 
 # -----------------------------------------------------------------------------
 
+
 def main():
-    folder_path = '../../TAQ_2008/TAQ_py/'
-    a, b = months_days_list(folder_path, 'AAPL')
-    print(a)
-    print(b)
+    """The main function of the script.
+
+    The main function is used to test the functions in the script.
+
+    :rtype: None.
+    """
+
+    pass
+
+    return None
 
 # -----------------------------------------------------------------------------
 
