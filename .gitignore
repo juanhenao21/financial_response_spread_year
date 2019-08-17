@@ -104,11 +104,11 @@ venv.bak/
 .mypy_cache/
 
 # Folders
-taq_data/
-itch_data/
+project/taq_data/
+project/itch_data/
 
-taq_plot/
-itch_plot/
+project/taq_plot/
+project/itch_plot/
 
 .vscode/
 
