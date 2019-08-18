@@ -5,18 +5,18 @@ whole implementation. These tools improve the way the tasks are standardized
 in the modules that use them.
 
 This script requires the following modules:
+    * matplotlib
     * numpy
     * pandas
-    * matplotlib
 
 The module contains the following functions
-    * taq_save_data - saves computed data
-    * taq_save_plot - saves figures
-    * taq_function_header_print_data - prints info about the function running
-    * taq_function_header_print_plot - prints info about the plot
-    * taq_start_folders - creates folders to save data and plots
-    * taq_business_days - creates a list of week days for a year
-    * main - the main function of the script
+    * taq_save_data - saves computed data.
+    * taq_save_plot - saves figures.
+    * taq_function_header_print_data - prints info about the function running.
+    * taq_function_header_print_plot - prints info about the plot.
+    * taq_start_folders - creates folders to save data and plots.
+    * taq_business_days - creates a list of week days for a year.
+    * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
@@ -48,7 +48,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     :param year: string of the year to be analized (i.e '2016').
     :param month: string of the month to be analized (i.e '07').
     :param day: string of the day to be analized (i.e '07').
-    :rtype: None. The function save the data in a file and does not return a
+    :return: None -- The function save the data in a file and does not return a
      value.
     """
 
@@ -106,7 +106,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2016').
     :param month: string of the month to be analized (i.e '07').
-    :rtype: None. The function save the plot in a file and does not return
+    :return: None -- The function save the plot in a file and does not return
      a value.
     """
 
@@ -161,7 +161,7 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     :param year: string of the year to be analized (i.e '2016').
     :param month: string of the month to be analized (i.e '07').
     :param day: string of the day to be analized (i.e '07').
-    :rtype: None. The function prints a message and does not return a
+    :return: None -- The function prints a message and does not return a
      value.
     """
 
@@ -194,7 +194,7 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     :param year: string of the year to be analized (i.e '2016').
     :param month: string of the month to be analized (i.e '07').
     :param day: string of the day to be analized (i.e '07').
-    :rtype: None. The function prints a message and does not return a
+    :return: None -- The function prints a message and does not return a
      value.
     """
 
@@ -217,7 +217,7 @@ def taq_start_folders(year):
     """Creates the initial folders to save the data and plots.
 
     :param year: string of the year to be analized (i.e '2016').
-    :rtype: None. The function create folders and does not return a
+    :return: None -- The function create folders and does not return a
      value.
     """
 
@@ -252,7 +252,7 @@ def taq_bussiness_days(year):
     """Generate a list with the dates of the bussiness days in a year
 
     :param year: string of the year to be analized (i.e '2008').
-    :rtype: list.
+    :return: list.
     """
 
     init_date = '01/01/{}'.format(year)
@@ -273,7 +273,7 @@ def main():
 
     The main function is used to test the functions in the script.
 
-    :rtype: None.
+    :return: None.
     """
 
     pass
