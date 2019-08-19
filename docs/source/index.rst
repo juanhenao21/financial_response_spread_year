@@ -10,9 +10,9 @@ Welcome to Response function analyisis's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   taq_article_reproduction
+   01_taq_article_reproduction
 
-   taq_event_shift
+   03_taq_event_shift
 
 Indices and tables
 ==================
