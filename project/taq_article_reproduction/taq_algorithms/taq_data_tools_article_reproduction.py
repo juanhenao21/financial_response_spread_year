@@ -60,13 +60,11 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
                           .format(function_name, year))):
 
         try:
-
             os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
         except FileExistsError:
-
             print('Folder exists. The folder was not created')
 
     # Cross-response data
@@ -118,13 +116,11 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
                           .format(function_name, year))):
 
         try:
-
             os.mkdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
         except FileExistsError:
-
             print('Folder exists. The folder was not created')
 
     # Cross-response
@@ -203,9 +199,11 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     print('TAQ data')
     print(function_name)
 
+    # Cross-response
     if (ticker_i != ticker_j):
         print('Processing plot for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
+    # Self-response
     else:
         print('Processing plot for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)
@@ -219,7 +217,7 @@ def taq_start_folders(year):
     """Creates the initial folders to save the data and plots.
 
     :param year: string of the year to be analized (i.e '2016').
-    :return: None -- The function create folders and does not return a value.
+    :return: None -- The function creates folders and does not return a value.
     """
 
     try:
@@ -228,7 +226,7 @@ def taq_start_folders(year):
         os.mkdir('../../taq_plot/')
         os.mkdir('../../taq_data/article_reproduction_data_{}'
                     .format(year))
-        os.mkdir('../../taq_plot/taq_article_reproduction_plot_{}'
+        os.mkdir('../../taq_plot/article_reproduction_plot_{}'
                     .format(year))
         print('Folder to save data created')
 
@@ -243,7 +241,7 @@ def taq_start_folders(year):
 
 
 def taq_bussiness_days(year):
-    """Generate a list with the dates of the bussiness days in a year
+    """Generates a list with the dates of the bussiness days in a year
 
     :param year: string of the year to be analized (i.e '2008').
     :return: list.

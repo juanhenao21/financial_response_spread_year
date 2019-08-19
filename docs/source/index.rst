@@ -12,6 +12,8 @@ Welcome to Response function analyisis's documentation!
 
    taq_article_reproduction
 
+   taq_event_shift
+
 Indices and tables
 ==================
 
