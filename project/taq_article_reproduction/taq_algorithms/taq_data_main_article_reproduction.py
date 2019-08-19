@@ -13,8 +13,8 @@ This script requires the following modules:
 
 The module contains the following functions:
     * taq_build_from_scratch - extract data to dayly CSV files.
-
-    * taq_run_analysis
+    * taq_data_plot_generator - generates all the analysis and plots from the
+      TAQ data.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -77,18 +77,19 @@ def taq_build_from_scratch(tickers, year):
         + '-I {}/armadillo-3.920.3/include -o decompress.out'.format(abs_path))
     os.system('mv decompress.out ../original_year_data_{}/'.format(year))
     os.chdir('../original_year_data_{}'.format(year))
+
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
         print('Extracting quotes')
-        pool.starmap(taq_data_tools_article_reproduction
-                     .article_reproduction.taq_decompress,
+        pool.starmap(taq_data_tools_article_reproduction.taq_decompress,
                      product(tickers, [year], ['quotes']))
+    with mp.Pool(processes=mp.cpu_count()) as pool:
         print('Extracting trades')
-        pool.starmap(taq_data_tools_article_reproduction
-                     .article_reproduction.taq_decompress,
+        pool.starmap(taq_data_tools_article_reproduction.taq_decompress,
                      product(tickers, [year], ['trades']))
+
     subprocess.call('rm decompress.out', shell=True)
-    subprocess.call('mv *.csv ../csv_year_data_{}/'.format(year))
+    subprocess.call('mv *.csv ../csv_year_data_{}/'.format(year), shell=True)
 
     # Extract dayly data
     date_list = taq_data_tools_article_reproduction.taq_bussiness_days(year)
@@ -104,7 +105,7 @@ def taq_build_from_scratch(tickers, year):
 
 
 def taq_data_plot_generator(tickers, year):
-    """ Generates all the analysis and plots from the TAQ data.
+    """Generates all the analysis and plots from the TAQ data.
 
     :param tickers: list of the string abbreviation of the stocks to be
      analized (i.e. ['AAPL', 'MSFT']).
@@ -119,20 +120,20 @@ def taq_data_plot_generator(tickers, year):
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        pool.starmap(taq_data_analysis.taq_midpoint_full_time_data,
+        pool.starmap(taq_data_analysis_article_reproduction.taq_midpoint_time_data,
                      product(tickers, date_list))
-        pool.starmap(taq_data_analysis.taq_trade_signs_full_time_data,
+        pool.starmap(taq_data_analysis_article_reproduction.taq_trade_signs_time_data,
                      product(tickers, date_list))
 
         # Especific functions
-        pool.starmap(taq_data_analysis.taq_self_response_year_data,
+        pool.starmap(taq_data_analysis_article_reproduction.taq_self_response_year_data,
                      product(tickers, [year]))
-        pool.starmap(taq_data_analysis.taq_cross_response_year_data,
+        pool.starmap(taq_data_analysis_article_reproduction.taq_cross_response_year_data,
                      product(tickers, tickers, [year]))
-        pool.starmap(taq_data_analysis
+        pool.starmap(taq_data_analysis_article_reproduction
                      .taq_trade_sign_self_correlator_year_data,
                      product(tickers, [year]))
-        pool.starmap(taq_data_analysis
+        pool.starmap(taq_data_analysis_article_reproduction
                      .taq_trade_sign_cross_correlator_year_data,
                      product(tickers, tickers, [year]))
 

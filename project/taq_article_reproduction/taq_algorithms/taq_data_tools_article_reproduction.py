@@ -222,47 +222,20 @@ def taq_start_folders(year):
     :return: None -- The function create folders and does not return a value.
     """
 
-    if (not os.path.isdir('../../taq_data')):
+    try:
+        os.mkdir('../../taq_data/csv_year_data_{}'.format(year))
+        os.mkdir('../../taq_data/pickle_dayly_data_{}'.format(year))
+        os.mkdir('../../taq_plot/')
+        os.mkdir('../../taq_data/article_reproduction_data_{}'
+                    .format(year))
+        os.mkdir('../../taq_plot/taq_article_reproduction_plot_{}'
+                    .format(year))
+        print('Folder to save data created')
 
-        try:
-            os.mkdir('../../taq_data/')
-            os.mkdir('../../taq_data/csv_year_data_{}'.format(year))
-            os.mkdir('../../taq_data/pickle_dayly_data_{}'.format(year))
-            print('Folder to save data created')
-
-        except FileExistsError:
-            print('Folder exists. The folder was not created')
-
-    if (not os.path.isdir('../../taq_plot')):
-
-        try:
-            os.mkdir('../../taq_plot/')
-            print('Folder to save data created')
-
-        except FileExistsError:
-            print('Folder exists. The folder was not created')
-
-    if (not os.path.isdir('../../taq_data/article_reproduction_data_{}'
-                          .format(year))):
-
-        try:
-            os.mkdir('../../taq_data/article_reproduction_data_{}'
-                     .format(year))
-            print('Folder to save data created')
-
-        except FileExistsError:
-            print('Folder exists. The folder was not created')
-
-    if (not os.path.isdir('../taq_plot/article_reproduction__plot{}'
-                          .format(year))):
-
-        try:
-            os.mkdir('../taq_plot/taq_article_reproduction_plot_{}'
-                     .format(year))
-            print('Folder to save plot created')
-
-        except FileExistsError:
-            print('Folder exists. The folder was not created')
+    except FileExistsError as e:
+        print('Folder exists. The folder was not created')
+        print(e)
+        raise Exception('Check the folders')
 
     return None
 
@@ -302,7 +275,7 @@ def taq_decompress(ticker, year, type):
     if (type == 'quotes'):
         subprocess.call('./decompress.out {}_{}_NASDAQ.quotes'
                         .format(ticker, year) +
-                        ' > {}_{}_NASDAQ_trades.csv'
+                        ' > {}_{}_NASDAQ_quotes.csv'
                         .format(ticker, year),
                         shell=True, stdout=subprocess.PIPE)
 
