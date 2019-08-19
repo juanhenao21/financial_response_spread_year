@@ -5,6 +5,7 @@ The objective of this part of the code is to test what are the results of use
 different event shifts between the returns and the trade signs.
 
 # Write what parts of the previous code does this implementation needs.
+- it needs taq_responses_event_shift_data for the trade signs
 
 The code is divided in four parts:
     * `Tools`_: some functions for repetitive actions.
@@ -19,7 +20,7 @@ Tools
    
 Analysis
 --------
-.. automodule::
+.. automodule:: taq_data_analysis_event_shift
    :members:
 
 Plot
