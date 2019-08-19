@@ -222,6 +222,26 @@ def taq_start_folders(year):
     :return: None -- The function create folders and does not return a value.
     """
 
+    if (not os.path.isdir('../../taq_data')):
+
+        try:
+            os.mkdir('../../taq_data/')
+            os.mkdir('../../taq_data/csv_year_data_{}'.format(year))
+            os.mkdir('../../taq_data/pickle_dayly_data_{}'.format(year))
+            print('Folder to save data created')
+
+        except FileExistsError:
+            print('Folder exists. The folder was not created')
+
+    if (not os.path.isdir('../../taq_plot')):
+
+        try:
+            os.mkdir('../../taq_plot/')
+            print('Folder to save data created')
+
+        except FileExistsError:
+            print('Folder exists. The folder was not created')
+
     if (not os.path.isdir('../../taq_data/article_reproduction_data_{}'
                           .format(year))):
 
