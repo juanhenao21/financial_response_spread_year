@@ -9,13 +9,14 @@ This script requires the following modules:
     * numpy
     * pandas
 
-The module contains the following functions
+The module contains the following functions:
     * taq_save_data - saves computed data.
     * taq_save_plot - saves figures.
     * taq_function_header_print_data - prints info about the function running.
     * taq_function_header_print_plot - prints info about the plot.
     * taq_start_folders - creates folders to save data and plots.
     * taq_business_days - creates a list of week days for a year.
+    * taq_decompress - decompress original data format to CSV file.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -29,6 +30,7 @@ import numpy as np
 import os
 import pandas as pd
 import pickle
+import subprocess
 
 # -----------------------------------------------------------------------------
 
@@ -217,8 +219,7 @@ def taq_start_folders(year):
     """Creates the initial folders to save the data and plots.
 
     :param year: string of the year to be analized (i.e '2016').
-    :return: None -- The function create folders and does not return a
-     value.
+    :return: None -- The function create folders and does not return a value.
     """
 
     if (not os.path.isdir('../../taq_data/article_reproduction_data_{}'
@@ -267,6 +268,32 @@ def taq_bussiness_days(year):
 
 # -----------------------------------------------------------------------------
 
+
+def taq_decompress(ticker, year, type):
+    """Decompress original data format to CSV file.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :param type: string with the word 'quotes' or 'trades'.
+    :return: None -- The function run a code and does not return a value.
+    """
+
+    if (type == 'quotes'):
+        subprocess.call('./decompress.out {}_{}_NASDAQ.quotes'
+                        .format(ticker, year) +
+                        ' > {}_{}_NASDAQ_trades.csv'
+                        .format(ticker, year),
+                        shell=True, stdout=subprocess.PIPE)
+
+    elif (type == 'trades'):
+        subprocess.call('./decompress.out {}_{}_NASDAQ.trades'
+                        .format(ticker, year) +
+                        ' > {}_{}_NASDAQ_trades.csv'
+                        .format(ticker, year),
+                        shell=True, stdout=subprocess.PIPE)
+
+    return None
 
 def main():
     """The main function of the script.

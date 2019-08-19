@@ -31,3 +31,5 @@ Plot
 
 Main
 ----
+.. automodule:: taq_data_main_article_reproduction
+   :members:

@@ -9,7 +9,7 @@ This script requires the following modules:
     * pandas
     * taq_data_tools_article_reproduction
 
-The module contains the following functions
+The module contains the following functions:
     * taq_data_extract - extracts the data for every day in a year.
     * taq_midpoint_event_data - computes the midpoint price of every event.
     * taq_midpoint_time_data - computes the midpoint price of every second.
@@ -48,7 +48,7 @@ __tau__ = 1000
 
 
 def taq_data_extract(ticker, date):
-    """Extracts the data for every day in a year
+    """Extracts the data for every day in a year.
 
     Extracts the trades and quotes (TAQ) data for a day from a CSV file with
     the information of a whole year. The time range for each day is from 9:30
