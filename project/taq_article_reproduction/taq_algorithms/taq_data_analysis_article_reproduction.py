@@ -972,6 +972,8 @@ def main():
 
     dates = taq_data_tools_article_reproduction.taq_bussiness_days(year)
 
+    return None
+
 # ----------------------------------------------------------------------------
 
 

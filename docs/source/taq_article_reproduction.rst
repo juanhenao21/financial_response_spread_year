@@ -26,6 +26,8 @@ Analysis
 
 Plot
 ----
+.. automodule:: taq_data_plot_article_reproduction
+   :members:
 
 Main
 ----

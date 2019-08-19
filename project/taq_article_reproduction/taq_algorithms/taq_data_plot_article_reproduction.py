@@ -1,32 +1,32 @@
-'''
-TAQ data plot
+'''TAQ data plot module.
 
-Module to plot different TAQ data results based on the results of the functions
-set in the module taq_data_analysis. The module plot the following data
+The functions in the module plots the data obtained in the
+taq_data_analysis_article_reproduction module.
 
-- Self response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+This script requires the following modules:
+    * matplotlib
+    * numpy
+    * taq_data_tools_article_reproduction.article_reproduction
 
-- Cross response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+The module contains the following functions
+    * taq_self_response_year_avg_plot - plots the self-response average for a
+      year.
+    * taq_cross_response_year_avg_plot - plots the cross-response average for a
+      year.
+    * taq_trade_sign_self_correlator_year_avg_plot - plots the trade sign self-
+      correlator average for a year.
+    * taq_trade_sign_cross_correlator_year_avg_plot - plots the trade sign
+      cross-correlator average for a year.
+    * main - the main function of the script.
 
-- Trade sign self correlator: plot the trade sign self correlator for
-  every day for one stock in independent plots in one figure.
-
-- Trade sign cross correlator: plot the trade sign cross correlator for
-  every day for two stocks in independent pltos in one figure.
-
-Juan Camilo Henao Londono
-juan.henao-londono@stud.uni-due.de
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
 # ----------------------------------------------------------------------------
 # Modules
-
-import numpy as np
 from matplotlib import pyplot as plt
+import numpy as np
 import os
-
 import pickle
 
 import taq_data_tools_article_reproduction
@@ -37,21 +37,22 @@ __tau__ = 1000
 
 
 def taq_self_response_year_avg_plot(ticker, year):
-    """
-    Plot the average cross response during a year and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+    """Plots the self-response average for a year.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     try:
-
         function_name = taq_self_response_year_avg_plot.__name__
-        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                      ticker, year, '', '')
+        taq_data_tools_article_reproduction \
+            .taq_function_header_print_plot(function_name, ticker, ticker,
+                                            year, '', '')
 
+        # Load data
         self_ = pickle.load(open(''.join((
                         '../../taq_data/article_reproduction_data_{1}/taq_self'
                         + '_response_year_data/taq_self_response_year_data'
@@ -73,13 +74,14 @@ def taq_self_response_year_avg_plot(ticker, year):
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker,
-                                     year, '')
+        taq_data_tools_article_reproduction \
+            .taq_save_plot(function_name, figure, ticker, ticker, year, '')
 
         return None
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
@@ -87,29 +89,29 @@ def taq_self_response_year_avg_plot(ticker, year):
 
 
 def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
-    """
-    Plot the average cross response during a month and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+    """Plots the cross-response average for a year.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param year: string of the year to be analized (i.e '2008')
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     if (ticker_i == ticker_j):
 
+        # Self-response
         return None
 
     else:
-
         try:
-
             function_name = taq_cross_response_year_avg_plot.__name__
-            taq_data_tools.taq_function_header_print_plot(function_name,
-                                                          ticker_i, ticker_j,
-                                                          year, '', '')
+            taq_data_tools_article_reproduction \
+                .taq_function_header_print_plot(function_name, ticker_i,
+                                                ticker_j, year, '', '')
+
             cross = pickle.load(open(''.join((
                             '../../taq_data/article_reproduction_data_{2}/taq'
                             + '_cross_response_year_data/taq_cross_response'
@@ -132,13 +134,15 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
-                                         ticker_j, year, '')
+            taq_data_tools_article_reproduction \
+                .taq_save_plot(function_name, figure, ticker_i, ticker_j,
+                               year, '')
 
             return None
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             print('No data')
+            print(e)
             print()
             return None
 
@@ -146,20 +150,20 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
 
 
 def taq_trade_sign_self_correlator_year_avg_plot(ticker, year):
-    """
-    Plot the average trade sign self correlator during a year and the dayly
-    self response contributions in a figure. The data is loaded from the trade
-    sign self correlator data results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+    """Plots the trade sign self-correlator average for a year.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     try:
-
         function_name = taq_trade_sign_self_correlator_year_avg_plot.__name__
-        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                      ticker, year, '', '')
+        taq_data_tools_article_reproduction \
+            .taq_function_header_print_plot(function_name, ticker, ticker,
+                                            year, '', '')
 
         t_self = pickle.load(open(''.join((
                         '../../taq_data/article_reproduction_data_{1}/taq'
@@ -181,13 +185,14 @@ def taq_trade_sign_self_correlator_year_avg_plot(ticker, year):
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker,
-                                     year, '')
+        taq_data_tools_article_reproduction \
+            .taq_save_plot(function_name, figure, ticker, ticker, year, '')
 
         return None
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
@@ -195,30 +200,29 @@ def taq_trade_sign_self_correlator_year_avg_plot(ticker, year):
 
 
 def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year):
-    """
-    Plot the average trade sign cross correlator during a year and the dayly
-    self response contributions in a figure. The data is loaded from the trade
-    sign cross correlator data results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+    """Plots the trade sign cross-correlator average for a year.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param year: string of the year to be analized (i.e '2008')
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     if (ticker_i == ticker_j):
 
+        # Self-response
         return None
 
     else:
-
         try:
-
             function_name = taq_trade_sign_cross_correlator_year_avg_plot. \
                              __name__
-            taq_data_tools.taq_function_header_print_plot(function_name,
-                                                          ticker_i, ticker_j,
-                                                          year, '', '')
+            taq_data_tools_article_reproduction \
+                .taq_function_header_print_plot(function_name, ticker_i,
+                                                ticker_j, year, '', '')
 
             t_cross = pickle.load(open(''.join((
                         '../../taq_data/article_reproduction_data_{2}/taq'
@@ -242,13 +246,15 @@ def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year):
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
-                                         ticker_j, year, '')
+            taq_data_tools_article_reproduction \
+                .taq_save_plot(function_name, figure, ticker_i, ticker_j, year,
+                               '')
 
             return None
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             print('No data')
+            print(e)
             print()
             return None
 
@@ -256,7 +262,16 @@ def taq_trade_sign_cross_correlator_year_avg_plot(ticker_i, ticker_j, year):
 
 
 def main():
+    """The main function of the script.
+
+    The main function is used to test the functions in the script.
+
+    :return: None.
+    """
+
     pass
+
+    return None
 
 # -----------------------------------------------------------------------------
 
