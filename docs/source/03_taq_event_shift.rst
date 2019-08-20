@@ -30,5 +30,5 @@ Plot
 
 Main
 ----
-.. automodule::
+.. automodule:: taq_data_main_event_shift
    :members:
