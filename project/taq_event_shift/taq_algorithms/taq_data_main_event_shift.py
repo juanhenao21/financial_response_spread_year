@@ -84,6 +84,10 @@ def main():
     year = '2008'
     taus = [1, 10, 100, 1000]
 
+    # Basic folders
+    taq_data_tools_event_shift.taq_start_folders('2008')
+
+    # Run analysis
     taq_data_plot_generator(tickers, year, taus)
 
     print('Ay vamos!!')

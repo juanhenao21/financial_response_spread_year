@@ -170,6 +170,7 @@ def main():
     # Basic folders
     taq_data_tools_article_reproduction.taq_start_folders(year)
 
+    # Run analysis
     taq_build_from_scratch(tickers, year)
     taq_data_plot_generator(tickers, year)
 
