@@ -9,10 +9,14 @@ This script requires the following modules:
     * taq_data_tools_event_shift
 
 The module contains the following functions:
-    * taq_self_response_day_data - computes the self response of a day.
-    * taq_self_response_year_data - computes the self response of a year.
-    * taq_cross_response_day_data - computes the cross response of a day.
-    * taq_cross_response_year_data - computes the cross response of a year.
+    * taq_self_response_day_event_shift_data - computes the self response of a
+      day.
+    * taq_self_response_year_event_shift_data - computes the self response of
+      a year.
+    * taq_cross_response_day_event_shift_data - computes the cross response of
+      a day.
+    * taq_cross_response_year_event_shift_data - computes the cross response
+      of a year.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
@@ -36,7 +40,7 @@ def taq_self_response_day_event_shift_data(ticker, date, tau):
     """Computes the self response of a day.
 
     Using the midpoint price and trade signs of a ticker computes the self-
-    response during different time shifts for a day. There is a constant
+    response during different event shifts for a day. There is a constant
     :math:`\tau` that most be set in the parameters.
 
     :param ticker: string of the abbreviation of the stock to be analized
@@ -97,7 +101,7 @@ def taq_self_response_day_event_shift_data(ticker, date, tau):
 
         assert not np.sum(midpoint_t == 0)
 
-        # Depending on the shift time value
+        # Depending on the event shift value
         for s_idx, s_val in enumerate(shift_val):
 
             if (s_val < 0):
@@ -192,7 +196,7 @@ def taq_cross_response_day_event_shift_data(ticker_i, ticker_j, date, tau):
     """Computes the cross response of a day.
 
     Using the midpoint price of ticker i and trade signs of ticker j computes
-    the cross-response during different time shifts for a day. There is a
+    the cross-response during different event shifts for a day. There is a
     constant :math:`\tau` that most be set in the parameters.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -261,7 +265,7 @@ def taq_cross_response_day_event_shift_data(ticker_i, ticker_j, date, tau):
 
             assert not np.sum(midpoint_t == 0)
 
-            # Depending on the shift time value
+            # Depending on the event shift value
             for s_idx, s_val in enumerate(shift_val):
 
                 if (s_val < 0):
@@ -280,7 +284,7 @@ def taq_cross_response_day_event_shift_data(ticker_i, ticker_j, date, tau):
                 trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
                 num[s_idx] = trade_sign_no_0_len
 
-                # Obtain the midpoint  return. Displace the numerator tau
+                # Obtain the midpoint return. Displace the numerator tau
                 # values to the right and compute the return
 
                 # Midpoint price returns
