@@ -8,6 +8,9 @@ stocks <https://arxiv.org/pdf/1603.01580.pdf>`_.
 # Explain this is the fundamental part of the code and that it should be run
 # before the others part to have the corresponding data
 
+# The time it takes to extract the data is really large, it must be improved.
+Make it run, make it right, make it fast, make it small
+
 The code is divided in four parts:
     * `Tools`_: some functions for repetitive actions.
     * `Analysis`_: code to analyze the data.

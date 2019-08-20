@@ -1,56 +1,89 @@
-'''
-TAQ data main
+'''TAQ data main module.
 
-Script to analyze the TAQ data with the information of 6 stocks during a 2008.
+The functions in the module run the complete analysis and plot of the TAQ data.
 
-For the first proyect I need to obtain the cross response functions between
-individual stocks. To compute these values I need to calculate the midpoint
-price, the midpoint log returns and the trade signs. Each task is specified
-in each function.
+This script requires the following modules:
+    * itertools
+    * multiprocessing
+    * pandas
+    * taq_data_analysis_event_shift
+    * taq_data_plot_event_shift
+    * taq_data_tools_event_shift
 
-Juan Camilo Henao Londono
-juan.henao-londono@stud.uni-due.de
+The module contains the following functions:
+    * taq_data_plot_generator - generates all the analysis and plots from the
+      TAQ data.
+    * main - the main function of the script.
+
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 # -----------------------------------------------------------------------------
 # Modules
 
 from itertools import product
-import subprocess
-
 import multiprocessing as mp
-import pickle
+import os
 import pandas as pd
+import pickle
 
-import taq_data_analysis
-import taq_data_plot
-import taq_data_tools
+import taq_data_analysis_event_shift
+import taq_data_plot_event_shift
+import taq_data_tools_event_shift
 
 __tau__ = 1000
 
 # -----------------------------------------------------------------------------
 
 
-def main():
+def taq_data_plot_generator(tickers, year, taus):
+    """Generates all the analysis and plots from the TAQ data.
 
-    # Tickers and days to analyze
+    :param tickers: list of the string abbreviation of the stocks to be
+     analized (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analized (i.e '2016').
+    :return: None -- The function saves the data in a file and does not return
+     a value.
+    """
 
-    tickers = ['AAPL', 'MSFT']
-    taus = [1, 10, 100, 1000]
-    year = '2008'
-    dates = taq_data_tools.taq_bussiness_days(year)
+    date_list = taq_data_tools_event_shift.taq_bussiness_days(year)
 
+    # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_analysis.taq_self_response_year_event_shift_data,
+
+        # Especific functions
+        pool.starmap(taq_data_analysis_event_shift
+                     .taq_self_response_year_event_shift_data,
                      product(tickers, [year], taus))
-        pool.starmap(taq_data_analysis.taq_cross_response_year_event_shift_data,
+        pool.starmap(taq_data_analysis_event_shift
+                     .taq_cross_response_year_event_shift_data,
                      product(tickers, tickers, [year], taus))
 
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_event_shift_plot,
-                     product(tickers, [year], [taus]))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_event_shift_plot,
-                     product(tickers, tickers, [year], [taus]))
+        pool.starmap(taq_data_plot_event_shift
+                     .taq_self_response_year_avg_event_shift_plot,
+                     product(tickers, [year]))
+        pool.starmap(taq_data_plot_event_shift
+                     .taq_cross_response_year_avg_event_shift_plot,
+                     product(tickers, tickers, [year]))
 
+    return None
+
+# -----------------------------------------------------------------------------
+
+
+def main():
+    """The main function of the script.
+
+    The main function is used to test the functions in the script.
+
+    :return: None.
+    """
+
+    # Tickers and days to analyze
+    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    year = '2008'
+    taus = [1, 10, 100, 1000]
+
+    taq_data_plot_generator(tickers, year, taus)
 
     print('Ay vamos!!')
 

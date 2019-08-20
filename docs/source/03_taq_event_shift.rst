@@ -25,7 +25,7 @@ Analysis
 
 Plot
 ----
-.. automodule::
+.. automodule:: taq_data_plot_event_shift
    :members:
 
 Main

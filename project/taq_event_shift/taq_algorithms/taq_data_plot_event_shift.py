@@ -1,29 +1,32 @@
-'''
-TAQ data plot
+'''TAQ data plot module.
 
-Module to plot different TAQ data results based on the results of the functions
-set in the module taq_data_analysis. The module plot the following data
+The functions in the module plot the data obtained in the
+taq_data_analysis_event_shift module.
 
-- Self response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+This script requires the following modules:
+    * matplotlib
+    * numpy
+    * taq_data_tools_event_shift
 
-- Cross response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+The module contains the following functions:
+    * taq_self_response_year_avg_plot - plots the self-response average for a
+      year.
+    * taq_cross_response_year_avg_plot - plots the cross-response average for a
+      year.
+    * main - the main function of the script.
 
-Juan Camilo Henao Londono
-juan.henao-londono@stud.uni-due.de
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
 # ----------------------------------------------------------------------------
 # Modules
 
-import numpy as np
 from matplotlib import pyplot as plt
+import numpy as np
 import os
-
 import pickle
 
-import taq_data_tools
+import taq_data_tools_event_shift
 
 __tau__ = 1000
 
@@ -31,28 +34,30 @@ __tau__ = 1000
 
 
 def taq_self_response_year_avg_event_shift_plot(ticker, year, taus):
-    """
-    Plot the average cross response during a year and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+    """Plots the self-response average for a year.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     try:
-
         function_name = taq_self_response_year_avg_event_shift_plot.__name__
-        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                      ticker, year, '', '')
+        taq_data_tools_event_shift \
+            .taq_function_header_print_plot(function_name, ticker, ticker,
+                                            year, '', '')
 
         figure = plt.figure(figsize=(9, 16))
 
+        # Figure with different plots for different taus
         for tau_idx, tau_val in enumerate(taus):
 
             ax = plt.subplot(len(taus), 1, tau_idx + 1)
 
             times = np.array(range(- 10 * tau_val, 10 * tau_val, 1))
+            # Load data
             self_ = pickle.load(open(''.join((
                                '../../taq_data/event_shift_data_{1}/taq_self'
                                + '_response_year_event_shift_data_tau_{2}/taq'
@@ -63,6 +68,7 @@ def taq_self_response_year_avg_event_shift_plot(ticker, year, taus):
             max_pos = np.where(max(self_) == self_)[0][0]
 
             ax.plot(times, self_, linewidth=5, label=r'{}'.format(ticker))
+            # Plot line in the peak of the figure
             ax.plot((times[max_pos], times[max_pos]), (0, self_[max_pos]),
                     '--', label=r'Max position $t$ = {}'
                     .format(max_pos - 10 * tau_val))
@@ -77,8 +83,8 @@ def taq_self_response_year_avg_event_shift_plot(ticker, year, taus):
             plt.tight_layout()
 
         # Plotting
-        taq_data_tools.taq_save_plot(function_name, figure, ticker, ticker,
-                                     year, '')
+        taq_data_tools_event_shift.taq_save_plot(function_name, figure, ticker,
+                                                 ticker, year, '')
 
         return None
 
@@ -92,45 +98,46 @@ def taq_self_response_year_avg_event_shift_plot(ticker, year, taus):
 
 
 def taq_cross_response_year_avg_event_shift_plot(ticker_i, ticker_j, year,
-                                                taus):
-    """
-    Plot the average cross response during a month and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+                                                 taus):
+    """Plots the cross-response average for a year.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param year: string of the year to be analized (i.e '2008')
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     if (ticker_i == ticker_j):
 
+        # Self-response
         return None
 
     else:
-
         try:
-
             function_name = taq_cross_response_year_avg_event_shift_plot. \
                             __name__
-            taq_data_tools.taq_function_header_print_plot(function_name,
-                                                          ticker_i, ticker_j,
-                                                          year, '', '')
+            taq_data_tools_event_shift \
+                .taq_function_header_print_plot(function_name, ticker_i,
+                                                ticker_j, year, '', '')
 
             figure = plt.figure(figsize=(9, 16))
 
+            # Figure with different plots for different taus
             for tau_idx, tau_val in enumerate(taus):
 
                 ax = plt.subplot(len(taus), 1, tau_idx + 1)
 
                 times = np.array(range(- 10 * tau_val, 10 * tau_val, 1))
+                # Load data
                 cross = pickle.load(open(''.join((
                                    '../../taq_data/event_shift_data_{2}/taq'
-                                   + '_cross_response_year_event_shift_data_tau'
-                                   + '_{3}/taq_cross_response_year_event_shift'
-                                   + '_data_tau_{3}_{2}_{0}i_{1}j.pickle')
-                                   .split())
+                                   + '_cross_response_year_event_shift_data'
+                                   + '_tau_{3}/taq_cross_response_year_event'
+                                   + '_shift_data_tau_{3}_{2}_{0}i_{1}j'
+                                   + '.pickle').split())
                                    .format(ticker_i, ticker_j, year, tau_val),
                                    'rb'))
 
@@ -138,6 +145,7 @@ def taq_cross_response_year_avg_event_shift_plot(ticker_i, ticker_j, year,
 
                 ax.plot(times, cross, linewidth=5, label=r'{} - {}'
                         .format(ticker_i, ticker_j))
+                # Plot line in the peak of the figure
                 ax.plot((times[max_pos], times[max_pos]), (0, cross[max_pos]),
                         '--', label=r'Max position $t$ = {}'
                         .format(max_pos - 10 * tau_val))
@@ -152,8 +160,9 @@ def taq_cross_response_year_avg_event_shift_plot(ticker_i, ticker_j, year,
                 plt.tight_layout()
 
             # Plotting
-            taq_data_tools.taq_save_plot(function_name, figure, ticker_i,
-                                         ticker_j, year, '')
+            taq_data_tools_event_shift.taq_save_plot(function_name, figure,
+                                                     ticker_i, ticker_j, year,
+                                                     '')
 
             return None
 
@@ -167,7 +176,16 @@ def taq_cross_response_year_avg_event_shift_plot(ticker_i, ticker_j, year,
 
 
 def main():
+    """The main function of the script.
+
+    The main function is used to test the functions in the script.
+
+    :return: None.
+    """
+
     pass
+
+    return None
 
 # -----------------------------------------------------------------------------
 

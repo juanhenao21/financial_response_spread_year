@@ -9,7 +9,7 @@ This script requires the following modules:
     * pandas
     * taq_data_analysis_article_reproduction
     * taq_data_plot_article_reproduction
-    * taq_data_tools_article_reproduction.article_reproduction
+    * taq_data_tools_article_reproduction
 
 The module contains the following functions:
     * taq_build_from_scratch - extract data to dayly CSV files.

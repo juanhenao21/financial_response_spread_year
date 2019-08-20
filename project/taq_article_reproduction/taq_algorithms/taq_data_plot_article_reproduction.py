@@ -1,12 +1,12 @@
 '''TAQ data plot module.
 
-The functions in the module plots the data obtained in the
+The functions in the module plot the data obtained in the
 taq_data_analysis_article_reproduction module.
 
 This script requires the following modules:
     * matplotlib
     * numpy
-    * taq_data_tools_article_reproduction.article_reproduction
+    * taq_data_tools_article_reproduction
 
 The module contains the following functions:
     * taq_self_response_year_avg_plot - plots the self-response average for a
