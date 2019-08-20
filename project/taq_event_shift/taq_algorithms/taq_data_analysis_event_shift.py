@@ -21,7 +21,7 @@ The module contains the following functions:
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
-# ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Modules
 
 import numpy as np

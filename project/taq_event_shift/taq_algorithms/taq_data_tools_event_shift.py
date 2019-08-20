@@ -216,9 +216,9 @@ def taq_start_folders(year):
     """
 
     try:
-        os.mkdir('../../taq_data/article_reproduction_data_{}'
+        os.mkdir('../../taq_data/event_shift_data_{}'
                  .format(year))
-        os.mkdir('../../taq_plot/article_reproduction_plot_{}'
+        os.mkdir('../../taq_plot/event_shift_plot_{}'
                  .format(year))
         print('Folder to save data created')
 
