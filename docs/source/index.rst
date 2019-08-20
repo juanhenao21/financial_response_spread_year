@@ -14,6 +14,8 @@ Welcome to Response function analyisis's documentation!
 
    03_taq_event_shift
 
+   04_taq_time_shift
+
 Indices and tables
 ==================
 

@@ -1,6 +1,24 @@
-'''
-TAQ data tools
+'''TAQ data tools module.
 
+The functions in the module do small repetitive tasks, that are used along the
+whole implementation. These tools improve the way the tasks are standardized
+in the modules that use them.
+
+This script requires the following modules:
+    * matplotlib
+    * numpy
+    * pandas
+
+The module contains the following functions:
+    * taq_save_data - saves computed data.
+    * taq_save_plot - saves figures.
+    * taq_function_header_print_data - prints info about the function running.
+    * taq_function_header_print_plot - prints info about the plot.
+    * taq_start_folders - creates folders to save data and plots.
+    * taq_business_days - creates a list of week days for a year.
+    * main - the main function of the script.
+
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 Module with functions that help to make more readable the modules.
 
 Juan Camilo Henao Londono
