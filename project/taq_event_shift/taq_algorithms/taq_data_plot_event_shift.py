@@ -9,10 +9,10 @@ This script requires the following modules:
     * taq_data_tools_event_shift
 
 The module contains the following functions:
-    * taq_self_response_year_avg_plot - plots the self-response average for a
-      year.
-    * taq_cross_response_year_avg_plot - plots the cross-response average for a
-      year.
+    * taq_self_response_year_avg_event_shift_plot - plots the self-response
+      average for a year.
+    * taq_cross_response_year_avg_event_shift_plot - plots the cross-response
+      average for a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
