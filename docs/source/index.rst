@@ -12,6 +12,8 @@ Welcome to Response function analyisis's documentation!
 
    01_taq_article_reproduction
 
+   02_taq_responses_event_shift
+
    03_taq_event_shift
 
    04_taq_time_shift
