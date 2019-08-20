@@ -29,7 +29,6 @@ import numpy as np
 import os
 import pandas as pd
 import pickle
-import subprocess
 
 # ---------------------------------------------------------------------------------
 
@@ -77,7 +76,6 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     # Self-response data
     else:
-
         pickle.dump(data, open(''.join((
             '../../taq_data/event_shift_data_{2}/{0}/{0}_{2}{3}{4}'
             '_{1}.pickle').split())
@@ -121,14 +119,15 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
         except FileExistsError:
             print('Folder exists. The folder was not created')
-    # Cross-response
+
+    # Cross-response data
     if (ticker_i != ticker_j):
 
         figure.savefig(
             '../../taq_plot/event_shift_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
             .format(function_name, ticker_i, ticker_j, year, month))
 
-    # Self-response
+    # Self-response data
     else:
 
         figure.savefig(
@@ -162,11 +161,11 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     print('TAQ data')
     print(function_name)
 
-    # Cross-response
+    # Cross-response data
     if (ticker_i != ticker_j):
         print('Processing data for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
-    # Self-response
+    # Self-response data
     else:
         print('Processing data for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)
@@ -195,11 +194,11 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     print('TAQ data')
     print(function_name)
 
-    # Cross-response
+    # Cross-response data
     if (ticker_i != ticker_j):
         print('Processing plot for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
-    # Self-response
+    # Self-response data
     else:
         print('Processing plot for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)

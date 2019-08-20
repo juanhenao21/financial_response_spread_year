@@ -110,7 +110,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
      a value.
     """
 
-    # Saving plot
+    # Saving plot data
 
     if (not os.path.isdir('../../taq_plot/article_reproduction_plot_{1}/{0}/'
                           .format(function_name, year))):
@@ -123,7 +123,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
         except FileExistsError:
             print('Folder exists. The folder was not created')
 
-    # Cross-response
+    # Cross-response data
     if (ticker_i != ticker_j):
 
         figure.savefig(''.join((
@@ -166,11 +166,11 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     print('TAQ data')
     print(function_name)
 
-    # Cross-response
+    # Cross-response data
     if (ticker_i != ticker_j):
         print('Processing data for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
-    # Self-response
+    # Self-response data
     else:
         print('Processing data for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)
@@ -199,11 +199,11 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     print('TAQ data')
     print(function_name)
 
-    # Cross-response
+    # Cross-response data
     if (ticker_i != ticker_j):
         print('Processing plot for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
-    # Self-response
+    # Self-response data
     else:
         print('Processing plot for the stock ' + ticker_i + ' the ' + year
               + '.' + month + '.' + day)
