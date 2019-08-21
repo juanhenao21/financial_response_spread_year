@@ -124,16 +124,18 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     # Cross-response data
     if (ticker_i != ticker_j):
 
-        figure.savefig(
-            '../../taq_plot/responses_event_shift_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
-            .format(function_name, ticker_i, ticker_j, year, month))
+        figure.savefig(''.join((
+                       '../../taq_plot/responses_event_shift_plot_{3}/{0}/{0}'
+                       + '_{3}{4}_{1}i_{2}j.png').split())
+                       .format(function_name, ticker_i, ticker_j, year, month))
 
     # Self-response data
     else:
 
-        figure.savefig(
-            '../../taq_plot/responses_event_shift_plot_{2}/{0}/{0}_{2}{3}_{1}.png'
-            .format(function_name, ticker_i, year, month))
+        figure.savefig(''.join((
+                       '../../taq_plot/responses_event_shift_plot_{2}/{0}/{0}'
+                       + '_{2}{3}_{1}.png').split())
+                       .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
     print()
