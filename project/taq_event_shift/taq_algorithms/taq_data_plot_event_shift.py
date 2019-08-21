@@ -39,6 +39,7 @@ def taq_self_response_year_avg_event_shift_plot(ticker, year, taus):
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2008').
+    :param taus: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -106,6 +107,7 @@ def taq_cross_response_year_avg_event_shift_plot(ticker_i, ticker_j, year,
     :param ticker_j: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL')
     :param year: string of the year to be analized (i.e '2008')
+    :param taus: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """

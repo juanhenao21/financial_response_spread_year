@@ -7,6 +7,9 @@ responses for different :math:`\tau` values.
 # Write what parts of the previous code does this implementation needs.
 - article reproduction
 
+.. warning::
+   You ... 
+
 The code is divided in four parts:
     * `Tools`_: some functions for repetitive actions.
     * `Analysis`_: code to analyze the data.
