@@ -1,8 +1,8 @@
-TAQ Responses Event Shift
+TAQ Responses Time Shift
 =========================
 
 The objective of this part of the code is to test how are the self- and cross
-responses for different :math:`\tau` values in event scale.
+responses for different :math:`\tau` values in time scale.
 
 # Write what parts of the previous code does this implementation needs.
 - article reproduction
@@ -18,20 +18,20 @@ The code is divided in four parts:
 
 Tools
 -----
-.. automodule:: taq_data_tools_responses_event_shift
+.. automodule:: taq_data_tools_responses_time_shift
    :members:
    
 Analysis
 --------
-.. automodule:: taq_data_analysis_responses_event_shift
+.. automodule:: taq_data_analysis_responses_time_shift
    :members:
 
 Plot
 ----
-.. automodule:: taq_data_plot_responses_event_shift
+.. automodule:: taq_data_plot_responses_time_shift
    :members:
 
 Main
 ----
-.. automodule:: taq_data_main_responses_event_shift
+.. automodule:: taq_data_main_responses_time_shift
    :members:
