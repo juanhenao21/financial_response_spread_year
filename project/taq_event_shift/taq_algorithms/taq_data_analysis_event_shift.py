@@ -311,8 +311,8 @@ def taq_cross_response_day_event_shift_data(ticker_i, ticker_j, date, tau):
 def taq_cross_response_year_event_shift_data(ticker_i, ticker_j, year, tau):
     """Computes the cross response of a year.
 
-    Using the taq_cross_response_day data function computes the cross-response
-    function for a year.
+    Using the taq_cross_response_day_event_shift_data function computes the
+    cross-response function for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').

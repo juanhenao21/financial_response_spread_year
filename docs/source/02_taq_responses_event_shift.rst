@@ -5,7 +5,7 @@ The objective of this part of the code is to test how are the self- and cross
 responses for different :math:`\tau` values.
 
 # Write what parts of the previous code does this implementation needs.
-- 
+- article reproduction
 
 The code is divided in four parts:
     * `Tools`_: some functions for repetitive actions.

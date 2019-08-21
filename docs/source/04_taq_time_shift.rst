@@ -6,6 +6,7 @@ different time shifts between the returns and the trade signs.
 
 # Write what parts of the previous code does this implementation needs.
 - it needs taq_responses_time_shift_data for the trade signs
+- article reproduction
 
 The code is divided in four parts:
     * `Tools`_: some functions for repetitive actions.

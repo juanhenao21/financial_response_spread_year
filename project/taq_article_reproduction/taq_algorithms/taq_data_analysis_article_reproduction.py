@@ -336,7 +336,7 @@ def taq_midpoint_time_data(ticker, date):
 def taq_trade_signs_event_data(ticker, year, month, day):
     """Computes the trade signs of every event.
 
-    Using the dayly TAQ computes the trade signs of every event in a day.
+    Using the dayly TAQ data computes the trade signs of every event in a day.
     The trade signs are computed using the equation (1) of the
     `paper <https://arxiv.org/pdf/1603.01580.pdf>`_.
     As the trades signs are not directly given by the TAQ data, they must be
