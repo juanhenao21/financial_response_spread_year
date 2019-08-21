@@ -20,6 +20,8 @@ Welcome to Response function analyisis's documentation!
 
    05_taq_time_shift
 
+   06_taq_responses_event_trades_minute
+
 Indices and tables
 ==================
 
