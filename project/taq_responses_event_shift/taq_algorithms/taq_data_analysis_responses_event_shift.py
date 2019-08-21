@@ -33,7 +33,7 @@ import pickle
 
 import taq_data_tools_responses_event_shift
 
-__tau__ = 1000
+__tau__ = 10000
 
 # ----------------------------------------------------------------------------
 
@@ -198,6 +198,7 @@ def taq_self_response_day_responses_event_shift_data(ticker, date, shift):
             trade_sign_tau = trade_sign_shift[:-tau_idx-1]
             trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
             num[tau_idx] = trade_sign_no_0_len
+
             # Obtain the midpoint price return. Displace the numerator tau
             # values to the right and compute the return
 
@@ -363,7 +364,6 @@ def taq_cross_response_day_responses_event_shift_data(ticker_i, ticker_j, date,
                 # tau values to the right and compute the return
 
                 # Midpoint price returns
-
                 log_return_sec = (midpoint_shift[tau_idx + 1:]
                                   - midpoint_shift[:-tau_idx - 1]) \
                     / midpoint_shift[:-tau_idx - 1]
