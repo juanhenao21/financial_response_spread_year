@@ -47,8 +47,6 @@ def taq_data_plot_generator(tickers, year, taus):
      a value.
     """
 
-    date_list = taq_data_tools_time_shift.taq_bussiness_days(year)
-
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
