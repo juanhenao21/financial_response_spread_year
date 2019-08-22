@@ -22,9 +22,9 @@ The module contains the following functions:
 # Modules
 
 from itertools import product
-import multiprocessing as mp
 import os
 import pandas as pd
+import multiprocessing as mp
 import pickle
 
 import taq_data_analysis_responses_event_shift
