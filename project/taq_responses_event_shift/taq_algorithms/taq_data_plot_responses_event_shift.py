@@ -128,6 +128,7 @@ def taq_cross_response_year_avg_responses_event_shift_plot(ticker_i, ticker_j,
             # Figure with different plots for different shifts
             for shift in shifts:
 
+                # Load data
                 cross = pickle.load(open(''.join((
                             '../../taq_data/responses_event_shift_data_{2}/'
                             + 'taq_cross_response_year_responses_event_shift'
