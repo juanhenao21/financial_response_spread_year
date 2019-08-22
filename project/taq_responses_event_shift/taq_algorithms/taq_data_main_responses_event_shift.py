@@ -60,10 +60,10 @@ def taq_data_plot_generator(tickers, year, shifts):
         # Especific functions
         pool.starmap(taq_data_analysis_responses_event_shift
                      .taq_self_response_year_responses_event_shift_data,
-                     product(tickers, [year], taus))
+                     product(tickers, [year], shifts))
         pool.starmap(taq_data_analysis_responses_event_shift
                      .taq_cross_response_year_responses_event_shift_data,
-                     product(tickers, tickers, [year], taus))
+                     product(tickers, tickers, [year], shifts))
 
         pool.starmap(taq_data_plot_responses_event_shift
                      .taq_self_response_year_avg_responses_event_shift_plot,
@@ -91,7 +91,7 @@ def main():
     shifts = [1, 5, 10, 50, 100, 500, 1000, 5000]
 
     # Basic folders
-    taq_data_tools_event_shift.taq_start_folders('2008')
+    taq_data_tools_responses_event_shift.taq_start_folders('2008')
 
     # Run analysis
     taq_data_plot_generator(tickers, year, shifts)

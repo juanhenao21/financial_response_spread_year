@@ -251,7 +251,7 @@ def taq_self_response_year_responses_event_shift_data(ticker, year, shift):
         try:
             (data,
              avg_num) = taq_self_response_day_responses_event_shift_data(
-                                ticker, date, shift, tau=tau)
+                                ticker, date, shift)
             self_ += data
             num_s.append(avg_num)
 
@@ -422,7 +422,7 @@ def taq_cross_response_year_responses_event_shift_data(ticker_i, ticker_j,
             try:
                 (data,
                  avg_num) = taq_cross_response_day_responses_event_shift_data(
-                     ticker_i, ticker_j, date, shift, tau=tau)
+                     ticker_i, ticker_j, date, shift)
                 cross += data
                 num_c.append(avg_num)
 
