@@ -1,23 +1,29 @@
-'''
-TAQ data analysis
+''' TAQ data analysis module.
 
-Module to compute the following data
+The functions in the module analyze the data from the NASDAQ stock market,
+computing the self- and cross-response functions.
 
-- Trade signs all transactions: using the model obtain the trade signs
-  for all the transactions in a day.
+This script requires the following modules:
+    * numpy
+    * pandas
+    * traceback
+    * taq_data_tools_event_shift
 
-- Self response function: using the midpoint price and the trade signs
-  calculate the midpoint log returns and the self response of a stock.
+The module contains the following functions:
+    * taq_self_response_day_responses_event_trades_minute_data - computes the
+      self response of a day.
+    * taq_self_response_year_responses_event_trades_minute_data - computes the
+      self response of a year.
+    * taq_self_response_year_avg_responses_event_trades_minute_data - computes
+      the average self response of a year.
+    * taq_cross_response_day_responses_event_trades_minute_data - computes the
+      cross response of a day.
+    * taq_cross_response_year_responses_event_trades_minute_data - computes the
+      cross response of a year.
+    * taq_cross_response_year_avg_responses_event_trades_minute_data - computes
+      the average cross response of a year.
 
-- Cross response function: using the midpoint price and the trade signs
-  calculate the midpoint log returns and the cross response between two
-  stocks.
-
-Compare the differences between the two definitions of returns (midpoint price
-returns and midpoint price log-returns).
-
-Juan Camilo Henao Londono
-juan.henao-londono@stud.uni-due.de
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
 # ----------------------------------------------------------------------------
@@ -25,28 +31,31 @@ juan.henao-londono@stud.uni-due.de
 
 import numpy as np
 import os
-
 import pandas as pd
 import pickle
 import traceback
-import taq_data_tools
 
-__tau__ = 10000
+import taq_data_tools_responses_event_trades_minute
+
+__tau__ = 1000
 
 # ----------------------------------------------------------------------------
 
 
 def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
                                                              tau):
-    """
-    Obtain the self response function and the trades per minute using the
-    midpoint price returns and trade signs of the ticker during different time
-    lags. Return an array with the self response for a day and an array of the
-    number of trades for a constant value of tau.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param date: string with the date of the data to be extracted
-         (i.e. '2008-01-02')
+    """Computes the self response of a day.
+
+    Using the midpoint price and trade signs of a ticker computes the self-
+    response during different trades per minute for a day. There is a constant
+    :math:`\\tau` that most be set in the parameters.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param date: string with the date of the data to be extracted
+     (i.e. '2008-01-02').
+    :param tau: integer great than zero (i.e. 10).
+    :return: tuple -- The function returns a tuple with positions.
     """
 
     date_sep = date.split('-')
@@ -57,15 +66,15 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
 
     function_name = taq_self_response_day_responses_event_trades_minute_data. \
         __name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, month, day)
+    taq_data_tools_responses_event_trades_minute \
+        .taq_function_header_print_data(function_name, ticker, ticker, year,
+                                        month, day)
 
     try:
-
         # Load data
         midpoint_i = pickle.load(open(''.join((
                 '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
-                + '_full_time_data/taq_midpoint_full_time_data_midpoint_{1}'
+                + '_time_data/taq_midpoint_time_data_midpoint_{1}'
                 + '{2}{3}_{0}.pickle').split())
                 .format(ticker, year, month, day), 'rb'))
         time_t, _, trade_sign_i = pickle.load(open("".join((
@@ -74,8 +83,9 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
                 + '_responses_event_shift_data_{1}{2}{3}_{0}.pickle')
                 .split())
                 .format(ticker, year, month, day), 'rb'))
-        # As the data is loaded from the original reproduction data from the
-        # article, the data have a shift of 1 second.
+
+        # As the data is loaded from the article reproduction module results,
+        # the data have a shift of 1 second.
         time_m = np.array(range(34801, 57001))
 
         assert not np.sum(trade_sign_i == 0)
@@ -85,14 +95,15 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
         # Array of the average of each tau. 10^3 s used by Wang
         # List to save the tuples with the response and rates.
         points = []
+
         # Minutes during the open market considering opening at 9:40 and
         # closing at 15:50
         time_minutes = np.array(range(370))
 
-        # Calculating the midpoint log return and the self response function
-
+        # Calculating the midpoint price return and the self response function
         midpoint_t = 0. * trade_sign_i
 
+        # Filling with midpoint price values
         for t_idx, t_val in enumerate(time_m):
             condition = time_t == t_val
             len_c = np.sum(condition)
@@ -100,7 +111,7 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
 
         assert not np.sum(midpoint_t == 0)
 
-        # Obtain the midpoint log return. Displace the numerator tau
+        # Obtain the midpoint price return. Displace the numerator tau
         # values to the right and compute the return
         # Midpoint price returns
         log_return_sec = (midpoint_t[tau + 1:]
@@ -111,7 +122,7 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
         time_t = time_t[:- tau - 1]
         assert len(trade_sign_tau_) == len(log_return_sec)
 
-        # Depending on the tau value
+        # Depending on the trades per minute value
         for t_idx, t_val in enumerate(time_minutes):
 
             if (t_idx):
@@ -121,6 +132,7 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
                 trade_sign_tau = trade_sign_tau_[condition]
                 log_return = log_return_sec[condition]
                 trades_minute = np.sum(condition)
+
                 # Obtain the self response value
                 product = log_return * trade_sign_tau
                 points.extend([(trades_minute, i) for i in product])
@@ -141,39 +153,44 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
 
 def taq_self_response_year_responses_event_trades_minute_data(ticker, year,
                                                               tau):
-    """
-    Obtain the year average self response function using the midpoint
-    price returns and trade signs of the ticker during different time
-    lags. Return an array with the year average self response.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
+    """Computes the self response of a year.
+
+    Using the taq_self_response_day_responses_event_trades_minute_data function
+    computes the self-response function for a year.
+
+    :param ticker: string of the abbreviation of stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param tau: integer great than zero (i.e. 50).
+    :return: None – The function saves the data in a file and does not return
+     a value.
     """
 
     function_name = \
         taq_self_response_year_responses_event_trades_minute_data.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, '', '')
+    taq_data_tools_responses_event_trades_minute \
+        .taq_function_header_print_data(function_name, ticker, ticker, year,
+                                        '', '')
 
-    dates = taq_data_tools.taq_bussiness_days(year)
+    dates = taq_data_tools_responses_event_trades_minute \
+        .taq_bussiness_days(year)
 
     points = []
 
     for date in dates:
 
         try:
-
             points.extend(
                 taq_self_response_day_responses_event_trades_minute_data(
                           ticker, date, tau))
 
         except TypeError:
-            print('error')
             pass
 
     # Saving data
-    taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
-                                 points, ticker, ticker, year, '', '')
+    taq_data_tools_responses_event_trades_minute \
+        .taq_save_data('{}_tau_{}'.format(function_name, tau), points, ticker,
+                       ticker, year, '', '')
 
     return None
 
@@ -182,110 +199,26 @@ def taq_self_response_year_responses_event_trades_minute_data(ticker, year,
 
 def taq_self_response_year_avg_responses_event_trades_minute_data(ticker, year,
                                                                   tau):
-    """
-    Load the list of tuples with the rate of trades per minute and the
-    responses. Average the responses and return an array with the averaged
-    responses.
-        :param ticker: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
-        :param tau: int of the tau value to be analized (i. e. 50)
-    """
+    """Computes the average self response of a year.
 
-    function_name = \
-        taq_self_response_year_avg_responses_event_trades_minute_data.__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, '', '')
+    Using the taq_self_response_day_responses_event_trades_minute_data function
+    computes the average self-response function for a year.
 
-    try:
-
-        # Load data
-        responses = pickle.load(open(''.join((
-                '../../taq_data/responses_event_trades_minute_data_{1}/taq'
-                + '_self_response_year_responses_event_trades_minute_data'
-                + '_tau_{2}/taq_self_response_year_responses_event_trades'
-                + '_minute_data_tau_{2}_{1}_{0}.pickle').split())
-                .format(ticker, year, tau), 'rb'))
-
-        responses.sort(key=lambda tup: tup[0])
-        res_list = [list(i) for i in zip(*responses)]
-        rate = np.asarray(res_list[0])
-        res = np.asarray(res_list[1])
-
-        res_avg = []
-        time = []
-
-        for i in range(1, 11):
-            condition = rate == i
-            if (np.sum(condition)):
-                res_avg.append(np.mean(res[condition]))
-                time.append(i)
-        inter1 = list(range(10, 101, 10))
-        for i, v in enumerate(inter1):
-            if (v == 10):
-                pass
-            else:
-                condition = (rate <= inter1[i]) \
-                            * (rate > inter1[i - 1])
-                if (np.sum(condition)):
-                    res_avg.append(np.mean(res[condition]))
-                    time.append(v)
-        inter2 = list(range(100, 1001, 100))
-        for i, v in enumerate(inter2):
-            if (v == 100):
-                pass
-            else:
-                condition = (rate <= inter2[i]) \
-                            * (rate > inter2[i-1])
-                if (np.sum(condition)):
-                    res_avg.append(np.mean(res[condition]))
-                    time.append(v)
-        inter3 = list(range(1000, 10001, 1000))
-        for i, v in enumerate(inter3):
-            if (v == 1000):
-                pass
-            else:
-                condition = (rate <= inter3[i]) \
-                            * (rate > inter3[i-1])
-                if (np.sum(condition)):
-                    res_avg.append(np.mean(res[condition]))
-                    time.append(v)
-
-    except TypeError as e:
-        print(e)
-        print(traceback.format_exc())
-        pass
-
-    assert len(res_avg) == len(time)
-    # Saving data
-    taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
-                                 (time, res_avg), ticker, ticker, year, '', '')
-
-    return (time, res_avg)
-
-# ----------------------------------------------------------------------------
-
-
-def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
-                                                                     year, tau):
-    """
-    Load the list of tuples with the rate of trades per minute and the
-    responses. Average the responses and return an array with the averaged
-    responses.
-        :param ticker: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
-        :param tau: int of the tau value to be analized (i. e. 50)
+    :param ticker: string of the abbreviation of stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param tau: integer great than zero (i.e. 50).
+    :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
     function_name = \
-        taq_self_response_year_avg_responses_event_trades_minute_data_v2 \
-            .__name__
-    taq_data_tools.taq_function_header_print_data(function_name, ticker,
-                                                  ticker, year, '', '')
+        taq_self_response_year_avg_responses_event_trades_minute_data \
+        .__name__
+    taq_data_tools_responses_event_trades_minute \
+        .taq_function_header_print_data(function_name, ticker, ticker, year,
+                                        '', '')
 
     try:
-
         # Load data
         responses = pickle.load(open(''.join((
                 '../../taq_data/responses_event_trades_minute_data_{1}/taq'
@@ -308,6 +241,7 @@ def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
             if (np.sum(condition)):
                 res_avg.append(np.sum(res[condition]) / avg_num)
                 time.append(i)
+
         inter1 = list(range(10, 101, 10))
         for i, v in enumerate(inter1):
             if (v == 10):
@@ -318,6 +252,7 @@ def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
                 if (np.sum(condition)):
                     res_avg.append(np.sum(res[condition]) / avg_num)
                     time.append(v)
+
         inter2 = list(range(100, 1001, 100))
         for i, v in enumerate(inter2):
             if (v == 100):
@@ -328,6 +263,7 @@ def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
                 if (np.sum(condition)):
                     res_avg.append(np.sum(res[condition]) / avg_num)
                     time.append(v)
+
         inter3 = list(range(1000, 10001, 1000))
         for i, v in enumerate(inter3):
             if (v == 1000):
@@ -345,9 +281,11 @@ def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
         pass
 
     assert len(res_avg) == len(time)
+
     # Saving data
-    taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
-                                 (time, res_avg), ticker, ticker, year, '', '')
+    taq_data_tools_responses_event_trades_minute \
+        .taq_save_data('{}_tau_{}'.format(function_name, tau), (time, res_avg),
+                       ticker, ticker, year, '', '')
 
     return (time, res_avg)
 
@@ -357,46 +295,46 @@ def taq_self_response_year_avg_responses_event_trades_minute_data_v2(ticker,
 def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
                                                               ticker_j, date,
                                                               tau):
+    """Computes the cross response of a day.
+
+    Using the midpoint price of ticker i and trade signs of ticker j computes
+    the cross-response during different event shifts for a day. There is a
+    constant :math:`\\tau` that most be set in the parameters.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param date: string with the date of the data to be extracted
+     (i.e. '2008-01-02').
+    :param tau: integer great than zero (i.e. 50).
+    :return: tuple -- The function returns a tuple with positions.
     """
-    Obtain the cross response function using the midpoint price returns of
-    ticker i and trade signs of ticker j during different time lags. The data
-    is adjusted to use only the values each second. Return an array with the
-    cross response function for a day.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the trade sign stock to
-            be analized (i.e. 'AAPL')
-        :param date: string with the date of the data to be extracted
-            (i.e. '2008-01-02')
-    """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
 
     if (ticker_i == ticker_j):
 
         # Self-response
-
         return None
 
     else:
-
         try:
-
-            date_sep = date.split('-')
-
-            year = date_sep[0]
-            month = date_sep[1]
-            day = date_sep[2]
-
             function_name = \
                 taq_cross_response_day_responses_event_trades_minute_data \
                 .__name__
-            taq_data_tools.taq_function_header_print_data(function_name,
-                                                          ticker_i, ticker_j,
-                                                          year, month, day)
+            taq_data_tools_responses_event_trades_minute \
+                .taq_function_header_print_data(function_name, ticker_i,
+                                                ticker_j, year, month, day)
 
             # Load data
             midpoint_i = pickle.load(open(''.join((
                     '../../taq_data/article_reproduction_data_{1}/taq'
-                    + '_midpoint_full_time_data/taq_midpoint_full_time_data'
+                    + '_midpoint_time_data/taq_midpoint_time_data'
                     + '_midpoint_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
 
@@ -407,8 +345,8 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
                 .split())
                 .format(ticker_j, year, month, day), 'rb'))
 
-            # As the data is loaded from the original reproduction data from
-            # the article, the data have a shift of 1 second.
+            # As the data is loaded from the article reproduction module
+            # results, the data have a shift of 1 second.
             time_m = np.array(range(34801, 57001))
 
             assert not np.sum(trade_sign_j == 0)
@@ -417,15 +355,16 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
 
             # List to save the tuples with the response and rates
             points = []
+
             # Minutes during the open market considering opening at 9:40 and
             # closing at 15:50
             time_minutes = np.array(range(370))
 
-            # Calculating the midpoint log return and the cross response
+            # Calculating the midpoint price return and the cross response
             # function
-
             midpoint_t = 0. * trade_sign_j
 
+            # Filling with midpoint price values
             for t_idx, t_val in enumerate(time_m):
                 condition = time_t == t_val
                 len_c = np.sum(condition)
@@ -433,7 +372,7 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
 
             assert not np.sum(midpoint_t == 0)
 
-            # Obtain the midpoint log return. Displace the numerator tau
+            # Obtain the midpoint price return. Displace the numerator tau
             # values to the right and compute the return
             # Midpoint price returns
             log_return_sec = (midpoint_t[tau + 1:]
@@ -444,17 +383,17 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
             time_t = time_t[:- tau - 1]
             assert len(trade_sign_tau_) == len(log_return_sec)
 
-            # Depending on the tau value
+            # Depending on the trades per minute value
             for t_idx, t_val in enumerate(time_minutes):
 
                 if (t_idx):
-
                     # Select the values in each minute
                     condition = (time_t < 34800 + time_minutes[t_idx] * 60) \
                             * (time_t >= 34800 + time_minutes[t_idx - 1] * 60)
                     trade_sign_tau = trade_sign_tau_[condition]
                     log_return = log_return_sec[condition]
                     trades_minute = np.sum(condition)
+
                     # Obtain the self response value
                     product = log_return * trade_sign_tau
                     points.extend([(trades_minute, i) for i in product])
@@ -476,39 +415,42 @@ def taq_cross_response_day_responses_event_trades_minute_data(ticker_i,
 def taq_cross_response_year_responses_event_trades_minute_data(ticker_i,
                                                                ticker_j, year,
                                                                tau):
-    """
-    Obtain the year average cross response function using the midpoint
-    price returns and trade signs of the tickers during different time
-    lags. Return an array with the year average cross response.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the trade sign stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
+    """Computes the cross response of a year.
+
+    Using the taq_cross_response_day_responses_event_trades_minutes_data
+    function computes the cross-response function for a year.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param tau: integer great than zero (i.e. 50).
+    :return: None – The function saves the data in a file and does not return a
+     value.
     """
 
     if (ticker_i == ticker_j):
 
         # Self-response
-
         return None
 
     else:
-
         function_name = \
             taq_cross_response_year_responses_event_trades_minute_data \
             .__name__
-        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
-                                                      ticker_j, year, '', '')
+        taq_data_tools_responses_event_trades_minute \
+            .taq_function_header_print_data(function_name, ticker_i, ticker_j,
+                                            year, '', '')
 
-        dates = taq_data_tools.taq_bussiness_days(year)
+        dates = taq_data_tools_responses_event_trades_minute \
+            .taq_bussiness_days(year)
 
         points = []
 
         for date in dates:
 
             try:
-
                 points.extend(
                     taq_cross_response_day_responses_event_trades_minute_data(
                               ticker_i, ticker_j, date, tau))
@@ -517,8 +459,9 @@ def taq_cross_response_year_responses_event_trades_minute_data(ticker_i,
                 pass
 
         # Saving data
-        taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
-                                     points, ticker_i, ticker_j, year, '', '')
+        taq_data_tools_responses_event_trades_minute \
+            .taq_save_data('{}_tau_{}'.format(function_name, tau), points,
+                           ticker_i, ticker_j, year, '', '')
 
         return None
 
@@ -528,133 +471,34 @@ def taq_cross_response_year_responses_event_trades_minute_data(ticker_i,
 def taq_cross_response_year_avg_responses_event_trades_minute_data(ticker_i,
                                                                    ticker_j,
                                                                    year, tau):
-    """
-    Load the list of tuples with the rate of trades per minute and the
-    responses. Average the responses and return an array with the averaged
-    responses.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
-        :param tau: int of the tau value to be analized (i. e. 50)
+    """Computes the average cross response of a year.
+
+    Using the taq_cross_response_day_responses_event_trades_minute_data
+    function computes the average cross-response function for a year.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2016').
+    :param tau: integer great than zero (i.e. 50).
+    :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
     if (ticker_i == ticker_j):
 
         # Self-response
-
         return None
 
     else:
-
         function_name = \
             taq_cross_response_year_avg_responses_event_trades_minute_data \
             .__name__
-        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
-                                                      ticker_j, year, '', '')
+        taq_data_tools_responses_event_trades_minute \
+            .taq_function_header_print_data(function_name, ticker_i, ticker_j,
+                                            year, '', '')
 
         try:
-
-            # Load data
-            responses = pickle.load(open(''.join((
-                    '../../taq_data/responses_event_trades_minute_data_{2}/taq'
-                    + '_cross_response_year_responses_event_trades_minute_data'
-                    + '_tau_{3}/taq_cross_response_year_responses_event_trades'
-                    + '_minute_data_tau_{3}_{2}_{0}i_{1}j.pickle').split())
-                    .format(ticker_i, ticker_j, year, tau), 'rb'))
-
-            responses.sort(key=lambda tup: tup[0])
-            res_list = [list(i) for i in zip(*responses)]
-            rate = np.asarray(res_list[0])
-            res = np.asarray(res_list[1])
-
-            res_avg = []
-            time = []
-
-            for i in range(1, 11):
-                condition = rate == i
-                if (np.sum(condition)):
-                    res_avg.append(np.mean(res[condition]))
-                    time.append(i)
-            inter1 = list(range(10, 101, 10))
-            for i, v in enumerate(inter1):
-                if (v == 10):
-                    pass
-                else:
-                    condition = (rate <= inter1[i]) \
-                                * (rate > inter1[i - 1])
-                    if (np.sum(condition)):
-                        res_avg.append(np.mean(res[condition]))
-                        time.append(v)
-            inter2 = list(range(100, 1001, 100))
-            for i, v in enumerate(inter2):
-                if (v == 100):
-                    pass
-                else:
-                    condition = (rate <= inter2[i]) \
-                                * (rate > inter2[i-1])
-                    if (np.sum(condition)):
-                        res_avg.append(np.mean(res[condition]))
-                        time.append(v)
-            inter3 = list(range(1000, 10001, 1000))
-            for i, v in enumerate(inter3):
-                if (v == 1000):
-                    pass
-                else:
-                    condition = (rate <= inter3[i]) \
-                                * (rate > inter3[i-1])
-                    if (np.sum(condition)):
-                        res_avg.append(np.mean(res[condition]))
-                        time.append(v)
-
-        except TypeError as e:
-            print(e)
-            print(traceback.format_exc())
-            pass
-
-        assert len(res_avg) == len(time)
-        # Saving data
-        taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
-                                    (time, res_avg), ticker_i, ticker_j, year, '', '')
-
-        return (time, res_avg)
-
-# ----------------------------------------------------------------------------
-
-
-def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
-                                                                      ticker_j,
-                                                                      year,
-                                                                      tau):
-    """
-    Load the list of tuples with the rate of trades per minute and the
-    responses. Average the responses and return an array with the averaged
-    responses.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-            be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2016')
-        :param tau: int of the tau value to be analized (i. e. 50)
-    """
-
-    if (ticker_i == ticker_j):
-
-        # Self-response
-
-        return None
-
-    else:
-
-        function_name = \
-            taq_cross_response_year_avg_responses_event_trades_minute_data_v2 \
-            .__name__
-        taq_data_tools.taq_function_header_print_data(function_name, ticker_i,
-                                                      ticker_j, year, '', '')
-
-        try:
-
             # Load data
             responses = pickle.load(open(''.join((
                     '../../taq_data/responses_event_trades_minute_data_{2}/taq'
@@ -677,6 +521,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
                 if (np.sum(condition)):
                     res_avg.append(np.sum(res[condition]) / avg_num)
                     time.append(i)
+
             inter1 = list(range(10, 101, 10))
             for i, v in enumerate(inter1):
                 if (v == 10):
@@ -687,6 +532,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
                     if (np.sum(condition)):
                         res_avg.append(np.sum(res[condition]) / avg_num)
                         time.append(v)
+
             inter2 = list(range(100, 1001, 100))
             for i, v in enumerate(inter2):
                 if (v == 100):
@@ -697,6 +543,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
                     if (np.sum(condition)):
                         res_avg.append(np.sum(res[condition]) / avg_num)
                         time.append(v)
+
             inter3 = list(range(1000, 10001, 1000))
             for i, v in enumerate(inter3):
                 if (v == 1000):
@@ -714,9 +561,11 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
             pass
 
         assert len(res_avg) == len(time)
+
         # Saving data
-        taq_data_tools.taq_save_data('{}_tau_{}'.format(function_name, tau),
-                                    (time, res_avg), ticker_i, ticker_j, year, '', '')
+        taq_data_tools_responses_event_trades_minute \
+            .taq_save_data('{}_tau_{}'.format(function_name, tau),
+                           (time, res_avg), ticker_i, ticker_j, year, '', '')
 
         return (time, res_avg)
 
@@ -724,18 +573,18 @@ def taq_cross_response_year_avg_responses_event_trades_minute_data_v2(ticker_i,
 
 
 def main():
+    """The main function of the script.
 
-    ticker = 'AAPL'
-    ticker_i = 'AAPL'
-    ticker_j = 'MSFT'
-    year = '2008'
-    tau = 50
+    The main function is used to test the functions in the script.
 
-    taq_self_response_day_responses_event_trades_minute_data(ticker,
-                                                              '2008-01-02', tau)
+    :return: None.
+    """
 
-#    print(x)
-#    print(y)
+    pass
+
+    return None
+
+# ----------------------------------------------------------------------------
 
 
 if __name__ == "__main__":

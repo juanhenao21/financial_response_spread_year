@@ -41,7 +41,7 @@ def taq_self_response_day_event_shift_data(ticker, date, tau):
 
     Using the midpoint price and trade signs of a ticker computes the self-
     response during different event shifts for a day. There is a constant
-    :math:`\tau` that most be set in the parameters.
+    :math:`\\tau` that most be set in the parameters.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -197,7 +197,7 @@ def taq_cross_response_day_event_shift_data(ticker_i, ticker_j, date, tau):
 
     Using the midpoint price of ticker i and trade signs of ticker j computes
     the cross-response during different event shifts for a day. There is a
-    constant :math:`\tau` that most be set in the parameters.
+    constant :math:`\\tau` that most be set in the parameters.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
