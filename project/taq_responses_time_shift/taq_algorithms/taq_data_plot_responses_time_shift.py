@@ -27,7 +27,7 @@ import numpy as np
 import os
 import pickle
 
-import taq_data_tools_responses_event_shift
+import taq_data_tools_responses_time_shift
 
 __tau__ = 10000
 
@@ -73,7 +73,7 @@ def taq_self_response_year_avg_responses_time_shift_plot(ticker, year, shifts):
         plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
         plt.xticks(fontsize=25)
         plt.yticks(fontsize=25)
-        # plt.xlim(1, 1000)
+        plt.xlim(1, 10000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.grid(True)
@@ -145,7 +145,7 @@ def taq_cross_response_year_avg_responses_time_shift_plot(ticker_i, ticker_j,
             plt.ylabel(r'$R_{ij}(\tau)$', fontsize=35)
             plt.xticks(fontsize=25)
             plt.yticks(fontsize=25)
-            # plt.xlim(1, 1000)
+            plt.xlim(1, 10000)
             # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
             plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             plt.grid(True)
