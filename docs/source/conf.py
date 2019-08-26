@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_shift/taq_a
 sys.path.insert(0, os.path.abspath('../../project/taq_event_shift/taq_algorithms/'))
 sys.path.insert(0, os.path.abspath('../../project/taq_time_shift/taq_algorithms/'))
 sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_trades_minute/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_trades_minute/taq_algorithms/'))
 
 # -- Project information -----------------------------------------------------
 

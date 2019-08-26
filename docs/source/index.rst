@@ -22,6 +22,8 @@ Welcome to Response function analyisis's documentation!
 
    06_taq_responses_event_trades_minute
 
+   07_taq_responses_time_trades_minute
+
 Indices and tables
 ==================
 
