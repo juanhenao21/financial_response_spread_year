@@ -37,7 +37,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     """ Saves computed data in pickle files.
 
     Saves the data generated in the functions of the
-    taq_data_analysis_responses_event_trades_minute module in pickle files.
+    taq_data_analysis_responses_time_trades_minute module in pickle files.
 
     :param function_name: name of the function that generates the data.
     :param data: data to be saved. The data can be of different types.
@@ -54,11 +54,11 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     # Saving data
 
-    if (not os.path.isdir('../../taq_data/responses_event_trades_minute_data_{1}/{0}/'
+    if (not os.path.isdir('../../taq_data/responses_time_trades_minute_data_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
-            os.mkdir('../../taq_data/responses_event_trades_minute_data_{1}/{0}/'
+            os.mkdir('../../taq_data/responses_time_trades_minute_data_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -69,7 +69,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     if (ticker_i != ticker_j):
 
         pickle.dump(data, open(''.join((
-            '../../taq_data/responses_event_trades_minute_data_{3}/{0}/{0}_{3}{4}{5}'
+            '../../taq_data/responses_time_trades_minute_data_{3}/{0}/{0}_{3}{4}{5}'
             + '_{1}i_{2}j.pickle').split())
             .format(function_name, ticker_i, ticker_j, year, month, day),
             'wb'))
@@ -78,7 +78,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     else:
 
         pickle.dump(data, open(''.join((
-            '../../taq_data/responses_event_trades_minute_data_{2}/{0}/{0}_{2}{3}{4}'
+            '../../taq_data/responses_time_trades_minute_data_{2}/{0}/{0}_{2}{3}{4}'
             '_{1}.pickle').split())
             .format(function_name, ticker_i, year, month, day), 'wb'))
 
@@ -94,7 +94,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     """Saves plot in png files.
 
     Saves the plot generated in the functions of the
-    taq_data_plot_responses_event_trades_minute module in png files.
+    taq_data_plot_responses_time_trades_minute module in png files.
 
     :param function_name: name of the function that generates the plot.
     :param figure: figure object that is going to be save.
@@ -110,11 +110,11 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     # Saving data
 
-    if (not os.path.isdir('../../taq_plot/responses_event_trades_minute_plot_{1}/{0}/'
+    if (not os.path.isdir('../../taq_plot/responses_time_trades_minute_plot_{1}/{0}/'
                           .format(function_name, year))):
 
         try:
-            os.mkdir('../../taq_plot/responses_event_trades_minute_plot_{1}/{0}/'
+            os.mkdir('../../taq_plot/responses_time_trades_minute_plot_{1}/{0}/'
                      .format(function_name, year))
             print('Folder to save data created')
 
@@ -125,14 +125,14 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../../taq_plot/responses_event_trades_minute_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
+            '../../taq_plot/responses_time_trades_minute_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
             .format(function_name, ticker_i, ticker_j, year, month))
 
     # Self-response data
     else:
 
         figure.savefig(
-            '../../taq_plot/responses_event_trades_minute_plot_{2}/{0}/{0}_{2}{3}_{1}.png'
+            '../../taq_plot/responses_time_trades_minute_plot_{2}/{0}/{0}_{2}{3}_{1}.png'
             .format(function_name, ticker_i, year, month))
 
     print('Plot saved')
@@ -195,7 +195,7 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     print('TAQ data')
     print(function_name)
 
-    # Cross-response data
+    # Cross.response data
     if (ticker_i != ticker_j):
         print('Processing plot for the stock i ' + ticker_i + ' and stock j '
               + ticker_j + ' the ' + year + '.' + month + '.' + day)
@@ -217,9 +217,9 @@ def taq_start_folders(year):
     """
 
     try:
-        os.mkdir('../../taq_data/responses_event_trade_minute_data_{}'
+        os.mkdir('../../taq_data/responses_time_trade_minute_data_{}'
                  .format(year))
-        os.mkdir('../../taq_plot/responses_event_trade_minute_plot_{}'
+        os.mkdir('../../taq_plot/responses_time_trade_minute_plot_{}'
                  .format(year))
         print('Folder to save data created')
 
@@ -231,6 +231,7 @@ def taq_start_folders(year):
     return None
 
 # -----------------------------------------------------------------------------
+
 
 def taq_bussiness_days(year):
     """Generates a list with the dates of the bussiness days in a year
@@ -249,8 +250,7 @@ def taq_bussiness_days(year):
 
     return date_list
 
-# ---------------------------------------------------------------------------------
-
+# -----------------------------------------------------------------------------
 
 def main():
     """The main function of the script.
