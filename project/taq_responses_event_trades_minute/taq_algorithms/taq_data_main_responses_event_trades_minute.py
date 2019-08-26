@@ -5,7 +5,6 @@ The functions in the module run the complete analysis and plot of the TAQ data.
 This script requires the following modules:
     * itertools
     * multiprocessing
-    * pandas
     * taq_data_analysis_responses_event_trades_minute
     * taq_data_plot_responses_event_trades_minute
     * taq_data_tools_responses_event_trades_minute
@@ -24,18 +23,18 @@ The module contains the following functions:
 from itertools import product
 import multiprocessing as mp
 import os
-import pandas as pd
 import pickle
 
-import taq_data_analysis_responses_event_shift
-import taq_data_plot_responses_event_shift
-import taq_data_tools_responses_event_shift
+import taq_data_analysis_responses_event_trades_minute
+import taq_data_plot_responses_event_trades_minute
+import taq_data_tools_responses_event_trades_minute
 
 __tau__ = 10000
 
 # -----------------------------------------------------------------------------
 
-def taq_data_plot_generator(tickers, year, shifts):
+
+def taq_data_plot_generator(tickers, year, taus):
     """Generates all the analysis and plots from the TAQ data.
 
     :param tickers: list of the string abbreviation of the stocks to be
@@ -46,44 +45,42 @@ def taq_data_plot_generator(tickers, year, shifts):
      a value.
     """
 
-    date_list = taq_data_tools_responses_event_shift.taq_bussiness_days(year)
+    # Self-response
+    self_parameters = product(tickers, [year], taus)
+    # Cross-response
+    cross_parameters = product(tickers, tickers, [year], taus)
 
-    for ticker in tickers:
-        for tau in taus:
+    for self_ in self_parameters:
 
-            taq_data_analysis.taq_self_response_year_responses_event_trades_minute_data(ticker, year, tau)
+        taq_data_analysis_responses_event_trades_minute \
+            .taq_self_response_year_responses_event_trades_minute_data(*self_)
+        taq_data_analysis_responses_event_trades_minute \
+            .taq_self_response_year_avg_responses_event_trades_minute_data(
+                *self_)
 
-    for tau in taus:
+        taq_data_plot_responses_event_trades_minute \
+            .taq_self_response_year_responses_event_trades_minute_plot(*self_)
 
-        taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
-        taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
+    for cross in cross_parameters:
 
-        taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[0], year, tau)
-        taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[1], year, tau)
-        taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
-        taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
+        taq_data_analysis_responses_event_trades_minute \
+            .taq_cross_response_year_responses_event_trades_minute_data(*cross)
+        taq_data_analysis_responses_event_trades_minute \
+            .taq_cross_response_year_avg_responses_event_trades_minute_data(
+                *cross)
 
-        taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data(tickers[0], year, tau)
-        taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data(tickers[1], year, tau)
-        taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
-        taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
-
-        taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot(tickers[0], year, tau)
-        taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot(tickers[1], year, tau)
-        taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
-        taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
-
-        taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data_v2(tickers[0], year, tau)
-        taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data_v2(tickers[1], year, tau)
-        taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data_v2(tickers[0], tickers[1], year, tau)
-        taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data_v2(tickers[1], tickers[0], year, tau)
+        taq_data_plot_responses_event_trades_minute \
+            .taq_cross_response_year_responses_event_trades_minute_plot(*cross)
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot_v2,
-        product(tickers, [year], taus))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot_v2,
-        product(tickers, tickers, [year], taus))
-
+        pool.starmap(
+            taq_data_plot_responses_event_trades_minute
+            .taq_self_response_year_avg_responses_event_trades_minute_plot,
+            product(tickers, [year], taus))
+        pool.starmap(
+            taq_data_plot_responses_event_trades_minute
+            .taq_cross_response_year_avg_responses_event_trades_minute_plot,
+            product(tickers, tickers, [year], taus))
 
     return None
 
@@ -91,48 +88,23 @@ def taq_data_plot_generator(tickers, year, shifts):
 
 
 def main():
+    """The main function of the script.
+
+    The main function is used to test the functions in the script.
+
+    :return: None.
+    """
 
     # Tickers and days to analyze
-
-    tickers = ['AAPL', 'MSFT']
+    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
     year = '2008'
     taus = [5, 10, 50, 100, 500, 1000]
 
-    # for ticker in tickers:
-    #     for tau in taus:
+    # Basic folders
+    taq_data_tools_responses_event_trades_minute.taq_start_folders('2008')
 
-    #         taq_data_analysis.taq_self_response_year_responses_event_trades_minute_data(ticker, year, tau)
-
-    # for tau in taus:
-
-        # taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
-
-        # taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[0], year, tau)
-        # taq_data_plot.taq_self_response_year_responses_event_trades_minute_plot(tickers[1], year, tau)
-        # taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
-        # taq_data_plot.taq_cross_response_year_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
-
-        # taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data(tickers[0], year, tau)
-        # taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data(tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data(tickers[0], tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data(tickers[1], tickers[0], year, tau)
-
-        # taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot(tickers[0], year, tau)
-        # taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot(tickers[1], year, tau)
-        # taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot(tickers[0], tickers[1], year, tau)
-        # taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot(tickers[1], tickers[0], year, tau)
-
-        # taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data_v2(tickers[0], year, tau)
-        # taq_data_analysis.taq_self_response_year_avg_responses_event_trades_minute_data_v2(tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data_v2(tickers[0], tickers[1], year, tau)
-        # taq_data_analysis.taq_cross_response_year_avg_responses_event_trades_minute_data_v2(tickers[1], tickers[0], year, tau)
-
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_plot.taq_self_response_year_avg_responses_event_trades_minute_plot_v2,
-        product(tickers, [year], taus))
-        pool.starmap(taq_data_plot.taq_cross_response_year_avg_responses_event_trades_minute_plot_v2,
-        product(tickers, tickers, [year], taus))
+    # Run analysis
+    taq_data_plot_generator(tickers, year, taus)
 
     print('Ay vamos!!')
 
