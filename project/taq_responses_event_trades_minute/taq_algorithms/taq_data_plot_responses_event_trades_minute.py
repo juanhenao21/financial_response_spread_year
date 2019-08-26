@@ -6,7 +6,7 @@ taq_data_analysis_responses_event_trades_minute module.
 This script requires the following modules:
     * matplotlib
     * numpy
-    * taq_data_tools_event_shift
+    * taq_data_tools_responses_event_trades_minute
 
 The module contains the following functions:
     * taq_self_response_year_responses_event_trades_minute_plot - plots the
@@ -120,6 +120,7 @@ def taq_self_response_year_avg_responses_event_trades_minute_plot(ticker, year,
 
         figure = plt.figure(figsize=(16, 9))
 
+        # Load data
         x, y = pickle.load(open(''.join((
                             '../../taq_data/responses_event_trades_minute_data'
                             + '_{1}/taq_self_response_year_avg_responses_event'
@@ -177,7 +178,7 @@ def taq_cross_response_year_responses_event_trades_minute_plot(ticker_i,
 
     if (ticker_i == ticker_j):
 
-        # Cross-response
+        # Self-response
         return None
 
     else:
@@ -249,7 +250,7 @@ def taq_cross_response_year_avg_responses_event_trades_minute_plot(ticker_i,
 
     if (ticker_i == ticker_j):
 
-        # Cross-response
+        # Self-response
         return None
 
     else:
