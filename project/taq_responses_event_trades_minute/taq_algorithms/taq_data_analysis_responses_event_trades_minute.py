@@ -7,7 +7,7 @@ This script requires the following modules:
     * numpy
     * pandas
     * traceback
-    * taq_data_tools_event_shift
+    * taq_data_tools_responses_event_trades_minute
 
 The module contains the following functions:
     * taq_self_response_day_responses_event_trades_minute_data - computes the
@@ -48,7 +48,7 @@ def taq_self_response_day_responses_event_trades_minute_data(ticker, date,
 
     Using the midpoint price and trade signs of a ticker computes the self-
     response during different trades per minute for a day. There is a constant
-    :math:`\\tau` that most be set in the parameters.
+    :math:`\\tau` that must be set in the parameters.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
