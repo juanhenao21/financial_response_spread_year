@@ -1,58 +1,58 @@
-'''
-TAQ data plot
+'''TAQ data plot module.
 
-Module to plot different TAQ data results based on the results of the functions
-set in the module taq_data_analysis. The module plot the following data
+The functions in the module plot the data obtained in the
+taq_data_analysis_responses_time_short_long module.
 
-- Self response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+This script requires the following modules:
+    * matplotlib
+    * numpy
+    * taq_data_tools_responses_time_short_long
 
-- Cross response data: it is possible to plot a day, or a group of days in a
-  week and the average, a month and the average or the year and the average.
+The module contains the following functions:
+    * taq_self_response_year_avg_responses_time_short_long_plot - plots
+      the self-response average for a year.
+    * taq_cross_response_year_avg_responses_time_short_long_plot - plots
+      the cross-response average for a year.
+    * main - the main function of the script.
 
-- Trade sign self correlator: plot the trade sign self correlator for
-  every day for one stock in independent plots in one figure.
-
-- Trade sign cross correlator: plot the trade sign cross correlator for
-  every day for two stocks in independent pltos in one figure.
-
-Juan Camilo Henao Londono
-juan.henao-londono@stud.uni-due.de
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
 # ----------------------------------------------------------------------------
 # Modules
 
-import numpy as np
 from matplotlib import pyplot as plt
+import numpy as np
 import os
-
 import pickle
 
-import taq_data_tools
-
-__tau__ = 1000
+import taq_data_tools_responses_time_short_long
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
-    """
-    Plot the average cross response during a year and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
+                                                              tau, tau_p):
+    """Plots the self-response average for a year.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :param tau: integer greater than zero (i.e. 50).
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     try:
 
-        function_name = taq_self_response_year_avg_time_short_long_plot. \
+        function_name = \
+            taq_self_response_year_avg_responses_time_short_long_plot. \
             __name__
-        taq_data_tools.taq_function_header_print_plot(function_name, ticker,
-                                                      ticker, year, '', '')
+        taq_data_tools_responses_time_short_long \
+            .taq_function_header_print_plot(function_name, ticker, ticker,
+                                            year, '', '')
 
+        # Load data
         (self_short,
          self_long,
          self_response,
@@ -65,6 +65,7 @@ def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
                                      + '_{1}_{0}.pickle').split())
                                      .format(ticker, year, tau, tau_p), 'rb'))
 
+        # Addition of the short and long response signal
         sum = np.zeros(tau)
         sum[:tau_p + 1] = self_short[:tau_p + 1]
         sum[tau_p + 1:] = self_short[tau_p + 1:] + self_long[tau_p + 1:]
@@ -93,46 +94,52 @@ def taq_self_response_year_avg_time_short_long_plot(ticker, year, tau, tau_p):
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools.taq_save_plot('{}_tau_{}_tau_p_{}'
-                                     .format(function_name, tau, tau_p),
-                                     figure, ticker, ticker, year, '')
+        taq_data_tools_responses_time_short_long \
+            .taq_save_plot('{}_tau_{}_tau_p_{}'
+                           .format(function_name, tau, tau_p),
+                           figure, ticker, ticker, year, '')
 
         return None
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         print('No data')
+        print(e)
         print()
         return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year,
-                                                     tau, tau_p):
-    """
-    Plot the average cross response during a month and the dayly cross-response
-    contributions in a figure. The data is loaded from the cross response data
-    results.
-        :param ticker_i: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param ticker_j: string of the abbreviation of the midpoint stock to
-         be analized (i.e. 'AAPL')
-        :param year: string of the year to be analized (i.e '2008')
+def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
+                                                               ticker_j, year,
+                                                               tau, tau_p):
+    """Plots the cross-response average for a year.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL')
+    :param year: string of the year to be analized (i.e '2008')
+    :param tau: integer greater than zero (i.e. 50).
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
     """
 
     if (ticker_i == ticker_j):
 
+        # Self-response
         return None
 
     else:
-
         try:
-
-            function_name = taq_cross_response_year_avg_time_short_long_plot. \
+            function_name = \
+                taq_cross_response_year_avg_responses_time_short_long_plot. \
                 __name__
-            taq_data_tools.taq_function_header_print_plot(function_name,
-                                                          ticker_i, ticker_j,
-                                                          year, '', '')
+            taq_data_tools_responses_time_short_long \
+                .taq_function_header_print_plot(function_name, ticker_i,
+                                                ticker_j, year, '', '')
+
+            # Load data
             (cross_short,
              cross_long,
              cross_response,
@@ -147,6 +154,7 @@ def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year,
                                           .format(ticker_i, ticker_j, year,
                                                   tau, tau_p), 'rb'))
 
+            # Addition of the short and long response signal
             sum = np.zeros(tau)
             sum[:tau_p + 1] = cross_short[:tau_p + 1]
             sum[tau_p + 1:] = cross_short[tau_p + 1:] + cross_long[tau_p + 1:]
@@ -178,14 +186,16 @@ def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year,
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools.taq_save_plot('{}_tau_{}_tau_p_{}'
-                                         .format(function_name, tau, tau_p),
-                                         figure, ticker_i, ticker_j, year, '')
+            taq_data_tools_responses_time_short_long \
+                .taq_save_plot('{}_tau_{}_tau_p_{}'
+                               .format(function_name, tau, tau_p),
+                               figure, ticker_i, ticker_j, year, '')
 
             return None
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             print('No data')
+            print(e)
             print()
             return None
 
@@ -193,9 +203,16 @@ def taq_cross_response_year_avg_time_short_long_plot(ticker_i, ticker_j, year,
 
 
 def main():
-    taq_cross_response_year_avg_time_short_long_plot('AAPL', 'MSFT', '2008',
-                                                     1000, 10)
-    # taq_self_response_year_avg_time_short_long_plot('AAPL', '2008', 1000, 10)
+    """The main function of the script.
+
+    The main function is used to test the functions in the script.
+
+    :return: None.
+    """
+
+    pass
+
+    return None
 
 # -----------------------------------------------------------------------------
 

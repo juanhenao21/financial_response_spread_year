@@ -12,11 +12,11 @@ The module contains the following functions:
     * taq_self_response_year_responses_time_trades_minute_plot - plots the
       self- response for a year.
     * taq_self_response_year_avg_responses_time_trades_minute_plot - plots
-      the self- response average for a year.
+      the self-response average for a year.
     * taq_cross_response_year_responses_time_trades_minute_plot - plots the
       cross- response for a year.
     * taq_cross_response_year_avg_responses_time_trades_minute_plot - plots
-      the cross- response average for a year.
+      the cross-response average for a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
