@@ -60,10 +60,10 @@ def taq_data_plot_generator(tickers, year, taus):
 
         pool.starmap(taq_data_plot_event_shift
                      .taq_self_response_year_avg_event_shift_plot,
-                     product(tickers, [year]))
+                     product(tickers, [year], [taus]))
         pool.starmap(taq_data_plot_event_shift
                      .taq_cross_response_year_avg_event_shift_plot,
-                     product(tickers, tickers, [year]))
+                     product(tickers, tickers, [year], [taus]))
 
     return None
 
