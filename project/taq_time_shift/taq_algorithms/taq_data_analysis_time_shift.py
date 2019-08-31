@@ -218,12 +218,12 @@ def taq_cross_response_day_time_shift_data(ticker_i, ticker_j, date, tau):
             # Load data
             midpoint_i = pickle.load(open(''.join((
                     '../../taq_data/article_reproduction_data_{1}/taq'
-                    + '_midpoint_full_time_data/taq_midpoint_full_time_data'
+                    + '_midpoint_time_data/taq_midpoint_time_data'
                     + '_midpoint_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
             _, _, trade_sign_j = pickle.load(open("".join((
                     '../../taq_data/article_reproduction_data_2008/taq_trade_'
-                    + 'signs_full_time_data/taq_trade_signs_full_time_data'
+                    + 'signs_time_data/taq_trade_signs_time_data'
                     + '_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_j, year, month, day), 'rb'))
 
