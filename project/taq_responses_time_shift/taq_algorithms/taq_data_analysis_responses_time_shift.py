@@ -6,7 +6,7 @@ computing the self- and cross-response functions.
 This script requires the following modules:
     * numpy
     * pandas
-    * taq_data_tools_event_shift
+    * taq_data_tools_responses_time_shift
 
 The module contains the following functions:
     * taq_trade_signs_responses_time_shift_data - computes the trade signs of

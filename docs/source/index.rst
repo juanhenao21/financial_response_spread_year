@@ -24,6 +24,8 @@ Welcome to Response function analyisis's documentation!
 
    07_taq_responses_time_trades_minute
 
+   09_taq_responses_time_short_long
+
 Indices and tables
 ==================
 
