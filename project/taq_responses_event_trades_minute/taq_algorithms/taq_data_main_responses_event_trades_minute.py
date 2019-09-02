@@ -54,9 +54,14 @@ def taq_data_plot_generator(tickers, year, taus):
 
         taq_data_analysis_responses_event_trades_minute \
             .taq_self_response_year_responses_event_trades_minute_data(*self_)
+
+    for self_ in self_parameters:
+
         taq_data_analysis_responses_event_trades_minute \
             .taq_self_response_year_avg_responses_event_trades_minute_data(
                 *self_)
+
+    for self_ in self_parameters:
 
         taq_data_plot_responses_event_trades_minute \
             .taq_self_response_year_responses_event_trades_minute_plot(*self_)
@@ -65,9 +70,14 @@ def taq_data_plot_generator(tickers, year, taus):
 
         taq_data_analysis_responses_event_trades_minute \
             .taq_cross_response_year_responses_event_trades_minute_data(*cross)
+
+    for cross in cross_parameters:
+
         taq_data_analysis_responses_event_trades_minute \
             .taq_cross_response_year_avg_responses_event_trades_minute_data(
                 *cross)
+
+    for cross in cross_parameters:
 
         taq_data_plot_responses_event_trades_minute \
             .taq_cross_response_year_responses_event_trades_minute_plot(*cross)

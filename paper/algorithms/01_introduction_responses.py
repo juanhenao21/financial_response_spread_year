@@ -25,6 +25,7 @@ def taq_self_response_year_avg_plot(tickers, year):
 
     try:
         figure = plt.figure(figsize=(16, 9))
+        ax = figure.add_subplot(111)
 
         for ticker in tickers:
 
@@ -37,15 +38,16 @@ def taq_self_response_year_avg_plot(tickers, year):
 
             plt.semilogx(self_resp, linewidth=5, label='{}'.format(ticker))
 
-        plt.legend(loc='best', fontsize=25)
+        plt.legend(loc='best', fontsize=30)
         # plt.title('Self-response', fontsize=40)
-        plt.xlabel(r'$\tau \, [s]$', fontsize=35)
-        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
+        plt.xlabel(r'$\tau \, [s]$', fontsize=40)
+        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=40)
+        plt.xticks(fontsize=30)
+        plt.yticks(fontsize=30)
         plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax.yaxis.offsetText.set_fontsize(30)
         plt.grid(True)
         plt.tight_layout()
         plt.show()
@@ -74,6 +76,7 @@ def taq_cross_response_year_avg_plot(sectors):
 
     try:
         figure = plt.figure(figsize=(16, 9))
+        ax = figure.add_subplot(111)
 
         for sector in sectors:
 
@@ -87,15 +90,16 @@ def taq_cross_response_year_avg_plot(sectors):
             plt.semilogx(cross_resp, linewidth=5, label='{} - {}'
                          .format(sector[0], sector[1]))
 
-        plt.legend(loc='best', fontsize=25)
+        plt.legend(loc='best', fontsize=30)
         # plt.title('Cross-response', fontsize=40)
-        plt.xlabel(r'$\tau \, [s]$', fontsize=35)
-        plt.ylabel(r'$R_{ij}(\tau)$', fontsize=35)
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
+        plt.xlabel(r'$\tau \, [s]$', fontsize=40)
+        plt.ylabel(r'$R_{ij}(\tau)$', fontsize=40)
+        plt.xticks(fontsize=30)
+        plt.yticks(fontsize=30)
         plt.xlim(1, 1000)
         # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax.yaxis.offsetText.set_fontsize(30)
         plt.grid(True)
         plt.tight_layout()
         plt.show()
