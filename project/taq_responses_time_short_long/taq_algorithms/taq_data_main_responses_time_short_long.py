@@ -50,17 +50,17 @@ def taq_data_plot_generator(tickers, year, taus, taus_p):
         # Especific functions
         pool.starmap(taq_data_analysis_responses_time_short_long
                      .taq_self_response_year_time_short_long_tau_data,
-                     product(tickers, [year], [taus], taus_p))
+                     product(tickers, [year], taus, taus_p))
         pool.starmap(taq_data_analysis_responses_time_short_long
                      .taq_cross_response_year_time_short_long_tau_data,
-                     product(tickers, tickers, [year], [taus], taus_p))
+                     product(tickers, tickers, [year], taus, taus_p))
 
         pool.starmap(taq_data_plot_responses_time_short_long
-                     .taq_self_response_year_avg_time_short_long_plot,
-                     product(tickers, [year], [taus], taus_p))
+            .taq_self_response_year_avg_responses_time_short_long_plot,
+            product(tickers, [year], taus, taus_p))
         pool.starmap(taq_data_plot_responses_time_short_long
-                     .taq_cross_response_year_avg_time_short_long_plot,
-                     product(tickers, tickers, [year], [taus], taus_p))
+            .taq_cross_response_year_avg_responses_time_short_long_plot,
+            product(tickers, tickers, [year], taus, taus_p))
 
     return None
 

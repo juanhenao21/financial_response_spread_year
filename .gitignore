@@ -111,6 +111,8 @@ project/taq_plot/
 project/itch_plot/
 project/taq_intermediate_results/taq_plot
 
+paper/plot
+
 .vscode/
 
 # Other

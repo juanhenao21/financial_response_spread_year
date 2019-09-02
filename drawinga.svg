@@ -14,7 +14,11 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg8"
+<<<<<<< HEAD
    inkscape:version="0.92.1 r15371"
+=======
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+>>>>>>> 0c5a9361c3673f0c994c33d876521ac1831502e2
    sodipodi:docname="drawing.svg">
   <defs
      id="defs2" />
@@ -25,6 +29,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
+<<<<<<< HEAD
      inkscape:zoom="0.98994949"
      inkscape:cx="-193.61889"
      inkscape:cy="787.31391"
@@ -44,6 +49,22 @@
      inkscape:window-width="1920"
      inkscape:window-height="1136"
      inkscape:window-x="1280"
+=======
+     inkscape:zoom="1.979899"
+     inkscape:cx="270.38277"
+     inkscape:cy="345.33708"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-center="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+>>>>>>> 0c5a9361c3673f0c994c33d876521ac1831502e2
      inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
@@ -63,6 +84,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
+<<<<<<< HEAD
        style="fill:#000000;stroke-width:0.26458332"
        id="rect10-3"
        width="100"
@@ -105,10 +127,37 @@
        height="10"
        x="93.576866"
        y="50.731098"
+=======
+       id="rect3713"
+       width="95"
+       height="1"
+       x="0"
+       y="94"
+       style="fill:#000000;stroke-width:0.25788391"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       id="rect3713-3"
+       width="100"
+       height="1"
+       x="0"
+       y="296"
+       style="stroke-width:0.26458332" />
+    <rect
+       style="fill:#008000;stroke-width:0.11900356"
+       id="rect3730"
+       width="25"
+       height="1"
+       x="8.8817842e-16"
+       y="113.99999"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+>>>>>>> 0c5a9361c3673f0c994c33d876521ac1831502e2
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <path
        sodipodi:type="star"
+<<<<<<< HEAD
        style="fill:#000000;stroke-width:0.26458332"
        id="path76"
        sodipodi:sides="3"
@@ -251,10 +300,185 @@
        height="10"
        x="118.27181"
        y="20.731098"
+=======
+       style="fill:#008000;stroke-width:0.26458332"
+       id="path3732"
+       sodipodi:sides="3"
+       sodipodi:cx="26.57728"
+       sodipodi:cy="106.50001"
+       sodipodi:r1="3.4227197"
+       sodipodi:r2="1.7113599"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 30,106.50001 -2.56704,1.48208 -2.56704,1.48208 0,-2.96416 0,-2.96416 2.56704,1.48208 z"
+       inkscape:transform-center-x="-0.83333252"
+       inkscape:transform-center-y="-1.4402391e-06"
+       transform="matrix(0.9738844,0,0,0.84340863,0.783468,24.676966)"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.17418541"
+       id="rect3736"
+       width="65"
+       height="1"
+       x="30"
+       y="114"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ff0000;stroke-width:0.26458332"
+       id="path3732-6"
+       sodipodi:sides="3"
+       sodipodi:cx="26.57728"
+       sodipodi:cy="106.50001"
+       sodipodi:r1="3.4227197"
+       sodipodi:r2="1.7113599"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 30,106.50001 -2.56704,1.48208 -2.56704,1.48208 0,-2.96416 0,-2.96416 2.56704,1.48208 z"
+       inkscape:transform-center-x="-0.83333252"
+       inkscape:transform-center-y="-1.4402391e-06"
+       transform="matrix(0.97388439,0,0,0.84340864,70.783468,24.676973)"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;stroke-width:0.26458332"
+       id="path3732-6-7"
+       sodipodi:sides="3"
+       sodipodi:cx="26.57728"
+       sodipodi:cy="106.50001"
+       sodipodi:r1="3.4227197"
+       sodipodi:r2="1.7113599"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 30,106.50001 -2.56704,1.48208 -2.56704,1.48208 0,-2.96416 0,-2.96416 2.56704,1.48208 z"
+       inkscape:transform-center-x="-0.83333252"
+       inkscape:transform-center-y="-1.4402391e-06"
+       transform="matrix(0.97388439,0,0,0.84340864,70.783468,4.6769734)"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <rect
        style="fill:#000000;stroke-width:0.26458332"
+       id="rect3768"
+       width="1"
+       height="5"
+       x="0"
+       y="92"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#008000;stroke-width:0.26458332"
+       id="rect3768-5"
+       width="1"
+       height="5"
+       x="0"
+       y="111.99999"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.26458332"
+       id="rect3768-3"
+       width="1"
+       height="5"
+       x="30"
+       y="111.99999"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="49.483234"
+       y="105"
+       id="text3793"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3791"
+         x="49.483234"
+         y="105"
+         style="stroke-width:0.26458332">τ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="8.1100874"
+       y="125"
+       id="text3793-5"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3791-6"
+         x="8.1100874"
+         y="125"
+         style="fill:#008000;stroke-width:0.26458332">τ'</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="53.01479"
+       y="125"
+       id="text3793-5-2"
+       inkscape:export-filename="/home/juan/Desktop/tau_short_long.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3791-6-9"
+         x="53.01479"
+         y="125"
+         style="fill:#ff0000;stroke-width:0.26458332">τ-τ'</tspan></text>
+    <rect
+       id="rect3713-1"
+       width="95"
+       height="1"
+       x="0"
+       y="194"
+       style="fill:#000000;stroke-width:0.25788391"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;stroke-width:0.26458332"
+       id="path3732-6-7-2"
+       sodipodi:sides="3"
+       sodipodi:cx="26.57728"
+       sodipodi:cy="106.50001"
+       sodipodi:r1="3.4227197"
+       sodipodi:r2="1.7113599"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 30,106.50001 -2.56704,1.48208 -2.56704,1.48208 0,-2.96416 0,-2.96416 2.56704,1.48208 z"
+       inkscape:transform-center-x="-0.83333252"
+       inkscape:transform-center-y="-1.4402391e-06"
+       transform="matrix(0.97388439,0,0,0.84340864,70.783469,104.67697)"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+>>>>>>> 0c5a9361c3673f0c994c33d876521ac1831502e2
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;stroke-width:0.26458332"
+<<<<<<< HEAD
        id="rect27-5-2"
        width="1"
        height="10"
@@ -269,11 +493,30 @@
        height="10"
        x="93.271805"
        y="20.731098"
+=======
+       id="rect3768-7"
+       width="1"
+       height="5"
+       x="0"
+       y="192"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       id="rect3713-1-0"
+       width="95"
+       height="1"
+       x="15"
+       y="204"
+       style="fill:#000000;stroke-width:0.25788391"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+>>>>>>> 0c5a9361c3673f0c994c33d876521ac1831502e2
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <path
        sodipodi:type="star"
        style="fill:#000000;stroke-width:0.26458332"
+<<<<<<< HEAD
        id="path76-2"
        sodipodi:sides="3"
        sodipodi:cx="93.945244"
@@ -582,5 +825,120 @@
          x="63.989338"
          y="-47.090637"
          style="stroke-width:0.41475433">{</tspan></text>
+=======
+       id="path3732-6-7-2-9"
+       sodipodi:sides="3"
+       sodipodi:cx="26.57728"
+       sodipodi:cy="106.50001"
+       sodipodi:r1="3.4227197"
+       sodipodi:r2="1.7113599"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 30,106.50001 -2.56704,1.48208 -2.56704,1.48208 0,-2.96416 0,-2.96416 2.56704,1.48208 z"
+       inkscape:transform-center-x="-0.83333252"
+       inkscape:transform-center-y="-1.4402391e-06"
+       transform="matrix(0.97388439,0,0,0.84340864,85.78347,114.67696)"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;stroke-width:0.26458332"
+       id="rect3768-7-3"
+       width="1"
+       height="5"
+       x="15"
+       y="202"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;stroke-width:0.26458332"
+       id="rect3768-7-6"
+       width="1"
+       height="5"
+       x="0"
+       y="212"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;stroke-width:0.26458332"
+       id="rect3768-7-6-0"
+       width="1"
+       height="5"
+       x="15"
+       y="212"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;stroke-width:0.25560385"
+       id="rect3939"
+       width="15"
+       height="1"
+       x="0.5"
+       y="214"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-13.440457"
+       y="206.71182"
+       id="text3943"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3941"
+         x="-13.440457"
+         y="206.71182"
+         style="font-size:7.05555534px;stroke-width:0.26458332">ε(t)</tspan><tspan
+         sodipodi:role="line"
+         x="-13.440457"
+         y="215.53127"
+         style="font-size:7.05555534px;stroke-width:0.26458332"
+         id="tspan3951" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;baseline-shift:baseline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;font-size:7.05555556px;"
+       x="-19.107454"
+       y="196.71182"
+       id="text3947"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3945"
+         x="-19.107454"
+         y="196.71182">r(t,τ)</tspan><tspan
+         sodipodi:role="line"
+         x="-19.107454"
+         y="211.71182"
+         id="tspan3949" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="2.57742"
+       y="222.8134"
+       id="text3955"
+       inkscape:export-filename="/home/juan/Desktop/time_shift.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan3953"
+         x="2.57742"
+         y="222.8134"
+         style="font-size:7.05555534px;stroke-width:0.26458332">1 s</tspan><tspan
+         sodipodi:role="line"
+         x="2.57742"
+         y="231.63284"
+         style="font-size:7.05555534px;stroke-width:0.26458332"
+         id="tspan3957" /></text>
+>>>>>>> 0c5a9361c3673f0c994c33d876521ac1831502e2
   </g>
 </svg>

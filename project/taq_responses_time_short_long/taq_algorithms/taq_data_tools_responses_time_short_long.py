@@ -223,7 +223,7 @@ def taq_start_folders(year):
     try:
         os.mkdir('../../taq_data/responses_time_short_long_data_{}'
                  .format(year))
-        os.mkdir('../taq_plot/responses_time_short_long_plot_{}'
+        os.mkdir('../../taq_plot/responses_time_short_long_plot_{}'
                  .format(year))
         print('Folder to save data created')
 
