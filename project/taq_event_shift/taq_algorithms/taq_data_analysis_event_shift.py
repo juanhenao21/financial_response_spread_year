@@ -373,8 +373,19 @@ def main():
 
     :return: None.
     """
+    import multiprocessing as mp
+    from itertools import product
 
-    pass
+    taus = [1, 10, 100, 1000]
+    year = '2008'
+
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+
+        # Especific functions
+        pool.starmap(taq_self_response_year_event_shift_data,
+                     product(['AAPL'], [year], taus))
+        pool.starmap(taq_cross_response_year_event_shift_data,
+                     product(['AAPL'], ['MSFT'], [year], taus))
 
     return None
 
