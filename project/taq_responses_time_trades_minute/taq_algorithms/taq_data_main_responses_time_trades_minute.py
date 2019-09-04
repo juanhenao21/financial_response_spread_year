@@ -56,14 +56,14 @@ def taq_data_plot_generator(tickers, year, taus):
 
     for self_ in self_parameters:
 
-        taq_data_analysis_responses_time_trades_minute \
-            .taq_self_response_year_avg_responses_time_trades_minute_data(
-                *self_)
+        taq_data_plot_responses_time_trades_minute \
+            .taq_self_response_year_responses_time_trades_minute_plot(*self_)
 
     for self_ in self_parameters:
 
-        taq_data_plot_responses_time_trades_minute \
-            .taq_self_response_year_responses_time_trades_minute_plot(*self_)
+        taq_data_analysis_responses_time_trades_minute \
+            .taq_self_response_year_avg_responses_time_trades_minute_data(
+                *self_)
 
     for cross in cross_parameters:
 
@@ -72,14 +72,14 @@ def taq_data_plot_generator(tickers, year, taus):
 
     for cross in cross_parameters:
 
-        taq_data_analysis_responses_time_trades_minute \
-            .taq_cross_response_year_avg_responses_time_trades_minute_data(
-                *cross)
+        taq_data_plot_responses_time_trades_minute \
+            .taq_cross_response_year_responses_time_trades_minute_plot(*cross)
 
     for cross in cross_parameters:
 
-        taq_data_plot_responses_time_trades_minute \
-            .taq_cross_response_year_responses_time_trades_minute_plot(*cross)
+        taq_data_analysis_responses_time_trades_minute \
+            .taq_cross_response_year_avg_responses_time_trades_minute_data(
+                *cross)
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
         pool.starmap(
@@ -110,7 +110,7 @@ def main():
     taus = [5, 10, 50, 100, 500, 1000]
 
     # Basic folders
-    # taq_data_tools_responses_time_trades_minute.taq_start_folders('2008')
+    taq_data_tools_responses_time_trades_minute.taq_start_folders('2008')
 
     # Run analysis
     taq_data_plot_generator(tickers, year, taus)

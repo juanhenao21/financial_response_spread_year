@@ -547,8 +547,14 @@ def main():
 
     :return: None.
     """
+    ticker = 'AAPL'
+    ticker_i = 'AAPL'
+    ticker_j = 'MSFT'
+    year = '2008'
+    tau = 1000
 
-    pass
+    # taq_self_response_year_avg_responses_time_trades_minute_data(ticker, year, tau)
+    taq_cross_response_year_avg_responses_time_trades_minute_data(ticker_i, ticker_j, year, tau)
 
     return None
 
