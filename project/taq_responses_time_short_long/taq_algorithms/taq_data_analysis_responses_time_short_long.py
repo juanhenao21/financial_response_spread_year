@@ -45,7 +45,8 @@ def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
-    :param shift: integer great than zero (i.e. 10).
+    :param tau: integer greater than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -214,6 +215,7 @@ def taq_self_response_year_time_short_long_tau_data(ticker, year, tau, tau_p):
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2016').
     :param tau: integer great than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None – The function saves the data in a file and does not return
      a value.
     """
@@ -298,6 +300,7 @@ def taq_cross_response_day_time_short_long_tau_data(ticker_i, ticker_j, date,
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
     :param tau: integer great than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: tuple -- The function returns a tuple with positions.
     """
 
@@ -476,6 +479,7 @@ def taq_cross_response_year_time_short_long_tau_data(ticker_i, ticker_j, year,
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2016').
     :param tau: integer great than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None – The function saves the data in a file and does not return a
      value.
     """
