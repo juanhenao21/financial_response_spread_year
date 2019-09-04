@@ -1,4 +1,4 @@
-'''Self- and cross responses figures
+'''Short and long self- and cross responses figures
 
 Plot the short and long self- and cross responses for the stocks AAPL, CVX,
 GS, JPM, MSFT, and XOM.
@@ -16,18 +16,19 @@ import pickle
 
 def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
                                                               tau, tau_p):
-    """Plots the self-response average for a year.
+    """Plots the short and long self-response average for a year.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2008').
     :param tau: integer greater than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
 
     try:
-        figure = plt.figure(figsize=(16,9))
+        figure = plt.figure(figsize=(16, 9))
         ax = figure.add_subplot(111)
 
         # Load data
@@ -90,7 +91,7 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
 def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
                                                                ticker_j, year,
                                                                tau, tau_p):
-    """Plots the cross-response average for a year.
+    """Plots the short and long cross-response average for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL')
@@ -98,6 +99,7 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
      (i.e. 'AAPL')
     :param year: string of the year to be analized (i.e '2008')
     :param tau: integer greater than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -109,7 +111,7 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
 
     else:
         try:
-            figure = plt.figure(figsize=(16,9))
+            figure = plt.figure(figsize=(16, 9))
             ax = figure.add_subplot(111)
 
             # Load data
@@ -174,6 +176,7 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
             return None
 
 # ----------------------------------------------------------------------------
+
 
 def main():
 

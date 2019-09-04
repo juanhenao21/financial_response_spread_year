@@ -13,6 +13,7 @@ import pickle
 
 # ----------------------------------------------------------------------------
 
+
 def taq_self_response_year_avg_plot(tickers, year):
     """Plots the self-response average for a year.
 
@@ -31,10 +32,10 @@ def taq_self_response_year_avg_plot(tickers, year):
 
             # Load data
             self_resp = pickle.load(open(
-                ''.join(('../../project/taq_data/article_reproduction_data_{1}/taq_self'
-                         + '_response_year_data/taq_self_response_year_data'
-                         + '_{1}_{0}.pickle').split())
-                         .format(ticker, year), 'rb'))
+                ''.join(('../../project/taq_data/article_reproduction_data_{1}'
+                         + '/taq_self_response_year_data/taq_self_response'
+                         + '_year_data_{1}_{0}.pickle').split())
+                .format(ticker, year), 'rb'))
 
             plt.semilogx(self_resp, linewidth=5, label='{}'.format(ticker))
 
@@ -64,12 +65,13 @@ def taq_self_response_year_avg_plot(tickers, year):
 
 # ----------------------------------------------------------------------------
 
+
 def taq_cross_response_year_avg_plot(sectors):
     """Plots the cross-response average for a year.
 
-    :param tickers: list of strings of the abbreviation of the stocks to be
-     analized (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e. '2008')
+    :param sectors: list of lists with the strings of the abbreviation of the
+     stocks to be analized and the year
+     (i.e. [['AAPL', 'MSFT', '2008], ['CVX', 'XOM', '2008]]).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -82,10 +84,10 @@ def taq_cross_response_year_avg_plot(sectors):
 
             # Load data
             cross_resp = pickle.load(open(
-                ''.join(('../../project/taq_data/article_reproduction_data_{2}/taq_cross'
-                         + '_response_year_data/taq_cross_response_year_data'
-                         + '_{2}_{0}i_{1}j.pickle').split())
-                         .format(sector[0], sector[1], sector[2]), 'rb'))
+                ''.join(('../../project/taq_data/article_reproduction_data'
+                         + '_{2}/taq_cross_response_year_data/taq_cross'
+                         + '_response_year_data_{2}_{0}i_{1}j.pickle').split())
+                .format(sector[0], sector[1], sector[2]), 'rb'))
 
             plt.semilogx(cross_resp, linewidth=5, label='{} - {}'
                          .format(sector[0], sector[1]))
@@ -107,12 +109,15 @@ def taq_cross_response_year_avg_plot(sectors):
         # Save plot
         figure.savefig('../plot/01_cross_responses_{}'.format(sector[2]))
 
+        return None
+
     except FileNotFoundError as e:
         print('No data')
         print(e)
-    return None
+        return None
 
 # ----------------------------------------------------------------------------
+
 
 def main():
 
