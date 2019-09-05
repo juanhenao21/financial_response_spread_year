@@ -53,11 +53,14 @@ def taq_self_response_year_avg_shift_plot(ticker, year, taus):
                      (0, self_event[max_pos]), '--',
                      label=r'Max position $t$ = {}'
                      .format(max_pos - 10 * tau_val))
-            ax1.legend(loc='best', fontsize=15)
+            ax1.legend(loc='lower left', fontsize=15)
             # ax.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-            ax1.set_xlabel(r'Time shift $[s]$', fontsize=15)
-            ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=15)
+            ax1.set_xlabel(r'Event shift', fontsize=20)
+            ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
+            ax1.tick_params(axis='x', labelsize=15)
+            ax1.tick_params(axis='y', labelsize=15)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            ax1.yaxis.offsetText.set_fontsize(15)
             ax1.grid(True)
 
             # Load data
@@ -75,15 +78,16 @@ def taq_self_response_year_avg_shift_plot(ticker, year, taus):
             ax2.plot((times[max_pos], times[max_pos]), (0, self_time[max_pos]),
                      '--', label=r'Max position $t$ = {}'
                      .format(max_pos - 10 * tau_val))
-            ax2.legend(loc='best', fontsize=15)
+            ax2.legend(loc='lower left', fontsize=15)
             # ax2.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-            ax2.set_xlabel(r'Time shift $[s]$', fontsize=15)
-            ax2.set_ylabel(r'$R_{ii}(\tau)$', fontsize=15)
+            ax2.set_xlabel(r'Time shift $[s]$', fontsize=20)
+            ax2.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
+            ax2.tick_params(axis='x', labelsize=15)
+            ax2.tick_params(axis='y', labelsize=15)
             ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+            ax2.yaxis.offsetText.set_fontsize(15)
             ax2.grid(True)
 
-        plt.xticks(fontsize=10)
-        plt.yticks(fontsize=10)
         plt.tight_layout()
         plt.show()
 
@@ -142,7 +146,7 @@ def taq_cross_response_year_avg_shift_plot(ticker_i, ticker_j, year, taus):
                                    .format(ticker_i, ticker_j, year, tau_val),
                                    'rb'))
 
-                # max_pos = np.where(max(cross_event) == cross_event)[0][0]
+                max_pos = np.where(max(cross_event) == cross_event)[0][0]
 
                 ax1.plot(times, cross_event, linewidth=5, label=r'{} - {}'
                          .format(ticker_i, ticker_j))
@@ -151,11 +155,14 @@ def taq_cross_response_year_avg_shift_plot(ticker_i, ticker_j, year, taus):
                          (0, cross_event[max_pos]),
                          '--', label=r'Max position $t$ = {}'
                          .format(max_pos - 10 * tau_val))
-                ax1.legend(loc='best', fontsize=15)
+                ax1.legend(loc='lower left', fontsize=15)
                 # ax1.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-                ax1.set_xlabel(r'Time shift $[s]$', fontsize=15)
-                ax1.set_ylabel(r'$R_{ij}(\tau)$', fontsize=15)
+                ax1.set_xlabel(r'Event shift', fontsize=20)
+                ax1.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
+                ax1.tick_params(axis='x', labelsize=15)
+                ax1.tick_params(axis='y', labelsize=15)
                 ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+                ax1.yaxis.offsetText.set_fontsize(15)
                 ax1.grid(True)
 
                 # Load data
@@ -163,8 +170,8 @@ def taq_cross_response_year_avg_shift_plot(ticker_i, ticker_j, year, taus):
                                    '../../project/taq_data/time_shift_data_{2}'
                                    + '/taq_cross_response_year_time_shift_data'
                                    + '_tau_{3}/taq_cross_response_year_time'
-                                   + '_shift_data_tau_{3}_{2}_{0}i_{1}j')
-                                   + '.pickle'.split())
+                                   + '_shift_data_tau_{3}_{2}_{0}i_{1}j'
+                                   + '.pickle').split())
                                    .format(ticker_i, ticker_j, year, tau_val),
                                    'rb'))
 
@@ -177,15 +184,16 @@ def taq_cross_response_year_avg_shift_plot(ticker_i, ticker_j, year, taus):
                          (0, cross_time[max_pos]),
                          '--', label=r'Max position $t$ = {}'
                          .format(max_pos - 10 * tau_val))
-                ax2.legend(loc='best', fontsize=15)
+                ax2.legend(loc='lower left', fontsize=15)
                 # ax2.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-                ax2.set_xlabel(r'Time shift $[s]$', fontsize=15)
-                ax2.set_ylabel(r'$R_{ij}(\tau)$', fontsize=15)
+                ax2.set_xlabel(r'Time shift $[s]$', fontsize=20)
+                ax2.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
+                ax2.tick_params(axis='x', labelsize=15)
+                ax2.tick_params(axis='y', labelsize=15)
                 ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+                ax2.yaxis.offsetText.set_fontsize(15)
                 ax2.grid(True)
 
-            plt.xticks(fontsize=10)
-            plt.yticks(fontsize=10)
             plt.tight_layout()
             plt.show()
 
@@ -235,7 +243,7 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
                 + '.pickle').split())
                 .format(ticker_i, year, shift), 'rb'))
 
-            ax1.semilogx(self_event, linewidth=5, label='Shift {} s'
+            ax1.semilogx(self_event, linewidth=5, label='Shift {} event'
                          .format(shift))
 
             self_time = pickle.load(open(''.join((
@@ -257,7 +265,7 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
                 .format(ticker_i, ticker_j, year, shift),
                 'rb'))
 
-            ax3.semilogx(cross_event, linewidth=5, label='Shift {} s'
+            ax3.semilogx(cross_event, linewidth=5, label='Shift {} event'
                          .format(shift))
 
             cross_time = pickle.load(open(''.join((
@@ -272,47 +280,57 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
             ax4.semilogx(cross_time, linewidth=5, label='Shift {} s'
                          .format(shift))
 
-        ax1.legend(loc='best', fontsize=25)
+        ax1.legend(loc='upper left', fontsize=20)
         # ax1.title('Self-response transactions {}'.format(ticker),
         #           fontsize=40)
-        ax1.set_xlabel(r'$\tau \, [s]$', fontsize=35)
-        ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=35)
+        ax1.set_xlabel(r'$\tau \, [event]$', fontsize=20)
+        ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
         ax1.set_xlim(1, 10000)
         # ax1.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.tick_params(axis='x', labelsize=15)
+        ax1.tick_params(axis='y', labelsize=15)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(15)
         ax1.grid(True)
 
-        ax2.legend(loc='best', fontsize=25)
+        ax2.legend(loc='upper left', fontsize=20)
         # ax2.title('Self-response - {}'.format(ticker), fontsize=40)
-        ax2.set_xlabel(r'$\tau \, [s]$', fontsize=35)
-        ax2.set_ylabel(r'$R_{ii}(\tau)$', fontsize=35)
+        ax2.set_xlabel(r'$\tau \, [s]$', fontsize=20)
+        ax2.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
         ax2.set_xlim(1, 10000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax2.tick_params(axis='x', labelsize=15)
+        ax2.tick_params(axis='y', labelsize=15)
         ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(15)
         ax2.grid(True)
 
-        ax3.legend(loc='best', fontsize=25)
+        ax3.legend(loc='upper left', fontsize=20)
         # ax3.title('Cross-response transactions {} - {}'.format(ticker_i,
         #           ticker_j), fontsize=40)
-        ax3.set_xlabel(r'$\tau \, [s]$', fontsize=35)
-        ax3.set_ylabel(r'$R_{ij}(\tau)$', fontsize=35)
+        ax3.set_xlabel(r'$\tau \, [event]$', fontsize=20)
+        ax3.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
         ax3.set_xlim(1, 10000)
         # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax3.tick_params(axis='x', labelsize=15)
+        ax3.tick_params(axis='y', labelsize=15)
         ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax3.yaxis.offsetText.set_fontsize(15)
         ax3.grid(True)
 
-        ax4.legend(loc='best', fontsize=25)
+        ax4.legend(loc='upper left', fontsize=20)
         # ax4.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
         #           fontsize=40)
-        ax4.set_xlabel(r'$\tau \, [s]$', fontsize=35)
-        ax4.set_ylabel(r'$R_{ij}(\tau)$', fontsize=35)
+        ax4.set_xlabel(r'$\tau \, [s]$', fontsize=20)
+        ax4.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
         ax4.set_xlim(1, 10000)
         # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax4.tick_params(axis='x', labelsize=15)
+        ax4.tick_params(axis='y', labelsize=15)
         ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax4.yaxis.offsetText.set_fontsize(15)
         ax4.grid(True)
 
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
         plt.tight_layout()
         plt.show()
 
@@ -333,11 +351,12 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
 def main():
 
     taus = [1, 10, 100, 1000]
-    shifts = [1, 5, 10, 50, 100, 500, 1000, 5000]
+    shifts = [1, 10, 100, 1000, 5000]
     year = '2008'
 
-    # taq_self_response_year_avg_shift_plot('AAPL', year, taus)
-    # taq_cross_response_year_avg_shift_plot('AAPL', 'MSFT', year, taus)
+    taq_self_response_year_avg_shift_plot('AAPL', year, taus)
+    taq_cross_response_year_avg_shift_plot('AAPL', 'MSFT', year, taus)
+    taq_responses_year_avg_shift_plot('AAPL', 'MSFT', year, shifts)
 
     return None
 

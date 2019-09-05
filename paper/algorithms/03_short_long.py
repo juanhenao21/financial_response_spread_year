@@ -49,27 +49,24 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
         sum[:tau_p + 1] = self_short[:tau_p + 1]
         sum[tau_p + 1:] = self_short[tau_p + 1:] + self_long[tau_p + 1:]
 
-        plt.semilogx(self_short, linewidth=5, label='{} - Short'
-                     .format(ticker))
-        plt.semilogx(self_long, linewidth=5, label='{} - Long'.format(ticker))
-        plt.semilogx(sum, linewidth=5, label='{} - Sum'.format(ticker))
-        plt.semilogx(self_response, linewidth=5, label='{} - Self-response'
-                     .format(ticker))
-        plt.semilogx(self_shuffle, linewidth=5, label='{} - Shuffle'
-                     .format(ticker))
+        plt.semilogx(self_short, linewidth=5, label='Short')
+        plt.semilogx(self_long, linewidth=5, label='Long')
+        plt.semilogx(sum, linewidth=5, label='Sum')
+        plt.semilogx(self_response, linewidth=5, label='Self-response')
+        plt.semilogx(self_shuffle, linewidth=5, label='Shuffle')
         plt.plot((tau_p, tau_p), (-1000, 1000), '--k', linewidth=5,
                  label=r"$\tau' $ = {}".format(tau_p))
 
-        plt.legend(loc='center left', fontsize=30)
+        plt.legend(loc='lower left', fontsize=35)
         # plt.title('Self-response', fontsize=40)
-        plt.xlabel(r'$\tau \, [s]$', fontsize=40)
-        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=40)
-        plt.xticks(fontsize=30)
-        plt.yticks(fontsize=30)
+        plt.xlabel(r'$\tau \, [s]$', fontsize=45)
+        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=45)
+        plt.xticks(fontsize=35)
+        plt.yticks(fontsize=35)
         plt.xlim(1, 1000)
         plt.ylim(-0.2 * 10 ** -4, 1.6 * 10 ** -4)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        ax.yaxis.offsetText.set_fontsize(30)
+        ax.yaxis.offsetText.set_fontsize(35)
         plt.grid(True)
         plt.tight_layout()
         plt.show()
@@ -135,30 +132,24 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
             sum[:tau_p + 1] = cross_short[:tau_p + 1]
             sum[tau_p + 1:] = cross_short[tau_p + 1:] + cross_long[tau_p + 1:]
 
-            plt.semilogx(cross_short, linewidth=5, label='{} - {} - Short'
-                         .format(ticker_i, ticker_j))
-            plt.semilogx(cross_long, linewidth=5, label='{} - {} - Long'
-                         .format(ticker_i, ticker_j))
-            plt.semilogx(sum, linewidth=5, label='{} - {} - Sum'
-                         .format(ticker_i, ticker_j))
-            plt.semilogx(cross_response, linewidth=5,
-                         label='{} - {} - Cross-response'.format(ticker_i,
-                                                                 ticker_j))
-            plt.semilogx(cross_shuffle, linewidth=5, label='{} - {} - Shuffle'
-                         .format(ticker_i, ticker_j))
+            plt.semilogx(cross_short, linewidth=5, label='Short')
+            plt.semilogx(cross_long, linewidth=5, label='Long')
+            plt.semilogx(sum, linewidth=5, label='Sum')
+            plt.semilogx(cross_response, linewidth=5, label='Cross-response')
+            plt.semilogx(cross_shuffle, linewidth=5, label='Shuffle')
             plt.plot((tau_p, tau_p), (-1000, 1000), '--k', linewidth=5,
                      label=r"$\tau' $ = {}".format(tau_p))
 
-            plt.legend(loc='lower left', fontsize=30)
+            plt.legend(loc='lower left', fontsize=35)
             # plt.title('Cross-response', fontsize=40)
-            plt.xlabel(r'$\tau \, [s]$', fontsize=40)
-            plt.ylabel(r'$R_{ij}(\tau)$', fontsize=40)
-            plt.xticks(fontsize=30)
-            plt.yticks(fontsize=30)
+            plt.xlabel(r'$\tau \, [s]$', fontsize=45)
+            plt.ylabel(r'$R_{ij}(\tau)$', fontsize=45)
+            plt.xticks(fontsize=35)
+            plt.yticks(fontsize=35)
             plt.xlim(1, 1000)
             plt.ylim(-8 * 10 ** -5, 9 * 10 ** -5)
             plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-            ax.yaxis.offsetText.set_fontsize(30)
+            ax.yaxis.offsetText.set_fontsize(35)
             plt.grid(True)
             plt.tight_layout()
             plt.show()

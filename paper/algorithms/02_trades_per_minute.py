@@ -43,7 +43,7 @@ def taq_responses_year_trades_minute_plot(ticker_i, ticker_j, year, tau):
                             + '_minute_data_tau_{2}_{1}_{0}.pickle').split())
                             .format(ticker_i, year, tau), 'rb'))
 
-        ax1.scatter(*zip(*points_event_self), label=r'$\tau = {}$'.format(tau))
+        ax1.scatter(*zip(*points_event_self), label=r'$\tau = {}$ events'.format(tau))
 
         points_time_self = pickle.load(open(''.join((
                             '../../project/taq_data/responses_time_trades'
@@ -53,7 +53,7 @@ def taq_responses_year_trades_minute_plot(ticker_i, ticker_j, year, tau):
                             + '_minute_data_tau_{2}_{1}_{0}.pickle').split())
                             .format(ticker_i, year, tau), 'rb'))
 
-        ax2.scatter(*zip(*points_time_self), label=r'$\tau = {}$'.format(tau))
+        ax2.scatter(*zip(*points_time_self), label=r'$\tau = {}$ s'.format(tau))
 
         points_event_cross = pickle.load(open(''.join((
                     '../../project/taq_data/responses_event_trades_minute_data'
@@ -63,7 +63,7 @@ def taq_responses_year_trades_minute_plot(ticker_i, ticker_j, year, tau):
                     + '_{0}i_{1}j.pickle').split())
                     .format(ticker_i, ticker_j, year, tau), 'rb'))
 
-        ax3.scatter(*zip(*points_event_cross), label=r'$\tau = {}$'
+        ax3.scatter(*zip(*points_event_cross), label=r'$\tau = {}$ events'
                     .format(tau))
 
         points_time_cross = pickle.load(open(''.join((
@@ -74,56 +74,66 @@ def taq_responses_year_trades_minute_plot(ticker_i, ticker_j, year, tau):
                     + '_{0}i_{1}j.pickle').split())
                     .format(ticker_i, ticker_j, year, tau), 'rb'))
 
-        ax4.scatter(*zip(*points_time_cross), label=r'$\tau = {}$'.format(tau))
+        ax4.scatter(*zip(*points_time_cross), label=r'$\tau = {}$ s'.format(tau))
 
-        ax1.legend(loc='best', fontsize=25)
+        ax1.legend(loc='upper left', fontsize=20)
         # ax1.title('Self-response event {}'.format(ticker), fontsize=40)
-        ax1.set_xlabel(r'Trades per minute', fontsize=35)
+        ax1.set_xlabel(r'Trades per minute', fontsize=20)
         ax1.set_ylabel(''.join((r'$r_{i} \left(t - 1, \tau \right) \cdot'
                        + r'\varepsilon_j \left( t \right)$').split()),
-                       fontsize=35)
+                       fontsize=20)
         # plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
-        # plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.tick_params(axis='x', labelsize=15)
+        ax1.tick_params(axis='y', labelsize=15)
+        ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(15)
         ax1.grid(True)
 
-        ax2.legend(loc='best', fontsize=25)
+        ax2.legend(loc='upper left', fontsize=20)
         # ax2.title('Self-response time {}'.format(ticker), fontsize=40)
-        ax2.set_xlabel(r'Trades per minute', fontsize=35)
+        ax2.set_xlabel(r'Trades per minute', fontsize=20)
         ax2.set_ylabel(''.join((r'$r_{i} \left(t - 1, \tau \right) \cdot'
                        + r'\varepsilon_j \left( t \right)$').split()),
-                       fontsize=35)
+                       fontsize=20)
         # ax2.xlim(1, 1000)
         # ax2.ylim(13 * 10 ** -5, 16 * 10 ** -5)
-        # ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.tick_params(axis='x', labelsize=15)
+        ax2.tick_params(axis='y', labelsize=15)
+        ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(15)
         ax2.grid(True)
 
-        ax3.legend(loc='best', fontsize=25)
+        ax3.legend(loc='upper left', fontsize=20)
         # ax3.title('Cross-response event {} - {}'.format(ticker_i,
         #           ticker_j), fontsize=40)
-        ax3.set_xlabel(r'Trades per minute', fontsize=35)
+        ax3.set_xlabel(r'Trades per minute', fontsize=20)
         ax3.set_ylabel(''.join((r'$r_{i} \left(t - 1, \tau \right)'
                        + r'\cdot \varepsilon_j \left( t \right)$').split()),
-                       fontsize=35)
+                       fontsize=20)
         # ax3.xlim(1, 1000)
         # ax3.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-        # ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax3.tick_params(axis='x', labelsize=15)
+        ax3.tick_params(axis='y', labelsize=15)
+        ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax3.yaxis.offsetText.set_fontsize(15)
         ax3.grid(True)
 
-        ax4.legend(loc='best', fontsize=25)
+        ax4.legend(loc='upper left', fontsize=20)
         # ax4.title('Cross-response time {} - {}'.format(ticker_i,
         #           ticker_j), fontsize=40)
-        ax4.set_xlabel(r'Trades per minute', fontsize=35)
+        ax4.set_xlabel(r'Trades per minute', fontsize=20)
         ax4.set_ylabel(''.join((r'$r_{i} \left(t - 1, \tau \right)'
                        + r'\cdot \varepsilon_j \left( t \right)$').split()),
-                       fontsize=35)
+                       fontsize=20)
         # ax4.xlim(1, 1000)
         # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-        # ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax4.tick_params(axis='x', labelsize=15)
+        ax4.tick_params(axis='y', labelsize=15)
+        ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax4.yaxis.offsetText.set_fontsize(15)
         ax4.grid(True)
 
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
         plt.tight_layout()
         plt.show()
 
@@ -140,8 +150,8 @@ def taq_responses_year_trades_minute_plot(ticker_i, ticker_j, year, tau):
 # ----------------------------------------------------------------------------
 
 
-    """Plots the self-response average for a year.
 def taq_responses_year_avg_trades_minute_plot(ticker_i, ticker_j, year, tau):
+    """Plots the averaged responses for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -170,7 +180,7 @@ def taq_responses_year_avg_trades_minute_plot(ticker_i, ticker_j, year, tau):
             .format(ticker_i, year, tau), 'rb'))
 
         ax1.semilogx(x_event_self, y_event_self, linewidth=5,
-                     label=r'$\tau = {}$'.format(tau))
+                     label=r'$\tau = {}$ events'.format(tau))
 
         x_time_self, y_time_self = pickle.load(open(''.join((
             '../../project/taq_data/responses_time_trades_minute_data'
@@ -181,7 +191,7 @@ def taq_responses_year_avg_trades_minute_plot(ticker_i, ticker_j, year, tau):
             .format(ticker_i, year, tau), 'rb'))
 
         ax2.semilogx(x_time_self, y_time_self, linewidth=5,
-                     label=r'$\tau = {}$'.format(tau))
+                     label=r'$\tau = {}$ s'.format(tau))
 
         x_event_cross, y_event_cross = pickle.load(open(''.join((
             '../../project/taq_data/responses_event_trades_minute'
@@ -193,7 +203,7 @@ def taq_responses_year_avg_trades_minute_plot(ticker_i, ticker_j, year, tau):
             .format(ticker_i, ticker_j, year, tau), 'rb'))
 
         ax3.semilogx(x_event_cross, y_event_cross, linewidth=5,
-                     label=r'$\tau = {}$'.format(tau))
+                     label=r'$\tau = {}$ events'.format(tau))
 
         x_time_cross, y_time_cross = pickle.load(open(''.join((
             '../../project/taq_data/responses_time_trades_minute'
@@ -205,56 +215,66 @@ def taq_responses_year_avg_trades_minute_plot(ticker_i, ticker_j, year, tau):
             .format(ticker_i, ticker_j, year, tau), 'rb'))
 
         ax4.semilogx(x_time_cross, y_time_cross, linewidth=5,
-                     label=r'$\tau = {}$'.format(tau))
+                     label=r'$\tau = {}$ s'.format(tau))
 
-        ax1.legend(loc='best', fontsize=25)
+        ax1.legend(loc='upper left', fontsize=20)
         # ax1.title('Self-response event {}'.format(ticker), fontsize=40)
-        ax1.set_xlabel(r'Trades per minute', fontsize=35)
+        ax1.set_xlabel(r'Trades per minute', fontsize=20)
         ax1.set_ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)'
-                       + r'\cdot\varepsilon_{i}\left(t\right)\right\rangle')
-                       + '_{t}$'.split()), fontsize=35)
+                       + r'\cdot\varepsilon_{i}\left(t\right)\right\rangle'
+                       + r'_{t}$').split()), fontsize=20)
         # plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.tick_params(axis='x', labelsize=15)
+        ax1.tick_params(axis='y', labelsize=15)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(15)
         ax1.grid(True)
 
-        ax2.legend(loc='best', fontsize=25)
+        ax2.legend(loc='upper left', fontsize=20)
         # ax2.title('Self-response time {}'.format(ticker), fontsize=40)
-        ax2.set_xlabel(r'Trades per minute', fontsize=35)
+        ax2.set_xlabel(r'Trades per minute', fontsize=20)
         ax2.set_ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)'
-                       + r'\cdot\varepsilon_{i}\left(t\right)\right\rangle')
-                       + '_{t}$'.split()), fontsize=35)
+                       + r'\cdot\varepsilon_{i}\left(t\right)\right\rangle'
+                       + '_{t}$').split()), fontsize=20)
         # plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax2.tick_params(axis='x', labelsize=15)
+        ax2.tick_params(axis='y', labelsize=15)
         ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(15)
         ax2.grid(True)
 
-        ax3.legend(loc='best', fontsize=25)
+        ax3.legend(loc='upper left', fontsize=20)
         # ax3.title('Cross-response event {} - {}'.format(ticker_i,
         #           ticker_j), fontsize=40)
-        ax3.set_xlabel(r'Trades per minute', fontsize=35)
+        ax3.set_xlabel(r'Trades per minute', fontsize=20)
         ax3.set_ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)'
                        + r'\cdot\varepsilon_{j}\left(t\right)\right\rangle'
-                       + r'_{t}$') .split()), fontsize=35)
+                       + r'_{t}$') .split()), fontsize=20)
         # plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax3.tick_params(axis='x', labelsize=15)
+        ax3.tick_params(axis='y', labelsize=15)
         ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax3.yaxis.offsetText.set_fontsize(15)
         ax3.grid(True)
 
-        ax4.legend(loc='best', fontsize=25)
+        ax4.legend(loc='upper left', fontsize=20)
         # ax4.title('Cross-response time {} - {}'.format(ticker_i, ticker_j),
         #           fontsize=40)
-        ax4.set_xlabel(r'Trades per minute', fontsize=35)
+        ax4.set_xlabel(r'Trades per minute', fontsize=20)
         ax4.set_ylabel(''.join((r'$\left\langle r_{i}\left(t-1,\tau\right)'
                        + r'\cdot\varepsilon_{j}\left(t\right)\right\rangle'
-                       + r'_{t}$').split()), fontsize=35)
+                       + r'_{t}$').split()), fontsize=20)
         # plt.xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax4.tick_params(axis='x', labelsize=15)
+        ax4.tick_params(axis='y', labelsize=15)
         ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax4.yaxis.offsetText.set_fontsize(15)
         ax4.grid(True)
 
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
         plt.tight_layout()
         plt.show()
 
@@ -277,7 +297,7 @@ def main():
     year = '2008'
     tau = 1000
 
-    # taq_responses_year_trades_minute_plot('AAPL', 'MSFT', year, tau)
+    taq_responses_year_trades_minute_plot('AAPL', 'MSFT', year, tau)
     taq_responses_year_avg_trades_minute_plot('AAPL', 'MSFT', year, tau)
 
     return None
