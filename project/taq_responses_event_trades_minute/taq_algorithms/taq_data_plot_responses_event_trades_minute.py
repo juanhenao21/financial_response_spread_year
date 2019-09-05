@@ -314,8 +314,25 @@ def main():
 
     :return: None.
     """
+    from itertools import product
 
-    pass
+    # Tickers and days to analyze
+    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    year = '2008'
+    taus = [5, 10, 50, 100, 500, 1000]
+
+    # Self-response
+    self_parameters = product(tickers, [year], taus)
+    # Cross-response
+    cross_parameters = product(tickers, tickers, [year], taus)
+
+    for self_ in self_parameters:
+
+        taq_self_response_year_responses_event_trades_minute_plot(*self_)
+
+    for cross in cross_parameters:
+
+        taq_cross_response_year_responses_event_trades_minute_plot(*cross)
 
     return None
 
