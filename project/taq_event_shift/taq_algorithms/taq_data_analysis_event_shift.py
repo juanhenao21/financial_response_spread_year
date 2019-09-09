@@ -383,9 +383,13 @@ def main():
 
         # Especific functions
         pool.starmap(taq_self_response_year_event_shift_data,
-                     product(['AAPL'], [year], taus))
+                     product(['GS'], [year], taus))
+        pool.starmap(taq_self_response_year_event_shift_data,
+                     product(['JPM'], [year], taus))
         pool.starmap(taq_cross_response_year_event_shift_data,
-                     product(['AAPL'], ['MSFT'], [year], taus))
+                     product(['GS'], ['JPM'], [year], taus))
+        pool.starmap(taq_cross_response_year_event_shift_data,
+                     product(['JPM'], ['GS'], [year], taus))
 
     return None
 

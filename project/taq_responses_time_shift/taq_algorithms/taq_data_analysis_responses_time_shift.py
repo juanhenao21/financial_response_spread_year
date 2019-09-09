@@ -344,8 +344,23 @@ def main():
 
     :return: None.
     """
+    import multiprocessing as mp
+    from itertools import product
 
-    pass
+    year = '2008'
+    shifts = [1, 10, 100, 1000]
+
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+
+        # Especific functions
+        pool.starmap(taq_self_response_year_responses_time_shift_data,
+                     product(['GS'], [year], shifts))
+        pool.starmap(taq_self_response_year_responses_time_shift_data,
+                     product(['GS'], [year], shifts))
+        pool.starmap(taq_cross_response_year_responses_time_shift_data,
+                     product(['GS'], ['JPM'], [year], shifts))
+        pool.starmap(taq_cross_response_year_responses_time_shift_data,
+                     product(['JPM'], ['GS'], [year], shifts))
 
     return None
 
