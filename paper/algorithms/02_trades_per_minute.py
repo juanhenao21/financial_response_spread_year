@@ -297,8 +297,8 @@ def main():
     year = '2008'
     tau = 1000
 
-    taq_responses_year_trades_minute_plot('AAPL', 'MSFT', year, tau)
-    taq_responses_year_avg_trades_minute_plot('AAPL', 'MSFT', year, tau)
+    taq_responses_year_trades_minute_plot('CVX', 'XOM', year, tau)
+    taq_responses_year_avg_trades_minute_plot('CVX', 'XOM', year, tau)
 
     return None
 

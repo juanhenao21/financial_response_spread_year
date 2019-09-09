@@ -46,8 +46,8 @@ def taq_self_response_year_avg_shift_plot(ticker, year, taus):
 
             max_pos = np.where(max(self_event) == self_event)[0][0]
 
-            ax1.plot(times, self_event, linewidth=5, label=r'{}'
-                     .format(ticker))
+            ax1.plot(times, self_event, linewidth=5, label=r'$\tau = {}$'
+                     .format(tau_val))
             # Plot line in the peak of the figure
             ax1.plot((times[max_pos], times[max_pos]),
                      (0, self_event[max_pos]), '--',
@@ -73,7 +73,8 @@ def taq_self_response_year_avg_shift_plot(ticker, year, taus):
 
             max_pos = np.where(max(self_time) == self_time)[0][0]
 
-            ax2.plot(times, self_time, linewidth=5, label=r'{}'.format(ticker))
+            ax2.plot(times, self_time, linewidth=5, label=r'$\tau = {}$'
+                     .format(tau_val))
             # Plot line in the peak of the figure
             ax2.plot((times[max_pos], times[max_pos]), (0, self_time[max_pos]),
                      '--', label=r'Max position $t$ = {}'
@@ -148,8 +149,8 @@ def taq_cross_response_year_avg_shift_plot(ticker_i, ticker_j, year, taus):
 
                 max_pos = np.where(max(cross_event) == cross_event)[0][0]
 
-                ax1.plot(times, cross_event, linewidth=5, label=r'{} - {}'
-                         .format(ticker_i, ticker_j))
+                ax1.plot(times, cross_event, linewidth=5, label=r'$\tau = {}$'
+                         .format(tau_val))
                 # Plot line in the peak of the figure
                 ax1.plot((times[max_pos], times[max_pos]),
                          (0, cross_event[max_pos]),
@@ -177,8 +178,8 @@ def taq_cross_response_year_avg_shift_plot(ticker_i, ticker_j, year, taus):
 
                 max_pos = np.where(max(cross_time) == cross_time)[0][0]
 
-                ax2.plot(times, cross_time, linewidth=5, label=r'{} - {}'
-                         .format(ticker_i, ticker_j))
+                ax2.plot(times, cross_time, linewidth=5, label=r'$\tau = {}$'
+                         .format(tau_val))
                 # Plot line in the peak of the figure
                 ax2.plot((times[max_pos], times[max_pos]),
                          (0, cross_time[max_pos]),
