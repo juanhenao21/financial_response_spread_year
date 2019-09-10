@@ -355,9 +355,9 @@ def main():
     shifts = [1, 10, 100, 1000, 5000]
     year = '2008'
 
-    taq_self_response_year_avg_shift_plot('AAPL', year, taus)
-    taq_cross_response_year_avg_shift_plot('AAPL', 'MSFT', year, taus)
-    taq_responses_year_avg_shift_plot('AAPL', 'MSFT', year, shifts)
+    taq_self_response_year_avg_shift_plot('GS', year, taus)
+    taq_cross_response_year_avg_shift_plot('GS', 'JPM', year, taus)
+    taq_responses_year_avg_shift_plot('GS', 'JPM', year, shifts)
 
     return None
 
