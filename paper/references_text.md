@@ -61,6 +61,7 @@ positive value of $\kappa$ indicating a ‘fat tail’, that is, a slow asymptot
 decay of the PDF.
 (Kurtosis and fat tails)
 
+<<<<<<< HEAD
 **What really causes large prices changes?**
 To understand our results it is essential that the reader understand the double
 continuous auction, which is the standard mechanism for price formation in most
@@ -108,8 +109,6 @@ transaction prices to bounce back and forth between the best bid and ask. Price
 changes are typically characterized as returns
 $r_{\tau}(t) = \log m(t) − \log m(t − \tau)$.
 (Orders explanation and midpoint price)
-
-The arrival of three kinds of events can cause the midprice to change:
 
 * Market orders. A market order bigger than the opposite best quote widens the
   spread by increasing the best ask if it is a buy order, or decreasing the
