@@ -179,17 +179,20 @@ def taq_midpoint_event_data(ticker, date):
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
-    data = pd.read_hdf(
-        f'../../taq_data/hdf5_dayly_data_{year}/taq_{ticker}_quotes_' \
-            + f'{date}.h5')
+    data_quotes_event = pd.read_hdf(
+        f'../../taq_data/hdf5_dayly_data_{year}/taq_{ticker}_quotes_'
+        + f'{date}.h5')
 
     # Some files are corrupted, so there are some zero values that
     # does not have sense
-    data = data[data['Ask'] != 0]
+    data_quotes_event = data_quotes_event[data_quotes_event['Ask'] != 0]
 
-    data['Midpoint'] = (data['Bid'] + data['Ask']) / 2
+    data_quotes_event['Midpoint'] = (data_quotes_event['Bid']
+                                     + data_quotes_event['Ask']) / 2
+    data_quotes_event['Spread'] = data_quotes_event['Ask'] \
+        - data_quotes_event['Bid']
 
-    return data
+    return data_quotes_event
 
 # ----------------------------------------------------------------------------
 
@@ -221,50 +224,32 @@ def taq_midpoint_time_data(ticker, date):
 
     try:
         # Calculate the values of the midpoint price for all the events
-        (time_q, bid_q, ask_q,
-         midpoint, spread) = taq_midpoint_event_data(ticker, year, month, day)
+        data_quotes_event = taq_midpoint_event_data(ticker, date)
 
         # 34800 s = 9h40 - 57000 s = 15h50
         # Reproducing S. Wang values. In her results the time interval for the
         # midpoint is [34800, 56999]
         full_time = np.array(range(34800, 57000))
-
+        data_quotes_time = 0
         # As there can be several values for the same second, we use the
         # last value of each second in the full time array as it behaves
         # quiet equal as the original input
 
-        midpoint_last_val = 0. * full_time
-        midpoint_last_val[-1] = midpoint[0]
-
-        ask_last_val = 0. * full_time
-        ask_last_val[-1] = ask_q[0]
-
-        bid_last_val = 0. * full_time
-        bid_last_val[-1] = bid_q[0]
-
-        spread_last_val = 0. * full_time
-        spread_last_val[-1] = spread[0]
-
         for t_idx, t_val in enumerate(full_time):
 
-            condition = time_q == t_val
+            if (t_val in data['Time']):
 
-            if (np.sum(condition)):
-
-                midpoint_last_val[t_idx] = midpoint[condition][-1]
-                ask_last_val[t_idx] = ask_q[condition][-1]
-                bid_last_val[t_idx] = bid_q[condition][-1]
-                spread_last_val[t_idx] = spread[condition][-1]
+                data_quotes_time = data_quotes_time.append(
+                    data_quotes_event[data_quotes_event['Time'] == t_val]
+                    .ix[-1:])
 
             else:
 
-                midpoint_last_val[t_idx] = midpoint_last_val[t_idx - 1]
-                ask_last_val[t_idx] = ask_last_val[t_idx - 1]
-                bid_last_val[t_idx] = bid_last_val[t_idx - 1]
-                spread_last_val[t_idx] = spread_last_val[t_idx - 1]
+                data_quotes_time = data_quotes_time.append(
+                    data_quotes_time.ix[-1:])
 
-        # There should not be 0 values in the midpoint array
-        assert not np.sum(midpoint_last_val == 0)
+        # The lengths of the time and the dataframe have to be the same
+        assert len(full_time) == len(data_quotes_time['Time'])
 
         # Saving data
 
@@ -959,17 +944,13 @@ def main():
     from itertools import product
     t = 0
     tickers = ['AAPL', 'MSFT']
-    for _ in range(5):
+    for _ in range(1):
         t0 = time.time()
         taq_midpoint_event_data('MSFT', '2008-01-02')
-    #     with mp.Pool(processes=mp.cpu_count()) as pool:
-    #         pool.starmap(taq_data_extract, product(tickers, ['quotes'], ['2008']))
-    #         pool.starmap(taq_data_extract, product(tickers, ['trades'], ['2008']))
         t1 = time.time()
         t += t1 - t0
 
     print(t/5)
-
 
     return None
 
