@@ -132,8 +132,8 @@ def taq_data_extract(ticker, type, year):
                                & (chunk['Time'] < 57600)]
 
                 if not df.empty:
-                    df.to_hdf(f''.join(('../../taq_data/pickle_dayly_data_'
-                              + f'{year}/TAQ_{ticker}_trades_{date}.h5')
+                    df.to_hdf(f''.join(('../../taq_data/hdf5_dayly_data_'
+                              + f'{year}/taq_{ticker}_{type}_{date}.h5')
                               .split()), key=type,
                               format='table', append=True)
 
@@ -150,7 +150,7 @@ def taq_data_extract(ticker, type, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_midpoint_event_data(ticker, year, month, day):
+def taq_midpoint_event_data(ticker, date):
     """Computes the midpoint price of every event.
 
     Using the dayly TAQ data computes the midpoint price of every event in a
@@ -166,6 +166,11 @@ def taq_midpoint_event_data(ticker, year, month, day):
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
+    date_sep = date.split('-')
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
     function_name = taq_midpoint_event_data.__name__
     taq_data_tools_article_reproduction \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
@@ -174,23 +179,17 @@ def taq_midpoint_event_data(ticker, year, month, day):
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
-    time_q_, bid_q_, ask_q_, _, _ = pickle.load(open(
-        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_quotes_{1}{2}{3}.pickle'
-        .format(ticker, year, month, day), 'rb'))
+    data = pd.read_hdf(
+        f'../../taq_data/hdf5_dayly_data_{year}/taq_{ticker}_quotes_' \
+            + f'{date}.h5')
 
     # Some files are corrupted, so there are some zero values that
     # does not have sense
-    condition_1 = ask_q_ != 0.
-    time_q = time_q_[condition_1]
-    bid_q = bid_q_[condition_1]
-    ask_q = ask_q_[condition_1]
+    data = data[data['Ask'] != 0]
 
-    assert len(bid_q) == len(ask_q)
+    data['Midpoint'] = (data['Bid'] + data['Ask']) / 2
 
-    midpoint = (bid_q + ask_q) / 2
-    spread = ask_q - bid_q
-
-    return (time_q, bid_q, ask_q, midpoint, spread)
+    return data
 
 # ----------------------------------------------------------------------------
 
@@ -956,15 +955,21 @@ def main():
     """
 
     import time
+    import multiprocessing as mp
+    from itertools import product
     t = 0
+    tickers = ['AAPL', 'MSFT']
     for _ in range(5):
         t0 = time.time()
-        taq_data_extract('AAPL', 'quotes', '2008')
-        taq_data_extract('AAPL', 'trades', '2008')
+        taq_midpoint_event_data('MSFT', '2008-01-02')
+    #     with mp.Pool(processes=mp.cpu_count()) as pool:
+    #         pool.starmap(taq_data_extract, product(tickers, ['quotes'], ['2008']))
+    #         pool.starmap(taq_data_extract, product(tickers, ['trades'], ['2008']))
         t1 = time.time()
         t += t1 - t0
 
     print(t/5)
+
 
     return None
 

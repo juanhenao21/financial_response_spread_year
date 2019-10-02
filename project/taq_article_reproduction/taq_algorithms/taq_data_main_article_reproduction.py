@@ -92,12 +92,12 @@ def taq_build_from_scratch(tickers, year):
     subprocess.call('mv *.csv ../csv_year_data_{}/'.format(year), shell=True)
 
     # Extract dayly data
-    date_list = taq_data_tools_article_reproduction.taq_bussiness_days(year)
-
-    # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
+        print('Extracting dayly data')
         pool.starmap(taq_data_analysis_article_reproduction.taq_data_extract,
-                     product(tickers, date_list))
+                     product(tickers, ['quotes'], [year]))
+        pool.starmap(taq_data_analysis_article_reproduction.taq_data_extract,
+                     product(tickers, ['trades'], [year]))
 
     return None
 
