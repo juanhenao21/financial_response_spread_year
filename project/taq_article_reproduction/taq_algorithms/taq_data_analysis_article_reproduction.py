@@ -230,71 +230,59 @@ def taq_midpoint_time_data(ticker, date):
         # Reproducing S. Wang values. In her results the time interval for the
         # midpoint is [34800, 56999]
         full_time = np.array(range(34800, 57000))
-        data_quotes_time = 0
+
         # As there can be several values for the same second, we use the
         # last value of each second in the full time array as it behaves
         # quiet equal as the original input
+        set_data_time = np.array(list(set(data_quotes_event['Time'])))
+        list_data_time = [0] * len(full_time)
 
         for t_idx, t_val in enumerate(full_time):
+            if (np.sum(t_val == set_data_time)):
 
-            if (t_val in data['Time']):
+                condition = data_quotes_event['Time'] == t_val
+                data_dict = {'Time': data_quotes_event[condition].ix[-1]['Time'],
+                             'Midpoint': data_quotes_event[condition].ix[-1]['Midpoint']}
 
-                data_quotes_time = data_quotes_time.append(
-                    data_quotes_event[data_quotes_event['Time'] == t_val]
-                    .ix[-1:])
+                list_data_time[t_idx] = data_dict
 
             else:
 
-                data_quotes_time = data_quotes_time.append(
-                    data_quotes_time.ix[-1:])
+                data_dict = {'Time': list_data_time[t_idx - 1]['Time'],
+                             'Midpoint': list_data_time[t_idx - 1]['Midpoint']}
+
+                list_data_time[t_idx] = data_dict
+
+        data_quotes_time = pd.DataFrame(list_data_time, columns=['Time', 'Midpoint'])
 
         # The lengths of the time and the dataframe have to be the same
         assert len(full_time) == len(data_quotes_time['Time'])
 
+        data_quotes_time['Time'] = full_time
+
         # Saving data
 
-        if (not os.path.isdir(''.join(('../../taq_data/article_reproduction'
-                                       + '_data_{1}/{0}/').split())
-                              .format(function_name, year))):
+        if (not os.path.isdir(''.join((f'../../taq_data/article_reproduction'
+                              + f'_data_{function_name}/{year}/').split()))):
 
-            os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
-                     .format(function_name, year))
-            print('Folder to save data created')
+            try:
+                os.mkdir(''.join((f'../../taq_data/article_reproduction_data'
+                        + f'_{year}/{function_name}/').split()))
+                print('Folder to save data created')
 
-        pickle.dump(ask_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/'
-                         + '{0}_ask_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
-        pickle.dump(bid_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                         + '_bid_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
-        pickle.dump(spread_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                         + '_spread_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
-        pickle.dump(full_time,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{1}/{0}/{0}'
-                         + '_time.pickle').split())
-                         .format(function_name, year), 'wb'))
-        pickle.dump(midpoint_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                         '_midpoint_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
+            except FileExistsError:
+                print('Folder exists. The folder was not created')
+
+        data_quotes_time.astype(str).to_hdf(''.join((f'../../taq_data/article'
+                                + f'_reproduction_data_{year}/{function_name}/'
+                                + f'{function_name}_quotes_{year}{month}{day}'
+                                + f'_{ticker}.h5').split()),
+                                key='data_quotes_time', mode='w', format='table')
 
         print('Data saved')
         print()
 
-        return midpoint_last_val
+        return data_quotes_time
 
     except FileNotFoundError as e:
         print('No data')
@@ -946,11 +934,13 @@ def main():
     tickers = ['AAPL', 'MSFT']
     for _ in range(1):
         t0 = time.time()
-        taq_midpoint_event_data('MSFT', '2008-01-02')
+        data_time = taq_midpoint_time_data('MSFT', '2008-01-02')
+        data_event = taq_midpoint_event_data('MSFT', '2008-01-02')
         t1 = time.time()
         t += t1 - t0
 
-    print(t/5)
+    print(t)
+
 
     return None
 
