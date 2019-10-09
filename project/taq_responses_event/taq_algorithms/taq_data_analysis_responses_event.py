@@ -36,6 +36,7 @@ __tau__ = 1000
 
 # ----------------------------------------------------------------------------
 
+
 def taq_midpoint_day_responses_event_data(ticker, date):
     """Create the midpoint associated with the trades signs in event scale.
 
@@ -71,13 +72,34 @@ def taq_midpoint_day_responses_event_data(ticker, date):
                 + f'_signs_responses_event_shift_data/taq_trade_signs'
                 + f'_responses_event_shift_data_{year}{month}{day}_{ticker}'
                 + f'.pickle').split()), 'rb'))
+
+        assert not np.sum(midpoint == 0)
+        assert not np.sum(time_t == 0)
+
+        # Midpoint array with the length of the trade signs
+        midpoint_t = 0. * time_t
+        midpoint = midpoint[1:]
+        time_scale = range(34801, 57000)
+
         # It is needed to associate each trade sign with a midpoint price
-        for t_idx, t_val in enumerate(time_m):
+        for t_idx, t_val in enumerate(time_scale):
             condition = time_t == t_val
             len_c = np.sum(condition)
-            midpoint_t[condition] = midpoint_i[t_idx] * np.ones(len_c)
+            midpoint_t[condition] = midpoint[t_idx] * np.ones(len_c)
+
 
         assert not np.sum(midpoint_t == 0)
+
+        # Saving data
+        taq_data_tools_responses_event.taq_save_data(function_name, midpoint_t,
+                                                     ticker, ticker, year,
+                                                     month, day)
+
+    except FileNotFoundError as e:
+        print('No data')
+        print(e)
+        print()
+        return None
 
 # ----------------------------------------------------------------------------
 
@@ -110,15 +132,16 @@ def taq_self_response_day_responses_event_data(ticker, date):
         # Load data
         midpoint = pickle.load(open(''.join((
                 f'../../taq_data/responses_event_data_{year}/taq_midpoint'
-                + f'_time_data/taq_midpoint_time_data_midpoint_{year}'
-                + f'{month}{day}_{ticker}.pickle').split()) , 'rb'))
+                + f'day_responses_event_data/taq_midpoint_day_responses_event'
+                + f'_data_midpoint_{year}{month}{day}_{ticker}.pickle')
+                .split()) , 'rb'))
         time_t, _, trade_sign = pickle.load(open("".join((
             f'../../taq_data/responses_event_shift_data_{year}/taq_trade'
             + f'_signs_responses_event_shift_data/taq_trade_signs'
             + f'_responses_event_shift_data_{year}{month}{day}_{ticker}'
             + f'.pickle').split()), 'rb'))
 
-        assert len(midpoint) == len(set(time_t))
+        assert len(midpoint) == len(time_t)
 
         # Array of the average of each tau. 10^3 s used by Wang
         self_response_tau = np.zeros(__tau__)
