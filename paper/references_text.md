@@ -21,7 +21,7 @@ price series and the application of computer-intensive methods for analysing
 their properties have opened new horizons to researchers in empirical finance
 in the last decade and have contributed to the consolidation of a data-based
 approach in financial modelling.
-(Introduction)
+(Data availability)
 
 $S\left(t\right)$ will denote the price of a financial asset —a stock, an
 exchange rate or a market index— and $X\left(t\right) = \ln S\left(t\right)$
@@ -61,7 +61,6 @@ positive value of $\kappa$ indicating a ‘fat tail’, that is, a slow asymptot
 decay of the PDF.
 (Kurtosis and fat tails)
 
-<<<<<<< HEAD
 **What really causes large prices changes?**
 To understand our results it is essential that the reader understand the double
 continuous auction, which is the standard mechanism for price formation in most
@@ -189,6 +188,21 @@ associated a volume $V$, corresponding to the total number of shares exchanged.
 (Data description)
 
 **The subtle nature of financial random walks**
+A quantitative trace of human activity is recorded and stored, in some cases
+every second. Some of these records span two centuries. These time series,
+perhaps surprisingly, turn out to reveal a very rich and non- trivial
+statistical structure, that is to some degree universal, across different
+assets (stocks, commodities, currencies, rates, etc.), regions (U.S., European,
+Asian) and epochs.
+(Statistical structure of data)
+
+In spite of its shortcomings, the model of Bachelier gets one important fact
+right: price changes are to a first approximation uncorrelated, which makes
+the prediction of stock markets difficult. However, the mechanism that
+converts a rather predictable human behavior into a sequence of (nearly)
+unpredictable price changes, has not been investigated in details until recently.
+(Prices changes uncorrelated)
+
 If one denotes $p(t)$ the price of an asset at time $t$, the return $r_{\tau}(t)$,
 at time $t$ and scale $\tau$ is simply the relative variation of the price from
 $t$ to $t + \tau$, $r_{\tau}(t) = [p(t + \tau) − p(t)] / p(t)$. If $\tau$ is
@@ -197,8 +211,193 @@ small enough, one has approximately $r_{\tau} (t) = \ln p(t + \tau) − ln p(t)$
 
 The simplest universal feature of financial time series, uncovered by Bachelier
 in 1900, is the linear growth of the variance of the return fluctuations with
-time scale. More precisely, if $m  \tau$ is the mean return on scale ! , the following
-property holds, to a very good approximation:
+time scale. More precisely, if $m  \tau$ is the mean return on scale $\tau$,
+the following property holds, to a very good approximation:
+
+$$\left\langle \left[r_{\tau}\left(t\right)-m\tau\right]^{2}\right\rangle_{e}
+\simeq\sigma^{2}\tau$$
+
+where $\left\langle \ldots\right\rangle _{e}$ denotes the sample average. This
+behavior typically holds for ! between a few minutes to a few years, and is
+equivalent to the statement that relative price changes are, in a first
+approximation, uncorrelated. Very long time scales (beyond a few years) are
+difficult to investigate, in particular because the average drift $m$ becomes
+itself time dependent, but there are systematic studies suggesting some degree
+of mean reversion on these long time scales. The absence of linear correlations
+(Bachelier’s first law) in financial time series is often related to the
+so-called market efficiency according to which one cannot make anomalous profits
+by predicting future price values.
+(Bachelier’s first law)
+
+Volatility ($\sigma$) is the simplest quantity that measures the amplitude of
+price fluctuations and therefore quantifies the risk associated with some given
+asset. A linear growth of the variance of the fluctuations with time is typical
+of the Brownian motion for the log-price x.
+(Volatility)
+
+The distribution of returns is in fact strongly non-Gaussian and its shape
+continuously depends on the return period $\tau$. for $\tau$ large enough
+(around few months), one observes quasi-Gaussian distributions while for small
+$\tau$ values, the return distributions have fat tails.
+(Non-Gaussian shape of returns)
+
+Past price changes and future volatilities are negatively correlated —this is
+the so-called leverage effect, which reflects the fact that markets become more
+active after a price drop, and tend to calm down when the price rises. This
+correlation is most visible on stock indices. This leverage effect leads to an
+anomalous negative skew in the distribution of price changes.
+(Leverage effect)
+
+Price changes behave very differently from the simple geometric Brownian motion
+description. Extreme events are much more probable, and interesting nonlinear
+correlations (volatility–volatility and price–volatility) are observed.
+These “statistical anomalies” are very important for a reliable estimation of
+financial risk and for quantitative option pricing and hedging, for which one
+often requires an accurate model that captures the statistics of returns on
+different time horizons $\tau$.
+(Price changes behavior)
+
+The efficient market hypothesis (EMH) posits that all available information is
+included in prices, which emerge at all times from the consensus between fully
+rational agents, that would otherwise immediately arbitrage away any deviation
+from the fair price. Price changes can then only be the result of unanticipated
+news and are by definition totally unpredictable.
+(Efficient market hypothesis)
+
+There is a model at the other extreme of the spectrum where prices also follow
+a pure random walk, but for a totally different reason. Assume that agents,
+instead of being fully rational, have “zero intelligence” and randomly buy or
+to sell. Suppose also that their action is interpreted by all the others agents
+as potentially containing some information. Then, the mere fact of buying (or
+selling) typically leads to a change of the ask $a(t)$ or bid $b(t)$ price and
+hence of a change of the midpoint $m(t) = a(t) + b(t) / 2$. In the absence of
+reliable information about the true price, the new midpoint is immediately
+adopted by all other market participants as the new reference price around
+which next orders are launched. In this case, the midpoint will also follow a
+random walk (at least for sufficiently large times), even if trades are not
+motivated by any rational decision and devoid of meaningful information.
+(Zero intelligence model)
+
+Based on a series of detailed empirical results obtained on trade by trade
+data, that the random walk nature of prices is in fact highly nontrivial and
+results from a fine-tuned competition between two populations of traders,
+liquidity providers (or market makers), and liquidity takers. Liquidity
+providers act such as to create antipersistence (or mean reversion) in price
+changes that would lead to a subdiffusive behavior of the price, whereas
+liquidity takers’ action leads to long range persistence and superdiffusive
+behavior. Both effects very precisely compensate and lead to an overall
+diffusive behavior, at least to a first approximation, such that (statistical)
+arbitrage opportunities are absent, as expected. We argue that in a very
+precise sense, the market is operating at a critical point;
+(Liquidity providers and takers - Random walk)
+
+In order to better understand the impact of trading on price changes, one can
+study the following response function $\mathcal{R}(l)$, defined as
+
+$$\mathcal{R}\left(l\right)=\left\langle \left(p_{n+l}-p_{n}\right)\cdot
+\varepsilon_{n}\right\rangle$$
+
+where $\varepsilon$ is the sign of the $n$th trade. The quantity $\mathcal{R}(l)
+measures how much, on average, the price moves up conditioned to a buy order at
+time $0$ (or a sell order moves the price down) a time $l$ later.
+Note that $\mathcal{R}(l)} increases by a factor $~2$ between $l=1$ and
+$l = l* \approx 1000$, before decreasing back. Including overnights allow one
+to probe larger values of $l$ and confirm that $\mathcal{R}(l)$ decreases, and
+even becomes negative beyond $l \simeq 5000$. Similar results have been obtained
+for many different stocks as well. However, in some cases the maximum is not
+observed and rather $\mathcal{R}(l)$ keeps increasing mildly.
+(Response function and behavior)
+
+This model of a totally random model of stock market is however qualitatively
+incorrect for the following reason. Although, as mentioned above, the
+statistics of price changes reveals very little temporal correlations, the
+correlation function of the sign + n of the trades, surprisingly, reveals very
+slowly decaying correlations as a function of trade time. More precisely, one
+can consider the following correlation function:
+
+$$\mathcal{C}_{0}\left(l\right)=\left\langle \varepsilon_{n+l}\varepsilon_{n}
+\right\rangle -\left\langle \varepsilon_{n}\right\rangle ^{2}$$
+
+If trades were random, one should observe that $\mathcal{C}_{0}(l)$ decays to
+zero beyond a few trades. Surprisingly, this is not what happens, on the
+contrary, $\mathcal{C}_{0}(l)$ is strong and decays very slowly toward zero, as
+an inverse power-law of $l$.
+
+$$\mathcal{C}_{0}\left(l\right)\simeq\frac{C_{0}}{l^{\gamma}}
+,\,\left(l\ge1\right)$$
+
+The value of $\gamma$ seems to be somewhat stock dependent, but is consistently
+found to be smaller than unity, leading to a non-integrable correlation
+function. This in general leads to superdiffusion, and is the main puzzle to
+elucidate: how can one reconcile the strong, slowly decaying correlations in
+the sign of the trades with the nearly diffusive nature of the price
+fluctuations, and the nearly structureless response function?
+(Explanation why zero intelligence model wrong)
+
+One is that of liquidity takers, that trigger trades by putting in market
+orders. The motivation for this category of traders might be to take advantage
+of some information, and make a profit from correctly anticipating future price
+changes. Information can in fact be of very different nature, fundamental
+(firm based), macroeconomical, political, statistical (based on regularities
+of price patterns), etc. Unfortunately, information is often hard to interpret
+correctly—except of course for insiders—and it is probable that many of these
+information driven trades are misguided. For example, systematic hedge funds
+which take decisions based on statistical pattern recognition have a typical
+success rate of only 52%. There is no compelling reason to believe that the
+intuition of traders in markets room fares much better than that. Since market
+orders are immediately executed, many impatient investors, who want to
+liquidate their position, or hedge, etc., might be tempted to place market
+orders, even at the expense of the bid-ask spread $s(t) = a(t) − b(t)$.
+(liquidity takers)
+
+The other category is that of liquidity providers (or market makers, although
+on electronic markets all participants can act as liquidity providers by
+putting in limit orders), who offer to buy or to sell but avoid taking any
+bare position on the market. Their profit comes from the bid-ask spread $s$:
+the sell price is always slightly larger than the buy price, so that each
+round turn operation leads to a profit equal to the spread $s$, at least if
+the midpoint has not changed in the mean time.
+(liquidity providers)
+
+This is where the game becomes interesting. Assume that a liquidity taker
+wants to buy, so that an increased number of buy orders arrive on the market.
+The liquidity providers are tempted to increase the offer (or ask) price a
+because the buyer might be informed and really know that the current price is
+too low and that it will most probably increase in the near future. Should
+this happen, the liquidity provider, who has to close his position later,
+might have to buy back at a much higher price and experience a loss. In order
+not to trigger a sudden increase of a that would make their trade costly,
+liquidity takers obviously need to put on not too large orders. This is the
+rationale for dividing one’s order in small chunks and disperse these as much
+as possible over time so as not to reveal their intentions. Doing so liquidity
+takers necessarily create some temporal correlations in the sign of the trades.
+Since these traders probably have a somewhat broad spectrum of volumes to
+trade, and therefore of trading horizons (from a few minutes to several
+weeks), this can easily explain the slow, power-law decay of the sign
+correlation function $\mathcal{C}_{0}(l)$ reported above.
+Now, if the market orders in fact do not contain useful information but are the
+result of hedging, noise trading, misguided interpretations, errors, etc., then
+the price should not move up on the long run, and should eventually mean revert
+to its previous value.
+Liquidity providers are obviously the active force behind this mean reversion,
+again because closing their position will be costly if the price has moved up
+too far from the initial price. However, this mean reversion cannot take place
+too quickly, again because a really informed trader would then be able to buy a
+large volume at a modest price. Hence, this mean reversion must be slow enough.
+To summarize, liquidity takers must dilute their orders and create long range
+correlations in the trade signs, whereas liquidity providers must correctly
+handle the fact that liquidity takers might either possess useful information
+(a rare situation, but that can be very costly since the price can jump as a
+result of some significant news), or might not be informed at all and trade
+randomly. By controlling the order flow such as to slowly mean reverting the
+price, liquidity providers minimize the probability that they either sell too
+low, or have to buy back too high. The delicate balance between these
+conflicting tendencies conspire to put the market at the border between
+persistence or antipersistence, and eliminate arbitrage opportunities.
+Therefore, the mere fact of trading such as to minimize impact for liquidity
+takers, and to optimize gains for liquidity providers, does lead to a random
+walk dynamics of the price, even in the absence of any real information.
+(Interaction between providers)
 
 ## Trades per minute
 
