@@ -131,44 +131,50 @@ def taq_self_response_day_responses_event_data(ticker, date):
     try:
         # Load data
         midpoint = pickle.load(open(''.join((
-                f'../../taq_data/responses_event_data_{year}/taq_midpoint'
-                + f'day_responses_event_data/taq_midpoint_day_responses_event'
-                + f'_data_midpoint_{year}{month}{day}_{ticker}.pickle')
-                .split()) , 'rb'))
+                f'../../taq_data/article_reproduction_data_{year}/taq'
+                + f'_midpoint_time_data/taq_midpoint_time_data_midpoint'
+                + f'_{year}{month}{day}_{ticker}.pickle').split()) , 'rb'))
         time_t, _, trade_sign = pickle.load(open("".join((
             f'../../taq_data/responses_event_shift_data_{year}/taq_trade'
             + f'_signs_responses_event_shift_data/taq_trade_signs'
             + f'_responses_event_shift_data_{year}{month}{day}_{ticker}'
             + f'.pickle').split()), 'rb'))
 
-        assert len(midpoint) == len(time_t)
+        # As the trade signs data only reach the second 56999, the midpoint
+        # data must be cut to 56998 seconds
+        time_m = np.array(range(34800, 56999))
+        midpoint = midpoint[:-1]
 
         # Array of the average of each tau. 10^3 s used by Wang
         self_response_tau = np.zeros(__tau__)
         num = np.zeros(__tau__)
 
         # Calculating the midpoint price return and the self response function
-
         # Depending on the tau value
         for tau_idx in range(__tau__):
-            for t_val in range(34800, 56999):
 
-                trade_sign_tau = trade_sign[:-tau_idx - 1]
-                trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
-                num[tau_idx] = trade_sign_no_0_len
-                # Obtain the midpoint price return. Displace the numerator tau
-                # values to the right and compute the return
+            # midpoint price returns
+            # Obtain the midpoint price return. Displace the numerator tau
+            # values to the right and compute the return
 
-                # midpoint price returns
+            log_return_sec = (midpoint[tau_idx + 1:]
+                            - midpoint[:-tau_idx - 1]) \
+                / midpoint[:-tau_idx - 1]
 
-                log_return_sec = (midpoint[tau_idx + 1:]
-                                - midpoint[:-tau_idx - 1]) \
-                    / midpoint[:-tau_idx - 1]
+            trade_sign_tau = trade_sign[time_t < time_m[-tau_idx]]
+            time_t_tau = time_t[time_t < time_m[-tau_idx]]
+            trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            num[tau_idx] = trade_sign_no_0_len
+
+            # Reduce the time to the corresponding length of returns
+            time_m_short = time_m[:-tau_idx - 1]
+
+            for t_idx, t_val in enumerate(time_m_short):
 
                 # Obtain the self response value
-                if (trade_sign_no_0_len != 0):
-                    product = log_return_sec * trade_sign_tau
-                    self_response_tau[tau_idx] = np.sum(product)
+                product = log_return_sec[t_idx] \
+                    * trade_sign_tau[time_t_tau == t_val]
+                self_response_tau[tau_idx] += np.sum(product)
 
         return (self_response_tau, num)
 
@@ -371,8 +377,18 @@ def main():
 
     :return: None.
     """
+    import time
+    t = 0
+    tickers = ['AAPL', 'MSFT']
+    for _ in range(1):
+        t0 = time.time()
+        self_r, num = taq_self_response_day_responses_event_data('AAPL', '2008-01-02')
+        t1 = time.time()
+        t += t1 - t0
 
-    taq_midpoint_day_responses_event_data('AAPL', '2008-01-02')
+    print(f'Time = {round(t / 60, 3)} minutes')
+    print(self_r)
+    print(num)
 
     return None
 
