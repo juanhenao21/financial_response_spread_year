@@ -30,6 +30,8 @@ import os
 import pandas as pd
 import pickle
 
+import multiprocessing as mp
+
 import taq_data_tools_responses_event
 
 __tau__ = 1000
@@ -161,8 +163,8 @@ def taq_self_response_day_responses_event_data(ticker, date):
                             - midpoint[:-tau_idx - 1]) \
                 / midpoint[:-tau_idx - 1]
 
-            trade_sign_tau = trade_sign[time_t < time_m[-tau_idx]]
-            time_t_tau = time_t[time_t < time_m[-tau_idx]]
+            trade_sign_tau = trade_sign[time_t < time_m[-tau_idx - 1]]
+            time_t_tau = time_t[time_t < time_m[-tau_idx - 1]]
             trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
             num[tau_idx] = trade_sign_no_0_len
 
@@ -175,6 +177,108 @@ def taq_self_response_day_responses_event_data(ticker, date):
                 product = log_return_sec[t_idx] \
                     * trade_sign_tau[time_t_tau == t_val]
                 self_response_tau[tau_idx] += np.sum(product)
+
+        return (self_response_tau, num)
+
+    except FileNotFoundError as e:
+        print('No data')
+        print(e)
+        print()
+        return None
+
+# ----------------------------------------------------------------------------
+def self_computation(time_tuple):
+
+    t_idx = time_tuple[0]
+    t_val = time_tuple[1]
+
+    # Using the global definition of the tuples
+    global log_return_sec
+    global trade_sign_tau
+    global self_response_tau
+    global time_t_tau
+
+    # Obtain the self response value
+    product = log_return_sec[t_idx] \
+        * trade_sign_tau[time_t_tau == t_val]
+    self_response_tau[tau_idx] += np.sum(product)
+
+    return None
+
+def taq_self_response_day_responses_event_data_test(ticker, date):
+    """Computes the self response of a day.
+
+    Using the midpoint price and trade signs of a ticker computes the self-
+    response during different time lags (:math:`\tau`) for a day.
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param date: string with the date of the data to be extracted
+     (i.e. '2008-01-02').
+    :return: tuple -- The function returns a tuple with numpy arrays.
+    """
+
+    date_sep = date.split('-')
+
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
+    function_name = taq_self_response_day_responses_event_data.__name__
+    taq_data_tools_responses_event \
+        .taq_function_header_print_data(function_name, ticker, ticker, year,
+                                        month, day)
+
+    try:
+        # Load data
+        midpoint = pickle.load(open(''.join((
+                f'../../taq_data/article_reproduction_data_{year}/taq'
+                + f'_midpoint_time_data/taq_midpoint_time_data_midpoint'
+                + f'_{year}{month}{day}_{ticker}.pickle').split()) , 'rb'))
+        time_t, _, trade_sign = pickle.load(open("".join((
+            f'../../taq_data/responses_event_shift_data_{year}/taq_trade'
+            + f'_signs_responses_event_shift_data/taq_trade_signs'
+            + f'_responses_event_shift_data_{year}{month}{day}_{ticker}'
+            + f'.pickle').split()), 'rb'))
+
+        # As the trade signs data only reach the second 56999, the midpoint
+        # data must be cut to 56998 seconds
+        time_m = np.array(range(34800, 56999))
+        midpoint = midpoint[:-1]
+
+        # Array of the average of each tau. 10^3 s used by Wang
+        global self_response_tau
+        self_response_tau = np.zeros(__tau__)
+        num = np.zeros(__tau__)
+
+        # Calculating the midpoint price return and the self response function
+        # Depending on the tau value
+        global tau_idx
+        for tau_idx in range(__tau__):
+
+            # midpoint price returns
+            # Obtain the midpoint price return. Displace the numerator tau
+            # values to the right and compute the return
+
+            global log_return_sec
+            log_return_sec = (midpoint[tau_idx + 1:]
+                            - midpoint[:-tau_idx - 1]) \
+                / midpoint[:-tau_idx - 1]
+
+            global trade_sign_tau
+            trade_sign_tau = trade_sign[time_t < time_m[-tau_idx - 1]]
+            global time_t_tau
+            time_t_tau = time_t[time_t < time_m[-tau_idx - 1]]
+            trade_sign_no_0_len = len(trade_sign_tau[trade_sign_tau != 0])
+            num[tau_idx] = trade_sign_no_0_len
+
+            # Reduce the time to the corresponding length of returns
+            time_m_short = time_m[:-tau_idx - 1]
+
+            time_values = list(enumerate(time_m_short))
+            # print(list(time_values))
+            with mp.Pool(processes=mp.cpu_count()) as pool:
+                pool.map(self_computation, time_values)
 
         return (self_response_tau, num)
 
@@ -207,27 +311,24 @@ def taq_self_response_year_responses_event_data(ticker, year):
     dates = taq_data_tools_responses_event.taq_bussiness_days(year)
 
     self_ = np.zeros(__tau__)
-    num_s = []
+    num_s = np.zeros(__tau__)
 
     for date in dates:
 
         try:
             data, avg_num = taq_self_response_day_responses_event_data(ticker, date)
             self_ += data
-            num_s.append(avg_num)
+            num_s += avg_num
 
         except TypeError:
             pass
 
-    num_s = np.asarray(num_s)
-    num_s_t = np.sum(num_s, axis=0)
-
     # Saving data
     taq_data_tools_responses_event \
-        .taq_save_data(function_name, self_ / num_s_t, ticker, ticker, year,
+        .taq_save_data(function_name, self_ / num_s, ticker, ticker, year,
                        '', '')
 
-    return (self_ / num_s_t, num_s_t)
+    return (self_ / num_s, num_s)
 
 # ----------------------------------------------------------------------------
 
@@ -378,17 +479,24 @@ def main():
     :return: None.
     """
     import time
-    t = 0
-    tickers = ['AAPL', 'MSFT']
-    for _ in range(1):
-        t0 = time.time()
-        self_r, num = taq_self_response_day_responses_event_data('AAPL', '2008-01-02')
-        t1 = time.time()
-        t += t1 - t0
 
-    print(f'Time = {round(t / 60, 3)} minutes')
-    print(self_r)
-    print(num)
+    tickers = ['AAPL', 'MSFT']
+
+    t0 = time.time()
+    self_normal, num_normal = taq_self_response_day_responses_event_data('AAPL', '2008-01-02')
+    t1 = time.time()
+    t = t1 - t0
+
+    print(f'Time normal = {round(t / 60, 3)} minutes')
+    pickle.dump((self_normal, num_normal), open('./normal.pickle', 'wb'))
+
+    t0 = time.time()
+    self_par, num_par = taq_self_response_day_responses_event_data_test('AAPL', '2008-01-02')
+    t1 = time.time()
+    t = t1 - t0
+
+    print(f'Time parallel = {round(t / 60, 3)} minutes')
+    pickle.dump((self_par, num_par), open('./par.pickle', 'wb'))
 
     return None
 
