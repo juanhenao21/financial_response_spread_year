@@ -86,7 +86,8 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    # tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    tickers = ['AAPL', 'MSFT']
     year = '2008'
 
     # Basic folders

@@ -49,8 +49,8 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     :param year: string of the year to be analized (i.e '2016').
     :param month: string of the month to be analized (i.e '07').
     :param day: string of the day to be analized (i.e '07').
-    :return: None -- The function saves the data in a file and does not return a
-     value.
+    :return: None -- The function saves the data in a file and does not return
+     a value.
     """
 
     # Saving data
