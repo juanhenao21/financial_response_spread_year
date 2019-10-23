@@ -399,6 +399,181 @@ takers, and to optimize gains for liquidity providers, does lead to a random
 walk dynamics of the price, even in the absence of any real information.
 (Interaction between providers)
 
+**The price impact of order book events**
+Traditionally, the above “one sell for one buy” paradox is resolved by arguing
+that there are in fact two types of traders coexisting in the ecology of
+financial markets:
+
+* “informed” traders who place market orders for immediate execution, at the
+  cost of paying half the bid-ask spread, and
+* uninformed (or less informed) market makers who provide liquidity by placing
+  limit orders on both sides of the order book, hoping to earn part of the
+  bid-ask spread.
+(Type of traders)
+
+Quantitative studies of the price impact of market orders have by now firmly
+established a number of stylized facts:
+
+* Buy (sell) trades on average impact the price up (down). In other words, there
+  is a strong correlation between price returns over a given time interval and
+  the market order imbalance on the same interval.
+* The impact curve as a function of the volume of the trade is strongly concave.
+  In other words, large volumes impact the price only marginally more than small
+  volumes.
+* The sign of market orders is strongly autocorrelated in time. Despite this,
+  the dynamics of the midpoint is very close to being purely diffusive.
+(Impact of market orders)
+
+**Econophysics: Empirical facts and agent-based models**
+“Econophysics” was coined by H. E. Stanley by a merging of the words ‘Economics’
+and ‘Physics’, at an international conference on Statistical Physics held in
+Kolkata in 1995
+(Origin word econophysics)
+
+Economics deals with how societies efficiently use their resources to produce
+valuable commodities and distribute them among different people or economic
+agents. It is a discipline related to almost everything around us, starting from
+the marketplace through the environment to the fate of nations.
+(Definition economics)
+
+On a general level, both economics and physics deal with “everything around us”,
+despite with different perspectives. On a practical level, the goals of both
+disciplines can be either purely theoretical in nature or strongly oriented
+toward the improvement of the quality of life. On a more technical side,
+analogies often become equivalences.
+(Similarities physics and economics)
+
+Branch of physics that combines the principles and procedures of statistics with
+the laws of both classical and quantum mechanics, particularly with respect to
+the field of thermodynamics. It aims to predict and explain the measurable
+properties of macroscopic systems on the basis of the properties and behavior of
+the microscopic constituents of those systems.
+(Definition statistical mechanics)
+
+The term “complex systems” was coined to cover the great variety of such systems
+which include examples from physics, chemistry, biology and also social
+sciences. The concepts and methods of statistical physics turned out to be
+extremely useful in application to these diverse complex systems including
+economic systems. Many complex systems in natural and social environments share
+the characteristics of competition among interacting agents for resources and
+their adaptation to dynamically changing environment.
+(Definition complex systems)
+
+Different kinds of financial time series have been recorded and studied for
+decades, but the scale changed twenty years ago. The computerization of stock
+exchanges that took place all over the world in the mid 1980’s and early 1990’s
+has lead to the explosion of the amount of data recorded. Nowadays, all
+transactions on a financial market are recorded tick-by-tick, i.e. every event
+on a stock is recorded with a timestamp defined up to the millisecond, leading
+to huge amounts of data.
+(Data acquisition change)
+
+The concept of “stylized facts” is adopted to describe empirical facts that
+arose in statistical studies of financial time series and that seem to be
+persistent across various time periods, places, markets, assets, etc.
+(Stylized facts definition)
+
+It has been largely observed and it is the first stylized fact, that the
+empirical distributions of financial returns and log-returns are fat-tailed.
+(Returns fat-tailed)
+
+There is no evidence of correlation between successive returns, which is the
+second “stylized-fact”. The autocorrelation function decays very rapidly to
+zero, even for a few lags of 1 minute.
+(No correlation between successive returns)
+
+Absence of correlation between returns must no be mistaken for a property of
+independence and identical distribution: price fluctuations are not identically
+distributed and the properties of the distribution change with time. In
+particular, absolute returns or squared returns exhibit a long-range slowly
+decaying auto correlation function. This phenomena is widely known as
+“volatility clustering”, and was formulated by Mandelbrot (1963) as “large
+changes tend to be followed by large changes -of either sign - and small changes
+tend to be followed by small changes”.
+(Volatility clustering)
+
+It has been observed that as one increases the time scale over which the returns
+are calculated, the fat-tail property becomes less pronounced, and their
+distribution approaches the Gaussian form.
+(Returns in large scales)
+
+Calendar time is the time usually used to compute statistical properties of
+financial time series. This means that computing these statistics involves
+sampling, which might be a delicate thing to do when dealing for example with
+several stocks with different liquidity.
+(Calendar time)
+
+Let us first introduce event time. Using this count, time is increased by one
+unit each time one order is submitted to the observed market. This framework is
+natural when dealing with the simulation of financial markets, as it will be
+showed in the companion paper. The main outcome of event time is its “smoothing”
+of data.
+(Event time)
+
+Another count of time might be relevant, and we call it trade time or
+transaction time. Using this count, time is increased by one unit each time a
+transaction happens. The advantage of this count is that limit orders submitted
+far away in the order book, and may thus be of lesser importance with respect to
+the price series, do not increase the clock by one unit.
+(Transaction time)
+
+Going on with focusing on important events to increase the clock, we can use
+tick time. Using this count, time is increased by one unit each time the price
+changes. Thus consecutive market orders that progressively “eat” liquidity until
+the first best limit is removed in an order book are counted as one unit time.
+(Tick time)
+
+We have seen above that when the sampling size increases, the distribution of
+the log-returns tends to be more Gaussian. This property is much better seen
+using trade time.
+(Aggregational normality in trade time)
+
+It is well-known that the series of the signs of the trades on a given stock
+(usual convention: +1 for a transaction at the ask price, −1 for a transaction
+at the bid price) exhibit large autocorrelation. A very plausible explanation of
+this phenomenon relies on the execution strategies of some major brokers on a
+given markets. These brokers have large transaction to execute on the account of
+some clients. In order to avoid market making move because of an inconsiderably
+large order, they tend to split large orders into small ones.
+(Autocorrelation of trade signs in tick time)
+
+Activity on financial markets is of course not constant throughout the day. the
+observed market activity is larger at the beginning and the end of the day, and
+more quiet around midday. Such a U-shaped curve is well-known.
+(Intraday seasonality)
+
+Correlation is defined as a relation existing between phenomena or things or
+between mathematical or statistical variables which tend to vary, be associated,
+or occur together in a way not expected on the basis of chance alone.
+(Correlation)
+
+When we talk about correlations in stock prices, what we are really interested
+in are relations between variables such as stock prices, order signs,
+transaction volumes, etc. and more importantly how these relations affect the
+nature of the statistical distributions and laws which govern the price time
+series.
+(Correlation in stock prices)
+
+If there are $N$ assets with price $P_{i}(t)$ for asset $i$ at time $t$, then
+the logarithmic return of stock $i$ is
+$r_{i}(t) = \ln P_{i}(t) - \ln P_{i}(t − 1)$, which for a certain consecutive
+sequence of trading days forms the return vector $r_{i}$. In order to
+characterize the synchronous time evolution of stocks, the equal time
+correlation coefficients between stocks $i$ and $j$ is defined as
+$$\rho_{ij}=\frac{\left\langle r_{i}r_{j}\right\rangle -\left\langle r_{i}\right
+\rangle \left\langle r_{j}\right\rangle }{\sqrt{\left[\left\langle r_{i}^{2}
+\right\rangle -\left\langle r_{i}\right\rangle ^{2}\right]\left[\left\langle
+r_{j}^{2}\right\rangle -\left\langle r_{j}\right\rangle ^{2}\right]}}$$
+where $\left\langle \ldots \right\rangle$ indicates a time average over the
+trading days included in the return vectors. These correlation coefficients form
+an $N \times N$ matrix with $−1 \le \rho_{ij} \le 1$. If $\rho_{ij} = 1$, the
+stock price changes are completely correlated; if  $\rho_{ij} = 0$, the stock
+price changes are uncorrelated, and if $\rho_{ij} = -1$, then the stock price
+changes are completely anti-correlated.
+(Correlation matrix)
+
+Earlier estimates... pag 16
+
 ## Trades per minute
 
 
