@@ -560,10 +560,12 @@ $r_{i}(t) = \ln P_{i}(t) - \ln P_{i}(t − 1)$, which for a certain consecutive
 sequence of trading days forms the return vector $r_{i}$. In order to
 characterize the synchronous time evolution of stocks, the equal time
 correlation coefficients between stocks $i$ and $j$ is defined as
+
 $$\rho_{ij}=\frac{\left\langle r_{i}r_{j}\right\rangle -\left\langle r_{i}\right
 \rangle \left\langle r_{j}\right\rangle }{\sqrt{\left[\left\langle r_{i}^{2}
 \right\rangle -\left\langle r_{i}\right\rangle ^{2}\right]\left[\left\langle
 r_{j}^{2}\right\rangle -\left\langle r_{j}\right\rangle ^{2}\right]}}$$
+
 where $\left\langle \ldots \right\rangle$ indicates a time average over the
 trading days included in the return vectors. These correlation coefficients form
 an $N \times N$ matrix with $−1 \le \rho_{ij} \le 1$. If $\rho_{ij} = 1$, the
@@ -572,6 +574,24 @@ price changes are uncorrelated, and if $\rho_{ij} = -1$, then the stock price
 changes are completely anti-correlated.
 (Correlation matrix)
 
+Two types of mechanisms generated significant correlation between any two given
+stocks. One was some kind of external effect (say, economic or political news)
+that influenced both stock prices simultaneously, and the change for both
+prices appeared at the same time, such that the maximum of the correlation was
+at zero time shift.
+The second effect was that, one of the companies had an influence on the other
+company indicating that one company’s operation depended on the other, so that
+the price change of the influenced stock appeared latter because it required
+some time to react on the price change of the first stock displaying a “pulling
+effect”. A weak but significant effect with the real data set was found, showing
+that in many cases the maximum correlation was at non-
+zero time shift indicating directions of influence between
+the companies, and the characteristic time was of the
+order of a few minutes, which was compatible with effi-
+cient market hypothesis. In the pulling effect, they found
+that in general, more important companies (which were
+traded more) pulled the relatively smaller companies.
+(Correlations as the function of the time shift)
 Earlier estimates... pag 16
 
 ## Trades per minute
