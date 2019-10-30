@@ -584,14 +584,14 @@ company indicating that one company’s operation depended on the other, so that
 the price change of the influenced stock appeared latter because it required
 some time to react on the price change of the first stock displaying a “pulling
 effect”. A weak but significant effect with the real data set was found, showing
-that in many cases the maximum correlation was at non-
-zero time shift indicating directions of influence between
-the companies, and the characteristic time was of the
-order of a few minutes, which was compatible with effi-
-cient market hypothesis. In the pulling effect, they found
-that in general, more important companies (which were
-traded more) pulled the relatively smaller companies.
+that in many cases the maximum correlation was at non-zero time shift
+indicating directions of influence between the companies, and the
+characteristic time was of the order of a few minutes, which was compatible
+with efficient market hypothesis. In the pulling effect, they found that in
+general, more important companies (which were traded more) pulled the
+relatively smaller companies.
 (Correlations as the function of the time shift)
+
 Earlier estimates... pag 16
 
 ## Trades per minute
