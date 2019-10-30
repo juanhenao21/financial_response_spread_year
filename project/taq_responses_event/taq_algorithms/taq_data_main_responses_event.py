@@ -55,22 +55,24 @@ def taq_data_plot_generator(tickers, year):
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        pool.starmap(taq_data_analysis_responses_event \
-                     .taq_midpoint_day_responses_event_data,
-                     product(tickers, date_list))
+        # pool.starmap(taq_data_analysis_responses_event \
+        #              .taq_midpoint_day_responses_event_data,
+        #              product(tickers, date_list))
 
         # Especific functions
-        # pool.starmap(taq_data_analysis_responses_event.taq_self_response_year_data,
-        #              product(tickers, [year]))
-        # pool.starmap(taq_data_analysis_responses_event.taq_cross_response_year_data,
-        #              product(tickers, tickers, [year]))
+        pool.starmap(taq_data_analysis_responses_event
+                     .taq_self_response_year_responses_event_data,
+                     product(tickers, [year]))
+        pool.starmap(taq_data_analysis_responses_event
+                     .taq_cross_response_year_responses_event_data,
+                     product(tickers, tickers, [year]))
 
-        # pool.starmap(taq_data_plot_responses_event
-        #              .taq_self_response_year_avg_plot,
-        #              product(tickers, [year]))
-        # pool.starmap(taq_data_plot_responses_event
-        #              .taq_cross_response_year_avg_plot,
-        #              product(tickers, tickers, [year]))
+        pool.starmap(taq_data_plot_responses_event
+                     .taq_self_response_year_avg_plot,
+                     product(tickers, [year]))
+        pool.starmap(taq_data_plot_responses_event
+                     .taq_cross_response_year_avg_plot,
+                     product(tickers, tickers, [year]))
 
     return None
 
