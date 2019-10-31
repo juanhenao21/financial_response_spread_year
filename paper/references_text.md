@@ -592,7 +592,43 @@ general, more important companies (which were traded more) pulled the
 relatively smaller companies.
 (Correlations as the function of the time shift)
 
-Earlier estimates... pag 16
+**Economics needs a scientific revolution**
+Compared to physics, it seems fair to say that the quantitative success of the
+economic sciences is disappointing. Rockets fly to the moon, energy is
+extracted from minute changes of atomic mass without major havoc, global
+positioning satellites help millions of people to find their way home. What is
+the flagship achievement of economics, apart from its recurrent inability to
+predict and avert crises, including the current worldwide credit crunch?
+("Success" of economic sciences)
+
+Classical economics is built on very strong assumptions that quickly become
+axioms: the rationality of economic agents, the invisible hand and market
+efficiency, etc. An economist once told me, to my bewilderment: These concepts
+are so strong that they supersede any empirical observation. As Robert Nelson
+argued in his book, Economics as Religion, the marketplace has been deified.
+(Problem in classical economics)
+
+In reality, markets are not efficient, humans tend to be over-focused in the
+short-term and blind in the long-term, and errors get amplified through social
+pressure and herding, ultimately leading to collective irrationality, panic and
+crashes. Free markets are wild markets. It is foolish to believe that the
+market can impose its own self-discipline.
+(Market behavior)
+
+**The economy needs agent-based modelling**
+The best models they have are of two types, both with fatal flaws. Type one is
+econometric: empirical statistical models that are fit to past data. These
+successfully forecast a few quarters ahead as long as things stay more or less
+the same, but fail in the face of great change. Type two goes by the name of
+‘dynamic stochastic general equilibrium’. These models assume a perfect world,
+and by their very nature rule out crises of the type we are experiencing now.
+(Classical models to guide the economy)
+
+**Economic crisis**
+Economic theory failed to envisage even the possibility of a financial crisis
+like the present one. A new foundation is needed that takes into account the
+interplay between heterogeneous agents.
+(Economic theory failure)
 
 ## Trades per minute
 
