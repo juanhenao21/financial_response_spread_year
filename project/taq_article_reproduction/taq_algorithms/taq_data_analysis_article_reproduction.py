@@ -42,6 +42,8 @@ import pickle
 
 import taq_data_tools_article_reproduction
 
+import time #Remove at the end
+
 __tau__ = 1000
 
 # ----------------------------------------------------------------------------
@@ -230,35 +232,30 @@ def taq_midpoint_time_data(ticker, date):
         # Reproducing S. Wang values. In her results the time interval for the
         # midpoint is [34800, 56999]
         full_time = np.array(range(34800, 57000))
+        midpoint = np.array(range(34800, 57000))
 
-        # As there can be several values for the same second, we use the
-        # last value of each second in the full time array as it behaves
-        # quiet equal as the original input
-        set_data_time = np.array(list(set(data_quotes_event['Time'])))
-        list_data_time = [0] * len(full_time)
-
+        t0 = time.time()
         for t_idx, t_val in enumerate(full_time):
-            if (np.sum(t_val == set_data_time)):
 
-                condition = data_quotes_event['Time'] == t_val
-                data_dict = {'Time': data_quotes_event[condition].ix[-1]['Time'],
-                             'Midpoint': data_quotes_event[condition].ix[-1]['Midpoint']}
+            condition = data_quotes_event['Time'] == t_val
+            if (np.sum(condition)):
+                midpoint[t_idx] = data_quotes_event[condition].ix[-1]['Midpoint']
 
-                list_data_time[t_idx] = data_dict
+        t1 = time.time()
+        print(f'First loop {t1-t0}')
 
-            else:
+        t0 = time.time()
+        for t_idx, t_val in enumerate(full_time):
 
-                data_dict = {'Time': list_data_time[t_idx - 1]['Time'],
-                             'Midpoint': list_data_time[t_idx - 1]['Midpoint']}
+            if (midpoint[t_idx] == 0):
+                midpoint[t_idx] = midpoint[t_idx - 1]
 
-                list_data_time[t_idx] = data_dict
+        t1 = time.time()
+        print(f'Second loop {t1-t0}')
 
-        data_quotes_time = pd.DataFrame(list_data_time, columns=['Time', 'Midpoint'])
-
-        # The lengths of the time and the dataframe have to be the same
-        assert len(full_time) == len(data_quotes_time['Time'])
-
+        data_quotes_time = pd.DataFrame(columns=['Time', 'Midpoint'])
         data_quotes_time['Time'] = full_time
+        data_quotes_time['Midpoint'] = midpoint
 
         # Saving data
 
@@ -935,7 +932,7 @@ def main():
     for _ in range(1):
         t0 = time.time()
         data_time = taq_midpoint_time_data('MSFT', '2008-01-02')
-        data_event = taq_midpoint_event_data('MSFT', '2008-01-02')
+        # data_event = taq_midpoint_event_data('MSFT', '2008-01-02')
         t1 = time.time()
         t += t1 - t0
 
