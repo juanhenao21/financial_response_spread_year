@@ -83,7 +83,7 @@ def main():
     # Tickers and days to analyze
     tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
     year = '2008'
-    shifts = [1, 5, 10, 50, 100, 500, 1000, 5000]
+    shifts = [1, 2, 3, 4, 5, 10, 50, 100, 500, 1000, 5000]
 
     # Basic folders
     taq_data_tools_responses_time_shift.taq_start_folders('2008')
