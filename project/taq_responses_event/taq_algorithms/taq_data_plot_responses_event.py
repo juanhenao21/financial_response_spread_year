@@ -54,10 +54,10 @@ def taq_self_response_year_avg_plot(ticker, year):
 
         # Load data
         self_ = pickle.load(open(''.join((
-                        '../../taq_data/responses_event_data_{1}/taq_self'
-                        + '_response_year_data/taq_self_response_year_data'
-                        + '_{1}_{0}.pickle').split())
-                        .format(ticker, year), 'rb'))
+                        f'../../taq_data/responses_event_data_{year}/taq_self'
+                        + f'_response_year_responses_event_data/taq_self'
+                        + f'_response_year_responses_event_data_{year}'
+                        + f'_{ticker}.pickle').split()), 'rb'))
 
         figure = plt.figure(figsize=(16, 9))
         plt.semilogx(self_, linewidth=5, label='{}'.format(ticker))
@@ -113,10 +113,11 @@ def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
                                                 ticker_j, year, '', '')
 
             cross = pickle.load(open(''.join((
-                            '../../taq_data/responses_event_data_{2}/taq'
-                            + '_cross_response_year_data/taq_cross_response'
-                            + '_year_data_{2}_{0}i_{1}j.pickle').split())
-                            .format(ticker_i, ticker_j, year), 'rb'))
+                            f'../../taq_data/responses_event_data_{year}/taq'
+                            + f'_cross_response_year_responses_event_data/taq'
+                            + f'_cross_response_year_responses_event_data'
+                            + f'_{year}_{ticker_i}i_{ticker_j}j.pickle')
+                            .split()), 'rb'))
 
             figure = plt.figure(figsize=(16, 9))
             plt.semilogx(cross, linewidth=5, label='{} - {}'.format(ticker_i,
@@ -157,7 +158,10 @@ def main():
     :return: None.
     """
 
-    pass
+    taq_self_response_year_avg_plot('AAPL', '2008')
+    taq_self_response_year_avg_plot('MSFT', '2008')
+    taq_cross_response_year_avg_plot('AAPL', 'MSFT', '2008')
+    taq_cross_response_year_avg_plot('MSFT', 'AAPL', '2008')
 
     return None
 
