@@ -55,9 +55,9 @@ def taq_data_plot_generator(tickers, year):
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        # pool.starmap(taq_data_analysis_responses_event \
-        #              .taq_midpoint_day_responses_event_data,
-        #              product(tickers, date_list))
+        pool.starmap(taq_data_analysis_responses_event \
+                     .taq_midpoint_day_responses_event_data,
+                     product(tickers, date_list))
 
         # Especific functions
         pool.starmap(taq_data_analysis_responses_event
@@ -93,7 +93,7 @@ def main():
     year = '2008'
 
     # Basic folders
-    # taq_data_tools_responses_event.taq_start_folders(year)
+    taq_data_tools_responses_event.taq_start_folders(year)
 
     # Run analysis
     taq_data_plot_generator(tickers, year)
