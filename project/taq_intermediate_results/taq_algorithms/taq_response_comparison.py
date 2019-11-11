@@ -20,9 +20,11 @@ The module contains the following functions:
 # ----------------------------------------------------------------------------
 # Modules
 from matplotlib import pyplot as plt
+import multiprocessing as mp
 import numpy as np
 import os
 import pickle
+from itertools import product
 
 __tau__ = 1000
 
@@ -171,10 +173,15 @@ def main():
     :return: None.
     """
 
-    taq_self_response_year_avg_plot('AAPL', '2008')
-    taq_self_response_year_avg_plot('MSFT', '2008')
-    taq_cross_response_year_avg_plot('AAPL', 'MSFT', '2008')
-    taq_cross_response_year_avg_plot('MSFT', 'AAPL', '2008')
+    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    year = '2008'
+
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_self_response_year_avg_plot,
+                     product(tickers, [year]))
+        pool.starmap(taq_cross_response_year_avg_plot,
+                     product(tickers, tickers, [year]))
 
     return None
 
