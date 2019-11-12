@@ -630,11 +630,46 @@ like the present one. A new foundation is needed that takes into account the
 interplay between heterogeneous agents.
 (Economic theory failure)
 
-## Trades per minute
+**The Market Impact Puzzle**
+The square root model is strikingly simple. Let $G$ denote the percentage cost
+of executing abet or meta-order of $Q$ shares of stock with price $P$,
+expressed as a fraction of the value of the bet $|PQ|$. Let $\sigma^{2}$ denote
+the asset’s returns variance per day, and let $V$ denote the asset’s trading
+volume in shares per day. Then the square root model of market impact can be
+written
 
+$$G = g \left(\sigma, P, V; Q) \prop \sigma \left( frac{\left|Q\right|}{V}
+\right)^{\frac{1}{2}}$$
 
-## Short long
+where $g(\ldots)$ provides a functional form for the model and the notation
+"\prop" means “is proportional to”. Trading volume and returns volatility are
+easy to observe or estimate. Empirical estimates suggest that the
+proportionality constant is close to one, and theory implies that it is exactly
+one for each asset; thus, the same model can be applied to all assets
+simultaneously. For example, if daily volatility is 2 percent and trading
+volume is one million shares per day, then execution of 5 percent of daily
+trading volume is expected to move prices or to cost a trader about 45 basis
+points $\left(0.02\left(0.05\right)^{\frac{1}{2}\left)$, or about $0.45\%$ of
+the dollar value traded.
+(Square root model)
 
+The square root model has two distinct disadvantages. First, even though the
+square root model seems to be a reasonable approximation to empirical estimates
+of transaction costs, there is still no consensus on whether market impact
+functions can indeed be described exactly by the square root function.
+Second, the square-root model is hard to reconcile with theoretical research.
+Following the methodology proposed by Kyle and Obizhaeva (2017a), Pohl et al.
+(2017) point out that volume and volatility are sufficient for deriving a
+square root model using dimensional analysis and leverage neutrality. By
+contrast, most theoretical models of market microstructure lead to a model of
+linear market impact, not a square root model.
+(Square root model disadvantages)
 
-
-## Shift
+Models with non-linear market impactare usually analytically intractable and
+seem to allow for simple arbitrage strategies. If market impact is sufficiently
+concave in the size of bets, then one could hypothetically make profits simply
+by making many purchases in small tranches and then selling the entire
+accumulated position as one large order. For example, given market impact (1),
+one could make profits by executing over time ten buy trades of 100 shares each
+and then selling 1000 shares at once.
+(Arbitrage in models with non-linear market impact)
