@@ -673,3 +673,32 @@ accumulated position as one large order. For example, given market impact (1),
 one could make profits by executing over time ten buy trades of 100 shares each
 and then selling 1000 shares at once.
 (Arbitrage in models with non-linear market impact)
+
+**Econophysics**
+_Thomas Guhr Book_
+We set
+
+$$\varepsilon\left(t\right)=\text{sign}\left(S\left(t\right)-m\left(t-\delta
+  \right)\right)$$
+
+where $\delta$ is a positive time increment smaller than all time differences
+between consecutives trades. Hence we have
+
+$$\varepsilon\left(t\right)=\left\{ \begin{array}{cc}
++1, & \text{If }S\left(t\right) \text{ is higher than the last } m\left( t \right)\\
+-1, & \text{If }S\left(t\right) \text{ is lower than the last } m\left( t \right)
+\end{array}\right.$$
+
+What does the trade sign tell us? Suppose a trader urgently wishes to buy
+shares, and he is satisfied with the best ask $a(t)$. He sends out a market
+order and buys all shares offered at the best ask. Hence, the actual traded
+price is equal to the best ask, $S(t) = a(t). As $a(t) > m(t)$, we have
+$\varepsilon(t) = +1$. After this trade, the second best ask before the trade
+becomes the new best bid. If he does not buy all shares, we still have
+$S(t) = a(t)$ and thus $\varepsilon(t)=+1$, but the best bid after the trade is
+the same as before the trade. Hence, $\varepsilon(t) = +1$ indicates that the
+trade was triggered by a market order to buy. The corresponding considerations
+apply, if this trader wants to sell shares. The traded price is then the best
+bid, $S(t) = b(t), and due to $b(t) < m(t)$, we have $\varepsilon(t) = -1$.
+Hence, a trade triggered by a market order to sell yields $\varepsilon(t) = -1$.
+
