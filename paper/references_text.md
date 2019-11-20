@@ -692,13 +692,13 @@ $$\varepsilon\left(t\right)=\left\{ \begin{array}{cc}
 What does the trade sign tell us? Suppose a trader urgently wishes to buy
 shares, and he is satisfied with the best ask $a(t)$. He sends out a market
 order and buys all shares offered at the best ask. Hence, the actual traded
-price is equal to the best ask, $S(t) = a(t). As $a(t) > m(t)$, we have
+price is equal to the best ask, $S(t) = a(t)$. As $a(t) > m(t)$, we have
 $\varepsilon(t) = +1$. After this trade, the second best ask before the trade
 becomes the new best bid. If he does not buy all shares, we still have
 $S(t) = a(t)$ and thus $\varepsilon(t)=+1$, but the best bid after the trade is
 the same as before the trade. Hence, $\varepsilon(t) = +1$ indicates that the
 trade was triggered by a market order to buy. The corresponding considerations
 apply, if this trader wants to sell shares. The traded price is then the best
-bid, $S(t) = b(t), and due to $b(t) < m(t)$, we have $\varepsilon(t) = -1$.
+bid, $S(t) = b(t)$, and due to $b(t) < m(t)$, we have $\varepsilon(t) = -1$.
 Hence, a trade triggered by a market order to sell yields $\varepsilon(t) = -1$.
 
