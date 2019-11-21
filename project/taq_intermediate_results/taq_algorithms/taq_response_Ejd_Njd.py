@@ -29,6 +29,7 @@ import multiprocessing as mp
 import numpy as np
 import os
 import pickle
+import scipy.stats as stats
 from itertools import product
 
 __tau__ = 1000
@@ -208,42 +209,129 @@ def main():
         trades_sum[t_idx] = t_sum
         trades_num[t_idx] = t_num
 
+    # Plot Ej,d(t)
+    fig = plt.figure(figsize=(16,9))
     plt.plot(trades_sum, label='sum')
-    plt.legend()
-    plt.title('$E_{j,d}(t)$')
-    plt.xlabel('Time $[s]$')
-    plt.ylabel('$E_{j,d}(t)$')
-    plt.show()
+    plt.legend(loc='best', fontsize=25)
+    plt.title(f'{ticker}', fontsize=40)
+    plt.xlabel(r'Time $[s]$', fontsize=35)
+    plt.ylabel(r'$E_{j,d}(t$', fontsize=35)
+    plt.xticks(fontsize=25)
+    plt.yticks(fontsize=25)
+    plt.grid(True)
+    plt.tight_layout()
+    fig.savefig('Ejd.png')
 
+    # Get the absolute value of Ej,d(t) to see the magnitud
     trades_sum_abs = np.abs(trades_sum)
 
-    plt.plot(trades_sum_abs, label='sum')
-    plt.legend()
-    plt.title('$|E_{j,d}(t)|$')
-    plt.xlabel('Time $[s]$')
-    plt.ylabel('$|E_{j,d}(t)|$')
-    plt.show()
+    # Max number of imbalance and trades per second
+    print()
+    print('GENERAL INFO')
+    print(f'The max number of imbalances is {max(trades_sum_abs)}')
+    print(f'The max number of trades is {max(trades_num)}')
 
-    plt.plot(trades_num, label='num')
-    plt.legend()
-    plt.title('$N_{j,d}(t)$')
-    plt.xlabel('Time $[s]$')
-    plt.ylabel('Number of trades')
-    plt.show()
+    print(f'On average, they are {int(np.mean(trades_num))} trades per second')
+    print(f'On average, they are {int(np.mean(trades_sum_abs))} imbalance per second')
 
-    trades_sum_norm = (trades_sum - np.mean(trades_sum)) / np.std(trades_sum)
-    trades_sum_abs_norm = (trades_sum_abs - np.mean(trades_sum_abs)) / np.std(trades_sum_abs)
-    trades_num_norm = (trades_num - np.mean(trades_num)) / np.std(trades_num)
+    # Plot |Ej,d(t)| with Nj,d(t)
+    fig = plt.figure(figsize=(16,9))
+    plt.plot(trades_num, label='$N_{j,d}(t)$')
+    plt.plot(trades_sum_abs, label='$|E_{j,d}(t)|$')
+    plt.legend(loc='best', fontsize=25)
+    plt.title(f'{ticker}', fontsize=40)
+    plt.xlabel(r'Time $[s]$', fontsize=35)
+    plt.ylabel(r'$N_{j,d}(t)$ or $|E_{j,d}(t)|$', fontsize=35)
+    plt.xticks(fontsize=25)
+    plt.yticks(fontsize=25)
+    plt.grid(True)
+    plt.tight_layout()
+    fig.savefig('Ejd_abs_vs_Njd.png')
 
-    plt.hist(trades_sum_norm, bins=100)
-    plt.hist(trades_num_norm, bins=100)
-    plt.hist(trades_sum_abs_norm, bins=100)
-    plt.show()
+    print()
+    print('ZEROS INFO')
+    print(f'The number of values equal in E and N are {np.sum(trades_num == trades_sum_abs)}')
+    # Difference Nj,d(t) - |Ej,d(t)|
+    difference_Njd_Ejd_abs = trades_num - trades_sum_abs
 
-    # plt.hist(trades_num, bins=100)
+    print(f'The number of values greater than zero are {len(difference_Njd_Ejd_abs[difference_Njd_Ejd_abs > 0])}')
+    print(f'The number of values equal to zero are {len(difference_Njd_Ejd_abs[difference_Njd_Ejd_abs == 0])}')
+
+    # Plot Nj,d(t) - |Ej,d(t)|
+    fig = plt.figure(figsize=(16,9))
+    plt.plot(difference_Njd_Ejd_abs, label='$N_{j,d}(t) - |E_{j,d}(t)|$')
+    plt.legend(loc='best', fontsize=25)
+    plt.title(f'{ticker}', fontsize=40)
+    plt.xlabel(r'Time $[s]$', fontsize=35)
+    plt.ylabel(r'Trades', fontsize=35)
+    plt.xticks(fontsize=25)
+    plt.yticks(fontsize=25)
+    plt.grid(True)
+    plt.tight_layout()
+    fig.savefig('difference_Ejd_abs_Njd.png')
+
+    # PDF
+    fig = plt.figure(figsize=(16,9))
+    plt.hist(trades_num, bins='auto', label='$N_{j,d}(t)$')
+    plt.hist(trades_sum_abs, bins='auto', label='$|E_{j,d}(t)|$')
+    plt.legend(loc='best', fontsize=25)
+    plt.title(f'{ticker}', fontsize=40)
+    plt.xlabel(r'Number of trades or Imbalance number', fontsize=35)
+    plt.ylabel(r'Counts', fontsize=35)
+    plt.xticks(fontsize=25)
+    plt.yticks(fontsize=25)
+    plt.xlim((0,20))
+    plt.grid(True)
+    plt.tight_layout()
+    fig.savefig('Ejd_Njd_pdf.png')
+
+    # |Ej,d(t)| and Nj,d(t) without zero with reference trade numbers
+    condition_num_no_0 = trades_num != 0
+    trades_num_no_0 = trades_num[condition_num_no_0]
+    trades_sum_abs_no_0 = trades_sum_abs[condition_num_no_0]
+    print(f'El número de segundos con balance es {np.sum(trades_sum_abs_no_0 == 0)}')
+
+    # |Ej,d(t)| / Nj,d(t)
+    rel_Ejd_Njd = trades_sum_abs_no_0 / trades_num_no_0
+
+    print(f'The values equal to one are equal to {np.sum(rel_Ejd_Njd == 1)}')
+
+    # Plot |Ej,d(t)| / Nj,d(t)
+    fig = plt.figure(figsize=(16,9))
+    plt.plot(rel_Ejd_Njd)
+    plt.title(f'{ticker}', fontsize=40)
+    plt.xlabel(r'Time $[s]$', fontsize=35)
+    plt.ylabel(r'$\frac{|E_{j,d}(t)|}{N_{j,d}(t)}$', fontsize=35)
+    plt.xticks(fontsize=25)
+    plt.yticks(fontsize=25)
+    plt.grid(True)
+    plt.tight_layout()
+    fig.savefig('Ejd_over_Njd.png')
+
+    # PDF
+    fig = plt.figure(figsize=(16,9))
+    plt.hist(rel_Ejd_Njd, bins=100, label=r'$\frac{|E_{j,d}(t)|}{N_{j,d}(t)}$')
+    plt.legend(loc='best', fontsize=25)
+    plt.title(f'{ticker}', fontsize=40)
+    plt.xlabel(r'$\frac{|E_{j,d}(t)|}{N_{j,d}(t)}$', fontsize=35)
+    plt.ylabel(r'Counts', fontsize=35)
+    plt.xticks(fontsize=25)
+    plt.yticks(fontsize=25)
+    plt.grid(True)
+    plt.tight_layout()
+    fig.savefig('Ejd_over_Njd_pdf.png')
+
+    # Normalization of the values to compare the PDF
+    # trades_sum_norm = (trades_sum - np.mean(trades_sum)) / np.std(trades_sum)
+    # trades_sum_abs_norm = (trades_sum_abs - np.mean(trades_sum_abs)) / np.std(trades_sum_abs)
+    # trades_num_norm = (trades_num - np.mean(trades_num)) / np.std(trades_num)
+
+    # plt.hist(trades_num_norm, bins='auto')
+    # plt.hist(trades_sum_abs_norm, bins='auto')
+    # plt.xlim((-1,5))
     # plt.show()
 
-    # plt.plot(np.abs(trades_sum[trades_num != 0]) / trades_num[trades_num != 0])
+    # plt.hist(trades_num, bins=100)
     # plt.show()
 
     # plt.hist(np.abs(trades_sum[trades_num != 0]) / trades_num[trades_num != 0], bins=100)
