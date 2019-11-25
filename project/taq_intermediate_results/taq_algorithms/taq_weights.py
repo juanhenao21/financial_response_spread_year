@@ -50,6 +50,8 @@ def taq_bussiness_days(year):
     return date_list
 
 # -----------------------------------------------------------------------------
+
+
 def taq_trades_number_imbalance_day_data(ticker, date):
     """ Compute the number of trades an imbalance for a day.
 

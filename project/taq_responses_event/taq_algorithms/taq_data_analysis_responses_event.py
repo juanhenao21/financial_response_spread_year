@@ -31,6 +31,7 @@ import pandas as pd
 import pickle
 
 import multiprocessing as mp
+from itertools import product
 
 import taq_data_tools_responses_event
 
@@ -294,7 +295,8 @@ def taq_self_response_day_responses_event_data_test(ticker, date):
         print('No data')
         print(e)
         print()
-        return None
+        zeros = np.zeros(__tau__)
+        return (zeros, zeros)
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
@@ -317,28 +319,33 @@ def taq_self_response_year_responses_event_data(ticker, year):
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         '', '')
 
-    dates = taq_data_tools_responses_event.taq_bussiness_days(year)
+    # dates = taq_data_tools_responses_event.taq_bussiness_days(year)
+    dates = ['2008-01-01','2008-01-02', '2008-01-03', '2008-01-04']
 
-    self_ = np.zeros(__tau__)
-    num_s = np.zeros(__tau__)
+    data = []
+    args_prod = product([ticker], dates)
 
-    for date in dates:
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        data.append(pool.starmap(taq_self_response_day_responses_event_data,
+                                 args_prod))
 
-        try:
-            data, avg_num = taq_self_response_day_responses_event_data(ticker,
-                                                                       date)
-            self_ += data
-            num_s += avg_num
+    total = np.sum(data[0], axis=0)
+    print(total)
+        # try:
+        #     data, avg_num = taq_self_response_day_responses_event_data(ticker,
+        #                                                                date)
+        #     self_ += data
+        #     num_s += avg_num
 
-        except TypeError:
-            pass
+        # except TypeError:
+        #     pass
 
     # Saving data
-    taq_data_tools_responses_event \
-        .taq_save_data(function_name, self_ / num_s, ticker, ticker, year,
-                       '', '')
+    # taq_data_tools_responses_event \
+    #     .taq_save_data(function_name, self_ / num_s, ticker, ticker, year,
+    #                    '', '')
 
-    return (self_ / num_s, num_s)
+    # return (self_ / num_s, num_s)
 
 # ----------------------------------------------------------------------------
 
@@ -500,7 +507,7 @@ def main():
     tickers = ['AAPL', 'MSFT']
 
     t0 = time.time()
-    taq_cross_response_day_responses_event_data('AAPL', 'MSFT', '2008-01-02')
+    taq_self_response_year_responses_event_data('AAPL', '2008')
     t1 = time.time()
     print(f'Total: {(t1 - t0) / 60}s')
 
