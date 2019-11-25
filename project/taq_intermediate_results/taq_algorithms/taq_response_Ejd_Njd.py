@@ -14,10 +14,21 @@ This script requires the following modules:
     * scipy
 
 The module contains the following functions:
-    * taq_self_response_year_avg_plot - plots the self-response average for a
-      year.
-    * taq_cross_response_year_avg_plot - plots the cross-response average for a
-      year.
+    * taq_trades_number_imbalance_day_data - obtain the number of trades and
+     imbalance in every second for one day.
+    * taq_Ejd_Njd_general_info_day - print the details of the day data.
+    * taq_imbalance_day_plot - plot the imbalance data for a day.
+    * taq_abs_imbalance_trades_day_plot - plot the magnitude of the imbalance
+     data and the number of trades for a day.
+    * taq_difference_trades_abs_imbalance_day_plot - plot the difference
+     between the number of trades and the imbalance for a day.
+    * taq_pdf_trades_abs_imbalance_day_plot - plot the distribution of the
+     magnitude of the imbalance and the trades for a day.
+    * taq_relation_abs_imbalance_trades_day_plot - plot the relation between
+     the imbalance magnitude and the number of trades for a day.
+    * taq_pdf_abs_imbalance_over_trades_day_plot - plot the distribution of the
+     magnitude of the relation between the imbalance magnitude and the number
+     of trades for a day.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -114,6 +125,7 @@ def taq_Ejd_Njd_general_info_day(ticker, date, trades_num, trades_sum):
     rel_Ejd_Njd = trades_sum_abs_no_0 / trades_num_no_0
 
     print(f'General info - {ticker} - {date}')
+    print(f'--------------------------------')
     print()
     print(f'The max number of imbalances is {max(trades_sum_abs)}')
     print(f'The max number of trades is {max(trades_num)}')
@@ -127,7 +139,7 @@ def taq_Ejd_Njd_general_info_day(ticker, date, trades_num, trades_sum):
     print('Zeros info')
     print(f'The trades have {np.sum(trades_num == 0)} second without events')
     print(f'The imbalance have {np.sum(trades_sum == 0)} seconds without'
-         + 'events or with a balance')
+         + ' events or with a balance')
     print(f'The number of balance is {np.sum(trades_sum_abs_no_0 == 0)}')
     print()
 
@@ -135,8 +147,9 @@ def taq_Ejd_Njd_general_info_day(ticker, date, trades_num, trades_sum):
     print(f'The number of values equal in E_j,d(t) and N_j,d(t) are '
          + f'{np.sum(trades_num == trades_sum_abs)} (excluding seconds '
          + f'without events)')
-    print(f'The values equal to one in the relation E_jd(t)/N_jd(t) are'
+    print(f'The values equal to one in the relation E_jd(t)/N_jd(t) are '
           + f'{np.sum(rel_Ejd_Njd == 1)}')
+    print()
 
     return None
 
@@ -200,6 +213,7 @@ def taq_abs_imbalance_trades_day_plot(ticker, date, trades_num, trades_sum):
     plt.grid(True)
     plt.tight_layout()
     fig.savefig(f'../taq_plot/taq_Ejd_Njd/day/abs_Ejd_Njd_{ticker}_{date}.png')
+    plt.close(fig)
 
     return None
 
@@ -237,6 +251,7 @@ def taq_difference_trades_abs_imbalance_day_plot(ticker, date, trades_num,
     plt.tight_layout()
     fig.savefig(f'../taq_plot/taq_Ejd_Njd/day/diff_Njd_Ejd_abs_{ticker}_{date}'
                + '.png')
+    plt.close(fig)
 
     return None
 
@@ -273,13 +288,14 @@ def taq_pdf_trades_abs_imbalance_day_plot(ticker, date, trades_num,
     plt.grid(True)
     plt.tight_layout()
     fig.savefig(f'../taq_plot/taq_Ejd_Njd/day/Ejd_Njd_pdf_{ticker}_{date}.png')
+    plt.close(fig)
 
     return None
 
 # ----------------------------------------------------------------------------
 
 
-def taq_relation_abs_imbalance_trades_plot(ticker, date, trades_num,
+def taq_relation_abs_imbalance_trades_day_plot(ticker, date, trades_num,
                                           trades_sum):
     """Plot the relation Ej,d(t)/Nj,d(t) of trades and abs imbalance.
 
@@ -313,6 +329,7 @@ def taq_relation_abs_imbalance_trades_plot(ticker, date, trades_num,
     plt.tight_layout()
     fig.savefig(f'../taq_plot/taq_Ejd_Njd/day/Ejd_over_Njd_{ticker}_{date}'
                 + '.png')
+    plt.close(fig)
 
     return None
 
@@ -354,6 +371,10 @@ def taq_pdf_abs_imbalance_over_trades_day_plot(ticker, date, trades_num,
     plt.tight_layout()
     fig.savefig(f'../taq_plot/taq_Ejd_Njd/day/Ejd_over_Njd_pdf_{ticker}_{date}'
                 + '.png')
+    plt.close(fig)
+
+    return None
+
 # ----------------------------------------------------------------------------
 
 
@@ -366,6 +387,7 @@ def main():
     """
 
     tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    dates = ['2008-01-02', '2008-04-08', '2008-08-14', '2008-12-18']
 
     ticker = 'AAPL'
     year = '2008'
@@ -375,7 +397,8 @@ def main():
 
     for ticker in tickers:
 
-        trades_num, trades_sum = taq_trades_number_imbalance_day_data(ticker, date)
+        trades_num, trades_sum = taq_trades_number_imbalance_day_data(ticker,
+                                                                      date)
 
         # Plot Ej,d(t)
         taq_imbalance_day_plot(ticker, date, trades_sum)
@@ -391,15 +414,16 @@ def main():
                                                     trades_sum)
 
         # PDF
-        taq_pdf_trades_abs_imbalance_day_plot(ticker, date, trades_num, trades_sum)
+        taq_pdf_trades_abs_imbalance_day_plot(ticker, date, trades_num,
+                                              trades_sum)
 
         # Plot |Ej,d(t)| / Nj,d(t)
-        taq_relation_abs_imbalance_trades_plot(ticker, date, trades_num,
-                                            trades_sum)
+        taq_relation_abs_imbalance_trades_day_plot(ticker, date, trades_num,
+                                                   trades_sum)
 
         # PDF
         taq_pdf_abs_imbalance_over_trades_day_plot(ticker, date, trades_num,
-                                                trades_sum)
+                                                   trades_sum)
 
     return None
 
