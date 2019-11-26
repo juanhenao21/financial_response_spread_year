@@ -98,9 +98,9 @@ def taq_trades_number_imbalance_day_data(ticker, date):
         return (trades_num, trades_sum)
 
     except FileNotFoundError as e:
-        print('No data')
-        print(e)
-        print()
+        # print('No data')
+        # print(e)
+        # print()
 
         zeros = np.zeros(len(range(34801, 57001)))
         return (zeros, zeros)
@@ -117,7 +117,7 @@ def taq_event_weight_day(ticker, date):
      (i.e. '2008-01-02').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
-    print(date)
+
     # Compute data
     trades_num, trades_sum = taq_trades_number_imbalance_day_data(ticker, date)
     # Magnitude of the imbalance
@@ -142,24 +142,95 @@ def taq_event_weight_year(ticker, year):
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2008').
-    :return: tuple -- The function returns a tuple with values.
+    :return: tuple -- The function returns a value.
     """
 
     date_list = taq_bussiness_days(year)
     # date_list = ['2008-01-02', '2008-01-03', '2008-01-04']
-    weight = []
+    data = []
     args_prod = product([ticker], date_list)
 
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        weight.append(pool.starmap(taq_event_weight_day, args_prod))
+        data.append(pool.starmap(taq_event_weight_day, args_prod))
         # pool.starmap(taq_event_weight_day, args_prod)
 
-    total = np.sum(weight[0], axis=0)
+    total = np.sum(data[0], axis=0)
 
-    print(total)
-    print(f'Weight = {total[1] / total[0]}')
+    weight = total[1] / total[0]
 
-    return None
+    return weight
+
+# ----------------------------------------------------------------------------
+
+
+def taq_event_time_self_response_relation_year(ticker, year):
+    """Compute the relation between the event and time self response
+
+    :param ticker: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :return: tuple -- The function returns a value.
+    """
+
+    try:
+
+        self_response_event = np.abs(pickle.load(open(''.join((
+            f'../../taq_data/responses_event_data_{year}/taq_self_response'
+            + f'_year_responses_event_data/taq_self_response_year_responses'
+            + f'_event_data_{year}_{ticker}.pickle').split()), 'rb')))
+        self_response_time = np.abs(pickle.load(open(''.join((
+            f'../../taq_data/article_reproduction_data_{year}/taq_self'
+            + f'_response_year_data/taq_self_response_year_data_{year}'
+            + f'_{ticker}.pickle').split()), 'rb')))
+
+        relation = self_response_event / self_response_time
+        rel_value = np.mean(relation)
+
+        return rel_value
+
+    except FileNotFoundError as e:
+        # print('No data')
+        # print(e)
+        # print()
+        return None
+
+# ----------------------------------------------------------------------------
+
+
+def taq_event_time_cross_response_relation_year(ticker_i, ticker_j, year):
+    """Compute the relation between the event and time self response
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e '2008').
+    :return: tuple -- The function returns a value.
+    """
+
+    try:
+
+        cross_response_event = np.abs(pickle.load(open(''.join((
+            f'../../taq_data/responses_event_data_{year}/taq_cross_response'
+            + f'_year_responses_event_data/taq_cross_response_year_responses'
+            + f'_event_data_{year}_{ticker_i}i_{ticker_j}j.pickle').split()),
+            'rb')))
+        cross_response_time = np.abs(pickle.load(open(''.join((
+            f'../../taq_data/article_reproduction_data_{year}/taq_cross'
+            + f'_response_year_data/taq_cross_response_year_data_{year}'
+            + f'_{ticker_i}i_{ticker_j}j.pickle').split()), 'rb')))
+
+        relation = cross_response_event / cross_response_time
+        rel_value = np.mean(relation)
+
+        return rel_value
+
+    except FileNotFoundError as e:
+        # print('No data')
+        # print(e)
+        # print()
+        return None
+
 # ----------------------------------------------------------------------------
 
 
@@ -171,16 +242,46 @@ def main():
     :return: None.
     """
 
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
-    dates = ['2008-01-02', '2008-04-08', '2008-08-14', '2008-12-18']
-
-    ticker = 'AAPL'
+    tickers_i = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    ticker_j = 'AAPL'
     year = '2008'
-    month = '01'
-    day = '02'
-    date = '2008-01-02'
 
-    taq_event_weight_year(ticker, year)
+    # weight_j = taq_event_weight_year(ticker_j, year)
+    # pickle.dump(weight_j, open(f'weight_{ticker_j}.pickle', 'wb'))
+    weight_j = pickle.load(open(f'weight_{ticker_j}.pickle', 'rb'))
+
+    for t_idx, ticker_i in enumerate(tickers_i):
+
+        if (ticker_i == ticker_j):
+
+            self_rel = \
+                taq_event_time_self_response_relation_year(ticker_i, year)
+            rel_error = np.abs(weight_j - self_rel) / weight_j * 100
+
+            print(f'Self-response {ticker_j}')
+            print(f'Weight = {weight_j :.5f}')
+            print(f'Self-response relation = {self_rel :.5f}')
+            print(f'Relative error = {rel_error :.3f}%')
+            print()
+
+        else:
+
+            try:
+                cross_rel = \
+                    taq_event_time_cross_response_relation_year(ticker_i,
+                                                                ticker_j,
+                                                                year)
+                rel_error = np.abs(weight_j - cross_rel) / weight_j * 100
+
+                print(f'Cross-response ticker_i {ticker_i} - ticker_j '
+                      + f'{ticker_j}')
+                print(f'Weight = {weight_j :.5f}')
+                print(f'Cross-response relation = {cross_rel :.5f}')
+                print(f'Relative error = {rel_error :.3f}%')
+                print()
+
+            except TypeError:
+                pass
 
     return None
 
