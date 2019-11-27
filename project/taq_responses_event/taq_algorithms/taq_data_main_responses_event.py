@@ -49,27 +49,21 @@ def taq_data_plot_generator(tickers, year):
      a value.
     """
 
-    date_list = taq_data_tools_responses_event.taq_bussiness_days(year)
+    for ticker_i in tickers:
+        for ticker_j in tickers:
+
+            if (ticker_i == ticker_j):
+                # Self-response
+                pass
+            else:
+                taq_data_analysis_responses_event. \
+                    taq_cross_response_year_responses_event_data(ticker_i,
+                                                                 ticker_j,
+                                                                 year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
-        # Basic functions
-        pool.starmap(taq_data_analysis_responses_event \
-                     .taq_midpoint_day_responses_event_data,
-                     product(tickers, date_list))
-
-        # Especific functions
-        pool.starmap(taq_data_analysis_responses_event
-                     .taq_self_response_year_responses_event_data,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_analysis_responses_event
-                     .taq_cross_response_year_responses_event_data,
-                     product(tickers, tickers, [year]))
-
-        pool.starmap(taq_data_plot_responses_event
-                     .taq_self_response_year_avg_plot,
-                     product(tickers, [year]))
         pool.starmap(taq_data_plot_responses_event
                      .taq_cross_response_year_avg_plot,
                      product(tickers, tickers, [year]))
@@ -88,12 +82,11 @@ def main():
     """
 
     # Tickers and days to analyze
-    # tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
-    tickers = ['AAPL', 'MSFT']
+    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
     year = '2008'
 
     # Basic folders
-    taq_data_tools_responses_event.taq_start_folders(year)
+    # taq_data_tools_responses_event.taq_start_folders(year)
 
     # Run analysis
     taq_data_plot_generator(tickers, year)
