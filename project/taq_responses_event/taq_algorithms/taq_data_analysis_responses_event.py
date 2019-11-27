@@ -184,7 +184,8 @@ def taq_self_response_day_responses_event_data(ticker, date):
         print('No data')
         print(e)
         print()
-        return None
+        zeros = np.zeros(__tau__)
+        return (zeros, zeros)
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
@@ -319,8 +320,7 @@ def taq_self_response_year_responses_event_data(ticker, year):
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         '', '')
 
-    # dates = taq_data_tools_responses_event.taq_bussiness_days(year)
-    dates = ['2008-01-01','2008-01-02', '2008-01-03', '2008-01-04']
+    dates = taq_data_tools_responses_event.taq_bussiness_days(year)
 
     data = []
     args_prod = product([ticker], dates)
@@ -330,22 +330,13 @@ def taq_self_response_year_responses_event_data(ticker, year):
                                  args_prod))
 
     total = np.sum(data[0], axis=0)
-    print(total)
-        # try:
-        #     data, avg_num = taq_self_response_day_responses_event_data(ticker,
-        #                                                                date)
-        #     self_ += data
-        #     num_s += avg_num
-
-        # except TypeError:
-        #     pass
 
     # Saving data
-    # taq_data_tools_responses_event \
-    #     .taq_save_data(function_name, self_ / num_s, ticker, ticker, year,
-    #                    '', '')
+    taq_data_tools_responses_event \
+        .taq_save_data(function_name, total[0] / total[1], ticker, ticker,
+                       year, '', '')
 
-    # return (self_ / num_s, num_s)
+    return (total[0] / total[1], total[1])
 
 # ----------------------------------------------------------------------------
 
@@ -438,7 +429,8 @@ def taq_cross_response_day_responses_event_data(ticker_i, ticker_j, date):
             print('No data')
             print(e)
             print()
-            return None
+            zeros = np.zeros(__tau__)
+            return (zeros, zeros)
 
 # ----------------------------------------------------------------------------
 
@@ -470,27 +462,21 @@ def taq_cross_response_year_responses_event_data(ticker_i, ticker_j, year):
 
         dates = taq_data_tools_responses_event.taq_bussiness_days(year)
 
-        cross = np.zeros(__tau__)
-        num_c = np.zeros(__tau__)
+        data = []
+        args_prod = product([ticker_i], [ticker_j], dates)
 
-        for date in dates:
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            data.append(pool.starmap(
+                taq_cross_response_day_responses_event_data, args_prod))
 
-            try:
-                data, avg_num = \
-                    taq_cross_response_day_responses_event_data(ticker_i,
-                                                                ticker_j, date)
-                cross += data
-                num_c += avg_num
-
-            except TypeError:
-                pass
+        total = np.sum(data[0], axis=0)
 
         # Saving data
         taq_data_tools_responses_event \
-            .taq_save_data(function_name, cross / num_c, ticker_i, ticker_j,
-                           year, '', '')
+            .taq_save_data(function_name, total[0] / total[1], ticker_i,
+                           ticker_j, year, '', '')
 
-        return (cross / num_c, num_c)
+        return (total[0] / total[1], total[1])
 
 # ----------------------------------------------------------------------------
 
@@ -502,14 +488,8 @@ def main():
 
     :return: None.
     """
-    import time
 
-    tickers = ['AAPL', 'MSFT']
-
-    t0 = time.time()
-    taq_self_response_year_responses_event_data('AAPL', '2008')
-    t1 = time.time()
-    print(f'Total: {(t1 - t0) / 60}s')
+    pass
 
     return None
 
