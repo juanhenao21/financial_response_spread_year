@@ -76,7 +76,7 @@ Buy limit orders are called bids, and sell limit orders are called offers or
 asks. At any given time there is a best (lowest) offer to sell with price $a(t)$,
 and a best (highest) bid to buy with price $b(t)$. These are also called the
 inside quotes or the best prices. The price gap between them is called the
-spread $s(t) = a(t)−b(t)$. Prices are not continuous, but rather change in
+spread $s(t) = a(t)-b(t)$. Prices are not continuous, but rather change in
 discrete quanta called ticks, of size $\Delta p$. The number of shares in an
 order is called either its size or its volume.
 A high density of limit orders per price results in high liquidity for market
