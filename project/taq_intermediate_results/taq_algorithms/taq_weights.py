@@ -220,8 +220,6 @@ def taq_event_time_cross_response_relation_year(ticker_i, ticker_j, year):
             + f'_response_year_data/taq_cross_response_year_data_{year}'
             + f'_{ticker_i}i_{ticker_j}j.pickle').split()), 'rb')))
 
-        print(cross_response_event)
-        print(cross_response_time)
         relation = cross_response_event / cross_response_time
         rel_value = np.mean(relation)
 
@@ -274,7 +272,6 @@ def main():
                     taq_event_time_cross_response_relation_year(ticker_i,
                                                                 ticker_j,
                                                                 year)
-                print(cross_rel)
                 rel_error = np.abs(weight_j - cross_rel) / weight_j * 100
 
                 print(f'Cross-response ticker_i {ticker_i} - ticker_j '
