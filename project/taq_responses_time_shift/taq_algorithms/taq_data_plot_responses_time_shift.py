@@ -67,7 +67,8 @@ def taq_self_response_year_avg_responses_time_shift_plot(ticker, year, shifts):
 
             plt.semilogx(self_, linewidth=5, label='Shift {} s'.format(shift))
 
-        plt.legend(loc='best', fontsize=25)
+        plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=6,
+                    fontsize=15)
         plt.title('Self-response - {}'.format(ticker), fontsize=40)
         plt.xlabel(r'$\tau \, [s]$', fontsize=35)
         plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
@@ -138,7 +139,8 @@ def taq_cross_response_year_avg_responses_time_shift_plot(ticker_i, ticker_j,
                 plt.semilogx(cross, linewidth=5, label='Shift {} s'
                              .format(shift))
 
-            plt.legend(loc='best', fontsize=25)
+            plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=6,
+                       fontsize=15)
             plt.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
                       fontsize=40)
             plt.xlabel(r'$\tau \, [s]$', fontsize=35)
@@ -175,7 +177,9 @@ def main():
     :return: None.
     """
 
-    pass
+    shifts = [1, 5, 10, 50, 100, 500, 1000, 5000]
+
+    taq_self_response_year_avg_responses_time_shift_plot('AAPL', '2008', shifts)
 
     return None
 
