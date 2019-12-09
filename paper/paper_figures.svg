@@ -17,7 +17,7 @@
    inkscape:export-filename="/home/tp/jchenaol/bitmap.png"
    inkscape:export-xdpi="73384.016"
    inkscape:export-ydpi="73384.016"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.1 r15371"
    sodipodi:docname="paper_figures.svg">
   <defs
      id="defs2">
@@ -37,8 +37,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="489.63764"
-     inkscape:cy="264.86708"
+     inkscape:cx="337.60968"
+     inkscape:cy="382.04478"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -50,9 +50,9 @@
      inkscape:snap-intersection-paths="true"
      inkscape:object-paths="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1025"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1143"
+     inkscape:window-x="1280"
+     inkscape:window-y="20"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
@@ -1128,7 +1128,12 @@
          x="180.22969"
          y="312.91919"
          style="font-size:4.13816786px;stroke-width:0.20690838"
-         id="tspan176">Last quote second</tspan></text>
+         id="tspan176">Last change in quotes</tspan><tspan
+         sodipodi:role="line"
+         x="180.22969"
+         y="318.09189"
+         style="font-size:4.13816786px;stroke-width:0.20690838"
+         id="tspan306">in a second</tspan></text>
     <rect
        style="fill:#000000;stroke-width:0.20928225"
        id="rect10-9"
@@ -1689,7 +1694,12 @@
          x="180.22923"
          y="241.7272"
          style="font-size:4.13816786px;stroke-width:0.20690838"
-         id="tspan176-8">Last quote second</tspan></text>
+         id="tspan176-8">Last change in quotes</tspan><tspan
+         sodipodi:role="line"
+         x="180.22923"
+         y="246.89992"
+         style="font-size:4.13816786px;stroke-width:0.20690838"
+         id="tspan304">in a second</tspan></text>
     <rect
        style="fill:#d4aa00;stroke-width:0.43691739"
        id="rect12-9-0-1-6-1-4"
@@ -2429,7 +2439,7 @@
          x="180.22923"
          y="159.53493"
          style="font-size:4.13816786px;stroke-width:0.20690838"
-         id="tspan176-6">Quote</tspan></text>
+         id="tspan176-6">Change in quotes</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
@@ -2444,7 +2454,12 @@
          id="tspan374-5-2"
          x="180.05545"
          y="170.89851"
-         style="font-size:4.13816786px;stroke-width:0.20690838">Last quote second</tspan></text>
+         style="font-size:4.13816786px;stroke-width:0.20690838">Last change in quotes</tspan><tspan
+         sodipodi:role="line"
+         x="180.05545"
+         y="176.07123"
+         style="font-size:4.13816786px;stroke-width:0.20690838"
+         id="tspan302">in a second</tspan></text>
     <rect
        style="fill:#0000ff;stroke-width:0.18506451"
        id="rect12-9-0-1-6-76"
