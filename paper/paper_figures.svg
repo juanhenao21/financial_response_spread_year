@@ -37,13 +37,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-<<<<<<< HEAD
-     inkscape:cx="365.97757"
-     inkscape:cy="345.67928"
-=======
-     inkscape:cx="292.55534"
-     inkscape:cy="289.77913"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
+     inkscape:cx="489.63764"
+     inkscape:cy="264.86708"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -81,63 +76,63 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#000000;stroke-width:0.18648078"
+       style="fill:#000000;stroke-width:0.20928225"
        id="rect10"
-       width="129.74594"
-       height="0.6549058"
-       x="17.2614"
-       y="249.44568"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="146.36621"
+       height="0.73118693"
+       x="17.367296"
+       y="282.96597"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12"
-       width="0.74140543"
-       height="6.549058"
-       x="135.88626"
-       y="246.4986"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="151.18784"
+       y="279.67563"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-3"
-       width="0.74140543"
-       height="6.549058"
-       x="106.23005"
-       y="246.4986"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="117.7327"
+       y="279.67563"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-6"
-       width="0.74140543"
-       height="6.549058"
-       x="76.573837"
-       y="246.4986"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="84.277565"
+       y="279.67563"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-7"
-       width="0.74140543"
-       height="6.549058"
-       x="46.917614"
-       y="246.4986"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="50.82243"
+       y="279.67563"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-5"
-       width="0.74140543"
-       height="6.549058"
-       x="17.2614"
-       y="246.4986"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="17.367296"
+       y="279.67563"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -155,256 +150,256 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
-       inkscape:transform-center-x="-0.61783352"
-       inkscape:transform-center-y="2.9443012e-06"
-       transform="matrix(0.56221374,0,0,0.43008587,131.88026,149.59202)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:transform-center-x="-0.69698089"
+       inkscape:transform-center-y="-1.0237501e-06"
+       transform="matrix(0.63423252,0,0,0.48018078,146.66867,171.48162)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="15.399553"
-       y="273.02127"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="15.314068"
+       y="311.18015"
        id="text84"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan82"
-         x="15.399553"
-         y="273.02127"
-         style="font-size:3.68731117px;stroke-width:0.18436554">0</tspan></text>
+         x="15.314068"
+         y="311.18015"
+         style="font-size:4.13816786px;stroke-width:0.20690838">0</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="43.238831"
-       y="273.07349"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="46.557323"
+       y="311.23874"
        id="text88"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan86"
-         x="43.238831"
-         y="273.07349"
-         style="font-size:3.68731117px;stroke-width:0.18436554">1</tspan></text>
+         x="46.557323"
+         y="311.23874"
+         style="font-size:4.13816786px;stroke-width:0.20690838">1</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="71.193344"
-       y="273.07349"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="77.929901"
+       y="311.23874"
        id="text92"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan90"
-         x="71.193344"
-         y="273.07349"
-         style="font-size:3.68731117px;stroke-width:0.18436554">2</tspan></text>
+         x="77.929901"
+         y="311.23874"
+         style="font-size:4.13816786px;stroke-width:0.20690838">2</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="99.023613"
-       y="273.02127"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="109.16305"
+       y="311.18015"
        id="text96"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan94"
-         x="99.023613"
-         y="273.02127"
-         style="font-size:3.68731117px;stroke-width:0.18436554">3</tspan></text>
+         x="109.16305"
+         y="311.18015"
+         style="font-size:4.13816786px;stroke-width:0.20690838">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="126.9025"
-       y="273.07349"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="140.45076"
+       y="311.23874"
        id="text100"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan98"
-         x="126.9025"
-         y="273.07349"
-         style="font-size:3.68731117px;stroke-width:0.18436554">4</tspan></text>
+         x="140.45076"
+         y="311.23874"
+         style="font-size:4.13816786px;stroke-width:0.20690838">4</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.91641426px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="142.91147"
-       y="267.48294"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="158.41719"
+       y="304.96463"
        id="text104"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan102"
-         x="142.91147"
-         y="267.48294"
-         style="font-size:4.91641426px;stroke-width:0.18436554">t<tspan
-   style="font-size:3.68731117px;baseline-shift:sub;stroke-width:0.18436554"
+         x="158.41719"
+         y="304.96463"
+         style="font-size:5.51755667px;stroke-width:0.20690838">t<tspan
+   style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan249">j</tspan></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.91641426px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="142.91147"
-       y="247.81288"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="158.41719"
+       y="282.88947"
        id="text104-5"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan102-9"
-         x="142.91147"
-         y="247.81288"
-         style="font-size:4.91641426px;stroke-width:0.18436554">t<tspan
-   style="font-size:3.68731117px;baseline-shift:sub;stroke-width:0.18436554"
+         x="158.41719"
+         y="282.88947"
+         style="font-size:5.51755667px;stroke-width:0.20690838">t<tspan
+   style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan247">i</tspan></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="27.037388"
-       y="241.23071"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="28.374889"
+       y="275.50247"
        id="text177"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175"
-         x="27.037388"
-         y="241.23071"
-         style="font-size:3.68731117px;stroke-width:0.18436554">m(1)</tspan></text>
+         x="28.374889"
+         y="275.50247"
+         style="font-size:4.13816786px;stroke-width:0.20690838">m(1)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.91641426px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="3.2340624"
-       y="247.95212"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="1.6610719"
+       y="283.04572"
        id="text177-2"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-2"
-         x="3.2340624"
-         y="247.95212"
-         style="font-size:4.91641426px;stroke-width:0.18436554">m<tspan
-   style="font-size:3.68731117px;baseline-shift:sub;stroke-width:0.18436554"
+         x="1.6610719"
+         y="283.04572"
+         style="font-size:5.51755667px;stroke-width:0.20690838">m<tspan
+   style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan251">i</tspan>(t)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="54.909977"
-       y="241.23071"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="59.655529"
+       y="275.50247"
        id="text177-8"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-9"
-         x="54.909977"
-         y="241.23071"
-         style="font-size:3.68731117px;stroke-width:0.18436554">m(2)</tspan></text>
+         x="59.655529"
+         y="275.50247"
+         style="font-size:4.13816786px;stroke-width:0.20690838">m(2)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="82.782562"
-       y="241.23071"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="90.936165"
+       y="275.50247"
        id="text177-8-7"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-9-3"
-         x="82.782562"
-         y="241.23071"
-         style="font-size:3.68731117px;stroke-width:0.18436554">m(3)</tspan></text>
+         x="90.936165"
+         y="275.50247"
+         style="font-size:4.13816786px;stroke-width:0.20690838">m(3)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="110.65514"
-       y="241.23071"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="122.2168"
+       y="275.50247"
        id="text177-8-6"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-9-1"
-         x="110.65514"
-         y="241.23071"
-         style="font-size:3.68731117px;stroke-width:0.18436554">m(4)</tspan></text>
+         x="122.2168"
+         y="275.50247"
+         style="font-size:4.13816786px;stroke-width:0.20690838">m(4)</tspan></text>
     <rect
-       style="fill:#000000;stroke-width:0.18648078"
+       style="fill:#000000;stroke-width:0.20928225"
        id="rect10-2"
-       width="129.74596"
-       height="0.6549058"
-       x="17.246758"
-       y="231.42094"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="146.36623"
+       height="0.73118693"
+       x="17.350779"
+       y="262.84152"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-9"
-       width="0.74140543"
-       height="6.549058"
-       x="135.87163"
-       y="228.47391"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="151.17134"
+       y="259.55118"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-3-3"
-       width="0.74140543"
-       height="6.549058"
-       x="106.21539"
-       y="228.47391"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="117.71617"
+       y="259.55118"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-6-1"
-       width="0.74140543"
-       height="6.549058"
-       x="76.559196"
-       y="228.47391"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="84.261047"
+       y="259.55118"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-7-9"
-       width="0.74140543"
-       height="6.549058"
-       x="46.902973"
-       y="228.47391"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="50.805912"
+       y="259.55118"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-5-4"
-       width="0.74140543"
-       height="6.549058"
-       x="17.246758"
-       y="228.47391"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="7.3118696"
+       x="17.350779"
+       y="259.55118"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -422,206 +417,146 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
-       inkscape:transform-center-x="-0.61783362"
-       inkscape:transform-center-y="-7.6008234e-06"
-       transform="matrix(0.56221373,0,0,0.43008586,131.86561,131.56704)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:transform-center-x="-0.69697768"
+       inkscape:transform-center-y="-5.3779287e-06"
+       transform="matrix(0.63423251,0,0,0.48018077,146.65214,151.35716)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="15.385794"
-       y="253.84283"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="15.298626"
+       y="289.65671"
        id="text84-8"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan82-4"
-<<<<<<< HEAD
          x="15.298626"
          y="289.65671"
          style="font-size:4.13816786px;stroke-width:0.20690838">-1</tspan></text>
-=======
-         x="15.385794"
-         y="253.84283"
-         style="font-size:3.68731117px;stroke-width:0.18436554">-1</tspan></text>
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="43.225071"
-       y="253.89505"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="46.541882"
+       y="289.7153"
        id="text88-5"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan86-0"
-<<<<<<< HEAD
          x="46.541882"
          y="289.7153"
          style="font-size:4.13816786px;stroke-width:0.20690838">0</tspan></text>
-=======
-         x="43.225071"
-         y="253.89505"
-         style="font-size:3.68731117px;stroke-width:0.18436554">0</tspan></text>
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="71.179581"
-       y="253.89505"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="77.914452"
+       y="289.7153"
        id="text92-3"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan90-6"
-<<<<<<< HEAD
          x="77.914452"
          y="289.7153"
          style="font-size:4.13816786px;stroke-width:0.20690838">1</tspan></text>
-=======
-         x="71.179581"
-         y="253.89505"
-         style="font-size:3.68731117px;stroke-width:0.18436554">1</tspan></text>
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="99.00985"
-       y="253.84283"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="109.1476"
+       y="289.65671"
        id="text96-1"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan94-0"
-<<<<<<< HEAD
          x="109.1476"
          y="289.65671"
          style="font-size:4.13816786px;stroke-width:0.20690838">2</tspan></text>
-=======
-         x="99.00985"
-         y="253.84283"
-         style="font-size:3.68731117px;stroke-width:0.18436554">2</tspan></text>
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="126.88876"
-       y="253.89505"
+       style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="140.43535"
+       y="289.7153"
        id="text100-6"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan98-3"
-<<<<<<< HEAD
          x="140.43535"
          y="289.7153"
          style="font-size:4.13816786px;stroke-width:0.20690838">3</tspan></text>
-=======
-         x="126.88876"
-         y="253.89505"
-         style="font-size:3.68731117px;stroke-width:0.18436554">3</tspan></text>
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.91641426px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="3.3612936"
-       y="267.09549"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="1.8038598"
+       y="304.52979"
        id="text322"
-       transform="scale(1.0639922,0.93985652)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="scale(1.0695157,0.93500262)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan320"
-         x="3.3612936"
-         y="267.09549"
-         style="font-size:4.91641426px;stroke-width:0.18436554">ε<tspan
-   style="font-size:3.68731117px;baseline-shift:sub;stroke-width:0.18436554"
+         x="1.8038598"
+         y="304.52979"
+         style="font-size:5.51755667px;stroke-width:0.20690838">ε<tspan
+   style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan324">j</tspan>(t)</tspan></text>
     <rect
-       style="fill:#000000;stroke-width:0.18436554"
+       style="fill:#000000;stroke-width:0.20690838"
        id="rect12-9-2"
-<<<<<<< HEAD
        width="0.8363784"
        height="7.3118696"
        x="184.64297"
        y="253.82402"
-=======
-       width="0.74140543"
-       height="6.549058"
-       x="165.54248"
-       y="217.18286"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0"
-<<<<<<< HEAD
        width="0.8363784"
        height="5.8494954"
        x="184.64297"
        y="266.25412"
-=======
-       width="0.74140543"
-       height="5.2392464"
-       x="165.54248"
-       y="228.31596"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6"
-<<<<<<< HEAD
        width="0.8363784"
        height="5.8494954"
        x="184.64297"
        y="277.22192"
-=======
-       width="0.74140543"
-       height="5.2392464"
-       x="165.54248"
-       y="238.13936"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
-<<<<<<< HEAD
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
        x="180.18904"
        y="276.92169"
        id="text368"
        transform="scale(1.0695157,0.93500263)"
-=======
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="162.31126"
-       y="235.93956"
-       id="text368"
-       transform="scale(1.0639922,0.93985652)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan366"
-<<<<<<< HEAD
          x="180.18904"
          y="276.92169"
          style="font-size:4.13816786px;stroke-width:0.20690838">Second</tspan></text>
@@ -632,24 +567,11 @@
        y="288.96921"
        id="text372"
        transform="scale(1.0695157,0.93500263)"
-=======
-         x="162.31126"
-         y="235.93956"
-         style="font-size:3.68731117px;stroke-width:0.18436554">Second</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="162.19243"
-       y="246.6745"
-       id="text372"
-       transform="scale(1.0639922,0.93985652)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan370"
-<<<<<<< HEAD
          x="180.05568"
          y="288.96921"
          style="font-size:4.13816786px;stroke-width:0.20690838">Buy</tspan></text>
@@ -660,224 +582,201 @@
        y="301.16418"
        id="text376"
        transform="scale(1.0695157,0.93500263)"
-=======
-         x="162.19243"
-         y="246.6745"
-         style="font-size:3.68731117px;stroke-width:0.18436554">Buy</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="162.31126"
-       y="257.5408"
-       id="text376"
-       transform="scale(1.0639922,0.93985652)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan374"
-<<<<<<< HEAD
          x="180.18904"
          y="301.16418"
          style="font-size:4.13816786px;stroke-width:0.20690838">Sell</tspan></text>
-=======
-         x="162.31126"
-         y="257.5408"
-         style="font-size:3.68731117px;stroke-width:0.18436554">Sell</tspan></text>
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0-1"
-       width="0.74140543"
-       height="5.2392464"
-       x="23.538631"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="24.448633"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0-1-5"
-       width="0.74140543"
-       height="5.2392464"
-       x="29.48719"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="31.159193"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0-1-54"
-       width="0.74140543"
-       height="5.2392464"
-       x="44.199009"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="47.755573"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6-7"
-       width="0.74140543"
-       height="5.2392464"
-       x="26.600788"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="27.903048"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6-7-6"
-       width="0.74140543"
-       height="5.2392464"
-       x="37.4734"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="40.168427"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0-1-54-5"
-       width="0.74140543"
-       height="5.2392464"
-       x="50.728901"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="55.121937"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0-1-54-6"
-       width="0.74140543"
-       height="5.2392464"
-       x="54.378944"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="59.239544"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6-7-6-9"
-       width="0.74140543"
-       height="5.2392464"
-       x="112.07101"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="124.32188"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6-7-6-3"
-       width="0.74140543"
-       height="5.2392464"
-       x="61.363163"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="67.118431"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6-7-6-7"
-       width="0.74140543"
-       height="5.2392464"
-       x="73.546944"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="80.86293"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#ff0000;stroke-width:0.16490155"
+       style="fill:#ff0000;stroke-width:0.18506448"
        id="rect12-9-0-6-7-6-4"
-       width="0.74140543"
-       height="5.2392464"
-       x="68.839005"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="75.551918"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#008000;stroke-width:0.16490155"
+       style="fill:#008000;stroke-width:0.18506448"
        id="rect12-9-0-1-54-6-5"
-       width="0.74140543"
-       height="5.2392464"
-       x="126.32191"
-       y="247.15352"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       width="0.8363784"
+       height="5.8494954"
+       x="140.3983"
+       y="280.40683"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:14.74523163px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.55294621"
-       x="511.15298"
-       y="-10.877078"
+       style="font-style:normal;font-weight:normal;font-size:16.54816818px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62055635"
+       x="583.19073"
+       y="-11.2214"
        id="text534"
-       transform="matrix(0,0.47061217,-2.1248919,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan532"
-         x="511.15298"
-         y="-10.877078"
-         style="stroke-width:0.55294621">{</tspan></text>
+         x="583.19073"
+         y="-11.2214"
+         style="stroke-width:0.62055635">{</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:14.74523163px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.55294621"
-       x="511.15298"
-       y="-24.833654"
+       style="font-style:normal;font-weight:normal;font-size:16.54816818px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62055635"
+       x="583.19073"
+       y="-26.884483"
        id="text534-2"
-       transform="matrix(0,0.47061217,-2.1248919,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan532-5"
-         x="511.15298"
-         y="-24.833654"
-         style="stroke-width:0.55294621">{</tspan></text>
+         x="583.19073"
+         y="-26.884483"
+         style="stroke-width:0.62055635">{</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:14.74523163px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.55294621"
-       x="511.15298"
-       y="-38.790234"
+       style="font-style:normal;font-weight:normal;font-size:16.54816818px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62055635"
+       x="583.19073"
+       y="-42.547565"
        id="text534-4"
-       transform="matrix(0,0.47061217,-2.1248919,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan532-7"
-         x="511.15298"
-         y="-38.790234"
-         style="stroke-width:0.55294621">{</tspan></text>
+         x="583.19073"
+         y="-42.547565"
+         style="stroke-width:0.62055635">{</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:14.74523163px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.55294621"
-       x="511.15298"
-       y="-52.746811"
+       style="font-style:normal;font-weight:normal;font-size:16.54816818px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62055635"
+       x="583.19073"
+       y="-58.210648"
        id="text534-44"
-       transform="matrix(0,0.47061217,-2.1248919,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan532-3"
-         x="511.15298"
-         y="-52.746811"
-         style="stroke-width:0.55294621">{</tspan></text>
+         x="583.19073"
+         y="-58.210648"
+         style="stroke-width:0.62055635">{</tspan></text>
     <rect
        style="fill:#000000;stroke-width:0.18394408"
        id="rect586"
        width="145"
        height="1"
-<<<<<<< HEAD
        x="23.434525"
        y="69.377975"
-=======
-       x="2.0907354e-08"
-       y="73.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -898,11 +797,7 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.83332301"
        inkscape:transform-center-y="-6.7534888e-06"
-<<<<<<< HEAD
        transform="matrix(0.75830812,0,0,0.6567141,148.03126,-83.09243)"
-=======
-       transform="matrix(0.75830812,0,0,0.6567141,124.59674,-79.147118)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -911,13 +806,8 @@
        id="rect586-7"
        width="25"
        height="1"
-<<<<<<< HEAD
        x="23.434525"
        y="79.377975"
-=======
-       x="2.0907354e-08"
-       y="83.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -926,13 +816,8 @@
        id="rect586-6"
        width="115"
        height="1"
-<<<<<<< HEAD
        x="53.434525"
        y="79.377975"
-=======
-       x="30"
-       y="83.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -953,11 +838,7 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.83332301"
        inkscape:transform-center-y="-6.7534888e-06"
-<<<<<<< HEAD
        transform="matrix(0.75830811,0,0,0.65671409,28.031266,-73.092427)"
-=======
-       transform="matrix(0.75830811,0,0,0.65671409,4.5967415,-69.147115)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -978,98 +859,59 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.83332301"
        inkscape:transform-center-y="-6.7534888e-06"
-<<<<<<< HEAD
        transform="matrix(0.75830811,0,0,0.65671409,148.03126,-73.092427)"
-=======
-       transform="matrix(0.75830811,0,0,0.65671409,124.59674,-69.147115)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-<<<<<<< HEAD
        x="93.810623"
        y="76.040512"
-=======
-       x="70.376099"
-       y="79.985809"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text686"
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan684"
-<<<<<<< HEAD
          x="93.810623"
          y="76.040512"
-=======
-         x="70.376099"
-         y="79.985809"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:7.05555534px;stroke-width:0.26458332">τ</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-<<<<<<< HEAD
        x="35.590015"
        y="87.377975"
-=======
-       x="12.155491"
-       y="91.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text686-1"
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan684-4"
-<<<<<<< HEAD
          x="35.590015"
          y="87.377975"
-=======
-         x="12.155491"
-         y="91.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:7.05555534px;fill:#008000;stroke-width:0.26458332">τ'</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-<<<<<<< HEAD
        x="104.61105"
        y="87.377975"
-=======
-       x="81.176529"
-       y="91.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text686-9"
        inkscape:export-filename="/home/tp/jchenaol/03_tau_short_long.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan684-2"
-<<<<<<< HEAD
          x="104.61105"
          y="87.377975"
-=======
-         x="81.176529"
-         y="91.32328"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:7.05555534px;fill:#ff0000;stroke-width:0.26458332">τ-τ'</tspan></text>
     <rect
        style="fill:#000000;stroke-width:0.18394408"
        id="rect586-0"
        width="145"
        height="1"
-<<<<<<< HEAD
        x="23.434525"
        y="18.050249"
-=======
-       x="2.0907354e-08"
-       y="21.99556"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1090,11 +932,7 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.83332301"
        inkscape:transform-center-y="-6.7534888e-06"
-<<<<<<< HEAD
        transform="matrix(0.75830811,0,0,0.65671409,148.03126,-134.42016)"
-=======
-       transform="matrix(0.75830811,0,0,0.65671409,124.59674,-130.47484)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1103,13 +941,8 @@
        id="rect12-7-9-8"
        width="0.8363784"
        height="7.3118696"
-<<<<<<< HEAD
        x="23.434525"
        y="14.894319"
-=======
-       x="2.0907354e-08"
-       y="18.83963"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1118,13 +951,8 @@
        id="rect586-0-9"
        width="145"
        height="1"
-<<<<<<< HEAD
        x="43.434525"
        y="6.2220306"
-=======
-       x="20"
-       y="10.167343"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1145,11 +973,7 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.83332301"
        inkscape:transform-center-y="-6.7534888e-06"
-<<<<<<< HEAD
        transform="matrix(0.75830811,0,0,0.65671409,168.03126,-146.24838)"
-=======
-       transform="matrix(0.75830811,0,0,0.65671409,144.59674,-142.30306)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1158,26 +982,16 @@
        id="rect12-7-9-8-6"
        width="0.8363784"
        height="7.3118696"
-<<<<<<< HEAD
        x="43.434525"
        y="3.0661013"
-=======
-       x="20"
-       y="7.0114136"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-<<<<<<< HEAD
        x="26.133844"
        y="8.4267998"
-=======
-       x="4.2225027"
-       y="12.646373"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text322-6"
        transform="scale(1.0695157,0.93500263)"
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
@@ -1185,26 +999,16 @@
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan320-4"
-<<<<<<< HEAD
          x="26.133844"
          y="8.4267998"
-=======
-         x="4.2225027"
-         y="12.646373"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:7.05555534px;stroke-width:0.20690838">ε<tspan
    style="font-size:7.05555534px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan324-9">j</tspan>(t)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-<<<<<<< HEAD
        x="1.5833424"
        y="21.811077"
-=======
-       x="-20.327999"
-       y="26.030651"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text322-5"
        transform="scale(1.0695157,0.93500263)"
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
@@ -1212,13 +1016,8 @@
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan320-0"
-<<<<<<< HEAD
          x="1.5833424"
          y="21.811077"
-=======
-         x="-20.327999"
-         y="26.030651"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:7.05555534px;stroke-width:0.20690838">r<tspan
    style="font-size:7.05555534px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan324-4">i</tspan>(t,τ)</tspan></text>
@@ -1227,13 +1026,8 @@
        id="rect12-7-9-8-6-8"
        width="0.8363784"
        height="7.3118696"
-<<<<<<< HEAD
        x="43.434525"
        y="28.066103"
-=======
-       x="20"
-       y="32.011414"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1242,13 +1036,8 @@
        id="rect12-7-9-8-6-8-7"
        width="0.8363784"
        height="7.3118696"
-<<<<<<< HEAD
        x="23.434525"
        y="28.066103"
-=======
-       x="2.0907354e-08"
-       y="32.011414"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -1257,26 +1046,16 @@
        id="rect586-0-1"
        width="20"
        height="1"
-<<<<<<< HEAD
        x="23.434525"
        y="31.222048"
-=======
-       x="2.0907354e-08"
-       y="35.167358"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-<<<<<<< HEAD
        x="25.838789"
        y="44.195477"
-=======
-       x="3.9274464"
-       y="48.415047"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text322-5-7"
        transform="scale(1.0695157,0.93500263)"
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
@@ -1284,24 +1063,14 @@
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan320-0-2"
-<<<<<<< HEAD
          x="25.838789"
          y="44.195477"
-=======
-         x="3.9274464"
-         y="48.415047"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:7.05555534px;stroke-width:0.20690838">1 s</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-<<<<<<< HEAD
        x="162.33481"
        y="22.120037"
-=======
-       x="140.42346"
-       y="26.339611"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text104-2"
        transform="scale(1.0695157,0.93500263)"
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
@@ -1309,13 +1078,8 @@
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan102-2"
-<<<<<<< HEAD
          x="162.33481"
          y="22.120037"
-=======
-         x="140.42346"
-         y="26.339611"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:5.51755667px;stroke-width:0.20690838"><tspan
            style="font-size:7.05555534px"
            id="tspan895">t</tspan><tspan
@@ -1324,13 +1088,8 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-<<<<<<< HEAD
        x="180.9803"
        y="9.4695692"
-=======
-       x="159.06895"
-       y="13.689143"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
        id="text104-5-1"
        transform="scale(1.0695157,0.93500263)"
        inkscape:export-filename="/home/tp/jchenaol/04_time_shift.png"
@@ -1338,27 +1097,21 @@
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan102-9-0"
-<<<<<<< HEAD
          x="180.9803"
          y="9.4695692"
-=======
-         x="159.06895"
-         y="13.689143"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
          style="font-size:5.51755667px;stroke-width:0.20690838"><tspan
            style="font-size:7.05555534px"
            id="tspan897">t</tspan><tspan
            style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
            id="tspan247-6">j</tspan></tspan></text>
     <rect
-<<<<<<< HEAD
        style="fill:#d4aa00;stroke-width:0.18506449"
        id="rect12-9-0-6-3"
        width="0.8363784"
        height="5.8494954"
        x="184.64301"
        y="288.21289"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -1368,7 +1121,7 @@
        y="312.91919"
        id="text376-7"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1383,7 +1136,7 @@
        height="0.73118693"
        x="17.366816"
        y="216.40118"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1393,7 +1146,7 @@
        height="7.3118696"
        x="151.18736"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1403,7 +1156,7 @@
        height="7.3118696"
        x="117.73222"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1413,7 +1166,7 @@
        height="7.3118696"
        x="84.277084"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1423,7 +1176,7 @@
        height="7.3118696"
        x="50.821949"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1433,7 +1186,7 @@
        height="7.3118696"
        x="17.366816"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -1454,7 +1207,7 @@
        inkscape:transform-center-x="-0.69698089"
        inkscape:transform-center-y="-1.0237501e-06"
        transform="matrix(0.63423252,0,0,0.48018078,146.66819,104.91704)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -1464,7 +1217,7 @@
        y="239.98816"
        id="text84-5"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1479,7 +1232,7 @@
        y="240.04675"
        id="text88-7"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1494,7 +1247,7 @@
        y="240.04675"
        id="text92-6"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1509,7 +1262,7 @@
        y="239.98816"
        id="text96-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1524,7 +1277,7 @@
        y="240.04675"
        id="text100-5"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1539,7 +1292,7 @@
        y="233.77264"
        id="text104-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1556,7 +1309,7 @@
        y="211.69748"
        id="text104-5-12"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1573,7 +1326,7 @@
        y="204.31049"
        id="text177-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1588,7 +1341,7 @@
        y="211.85373"
        id="text177-2-8"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1605,7 +1358,7 @@
        y="204.31049"
        id="text177-8-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1620,7 +1373,7 @@
        y="204.31049"
        id="text177-8-7-6"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1635,7 +1388,7 @@
        y="204.31049"
        id="text177-8-6-8"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1650,7 +1403,7 @@
        height="0.73118693"
        x="17.350298"
        y="196.27673"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1660,7 +1413,7 @@
        height="7.3118696"
        x="151.17085"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1670,7 +1423,7 @@
        height="7.3118696"
        x="117.71569"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1680,7 +1433,7 @@
        height="7.3118696"
        x="84.260574"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1690,26 +1443,17 @@
        height="7.3118696"
        x="50.805435"
        y="192.98639"
-=======
-       style="fill:#0000ff;stroke-width:0.16490157"
-       id="rect12-9-0-3"
-       width="0.74140543"
-       height="5.2392464"
-       x="165.5425"
-       y="247.98361"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-<<<<<<< HEAD
        style="fill:#000000;stroke-width:0.20690838"
        id="rect12-5-4-8"
        width="0.8363784"
        height="7.3118696"
        x="17.350298"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -1730,7 +1474,7 @@
        inkscape:transform-center-x="-0.69697768"
        inkscape:transform-center-y="-5.3779287e-06"
        transform="matrix(0.63423252,0,0,0.48018078,146.65166,84.792558)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -1740,7 +1484,7 @@
        y="218.46472"
        id="text84-8-8"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1755,7 +1499,7 @@
        y="218.52332"
        id="text88-5-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1770,7 +1514,7 @@
        y="218.52332"
        id="text92-3-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1785,7 +1529,7 @@
        y="218.46472"
        id="text96-1-4"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1800,7 +1544,7 @@
        y="218.52332"
        id="text100-6-4"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1815,7 +1559,7 @@
        y="233.3378"
        id="text322-63"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1832,74 +1576,37 @@
        height="7.3118696"
        x="184.64249"
        y="187.25923"
-=======
-       style="fill:#0000ff;stroke-width:0.16490158"
-       id="rect12-9-0-3-6"
-       width="0.74140543"
-       height="5.2392464"
-       x="26.628334"
-       y="229.12881"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-       style="fill:#0000ff;stroke-width:0.16490158"
-       id="rect12-9-0-3-6-7"
-       width="0.74140543"
-       height="5.2392464"
-       x="33.76289"
-       y="229.12881"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300" />
-    <rect
-<<<<<<< HEAD
        style="fill:#008000;stroke-width:0.18506449"
        id="rect12-9-0-9"
        width="0.8363784"
        height="5.8494954"
        x="184.64249"
        y="199.68916"
-=======
-       style="fill:#0000ff;stroke-width:0.16490158"
-       id="rect12-9-0-3-6-5"
-       width="0.74140543"
-       height="5.2392464"
-       x="19.418201"
-       y="229.12881"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-<<<<<<< HEAD
        style="fill:#ff0000;stroke-width:0.18506449"
        id="rect12-9-0-6-6"
        width="0.8363784"
        height="5.8494954"
        x="184.64249"
        y="210.65697"
-=======
-       style="fill:#d4aa00;stroke-width:0.16490158"
-       id="rect12-9-0-3-6-3"
-       width="0.74140543"
-       height="5.2392464"
-       x="63.396309"
-       y="229.12881"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
-<<<<<<< HEAD
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
        x="180.18858"
        y="205.72971"
        id="text368-2"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1914,7 +1621,7 @@
        y="217.77722"
        id="text372-7"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1929,7 +1636,7 @@
        y="229.9722"
        id="text376-5"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1944,7 +1651,7 @@
        height="0.83491302"
        x="18.203194"
        y="213.11253"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"
        transform="skewY(-0.00190935)" />
@@ -1955,7 +1662,7 @@
        height="0.83600003"
        x="51.658329"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -1965,7 +1672,7 @@
        height="5.8494954"
        x="184.64252"
        y="221.64793"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -1975,7 +1682,7 @@
        y="241.7272"
        id="text376-7-8"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -1990,7 +1697,7 @@
        height="0.83600003"
        x="18.186676"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2000,7 +1707,7 @@
        height="0.73118693"
        x="17.366814"
        y="145.37204"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2010,7 +1717,7 @@
        height="7.3118696"
        x="151.18736"
        y="142.0817"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2020,7 +1727,7 @@
        height="7.3118696"
        x="117.73222"
        y="142.0817"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2030,7 +1737,7 @@
        height="7.3118696"
        x="84.277077"
        y="142.0817"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2040,7 +1747,7 @@
        height="7.3118696"
        x="50.821945"
        y="142.0817"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2050,7 +1757,7 @@
        height="7.3118696"
        x="17.366814"
        y="142.0817"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -2071,7 +1778,7 @@
        inkscape:transform-center-x="-0.69698089"
        inkscape:transform-center-y="-1.0237501e-06"
        transform="matrix(0.63423252,0,0,0.48018078,146.66819,33.887787)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -2081,7 +1788,7 @@
        y="164.02133"
        id="text84-4"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2096,7 +1803,7 @@
        y="164.07991"
        id="text88-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2111,7 +1818,7 @@
        y="164.07991"
        id="text92-2"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2126,7 +1833,7 @@
        y="164.02133"
        id="text96-7"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2141,7 +1848,7 @@
        y="164.07991"
        id="text100-54"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2156,7 +1863,7 @@
        y="157.8058"
        id="text104-1"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2173,7 +1880,7 @@
        y="135.73065"
        id="text104-5-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2190,7 +1897,7 @@
        y="128.34367"
        id="text177-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2205,7 +1912,7 @@
        y="135.8869"
        id="text177-2-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2222,7 +1929,7 @@
        y="128.34367"
        id="text177-8-1"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2237,7 +1944,7 @@
        y="128.34367"
        id="text177-8-7-8"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2252,7 +1959,7 @@
        y="128.34367"
        id="text177-8-6-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2267,7 +1974,7 @@
        height="0.73118693"
        x="17.350296"
        y="125.24768"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2277,7 +1984,7 @@
        height="7.3118696"
        x="151.17085"
        y="121.95731"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2287,7 +1994,7 @@
        height="7.3118696"
        x="117.71568"
        y="121.95731"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2297,7 +2004,7 @@
        height="7.3118696"
        x="84.260567"
        y="121.95731"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2307,7 +2014,7 @@
        height="7.3118696"
        x="50.805428"
        y="121.95731"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2317,7 +2024,7 @@
        height="7.3118696"
        x="17.350296"
        y="121.95731"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -2338,7 +2045,7 @@
        inkscape:transform-center-x="-0.69697768"
        inkscape:transform-center-y="-5.3779287e-06"
        transform="matrix(0.63423252,0,0,0.48018078,146.65166,13.763326)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -2348,7 +2055,7 @@
        y="142.49789"
        id="text84-8-4"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2363,7 +2070,7 @@
        y="142.55647"
        id="text88-5-2"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2378,7 +2085,7 @@
        y="142.55647"
        id="text92-3-06"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2393,7 +2100,7 @@
        y="142.49789"
        id="text96-1-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2408,7 +2115,7 @@
        y="142.55647"
        id="text100-6-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2423,7 +2130,7 @@
        y="157.37096"
        id="text322-1"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2440,7 +2147,7 @@
        height="7.3118696"
        x="184.64249"
        y="110.40942"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2450,7 +2157,7 @@
        height="5.8494954"
        x="184.64249"
        y="122.83935"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2460,7 +2167,7 @@
        height="5.8494954"
        x="184.64249"
        y="133.80708"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -2470,7 +2177,7 @@
        y="123.53746"
        id="text368-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2485,7 +2192,7 @@
        y="135.58495"
        id="text372-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2500,19 +2207,11 @@
        y="147.77992"
        id="text376-9"
        transform="scale(1.0695157,0.93500263)"
-=======
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="162.34747"
-       y="268.01511"
-       id="text376-5"
-       transform="scale(1.0639922,0.93985652)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan374-6"
-<<<<<<< HEAD
          x="180.18858"
          y="147.77992"
          style="font-size:4.13816786px;stroke-width:0.20690838">Sell</tspan></text>
@@ -2523,7 +2222,7 @@
        height="5.8494954"
        x="24.448151"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2533,7 +2232,7 @@
        height="5.8494954"
        x="31.158707"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2543,7 +2242,7 @@
        height="5.8494954"
        x="47.755089"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2553,7 +2252,7 @@
        height="5.8494954"
        x="27.902565"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2563,7 +2262,7 @@
        height="5.8494954"
        x="40.167938"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2573,7 +2272,7 @@
        height="5.8494954"
        x="55.121452"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2583,7 +2282,7 @@
        height="5.8494954"
        x="59.239056"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2593,7 +2292,7 @@
        height="5.8494954"
        x="124.3214"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2603,7 +2302,7 @@
        height="5.8494954"
        x="67.117943"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2613,7 +2312,7 @@
        height="5.8494954"
        x="80.862442"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2623,7 +2322,7 @@
        height="5.8494954"
        x="75.55143"
        y="142.8129"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2633,30 +2332,17 @@
        height="5.8494954"
        x="140.39781"
        y="142.8129"
-=======
-         x="162.34747"
-         y="268.01511"
-         style="font-size:3.68731117px;stroke-width:0.18436554">Quote</tspan></text>
-    <rect
-       style="fill:#d4aa00;stroke-width:0.16490158"
-       id="rect12-9-0-3-2"
-       width="0.74140543"
-       height="5.2392464"
-       x="165.83397"
-       y="257.83603"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
-<<<<<<< HEAD
        style="font-style:normal;font-weight:normal;font-size:16.54816818px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62055635"
        x="289.30075"
        y="-11.221171"
        id="text534-26"
        transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2671,7 +2357,7 @@
        y="-26.884256"
        id="text534-2-6"
        transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2686,18 +2372,10 @@
        y="-42.547337"
        id="text534-4-8"
        transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
-=======
-       style="font-style:normal;font-weight:normal;font-size:3.68731117px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18436554"
-       x="162.34747"
-       y="278.25403"
-       id="text376-5-9"
-       transform="scale(1.0639922,0.93985652)"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
-<<<<<<< HEAD
          id="tspan532-7-7"
          x="289.30075"
          y="-42.547337"
@@ -2709,7 +2387,7 @@
        y="-58.210419"
        id="text534-44-2"
        transform="matrix(0,0.46818169,-2.1359229,0,0,0)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2724,7 +2402,7 @@
        height="5.8494954"
        x="184.64252"
        y="144.79803"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2734,7 +2412,7 @@
        height="5.8494954"
        x="184.64252"
        y="155.79803"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -2744,7 +2422,7 @@
        y="159.53493"
        id="text376-7-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2759,7 +2437,7 @@
        y="170.89851"
        id="text376-3-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2774,7 +2452,7 @@
        height="5.8494954"
        x="18.937798"
        y="122.68855"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2784,7 +2462,7 @@
        height="5.8494954"
        x="28.880997"
        y="122.68855"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2794,7 +2472,7 @@
        height="5.8494954"
        x="36.818497"
        y="122.68855"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2804,7 +2482,7 @@
        height="5.8494954"
        x="45.513756"
        y="122.68855"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2814,7 +2492,7 @@
        height="5.8494954"
        x="69.443878"
        y="122.68855"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2824,7 +2502,7 @@
        height="5.8494954"
        x="125.65316"
        y="122.68851"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2834,7 +2512,7 @@
        height="5.8494954"
        x="60.748627"
        y="122.68855"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2844,7 +2522,7 @@
        height="0.83600003"
        x="118.5686"
        y="213.11084"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2854,7 +2532,7 @@
        height="0.83600003"
        x="51.641815"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2864,7 +2542,7 @@
        height="0.83600003"
        x="118.55207"
        y="192.98639"
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2874,58 +2552,27 @@
        height="0.83600003"
        x="18.187157"
        y="259.55118"
-=======
-         id="tspan374-6-1"
-         x="162.34747"
-         y="278.25403"
-         style="font-size:3.68731117px;stroke-width:0.18436554">Last quote second</tspan></text>
-    <rect
-       style="fill:#0000ff;stroke-width:0.16490158"
-       id="rect12-9-0-3-6-7-2"
-       width="0.74140543"
-       height="5.2392464"
-       x="55.149643"
-       y="229.12881"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-<<<<<<< HEAD
        style="fill:#d4aa00;stroke-width:0.43691739"
        id="rect12-9-0-1-6-1-4-0"
        width="32.618759"
        height="0.83600003"
        x="51.642288"
        y="259.55118"
-=======
-       style="fill:#d4aa00;stroke-width:0.16490158"
-       id="rect12-9-0-3-6-3-7"
-       width="0.74140543"
-       height="5.2392464"
-       x="42.719646"
-       y="229.71233"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
-<<<<<<< HEAD
        style="fill:#d4aa00;stroke-width:0.43691739"
        id="rect12-9-0-1-6-1-4-7"
        width="32.618759"
        height="0.83600003"
        x="118.55258"
        y="259.55118"
-=======
-       style="fill:#d4aa00;stroke-width:0.16490158"
-       id="rect12-9-0-3-6-3-0"
-       width="0.74140543"
-       height="5.2392464"
-       x="112.11665"
-       y="229.12881"
->>>>>>> 4d97525ba9e7c6e9d3a0ada1909cec04b89f550e
-       inkscape:export-filename="/home/tp/jchenaol/02_relation_trades_midpoint.png"
+       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_time_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
   </g>
