@@ -6,6 +6,7 @@ Plot the event and time shift for the stocks AAPL, CVX, GS, JPM, MSFT, and XOM.
 # ----------------------------------------------------------------------------
 # Modules
 from matplotlib import pyplot as plt
+from matplotlib import ticker
 import numpy as np
 import os
 import pickle
@@ -13,7 +14,7 @@ import pickle
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
+def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year,
                                                  taus):
     """Plots the self- and cross-response for a year in trade time scale.
 
@@ -49,18 +50,18 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax1 = np.where(max(self_event_ax1) == self_event_ax1)[0][0]
 
-        ax1.plot(t_ax_1_5, self_event_ax1, linewidth=5, label=r'$\tau = {}$'
-                 .format(taus[0]))
+        ax1.plot(t_ax_1_5, self_event_ax1, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[0]))
 
         # Plot line in the peak of the figure
         ax1.plot((t_ax_1_5[max_pos_ax1], t_ax_1_5[max_pos_ax1]),
                  (0, self_event_ax1[max_pos_ax1]), '--',
-                 label=r'Max position $t$ = {}'
+                 label=r'Max $t$ = {} trades'
                  .format(max_pos_ax1 - 10 * taus[0]))
 
         ax1.legend(loc='upper left', fontsize=15)
-        # ax.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-        ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
+        # ax.set_title(r'$\tau_{trade}$ = {}'.format(tau_val), fontsize=20)
+        ax1.set_ylabel(r'$R_{ii}(\tau_{trades})$', fontsize=20)
         ax1.tick_params(axis='y', labelsize=15)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         ax1.yaxis.offsetText.set_fontsize(15)
@@ -75,13 +76,13 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax2 = np.where(max(self_event_ax2) == self_event_ax2)[0][0]
 
-        ax2.plot(t_ax_2_6, self_event_ax2, linewidth=5, label=r'$\tau = {}$'
-                 .format(taus[1]))
+        ax2.plot(t_ax_2_6, self_event_ax2, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[1]))
 
         # Plot line in the peak of the figure
         ax2.plot((t_ax_2_6[max_pos_ax2], t_ax_2_6[max_pos_ax2]),
                  (0, self_event_ax2[max_pos_ax2]), '--',
-                 label=r'Max position $t$ = {}'
+                 label=r'Max $t$ = {} trades'
                  .format(max_pos_ax2 - 10 * taus[1]))
 
         ax2.legend(loc='upper left', fontsize=15)
@@ -97,13 +98,13 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax3 = np.where(max(self_event_ax3) == self_event_ax3)[0][0]
 
-        ax3.plot(t_ax_3_7, self_event_ax3, linewidth=5, label=r'$\tau = {}$'
-                 .format(taus[2]))
+        ax3.plot(t_ax_3_7, self_event_ax3, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[2]))
 
         # Plot line in the peak of the figure
         ax3.plot((t_ax_3_7[max_pos_ax3], t_ax_3_7[max_pos_ax3]),
                  (0, self_event_ax3[max_pos_ax3]), '--',
-                 label=r'Max position $t$ = {}'
+                 label=r'Max $t$ = {} trades'
                  .format(max_pos_ax3 - 10 * taus[2]))
 
         ax3.legend(loc='upper left', fontsize=15)
@@ -119,13 +120,13 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax4 = np.where(max(self_event_ax4) == self_event_ax4)[0][0]
 
-        ax4.plot(t_ax_4_8, self_event_ax4, linewidth=5, label=r'$\tau = {}$'
-                 .format(taus[3]))
+        ax4.plot(t_ax_4_8, self_event_ax4, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[3]))
 
         # Plot line in the peak of the figure
         ax4.plot((t_ax_4_8[max_pos_ax4], t_ax_4_8[max_pos_ax4]),
                  (0, self_event_ax4[max_pos_ax4]), '--',
-                 label=r'Max position $t$ = {}'
+                 label=r'Max $t$ = {} trades'
                  .format(max_pos_ax4 - 10 * taus[3]))
 
         ax4.legend(loc='upper left', fontsize=15)
@@ -141,20 +142,22 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax5 = np.where(max(cross_event_ax5) == cross_event_ax5)[0][0]
 
-        ax5.plot(t_ax_1_5, cross_event_ax5, linewidth=5, label=r'$\tau = {}$'
-                    .format(taus[0]))
+        ax5.plot(t_ax_1_5, cross_event_ax5, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[0]))
         # Plot line in the peak of the figure
         ax5.plot((t_ax_1_5[max_pos_ax5], t_ax_1_5[max_pos_ax5]),
                     (0, cross_event_ax5[max_pos_ax5]),
-                    '--', label=r'Max position $t$ = {}'
+                    '--', label=r'Max $t$ = {} trades'
                     .format(max_pos_ax5 - 10 * taus[0]))
         ax5.legend(loc='upper left', fontsize=15)
         # ax1.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-        ax5.set_xlabel(r'Trade shift', fontsize=20)
-        ax5.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
+        ax5.set_xlabel(r'Trade shift [trades]', fontsize=20)
+        ax5.set_ylabel(r'$R_{ij}(\tau_{trades})$', fontsize=20)
         ax5.tick_params(axis='x', labelsize=15)
         ax5.tick_params(axis='y', labelsize=15)
+        ax5.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         ax5.yaxis.offsetText.set_fontsize(15)
+        ax5.xaxis.set_major_locator(ticker.MaxNLocator(4))
         ax5.grid(True)
 
         # Load data
@@ -166,17 +169,18 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax6 = np.where(max(cross_event_ax6) == cross_event_ax6)[0][0]
 
-        ax6.plot(t_ax_2_6, cross_event_ax6, linewidth=5, label=r'$\tau = {}$'
-                    .format(taus[2]))
+        ax6.plot(t_ax_2_6, cross_event_ax6, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[2]))
         # Plot line in the peak of the figure
         ax6.plot((t_ax_2_6[max_pos_ax6], t_ax_2_6[max_pos_ax6]),
                     (0, cross_event_ax6[max_pos_ax6]),
-                    '--', label=r'Max position $t$ = {}'
+                    '--', label=r'Max $t$ = {} trades'
                     .format(max_pos_ax6 - 10 * taus[1]))
         ax6.legend(loc='upper left', fontsize=15)
         # ax1.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-        ax6.set_xlabel(r'Trade shift', fontsize=20)
+        ax6.set_xlabel(r'Trade shift [trades]', fontsize=20)
         ax6.tick_params(axis='x', labelsize=15)
+        ax6.xaxis.set_major_locator(ticker.MaxNLocator(4))
         ax6.grid(True)
 
         # Load data
@@ -188,17 +192,18 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax7 = np.where(max(cross_event_ax7) == cross_event_ax7)[0][0]
 
-        ax7.plot(t_ax_3_7, cross_event_ax7, linewidth=5, label=r'$\tau = {}$'
-                    .format(taus[2]))
+        ax7.plot(t_ax_3_7, cross_event_ax7, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[2]))
         # Plot line in the peak of the figure
         ax7.plot((t_ax_3_7[max_pos_ax7], t_ax_3_7[max_pos_ax7]),
                     (0, cross_event_ax7[max_pos_ax7]),
-                    '--', label=r'Max position $t$ = {}'
+                    '--', label=r'Max $t$ = {} trades'
                     .format(max_pos_ax7 - 10 * taus[2]))
         ax7.legend(loc='upper left', fontsize=15)
         # ax1.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-        ax7.set_xlabel(r'Trade shift', fontsize=20)
+        ax7.set_xlabel(r'Trade shift [trades]', fontsize=20)
         ax7.tick_params(axis='x', labelsize=15)
+        ax7.xaxis.set_major_locator(ticker.MaxNLocator(4))
         ax7.grid(True)
 
         # Load data
@@ -210,17 +215,18 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
         max_pos_ax8 = np.where(max(cross_event_ax8) == cross_event_ax8)[0][0]
 
-        ax8.plot(t_ax_4_8, cross_event_ax8, linewidth=5, label=r'$\tau = {}$'
-                    .format(taus[3]))
+        ax8.plot(t_ax_4_8, cross_event_ax8, linewidth=5,
+                 label=r'$\tau_{trades} = %d$' %(taus[3]))
         # Plot line in the peak of the figure
         ax8.plot((t_ax_4_8[max_pos_ax8], t_ax_4_8[max_pos_ax8]),
                     (0, cross_event_ax8[max_pos_ax8]),
-                    '--', label=r'Max position $t$ = {}'
+                    '--', label=r'Max $t$ = {} trades'
                     .format(max_pos_ax8 - 10 * taus[3]))
         ax8.legend(loc='upper left', fontsize=15)
         # ax1.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-        ax8.set_xlabel(r'Trade shift', fontsize=20)
+        ax8.set_xlabel(r'Trade shift [trades]', fontsize=20)
         ax8.tick_params(axis='x', labelsize=15)
+        ax8.xaxis.set_major_locator(ticker.MaxNLocator(4))
         ax8.grid(True)
 
         plt.tight_layout()
@@ -239,7 +245,7 @@ def taq_trade_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 # ----------------------------------------------------------------------------
 
 
-def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
+def taq_time_scale_shift_year_avg_plot(ticker_i, ticker_j, year,
                                                 taus):
     """Plots the self- and cross-response for a year in second time scale.
 
@@ -281,18 +287,18 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
             max_pos_ax1 = np.where(max(self_time_ax1) == self_time_ax1)[0][0]
 
-            ax1.plot(t_ax_1_5, self_time_ax1, linewidth=5, label=r'$\tau = {}$'
-                     .format(taus[0]))
+            ax1.plot(t_ax_1_5, self_time_ax1, linewidth=5,
+                     label=r'$\tau_{seconds} = %d$' %(taus[0]))
 
             # Plot line in the peak of the figure
             ax1.plot((t_ax_1_5[max_pos_ax1], t_ax_1_5[max_pos_ax1]),
                     (0, self_time_ax1[max_pos_ax1]), '--',
-                    label=r'Max position $t$ = {}'
+                    label=r'Max $t$ = {} seconds'
                     .format(max_pos_ax1 - 10 * taus[0]))
 
             ax1.legend(loc='upper left', fontsize=15)
             # ax.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
-            ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
+            ax1.set_ylabel(r'$R_{ii}(\tau_{seconds})$', fontsize=20)
             ax1.tick_params(axis='y', labelsize=15)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax1.yaxis.offsetText.set_fontsize(15)
@@ -307,13 +313,13 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
             max_pos_ax2 = np.where(max(self_time_ax2) == self_time_ax2)[0][0]
 
-            ax2.plot(t_ax_2_6, self_time_ax2, linewidth=5, label=r'$\tau = {}$'
-                     .format(taus[0]))
+            ax2.plot(t_ax_2_6, self_time_ax2, linewidth=5,
+                     label=r'$\tau_{seconds} = %d$' %(taus[0]))
 
             # Plot line in the peak of the figure
             ax2.plot((t_ax_2_6[max_pos_ax2], t_ax_2_6[max_pos_ax2]),
                     (0, self_time_ax2[max_pos_ax2]), '--',
-                    label=r'Max position $t$ = {}'
+                    label=r'Max $t$ = {} seconds'
                     .format(max_pos_ax2 - 10 * taus[1]))
 
             ax2.legend(loc='upper left', fontsize=15)
@@ -329,13 +335,13 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
             max_pos_ax3 = np.where(max(self_time_ax3) == self_time_ax3)[0][0]
 
-            ax3.plot(t_ax_3_7, self_time_ax3, linewidth=5, label=r'$\tau = {}$'
-                     .format(taus[0]))
+            ax3.plot(t_ax_3_7, self_time_ax3, linewidth=5,
+                     label=r'$\tau_{seconds} = %d$' %(taus[0]))
 
             # Plot line in the peak of the figure
             ax3.plot((t_ax_3_7[max_pos_ax3], t_ax_3_7[max_pos_ax3]),
                     (0, self_time_ax3[max_pos_ax3]), '--',
-                    label=r'Max position $t$ = {}'
+                    label=r'Max $t$ = {} seconds'
                     .format(max_pos_ax3 - 10 * taus[2]))
 
             ax3.legend(loc='upper left', fontsize=15)
@@ -351,13 +357,13 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 
             max_pos_ax4 = np.where(max(self_time_ax4) == self_time_ax4)[0][0]
 
-            ax4.plot(t_ax_4_8, self_time_ax4, linewidth=5, label=r'$\tau = {}$'
-                     .format(taus[0]))
+            ax4.plot(t_ax_4_8, self_time_ax4, linewidth=5,
+                     label=r'$\tau_{seconds} = %d$' %(taus[0]))
 
             # Plot line in the peak of the figure
             ax4.plot((t_ax_4_8[max_pos_ax4], t_ax_4_8[max_pos_ax4]),
                     (0, self_time_ax4[max_pos_ax4]), '--',
-                    label=r'Max position $t$ = {}'
+                    label=r'Max $t$ = {} seconds'
                     .format(max_pos_ax4 - 10 * taus[3]))
 
             ax4.legend(loc='upper left', fontsize=15)
@@ -374,20 +380,21 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
             max_pos_ax5 = np.where(max(cross_time_ax5) == cross_time_ax5)[0][0]
 
             ax5.plot(t_ax_1_5, cross_time_ax5, linewidth=5,
-                     label=r'$\tau = {}$'.format(taus[0]))
+                     label=r'$\tau_{seconds} = %d$' %(taus[0]))
             # Plot line in the peak of the figure
             ax5.plot((t_ax_1_5[max_pos_ax5], t_ax_1_5[max_pos_ax5]),
                         (0, cross_time_ax5[max_pos_ax5]),
-                        '--', label=r'Max position $t$ = {}'
+                        '--', label=r'Max $t$ = {} seconds'
                         .format(max_pos_ax5 - 10 * taus[0]))
             ax5.legend(loc='upper left', fontsize=15)
             # ax2.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
             ax5.set_xlabel(r'Time shift $[s]$', fontsize=20)
-            ax5.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
+            ax5.set_ylabel(r'$R_{ij}(\tau_{seconds})$', fontsize=20)
             ax5.tick_params(axis='x', labelsize=15)
             ax5.tick_params(axis='y', labelsize=15)
             ax5.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax5.yaxis.offsetText.set_fontsize(15)
+            ax5.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax5.grid(True)
 
             # Load data
@@ -400,16 +407,17 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
             max_pos_ax6 = np.where(max(cross_time_ax6) == cross_time_ax6)[0][0]
 
             ax6.plot(t_ax_2_6, cross_time_ax6, linewidth=5,
-                     label=r'$\tau = {}$'.format(taus[1]))
+                     label=r'$\tau_{seconds} = %d$' %(taus[1]))
             # Plot line in the peak of the figure
             ax6.plot((t_ax_2_6[max_pos_ax6], t_ax_2_6[max_pos_ax6]),
                         (0, cross_time_ax6[max_pos_ax6]),
-                        '--', label=r'Max position $t$ = {}'
+                        '--', label=r'Max $t$ = {} seconds'
                         .format(max_pos_ax6 - 10 * taus[1]))
             ax6.legend(loc='upper left', fontsize=15)
             # ax2.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
             ax6.set_xlabel(r'Time shift $[s]$', fontsize=20)
             ax6.tick_params(axis='x', labelsize=15)
+            ax6.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax6.grid(True)
 
             # Load data
@@ -422,16 +430,17 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
             max_pos_ax7 = np.where(max(cross_time_ax7) == cross_time_ax7)[0][0]
 
             ax7.plot(t_ax_3_7, cross_time_ax7, linewidth=5,
-                     label=r'$\tau = {}$'.format(taus[2]))
+                     label=r'$\tau_{seconds} = %d$' %(taus[2]))
             # Plot line in the peak of the figure
             ax7.plot((t_ax_3_7[max_pos_ax7], t_ax_3_7[max_pos_ax7]),
                         (0, cross_time_ax7[max_pos_ax7]),
-                        '--', label=r'Max position $t$ = {}'
+                        '--', label=r'Max $t$ = {} seconds'
                         .format(max_pos_ax7 - 10 * taus[2]))
             ax7.legend(loc='upper left', fontsize=15)
             # ax2.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
             ax7.set_xlabel(r'Time shift $[s]$', fontsize=20)
             ax7.tick_params(axis='x', labelsize=15)
+            ax7.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax7.grid(True)
 
             # Load data
@@ -444,16 +453,17 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
             max_pos_ax8 = np.where(max(cross_time_ax8) == cross_time_ax8)[0][0]
 
             ax8.plot(t_ax_4_8, cross_time_ax8, linewidth=5,
-                     label=r'$\tau = {}$'.format(taus[3]))
+                     label=r'$\tau_{seconds} = %d$' %(taus[3]))
             # Plot line in the peak of the figure
             ax8.plot((t_ax_4_8[max_pos_ax8], t_ax_4_8[max_pos_ax8]),
                         (0, cross_time_ax8[max_pos_ax8]),
-                        '--', label=r'Max position $t$ = {}'
+                        '--', label=r'Max $t$ = {} seconds'
                         .format(max_pos_ax8 - 10 * taus[3]))
             ax8.legend(loc='upper left', fontsize=15)
             # ax2.set_title(r'$\tau$ = {}'.format(tau_val), fontsize=20)
             ax8.set_xlabel(r'Time shift $[s]$', fontsize=20)
             ax8.tick_params(axis='x', labelsize=15)
+            ax8.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax8.grid(True)
 
             plt.tight_layout()
@@ -472,7 +482,93 @@ def taq_time_scale_response_year_avg_shift_plot(ticker_i, ticker_j, year,
 # ----------------------------------------------------------------------------
 
 
-def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
+def taq_trade_scale_responses_year_avg_shift_plot(ticker_i, ticker_j, year,
+                                                  shifts):
+    """Plots the responses average for a year with trade time shifts.
+
+    :param ticker_i: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param ticker_j: string of the abbreviation of the stock to be analized
+     (i.e. 'AAPL').
+    :param year: string of the year to be analized (i.e. '2008')
+    :param shifts: list of integers greater than zero (i.e. [1, 10, 50]).
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
+    """
+
+    try:
+        figure = plt.figure(figsize=(16, 9))
+        ax1 = plt.subplot(1, 2, 1)
+        ax2 = plt.subplot(1, 2, 2)
+
+        # Figure with different plots for different shifts
+        for shift in shifts:
+
+            # Load data
+            self_event = pickle.load(open(''.join((
+                '../../project/taq_data/responses_event_shift_data'
+                + '_{1}/taq_self_response_year_responses_event'
+                + '_shift_data_shift_{2}/taq_self_response_year'
+                + '_responses_event_shift_data_shift_{2}_{1}_{0}'
+                + '.pickle').split())
+                .format(ticker_i, year, shift), 'rb'))
+
+            ax1.semilogx(self_event, linewidth=5, label='Shift {} trades'
+                         .format(shift))
+
+            cross_event = pickle.load(open(''.join((
+                '../../project/taq_data/responses_event_shift_data_{2}/'
+                + 'taq_cross_response_year_responses_event_shift'
+                + '_data_shift_{3}/taq_cross_response_year'
+                + '_responses_event_shift_data_shift_{3}_{2}_{0}i'
+                + '_{1}j.pickle').split())
+                .format(ticker_i, ticker_j, year, shift),
+                'rb'))
+
+            ax2.semilogx(cross_event, linewidth=5, label='Shift {} trades'
+                         .format(shift))
+
+        ax1.legend(loc='upper left', fontsize=20)
+        ax1.set_title('{}'.format(ticker_i), fontsize=40)
+        ax1.set_xlabel(r'$\tau \, [trades]$', fontsize=20)
+        ax1.set_ylabel(r'$R_{ii}(\tau_{trades})$', fontsize=20)
+        ax1.set_xlim(1, 10000)
+        # ax1.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.tick_params(axis='x', labelsize=15)
+        ax1.tick_params(axis='y', labelsize=15)
+        ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(15)
+        ax1.grid(True)
+
+        ax2.legend(loc='upper left', fontsize=20)
+        ax2.set_title('{} - {}'.format(ticker_i, ticker_j), fontsize=40)
+        ax2.set_xlabel(r'$\tau \, [trades]$', fontsize=20)
+        ax2.set_ylabel(r'$R_{ij}(\tau_{trades})$', fontsize=20)
+        ax2.set_xlim(1, 10000)
+        # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax2.tick_params(axis='x', labelsize=15)
+        ax2.tick_params(axis='y', labelsize=15)
+        ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(15)
+        ax2.grid(True)
+
+        plt.tight_layout()
+
+        # Save plot
+        figure.savefig('../plot/04_shift_responses_trades')
+
+        return None
+
+    except FileNotFoundError as e:
+        print('No data')
+        print(e)
+        print()
+        return None
+
+# ----------------------------------------------------------------------------
+
+def taq_time_scale_responses_year_avg_shift_plot(ticker_i, ticker_j, year,
+                                                 shifts):
     """Plots the responses average for a year with event and time shifts.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -487,26 +583,13 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
 
     try:
         figure = plt.figure(figsize=(16, 9))
-        ax1 = plt.subplot(2, 2, 1)
-        ax2 = plt.subplot(2, 2, 2)
-        ax3 = plt.subplot(2, 2, 3)
-        ax4 = plt.subplot(2, 2, 4)
+        ax1 = plt.subplot(1, 2, 1)
+        ax2 = plt.subplot(1, 2, 2)
 
         # Figure with different plots for different shifts
         for shift in shifts:
 
             # Load data
-            self_event = pickle.load(open(''.join((
-                '../../project/taq_data/responses_event_shift_data'
-                + '_{1}/taq_self_response_year_responses_event'
-                + '_shift_data_shift_{2}/taq_self_response_year'
-                + '_responses_event_shift_data_shift_{2}_{1}_{0}'
-                + '.pickle').split())
-                .format(ticker_i, year, shift), 'rb'))
-
-            ax1.semilogx(self_event, linewidth=5, label='Shift {} event'
-                         .format(shift))
-
             self_time = pickle.load(open(''.join((
                 '../../project/taq_data/responses_time_shift_data'
                 + '_{1}/taq_self_response_year_responses_time'
@@ -514,19 +597,7 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
                 + '_responses_time_shift_data_shift_{2}_{1}_{0}.pickle')
                 .split()).format(ticker_i, year, shift), 'rb'))
 
-            ax2.semilogx(self_time, linewidth=5, label='Shift {} s'
-                         .format(shift))
-
-            cross_event = pickle.load(open(''.join((
-                '../../project/taq_data/responses_event_shift_data_{2}/'
-                + 'taq_cross_response_year_responses_event_shift'
-                + '_data_shift_{3}/taq_cross_response_year'
-                + '_responses_event_shift_data_shift_{3}_{2}_{0}i'
-                + '_{1}j.pickle').split())
-                .format(ticker_i, ticker_j, year, shift),
-                'rb'))
-
-            ax3.semilogx(cross_event, linewidth=5, label='Shift {} event'
+            ax1.semilogx(self_time, linewidth=5, label='Shift {} s'
                          .format(shift))
 
             cross_time = pickle.load(open(''.join((
@@ -538,16 +609,15 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
                             .format(ticker_i, ticker_j, year, shift),
                             'rb'))
 
-            ax4.semilogx(cross_time, linewidth=5, label='Shift {} s'
+            ax2.semilogx(cross_time, linewidth=5, label='Shift {} s'
                          .format(shift))
 
         ax1.legend(loc='upper left', fontsize=20)
-        # ax1.title('Self-response transactions {}'.format(ticker),
-        #           fontsize=40)
-        ax1.set_xlabel(r'$\tau \, [event]$', fontsize=20)
-        ax1.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
+        ax1.set_title('{}'.format(ticker_i), fontsize=40)
+        ax1.set_xlabel(r'$\tau \, [s]$', fontsize=20)
+        ax1.set_ylabel(r'$R_{ii}(\tau_{seconds})$', fontsize=20)
         ax1.set_xlim(1, 10000)
-        # ax1.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax1.tick_params(axis='x', labelsize=15)
         ax1.tick_params(axis='y', labelsize=15)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
@@ -555,48 +625,21 @@ def taq_responses_year_avg_shift_plot(ticker_i, ticker_j, year, shifts):
         ax1.grid(True)
 
         ax2.legend(loc='upper left', fontsize=20)
-        # ax2.title('Self-response - {}'.format(ticker), fontsize=40)
+        ax2.set_title('{} - {}'.format(ticker_i, ticker_j), fontsize=40)
         ax2.set_xlabel(r'$\tau \, [s]$', fontsize=20)
-        ax2.set_ylabel(r'$R_{ii}(\tau)$', fontsize=20)
+        ax2.set_ylabel(r'$R_{ij}(\tau_{seconds})$', fontsize=20)
         ax2.set_xlim(1, 10000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
         ax2.tick_params(axis='x', labelsize=15)
         ax2.tick_params(axis='y', labelsize=15)
         ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         ax2.yaxis.offsetText.set_fontsize(15)
         ax2.grid(True)
 
-        ax3.legend(loc='upper left', fontsize=20)
-        # ax3.title('Cross-response transactions {} - {}'.format(ticker_i,
-        #           ticker_j), fontsize=40)
-        ax3.set_xlabel(r'$\tau \, [event]$', fontsize=20)
-        ax3.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
-        ax3.set_xlim(1, 10000)
-        # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-        ax3.tick_params(axis='x', labelsize=15)
-        ax3.tick_params(axis='y', labelsize=15)
-        ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        ax3.yaxis.offsetText.set_fontsize(15)
-        ax3.grid(True)
-
-        ax4.legend(loc='upper left', fontsize=20)
-        # ax4.title('Cross-response {} - {}'.format(ticker_i, ticker_j),
-        #           fontsize=40)
-        ax4.set_xlabel(r'$\tau \, [s]$', fontsize=20)
-        ax4.set_ylabel(r'$R_{ij}(\tau)$', fontsize=20)
-        ax4.set_xlim(1, 10000)
-        # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-        ax4.tick_params(axis='x', labelsize=15)
-        ax4.tick_params(axis='y', labelsize=15)
-        ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        ax4.yaxis.offsetText.set_fontsize(15)
-        ax4.grid(True)
-
         plt.tight_layout()
-        plt.show()
 
         # Save plot
-        figure.savefig('../plot/04_shift_responses')
+        figure.savefig('../plot/04_shift_responses_time')
 
         return None
 
@@ -615,10 +658,10 @@ def main():
     shifts = [1, 10, 100, 1000, 5000]
     year = '2008'
 
-    taq_trade_scale_response_year_avg_shift_plot('GS', 'JPM', year, taus)
-    taq_time_scale_response_year_avg_shift_plot('GS', 'JPM', year, taus)
-    # taq_cross_response_year_avg_shift_plot('GS', 'JPM', year, taus)
-    # taq_responses_year_avg_shift_plot('GS', 'JPM', year, shifts)
+    # taq_trade_scale_shift_year_avg_plot('GS', 'JPM', year, taus)
+    # taq_time_scale_shift_year_avg_plot('GS', 'JPM', year, taus)
+    taq_trade_scale_responses_year_avg_shift_plot('GS', 'JPM', year, shifts)
+    taq_time_scale_responses_year_avg_shift_plot('GS', 'JPM', year, shifts)
 
     return None
 
