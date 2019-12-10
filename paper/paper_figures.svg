@@ -17,7 +17,7 @@
    inkscape:export-filename="/home/tp/jchenaol/bitmap.png"
    inkscape:export-xdpi="73384.016"
    inkscape:export-ydpi="73384.016"
-   inkscape:version="0.92.1 r15371"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="paper_figures.svg">
   <defs
      id="defs2">
@@ -36,9 +36,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="-1261.7327"
-     inkscape:cy="944.59046"
+     inkscape:zoom="0.1767767"
+     inkscape:cx="-301.09742"
+     inkscape:cy="-31.948223"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -50,15 +50,17 @@
      inkscape:snap-intersection-paths="true"
      inkscape:object-paths="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1143"
-     inkscape:window-x="1280"
-     inkscape:window-y="20"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
      inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-bbox-midpoints="true" />
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:measure-start="0,0"
+     inkscape:measure-end="0,0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -2593,16 +2595,16 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-121.23799"
+       x="-139.93805"
        y="144.60773"
        id="text104-5-3-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan102-9-6-6"
-         x="-121.23799"
+         x="-139.93805"
          y="144.60773"
          style="font-size:5.51755667px;stroke-width:0.20690838">t<tspan
    style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
@@ -2610,16 +2612,16 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-187.50163"
+       x="-206.20169"
        y="144.76396"
        id="text177-2-0-5"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-2-5-6"
-         x="-187.50163"
+         x="-206.20169"
          y="144.76396"
          style="font-size:5.51755667px;stroke-width:0.20690838">m<tspan
    style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
@@ -2629,9 +2631,9 @@
        id="rect10-2-4-3"
        width="50"
        height="0.73118693"
-       x="-184.80171"
+       x="-204.80171"
        y="133.54774"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2639,9 +2641,9 @@
        id="rect12-7-9-6-2"
        width="0.8363784"
        height="7.3118696"
-       x="-145.49863"
+       x="-165.49863"
        y="130.25737"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2649,9 +2651,9 @@
        id="rect12-5-4-2-6"
        width="0.8363784"
        height="7.3118696"
-       x="-184.80171"
+       x="-204.80171"
        y="130.25737"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -2671,38 +2673,38 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.69697768"
        inkscape:transform-center-y="-5.3779287e-06"
-       transform="matrix(0.63423252,0,0,0.48018078,-151.86656,22.063374)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       transform="matrix(0.63423252,0,0,0.48018078,-171.86657,22.063374)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-173.71448"
+       x="-192.41454"
        y="151.37494"
        id="text84-8-4-8"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan82-4-7-7"
-         x="-173.71448"
+         x="-192.41454"
          y="151.37494"
          style="font-size:4.13816786px;stroke-width:0.20690838">0</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-137.00337"
+       x="-155.70343"
        y="151.87123"
        id="text88-5-2-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan86-0-4-2"
-         x="-137.00337"
+         x="-155.70343"
          y="151.87123"
          style="font-size:4.13816786px;stroke-width:0.20690838">1</tspan></text>
     <rect
@@ -2710,9 +2712,9 @@
        id="rect12-9-0-1-6-76-2"
        width="0.8363784"
        height="5.8494954"
-       x="-175.49863"
+       x="-195.49863"
        y="130.98862"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2720,9 +2722,9 @@
        id="rect12-9-0-1-6-2-1-2"
        width="0.8363784"
        height="5.8494954"
-       x="-155.49863"
+       x="-175.49863"
        y="130.98862"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2730,24 +2732,24 @@
        id="rect12-9-0-1-6-2-9-3-8"
        width="0.8363784"
        height="5.8494954"
-       x="-165.49863"
+       x="-185.49863"
        y="130.98862"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-214.73824"
+       x="-224.08827"
        y="145.04543"
        id="text104-5-3-3-1"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan102-9-6-6-2"
-         x="-214.73824"
+         x="-224.08827"
          y="145.04543"
          style="font-size:5.51755667px;stroke-width:0.20690838">t<tspan
    style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
@@ -2755,16 +2757,16 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-281.00189"
+       x="-290.35193"
        y="145.20166"
        id="text177-2-0-5-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-2-5-6-1"
-         x="-281.00189"
+         x="-290.35193"
          y="145.20166"
          style="font-size:5.51755667px;stroke-width:0.20690838">m<tspan
    style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
@@ -2774,9 +2776,9 @@
        id="rect10-2-4-3-4"
        width="50"
        height="0.73118693"
-       x="-284.8017"
+       x="-294.8017"
        y="133.95699"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2784,9 +2786,9 @@
        id="rect12-7-9-6-2-7"
        width="0.8363784"
        height="7.3118696"
-       x="-245.49863"
+       x="-255.49863"
        y="130.66661"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2794,9 +2796,9 @@
        id="rect12-5-4-2-6-8"
        width="0.8363784"
        height="7.3118696"
-       x="-284.8017"
+       x="-294.8017"
        y="130.66661"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -2816,38 +2818,38 @@
        d="m 26.906291,236.73986 0,-7.61366 6.593626,3.80683 z"
        inkscape:transform-center-x="-0.69697768"
        inkscape:transform-center-y="-5.3779287e-06"
-       transform="matrix(0.63423252,0,0,0.48018078,-251.86653,22.472614)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       transform="matrix(0.63423252,0,0,0.48018078,-261.86654,22.472614)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-267.21472"
+       x="-276.56476"
        y="151.81264"
        id="text84-8-4-8-5"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan82-4-7-7-0"
-         x="-267.21472"
+         x="-276.56476"
          y="151.81264"
          style="font-size:4.13816786px;stroke-width:0.20690838">0</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.13816786px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-230.50365"
+       x="-239.85368"
        y="151.87123"
        id="text88-5-2-9-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan86-0-4-2-6"
-         x="-230.50365"
+         x="-239.85368"
          y="151.87123"
          style="font-size:4.13816786px;stroke-width:0.20690838">1</tspan></text>
     <rect
@@ -2855,9 +2857,9 @@
        id="rect12-9-0-1-6-76-2-1"
        width="0.8363784"
        height="5.8494954"
-       x="-275.49863"
+       x="-285.49863"
        y="131.39786"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2865,9 +2867,9 @@
        id="rect12-9-0-1-6-2-1-2-0"
        width="0.8363784"
        height="5.8494954"
-       x="-255.49863"
+       x="-265.49863"
        y="131.39786"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2875,9 +2877,9 @@
        id="rect12-9-0-1-6-2-9-3-8-6"
        width="0.8363784"
        height="5.8494954"
-       x="-265.49863"
+       x="-275.49863"
        y="131.39786"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -2887,7 +2889,7 @@
        y="145.04543"
        id="text104-5-3-3-3"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2904,7 +2906,7 @@
        y="145.20166"
        id="text177-2-0-5-1"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2921,7 +2923,7 @@
        height="0.73118693"
        x="-384.80188"
        y="133.957"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2931,7 +2933,7 @@
        height="7.3118696"
        x="-345.49881"
        y="130.66663"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -2941,7 +2943,7 @@
        height="7.3118696"
        x="-384.80188"
        y="130.66663"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
@@ -2962,7 +2964,7 @@
        inkscape:transform-center-x="-0.69697768"
        inkscape:transform-center-y="-5.3779287e-06"
        transform="matrix(0.63423252,0,0,0.48018078,-351.86728,22.472624)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <text
@@ -2972,7 +2974,7 @@
        y="151.81264"
        id="text84-8-4-8-9"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -2987,7 +2989,7 @@
        y="151.87123"
        id="text88-5-2-9-7"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
@@ -3002,7 +3004,7 @@
        height="5.8494954"
        x="-375.49881"
        y="131.39787"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3012,7 +3014,7 @@
        height="5.8494954"
        x="-355.49881"
        y="131.39787"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3022,12 +3024,15 @@
        height="5.8494954"
        x="-365.49881"
        y="131.39787"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <g
        id="g5263"
-       transform="matrix(0.56338028,0,0,1,-154.78045,8.861439)">
+       transform="matrix(0.56338028,0,0,1,-154.78045,21.004169)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
       <rect
          inkscape:export-ydpi="300"
          inkscape:export-xdpi="300"
@@ -3265,8 +3270,8 @@
        width="0.8363784"
        height="5.8494954"
        x="-350.56384"
-       y="159.97247"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="172.11458"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3275,8 +3280,8 @@
        width="0.8363784"
        height="5.8494954"
        x="-350.56384"
-       y="154.123"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="166.26514"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3285,14 +3290,17 @@
        width="0.8363784"
        height="5.8494954"
        x="-350.56384"
-       y="148.27356"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="160.41574"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <g
        id="g5316"
-       transform="translate(-0.91625977,-20.68287)"
-       style="fill:#0000ff">
+       transform="translate(-0.91625977,-8.5401284)"
+       style="fill:#0000ff"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
       <rect
          inkscape:export-ydpi="300"
          inkscape:export-xdpi="300"
@@ -3330,8 +3338,8 @@
        width="3"
        height="0.83600003"
        x="-351.64566"
-       y="159.97247"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="172.11461"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3340,8 +3348,8 @@
        width="3"
        height="0.83600003"
        x="-351.72006"
-       y="154.123"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="166.26514"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3350,8 +3358,8 @@
        width="3"
        height="0.83600003"
        x="-351.64566"
-       y="148.27356"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="160.41574"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -3360,88 +3368,1282 @@
        width="3"
        height="0.83600003"
        x="-361.72006"
-       y="148.27356"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       y="160.41574"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <circle
        style="fill:#000000;stroke-width:0.99290788;stroke-miterlimit:4;stroke-dasharray:none"
        id="path5388"
        cx="-375.55801"
-       cy="161.13953"
-       r="3.5" />
+       cy="173.28163"
+       r="3.5"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <circle
        style="fill:#ffffff;stroke-width:3.2444284;stroke-miterlimit:4;stroke-dasharray:none"
        id="path5390"
        cx="-375.55801"
-       cy="161.13953"
-       r="3" />
+       cy="173.28163"
+       r="3"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <rect
        style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect5369"
        width="0.5"
        height="5"
        x="-375.80801"
-       y="158.63953" />
+       y="170.78163"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <rect
        style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect5369-7"
        width="5"
        height="0.5"
        x="-378.05801"
-       y="160.88953" />
+       y="173.03163"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <circle
        style="fill:#000000;stroke-width:0.99290788;stroke-miterlimit:4;stroke-dasharray:none"
        id="path5388-7"
        cx="-375.29044"
-       cy="171.35789"
-       r="3.5" />
+       cy="183.5"
+       r="3.5"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <circle
        style="fill:#ffffff;stroke-width:3.2444284;stroke-miterlimit:4;stroke-dasharray:none"
        id="path5390-1"
        cx="-375.29044"
-       cy="171.35789"
-       r="3" />
+       cy="183.5"
+       r="3"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <rect
        style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect5369-7-5"
        width="5"
        height="0.5"
        x="-377.79044"
-       y="171.10789" />
+       y="183.25"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
        x="-348.4826"
-       y="169.50699"
+       y="182.49352"
        id="text177-2-0-5-3-0"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-2-5-6-1-6"
          x="-348.4826"
-         y="169.50699"
+         y="182.49352"
          style="font-size:5.51755667px;stroke-width:0.20690838">r<tspan
    style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
    id="tspan251-1-2-9-4">i</tspan>(1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
-       x="-324.51544"
-       y="162.63126"
+       x="-324.24405"
+       y="173.6843"
        id="text177-2-0-5-3-0-7"
        transform="scale(1.0695157,0.93500263)"
-       inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan175-2-5-6-1-6-4"
-         x="-324.51544"
-         y="162.63126"
+         x="-324.24405"
+         y="173.6843"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8">i</tspan><tspan
+   style="font-size:64.99999762%;baseline-shift:super"
+   id="tspan448">(3)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-324.24365"
+       y="179.4933"
+       id="text177-2-0-5-3-0-7-2"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-7"
+         x="-324.24365"
+         y="179.4933"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-0">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-9">(2)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-324.24365"
+       y="185.74944"
+       id="text177-2-0-5-3-0-7-3"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6"
+         x="-324.24365"
+         y="185.74944"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2">(1)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-399.80167"
+       id="text177-2-0-5-3-0-7-3-6"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1"
+         x="-141.44171"
+         y="-399.80167"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7">(1)</tspan>(1)</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot8159"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:26.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion8161"><rect
+           id="rect8163"
+           width="379.71634"
+           height="140.00714"
+           x="-1516.037"
+           y="558.95557" /></flowRegion><flowPara
+         id="flowPara8165"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-389.10651"
+       id="text177-2-0-5-3-0-7-3-6-3"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-7"
+         x="-141.44171"
+         y="-389.10651"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-5">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-9">(2)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-378.41135"
+       id="text177-2-0-5-3-0-7-3-6-2"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-2"
+         x="-141.44171"
+         y="-378.41135"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-8">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-97">(3)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-303.54504"
+       id="text177-2-0-5-3-0-7-3-6-36"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-1"
+         x="-141.44171"
+         y="-303.54504"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-2">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-93">(1)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-292.84988"
+       id="text177-2-0-5-3-0-7-3-6-3-1"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-7-9"
+         x="-141.44171"
+         y="-292.84988"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-5-4">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-9-7">(2)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-282.15472"
+       id="text177-2-0-5-3-0-7-3-6-2-8"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-2-4"
+         x="-141.44171"
+         y="-282.15472"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-8-5">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-97-0">(3)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-207.28864"
+       id="text177-2-0-5-3-0-7-3-6-361"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-0"
+         x="-141.44171"
+         y="-207.28864"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-6">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-3">(1)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-196.59348"
+       id="text177-2-0-5-3-0-7-3-6-3-2"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-7-0"
+         x="-141.44171"
+         y="-196.59348"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-5-6">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-9-1">(2)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-141.44171"
+       y="-185.89832"
+       id="text177-2-0-5-3-0-7-3-6-2-5"
+       transform="matrix(0,-1.0695157,0.93500263,0,0,0)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-1-2-5"
+         x="-141.44171"
+         y="-185.89832"
+         style="font-size:2.82222223px;stroke-width:0.20690838">m<tspan
+   style="font-size:2.82222223px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-8-8-4">i</tspan><tspan
+   style="font-size:2.82222223px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-7-97-7">(3)</tspan>(1)</tspan></text>
+    <g
+       id="g5263-0"
+       transform="matrix(0.56338028,0,0,1,-64.362101,21.004156)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96078"
+         x="-400"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-78"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96082"
+         x="-394"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-68"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96082"
+         x="-394"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-8"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96085"
+         x="-388"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-4"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96085"
+         x="-388"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-88-3"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96088"
+         x="-382"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-4-1"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96088"
+         x="-382"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-3-4"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96091"
+         x="-376"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-1-9"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96091"
+         x="-376"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-4-2"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96094"
+         x="-370"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-9-0"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96094"
+         x="-370"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-2-6"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96097"
+         x="-364"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-0-8"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96097"
+         x="-364"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-88-6-9"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.961"
+         x="-358"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-4-8-2"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.961"
+         x="-358"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-3-9-6"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96103"
+         x="-352"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-1-2-6"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96103"
+         x="-352"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-6-4"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96106"
+         x="-346"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-64-9"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96106"
+         x="-346"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-9-5"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96109"
+         x="-340"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-5-0"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96109"
+         x="-340"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-88-0-4"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96112"
+         x="-334"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-4-4-8"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96112"
+         x="-334"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-3-8-7"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <rect
+       style="fill:#ff0000;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-0-1"
+       width="0.8363784"
+       height="5.8494954"
+       x="-260.12805"
+       y="190.39523"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-6-7"
+       width="0.8363784"
+       height="5.8494954"
+       x="-260.12805"
+       y="184.54579"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-1-2"
+       width="0.8363784"
+       height="5.8494954"
+       x="-260.12805"
+       y="178.6964"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <g
+       id="g5316-7"
+       transform="translate(89.726082,9.7395544)"
+       style="fill:#0000ff"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="180.65573"
+         x="-359.72198"
+         height="5.8494954"
+         width="0.8363784"
+         id="rect12-9-0-1-6-76-2-5-0-5-2"
+         style="fill:#0000ff;stroke-width:0.18506451" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="174.80623"
+         x="-359.72198"
+         height="5.8494954"
+         width="0.8363784"
+         id="rect12-9-0-1-6-76-2-5-6-9-2"
+         style="fill:#0000ff;stroke-width:0.18506451" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="168.95673"
+         x="-359.72198"
+         height="5.8494954"
+         width="0.8363784"
+         id="rect12-9-0-1-6-76-2-5-1-4-6"
+         style="fill:#0000ff;stroke-width:0.18506451" />
+    </g>
+    <rect
+       style="fill:#ff0000;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-1"
+       width="3"
+       height="0.83600003"
+       x="-261.20987"
+       y="195.40872"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-0-0"
+       width="3"
+       height="0.83600003"
+       x="-261.20987"
+       y="189.5593"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-9-6"
+       width="3"
+       height="0.83600003"
+       x="-261.20987"
+       y="183.70979"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-9-1-1"
+       width="3"
+       height="0.83600003"
+       x="-271.07773"
+       y="195.40878"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke-width:0.99290788;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5388-5"
+       cx="-285.13965"
+       cy="173.28163"
+       r="3.5"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#ffffff;stroke-width:3.2444284;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5390-9"
+       cx="-285.13965"
+       cy="173.28163"
+       r="3"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect5369-4"
+       width="0.5"
+       height="5"
+       x="-285.38965"
+       y="170.78163"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect5369-7-9"
+       width="5"
+       height="0.5"
+       x="-287.63965"
+       y="173.03163"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke-width:0.99290788;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5388-7-0"
+       cx="-284.87207"
+       cy="183.5"
+       r="3.5"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#ffffff;stroke-width:3.2444284;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5390-1-9"
+       cx="-284.87207"
+       cy="183.5"
+       r="3"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect5369-7-5-1"
+       width="5"
+       height="0.5"
+       x="-287.37207"
+       y="183.25"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-263.94122"
+       y="201.73575"
+       id="text177-2-0-5-3-0-77"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-1"
+         x="-263.94122"
+         y="201.73575"
          style="font-size:5.51755667px;stroke-width:0.20690838">r<tspan
    style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
-   id="tspan251-1-2-9-4-8">i</tspan>(1)</tspan></text>
+   id="tspan251-1-2-9-4-1">i</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-239.27347"
+       y="198.15031"
+       id="text177-2-0-5-3-0-7-5"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-9"
+         x="-239.27347"
+         y="198.15031"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-7">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-7">(1)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-239.27307"
+       y="203.95932"
+       id="text177-2-0-5-3-0-7-2-6"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-7-7"
+         x="-239.27307"
+         y="203.95932"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-0-3">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-9-6">(2)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-239.27307"
+       y="210.21545"
+       id="text177-2-0-5-3-0-7-3-5"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-6"
+         x="-239.27307"
+         y="210.21545"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-3">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-9">(3)</tspan>(1)</tspan></text>
+    <g
+       id="g5263-4"
+       transform="matrix(0.56338028,0,0,1,25.637894,21.004167)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96078"
+         x="-400"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-81"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96082"
+         x="-394"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-2"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96082"
+         x="-394"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-93"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96085"
+         x="-388"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-9"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96085"
+         x="-388"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-88-08"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96088"
+         x="-382"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-4-85"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96088"
+         x="-382"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-3-0"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96091"
+         x="-376"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-1-96"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96091"
+         x="-376"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-4-3"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96094"
+         x="-370"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-9-8"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96094"
+         x="-370"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-2-5"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96097"
+         x="-364"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-0-6"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96097"
+         x="-364"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-88-6-1"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.961"
+         x="-358"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-4-8-1"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.961"
+         x="-358"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-3-9-5"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96103"
+         x="-352"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-1-2-9"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96103"
+         x="-352"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-6-8"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96106"
+         x="-346"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-64-4"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96106"
+         x="-346"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-9-8"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96109"
+         x="-340"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-6-5-1"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96109"
+         x="-340"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-88-0-0"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96112"
+         x="-334"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-7-4-4-3"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/juan/Desktop/01_relation_trades_quotes_trade_scale.png"
+         y="156.96112"
+         x="-334"
+         height="0.73118693"
+         width="5"
+         id="rect10-2-4-3-47-7-8-3-8-0"
+         style="fill:#000000;stroke-width:0.41834298;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <rect
+       style="fill:#008000;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-0-4"
+       width="0.8363784"
+       height="5.8494954"
+       x="-170.14551"
+       y="172.11459"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#008000;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-6-4"
+       width="0.8363784"
+       height="5.8494954"
+       x="-170.14551"
+       y="166.26515"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-1-44"
+       width="0.8363784"
+       height="5.8494954"
+       x="-170.12807"
+       y="178.69641"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-0-5-3"
+       width="0.8363784"
+       height="5.8494954"
+       x="-180.21989"
+       y="172.11562"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:0.18506451"
+       id="rect12-9-0-1-6-76-2-5-6-9-1"
+       width="0.8363784"
+       height="5.8494954"
+       x="-180.21989"
+       y="166.26611"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#008000;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-5"
+       width="3"
+       height="0.83600003"
+       x="-171.22733"
+       y="172.11462"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#008000;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-0-9"
+       width="3"
+       height="0.83600003"
+       x="-171.30173"
+       y="166.26515"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-9-62"
+       width="3"
+       height="0.83600003"
+       x="-171.20988"
+       y="183.7099"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:0.13250317"
+       id="rect12-9-0-1-6-76-2-5-0-9-9-1-17"
+       width="3"
+       height="0.83600003"
+       x="-181.30171"
+       y="166.26611"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke-width:0.99290788;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5388-8"
+       cx="-195.13968"
+       cy="173.28165"
+       r="3.5"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#ffffff;stroke-width:3.2444284;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5390-5"
+       cx="-195.13968"
+       cy="173.28165"
+       r="3"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect5369-74"
+       width="0.5"
+       height="5"
+       x="-195.38968"
+       y="170.78165"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect5369-7-1"
+       width="5"
+       height="0.5"
+       x="-197.63968"
+       y="173.03165"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke-width:0.99290788;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5388-7-8"
+       cx="-194.8721"
+       cy="183.5"
+       r="3.5"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#ffffff;stroke-width:3.2444284;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path5390-1-5"
+       cx="-194.8721"
+       cy="183.5"
+       r="3"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#0000ff;stroke-width:1.32291663;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect5369-7-5-9"
+       width="5"
+       height="0.5"
+       x="-197.3721"
+       y="183.25002"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-179.79099"
+       y="182.49352"
+       id="text177-2-0-5-3-0-75"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-3"
+         x="-179.79099"
+         y="182.49352"
+         style="font-size:5.51755667px;stroke-width:0.20690838">r<tspan
+   style="font-size:4.13816786px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-88">i</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-155.55243"
+       y="198.02008"
+       id="text177-2-0-5-3-0-7-31"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-8"
+         x="-155.55243"
+         y="198.02008"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-9">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-6">(2)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-155.55202"
+       y="179.4933"
+       id="text177-2-0-5-3-0-7-2-4"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-7-3"
+         x="-155.55202"
+         y="179.4933"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-0-33">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-9-8">(3)</tspan>(1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.51755667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20690838"
+       x="-155.55202"
+       y="185.74944"
+       id="text177-2-0-5-3-0-7-3-60"
+       transform="scale(1.0695157,0.93500263)"
+       inkscape:export-filename="/home/juan/Desktop/return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan175-2-5-6-1-6-4-6-4"
+         x="-155.55202"
+         y="185.74944"
+         style="font-size:3.52777767px;stroke-width:0.20690838">r<tspan
+   style="font-size:3.52777767px;baseline-shift:sub;stroke-width:0.20690838"
+   id="tspan251-1-2-9-4-8-06-88">i</tspan><tspan
+   style="font-size:2.2930553px;baseline-shift:super;stroke-width:0.20690838"
+   id="tspan448-2-8">(1)</tspan>(1)</tspan></text>
   </g>
 </svg>
