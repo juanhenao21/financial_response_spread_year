@@ -72,7 +72,7 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
         plt.show()
 
         # Save plot
-        figure.savefig('../plot/03_self_short_long_{}'.format(ticker))
+        figure.savefig('../plot/05_self_short_long_{}.png'.format(ticker))
 
         return None
 
@@ -155,7 +155,7 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
             plt.show()
 
             # Plotting
-            figure.savefig('../plot/03_cross_short_long_{}_{}'
+            figure.savefig('../plot/05_cross_short_long_{}_{}.png'
                            .format(ticker_i, ticker_j))
 
             return None
