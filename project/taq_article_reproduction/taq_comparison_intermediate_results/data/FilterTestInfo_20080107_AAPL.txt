@@ -1,0 +1,49 @@
+The information for filtering transactions
+Total trade number: 
+215794
+Hidden order number: 
+82188
+The proportion of hidden order in all executed order: 
+0.380863
+Identified limit order number: 
+825981
+Identified limit order number between 9:40:00~15:50:00 : 
+745020
+Identified trade number: 
+133606
+The quantities of columns in file 'transactions_20080107_AAPL.txt' are: 
+Time, Time in seconds, Order ID, Type of market order, Trading price, Trading volume.
+  
+The information for sign accuracy of all transactions between 9:40:00~15:50:00
+The number of identified transactions is: 
+120287
+The number of matched transactions is: 
+103635
+The number of hidden transactions is: 
+75345
+The accuracy of sign for all transactions is: 
+0.861564
+The quantities of columns in file 'SignCompare_transactions_20080107_AAPL.txt' are: 
+Number, Milliseconds,Time,Empirial sign, Theoretical sign
+  
+The information for sign accuracy of every second between 9:40:00~15:50:00
+The seconds of identified transactions: 
+17115
+Case (1) The trade sign per second is defined as the sum of all the signs in this second.
+The seconds of matched transactions for case (1): 
+13956
+The accuracy is: 
+0.815425
+Case (2) The trade sign per second is defined as the sum of all the signs multiplying trading volumes in this second.
+The seconds of matched transactions for case (2): 
+13281
+The accuracy is: 
+0.775986
+The quantities of columns in file 'SignCompare_persecond_20080107_AAPL.txt' are: 
+Seconds, Time, Empirial sign for case (1), Empirial sign for case (2), Theoretical sign for case (1)
+  
+Number of zero trade sign between 9:40:00~15:50:00
+For Case (1)
+5978
+For Case (2)
+5346

@@ -42,12 +42,14 @@ import pickle
 
 import taq_data_tools_article_reproduction
 
+import time #Remove at the end
+
 __tau__ = 1000
 
 # ----------------------------------------------------------------------------
 
 
-def taq_data_extract(ticker, date):
+def taq_data_extract(ticker, type, year):
     """Extracts the data for every day in a year.
 
     Extracts the trades and quotes (TAQ) data for a day from a CSV file with
@@ -56,103 +58,91 @@ def taq_data_extract(ticker, date):
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
-    :param date: string with the date of the data to be extracted
-     (i.e. '2008-01-02').
-    :return: tuple -- The function return a tuple with numpy arrays.
+    :param type: string with the type of the data to be extracted
+     (i.e. 'trades' or 'quotes').
+    :param year: string of the year to be analyzed (i.e. '2016').
+    :return: None -- The function extracts the data and does not return a
+     value.
     """
-
-    date_sep = date.split('-')
-
-    year = date_sep[0]
-    month = date_sep[1]
-    day = date_sep[2]
 
     function_name = taq_data_extract.__name__
     taq_data_tools_article_reproduction \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
-                                        month, day)
+                                        '', '')
 
     try:
 
+        df = pd.DataFrame()
+        chunksize = 10 ** 7
+
+        date_list = taq_data_tools_article_reproduction \
+            .taq_bussiness_days(year)
+
         # Load data
-        # Date of the day to be saved
-        date = '{}-{}-{}'.format(year, month, day)
-        quotes_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
-                                   + '_NASDAQ_quotes.csv')
-                                  .split()).format(ticker, year)
-        trades_filename = ''.join(('../../taq_data/csv_year_data_{1}/{0}_{1}'
-                                   + '_NASDAQ_trades.csv')
-                                  .split()).format(ticker, year)
-        quotes_day_list = []
-        trades_day_list = []
+        csv_file = f'../../taq_data/csv_year_data_{year}/{ticker}_{year}' + \
+            f'_NASDAQ_{type}.csv'
 
-        # Read line per line
-        # Quotes
-        with open(quotes_filename) as f_quotes:
-            for line in f_quotes:
-                list_line = line.split()
-                if (list_line[0] == date
-                        and list_line[1] >= '34200'
-                        and list_line[1] <= '57600'):
-                    quotes_day_list.append(list_line[:6])
+        df_type = {'quotes': {
+                        'Date': 'str',
+                        'Time': 'int',
+                        'Bid': 'int',
+                        'Ask': 'int',
+                        'Vol_Bid': 'int',
+                        'Vol_Ask': 'int',
+                        'Mode': 'int',
+                        'Cond': 'str',
+                    },
+                   'trades': {
+                        'Date': 'str',
+                        'Time': 'int',
+                        'Ask': 'int',
+                        'Vol_Ask': 'int',
+                        'Mode': 'int',
+                        'Corr': 'int',
+                        'Cond': 'str',
+                    }}
 
-        assert len(quotes_day_list) != 0
-
-        # Trades
-        with open(trades_filename) as f_trades:
-            for line in f_trades:
-                list_line = line.split()
-                if (list_line[0] == date
-                        and list_line[1] >= '34200'
-                        and list_line[1] <= '57600'):
-                    trades_day_list.append(list_line[:4])
-
-        assert len(trades_day_list) != 0
-
-        # Pandas dataframes with the filtered data
-        quotes_df = pd.DataFrame(quotes_day_list,
-                                 columns=['Date', 'Time', 'Bid', 'Ask',
-                                          'Vol_Bid', 'Vol_Ask'])
-        trades_df = pd.DataFrame(trades_day_list,
-                                 columns=['Date', 'Time', 'Ask', 'Vol_Ask'])
-
-        # Dataframes to arrays
-        time_q = np.array(quotes_df['Time']).astype(int)
-        bid_q = np.array(quotes_df['Bid']).astype(int)
-        ask_q = np.array(quotes_df['Ask']).astype(int)
-        vol_bid_q = np.array(quotes_df['Vol_Bid']).astype(int)
-        vol_ask_q = np.array(quotes_df['Vol_Ask']).astype(int)
-
-        time_t = np.array(trades_df['Time']).astype(int)
-        ask_t = np.array(trades_df['Ask']).astype(int)
-        vol_ask_t = np.array(trades_df['Vol_Ask']).astype(int)
+        col_names = {'quotes': ['Date', 'Time', 'Bid', 'Ask', 'Vol_Bid',
+                                'Vol_Ask', 'Mode', 'Cond'],
+                     'trades': ['Date', 'Time', 'Ask', 'Vol_Ask', 'Mode',
+                                'Corr', 'Cond']}
 
         # Save data
-        if (not os.path.isdir('../../taq_data/pickle_dayly_data_{}/'
-                              .format(year))):
+        if (not os.path.isdir(f'../../taq_data/hdf5_dayly_data_{year}/')):
 
             try:
-                os.mkdir('../../taq_data/pickle_dayly_data_{}/'.format(year))
+                os.mkdir(f'../../taq_data/hdf5_dayly_data_{year}/')
                 print('Folder to save data created')
 
             except FileExistsError:
                 print('Folder exists. The folder was not created')
 
-        pickle.dump((time_q, bid_q, ask_q, vol_bid_q, vol_ask_q),
-                    open(''.join(('../../taq_data/pickle_dayly_data_2008/'
-                         + 'TAQ_{0}_quotes_{1}{2}{3}.pickle').split())
-                         .format(ticker, year, month, day), 'wb'))
+        for chunk in pd.read_csv(csv_file, chunksize=chunksize, sep='\s+',
+                                 names=col_names[type], dtype=df_type[type],
+                                 na_filter=False, low_memory=False):
 
-        pickle.dump((time_t, ask_t, vol_ask_t),
-                    open(''.join(('../../taq_data/pickle_dayly_data_2008/'
-                         + 'TAQ_{0}_trades_{1}{2}{3}.pickle').split())
-                         .format(ticker, year, month, day), 'wb'))
+            chunk['Date'] = pd.to_datetime(chunk['Date'], format='%Y-%m-%d')
+            chunk.set_index('Date', inplace=True)
+            if (type == 'quotes'):
+                chunk.drop(['Mode', 'Cond'], axis=1, inplace=True)
+            else:
+                chunk.drop(['Mode', 'Corr', 'Cond'], axis=1, inplace=True)
+
+            for date in date_list:
+                day = chunk.index.isin([date])
+                df = chunk.loc[day & (chunk['Time'] >= 34200)
+                               & (chunk['Time'] < 57600)]
+
+                if not df.empty:
+                    df.to_hdf(f''.join(('../../taq_data/hdf5_dayly_data_'
+                              + f'{year}/taq_{ticker}_{type}_{date}.h5')
+                              .split()), key=type,
+                              format='table', append=True)
 
         print('Data Saved')
         print()
 
-        return (time_q, bid_q, ask_q, vol_bid_q, vol_ask_q,
-                time_t, ask_t, vol_ask_t)
+        return None
 
     except AssertionError:
         print('No data')
@@ -162,7 +152,7 @@ def taq_data_extract(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_midpoint_event_data(ticker, year, month, day):
+def taq_midpoint_event_data(ticker, date):
     """Computes the midpoint price of every event.
 
     Using the dayly TAQ data computes the midpoint price of every event in a
@@ -178,6 +168,11 @@ def taq_midpoint_event_data(ticker, year, month, day):
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
+    date_sep = date.split('-')
+    year = date_sep[0]
+    month = date_sep[1]
+    day = date_sep[2]
+
     function_name = taq_midpoint_event_data.__name__
     taq_data_tools_article_reproduction \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
@@ -186,23 +181,21 @@ def taq_midpoint_event_data(ticker, year, month, day):
     # Load data
     # TAQ data gives directly the quotes data in every second that there is
     # a change in the quotes
-    time_q_, bid_q_, ask_q_, _, _ = pickle.load(open(
-        '../../taq_data/pickle_dayly_data_{1}/TAQ_{0}_quotes_{1}{2}{3}.pickle'
-        .format(ticker, year, month, day), 'rb'))
+    data_quotes_event = pd.read_hdf(
+        f'../../taq_data/hdf5_dayly_data_{year}/taq_{ticker}_quotes_'
+        + f'{date}.h5')
 
     # Some files are corrupted, so there are some zero values that
     # does not have sense
-    condition_1 = ask_q_ != 0.
-    time_q = time_q_[condition_1]
-    bid_q = bid_q_[condition_1]
-    ask_q = ask_q_[condition_1]
+    data_quotes_event = data_quotes_event[data_quotes_event['Ask'] != 0]
 
-    assert len(bid_q) == len(ask_q)
+    midpoint = (data_quotes_event['Bid']
+                                     + data_quotes_event['Ask']) / 2
 
-    midpoint = (bid_q + ask_q) / 2
-    spread = ask_q - bid_q
+    time_q = np.array(data_quotes_event['Time']).astype(int)
+    midpoint = np.array(midpoint)
 
-    return (time_q, bid_q, ask_q, midpoint, spread)
+    return (time_q, midpoint)
 
 # ----------------------------------------------------------------------------
 
@@ -234,77 +227,40 @@ def taq_midpoint_time_data(ticker, date):
 
     try:
         # Calculate the values of the midpoint price for all the events
-        (time_q, bid_q, ask_q,
-         midpoint, spread) = taq_midpoint_event_data(ticker, year, month, day)
+        time_q, midpoint_trade = taq_midpoint_event_data(ticker, date)
 
         # 34800 s = 9h40 - 57000 s = 15h50
         # Reproducing S. Wang values. In her results the time interval for the
         # midpoint is [34800, 56999]
         full_time = np.array(range(34800, 57000))
-
-        # As there can be several values for the same second, we use the
-        # last value of each second in the full time array as it behaves
-        # quiet equal as the original input
-
-        midpoint_last_val = 0. * full_time
-        midpoint_last_val[-1] = midpoint[0]
-
-        ask_last_val = 0. * full_time
-        ask_last_val[-1] = ask_q[0]
-
-        bid_last_val = 0. * full_time
-        bid_last_val[-1] = bid_q[0]
-
-        spread_last_val = 0. * full_time
-        spread_last_val[-1] = spread[0]
+        midpoint = np.array(range(34800, 57000))
 
         for t_idx, t_val in enumerate(full_time):
 
             condition = time_q == t_val
-
             if (np.sum(condition)):
-
-                midpoint_last_val[t_idx] = midpoint[condition][-1]
-                ask_last_val[t_idx] = ask_q[condition][-1]
-                bid_last_val[t_idx] = bid_q[condition][-1]
-                spread_last_val[t_idx] = spread[condition][-1]
+                midpoint[t_idx] = midpoint_trade[condition][-1]
 
             else:
-
-                midpoint_last_val[t_idx] = midpoint_last_val[t_idx - 1]
-                ask_last_val[t_idx] = ask_last_val[t_idx - 1]
-                bid_last_val[t_idx] = bid_last_val[t_idx - 1]
-                spread_last_val[t_idx] = spread_last_val[t_idx - 1]
-
-        # There should not be 0 values in the midpoint array
-        assert not np.sum(midpoint_last_val == 0)
+                midpoint[t_idx] = midpoint[t_idx - 1]
 
         # Saving data
 
-        if (not os.path.isdir(''.join(('../../taq_data/article_reproduction'
-                                       + '_data_{1}/{0}/').split())
-                              .format(function_name, year))):
+        if (not os.path.isdir(''.join((f'../../taq_data/article_reproduction'
+                              + f'_data_{function_name}/{year}/').split()))):
 
-            os.mkdir('../../taq_data/article_reproduction_data_{1}/{0}/'
-                     .format(function_name, year))
-            print('Folder to save data created')
+            try:
+                os.mkdir(''.join((f'../../taq_data/article_reproduction_data'
+                        + f'_{year}/{function_name}/').split()))
+                print('Folder to save data created')
 
-        pickle.dump(ask_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/'
-                         + '{0}_ask_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
-        pickle.dump(bid_last_val / 10000,
+            except FileExistsError:
+                print('Folder exists. The folder was not created')
+
+        pickle.dump(midpoint / 10000,
                     open(''.join((
                          '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                         + '_bid_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
-        pickle.dump(spread_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                         + '_spread_{2}{3}{4}_{1}.pickle').split())
+                         '_midpoint_{2}{3}{4}_{1}.pickle').split())
                          .format(function_name, ticker, year, month, day),
                          'wb'))
         pickle.dump(full_time,
@@ -312,23 +268,17 @@ def taq_midpoint_time_data(ticker, date):
                          '../../taq_data/article_reproduction_data_{1}/{0}/{0}'
                          + '_time.pickle').split())
                          .format(function_name, year), 'wb'))
-        pickle.dump(midpoint_last_val / 10000,
-                    open(''.join((
-                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
-                         '_midpoint_{2}{3}{4}_{1}.pickle').split())
-                         .format(function_name, ticker, year, month, day),
-                         'wb'))
 
         print('Data saved')
         print()
 
-        return midpoint_last_val
+        return (full_time, midpoint)
 
     except FileNotFoundError as e:
-            print('No data')
-            print(e)
-            print()
-            return None
+        print('No data')
+        print(e)
+        print()
+        return None
 
 # ----------------------------------------------------------------------------
 
@@ -457,10 +407,10 @@ def taq_trade_signs_time_data(ticker, date):
         return (full_time, price_signs, trade_signs)
 
     except FileNotFoundError as e:
-            print('No data')
-            print(e)
-            print()
-            return None
+        print('No data')
+        print(e)
+        print()
+        return None
 
 # ----------------------------------------------------------------------------
 
@@ -967,7 +917,30 @@ def main():
     :return: None.
     """
 
-    pass
+    import time
+    import multiprocessing as mp
+    from itertools import product
+
+    t = 0
+    tickers = ['AAPL', 'MSFT']
+    for _ in range(5):
+        t0 = time.time()
+        data_event = taq_midpoint_event_data('MSFT', '2008-01-02')
+        t1 = time.time()
+        t += t1 - t0
+
+    print(t/5)
+
+    t = 0
+    tickers = ['AAPL', 'MSFT']
+    for _ in range(1):
+        t0 = time.time()
+        data_time = taq_midpoint_time_data('MSFT', '2008-01-02')
+        t1 = time.time()
+        t += t1 - t0
+
+    print(t/1)
+
 
     return None
 
