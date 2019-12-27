@@ -189,12 +189,13 @@ def taq_midpoint_event_data(ticker, date):
     # does not have sense
     data_quotes_event = data_quotes_event[data_quotes_event['Ask'] != 0]
 
-    data_quotes_event['Midpoint'] = (data_quotes_event['Bid']
+    midpoint = (data_quotes_event['Bid']
                                      + data_quotes_event['Ask']) / 2
-    data_quotes_event['Spread'] = data_quotes_event['Ask'] \
-        - data_quotes_event['Bid']
 
-    return data_quotes_event
+    time_q = np.array(data_quotes_event['Time']).astype(int)
+    midpoint = np.array(midpoint)
+
+    return (time_q, midpoint)
 
 # ----------------------------------------------------------------------------
 
@@ -226,7 +227,7 @@ def taq_midpoint_time_data(ticker, date):
 
     try:
         # Calculate the values of the midpoint price for all the events
-        data_quotes_event = taq_midpoint_event_data(ticker, date)
+        time_q, midpoint_trade = taq_midpoint_event_data(ticker, date)
 
         # 34800 s = 9h40 - 57000 s = 15h50
         # Reproducing S. Wang values. In her results the time interval for the
@@ -234,28 +235,14 @@ def taq_midpoint_time_data(ticker, date):
         full_time = np.array(range(34800, 57000))
         midpoint = np.array(range(34800, 57000))
 
-        t0 = time.time()
         for t_idx, t_val in enumerate(full_time):
 
-            condition = data_quotes_event['Time'] == t_val
+            condition = time_q == t_val
             if (np.sum(condition)):
-                midpoint[t_idx] = data_quotes_event[condition].ix[-1]['Midpoint']
+                midpoint[t_idx] = midpoint_trade[condition][-1]
 
-        t1 = time.time()
-        print(f'First loop {t1-t0}')
-
-        t0 = time.time()
-        for t_idx, t_val in enumerate(full_time):
-
-            if (midpoint[t_idx] == 0):
+            else:
                 midpoint[t_idx] = midpoint[t_idx - 1]
-
-        t1 = time.time()
-        print(f'Second loop {t1-t0}')
-
-        data_quotes_time = pd.DataFrame(columns=['Time', 'Midpoint'])
-        data_quotes_time['Time'] = full_time
-        data_quotes_time['Midpoint'] = midpoint
 
         # Saving data
 
@@ -270,16 +257,22 @@ def taq_midpoint_time_data(ticker, date):
             except FileExistsError:
                 print('Folder exists. The folder was not created')
 
-        data_quotes_time.astype(str).to_hdf(''.join((f'../../taq_data/article'
-                                + f'_reproduction_data_{year}/{function_name}/'
-                                + f'{function_name}_quotes_{year}{month}{day}'
-                                + f'_{ticker}.h5').split()),
-                                key='data_quotes_time', mode='w', format='table')
+        pickle.dump(midpoint / 10000,
+                    open(''.join((
+                         '../../taq_data/article_reproduction_data_{2}/{0}/{0}'
+                         '_midpoint_{2}{3}{4}_{1}.pickle').split())
+                         .format(function_name, ticker, year, month, day),
+                         'wb'))
+        pickle.dump(full_time,
+                    open(''.join((
+                         '../../taq_data/article_reproduction_data_{1}/{0}/{0}'
+                         + '_time.pickle').split())
+                         .format(function_name, year), 'wb'))
 
         print('Data saved')
         print()
 
-        return data_quotes_time
+        return (full_time, midpoint)
 
     except FileNotFoundError as e:
         print('No data')
@@ -927,16 +920,26 @@ def main():
     import time
     import multiprocessing as mp
     from itertools import product
+
+    t = 0
+    tickers = ['AAPL', 'MSFT']
+    for _ in range(5):
+        t0 = time.time()
+        data_event = taq_midpoint_event_data('MSFT', '2008-01-02')
+        t1 = time.time()
+        t += t1 - t0
+
+    print(t/5)
+
     t = 0
     tickers = ['AAPL', 'MSFT']
     for _ in range(1):
         t0 = time.time()
         data_time = taq_midpoint_time_data('MSFT', '2008-01-02')
-        # data_event = taq_midpoint_event_data('MSFT', '2008-01-02')
         t1 = time.time()
         t += t1 - t0
 
-    print(t)
+    print(t/1)
 
 
     return None

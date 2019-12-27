@@ -120,22 +120,22 @@ def taq_data_plot_generator(tickers, year):
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        pool.starmap(taq_data_analysis_article_reproduction.taq_midpoint_time_data,
-                     product(tickers, date_list))
-        pool.starmap(taq_data_analysis_article_reproduction.taq_trade_signs_time_data,
-                     product(tickers, date_list))
+        # pool.starmap(taq_data_analysis_article_reproduction.taq_midpoint_time_data,
+        #              product(tickers, date_list))
+        # pool.starmap(taq_data_analysis_article_reproduction.taq_trade_signs_time_data,
+        #              product(tickers, date_list))
 
         # Especific functions
         pool.starmap(taq_data_analysis_article_reproduction.taq_self_response_year_data,
                      product(tickers, [year]))
-        pool.starmap(taq_data_analysis_article_reproduction.taq_cross_response_year_data,
-                     product(tickers, tickers, [year]))
-        pool.starmap(taq_data_analysis_article_reproduction
-                     .taq_trade_sign_self_correlator_year_data,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_analysis_article_reproduction
-                     .taq_trade_sign_cross_correlator_year_data,
-                     product(tickers, tickers, [year]))
+        # pool.starmap(taq_data_analysis_article_reproduction.taq_cross_response_year_data,
+        #              product(tickers, tickers, [year]))
+        # pool.starmap(taq_data_analysis_article_reproduction
+        #              .taq_trade_sign_self_correlator_year_data,
+        #              product(tickers, [year]))
+        # pool.starmap(taq_data_analysis_article_reproduction
+        #              .taq_trade_sign_cross_correlator_year_data,
+        #              product(tickers, tickers, [year]))
 
         pool.starmap(taq_data_plot_article_reproduction
                      .taq_self_response_year_avg_plot,
@@ -164,14 +164,14 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    tickers = ['AAPL']#, 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
     year = '2008'
 
     # Basic folders
-    taq_data_tools_article_reproduction.taq_start_folders(year)
+    # taq_data_tools_article_reproduction.taq_start_folders(year)
 
     # Run analysis
-    taq_build_from_scratch(tickers, year)
+    # taq_build_from_scratch(tickers, year)
     taq_data_plot_generator(tickers, year)
 
     print('Ay vamos!!')
