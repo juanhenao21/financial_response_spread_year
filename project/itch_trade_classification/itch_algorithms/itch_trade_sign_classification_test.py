@@ -1,8 +1,9 @@
 '''ITCH trade sign classification
 
 Module to implement Eq. 1,2 and 3 to classify trade signs used in the section
-II.C of the `paper <https://arxiv.org/pdf/1603.01580.pdf>`_.
-The classification is made using the TotalView-ITCH data.
+2.3 of the `paper
+ <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
+The classification is made using the TotalView-ITCH 2008 data.
 Finally, the acurracy of the classification is computed.
 
 ..moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -22,8 +23,9 @@ import pandas as pd
 def itch_trade_classification_data(ticker, year, month, day):
     """Extracts the data to make the classification.
 
-    Obtain the reference time, trade signs, volumes and prices from an ITCH
-    file. These data is used to test the trade sign classification equations.
+    Obtain the reference time, trade signs, volumes and prices from an
+    TotalView-ITCH file. These data is used to test the trade sign
+    classification equations.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -41,7 +43,7 @@ def itch_trade_classification_data(ticker, year, month, day):
         f'../../itch_data/original_data_{year}/{year}{month}{day}_{ticker}'
         + f'.csv.gz').split()), 'rt'), usecols=(0, 2, 3, 4, 5),
         dtype={'Time': 'uint32', 'Order': 'uint64', 'T': str,
-        'Shares': 'uint16', 'Price': 'float64'})
+               'Shares': 'uint16', 'Price': 'float64'})
 
     data['Price'] = data['Price'] / 10000
 
@@ -81,6 +83,8 @@ def itch_trade_classification_data(ticker, year, month, day):
     trade_volumes = np.zeros(length_trades, dtype='uint16')
     trade_price = np.zeros(length_trades)
 
+    # In the for loop is assigned the price, trade sign and volume of each
+    # trade.
     for t_idx in range(length_trades):
 
         try:
@@ -136,6 +140,7 @@ def itch_trade_classification_data(ticker, year, month, day):
     trade_volumes[hidden_pos] = trade_data_volume[hidden_pos]
     trade_price[hidden_pos] = trade_data_price[hidden_pos]
 
+    # Open market time 9h40 - 15h50
     market_time = (trade_times / 3600 / 1000 >= 9.666666) & \
         (trade_times / 3600 / 1000 < 15.833333)
 
@@ -155,9 +160,11 @@ def itch_trade_classification_eq1_data(ticker, trade_signs, price_signs, year,
     """Implementation Eq. 1.
 
     Implementation of Eq. 1 of the
-    `paper <https://arxiv.org/pdf/1603.01580.pdf>`_.
+    `paper
+    <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
     Obtain the experimental trade signs based on the change of prices. To
     compute the trades signs are used consecutive trades in the ITCH data.
+
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
     :param trade_signs: array of empirical trade signs from ITCH data.
@@ -190,15 +197,6 @@ def itch_trade_classification_eq1_data(ticker, trade_signs, price_signs, year,
 
     trades_pos = trade_signs != 0
     identified_trades = identified_trades[trades_pos]
-    trades_no_0 = trade_signs[trades_pos]
-
-    # Accuracy of the classification
-    print('For consecutive trades in ms:')
-    print('Accuracy of the classification:',
-          round(np.sum(trades_no_0 == identified_trades) / len(trades_no_0) * 100, 2), '%')
-    print('Number of identified trades:', len(trades_no_0))
-    print('Number of matches:', np.sum(trades_no_0 == identified_trades))
-    print()
 
     return identified_trades
 
@@ -210,7 +208,8 @@ def itch_trade_classification_eq2_data(ticker, times_signs, trade_signs,
     """Implementation Eq. 2.
 
     Implementation of the Eq. 2 of the
-    `paper <https://arxiv.org/pdf/1603.01580.pdf>`_.
+    `paper
+    <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
     Obtain the experimental trade signs based on Eq. 1 classification using
     the ITCH data.
     :param ticker: string of the abbreviation of the stock to be analized
@@ -235,8 +234,8 @@ def itch_trade_classification_eq2_data(ticker, times_signs, trade_signs,
     assert len(trade_signs) == len(identified_trades)
 
     full_time = np.array(range(34800, 57000))
-    trades_emp_s_ = 0. * full_time
-    trades_exp_s_ = 0. * full_time
+    trades_emp_s = 0. * full_time
+    trades_exp_s = 0. * full_time
 
     # Implementation of equation (2). Trade sign in each second
     for t_idx, t_val in enumerate(full_time):
@@ -246,23 +245,12 @@ def itch_trade_classification_eq2_data(ticker, times_signs, trade_signs,
         # Experimental
         trades_same_t_exp = identified_trades[condition]
         sign_exp = np.sign(np.sum(trades_same_t_exp))
-        trades_exp_s_[t_idx] = sign_exp
+        trades_exp_s[t_idx] = sign_exp
 
         # Empirical
         trades_same_t_emp = trade_signs[condition]
         sign_emp = np.sign(np.sum(trades_same_t_emp))
-        trades_emp_s_[t_idx] = sign_emp
-
-    trades_emp_s = trades_emp_s_[trades_emp_s_ != 0]
-    trades_exp_s = trades_exp_s_[trades_emp_s_ != 0]
-
-    # Accuracy of the classification
-    print('For consecutive trades in s:')
-    print('Accuracy of the classification:',
-          round(np.sum(trades_emp_s == trades_exp_s) / len(trades_emp_s) * 100, 2), '%')
-    print('Number of identified trades:', len(trades_emp_s))
-    print('Number of matches:', np.sum(trades_emp_s == trades_exp_s))
-    print()
+        trades_emp_s[t_idx] = sign_emp
 
     return (trades_emp_s, trades_exp_s)
 
@@ -275,7 +263,8 @@ def itch_trade_classification_eq3_data(ticker, times_signs, trade_signs,
     """Implementation Eq. 3.
 
     Implementation of the Eq. 3 of the
-    `paper <https://arxiv.org/pdf/1603.01580.pdf>`_.
+    `paper
+    <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
     Obtain the experimental trade signs based on Eq. 1 classification using
     the ITCH data.
     :param ticker: string of the abbreviation of the stock to be analized
@@ -302,8 +291,8 @@ def itch_trade_classification_eq3_data(ticker, times_signs, trade_signs,
     assert (len(trade_signs) == len(identified_trades))
 
     full_time = np.array(range(34800, 57000))
-    trades_emp_s_ = 0. * full_time
-    trades_exp_s_ = 0. * full_time
+    trades_emp_s = 0. * full_time
+    trades_exp_s = 0. * full_time
 
     # Implementation of equation (3). Trade sign in each second
     for t_idx, t_val in enumerate(full_time):
@@ -314,23 +303,12 @@ def itch_trade_classification_eq3_data(ticker, times_signs, trade_signs,
         trades_same_t_exp = identified_trades[condition]
         volumes_same_t = volume_signs[condition]
         sign_exp = np.sign(np.sum(trades_same_t_exp * volumes_same_t))
-        trades_exp_s_[t_idx] = sign_exp
+        trades_exp_s[t_idx] = sign_exp
 
-        # Theoric
+        # Empirical
         trades_same_t_emp = trade_signs[condition]
         sign_emp = np.sign(np.sum(trades_same_t_emp))
-        trades_emp_s_[t_idx] = sign_emp
-
-    trades_emp_s = trades_emp_s_[trades_emp_s_ != 0]
-    trades_exp_s = trades_exp_s_[trades_emp_s_ != 0]
-
-    # Accuracy of the classification
-    print('For consecutive trades in s:')
-    print('Accuracy of the classification:',
-          round(np.sum(trades_emp_s == trades_exp_s) / len(trades_emp_s) * 100, 2), '%')
-    print('Number of identified trades:', len(trades_emp_s))
-    print('Number of matches:', np.sum(trades_emp_s == trades_exp_s))
-    print()
+        trades_emp_s[t_idx] = sign_emp
 
     return (trades_emp_s, trades_exp_s)
 
@@ -338,15 +316,24 @@ def itch_trade_classification_eq3_data(ticker, times_signs, trade_signs,
 
 
 def main():
+    """Main function of the script.
+
+    The main function extract the data and classify the trade signs using
+    different equations
+
+    :return: None.
+    """
 
     ticker = ['AAPL', 'AAPL', 'GS', 'GS', 'XOM', 'XOM']
     year = '2008'
     month = ['01', '06', '10', '12', '02', '08']
     day = ['07', '02', '07', '10', '11', '04']
+    full_time = np.array(range(34800, 57000))
 
     file = open('../stats_trade_sign_classification.csv', 'a+')
-    file.write('Ticker, Date,No_Id_Trades,No_Matches,Accuracy,No_Id_Trades,'
-               + 'Matches_eq_2,Acc_eq_2,Matches_eq_3,Acc_eq_3\n')
+    file.write('Ticker, Date, No_Id_Trades, No_Matches, Accuracy, '
+               + 'No_Id_Trades, Matches_eq_2, Acc_eq_2, Matches_eq_3, '
+               + 'Acc_eq_3, Trades_zero_eq2, Trades_zero_eq_3\n')
 
     for (t, m, d) in zip(ticker, month, day):
 
@@ -358,25 +345,52 @@ def main():
             itch_trade_classification_eq1_data(t, trade_signs, price_signs,
                                                year, m, d)
 
-        teo_eq2_s, exp_eq2_s = \
+        emp_eq2_s, exp_eq2_s = \
             itch_trade_classification_eq2_data(t, times_signs, trade_signs,
                                                identified_trades, year, m, d)
 
-        teo_eq3_s, exp_eq3_s = \
+        emp_eq3_s, exp_eq3_s = \
             itch_trade_classification_eq3_data(t, times_signs, trade_signs,
                                                volume_signs, identified_trades,
                                                year, m, d)
 
-        file.write('{}, {}, {}, {}, {}, {}, {}, {}, {}, {} \n'
-            .format(t, year + m + d, len(trade_signs[trade_signs != 0]),
-                    sum(trade_signs[trade_signs != 0] == identified_trades),
-                    round(sum(trade_signs[trade_signs != 0]
-                              == identified_trades)
-                               / len(trade_signs[trade_signs != 0]), 4),
-                    len(teo_eq2_s), sum(teo_eq2_s == exp_eq2_s),
-                    round(sum(teo_eq2_s == exp_eq2_s) / len(teo_eq2_s), 4),
-                    sum(teo_eq3_s == exp_eq3_s),
-                    round(sum(teo_eq3_s == exp_eq3_s) / len(teo_eq3_s), 4)))
+        count = 0
+        for t_idx, t_val in enumerate(full_time):
+
+            if(not emp_eq2_s[t_idx]
+               and not exp_eq2_s[t_idx]
+               and not exp_eq3_s[t_idx]):
+
+               emp_eq2_s[t_idx] = float('nan')
+               exp_eq2_s[t_idx] = float('nan')
+               exp_eq3_s[t_idx] = float('nan')
+
+               count += 1
+
+        emp_eq2_s = emp_eq2_s[~np.isnan(emp_eq2_s)]
+        exp_eq2_s = exp_eq2_s[~np.isnan(exp_eq2_s)]
+        exp_eq3_s = exp_eq3_s[~np.isnan(exp_eq3_s)]
+
+        assert len(emp_eq2_s) == len(exp_eq2_s)
+        assert len(emp_eq2_s) == len(exp_eq3_s)
+
+        date = year + m + d
+        id_trades_trades_num = len(trade_signs[trade_signs != 0])
+        trade_matches = np.sum(trade_signs[trade_signs != 0] == identified_trades)
+        accuracy_trades = round(trade_matches / id_trades_trades_num, 4)
+        id_trades_second_num = len(emp_eq2_s)
+        second_matches_eq2 =  np.sum(emp_eq2_s == exp_eq2_s)
+        accuracy_second_eq2 = round(second_matches_eq2 / id_trades_second_num, 4)
+        second_matches_eq3 =  np.sum(emp_eq2_s == exp_eq3_s)
+        accuracy_second_eq3 = round(second_matches_eq3 / id_trades_second_num, 4)
+        zeros_eq2 = np.sum(exp_eq2_s == 0) + count
+        zeros_eq3 = np.sum(exp_eq3_s == 0) + count
+        file.write(f'{t}, {date}, {id_trades_trades_num}, {trade_matches}, '
+                   + f'{accuracy_trades}, '
+                   + f'{id_trades_second_num}, {second_matches_eq2}, '
+                   +f'{accuracy_second_eq2}, '
+                   +f'{second_matches_eq3}, {accuracy_second_eq3}, '
+                   +f'{zeros_eq2}, {zeros_eq3}\n')
 
     file.close()
 
