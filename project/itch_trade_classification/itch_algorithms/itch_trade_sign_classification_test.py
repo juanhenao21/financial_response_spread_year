@@ -361,11 +361,11 @@ def main():
                and not exp_eq2_s[t_idx]
                and not exp_eq3_s[t_idx]):
 
-               emp_eq2_s[t_idx] = float('nan')
-               exp_eq2_s[t_idx] = float('nan')
-               exp_eq3_s[t_idx] = float('nan')
+                emp_eq2_s[t_idx] = float('nan')
+                exp_eq2_s[t_idx] = float('nan')
+                exp_eq3_s[t_idx] = float('nan')
 
-               count += 1
+                count += 1
 
         emp_eq2_s = emp_eq2_s[~np.isnan(emp_eq2_s)]
         exp_eq2_s = exp_eq2_s[~np.isnan(exp_eq2_s)]
@@ -376,21 +376,24 @@ def main():
 
         date = year + m + d
         id_trades_trades_num = len(trade_signs[trade_signs != 0])
-        trade_matches = np.sum(trade_signs[trade_signs != 0] == identified_trades)
+        trade_matches = np.sum(
+            trade_signs[trade_signs != 0] == identified_trades)
         accuracy_trades = round(trade_matches / id_trades_trades_num, 4)
         id_trades_second_num = len(emp_eq2_s)
-        second_matches_eq2 =  np.sum(emp_eq2_s == exp_eq2_s)
-        accuracy_second_eq2 = round(second_matches_eq2 / id_trades_second_num, 4)
-        second_matches_eq3 =  np.sum(emp_eq2_s == exp_eq3_s)
-        accuracy_second_eq3 = round(second_matches_eq3 / id_trades_second_num, 4)
+        second_matches_eq2 = np.sum(emp_eq2_s == exp_eq2_s)
+        accuracy_second_eq2 = round(second_matches_eq2 / id_trades_second_num,
+                                    4)
+        second_matches_eq3 = np.sum(emp_eq2_s == exp_eq3_s)
+        accuracy_second_eq3 = round(second_matches_eq3 / id_trades_second_num,
+                                    4)
         zeros_eq2 = np.sum(exp_eq2_s == 0) + count
         zeros_eq3 = np.sum(exp_eq3_s == 0) + count
         file.write(f'{t}, {date}, {id_trades_trades_num}, {trade_matches}, '
                    + f'{accuracy_trades}, '
                    + f'{id_trades_second_num}, {second_matches_eq2}, '
-                   +f'{accuracy_second_eq2}, '
-                   +f'{second_matches_eq3}, {accuracy_second_eq3}, '
-                   +f'{zeros_eq2}, {zeros_eq3}\n')
+                   + f'{accuracy_second_eq2}, '
+                   + f'{second_matches_eq3}, {accuracy_second_eq3}, '
+                   + f'{zeros_eq2}, {zeros_eq3}\n')
 
     file.close()
 
