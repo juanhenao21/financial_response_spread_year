@@ -74,7 +74,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     if (ticker_i != ticker_j):
 
         pickle.dump(data, open(f'../../taq_data/responses_second_data_{year}/'
-                    + f'{function_name}/{function}_{year}{month}{day}'
+                    + f'{function_name}/{function_name}_{year}{month}{day}'
                     + f'_{ticker_i}i_{ticker_j}j.pickle', 'wb'))
 
     # Self-response data
