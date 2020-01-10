@@ -94,6 +94,7 @@ def taq_build_from_scratch(tickers, year):
                          iprod(tickers_rm, [year], ['trades']))
 
         subprocess.call('rm decompress.out', shell=True)
+        subprocess.call(f'mkdir ../csv_year_data_{year}/', shell=True)
         subprocess.call(f'mv *.csv ../csv_year_data_{year}/', shell=True)
 
     else:
@@ -188,11 +189,11 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
+    tickers = ['AAPL', 'MSFT'] # , 'GS', 'JPM', 'XOM', 'CVX']
     year = '2008'
 
     # Basic folders
-    # taq_data_tools_responses_second.taq_start_folders(year)
+    taq_data_tools_responses_second.taq_start_folders(year)
 
     # Run analysis
     taq_build_from_scratch(tickers, year)
