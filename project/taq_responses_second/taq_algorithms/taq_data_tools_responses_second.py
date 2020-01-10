@@ -219,12 +219,21 @@ def taq_start_folders(year):
     """
 
     try:
-        os.mkdir(f'../../taq_data/csv_year_data_{year}')
-        os.mkdir(f'../../taq_data/hdf5_dayly_data_{year}')
         os.mkdir('../../taq_plot/')
-        os.mkdir(f'../../taq_data/responses_second_data_{year}')
         os.mkdir(f'../../taq_plot/responses_second_plot_{year}')
+        # os.mkdir('../../taq_data/')
+        os.mkdir(f'../../taq_data/responses_second_data_{year}')
+
         print('Folder to save data created')
+
+        res = 'no'
+        while (res == 'no'):
+            print('Please move the .quotes and .trades files to the '
+                  + 'original_year_data_2008 folder and move the '
+                  + 'decompress_original_data_2008 folder to the taq_data '
+                  + 'folder.')
+            print('Are you ready to continue? (yes/no): ')
+            res = input()
 
     except FileExistsError as e:
         print('Folder exists. The folder was not created')
