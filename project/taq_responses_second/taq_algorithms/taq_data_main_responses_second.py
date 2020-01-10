@@ -4,12 +4,12 @@ The functions in the module run the complete extraction, analysis and plot of
 the TAQ data.
 
 This script requires the following modules:
-    * itertools
+    * itertools.product
     * multiprocessing
     * pandas
-    * taq_data_analysis_article_reproduction
-    * taq_data_plot_article_reproduction
-    * taq_data_tools_article_reproduction
+    * taq_data_analysis_responses_second
+    * taq_data_plot_responses_second
+    * taq_data_tools_responses_second
 
 The module contains the following functions:
     * taq_build_from_scratch - extract data to dayly CSV files.
@@ -23,16 +23,16 @@ The module contains the following functions:
 # -----------------------------------------------------------------------------
 # Modules
 
-from itertools import product
+from itertools import product as iprod
 import multiprocessing as mp
 import os
 import pandas as pd
 import pickle
 import subprocess
 
-import taq_data_analysis_article_reproduction
-import taq_data_plot_article_reproduction
-import taq_data_tools_article_reproduction
+import taq_data_analysis_responses_second
+import taq_data_plot_responses_second
+import taq_data_tools_responses_second
 
 __tau__ = 1000
 
@@ -53,51 +53,59 @@ def taq_build_from_scratch(tickers, year):
      a value.
     """
 
+    tickers_rm = tickers[:]
+
     # Check if there are extracted files from the list of stocks
     for ticker in tickers:
         if(os.path.isfile(
-            '../../taq_data/csv_year_data_{1}/{0}_{1}_NASDAQ_quotes.csv'
-            .format(ticker, year))
+            f'../../taq_data/csv_year_data_{year}/{ticker}_{year}_NASDAQ'
+            + f'_quotes.csv')
            and os.path.isfile(
-               '../../taq_data/csv_year_data_{1}/{0}_{1}_NASDAQ_trades.csv'
-               .format(ticker, year))):
+                f'../../taq_data/csv_year_data_{year}/{ticker}_{year}_NASDAQ'
+                + f'_trades.csv')):
 
-            tickers.remove(ticker)
+            print(f'The ticker {ticker} has already the trades and quotes '
+                  + f'csv files')
+            tickers_rm.remove(ticker)
 
-    # Compile and run the C++ script to decompress
-    os.chdir('../../taq_data/decompress_original_data_{}/armadillo-3.920.3/'
-             .format(year))
-    subprocess.call('rm CMakeCache.txt', shell=True)
-    subprocess.call('cmake .', shell=True)
-    subprocess.call('make', shell=True)
-    os.chdir('../')
-    abs_path = os.path.abspath('.')
-    os.system(
-        'g++ main.cpp -std=c++11 -lboost_date_time -lz '
-        + '-I {}/armadillo-3.920.3/include -o decompress.out'.format(abs_path))
-    os.system('mv decompress.out ../original_year_data_{}/'.format(year))
-    os.chdir('../original_year_data_{}'.format(year))
+    if (len(tickers_rm)):
+        # Compile and run the C++ script to decompress
+        os.chdir(f'../../taq_data/decompress_original_data_{year}/'
+                 + f'armadillo-3.920.3/')
+        subprocess.call('rm CMakeCache.txt', shell=True)
+        subprocess.call('cmake .', shell=True)
+        subprocess.call('make', shell=True)
+        os.chdir('../')
+        abs_path = os.path.abspath('.')
+        os.system(
+            'g++ main.cpp -std=c++11 -lboost_date_time -lz '
+            + f'-I {abs_path}/armadillo-3.920.3/include -o decompress.out')
+        os.system(f'mv decompress.out ../original_year_data_{year}/')
+        os.chdir(f'../original_year_data_{year}')
 
-    # Parallel computing
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        print('Extracting quotes')
-        pool.starmap(taq_data_tools_article_reproduction.taq_decompress,
-                     product(tickers, [year], ['quotes']))
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        print('Extracting trades')
-        pool.starmap(taq_data_tools_article_reproduction.taq_decompress,
-                     product(tickers, [year], ['trades']))
+        # Parallel computing
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            print('Extracting quotes')
+            pool.starmap(taq_data_tools_responses_second.taq_decompress,
+                         iprod(tickers_rm, [year], ['quotes']))
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            print('Extracting trades')
+            pool.starmap(taq_data_tools_responses_second.taq_decompress,
+                         iprod(tickers_rm, [year], ['trades']))
 
-    subprocess.call('rm decompress.out', shell=True)
-    subprocess.call('mv *.csv ../csv_year_data_{}/'.format(year), shell=True)
+        subprocess.call('rm decompress.out', shell=True)
+        subprocess.call(f'mv *.csv ../csv_year_data_{year}/', shell=True)
+
+    else:
+        print('All the tickers have trades and quotes csv files')
 
     # Extract dayly data
     with mp.Pool(processes=mp.cpu_count()) as pool:
         print('Extracting dayly data')
-        pool.starmap(taq_data_analysis_article_reproduction.taq_data_extract,
-                     product(tickers, ['quotes'], [year]))
-        pool.starmap(taq_data_analysis_article_reproduction.taq_data_extract,
-                     product(tickers, ['trades'], [year]))
+        pool.starmap(taq_data_analysis_responses_second.taq_data_extract,
+                     iprod(tickers, ['quotes'], [year]))
+        pool.starmap(taq_data_analysis_responses_second.taq_data_extract,
+                     iprod(tickers, ['trades'], [year]))
 
     return None
 
@@ -114,41 +122,57 @@ def taq_data_plot_generator(tickers, year):
      a value.
     """
 
-    date_list = taq_data_tools_article_reproduction.taq_bussiness_days(year)
+    date_list = taq_data_tools_responses_second.taq_bussiness_days(year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        # pool.starmap(taq_data_analysis_article_reproduction.taq_midpoint_time_data,
-        #              product(tickers, date_list))
-        # pool.starmap(taq_data_analysis_article_reproduction.taq_trade_signs_time_data,
-        #              product(tickers, date_list))
+        pool.starmap(taq_data_analysis_responses_second
+                     .taq_midpoint_second_data,
+                     iprod(tickers, date_list))
+        pool.starmap(taq_data_analysis_responses_second
+                     .taq_trade_signs_second_data,
+                     iprod(tickers, date_list))
 
-        # Especific functions
-        pool.starmap(taq_data_analysis_article_reproduction.taq_self_response_year_data,
-                     product(tickers, [year]))
-        # pool.starmap(taq_data_analysis_article_reproduction.taq_cross_response_year_data,
-        #              product(tickers, tickers, [year]))
-        # pool.starmap(taq_data_analysis_article_reproduction
-        #              .taq_trade_sign_self_correlator_year_data,
-        #              product(tickers, [year]))
-        # pool.starmap(taq_data_analysis_article_reproduction
-        #              .taq_trade_sign_cross_correlator_year_data,
-        #              product(tickers, tickers, [year]))
+    # Especific functions
+    # Self-response and self-correlator
+    for ticker in tickers:
 
-        pool.starmap(taq_data_plot_article_reproduction
-                     .taq_self_response_year_avg_plot,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_plot_article_reproduction
-                     .taq_cross_response_year_avg_plot,
-                     product(tickers, tickers, [year]))
-        pool.starmap(taq_data_plot_article_reproduction
-                     .taq_trade_sign_self_correlator_year_avg_plot,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_plot_article_reproduction
-                     .taq_trade_sign_cross_correlator_year_avg_plot,
-                     product(tickers, tickers, [year]))
+        taq_data_analysis_responses_second \
+            .taq_self_response_year_responses_second_data(ticker, year)
+        taq_data_analysis_responses_second \
+            .taq_trade_sign_self_correlator_year_responses_second_data(ticker,
+                                                                       year)
+
+    ticker_prod = iprod(tickers, tickers)
+
+    # Cross-response and cross-correlator
+    for ticks in ticker_prod:
+
+        taq_data_analysis_responses_second \
+            .taq_cross_response_year_responses_second_data(ticks[0], ticks[1],
+                                                           year)
+        taq_data_analysis_responses_second \
+            .taq_trade_sign_cross_correlator_year_responses_second_data(
+                ticks[0], ticks[1], year)
+
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+
+        # Plot
+        pool.starmap(taq_data_plot_responses_second
+                     .taq_self_response_year_avg_responses_second_plot,
+                     iprod(tickers, [year]))
+        pool.starmap(taq_data_plot_responses_second
+                     .taq_cross_response_year_avg_responses_second_plot,
+                     iprod(tickers, tickers, [year]))
+        pool.starmap(taq_data_plot_responses_second
+            .taq_trade_sign_self_correlator_year_avg_responses_second_plot,
+            iprod(tickers, [year]))
+        pool.starmap(taq_data_plot_responses_second
+            .taq_trade_sign_cross_correlator_year_avg_responses_second_plot,
+            iprod(tickers, tickers, [year]))
 
     return None
 
@@ -164,14 +188,14 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL']#, 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
     year = '2008'
 
     # Basic folders
-    # taq_data_tools_article_reproduction.taq_start_folders(year)
+    # taq_data_tools_responses_second.taq_start_folders(year)
 
     # Run analysis
-    # taq_build_from_scratch(tickers, year)
+    taq_build_from_scratch(tickers, year)
     taq_data_plot_generator(tickers, year)
 
     print('Ay vamos!!')

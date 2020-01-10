@@ -47,7 +47,7 @@ The module contains the following functions:
 # Modules
 
 from itertools import product as iprod
-import multiprocessing
+import multiprocessing as mp
 import numpy as np
 import os
 import pandas as pd
@@ -86,7 +86,7 @@ def taq_data_extract(ticker, type, year):
         df = pd.DataFrame()
         chunksize = 10 ** 7
 
-        date_list =taq_data_tools_responses_second.taq_bussiness_days(year)
+        date_list = taq_data_tools_responses_second.taq_bussiness_days(year)
 
         # Load data
         csv_file = f'../../taq_data/csv_year_data_{year}/{ticker}_{year}' + \
@@ -238,51 +238,68 @@ def taq_midpoint_second_data(ticker, date):
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         month, day)
 
-    # Calculate the values of the midpoint price for all the events
-    time_q, midpoint_trade = taq_midpoint_trade_data(ticker, date)
+    try:
+        # Calculate the values of the midpoint price for all the events
+        time_q, midpoint_trade = taq_midpoint_trade_data(ticker, date)
 
-    # 34800 s = 9h40 - 57000 s = 15h50
-    # Reproducing the paper time values. In the results the time interval for
-    # the midpoint is [34800, 56999]
-    full_time = np.array(range(34800, 57000))
-    midpoint = 0. * full_time
+        # 34800 s = 9h40 - 57000 s = 15h50
+        # Reproducing the paper time values. In the results the time interval
+        # for the midpoint is [34800, 56999]
+        full_time = np.array(range(34800, 57000))
+        midpoint = 0. * full_time
 
-    # Select the last midpoint price of every second. If there is no midpoint
-    # price in a second, takes the value of the previous second
-    for t_idx, t_val in enumerate(full_time):
+        # Select the last midpoint price of every second. If there is no
+        # midpoint price in a second, takes the value of the previous second
+        for t_idx, t_val in enumerate(full_time):
 
-        condition = time_q == t_val
-        if (np.sum(condition)):
-            midpoint[t_idx] = midpoint_trade[condition][-1]
+            condition = time_q == t_val
+            if (np.sum(condition)):
+                midpoint[t_idx] = midpoint_trade[condition][-1]
 
-        else:
-            midpoint[t_idx] = midpoint[t_idx - 1]
+            else:
+                midpoint[t_idx] = midpoint[t_idx - 1]
 
-    # Saving data
+        # Prevent zero values in dates when the first seconds does not have a
+        # midpoint price value
+        t_pos = 34800
+        while (not np.sum(time_q == t_pos)):
+            t_pos -= 1
+        m_pos = 0
+        condition_2 = time_q == t_pos
+        while (not midpoint[m_pos]):
+            midpoint[m_pos] = midpoint_trade[condition_2][-1]
+            m_pos += 1
 
-    if (not os.path.isdir(f'../../taq_data/responses_second_data'
-                          + f'_{function_name}/{year}/')):
+        assert not np.sum(midpoint == 0)
 
-        try:
-            os.mkdir(f'../../taq_data/responses_second_data_{year}/'
-                     + f'{function_name}/')
-            print('Folder to save data created')
+        # Saving data
+        if (not os.path.isdir(f'../../taq_data/responses_second_data'
+                              + f'_{function_name}/{year}/')):
 
-        except FileExistsError:
-            print('Folder exists. The folder was not created')
+            try:
+                os.mkdir(f'../../taq_data/responses_second_data_{year}/'
+                         + f'{function_name}/')
+                print('Folder to save data created')
 
-    pickle.dump(midpoint / 10000,
-                open(f'../../taq_data/responses_second_data_{year}/'
-                     + f'{function_name}/{function_name}_midpoint_'
-                     + f'{year}{month}{day}_{ticker}.pickle', 'wb'))
-    pickle.dump(full_time,
-                open(f'../../taq_data/responses_second_data_{year}/'
-                     + f'{function_name}/{function_name}_time.pickle', 'wb'))
+            except FileExistsError:
+                print('Folder exists. The folder was not created')
 
-    print('Data saved')
-    print()
+        pickle.dump(midpoint / 10000,
+                    open(f'../../taq_data/responses_second_data_{year}/'
+                         + f'{function_name}/{function_name}_midpoint_'
+                         + f'{year}{month}{day}_{ticker}.pickle', 'wb'))
+        pickle.dump(full_time,
+                    open(f'../../taq_data/responses_second_data_{year}/'
+                         + f'{function_name}/{function_name}_time.pickle',
+                         'wb'))
 
-    return (full_time, midpoint)
+        print('Data saved')
+        print()
+
+        return (full_time, midpoint)
+
+    except TypeError as e:
+        return None
 
 # ----------------------------------------------------------------------------
 
@@ -387,33 +404,38 @@ def taq_trade_signs_second_data(ticker, date):
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         month, day)
 
-    # Calculate the values of the trade signs for all the events
-    (time_t, ask_t,
-     identified_trades) = taq_trade_signs_trade_data(ticker, date)
+    try:
+        # Calculate the values of the trade signs for all the events
+        (time_t, ask_t,
+         identified_trades) = taq_trade_signs_trade_data(ticker, date)
 
-    # Reproducing the paper time values. In her results the time interval for
-    # the trade signs is [34801, 57000]
-    full_time = np.array(range(34801, 57001))
-    trade_signs = 0. * full_time
-    price_signs = 0. * full_time
+        # Reproducing the paper time values. In her results the time interval
+        # for the trade signs is [34801, 57000]
+        full_time = np.array(range(34801, 57001))
+        trade_signs = 0. * full_time
+        price_signs = 0. * full_time
 
-    # Implementation of Eq. 2. Trade sign in each second
-    for t_idx, t_val in enumerate(full_time):
+        # Implementation of Eq. 2. Trade sign in each second
+        for t_idx, t_val in enumerate(full_time):
 
-        condition = (time_t >= t_val) * (time_t < t_val + 1)
-        trades_same_t_exp = identified_trades[condition]
-        sign_exp = int(np.sign(np.sum(trades_same_t_exp)))
-        trade_signs[t_idx] = sign_exp
+            condition = (time_t >= t_val) * (time_t < t_val + 1)
+            trades_same_t_exp = identified_trades[condition]
+            sign_exp = int(np.sign(np.sum(trades_same_t_exp)))
+            trade_signs[t_idx] = sign_exp
 
-        if (np.sum(condition)):
-            price_signs[t_idx] = ask_t[condition][-1]
+            if (np.sum(condition)):
+                price_signs[t_idx] = ask_t[condition][-1]
 
-    # Saving data
-    taq_data_tools_responses_second \
-        .taq_save_data(function_name, (full_time, price_signs, trade_signs),
-                       ticker, ticker, year, month, day)
+        # Saving data
+        taq_data_tools_responses_second \
+            .taq_save_data(function_name,
+                           (full_time, price_signs, trade_signs), ticker,
+                           ticker, year, month, day)
 
-    return (full_time, price_signs, trade_signs)
+        return (full_time, price_signs, trade_signs)
+
+    except TypeError as e:
+        return None
 
 # ----------------------------------------------------------------------------
 
@@ -442,7 +464,7 @@ def taq_self_response_day_responses_second_data(ticker, date):
         midpoint = pickle.load(open(
                 f'../../taq_data/responses_second_data_{year}/taq_midpoint'
                 + f'_second_data/taq_midpoint_second_data_midpoint'
-                + f'{year}{month}{day}_{ticker}.pickle', 'rb'))
+                + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
         _, _, trade_sign = pickle.load(open(
                 f'../../taq_data/responses_second_data_{year}/taq_trade_signs'
                 + f'_second_data/taq_trade_signs_second_data'
@@ -507,7 +529,7 @@ def taq_self_response_year_responses_second_data(ticker, year):
     dates = taq_data_tools_responses_second.taq_bussiness_days(year)
 
     self_values = []
-    args_prod = iprod([ticker], [ticker], dates)
+    args_prod = iprod([ticker], dates)
 
     # Parallel computation of the self-responses. Every result is appended to
     # a list
@@ -739,7 +761,7 @@ def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
     dates = taq_data_tools_responses_second.taq_bussiness_days(year)
 
     self_values = []
-    args_prod = iprod([ticker], [ticker], dates)
+    args_prod = iprod([ticker], dates)
 
     # Parallel computation of the self-correlator. Every result is appended to
     # a list
@@ -756,9 +778,9 @@ def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
     self_correlator_avg = self_v_final[1]
 
     # Saving data
-    taq_data_tools_correlator_second \
-        .taq_save_data(function_name, self_correlator_val, ticker, ticker, year,
-                       '', '')
+    taq_data_tools_responses_second \
+        .taq_save_data(function_name, self_correlator_val, ticker, ticker,
+                       year, '', '')
 
     return (self_correlator_val, self_correlator_avg)
 
@@ -796,11 +818,11 @@ def taq_trade_sign_cross_correlator_day_responses_second_data(ticker_i,
         try:
             # Load data
             _, _, trade_sign_i = pickle.load(open(
-                    f'../../taq_data/response_second_data_{year}/taq_trade_'
+                    f'../../taq_data/responses_second_data_{year}/taq_trade_'
                     + f'signs_second_data/taq_trade_signs_second_data'
                     + f'_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
             _, _, trade_sign_j = pickle.load(open(
-                    f'../../taq_data/response_second_data_{year}/taq_trade_'
+                    f'../../taq_data/responses_second_data_{year}/taq_trade_'
                     + f'signs_second_data/taq_trade_signs_second_data'
                     + f'_{year}{month}{day}_{ticker_j}.pickle', 'rb'))
 
@@ -874,14 +896,15 @@ def taq_trade_sign_cross_correlator_year_responses_second_data(ticker_i,
                 args_prod))
 
         # To obtain the total cross-correlator, I sum over all the
-        # cross-correlator values and all the amount of trades (averaging values)
+        # cross-correlator values and all the amount of trades
+        # (averaging values)
         cross_v_final = np.sum(cross_values[0], axis=0)
 
         cross_correlator_val = cross_v_final[0] / cross_v_final[1]
         cross_correlator_avg = cross_v_final[1]
 
         # Saving data
-        taq_data_tools_correlator_second \
+        taq_data_tools_responses_second \
             .taq_save_data(function_name, cross_correlator_val, ticker_i,
                            ticker_j, year, '', '')
 
@@ -898,21 +921,26 @@ def main():
     :return: None.
     """
 
-    import time
-    import multiprocessing as mp
-    from itertools import product
+    ticker = 'MSFT'
+    year = '2008'
+    date = '2008-01-02'
 
-    taq_midpoint_trade_data('MSFT', '2008-01-02')
+    # date_list = taq_data_tools_responses_second.taq_bussiness_days(year)
 
-    t = 0
-    tickers = ['AAPL', 'MSFT']
-    for _ in range(5):
-        t0 = time.time()
-        taq_midpoint_trade_data('MSFT', '2008-01-02')
-        t1 = time.time()
-        t += t1 - t0
+    # # Parallel computing
+    # with mp.Pool(processes=mp.cpu_count()) as pool:
 
-    print(t/5)
+    #     # Basic functions
+    #     pool.starmap(taq_midpoint_second_data,
+    #                  iprod([ticker], date_list))
+
+    # 2008-01-04 2008-04-01 2008-02-25
+    t, mid = taq_midpoint_second_data('MSFT', '2008-02-25')
+    # print(np.sum(mid == 0))
+    # print(np.where(mid == 0))
+    # print(np.where(t == 34800))
+
+    # taq_self_response_year_responses_second_data(ticker, year)
 
     return None
 
