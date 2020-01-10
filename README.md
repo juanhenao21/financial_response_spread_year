@@ -21,7 +21,7 @@ The `taq_data` and `taq_plot` folder must be inside the `project` folder. The `o
 `taq_data` folder.
 
 Then you need to move the `.quotes` and `.trades` files of the tickers you want to analize into the folder
-`original_year_data_2008`. Finally you need to move to the folder 
+`original_year_data_2008`, and the `decompress_original_data_2008` to the `taq_data` folder. Finally you need to move to the folder 
 `market_response_2008/project/taq_responses_second/taq_algorithms/` and run the module `taq_data_main_responses_second.py`. 
 This will obtain and plot the data for the corresconding stocks. 
 
