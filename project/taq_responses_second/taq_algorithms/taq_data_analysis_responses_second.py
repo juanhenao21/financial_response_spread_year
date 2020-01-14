@@ -273,8 +273,8 @@ def taq_midpoint_second_data(ticker, date):
         assert not np.sum(midpoint == 0)
 
         # Saving data
-        if (not os.path.isdir(f'../../taq_data/responses_second_data'
-                              + f'_{function_name}/{year}/')):
+        if (not os.path.isdir(f'../../taq_data/responses_second_data_{year}'
+                              + f'/{function_name}/')):
 
             try:
                 os.mkdir(f'../../taq_data/responses_second_data_{year}/'
