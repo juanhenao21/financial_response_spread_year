@@ -183,11 +183,16 @@ def taq_midpoint_trade_data(ticker, date):
 
     try:
         # Load data
-        # TAQ data gives directly the quotes data in every second that there is
-        # a change in the quotes
-        data_quotes_trade = pd.read_hdf(
-            f'../../taq_data/hdf5_dayly_data_{year}/taq_{ticker}_quotes_'
-            + f'{date}.h5', key='/quotes')
+        # The module is used in other folders, so it is necessary to use
+        # absolute paths instead of relative paths
+        # Obtain the absolut path of the current file and split it
+        abs_path = os.path.abspath(__file__).split('/')
+        # Take the path from the start to the project folder
+        root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
+        data_quotes_trade = pd.read_hdf(root_path
+                                        + f'/taq_data/hdf5_dayly_data_{year}/'
+                                        + f'taq_{ticker}_quotes_{date}.h5',
+                                        key='/quotes')
 
         time_q = data_quotes_trade['Time'].to_numpy()
         bid_q = data_quotes_trade['Bid'].to_numpy()
@@ -330,9 +335,16 @@ def taq_trade_signs_trade_data(ticker, date):
 
     try:
         # Load data
-        data_trades_trade = pd.read_hdf(
-            f'../../taq_data/hdf5_dayly_data_{year}/taq_{ticker}_trades_'
-            + f'{date}.h5', key='/trades')
+        # The module is used in other folders, so it is necessary to use
+        # absolute paths instead of relative paths
+        # Obtain the absolut path of the current file and split it
+        abs_path = os.path.abspath(__file__).split('/')
+        # Take the path from the start to the project folder
+        root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
+        data_trades_trade = pd.read_hdf(root_path
+                                        + f'/taq_data/hdf5_dayly_data_{year}/'
+                                        + f'taq_{ticker}_trades_{date}.h5',
+                                        key='/trades')
 
         time_t = data_trades_trade['Time'].to_numpy()
         ask_t = data_trades_trade['Ask'].to_numpy()
@@ -935,12 +947,14 @@ def main():
     #                  iprod([ticker], date_list))
 
     # 2008-01-04 2008-04-01 2008-02-25
-    t, mid = taq_midpoint_second_data('MSFT', '2008-02-25')
+    # t, mid = taq_midpoint_second_data('MSFT', '2008-02-25')
     # print(np.sum(mid == 0))
     # print(np.where(mid == 0))
     # print(np.where(t == 34800))
 
     # taq_self_response_year_responses_second_data(ticker, year)
+
+    taq_trade_signs_trade_data(ticker, date)
 
     return None
 
