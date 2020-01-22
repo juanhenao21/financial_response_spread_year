@@ -8,7 +8,7 @@ Ph . D. Physics - Econophysics
 
 [Universität Duisburg-Essen](https://www.uni-due.de/)
 
-To run the code from the scratch and reproduce the results in section 2.3 and 2.4 of the [paper](), it is needed to create
+To run the code from the scratch and reproduce the results in section 2.3 and 2.4 of the [paper](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf), it is needed to create
 three folders:
 
 |
@@ -24,11 +24,3 @@ Then you need to move the `.quotes` and `.trades` files of the tickers you want 
 `original_year_data_2008`, and the `decompress_original_data_2008` to the `taq_data` folder. Finally you need to move to the folder 
 `market_response_2008/project/taq_responses_second/taq_algorithms/` and run the module `taq_data_main_responses_second.py`. 
 This will obtain and plot the data for the corresconding stocks. 
-
-## Basic folder
-
-Contains the first approach to the data and the algorithms used in the group. It has not useful information.
-
-## Cross response individual stocks
-
-Contains the information of the first work I made in the group. Here is the code I used to obtain the results. All the planification and issues were reported in this [Trello Board](https://trello.com/b/pJfWRI4u/econophysics-ph-d).
