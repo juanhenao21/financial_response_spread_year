@@ -4,7 +4,7 @@ The functions in the module analyze the data from the NASDAQ stock market,
 computing the self- and cross-response functions and the trade sign self- and
 cross-correlator functions. This module reproduces the sections 3.1 and 3.2 of
 the `paper
- <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
+<https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
 
 
 This script requires the following modules:
@@ -23,21 +23,21 @@ The module contains the following functions:
     * taq_trade_signs_trade_data - computes the trade signs of every trade.
     * taq_trade_signs_second_data - computes the trade signs of every second.
     * taq_self_response_day_responses_second_data - computes the self response
-     of a day.
+      of a day.
     * taq_self_response_year_responses_second_data - computes the self response
-     of a year.
+      of a year.
     * taq_cross_response_day_responses_second_data - computes the cross
-     response of a day.
+      response of a day.
     * taq_cross_response_year_responses_second_data - computes the cross
-     response of a year.
+      response of a year.
     * taq_trade_sign_self_correlator_day_responses_second_data - computes the
-     trade sign self correlator of a day.
+      trade sign self correlator of a day.
     * taq_trade_sign_self_correlator_year_responses_second_data - computes the
-     trade sign self correlator of a year.
+      trade sign self correlator of a year.
     * taq_trade_sign_cross_correlator_day_responses_second_data - computes the
-     trade sign cross correlator of a day.
+      trade sign cross correlator of a day.
     * taq_trade_sign_cross_correlator_year_responses_second_data - computes the
-     trade sign cross correlator of a year.
+      trade sign cross correlator of a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -456,7 +456,7 @@ def taq_self_response_day_responses_second_data(ticker, date):
     """Computes the self-response of a day.
 
     Using the midpoint price and trade signs of a ticker computes the self-
-    response during different time lags (:math:`\tau`) for a day.
+    response during different time lags (:math:`\\tau`) for a day.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -570,7 +570,7 @@ def taq_cross_response_day_responses_second_data(ticker_i, ticker_j, date):
     """Computes the cross-response of a day.
 
     Using the midpoint price of ticker i and trade signs of ticker j computes
-    the cross-response during different time lags (:math:`\tau`) for a day.
+    the cross-response during different time lags (:math:`\\tau`) for a day.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -700,7 +700,7 @@ def taq_trade_sign_self_correlator_day_responses_second_data(ticker, date):
     """Computes the trade sign self-correlator of a year.
 
     Using the trade signs of a ticker computes the self-correlator during
-    different time lags (:math:`\tau`) for a day.
+    different time lags (:math:`\\tau`) for a day.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -804,7 +804,7 @@ def taq_trade_sign_cross_correlator_day_responses_second_data(ticker_i,
     """Computes the trade sign cross-correlator of a day.
 
     Using the trade signs of ticker i and trade signs of ticker j computes the
-    cross-correlator during different time lags (:math:`\tau`) for a day.
+    cross-correlator during different time lags (:math:`\\tau`) for a day.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
