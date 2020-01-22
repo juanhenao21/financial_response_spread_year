@@ -11,12 +11,12 @@ Ph . D. Physics - Econophysics
 To run the code from the scratch and reproduce the results in section 2.3 and 2.4 of the [paper](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf), it is needed to create
 three folders:
 
-|
-|- project
- | - taq_data
- | |- original_year_data_2008
- | - taq_plot
- 
+```bash
+└── project
+│   ├── taq_data
+│   │   ├── original_year_data_2008
+│   └── taq_plot
+``` 
 The `taq_data` and `taq_plot` folder must be inside the `project` folder. The `original_year_data_2008` must be inside the
 `taq_data` folder.
 
