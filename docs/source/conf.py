@@ -14,18 +14,18 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../project/taq_article_reproduction/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_shift/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_shift/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_event_shift/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_time_shift/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_trades_minute/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_trades_minute/taq_algorithms/'))
-sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_short_long/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_second/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_shift/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_shift/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_event_shift/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_time_shift/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_trades_minute/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_trades_minute/taq_algorithms/'))
+# sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_short_long/taq_algorithms/'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Response function analyisis'
+project = 'Market response analysis'
 copyright = '2019, Juan Camilo Henao Londono'
 author = 'Juan Camilo Henao Londono'
 
@@ -86,7 +86,7 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-# html_theme = 'alabaster'   
+# html_theme = 'alabaster'
 from jupyter_sphinx_theme import *
 init_theme()
 
@@ -142,7 +142,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Responsefunctionanalyisis.tex', 'Response function analyisis Documentation',
+    (master_doc, 'marketresponseanalysis.tex', 'Market response analysis Documentation',
      'Juan Camilo Henao Londono', 'manual'),
 ]
 
@@ -152,7 +152,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'responsefunctionanalyisis', 'Response function analyisis Documentation',
+    (master_doc, 'marketresponseanalysis', 'Market response analysis Documentation',
      [author], 1)
 ]
 
@@ -163,8 +163,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Responsefunctionanalyisis', 'Response function analyisis Documentation',
-     author, 'Responsefunctionanalyisis', 'One line description of project.',
+    (master_doc, 'marketresponseanalysis', 'Market response analysis Documentation',
+     author, 'marketresponseanalysis', 'Market response analysis.',
      'Miscellaneous'),
 ]
 
