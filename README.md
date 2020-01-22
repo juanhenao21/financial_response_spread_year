@@ -14,7 +14,7 @@ three folders:
 ```bash
 └── project
     ├── taq_data
-    │   ├── original_year_data_2008
+    │   └── original_year_data_2008
     └── taq_plot
 ``` 
 The `taq_data` and `taq_plot` folder must be inside the `project` folder. The `original_year_data_2008` must be inside the
