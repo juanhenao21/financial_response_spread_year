@@ -102,6 +102,9 @@ def taq_build_from_scratch(tickers, year):
 
     return None
 
+# -----------------------------------------------------------------------------
+
+
 def taq_dayly_data_extract(tickers, year):
     """ Extracts data to dayly CSV files.
 
@@ -203,8 +206,9 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'MSFT'] # , 'GS', 'JPM', 'XOM', 'CVX']
+
     year = '2008'
+    tickers = taq_data_tools_responses_second.taq_tickers()
 
     # Basic folders
     taq_data_tools_responses_second.taq_start_folders(year)
