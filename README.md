@@ -20,7 +20,7 @@ three folders:
 The `taq_data` and `taq_plot` folder must be inside the `project` folder. The `original_year_data_2008` must be inside the
 `taq_data` folder.
 
-$$x_^2 = \int x dxSS
+$$x_^2 = \int x dx$$
 
 Then you need to move the `.quotes` and `.trades` files of the tickers you want to analize into the folder
 `original_year_data_2008`, and the `decompress_original_data_2008` to the `taq_data` folder. Finally you need to move to the folder 
