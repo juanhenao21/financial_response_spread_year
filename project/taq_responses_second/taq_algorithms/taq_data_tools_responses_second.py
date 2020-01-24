@@ -234,6 +234,9 @@ def taq_start_folders(year):
                   + 'original_year_data_2008 folder and move the '
                   + 'decompress_original_data_2008 folder to the taq_data '
                   + 'folder.')
+            print()
+            print(f'Or move the CSV year data files to the'
+                  + f'csv_year_data_{year} folder')
             print('Are you ready to continue? (yes/no): ')
             res = input()
 
@@ -243,6 +246,27 @@ def taq_start_folders(year):
         raise Exception('Check the folders')
 
     return None
+
+# -----------------------------------------------------------------------------
+
+
+def taq_tickers():
+    """Creates a list with the tickers to be analyzed.
+
+    :return: List -- The function return a list with the name of the tickers.
+    """
+
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
+
+    for ticker in tickers[:]:
+
+        print(f'Do you want to use the {ticker} ticker? (yes/no)')
+        res = input()
+
+        if (res == 'no'):
+            tickers.remove(ticker)
+
+    return tickers
 
 # -----------------------------------------------------------------------------
 
@@ -300,7 +324,8 @@ def main():
     :return: None.
     """
 
-    pass
+    t = taq_tickers()
+    print(t)
 
     return None
 
