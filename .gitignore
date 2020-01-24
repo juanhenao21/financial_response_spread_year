@@ -109,8 +109,8 @@ project/itch_data/
 
 project/taq_plot/
 project/itch_plot/
-project/taq_intermediate_results/taq_plot
-project/taq_responses_second/taq_comparison_intermediate_results/paper_algorithm
+project/taq_intermediate_results/taq_plot/
+project/taq_responses_second/taq_comparison_intermediate_results/paper_algorithm/
 
 paper/plot
 
