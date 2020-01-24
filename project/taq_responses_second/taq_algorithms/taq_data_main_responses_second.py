@@ -40,11 +40,11 @@ __tau__ = 1000
 
 
 def taq_build_from_scratch(tickers, year):
-    """ Extracts data to dayly CSV files.
+    """ Extracts data to year CSV files.
 
     The original data must be decompressed. The function runs a script in
-    C++ to decompress and then extract and filter the data for every day of a
-    year in CSV files.
+    C++ to decompress and then extract and filter the data for a year in CSV
+    files.
 
     :param tickers: list of the string abbreviation of the stocks to be
      analized (i.e. ['AAPL', 'MSFT']).
@@ -94,11 +94,25 @@ def taq_build_from_scratch(tickers, year):
                          iprod(tickers_rm, [year], ['trades']))
 
         subprocess.call('rm decompress.out', shell=True)
-        subprocess.call(f'mkdir ../hdf5_dayly_data_{year}/', shell=True)
-        subprocess.call(f'mv *.csv ../hdf5_dayly_data_{year}/', shell=True)
+        subprocess.call(f'mkdir ../csv_year_data_{year}/', shell=True)
+        subprocess.call(f'mv *.csv ../csv_year_data_{year}/', shell=True)
 
     else:
         print('All the tickers have trades and quotes csv files')
+
+    return None
+
+def taq_dayly_data_extract(tickers, year):
+    """ Extracts data to dayly CSV files.
+
+    Extract and filter the data for every day of a year in HDF5 files.
+
+    :param tickers: list of the string abbreviation of the stocks to be
+     analized (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analized (i.e '2016').
+    :return: None -- The function saves the data in a file and does not return
+     a value.
+    """
 
     # Extract dayly data
     with mp.Pool(processes=mp.cpu_count()) as pool:
@@ -196,7 +210,10 @@ def main():
     taq_data_tools_responses_second.taq_start_folders(year)
 
     # Run analysis
+    # Use the following function if you have all the C++ modules
     taq_build_from_scratch(tickers, year)
+    # Use this function if you have the year csv files of the stocks
+    taq_dayly_data_extract(tickers, year)
     taq_data_plot_generator(tickers, year)
 
     print('Ay vamos!!')
