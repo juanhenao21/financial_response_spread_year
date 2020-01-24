@@ -45,13 +45,20 @@ install the `-lboost_date_time` and the `armadillo-3.920.3` module.
 To run the code from the scratch and reproduce the results in section 2.3 and
 2.4 of the
 [paper](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf),
-you need to move the `.quotes` and `.trades` files of the tickers you want
-to analize into the folder `original_year_data_2008`, and the
-`decompress_original_data_2008` folder to the `taq_data` folder. Finally you
-need to move (cd) to the folder
+you need to move (cd) to the folder
 `market_response_2008/project/taq_responses_second/taq_algorithms/` and run the
-module `taq_data_main_responses_second.py`. This will obtain and plot the data
-for the corresponding stocks.
+module `taq_data_main_responses_second.py`. In Linux, using the terminal the
+command look like
+
+```bash
+$ python3 taq_data_main_responses_second.py
+```
+
+The program will ask you to move the `.quotes` and `.trades` files of the
+tickers you want to analize into the folder `original_year_data_2008`, and the
+`decompress_original_data_2008` folder to the `taq_data` folder.
+After you move the folder to the location, the program will obtain and plot
+the data for the corresponding stocks.
 
 #### For the users with the year CSV data files
 
@@ -62,6 +69,18 @@ file and comment the line in the `main` function
 ```Python
 # taq_build_from_scratch(tickers, year)
 ```
+
+Then you need to run the module. In Linux, using the terminal, the command look
+like
+
+```bash
+$ python3 taq_data_main_responses_second.py
+```
+
+The program will ask you to move the `CSV` files of the tickers you want to
+analize into the folder `csv_year_data_2008`.
+After you move the files to the corresponding place, the program will obtain
+and plot the data for the stocks.
 
 ## Expected results
 
