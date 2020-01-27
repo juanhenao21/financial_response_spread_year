@@ -4,15 +4,19 @@
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://market-response-year.readthedocs.io/en/latest/)
 
 In this repository, I analyze the market response for NASDAQ TAQ data for the
-year 2008. I reproduce in the first part the sections 3.1 and 3.2 of the paper
+year 2008, however, it is possible to analyze data from other years with the
+corresponding data.
+
+I reproduce in the first part the sections 3.1 and 3.2 of the paper
 [Cross-response in correlated financial markets: individual stocks](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf)
 to obtain the midpoint price, trade signs, self-response, cross-response, trade
 sign self-correlator and trade sign cross-correlator values for different
 stocks.
 
-With these values, I analyze different characteristics of the responses.
+With these values, I analyze different characteristics of the responses (To be
+done).
 
-You can find [here](https://juanhenao21.github.io/docs/documentation_market_response_2008/index.html)
+You can find [here](https://market-response-year.readthedocs.io/en/latest/)
 a detailed documentation of the code.
 
 ## Getting Started
@@ -27,17 +31,29 @@ files examples, so we can share the files with you.
 ### Prerequisites
 
 For `Python`, all the packages needed to run the analysis are in the
-`requirements.txt` file. To install the packages from terminal, in the main
-folder of the repository activate your virtualenv and run
 
-```bash
-$ pip install -r requirements.txt
-```
 
 For the `C++` module compilation I used the `g++` compiler. It is necessary to
-install the `-lboost_date_time` and the `armadillo-3.920.3` module.
+install the `-lboost_date_time` and the `armadillo-3.920.3` module (only for
+Research group Guhr members).
 
 ## Running the code
+
+The first step is clone the repository
+
+```bash
+$ git clone https://github.com/juanhenao21/market_response_year.git
+```
+
+To install all the `Pyton` packages needed I recommend to create a virtual
+environment and install them from the `requirements.txt` file. To install the
+packages from terminal, you can use
+
+```bash
+$ virtualenv -p python3 env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+```
 
 ### TAQ Responses Second
 
@@ -47,24 +63,26 @@ To run the code from the scratch and reproduce the results in section 2.3 and
 2.4 of the
 [paper](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf),
 you need to move (cd) to the folder
-`market_response_2008/project/taq_responses_second/taq_algorithms/` and run the
+`market_response_year/project/taq_responses_second/taq_algorithms/` and run the
 module `taq_data_main_responses_second.py`. In Linux, using the terminal the
-command look like
+command looks like
 
 ```bash
 $ python3 taq_data_main_responses_second.py
 ```
 
-The program will ask you to move the `.quotes` and `.trades` files of the
-tickers you want to analize into the folder `original_year_data_2008`, and the
-`decompress_original_data_2008` folder to the `taq_data` folder.
+The program will ask you which tickers will be used during the analysis and the
+year of the analysis. After that, the program will ask you to move the
+`.quotes` and `.trades` files of the tickers you want to analize into the
+folder `market_response_year/project/taq_data/original_year_data_2008`, and the `decompress_original_data_2008`
+folder to the `market_response_year/project/taq_data` folder.
 After you move the folder to the location, the program will obtain and plot
 the data for the corresponding stocks.
 
 #### For the users with the year CSV data files
 
 If you have the CSV data files, go to the
-`market_response_2008/project/taq_responses_second/taq_algorithms/taq_data_main_responses_second.py`
+`market_response_year/project/taq_responses_second/taq_algorithms/taq_data_main_responses_second.py`
 file and comment the line in the `main` function
 
 ```Python
