@@ -18,6 +18,7 @@ The module contains the following functions:
     * taq_function_header_print_data - prints info about the function running.
     * taq_function_header_print_plot - prints info about the plot.
     * taq_start_folders - creates folders to save data and plots.
+    * taq_initial_data - takes the initial values for the analysis.
     * taq_business_days - creates a list of week days for a year.
     * taq_decompress - decompress original data format to CSV file.
     * main - the main function of the script.
@@ -239,8 +240,10 @@ def taq_start_folders(year):
             print()
             print(f'Move the CSV year data files to the '
                   + f'csv_year_data_{year} folder')
+            print()
             print('Are you ready to continue? (yes/no): ')
             res = input()
+            print()
 
     except FileExistsError as e:
         print('Folder exists. The folder was not created')
@@ -252,12 +255,25 @@ def taq_start_folders(year):
 # -----------------------------------------------------------------------------
 
 
-def taq_tickers():
-    """Creates a list with the tickers to be analyzed.
+def taq_initial_data():
+    """Takes the initial values for the analysis
 
-    :return: List -- The function return a list with the name of the tickers.
+    :return: Tuple -- The function return a tuple with a string with the year
+     to be analized and a list with the name of the tickers.
     """
 
+    print()
+    print('########################')
+    print('Market Response Analysis')
+    print('########################')
+    print('AG Guhr')
+    print('Faculty of Physics')
+    print('University of Duisburg-Essen')
+    print('Author: Juan Camilo Henao Londono')
+    print('More information in:')
+    print('  * https://juanhenao21.github.io/')
+    print('  * https://github.com/juanhenao21/market_response_year')
+    print()
     tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
 
     for ticker in tickers[:]:
@@ -268,7 +284,12 @@ def taq_tickers():
         if (res == 'no'):
             tickers.remove(ticker)
 
-    return tickers
+    print()
+    print('Please enter the year to be analyzed (i.e. 2008): ')
+    year = input()
+    print()
+
+    return (year, tickers)
 
 # -----------------------------------------------------------------------------
 

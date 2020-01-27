@@ -207,8 +207,7 @@ def main():
 
     # Tickers and days to analyze
 
-    year = '2008'
-    tickers = taq_data_tools_responses_second.taq_tickers()
+    year, tickers = taq_data_tools_responses_second.taq_initial_data()
 
     # Basic folders
     taq_data_tools_responses_second.taq_start_folders(year)
