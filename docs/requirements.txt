@@ -77,7 +77,7 @@ pytz==2018.3
 pyzmq==18.1.0
 qtconsole==4.5.5
 recommonmark==0.4.0
-requests==2.18.4
+requests==2.20.0
 rinoh-typeface-dejavuserif==0.1.1
 rinoh-typeface-texgyrecursor==0.1.1
 rinoh-typeface-texgyreheros==0.1.1
