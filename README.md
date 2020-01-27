@@ -1,6 +1,7 @@
 # Market response 2008
 
-[![Documentation Status](https://juanhenao21.github.io/docs/documentation_market_response_2008/index.html)](https://juanhenao21.github.io/docs/documentation_market_response_2008/index.html)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://market-response-year.readthedocs.io/en/latest/)
 
 In this repository, I analyze the market response for NASDAQ TAQ data for the
 year 2008. I reproduce in the first part the sections 3.1 and 3.2 of the paper
