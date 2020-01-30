@@ -1,7 +1,7 @@
 # Response Functions Analysis
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://market-response-year.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://response-functions-year.readthedocs.io/en/latest/)
 
 In this repository, I analyze the response functions for NASDAQ TAQ data for
 the year 2008, however, it is possible to analyze other years with the
@@ -16,7 +16,7 @@ stocks.
 With these values, I analyze different characteristics of the responses (To be
 done).
 
-You can find [here](https://market-response-year.readthedocs.io/en/latest/)
+You can find [here](https://response-functions-year.readthedocs.io/en/latest/)
 a detailed documentation of the code.
 
 ## Getting Started
