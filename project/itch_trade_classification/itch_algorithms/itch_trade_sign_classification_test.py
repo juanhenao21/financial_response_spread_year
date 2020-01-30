@@ -379,20 +379,20 @@ def main():
         trade_matches = np.sum(
             trade_signs[trade_signs != 0] == identified_trades)
         accuracy_trades = round(trade_matches / id_trades_trades_num, 4)
-        id_trades_second_num = len(emp_eq2_s)
-        second_matches_eq2 = np.sum(emp_eq2_s == exp_eq2_s)
-        accuracy_second_eq2 = round(second_matches_eq2 / id_trades_second_num,
+        id_trades_physical_num = len(emp_eq2_s)
+        physical_matches_eq2 = np.sum(emp_eq2_s == exp_eq2_s)
+        accuracy_physical_eq2 = round(physical_matches_eq2 / id_trades_physical_num,
                                     4)
-        second_matches_eq3 = np.sum(emp_eq2_s == exp_eq3_s)
-        accuracy_second_eq3 = round(second_matches_eq3 / id_trades_second_num,
+        physical_matches_eq3 = np.sum(emp_eq2_s == exp_eq3_s)
+        accuracy_physical_eq3 = round(physical_matches_eq3 / id_trades_physical_num,
                                     4)
         zeros_eq2 = np.sum(exp_eq2_s == 0) + count
         zeros_eq3 = np.sum(exp_eq3_s == 0) + count
         file.write(f'{t}, {date}, {id_trades_trades_num}, {trade_matches}, '
                    + f'{accuracy_trades}, '
-                   + f'{id_trades_second_num}, {second_matches_eq2}, '
-                   + f'{accuracy_second_eq2}, '
-                   + f'{second_matches_eq3}, {accuracy_second_eq3}, '
+                   + f'{id_trades_physical_num}, {physical_matches_eq2}, '
+                   + f'{accuracy_physical_eq2}, '
+                   + f'{physical_matches_eq3}, {accuracy_physical_eq3}, '
                    + f'{zeros_eq2}, {zeros_eq3}\n')
 
     file.close()
