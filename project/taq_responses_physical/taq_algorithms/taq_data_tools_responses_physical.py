@@ -225,9 +225,9 @@ def taq_start_folders(year):
         os.mkdir('../../taq_data/')
         os.mkdir(f'../../taq_data/responses_physical_data_{year}')
         os.mkdir(f'../../taq_data/original_year_data_{year}')
-        os.mkdir(f'../../taq_data/csv_year_data_{year}')
 
         print('Folder to save data created')
+        print()
 
         res = 'no'
         while (res == 'no'):
