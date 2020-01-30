@@ -1,14 +1,14 @@
 '''TAQ data plot module.
 
 The functions in the module plot the data obtained in the
-taq_data_analysis_responses_second module.
+taq_data_analysis_responses_physical module.
 
 This script requires the following modules:
     * matplotlib
     * numpy
     * os
     * pickle
-    * taq_data_tools_responses_second
+    * taq_data_tools_responses_physical
 
 The module contains the following functions:
     * taq_self_response_year_avg_plot - plots the self-response average for a
@@ -31,14 +31,14 @@ import numpy as np
 import os
 import pickle
 
-import taq_data_tools_responses_second
+import taq_data_tools_responses_physical
 
 __tau__ = 1000
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_responses_second_plot(ticker, year):
+def taq_self_response_year_avg_responses_physical_plot(ticker, year):
     """Plots the self-response average for a year.
 
     :param ticker: string of the abbreviation of the stock to be analized
@@ -49,17 +49,17 @@ def taq_self_response_year_avg_responses_second_plot(ticker, year):
     """
 
     try:
-        function_name = taq_self_response_year_avg_responses_second_plot \
+        function_name = taq_self_response_year_avg_responses_physical_plot \
             .__name__
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_function_header_print_plot(function_name, ticker, ticker,
                                             year, '', '')
 
         # Load data
         self_ = pickle.load(open(
-                        f'../../taq_data/responses_second_data_{year}/taq_self'
-                        + f'_response_year_responses_second_data/taq_self'
-                        + f'_response_year_responses_second_data_{year}'
+                        f'../../taq_data/responses_physical_data_{year}/taq'
+                        + f'_self_response_year_responses_physical_data/taq'
+                        + f'_self_response_year_responses_physical_data_{year}'
                         + f'_{ticker}.pickle', 'rb'))
 
         figure = plt.figure(figsize=(16, 9))
@@ -77,7 +77,7 @@ def taq_self_response_year_avg_responses_second_plot(ticker, year):
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_save_plot(function_name, figure, ticker, ticker, year, '')
 
         return None
@@ -91,8 +91,8 @@ def taq_self_response_year_avg_responses_second_plot(ticker, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_responses_second_plot(ticker_i, ticker_j,
-                                                      year):
+def taq_cross_response_year_avg_responses_physical_plot(ticker_i, ticker_j,
+                                                        year):
     """Plots the cross-response average for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -111,17 +111,18 @@ def taq_cross_response_year_avg_responses_second_plot(ticker_i, ticker_j,
 
     else:
         try:
-            function_name = taq_cross_response_year_avg_responses_second_plot \
-                .__name__
-            taq_data_tools_responses_second \
+            function_name = \
+                taq_cross_response_year_avg_responses_physical_plot.__name__
+            taq_data_tools_responses_physical \
                 .taq_function_header_print_plot(function_name, ticker_i,
                                                 ticker_j, year, '', '')
 
             cross = pickle.load(open(
-                            f'../../taq_data/responses_second_data_{year}/taq'
-                            + f'_cross_response_year_responses_second_data/'
-                            + f'taq_cross_response_year_responses_second_data'
-                            + f'_{year}_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
+                            f'../../taq_data/responses_physical_data_{year}/'
+                            + f'taq_cross_response_year_responses_physical'
+                            + f'_data/taq_cross_response_year_responses'
+                            + f'_physical_data_{year}_{ticker_i}i_{ticker_j}j'
+                            + f'.pickle', 'rb'))
 
             figure = plt.figure(figsize=(16, 9))
             plt.semilogx(cross, linewidth=5, label=f'{ticker_i} - {ticker_j}')
@@ -138,7 +139,7 @@ def taq_cross_response_year_avg_responses_second_plot(ticker_i, ticker_j,
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools_responses_second \
+            taq_data_tools_responses_physical \
                 .taq_save_plot(function_name, figure, ticker_i, ticker_j,
                                year, '')
 
@@ -153,8 +154,8 @@ def taq_cross_response_year_avg_responses_second_plot(ticker_i, ticker_j,
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_self_correlator_year_avg_responses_second_plot(ticker,
-                                                                  year):
+def taq_trade_sign_self_correlator_year_avg_responses_physical_plot(ticker,
+                                                                    year):
     """Plots the trade sign self-correlator average for a year.
 
     :param ticker: string of the abbreviation of the stock to be analized
@@ -166,17 +167,17 @@ def taq_trade_sign_self_correlator_year_avg_responses_second_plot(ticker,
 
     try:
         function_name = \
-            taq_trade_sign_self_correlator_year_avg_responses_second_plot \
+            taq_trade_sign_self_correlator_year_avg_responses_physical_plot \
             .__name__
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_function_header_print_plot(function_name, ticker, ticker,
                                             year, '', '')
 
         t_self = pickle.load(open(
-                        f'../../taq_data/responses_second_data_{year}/taq'
-                        + f'_trade_sign_self_correlator_year_responses_second'
-                        + f'_data/taq_trade_sign_self_correlator_year'
-                        + f'_responses_second_data_{year}_{ticker}.pickle',
+                        f'../../taq_data/responses_physical_data_{year}/taq'
+                        + f'_trade_sign_self_correlator_year_responses'
+                        + f'_physical_data/taq_trade_sign_self_correlator_year'
+                        + f'_responses_physical_data_{year}_{ticker}.pickle',
                         'rb'))
 
         figure = plt.figure(figsize=(16, 9))
@@ -193,7 +194,7 @@ def taq_trade_sign_self_correlator_year_avg_responses_second_plot(ticker,
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_save_plot(function_name, figure, ticker, ticker, year, '')
 
         return None
@@ -207,9 +208,9 @@ def taq_trade_sign_self_correlator_year_avg_responses_second_plot(ticker,
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_cross_correlator_year_avg_responses_second_plot(ticker_i,
-                                                                   ticker_j,
-                                                                   year):
+def taq_trade_sign_cross_correlator_year_avg_responses_physical_plot(ticker_i,
+                                                                     ticker_j,
+                                                                     year):
     """Plots the trade sign cross-correlator average for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -229,17 +230,17 @@ def taq_trade_sign_cross_correlator_year_avg_responses_second_plot(ticker_i,
     else:
         try:
             function_name = \
-                taq_trade_sign_cross_correlator_year_avg_responses_second_plot\
+                taq_trade_sign_cross_correlator_year_avg_responses_physical_plot\
                 .__name__
-            taq_data_tools_responses_second \
+            taq_data_tools_responses_physical \
                 .taq_function_header_print_plot(function_name, ticker_i,
                                                 ticker_j, year, '', '')
 
             t_cross = pickle.load(open(
-                        f'../../taq_data/responses_second_data_{year}/taq'
-                        + f'_trade_sign_cross_correlator_year_responses_second'
-                        + '_data/taq_trade_sign_cross_correlator_year'
-                        + f'_responses_second_data_{year}_{ticker_i}i'
+                        f'../../taq_data/responses_physical_data_{year}/taq'
+                        + f'_trade_sign_cross_correlator_year_responses'
+                        + '_physical_data/taq_trade_sign_cross_correlator_year'
+                        + f'_responses_physical_data_{year}_{ticker_i}i'
                         + f'_{ticker_j}j.pickle', 'rb'))
 
             figure = plt.figure(figsize=(16, 9))
@@ -256,7 +257,7 @@ def taq_trade_sign_cross_correlator_year_avg_responses_second_plot(ticker_i,
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools_responses_second \
+            taq_data_tools_responses_physical \
                 .taq_save_plot(function_name, figure, ticker_i, ticker_j, year,
                                '')
 

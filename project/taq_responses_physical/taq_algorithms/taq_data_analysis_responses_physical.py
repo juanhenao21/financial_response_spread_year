@@ -14,30 +14,30 @@ This script requires the following modules:
     * os
     * pandas
     * pickle
-    * taq_data_tools_responses_second
+    * taq_data_tools_responses_physical
 
 The module contains the following functions:
     * taq_data_extract - extracts the data for every day in a year.
     * taq_midpoint_trade_data - computes the midpoint price of every trade.
-    * taq_midpoint_second_data - computes the midpoint price of every second.
+    * taq_midpoint_physical_data - computes the midpoint price of every second.
     * taq_trade_signs_trade_data - computes the trade signs of every trade.
-    * taq_trade_signs_second_data - computes the trade signs of every second.
-    * taq_self_response_day_responses_second_data - computes the self response
-      of a day.
-    * taq_self_response_year_responses_second_data - computes the self response
-      of a year.
-    * taq_cross_response_day_responses_second_data - computes the cross
-      response of a day.
-    * taq_cross_response_year_responses_second_data - computes the cross
+    * taq_trade_signs_physical_data - computes the trade signs of every second.
+    * taq_self_response_day_responses_physical_data - computes the self
+     response of a day.
+    * taq_self_response_year_responses_physical_data - computes the self
       response of a year.
-    * taq_trade_sign_self_correlator_day_responses_second_data - computes the
+    * taq_cross_response_day_responses_physical_data - computes the cross
+      response of a day.
+    * taq_cross_response_year_responses_physical_data - computes the cross
+      response of a year.
+    * taq_trade_sign_self_correlator_day_responses_physical_data - computes the
       trade sign self correlator of a day.
-    * taq_trade_sign_self_correlator_year_responses_second_data - computes the
-      trade sign self correlator of a year.
-    * taq_trade_sign_cross_correlator_day_responses_second_data - computes the
-      trade sign cross correlator of a day.
-    * taq_trade_sign_cross_correlator_year_responses_second_data - computes the
-      trade sign cross correlator of a year.
+    * taq_trade_sign_self_correlator_year_responses_physical_data - computes
+      the trade sign self correlator of a year.
+    * taq_trade_sign_cross_correlator_day_responses_physical_data - computes
+      the trade sign cross correlator of a day.
+    * taq_trade_sign_cross_correlator_year_responses_physical_data - computes
+      the trade sign cross correlator of a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -53,7 +53,7 @@ import os
 import pandas as pd
 import pickle
 
-import taq_data_tools_responses_second
+import taq_data_tools_responses_physical
 
 __tau__ = 1000
 
@@ -77,7 +77,7 @@ def taq_data_extract(ticker, type, year):
     """
 
     function_name = taq_data_extract.__name__
-    taq_data_tools_responses_second \
+    taq_data_tools_responses_physical \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         '', '')
 
@@ -86,7 +86,7 @@ def taq_data_extract(ticker, type, year):
         df = pd.DataFrame()
         chunksize = 10 ** 7
 
-        date_list = taq_data_tools_responses_second.taq_bussiness_days(year)
+        date_list = taq_data_tools_responses_physical.taq_bussiness_days(year)
 
         # Load data
         csv_file = f'../../taq_data/csv_year_data_{year}/{ticker}_{year}' + \
@@ -218,7 +218,7 @@ def taq_midpoint_trade_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_midpoint_second_data(ticker, date):
+def taq_midpoint_physical_data(ticker, date):
     """Computes the midpoint price of every second.
 
     Using the taq_midpoint_trade_data function computes the midpoint price of
@@ -238,8 +238,8 @@ def taq_midpoint_second_data(ticker, date):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_midpoint_second_data.__name__
-    taq_data_tools_responses_second \
+    function_name = taq_midpoint_physical_data.__name__
+    taq_data_tools_responses_physical \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         month, day)
 
@@ -278,11 +278,11 @@ def taq_midpoint_second_data(ticker, date):
         assert not np.sum(midpoint == 0)
 
         # Saving data
-        if (not os.path.isdir(f'../../taq_data/responses_second_data_{year}'
+        if (not os.path.isdir(f'../../taq_data/responses_physical_data_{year}'
                               + f'/{function_name}/')):
 
             try:
-                os.mkdir(f'../../taq_data/responses_second_data_{year}/'
+                os.mkdir(f'../../taq_data/responses_physical_data_{year}/'
                          + f'{function_name}/')
                 print('Folder to save data created')
 
@@ -290,11 +290,11 @@ def taq_midpoint_second_data(ticker, date):
                 print('Folder exists. The folder was not created')
 
         pickle.dump(midpoint / 10000,
-                    open(f'../../taq_data/responses_second_data_{year}/'
+                    open(f'../../taq_data/responses_physical_data_{year}/'
                          + f'{function_name}/{function_name}_midpoint_'
                          + f'{year}{month}{day}_{ticker}.pickle', 'wb'))
         pickle.dump(full_time,
-                    open(f'../../taq_data/responses_second_data_{year}/'
+                    open(f'../../taq_data/responses_physical_data_{year}/'
                          + f'{function_name}/{function_name}_time.pickle',
                          'wb'))
 
@@ -383,7 +383,7 @@ def taq_trade_signs_trade_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_signs_second_data(ticker, date):
+def taq_trade_signs_physical_data(ticker, date):
     """Computes the trade signs of every second.
 
     Using the taq_trade_signs_trade_data function computes the trade signs of
@@ -411,8 +411,8 @@ def taq_trade_signs_second_data(ticker, date):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_trade_signs_second_data.__name__
-    taq_data_tools_responses_second \
+    function_name = taq_trade_signs_physical_data.__name__
+    taq_data_tools_responses_physical \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         month, day)
 
@@ -439,7 +439,7 @@ def taq_trade_signs_second_data(ticker, date):
                 price_signs[t_idx] = ask_t[condition][-1]
 
         # Saving data
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_save_data(function_name,
                            (full_time, price_signs, trade_signs), ticker,
                            ticker, year, month, day)
@@ -452,7 +452,7 @@ def taq_trade_signs_second_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_day_responses_second_data(ticker, date):
+def taq_self_response_day_responses_physical_data(ticker, date):
     """Computes the self-response of a day.
 
     Using the midpoint price and trade signs of a ticker computes the self-
@@ -474,12 +474,12 @@ def taq_self_response_day_responses_second_data(ticker, date):
     try:
         # Load data
         midpoint = pickle.load(open(
-                f'../../taq_data/responses_second_data_{year}/taq_midpoint'
-                + f'_second_data/taq_midpoint_second_data_midpoint'
+                f'../../taq_data/responses_physical_data_{year}/taq_midpoint'
+                + f'_physical_data/taq_midpoint_physical_data_midpoint'
                 + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
         _, _, trade_sign = pickle.load(open(
-                f'../../taq_data/responses_second_data_{year}/taq_trade_signs'
-                + f'_second_data/taq_trade_signs_second_data'
+                f'../../taq_data/responses_physical_data_{year}/taq_trade'
+                + f'_signs_physical_data/taq_trade_signs_physical_data'
                 + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
 
         assert len(midpoint) == len(trade_sign)
@@ -521,11 +521,11 @@ def taq_self_response_day_responses_second_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_responses_second_data(ticker, year):
+def taq_self_response_year_responses_physical_data(ticker, year):
     """Computes the self-response of a year.
 
-    Using the taq_self_response_day_responses_second_data function computes the
-    self-response function for a year.
+    Using the taq_self_response_day_responses_physical_data function computes
+    the self-response function for a year.
 
     :param ticker: string of the abbreviation of stock to be analized
      (i.e. 'AAPL').
@@ -533,12 +533,12 @@ def taq_self_response_year_responses_second_data(ticker, year):
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
-    function_name = taq_self_response_year_responses_second_data.__name__
-    taq_data_tools_responses_second \
+    function_name = taq_self_response_year_responses_physical_data.__name__
+    taq_data_tools_responses_physical \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         '', '')
 
-    dates = taq_data_tools_responses_second.taq_bussiness_days(year)
+    dates = taq_data_tools_responses_physical.taq_bussiness_days(year)
 
     self_values = []
     args_prod = iprod([ticker], dates)
@@ -547,7 +547,7 @@ def taq_self_response_year_responses_second_data(ticker, year):
     # a list
     with mp.Pool(processes=mp.cpu_count()) as pool:
         self_values.append(pool.starmap(
-            taq_self_response_day_responses_second_data, args_prod))
+            taq_self_response_day_responses_physical_data, args_prod))
 
     # To obtain the total self-response, I sum over all the self-response
     # values and all the amount of trades (averaging values)
@@ -557,7 +557,7 @@ def taq_self_response_year_responses_second_data(ticker, year):
     self_response_avg = self_v_final[1]
 
     # Saving data
-    taq_data_tools_responses_second \
+    taq_data_tools_responses_physical \
         .taq_save_data(function_name, self_response_val, ticker, ticker, year,
                        '', '')
 
@@ -566,7 +566,7 @@ def taq_self_response_year_responses_second_data(ticker, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_day_responses_second_data(ticker_i, ticker_j, date):
+def taq_cross_response_day_responses_physical_data(ticker_i, ticker_j, date):
     """Computes the cross-response of a day.
 
     Using the midpoint price of ticker i and trade signs of ticker j computes
@@ -596,12 +596,12 @@ def taq_cross_response_day_responses_second_data(ticker_i, ticker_j, date):
         try:
             # Load data
             midpoint_i = pickle.load(open(
-                    f'../../taq_data/responses_second_data_{year}/taq_midpoint'
-                    + f'_second_data/taq_midpoint_second_data_midpoint'
-                    + f'_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
+                    f'../../taq_data/responses_physical_data_{year}/taq'
+                    + f'_midpoint_physical_data/taq_midpoint_physical_data'
+                    + f'_midpoint_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
             _, _, trade_sign_j = pickle.load(open(
-                    f'../../taq_data/responses_second_data_{year}/taq_trade_'
-                    + f'signs_second_data/taq_trade_signs_second_data'
+                    f'../../taq_data/responses_physical_data_{year}/taq_trade_'
+                    + f'signs_physical_data/taq_trade_signs_physical_data'
                     + f'_{year}{month}{day}_{ticker_j}.pickle', 'rb'))
 
             assert len(midpoint_i) == len(trade_sign_j)
@@ -643,10 +643,10 @@ def taq_cross_response_day_responses_second_data(ticker_i, ticker_j, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_responses_second_data(ticker_i, ticker_j, year):
+def taq_cross_response_year_responses_physical_data(ticker_i, ticker_j, year):
     """Computes the cross-response of a year.
 
-    Using the taq_cross_response_day_responses_second_data function computes
+    Using the taq_cross_response_day_responses_physical_data function computes
     the cross-response function for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -663,12 +663,13 @@ def taq_cross_response_year_responses_second_data(ticker_i, ticker_j, year):
         return None
 
     else:
-        function_name = taq_cross_response_year_responses_second_data.__name__
-        taq_data_tools_responses_second \
+        function_name = taq_cross_response_year_responses_physical_data \
+            .__name__
+        taq_data_tools_responses_physical \
             .taq_function_header_print_data(function_name, ticker_i, ticker_j,
                                             year, '', '')
 
-        dates = taq_data_tools_responses_second.taq_bussiness_days(year)
+        dates = taq_data_tools_responses_physical.taq_bussiness_days(year)
 
         cross_values = []
         args_prod = iprod([ticker_i], [ticker_j], dates)
@@ -677,7 +678,7 @@ def taq_cross_response_year_responses_second_data(ticker_i, ticker_j, year):
         # to a list
         with mp.Pool(processes=mp.cpu_count()) as pool:
             cross_values.append(pool.starmap(
-                taq_cross_response_day_responses_second_data, args_prod))
+                taq_cross_response_day_responses_physical_data, args_prod))
 
         # To obtain the total cross-response, I sum over all the cross-response
         # values and all the amount of trades (averaging values)
@@ -687,7 +688,7 @@ def taq_cross_response_year_responses_second_data(ticker_i, ticker_j, year):
         cross_response_avg = cross_v_final[1]
 
         # Saving data
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_save_data(function_name, cross_response_val, ticker_i,
                            ticker_j, year, '', '')
 
@@ -696,7 +697,7 @@ def taq_cross_response_year_responses_second_data(ticker_i, ticker_j, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_self_correlator_day_responses_second_data(ticker, date):
+def taq_trade_sign_self_correlator_day_responses_physical_data(ticker, date):
     """Computes the trade sign self-correlator of a year.
 
     Using the trade signs of a ticker computes the self-correlator during
@@ -718,8 +719,8 @@ def taq_trade_sign_self_correlator_day_responses_second_data(ticker, date):
     try:
         # Load data
         _, _, trade_sign_i = pickle.load(open(
-                f'../../taq_data/responses_second_data_{year}/taq_trade_signs'
-                + f'_second_data/taq_trade_signs_second_data'
+                f'../../taq_data/responses_physical_data_{year}/taq_trade'
+                + f'_signs_physical_data/taq_trade_signs_physical_data'
                 + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
 
         # Array of the average of each tau. 10^3 s is used in the paper.
@@ -752,11 +753,11 @@ def taq_trade_sign_self_correlator_day_responses_second_data(ticker, date):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
+def taq_trade_sign_self_correlator_year_responses_physical_data(ticker, year):
     """Computes the trade sign self-correlator of a year.
 
-    Using the taq_trade_sign_self_correlator_day_responses_second_data function
-    computes the self-correlator function for a year.
+    Using the taq_trade_sign_self_correlator_day_responses_physical_data
+    function computes the self-correlator function for a year.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -764,13 +765,13 @@ def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
-    function_name = taq_trade_sign_self_correlator_year_responses_second_data \
-        .__name__
-    taq_data_tools_responses_second \
+    function_name = \
+        taq_trade_sign_self_correlator_year_responses_physical_data.__name__
+    taq_data_tools_responses_physical \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         '', '')
 
-    dates = taq_data_tools_responses_second.taq_bussiness_days(year)
+    dates = taq_data_tools_responses_physical.taq_bussiness_days(year)
 
     self_values = []
     args_prod = iprod([ticker], dates)
@@ -779,7 +780,7 @@ def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
     # a list
     with mp.Pool(processes=mp.cpu_count()) as pool:
         self_values.append(pool.starmap(
-            taq_trade_sign_self_correlator_day_responses_second_data,
+            taq_trade_sign_self_correlator_day_responses_physical_data,
             args_prod))
 
     # To obtain the total self-correlator, I sum over all the self-correlator
@@ -790,7 +791,7 @@ def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
     self_correlator_avg = self_v_final[1]
 
     # Saving data
-    taq_data_tools_responses_second \
+    taq_data_tools_responses_physical \
         .taq_save_data(function_name, self_correlator_val, ticker, ticker,
                        year, '', '')
 
@@ -799,8 +800,9 @@ def taq_trade_sign_self_correlator_year_responses_second_data(ticker, year):
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_cross_correlator_day_responses_second_data(ticker_i,
-                                                              ticker_j, date):
+def taq_trade_sign_cross_correlator_day_responses_physical_data(ticker_i,
+                                                                ticker_j,
+                                                                date):
     """Computes the trade sign cross-correlator of a day.
 
     Using the trade signs of ticker i and trade signs of ticker j computes the
@@ -830,12 +832,12 @@ def taq_trade_sign_cross_correlator_day_responses_second_data(ticker_i,
         try:
             # Load data
             _, _, trade_sign_i = pickle.load(open(
-                    f'../../taq_data/responses_second_data_{year}/taq_trade_'
-                    + f'signs_second_data/taq_trade_signs_second_data'
+                    f'../../taq_data/responses_physical_data_{year}/taq_trade_'
+                    + f'signs_physical_data/taq_trade_signs_physical_data'
                     + f'_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
             _, _, trade_sign_j = pickle.load(open(
-                    f'../../taq_data/responses_second_data_{year}/taq_trade_'
-                    + f'signs_second_data/taq_trade_signs_second_data'
+                    f'../../taq_data/responses_physical_data_{year}/taq_trade_'
+                    + f'signs_physical_data/taq_trade_signs_physical_data'
                     + f'_{year}{month}{day}_{ticker_j}.pickle', 'rb'))
 
             # Array of the average of each tau. 10^3 s used by Wang
@@ -868,11 +870,12 @@ def taq_trade_sign_cross_correlator_day_responses_second_data(ticker_i,
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_sign_cross_correlator_year_responses_second_data(ticker_i,
-                                                               ticker_j, year):
+def taq_trade_sign_cross_correlator_year_responses_physical_data(ticker_i,
+                                                                 ticker_j,
+                                                                 year):
     """Computes the trade sign-cross correlator of a year.
 
-    Using the taq_trade_sign_cross_correlator_day_responses_second_data
+    Using the taq_trade_sign_cross_correlator_day_responses_physical_data
     function computes the cross-correlator function for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -890,12 +893,13 @@ def taq_trade_sign_cross_correlator_year_responses_second_data(ticker_i,
 
     else:
         function_name = \
-            taq_trade_sign_cross_correlator_year_responses_second_data.__name__
-        taq_data_tools_responses_second \
+            taq_trade_sign_cross_correlator_year_responses_physical_data \
+            .__name__
+        taq_data_tools_responses_physical \
             .taq_function_header_print_data(function_name, ticker_i, ticker_j,
                                             year, '', '')
 
-        dates = taq_data_tools_responses_second.taq_bussiness_days(year)
+        dates = taq_data_tools_responses_physical.taq_bussiness_days(year)
 
         cross_values = []
         args_prod = iprod([ticker_i], [ticker_j], dates)
@@ -904,7 +908,7 @@ def taq_trade_sign_cross_correlator_year_responses_second_data(ticker_i,
         # appended to a list
         with mp.Pool(processes=mp.cpu_count()) as pool:
             cross_values.append(pool.starmap(
-                taq_trade_sign_cross_correlator_day_responses_second_data,
+                taq_trade_sign_cross_correlator_day_responses_physical_data,
                 args_prod))
 
         # To obtain the total cross-correlator, I sum over all the
@@ -916,7 +920,7 @@ def taq_trade_sign_cross_correlator_year_responses_second_data(ticker_i,
         cross_correlator_avg = cross_v_final[1]
 
         # Saving data
-        taq_data_tools_responses_second \
+        taq_data_tools_responses_physical \
             .taq_save_data(function_name, cross_correlator_val, ticker_i,
                            ticker_j, year, '', '')
 
@@ -933,28 +937,7 @@ def main():
     :return: None.
     """
 
-    ticker = 'MSFT'
-    year = '2008'
-    date = '2008-01-02'
-
-    # date_list = taq_data_tools_responses_second.taq_bussiness_days(year)
-
-    # # Parallel computing
-    # with mp.Pool(processes=mp.cpu_count()) as pool:
-
-    #     # Basic functions
-    #     pool.starmap(taq_midpoint_second_data,
-    #                  iprod([ticker], date_list))
-
-    # 2008-01-04 2008-04-01 2008-02-25
-    # t, mid = taq_midpoint_second_data('MSFT', '2008-02-25')
-    # print(np.sum(mid == 0))
-    # print(np.where(mid == 0))
-    # print(np.where(t == 34800))
-
-    # taq_self_response_year_responses_second_data(ticker, year)
-
-    taq_trade_signs_trade_data(ticker, date)
+    pass
 
     return None
 

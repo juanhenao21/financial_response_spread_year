@@ -43,7 +43,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     """ Saves computed data in pickle files.
 
     Saves the data generated in the functions of the
-    taq_data_analysis_responses_second module in pickle files.
+    taq_data_analysis_responses_physical module in pickle files.
 
     :param function_name: name of the function that generates the data.
     :param data: data to be saved. The data can be of different types.
@@ -60,11 +60,11 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     # Saving data
 
-    if (not os.path.isdir(
-            f'../../taq_data/responses_second_data_{year}/{function_name}/')):
+    if (not os.path.isdir(f'../../taq_data/responses_physical_data_{year}/'
+                          + f'{function_name}/')):
 
         try:
-            os.mkdir(f'../../taq_data/responses_second_data_{year}/'
+            os.mkdir(f'../../taq_data/responses_physical_data_{year}/'
                      + f'{function_name}/')
             print('Folder to save data created')
 
@@ -74,15 +74,15 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     # Cross-response data
     if (ticker_i != ticker_j):
 
-        pickle.dump(data, open(f'../../taq_data/responses_second_data_{year}/'
-                    + f'{function_name}/{function_name}_{year}{month}{day}'
+        pickle.dump(data, open(f'../../taq_data/responses_physical_data_{year}'
+                    + f'/{function_name}/{function_name}_{year}{month}{day}'
                     + f'_{ticker_i}i_{ticker_j}j.pickle', 'wb'))
 
     # Self-response data
     else:
 
-        pickle.dump(data, open(f'../../taq_data/responses_second_data_{year}/'
-                    + f'{function_name}/{function_name}_{year}{month}{day}'
+        pickle.dump(data, open(f'../../taq_data/responses_physical_data_{year}'
+                    + f'/{function_name}/{function_name}_{year}{month}{day}'
                     + f'_{ticker_i}.pickle', 'wb'))
 
     print('Data Saved')
@@ -97,7 +97,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     """Saves plot in png files.
 
     Saves the plot generated in the functions of the
-    taq_data_plot_responses_second module in png files.
+    taq_data_plot_responses_physical module in png files.
 
     :param function_name: name of the function that generates the plot.
     :param figure: figure object that is going to be save.
@@ -113,11 +113,11 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     # Saving plot data
 
-    if (not os.path.isdir(
-            f'../../taq_plot/responses_second_plot_{year}/{function_name}/')):
+    if (not os.path.isdir(f'../../taq_plot/responses_physical_plot_{year}'
+                          + f'/{function_name}/')):
 
         try:
-            os.mkdir(f'../../taq_plot/responses_second_plot_{year}/'
+            os.mkdir(f'../../taq_plot/responses_physical_plot_{year}/'
                      + f'{function_name}/')
             print('Folder to save data created')
 
@@ -127,14 +127,14 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     # Cross-response data
     if (ticker_i != ticker_j):
 
-        figure.savefig(f'../../taq_plot/responses_second_plot_{year}/'
+        figure.savefig(f'../../taq_plot/responses_physical_plot_{year}/'
                        + f'{function_name}/{function_name}_{year}{month}'
                        + f'_{ticker_i}i_{ticker_j}j.png')
 
     # Self-response
     else:
 
-        figure.savefig(f'../../taq_plot/responses_second_plot_{year}/'
+        figure.savefig(f'../../taq_plot/responses_physical_plot_{year}/'
                        + f'{function_name}/{function_name}_{year}{month}'
                        + f'_{ticker_i}i.png')
 
@@ -221,9 +221,9 @@ def taq_start_folders(year):
 
     try:
         os.mkdir('../../taq_plot/')
-        os.mkdir(f'../../taq_plot/responses_second_plot_{year}')
+        os.mkdir(f'../../taq_plot/responses_physical_plot_{year}')
         os.mkdir('../../taq_data/')
-        os.mkdir(f'../../taq_data/responses_second_data_{year}')
+        os.mkdir(f'../../taq_data/responses_physical_data_{year}')
         os.mkdir(f'../../taq_data/original_year_data_{year}')
         os.mkdir(f'../../taq_data/csv_year_data_{year}')
 
@@ -263,16 +263,16 @@ def taq_initial_data():
     """
 
     print()
-    print('########################')
-    print('Market Response Analysis')
-    print('########################')
+    print('###########################')
+    print('Response Functions Analysis')
+    print('###########################')
     print('AG Guhr')
     print('Faculty of Physics')
     print('University of Duisburg-Essen')
     print('Author: Juan Camilo Henao Londono')
     print('More information in:')
     print('  * https://juanhenao21.github.io/')
-    print('  * https://github.com/juanhenao21/market_response_year')
+    print('  * https://github.com/juanhenao21/response_functions_year')
     print()
     tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
 
@@ -347,8 +347,7 @@ def main():
     :return: None.
     """
 
-    t = taq_tickers()
-    print(t)
+    pass
 
     return None
 

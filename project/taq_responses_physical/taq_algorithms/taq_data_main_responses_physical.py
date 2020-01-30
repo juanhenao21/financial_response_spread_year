@@ -7,9 +7,9 @@ This script requires the following modules:
     * itertools.product
     * multiprocessing
     * pandas
-    * taq_data_analysis_responses_second
-    * taq_data_plot_responses_second
-    * taq_data_tools_responses_second
+    * taq_data_analysis_responses_physical
+    * taq_data_plot_responses_physical
+    * taq_data_tools_responses_physical
 
 The module contains the following functions:
     * taq_build_from_scratch - extract data to dayly CSV files.
@@ -30,9 +30,9 @@ import pandas as pd
 import pickle
 import subprocess
 
-import taq_data_analysis_responses_second
-import taq_data_plot_responses_second
-import taq_data_tools_responses_second
+import taq_data_analysis_responses_physical
+import taq_data_plot_responses_physical
+import taq_data_tools_responses_physical
 
 __tau__ = 1000
 
@@ -86,11 +86,11 @@ def taq_build_from_scratch(tickers, year):
         # Parallel computing
         with mp.Pool(processes=mp.cpu_count()) as pool:
             print('Extracting quotes')
-            pool.starmap(taq_data_tools_responses_second.taq_decompress,
+            pool.starmap(taq_data_tools_responses_physical.taq_decompress,
                          iprod(tickers_rm, [year], ['quotes']))
         with mp.Pool(processes=mp.cpu_count()) as pool:
             print('Extracting trades')
-            pool.starmap(taq_data_tools_responses_second.taq_decompress,
+            pool.starmap(taq_data_tools_responses_physical.taq_decompress,
                          iprod(tickers_rm, [year], ['trades']))
 
         subprocess.call('rm decompress.out', shell=True)
@@ -120,9 +120,9 @@ def taq_dayly_data_extract(tickers, year):
     # Extract dayly data
     with mp.Pool(processes=mp.cpu_count()) as pool:
         print('Extracting dayly data')
-        pool.starmap(taq_data_analysis_responses_second.taq_data_extract,
+        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
                      iprod(tickers, ['quotes'], [year]))
-        pool.starmap(taq_data_analysis_responses_second.taq_data_extract,
+        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
                      iprod(tickers, ['trades'], [year]))
 
     return None
@@ -140,56 +140,56 @@ def taq_data_plot_generator(tickers, year):
      a value.
     """
 
-    date_list = taq_data_tools_responses_second.taq_bussiness_days(year)
+    date_list = taq_data_tools_responses_physical.taq_bussiness_days(year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        pool.starmap(taq_data_analysis_responses_second
-                     .taq_midpoint_second_data,
+        pool.starmap(taq_data_analysis_responses_physical
+                     .taq_midpoint_physical_data,
                      iprod(tickers, date_list))
-        pool.starmap(taq_data_analysis_responses_second
-                     .taq_trade_signs_second_data,
+        pool.starmap(taq_data_analysis_responses_physical
+                     .taq_trade_signs_physical_data,
                      iprod(tickers, date_list))
 
     # Especific functions
     # Self-response and self-correlator
     for ticker in tickers:
 
-        taq_data_analysis_responses_second \
-            .taq_self_response_year_responses_second_data(ticker, year)
-        taq_data_analysis_responses_second \
-            .taq_trade_sign_self_correlator_year_responses_second_data(ticker,
-                                                                       year)
+        taq_data_analysis_responses_physical \
+            .taq_self_response_year_responses_physical_data(ticker, year)
+        taq_data_analysis_responses_physical \
+            .taq_trade_sign_self_correlator_year_responses_physical_data(
+                ticker, year)
 
     ticker_prod = iprod(tickers, tickers)
 
     # Cross-response and cross-correlator
     for ticks in ticker_prod:
 
-        taq_data_analysis_responses_second \
-            .taq_cross_response_year_responses_second_data(ticks[0], ticks[1],
-                                                           year)
-        taq_data_analysis_responses_second \
-            .taq_trade_sign_cross_correlator_year_responses_second_data(
+        taq_data_analysis_responses_physical \
+            .taq_cross_response_year_responses_physical_data(ticks[0],
+                                                             ticks[1], year)
+        taq_data_analysis_responses_physical \
+            .taq_trade_sign_cross_correlator_year_responses_physical_data(
                 ticks[0], ticks[1], year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Plot
-        pool.starmap(taq_data_plot_responses_second
-                     .taq_self_response_year_avg_responses_second_plot,
+        pool.starmap(taq_data_plot_responses_physical
+                     .taq_self_response_year_avg_responses_physical_plot,
                      iprod(tickers, [year]))
-        pool.starmap(taq_data_plot_responses_second
-                     .taq_cross_response_year_avg_responses_second_plot,
+        pool.starmap(taq_data_plot_responses_physical
+                     .taq_cross_response_year_avg_responses_physical_plot,
                      iprod(tickers, tickers, [year]))
-        pool.starmap(taq_data_plot_responses_second
-            .taq_trade_sign_self_correlator_year_avg_responses_second_plot,
+        pool.starmap(taq_data_plot_responses_physical
+            .taq_trade_sign_self_correlator_year_avg_responses_physical_plot,
             iprod(tickers, [year]))
-        pool.starmap(taq_data_plot_responses_second
-            .taq_trade_sign_cross_correlator_year_avg_responses_second_plot,
+        pool.starmap(taq_data_plot_responses_physical
+            .taq_trade_sign_cross_correlator_year_avg_responses_physical_plot,
             iprod(tickers, tickers, [year]))
 
     return None
@@ -207,16 +207,16 @@ def main():
 
     # Tickers and days to analyze
 
-    year, tickers = taq_data_tools_responses_second.taq_initial_data()
+    year, tickers = taq_data_tools_responses_physical.taq_initial_data()
 
     # Basic folders
-    taq_data_tools_responses_second.taq_start_folders(year)
+    # taq_data_tools_responses_physical.taq_start_folders(year)
 
     # Run analysis
     # Use the following function if you have all the C++ modules
-    taq_build_from_scratch(tickers, year)
+    # taq_build_from_scratch(tickers, year)
     # Use this function if you have the year csv files of the stocks
-    taq_dayly_data_extract(tickers, year)
+    # taq_dayly_data_extract(tickers, year)
     taq_data_plot_generator(tickers, year)
 
     print('Ay vamos!!')
