@@ -206,17 +206,18 @@ def main():
     """
 
     # Tickers and days to analyze
-
     year, tickers = taq_data_tools_responses_physical.taq_initial_data()
 
     # Basic folders
-    # taq_data_tools_responses_physical.taq_start_folders(year)
+    taq_data_tools_responses_physical.taq_start_folders(year)
 
     # Run analysis
     # Use the following function if you have all the C++ modules
-    # taq_build_from_scratch(tickers, year)
+    taq_build_from_scratch(tickers, year)
     # Use this function if you have the year csv files of the stocks
-    # taq_dayly_data_extract(tickers, year)
+    taq_dayly_data_extract(tickers, year)
+
+    # Analysis and plot
     taq_data_plot_generator(tickers, year)
 
     print('Ay vamos!!')
