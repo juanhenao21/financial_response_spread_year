@@ -7,7 +7,9 @@ in the modules that use them.
 This script requires the following modules:
     * matplotlib
     * numpy
+    * os
     * pandas
+    * pickle
 
 The module contains the following functions:
     * taq_save_data - saves computed data.
@@ -128,8 +130,8 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     else:
 
         figure.savefig(
-            f'../../taq_plot/physical_shift_plot_{year}/{function_name}'
-            + f'_{year}{month}_{ticker_i}.png')
+            f'../../taq_plot/physical_shift_plot_{year}/{function_name}/'
+            + f'{function_name}_{year}{month}_{ticker_i}.png')
 
     print('Plot saved')
     print()
