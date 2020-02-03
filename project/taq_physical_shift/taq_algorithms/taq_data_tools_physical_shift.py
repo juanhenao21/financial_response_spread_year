@@ -37,7 +37,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     """ Saves computed data in pickle files.
 
     Saves the data generated in the functions of the
-    taq_data_analysis_time_shift module in pickle files.
+    taq_data_analysis_physical_shift module in pickle files.
 
     :param function_name: name of the function that generates the data.
     :param data: data to be saved. The data can be of different types.
@@ -54,12 +54,12 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     # Saving data
 
-    if (not os.path.isdir('../../taq_data/time_shift_data_{1}/{0}/'
-                          .format(function_name, year))):
+    if (not os.path.isdir(f'../../taq_data/physical_shift_data_{year}/'
+                          + f'{function_name}/')):
 
         try:
-            os.mkdir('../../taq_data/time_shift_data_{1}/{0}/'
-                     .format(function_name, year))
+            os.mkdir(f'../../taq_data/physical_shift_data_{year}/'
+                     + f'{function_name}/')
             print('Folder to save data created')
 
         except FileExistsError:
@@ -68,18 +68,16 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     # Cross-response data
     if (ticker_i != ticker_j):
 
-        pickle.dump(data, open(''.join((
-            '../../taq_data/time_shift_data_{3}/{0}/{0}_{3}{4}{5}'
-            + '_{1}i_{2}j.pickle').split())
-            .format(function_name, ticker_i, ticker_j, year, month, day),
-            'wb'))
+        pickle.dump(data, open(
+            f'../../taq_data/physical_shift_data_{year}/{function_name}/'
+            + f'{function_name}_{year}{month}{day}_{ticker_i}i_{ticker_j}j'
+            + f'.pickle', 'wb'))
 
     # Self-response data
     else:
-        pickle.dump(data, open(''.join((
-            '../../taq_data/time_shift_data_{2}/{0}/{0}_{2}{3}{4}'
-            '_{1}.pickle').split())
-            .format(function_name, ticker_i, year, month, day), 'wb'))
+        pickle.dump(data, open(
+            f'../../taq_data/physical_shift_data_{year}/{function_name}/'
+            + f'{function_name}_{year}{month}{day}_{ticker_i}.pickle', 'wb'))
 
     print('Data Saved')
     print()
@@ -93,7 +91,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     """Saves plot in png files.
 
     Saves the plot generated in the functions of the
-    taq_data_plot_time_shift module in png files.
+    taq_data_plot_physical_shift module in png files.
 
     :param function_name: name of the function that generates the plot.
     :param figure: figure object that is going to be save.
@@ -109,12 +107,12 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     # Saving data
 
-    if (not os.path.isdir('../../taq_plot/time_shift_plot_{1}/{0}/'
-                          .format(function_name, year))):
+    if (not os.path.isdir(f'../../taq_plot/physical_shift_plot_{year}/'
+                          + f'{function_name}/')):
 
         try:
-            os.mkdir('../../taq_plot/time_shift_plot_{1}/{0}/'
-                     .format(function_name, year))
+            os.mkdir(f'../../taq_plot/physical_shift_plot_{year}/'
+                     + f'{function_name}/')
             print('Folder to save data created')
 
         except FileExistsError:
@@ -124,14 +122,14 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(
-            '../../taq_plot/time_shift_plot_{3}/{0}/{0}_{3}{4}_{1}i_{2}j.png'
-            .format(function_name, ticker_i, ticker_j, year, month))
+            f'../../taq_plot/physical_shift_plot_{year}/{function_name}/'
+            + f'{function_name}_{year}{month}_{ticker_i}i_{ticker_j}j.png')
 
     else:
 
         figure.savefig(
-            '../../taq_plot/time_shift_plot_{2}/{0}/{0}_{2}{3}_{1}.png'
-            .format(function_name, ticker_i, year, month))
+            f'../../taq_plot/physical_shift_plot_{year}/{function_name}'
+            + f'_{year}{month}_{ticker_i}.png')
 
     print('Plot saved')
     print()
@@ -162,12 +160,12 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
     # Cross-response data
     if (ticker_i != ticker_j):
-        print('Processing data for the stock i ' + ticker_i + ' and stock j '
-              + ticker_j + ' the ' + year + '.' + month + '.' + day)
+        print(f'Processing data for the stock i {ticker_i} and stock j '
+              + f'{ticker_j} the {year}.{month}.{day}')
     # Self-response data
     else:
-        print('Processing data for the stock ' + ticker_i + ' the ' + year
-              + '.' + month + '.' + day)
+        print(f'Processing data for the stock {ticker_i} the '
+              + f'{year}.{month}.{day}')
 
     return None
 
@@ -195,12 +193,12 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 
     # Cross-response data
     if (ticker_i != ticker_j):
-        print('Processing plot for the stock i ' + ticker_i + ' and stock j '
-              + ticker_j + ' the ' + year + '.' + month + '.' + day)
+        print(f'Processing plot for the stock i {ticker_i} and stock j '
+              + f'{ticker_j} the {year}.{month}.{day}')
     # Self-response data
     else:
-        print('Processing plot for the stock ' + ticker_i + ' the ' + year
-              + '.' + month + '.' + day)
+        print(f'Processing plot for the stock {ticker_i} the '
+              + f'{year}.{month}.{day}')
 
     return None
 
@@ -215,10 +213,8 @@ def taq_start_folders(year):
     """
 
     try:
-        os.mkdir('../../taq_data/time_shift_data_{}'
-                 .format(year))
-        os.mkdir('../../taq_plot/time_shift_plot_{}'
-                 .format(year))
+        os.mkdir(f'../../taq_data/physical_shift_data_{year}')
+        os.mkdir(f'../../taq_plot/physical_shift_plot_{year}')
         print('Folder to save data created')
 
     except FileExistsError as e:
@@ -238,8 +234,8 @@ def taq_bussiness_days(year):
     :return: list.
     """
 
-    init_date = '01/01/{}'.format(year)
-    last_date = '12/31/{}'.format(year)
+    init_date = f'01/01/{year}'
+    last_date = f'12/31/{year}'
 
     # Use only the bussiness days
     dt = pd.date_range(start=init_date, end=last_date, freq='B')
