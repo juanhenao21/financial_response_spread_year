@@ -55,7 +55,7 @@ $ source env/bin/activate
 $ pip install -r requirements.txt
 ```
 
-### TAQ Responses Second
+### TAQ Responses Physical
 
 #### For the members of the research group Guhr
 
@@ -116,5 +116,5 @@ Give an example
 
 ## Acknowledgments
 
-* DAAD Research Grants - Doctoral Programmes in Germany
 * Research Group Guhr
+* DAAD Research Grants - Doctoral Programmes in Germany
