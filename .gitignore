@@ -146,3 +146,6 @@ paper/plot
 *.mtc1
 *.out
 *.synctex.gz
+*.brf
+*.fdb_latexmk
+*.fls
