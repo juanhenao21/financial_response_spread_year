@@ -229,6 +229,63 @@ def taq_start_folders(year):
 # -----------------------------------------------------------------------------
 
 
+def taq_initial_data():
+    """Takes the initial values for the analysis
+
+    :return: Tuple -- The function return a tuple with a string with the year
+     to be analized, a list with the name of the tickers and a list with the
+     :math:`\\tau` values.
+    """
+
+    print()
+    print('#######################')
+    print('Physical Shift Analysis')
+    print('#######################')
+    print('AG Guhr')
+    print('Faculty of Physics')
+    print('University of Duisburg-Essen')
+    print('Author: Juan Camilo Henao Londono')
+    print('More information in:')
+    print('  * https://juanhenao21.github.io/')
+    print('  * https://github.com/juanhenao21/response_functions_year')
+    print()
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
+
+    for ticker in tickers[:]:
+
+        print(f'Do you want to use the {ticker} ticker? (yes/no)')
+        res = input()
+
+        if (res == 'no'):
+            tickers.remove(ticker)
+
+    print()
+
+    taus = []
+    cond = True
+    while (cond):
+        print('Do you want to add a tau value? (yes/no)')
+        res = input()
+
+        if (res == "yes"):
+            print('Add the value')
+            taus.append(int(input()))
+        else:
+            cond = False
+
+
+    print()
+    print('Please enter the year to be analyzed (i.e. 2008): ')
+    year = input()
+    print()
+
+    print(taus)
+
+    return (year, tickers, taus)
+
+# -----------------------------------------------------------------------------
+
+
 def taq_bussiness_days(year):
     """Generates a list with the dates of the bussiness days in a year
 

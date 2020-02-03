@@ -1,14 +1,17 @@
 '''TAQ data main module.
 
-The functions in the module run the complete analysis and plot of the TAQ data.
+The functions in the module run the complete analysis and plot of the TAQ data
+for the physical shift between returns and trade signs. To run this module it
+is necessary to have the files of the returns and trade signs for physical time
+scale from the TAQ Responses Physical module.
 
 This script requires the following modules:
-    * itertools
+    * itertools.product
     * multiprocessing
     * pandas
-    * taq_data_analysis_time_shift
-    * taq_data_plot_time_shift
-    * taq_data_tools_time_shift
+    * taq_data_analysis_physical_shift
+    * taq_data_plot_physical_shift
+    * taq_data_tools_physical_shift
 
 The module contains the following functions:
     * taq_data_plot_generator - generates all the analysis and plots from the
@@ -21,17 +24,15 @@ The module contains the following functions:
 # -----------------------------------------------------------------------------
 # Modules
 
-from itertools import product
+from itertools import product as iprod
 import multiprocessing as mp
 import os
 import pandas as pd
 import pickle
 
-import taq_data_analysis_time_shift
-import taq_data_plot_time_shift
-import taq_data_tools_time_shift
-
-__tau__ = 1000
+import taq_data_analysis_physical_shift
+import taq_data_plot_physical_shift
+import taq_data_tools_physical_shift
 
 # -----------------------------------------------------------------------------
 
@@ -47,23 +48,34 @@ def taq_data_plot_generator(tickers, year, taus):
      a value.
     """
 
+
+    # Especific functions
+    # Self-response
+    for ticker in tickers:
+        for tau in taus:
+
+            taq_data_analysis_physical_shift \
+                .taq_self_response_year_physical_shift_data(ticker, year, tau)
+
+    ticker_prod = iprod(tickers, tickers)
+
+    # Cross-response
+    for ticks in ticker_prod:
+        for tau in taus:
+
+            taq_data_analysis_physical_shift \
+                .taq_cross_response_year_physical_shift_data(ticks[0],
+                                                             ticks[1], year,
+                                                             tau)
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
-        # Especific functions
-        pool.starmap(taq_data_analysis_time_shift
-                     .taq_self_response_year_time_shift_data,
-                     product(tickers, [year], taus))
-        pool.starmap(taq_data_analysis_time_shift
-                     .taq_cross_response_year_time_shift_data,
-                     product(tickers, tickers, [year], taus))
-
-        pool.starmap(taq_data_plot_time_shift
-                     .taq_self_response_year_avg_time_shift_plot,
-                     product(tickers, [year], [taus]))
-        pool.starmap(taq_data_plot_time_shift
-                     .taq_cross_response_year_avg_time_shift_plot,
-                     product(tickers, tickers, [year], [taus]))
+        # Plot
+        pool.starmap(taq_data_plot_physical_shift
+                     .taq_self_response_year_avg_physical_shift_plot,
+                     iprod(tickers, [year], [taus]))
+        pool.starmap(taq_data_plot_physical_shift
+                     .taq_cross_response_year_avg_physical_shift_plot,
+                     iprod(tickers, tickers, [year], [taus]))
 
     return None
 
@@ -79,14 +91,13 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
-    year = '2008'
-    taus = [1, 10, 100, 1000]
+    year, tickers, taus = taq_data_tools_physical_shift.taq_initial_data()
 
     # Basic folders
-    taq_data_tools_time_shift.taq_start_folders('2008')
+    # taq_data_tools_physical_shift.taq_start_folders('2008')
 
     # Run analysis
+    # Analysis and plot
     taq_data_plot_generator(tickers, year, taus)
 
     print('Ay vamos!!')
