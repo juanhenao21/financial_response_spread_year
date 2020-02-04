@@ -1,0 +1,47 @@
+\section{Introduction}
+
+The response function is used to study the mutual dependence between stocks. In
+\cite{Bouchaud_2004}, Bouchaud et al. use the response function
+
+\begin{equation}\label{eq:Bouchaud_2004}
+    R\left(l\right)=\left\langle \left(p_{n+l}-p_{n}\right) \cdot
+    \varepsilon_{n}\right\rangle
+\end{equation}
+
+\textcolor{red}{mirar sobre que hace el promedio}
+
+Where $\varepsilon_{n}$ is the sign of the $n^{th}$ trade and the price $p_n$ is defined as the
+mid-point just before the $n^{th}$ trade ($p_{n} \equiv m_{n^{-}}$). That means, the trade sign
+and the price have a shift of one second.
+The quantity $R\left(l\right)$ measures how much, on average, the price moves up (down) conditioned
+to a buy (sell) order at time zero, a time $l$ later.
+
+In a later work \cite{Wang_2016_cross}, S. Wang use the logarithmic return for stock $i$
+and time lag $\tau$, defined via the midpoint price $m_{i} \left( t \right)$. The cross-response
+function is then defined as
+
+\begin{equation}\label{eq:Wang_2016}
+    R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot\varepsilon_{j}
+    \left(t\right) \right\rangle _{t}
+\end{equation}
+
+Finally, in \cite{Wang_2018_b}, S. Wang et al. define the response function as
+
+\begin{equation}\label{eq:Wang_2018_b}
+    R_{ij}\left\langle \left(\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-\ln m_{i}^{\left(p\right)}
+    \left(t_{j}\right) \right)\cdot\varepsilon_{j}\left(t_{j}\right)\right\rangle _{t_{j}}
+\end{equation}
+
+For the price change of stock $i$ caused by a trade of stock $j$.
+
+Here, $m_{i}^{\left(p\right)}\left(t_{j}\right)$ is the midpoint price of stock $i$ previous to
+the trade of stock $j$ at its event time $t_j$ and $m_{i}^{\left(f\right)}\left(t_{j}\right)$ is
+the midpoint price of stock $i$ following that trade.
+
+The difference between the definition in \cite{Wang_2016_cross} and in \cite{Wang_2018_b}, is that
+\cite{Wang_2016_cross} measures how a buy or sell order at time $t$ influences on average the price
+at a later time $t + \tau$. The physical time scale was chosen since the trades in different stocks
+are not synchronous (TAQ data).
+In \cite{Wang_2018_b}, is used a response function on an event time scale (Totalview data), as the
+interest is to analyze the immediate responses. The time lag $\tau$ is restricted to one such that
+the price response quantifies the price impact of a single trade.
