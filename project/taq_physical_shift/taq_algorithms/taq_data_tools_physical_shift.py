@@ -238,9 +238,9 @@ def taq_initial_data():
     """
 
     print()
-    print('#######################')
-    print('Physical Shift Analysis')
-    print('#######################')
+    print('############################')
+    print('Physical Time Shift Analysis')
+    print('############################')
     print('AG Guhr')
     print('Faculty of Physics')
     print('University of Duisburg-Essen')
