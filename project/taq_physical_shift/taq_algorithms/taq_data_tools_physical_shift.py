@@ -279,8 +279,6 @@ def taq_initial_data():
     year = input()
     print()
 
-    print(taus)
-
     return (year, tickers, taus)
 
 # -----------------------------------------------------------------------------
