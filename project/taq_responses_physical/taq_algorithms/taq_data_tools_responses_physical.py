@@ -263,9 +263,9 @@ def taq_initial_data():
     """
 
     print()
-    print('###########################')
-    print('Response Functions Analysis')
-    print('###########################')
+    print('#########################################')
+    print('Response Functions Physical Time Analysis')
+    print('#########################################')
     print('AG Guhr')
     print('Faculty of Physics')
     print('University of Duisburg-Essen')
