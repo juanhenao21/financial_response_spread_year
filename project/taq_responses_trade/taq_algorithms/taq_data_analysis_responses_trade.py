@@ -31,7 +31,7 @@ The module contains the following functions:
 # ----------------------------------------------------------------------------
 # Modules
 
-from itertools import product as ipod
+from itertools import product as iprod
 import multiprocessing as mp
 import numpy as np
 import os
@@ -69,6 +69,8 @@ def taq_trade_signs_trade_data(ticker, date):
     year = date_sep[0]
     month = date_sep[1]
     day = date_sep[2]
+
+    function_name = taq_trade_signs_trade_data.__name__
 
     try:
         # Load data
@@ -110,7 +112,7 @@ def taq_trade_signs_trade_data(ticker, date):
         assert not np.sum(identified_trades == 0)
 
         # Saving data
-        taq_data_tools_responses_event_shift \
+        taq_data_tools_responses_trade \
             .taq_save_data(function_name, (time_t, ask_t, identified_trades),
                            ticker, ticker, year, month, day)
 
@@ -148,8 +150,8 @@ def taq_self_response_day_responses_trade_data(ticker, date):
         # Load data
         midpoint = pickle.load(open(
                 f'../../taq_data/responses_physical_data_{year}/taq'
-                + f'_midpoint_time_data/taq_midpoint_time_data_midpoint'
-                + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
+                + f'_midpoint_physical_data/taq_midpoint_physical_data'
+                + f'_midpoint_{year}{month}{day}_{ticker}.pickle', 'rb'))
         time_t, _, trade_sign = pickle.load(open(
             f'../../taq_data/responses_trade_data_{year}/taq_trade_signs_trade'
             + f'_data/taq_trade_signs_trade_data_{year}{month}{day}_{ticker}'
@@ -286,8 +288,8 @@ def taq_cross_response_day_responses_trade_data(ticker_i, ticker_j, date):
             # Load data
             midpoint_i = pickle.load(open(
                     f'../../taq_data/responses_physical_data_{year}/taq'
-                    + f'_midpoint_time_data/taq_midpoint_time_data_midpoint'
-                    + f'_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
+                    + f'_midpoint_physical_data/taq_midpoint_physical_data'
+                    + f'_midpoint_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
             time_t, _, trade_sign_j = pickle.load(open(
                     f'../../taq_data/responses_trade_data_{year}/taq_trade'
                     + f'_signs_trade_data/taq_trade_signs_trade_data'
