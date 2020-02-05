@@ -34,8 +34,6 @@ import taq_data_analysis_responses_physical
 import taq_data_plot_responses_physical
 import taq_data_tools_responses_physical
 
-__tau__ = 1000
-
 # -----------------------------------------------------------------------------
 
 

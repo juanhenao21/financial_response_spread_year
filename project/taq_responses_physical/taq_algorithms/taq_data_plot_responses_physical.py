@@ -33,8 +33,6 @@ import pickle
 
 import taq_data_tools_responses_physical
 
-__tau__ = 1000
-
 # ----------------------------------------------------------------------------
 
 
