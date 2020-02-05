@@ -287,8 +287,7 @@ def taq_cross_response_day_responses_trade_data(ticker_i, ticker_j, date):
             midpoint_i = pickle.load(open(
                     f'../../taq_data/responses_physical_data_{year}/taq'
                     + f'_midpoint_time_data/taq_midpoint_time_data_midpoint'
-                    + f'_{year}{month}{day}_{ticker_i}.pickle').split()),
-                    'rb'))
+                    + f'_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
             time_t, _, trade_sign_j = pickle.load(open(
                     f'../../taq_data/responses_trade_data_{year}/taq_trade'
                     + f'_signs_trade_data/taq_trade_signs_trade_data'

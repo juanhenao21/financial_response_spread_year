@@ -54,7 +54,7 @@ def taq_self_response_year_avg_responses_trade_plot(ticker, year):
                         f'../../taq_data/responses_trade_data_{year}/taq_self'
                         + f'_response_year_responses_trade_data/taq_self'
                         + f'_response_year_responses_trade_data_{year}'
-                        + f'_{ticker}.pickle'), 'rb'))
+                        + f'_{ticker}.pickle', 'rb'))
 
         figure = plt.figure(figsize=(16, 9))
         plt.semilogx(self_, linewidth=5, label='{}'.format(ticker))
@@ -117,7 +117,7 @@ def taq_cross_response_year_avg_responses_trade_plot(ticker_i, ticker_j, year):
                             + f'_{year}_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
             figure = plt.figure(figsize=(16, 9))
-            plt.semilogx(cross, linewidth=5, label=f'{ticker_i} - {ticker_j}'))
+            plt.semilogx(cross, linewidth=5, label=f'{ticker_i} - {ticker_j}')
             plt.legend(loc='best', fontsize=25)
             plt.title('Cross-response', fontsize=40)
             plt.xlabel(r'$\tau \, [s]$', fontsize=35)
