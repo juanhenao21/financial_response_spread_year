@@ -7,30 +7,42 @@ Sect. \ref{subsec:trade_time} we describe the trade time scale.
 \subsection{Data set}\label{subsec:data_set}
 
 In this study, we have analyzed trades and quotes (TAQ) data from the NASDAQ
-Stock Market in the year 2008.
+Stock Market. We selected NASDAQ because it is an electronic exchange where
+stocks are traded through an automated network of computers instead of a
+trading floor, which makes trading more efficient, fast and accurate.
+NASDAQ is the second largest stock exchange based on market capitalization in
+the world.
 
-This study is based on the data from NASDAQ stock market of the year 2008.
-NASDAQ is a purely electronic stock exchange, whose Trades and Quotes (TAQ)
-data set contains the time, price and volume. This information is not only
-given for the trades with all successive transactions, but also for the quotes
-with all successive best buy and sell limit orders. To analyze the response
-across different stocks, we select six companies (Apple inc., Microsoft Corp.,
-Goldman Sachs Group, JPMorgan Chase, Exxon Mobil Corp. and Chevron Corp.) from
-three different economic sectors (information technology, financials and
-energy) traded in the NASDAQ stock market in 2008.
+In the TAQ data set, there are two data files for each stock. One gives the
+list of all successive quotes. Thus, we have the best bid price, best ask price,
+available volume and the time stamp accurate to the second. The other data file
+is the list of all successive trades, with the traded price, traded volume and
+time stamp accurate to the second. Despite the one second accuracy of the time
+stamps, in both files more than one quote or trade may be recorded in the same
+second.
 
-The quote data and the trade data of each stock are in two separate files with
-a time-stamp accuracy of one second.  However, more than one quote or trade may
-be recorded in the same second.
-Due to the one-second accuracy of the time stamps, it is not possible to match
-each trade with the directly preceding quote. Hence, we cannot determine the
-trade sign by comparing the traded price and the preceding midpoint price
+Due to the the time stamp accuracy, it is not possible to match each trade with
+the directly preceding quote. Hence, we cannot determine the trade sign by
+comparing the traded price and the preceding midpoint price
 \cite{Wang_2016_cross}. In this case we need to do a preprocessing of the data
 to relate the midpoint prices with the trade signs in trade time scale and in
 physical time scale. Observe that we will not be discussing the returns, but
-the midpoint price. This because both are intrinsically related, as explain
+the midpoint price. This because both are intrinsically related, as explained
 before, and it is more intuitive to understand the changes in midpoint prices
 than in returns.
+
+To analyze the response functions across different liquid stocks, we select the
+six companies with the largest average market capitalization (AMC) (Alphabet
+Inc., Mastercard Inc., CME Group Inc., Goldman Sachs Group Inc., Transocean
+Ltd. and Apache Corp.) in three economic sectors (information technology,
+financials and energy) of the S\&P index in 2008.
+
+In order to avoid overnight effects and any artifact due to the opening and
+closing of the market, we systematically discarded the first ten and the last
+ten minutes of trading in a given day
+\cite{spread_changes_affect,Bouchaud_2004,Wang_2016_cross,large_prices_changes}.
+Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
+New York local time.
 
 \subsection{Trade time scale}\label{subsec:trade_time}
 
