@@ -163,7 +163,7 @@ def taq_data_extract(ticker, type, year):
 
 
 def taq_midpoint_trade_data(ticker, date):
-    """Computes the midpoint price of every event.
+    """Computes the midpoint price of every trade.
 
     Using the dayly TAQ data computes the midpoint price of every trade in a
     day. For further calculations, the function returns the values for the time
@@ -177,6 +177,7 @@ def taq_midpoint_trade_data(ticker, date):
     """
 
     date_sep = date.split('-')
+
     year = date_sep[0]
     month = date_sep[1]
     day = date_sep[2]
@@ -329,6 +330,7 @@ def taq_trade_signs_trade_data(ticker, date):
     """
 
     date_sep = date.split('-')
+
     year = date_sep[0]
     month = date_sep[1]
     day = date_sep[2]
