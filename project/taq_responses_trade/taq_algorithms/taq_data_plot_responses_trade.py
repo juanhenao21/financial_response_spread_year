@@ -29,8 +29,6 @@ import pickle
 
 import taq_data_tools_responses_trade
 
-__tau__ = 1000
-
 # ----------------------------------------------------------------------------
 
 
