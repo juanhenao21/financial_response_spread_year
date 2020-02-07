@@ -69,10 +69,11 @@ The midpoint price will not change if there is no activity in the market.
 Price changes are typically characterized as returns. If one denotes
 $S\left( t\right)$ the price of an asset at time $t$, the return
 $r\left(t\right)$, at time $t$ and time lag $\tau$ is simply the relative
-variation of the price from $t$ to $t + \tau$ \cite{subtle_nature,empirical_facts},
+variation of the price from $t$ to $t + \tau$
+\cite{subtle_nature,empirical_facts},
 
 \begin{equation}\label{eq:return_general}
-    r^{general} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
+    r^{g} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
     - S\left(t\right)}{S\left(t\right)}
 \end{equation}
 
@@ -80,7 +81,7 @@ It is also common to define the returns as
 \cite{empirical_properties,fluctions_market_friction,large_prices_changes,subtle_nature,theory_market_impact,empirical_facts,dissecting_cross,spread_changes_affect}
 
 \begin{equation}\label{eq:log_return_general}
-    r^{log}\left(t,\tau\right) = \ln S\left(t + \tau\right)
+    r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
     - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
 \end{equation}
 
@@ -146,8 +147,8 @@ order to avoid market making move because of an inconsiderable large order,
 they tend to split large orders into small ones \cite{empirical_facts}.
 
 The response function is used to study the mutual dependence between stocks. In
-\cite{Bouchaud_2004,r_walks_liquidity}, Bouchaud et al. use the response function that only
-depends on the time lag $\tau$
+\cite{Bouchaud_2004,r_walks_liquidity}, Bouchaud et al. use the response
+function that only depends on the time lag $\tau$
 
 \begin{equation}\label{eq:Bouchaud_2004}
     R\left(\tau\right)=\left\langle \left(S_{n+\tau}-S_{n}\right) \cdot
