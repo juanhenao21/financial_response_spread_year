@@ -36,9 +36,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.3535534"
-     inkscape:cx="-256.81227"
-     inkscape:cy="502.64983"
+     inkscape:zoom="1"
+     inkscape:cx="237.63549"
+     inkscape:cy="682.79883"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3807,6 +3807,26 @@
        inkscape:transform-center-y="-0.83333056"
        transform="matrix(0.26392216,0,0,0.30475105,309.48524,108.68081)"
        inkscape:export-filename="/scratch/jchenaol/response_functions_year/paper/response_functions_analysis_paper/figures/02_return_contributions.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#d4aa00;stroke-width:0.43691739"
+       id="rect12-9-0-1-6-1-4-9-3"
+       width="32.618759"
+       height="0.83600003"
+       x="85.096931"
+       y="192.98639"
+       inkscape:export-filename="/scratch/jchenaol/response_functions_year/paper/response_functions_analysis_paper/figures/02_relation_trades_quotes_time_scale.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:#d4aa00;stroke-width:0.43691739"
+       id="rect12-9-0-1-6-1-4-9-6"
+       width="32.618759"
+       height="0.83600003"
+       x="85.096924"
+       y="121.95731"
+       inkscape:export-filename="/scratch/jchenaol/response_functions_year/paper/response_functions_analysis_paper/figures/02_relation_trades_quotes_trade_scale.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
   </g>
