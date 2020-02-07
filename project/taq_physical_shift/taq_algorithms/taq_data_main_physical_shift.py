@@ -2,8 +2,8 @@
 
 The functions in the module run the complete analysis and plot of the TAQ data
 for the physical shift between returns and trade signs. To run this module it
-is necessary to have the files of the returns and trade signs for physical time
-scale from the TAQ Responses Physical module.
+is necessary to have the files of the midpoint prices and trade signs for
+physical time scale from the TAQ Responses Physical module.
 
 This script requires the following modules:
     * itertools.product

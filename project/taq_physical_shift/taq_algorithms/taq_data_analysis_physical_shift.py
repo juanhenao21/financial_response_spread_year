@@ -349,10 +349,7 @@ def main():
     :return: None.
     """
 
-    taus = [1, 10, 100, 1000]
-    year = '2008'
-
-    taq_cross_response_year_physical_shift_data('GS', 'JPM', '2008', 1)
+    pass
 
     return None
 
