@@ -249,6 +249,7 @@ def taq_initial_data():
     print('  * https://juanhenao21.github.io/')
     print('  * https://github.com/juanhenao21/response_functions_year')
     print()
+
     tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
 
     for ticker in tickers[:]:
@@ -272,7 +273,6 @@ def taq_initial_data():
             taus.append(int(input()))
         else:
             cond = False
-
 
     print()
     print('Please enter the year to be analyzed (i.e. 2008): ')

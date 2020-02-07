@@ -17,6 +17,7 @@ The module contains the following functions:
     * taq_function_header_print_data - prints info about the function running.
     * taq_function_header_print_plot - prints info about the plot.
     * taq_start_folders - creates folders to save data and plots.
+    * taq_initial_data - takes the initial values for the analysis.
     * taq_business_days - creates a list of week days for a year.
     * main - the main function of the script.
 
@@ -77,7 +78,6 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     # Self-response data
     else:
-
         pickle.dump(data, open(
             f'../../taq_data/responses_trade_data_{year}/{function_name}/'
             + f'{function_name}_{year}{month}{day}_{ticker_i}.pickle', 'wb'))
@@ -250,6 +250,7 @@ def taq_initial_data():
     print('  * https://juanhenao21.github.io/')
     print('  * https://github.com/juanhenao21/response_functions_year')
     print()
+
     tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
 
     for ticker in tickers[:]:
