@@ -6,7 +6,6 @@ taq_data_analysis_responses_trade module.
 This script requires the following modules:
     * matplotlib
     * numpy
-    * os
     * pickle
     * taq_data_tools_responses_trade
 
@@ -24,7 +23,6 @@ The module contains the following functions:
 # Modules
 from matplotlib import pyplot as plt
 import numpy as np
-import os
 import pickle
 
 import taq_data_tools_responses_trade
