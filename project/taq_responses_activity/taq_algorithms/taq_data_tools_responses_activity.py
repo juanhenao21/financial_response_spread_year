@@ -125,8 +125,8 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
     if (ticker_i != ticker_j):
 
         figure.savefig(f'../../taq_plot/responses_activity_plot_{year}/'
-            + f'{function_name}/{function_name}_{year}{month}_{ticker_i}i'
-            + f'_{ticker_j}j.png')
+                       + f'{function_name}/{function_name}_{year}{month}'
+                       + f'_{ticker_i}i_{ticker_j}j.png')
 
     # Self-response
     else:
