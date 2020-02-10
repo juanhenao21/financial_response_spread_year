@@ -130,7 +130,7 @@ def taq_cross_response_year_avg_responses_physical_shift_plot(ticker_i,
                 cross = pickle.load(open(
                     f'../../taq_data/responses_physical_shift_data_{year}/taq'
                     + f'_cross_response_year_responses_physical_shift_data'
-                    + f'_shift_{year}/taq_cross_response_year_responses'
+                    + f'_shift_{shift}/taq_cross_response_year_responses'
                     + f'_physical_shift_data_shift_{shift}_{year}_{ticker_i}i'
                     + f'_{ticker_j}j.pickle', 'rb'))
 
