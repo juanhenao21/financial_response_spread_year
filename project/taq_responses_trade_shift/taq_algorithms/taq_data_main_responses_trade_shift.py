@@ -3,12 +3,12 @@
 The functions in the module run the complete analysis and plot of the TAQ data.
 
 This script requires the following modules:
-    * itertools
+    * itertools.product
     * multiprocessing
     * pandas
-    * taq_data_analysis_responses_event_shift
-    * taq_data_plot_responses_event_shift
-    * taq_data_tools_responses_event_shift
+    * taq_data_analysis_responses_trade_shift
+    * taq_data_plot_responses_trade_shift
+    * taq_data_tools_responses_trade_shift
 
 The module contains the following functions:
     * taq_data_plot_generator - generates all the analysis and plots from the
@@ -21,17 +21,14 @@ The module contains the following functions:
 # -----------------------------------------------------------------------------
 # Modules
 
-from itertools import product
-import os
-import pandas as pd
+from itertools import product as iprod
 import multiprocessing as mp
+import pandas as pd
 import pickle
 
-import taq_data_analysis_responses_event_shift
-import taq_data_plot_responses_event_shift
-import taq_data_tools_responses_event_shift
-
-__tau__ = 10000
+import taq_data_analysis_responses_trade_shift
+import taq_data_plot_responses_trade_shift
+import taq_data_tools_responses_trade_shift
 
 # -----------------------------------------------------------------------------
 
@@ -47,29 +44,35 @@ def taq_data_plot_generator(tickers, year, shifts):
      a value.
     """
 
-    date_list = taq_data_tools_responses_event_shift.taq_bussiness_days(year)
+    date_list = taq_data_tools_responses_trade_shift.taq_bussiness_days(year)
+
+    # Especific functions
+    # Self-response
+    for ticker in tickers:
+        for shift in shifts:
+
+            taq_data_analysis_responses_trade_shift \
+                .taq_self_response_year_responses_trade_shift_data(ticker,
+                                                                   year, shift)
+
+    ticker_prod = iprod(tickers, tickers)
+
+    # Cross-response
+    for ticks in ticker_prod:
+        for shift in shifts:
+
+            taq_data_analysis_responses_trade_shift \
+                .taq_cross_response_year_responses_trade_shift_data(
+                    ticks[0], ticks[1], year, shift)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
-        # Basic functions
-        pool.starmap(taq_data_analysis_responses_event_shift
-                     .taq_trade_signs_responses_event_shift_data,
-                     product(tickers, date_list))
-
-        # Especific functions
-        pool.starmap(taq_data_analysis_responses_event_shift
-                     .taq_self_response_year_responses_event_shift_data,
-                     product(tickers, [year], shifts))
-        pool.starmap(taq_data_analysis_responses_event_shift
-                     .taq_cross_response_year_responses_event_shift_data,
-                     product(tickers, tickers, [year], shifts))
-
-        pool.starmap(taq_data_plot_responses_event_shift
-                     .taq_self_response_year_avg_responses_event_shift_plot,
+        # Plot
+        pool.starmap(taq_data_plot_responses_trade_shift
+                     .taq_self_response_year_avg_responses_trade_shift_plot,
                      product(tickers, [year], [shifts]))
-        pool.starmap(taq_data_plot_responses_event_shift
-                     .taq_cross_response_year_avg_responses_event_shift_plot,
+        pool.starmap(taq_data_plot_responses_trade_shift
+                     .taq_cross_response_year_avg_responses_trade_shift_plot,
                      product(tickers, tickers, [year], [shifts]))
 
     return None
@@ -86,14 +89,14 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
-    year = '2008'
-    shifts = [1, 5, 10, 50, 100, 500, 1000, 5000]
+    year, tickers, shifts = taq_data_tools_responses_trade_shift \
+        .taq_initial_data()
 
     # Basic folders
-    taq_data_tools_responses_event_shift.taq_start_folders('2008')
+    taq_data_tools_responses_trade_shift.taq_start_folders('2008')
 
     # Run analysis
+    # Analysis and plot
     taq_data_plot_generator(tickers, year, shifts)
 
     print('Ay vamos!!')
