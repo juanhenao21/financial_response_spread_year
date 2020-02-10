@@ -243,7 +243,7 @@ def taq_cross_response_day_trade_shift_data(ticker_i, ticker_j, date, tau):
             assert not np.sum(trade_sign_j == 0)
             assert not np.sum(midpoint_i == 0)
 
-            # Array of the average of each tau. 10^3 s used by Wang
+            # Array of the average of each tau. 10^3 s is used in the paper
             shift_val = range(- 10 * tau, 10 * tau, 1)
             cross_response_shift = np.zeros(len(shift_val))
             num = np.zeros(len(shift_val))
