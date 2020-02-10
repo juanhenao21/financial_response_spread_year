@@ -14,13 +14,13 @@ This script requires the following modules:
 The module contains the following functions:
     * taq_trade_signs_responses_physical_shift_data - computes the trade signs
       of every event.
-    * taq_self_response_day_physical_shift_data - computes the self response of
+    * taq_self_response_day_physical_shift_data - computes the self-response of
       a day.
-    * taq_self_response_year_physical_shift_data - computes the self response
+    * taq_self_response_year_physical_shift_data - computes the self-response
       of a year.
-    * taq_cross_response_day_physical_shift_data - computes the cross response
+    * taq_cross_response_day_physical_shift_data - computes the cross-response
       of a day.
-    * taq_cross_response_year_physical_shift_data - computes the cross response
+    * taq_cross_response_year_physical_shift_data - computes the cross-response
       of a year.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
