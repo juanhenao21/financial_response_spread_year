@@ -7,7 +7,6 @@ This script requires the following modules:
     * itertools.product
     * multiprocessing
     * numpy
-    * os
     * pandas
     * pickle
     * taq_data_tools_physical_shift
@@ -31,7 +30,6 @@ The module contains the following functions:
 from itertools import product as iprod
 import multiprocessing as mp
 import numpy as np
-import os
 import pandas as pd
 import pickle
 
@@ -60,11 +58,6 @@ def taq_self_response_day_physical_shift_data(ticker, date, tau):
     year = date_sep[0]
     month = date_sep[1]
     day = date_sep[2]
-
-    function_name = taq_self_response_day_physical_shift_data.__name__
-    taq_data_tools_physical_shift \
-        .taq_function_header_print_data(function_name, ticker, ticker, year,
-                                        month, day)
 
     try:
         # Load data
