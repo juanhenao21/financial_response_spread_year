@@ -4,20 +4,23 @@ The functions in the module analyze the data from the NASDAQ stock market,
 computing the self- and cross-response functions.
 
 This script requires the following modules:
+    * itertools.product
+    * multiprocessing
     * numpy
     * pandas
-    * taq_data_tools_responses_time_shift
+    * pickle
+    * taq_data_tools_responses_physical_shift
 
 The module contains the following functions:
-    * taq_trade_signs_responses_time_shift_data - computes the trade signs of
-      every event.
-    * taq_self_response_day_time_shift_data - computes the self response of a
-      day.
-    * taq_self_response_year_time_shift_data - computes the self response of
-      a year.
-    * taq_cross_response_day_time_shift_data - computes the cross response of
+    * taq_trade_signs_responses_physical_shift_data - computes the trade signs
+      of every event.
+    * taq_self_response_day_physical_shift_data - computes the self response of
       a day.
-    * taq_cross_response_year_time_shift_data - computes the cross response
+    * taq_self_response_year_physical_shift_data - computes the self response
+      of a year.
+    * taq_cross_response_day_physical_shift_data - computes the cross response
+      of a day.
+    * taq_cross_response_year_physical_shift_data - computes the cross response
       of a year.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -26,23 +29,24 @@ The module contains the following functions:
 # ----------------------------------------------------------------------------
 # Modules
 
+from itertools import product as iprod
+import multiprocessing as mp
 import numpy as np
-import os
 import pandas as pd
 import pickle
 
-import taq_data_tools_responses_time_shift
+import taq_data_tools_responses_physical_shift
 
-__tau__ = 10000
+__tau__ = 1000
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_day_responses_time_shift_data(ticker, date, shift):
-    """Computes the self response of a day.
+def taq_self_response_day_responses_physical_shift_data(ticker, date, shift):
+    """Computes the self-response of a day.
 
     Using the midpoint price and trade signs of a ticker computes the self-
-    response during different time shifts for a day. There is a constant
+    response during different physical shifts for a day. There is a constant
     *shift* that most be set in the parameters.
 
     :param ticker: string of the abbreviation of the stock to be analized
@@ -59,25 +63,18 @@ def taq_self_response_day_responses_time_shift_data(ticker, date, shift):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_self_response_day_responses_time_shift_data.__name__
-    taq_data_tools_responses_time_shift \
-        .taq_function_header_print_data(function_name, ticker, ticker, year,
-                                        month, day)
-
     try:
         # Load data
-        midpoint = pickle.load(open(''.join((
-                '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
-                + '_time_data/taq_midpoint_time_data_midpoint_{1}'
-                + '{2}{3}_{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
-        _, _, trade_sign = pickle.load(open("".join((
-                '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
-                + '_time_data/taq_trade_signs_time_data_{1}{2}{3}_'
-                + '{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
+        midpoint = pickle.load(open(
+                f'../../taq_data/responses_physical_data_{year}/taq_midpoint'
+                + f'_physical_data/taq_midpoint_physical_data_midpoint'
+                + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
+        _, _, trade_sign = pickle.load(open(
+                f'../../taq_data/responses_physical_data_{year}/taq_trade'
+                + f'_signs_physical_data/taq_trade_signs_physical_data'
+                + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
 
-        # As the data is loaded from the article reproduction module results,
+        # As the data is loaded from the responses physical module results,
         # the data have a shift of 1 second. To correct this I changed both
         # data to have the same time [34801, 56999]
         midpoint = midpoint[1:]
@@ -85,12 +82,11 @@ def taq_self_response_day_responses_time_shift_data(ticker, date, shift):
 
         assert len(midpoint) == len(trade_sign)
 
-        # Array of the average of each tau. 10^3 s used by Wang
+        # Array of the average of each tau. 10^3 s is used in the paper
         self_response_tau = np.zeros(__tau__)
         num = np.zeros(__tau__)
 
         # Calculating the midpoint price return and the self response function
-
         # Depending on the tau value
         for tau_idx in range(__tau__):
 
@@ -124,15 +120,16 @@ def taq_self_response_day_responses_time_shift_data(ticker, date, shift):
         print('No data')
         print(e)
         print()
-        return None
+        zeros = np.zeros(__tau__)
+        return (zeros, zeros)
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_responses_time_shift_data(ticker, year, shift):
-    """Computes the self response of a year.
+def taq_self_response_year_responses_physical_shift_data(ticker, year, shift):
+    """Computes the self-response of a year.
 
-    Using the taq_self_response_day_responses_time_shift_data function
+    Using the taq_self_response_day_responses_physical_shift_data function
     computes the self-response function for a year.
 
     :param ticker: string of the abbreviation of stock to be analized
@@ -142,47 +139,46 @@ def taq_self_response_year_responses_time_shift_data(ticker, year, shift):
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
-    function_name = taq_self_response_year_responses_time_shift_data.__name__
-    taq_data_tools_responses_time_shift \
+    function_name = taq_self_response_year_responses_physical_shift_data \
+        .__name__
+    taq_data_tools_responses_physical_shift \
         .taq_function_header_print_data(function_name, ticker, ticker, year,
                                         '', '')
 
-    dates = taq_data_tools_responses_time_shift.taq_bussiness_days(year)
+    dates = taq_data_tools_responses_physical_shift.taq_bussiness_days(year)
 
-    self_ = np.zeros(__tau__)
-    num_s = []
+    self_values = []
+    args_prod = iprod([ticker], dates, [shift])
 
-    for date in dates:
+    # Parallel computation of the self-responses. Every result is appended to
+    # a list
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        self_values.append(pool.starmap(
+            taq_self_response_day_responses_physical_shift_data, args_prod))
 
-        try:
-            (data,
-             avg_num) = taq_self_response_day_responses_time_shift_data(
-                 ticker, date, shift)
-            self_ += data
-            num_s.append(avg_num)
+    # To obtain the total self-response, I sum over all the self-response
+    # values and all the amount of trades (averaging values)
+    self_v_final = np.sum(self_values[0], axis=0)
 
-        except TypeError:
-            pass
-
-    num_s = np.asarray(num_s)
-    num_s_t = np.sum(num_s, axis=0)
+    self_response_val = self_v_final[0] / self_v_final[1]
+    self_response_avg = self_v_final[1]
 
     # Saving data
-    taq_data_tools_responses_time_shift \
-        .taq_save_data('{}_shift_{}'.format(function_name, shift),
-                       self_ / num_s_t, ticker, ticker, year, '', '')
+    taq_data_tools_responses_physical_shift \
+        .taq_save_data(f'{function_name}_shift_{shift}', self_response_val,
+                       ticker, ticker, year, '', '')
 
-    return (self_ / num_s_t, num_s_t)
+    return (self_response_val, self_response_avg)
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
-                                                     shift):
-    """Computes the cross response of a day.
+def taq_cross_response_day_responses_physical_shift_data(ticker_i, ticker_j,
+                                                         date, shift):
+    """Computes the cross-response of a day.
 
     Using the midpoint price of ticker i and trade signs of ticker j computes
-    the cross-response during different time shifts for a day. There is a
+    the cross-response during different physical shifts for a day. There is a
     constant *shift* that most be set in the parameters.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -208,25 +204,17 @@ def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
 
     else:
         try:
-            function_name = taq_cross_response_day_responses_time_shift_data. \
-                            __name__
-            taq_data_tools_responses_time_shift \
-                .taq_function_header_print_data(function_name, ticker_i,
-                                                ticker_j, year, month, day)
-
             # Load data
-            midpoint_i = pickle.load(open(''.join((
-                    '../../taq_data/article_reproduction_data_{1}/taq'
-                    + '_midpoint_time_data/taq_midpoint_time_data'
-                    + '_midpoint_{1}{2}{3}_{0}.pickle').split())
-                    .format(ticker_i, year, month, day), 'rb'))
-            _, _, trade_sign_j = pickle.load(open("".join((
-                    '../../taq_data/article_reproduction_data_2008/taq_trade_'
-                    + 'signs_time_data/taq_trade_signs_time_data'
-                    + '_{1}{2}{3}_{0}.pickle').split())
-                    .format(ticker_j, year, month, day), 'rb'))
+            midpoint_i = pickle.load(open(
+                    f'../../taq_data/responses_physical_data_{year}/taq'
+                    + f'_midpoint_physical_data/taq_midpoint_physical_data'
+                    + f'_midpoint_{year}{month}{day}_{ticker_i}.pickle', 'rb'))
+            _, _, trade_sign_j = pickle.load(open(
+                    f'../../taq_data/responses_physical_data_{year}/taq_trade_'
+                    + f'signs_physical_data/taq_trade_signs_physical_data'
+                    + f'_{year}{month}{day}_{ticker_j}.pickle', 'rb'))
 
-            # As the data is loaded from the article reproduction module
+            # As the data is loaded from the responses physical module
             # results, the data have a shift of 1 second. To correct this
             # I changed both data to have the same time [34801, 56999]
             midpoint_i = midpoint_i[1:]
@@ -274,16 +262,17 @@ def taq_cross_response_day_responses_time_shift_data(ticker_i, ticker_j, date,
             print('No data')
             print(e)
             print()
-            return None
+            zeros = np.zeros(__tau__)
+            return (zeros, zeros)
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_responses_time_shift_data(ticker_i, ticker_j,
-                                                      year, shift):
-    """Computes the cross response of a year.
+def taq_cross_response_year_responses_physical_shift_data(ticker_i, ticker_j,
+                                                          year, shift):
+    """Computes the cross-response of a year.
 
-    Using the taq_cross_response_day_responses_time_shift_data function
+    Using the taq_cross_response_day_responses_physical_shift_data function
     computes the cross-response function for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -301,38 +290,39 @@ def taq_cross_response_year_responses_time_shift_data(ticker_i, ticker_j,
         return None
 
     else:
-        function_name = taq_cross_response_year_responses_time_shift_data\
+        function_name = taq_cross_response_year_responses_physical_shift_data\
                         .__name__
-        taq_data_tools_responses_time_shift \
+        taq_data_tools_responses_physical_shift \
             .taq_function_header_print_data(function_name, ticker_i, ticker_j,
                                             year, '', '')
 
-        dates = taq_data_tools_responses_time_shift.taq_bussiness_days(year)
+        dates = taq_data_tools_responses_physical_shift \
+            .taq_bussiness_days(year)
 
-        cross = np.zeros(__tau__)
-        num_c = []
+        cross_values = []
+        args_prod = iprod([ticker_i], [ticker_j], dates, [shift])
 
-        for date in dates:
+        # Parallel computation of the cross-responses. Every result is appended
+        # to a list
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            cross_values.append(pool.starmap(
+                taq_cross_response_day_responses_physical_shift_data,
+                args_prod))
 
-            try:
-                (data,
-                 avg_num) = taq_cross_response_day_responses_time_shift_data(
-                     ticker_i, ticker_j, date, shift)
-                cross += data
-                num_c.append(avg_num)
+        # To obtain the total cross-response, I sum over all the cross-response
+        # values and all the amount of trades (averaging values)
+        cross_v_final = np.sum(cross_values[0], axis=0)
 
-            except TypeError:
-                pass
-
-        num_c = np.asarray(num_c)
-        num_c_t = np.sum(num_c, axis=0)
+        cross_response_val = cross_v_final[0] / cross_v_final[1]
+        cross_response_avg = cross_v_final[1]
 
         # Saving data
-        taq_data_tools_responses_time_shift \
-            .taq_save_data('{}_shift_{}'.format(function_name, shift),
-                           cross / num_c_t, ticker_i, ticker_j, year, '', '')
+        taq_data_tools_responses_physical_shift \
+            .taq_save_data(f'{function_name}_shift_{shift}',
+                           cross_response_val, ticker_i, ticker_j, year, '',
+                           '')
 
-        return (cross / num_c_t, num_c_t)
+        return (cross_response_val, cross_response_avg)
 
 # ----------------------------------------------------------------------------
 
@@ -344,23 +334,8 @@ def main():
 
     :return: None.
     """
-    import multiprocessing as mp
-    from itertools import product
 
-    year = '2008'
-    shifts = [1, 10, 100, 1000]
-
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-
-        # Especific functions
-        pool.starmap(taq_self_response_year_responses_time_shift_data,
-                     product(['GS'], [year], shifts))
-        pool.starmap(taq_self_response_year_responses_time_shift_data,
-                     product(['GS'], [year], shifts))
-        pool.starmap(taq_cross_response_year_responses_time_shift_data,
-                     product(['GS'], ['JPM'], [year], shifts))
-        pool.starmap(taq_cross_response_year_responses_time_shift_data,
-                     product(['JPM'], ['GS'], [year], shifts))
+    pass
 
     return None
 
