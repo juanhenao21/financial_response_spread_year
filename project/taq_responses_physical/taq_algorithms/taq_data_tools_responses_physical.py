@@ -136,7 +136,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
         figure.savefig(f'../../taq_plot/responses_physical_plot_{year}/'
                        + f'{function_name}/{function_name}_{year}{month}'
-                       + f'_{ticker_i}i.png')
+                       + f'_{ticker_i}.png')
 
     print('Plot saved')
     print()
