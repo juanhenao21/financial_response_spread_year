@@ -7,7 +7,7 @@ This script requires the following modules:
     * matplotlib
     * numpy
     * pickle
-    * taq_data_tools_event_shift
+    * taq_data_tools_response_physical_shift
 
 The module contains the following functions:
     * taq_self_response_year_avg_responses_physical_shift_plot - plots the
