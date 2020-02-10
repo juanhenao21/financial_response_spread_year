@@ -23,7 +23,6 @@ The module contains the following functions:
 
 from itertools import product as iprod
 import multiprocessing as mp
-import os
 import pandas as pd
 import pickle
 
