@@ -4,18 +4,21 @@ The functions in the module analyze the data from the NASDAQ stock market,
 computing the self- and cross-response functions.
 
 This script requires the following modules:
+    * itertools.product
+    * multiprocessing
     * numpy
     * pandas
-    * taq_data_tools_responses_time_short_long
+    * pickle
+    * taq_data_tools_responses_physical_short_long
 
 The module contains the following functions:
-    * taq_self_response_day_time_short_long_tau_data - computes the self
+    * taq_self_response_day_physical_short_long_tau_data - computes the self
       response of a day.
-    * taq_self_response_year_time_short_long_tau_data - computes the self
+    * taq_self_response_year_physical_short_long_tau_data - computes the self
       response of a year.
-    * taq_cross_response_day_time_short_long_tau_data - computes the cross
+    * taq_cross_response_day_physical_short_long_tau_data - computes the cross
       response of a day.
-    * taq_cross_response_year_time_short_long_tau_data - computes the cross
+    * taq_cross_response_year_physical_short_long_tau_data - computes the cross
       response of a year.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -24,18 +27,19 @@ The module contains the following functions:
 # ----------------------------------------------------------------------------
 # Modules
 
+from itertools import product as iprod
+import multiprocessing as mp
 import numpy as np
-import os
 import pandas as pd
 import pickle
 
-import taq_data_tools_responses_time_short_long
+import taq_data_tools_responses_physical_short_long
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
-    """Computes the self response of a day.
+def taq_self_response_day_responses_physical_short_long_data(ticker, date, tau, tau_p):
+    """Computes the self-response of a day.
 
     Using the midpoint price and trade signs of a ticker computes the self-
     response for a day. There is a constant :math:`\\tau` and :math:`\\tau'`
@@ -56,29 +60,22 @@ def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
     month = date_sep[1]
     day = date_sep[2]
 
-    function_name = taq_self_response_day_time_short_long_tau_data.__name__
-    taq_data_tools_responses_time_short_long \
-        .taq_function_header_print_data(function_name, ticker, ticker, year,
-                                        month, day)
-
     try:
         # Load data
-        midpoint = pickle.load(open(''.join((
-                '../../taq_data/article_reproduction_data_{1}/taq_midpoint'
-                + '_time_data/taq_midpoint_time_data_midpoint_{1}'
-                + '{2}{3}_{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
-        _, _, trade_sign = pickle.load(open("".join((
-                '../../taq_data/article_reproduction_data_{1}/taq_trade_signs'
-                + '_time_data/taq_trade_signs_time_data_{1}{2}{3}_'
-                + '{0}.pickle').split())
-                .format(ticker, year, month, day), 'rb'))
+        midpoint = pickle.load(open(
+                f'../../taq_data/responses_physical_data_{year}/taq_midpoint'
+                + f'_physical_data/taq_midpoint_physical_data_midpoint'
+                + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
+        _, _, trade_sign = pickle.load(open(
+                f'../../taq_data/responses_physical_data_{year}/taq_trade'
+                + f'_signs_physical_data/taq_trade_signs_physical_data'
+                + f'_{year}{month}{day}_{ticker}.pickle', 'rb'))
 
-        # As the data is loaded from the article reproduction module results,
+        # As the data is loaded from the responses physical module results,
         # the data have a shift of 1 second.
         assert len(midpoint) == len(trade_sign)
 
-        # Array of the average of each tau
+        # Array for the average of each tau
         self_short = np.zeros(tau)
         self_long = np.zeros(tau)
         self_response = np.zeros(tau)
@@ -89,7 +86,6 @@ def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
         num_shuffle = np.zeros(tau)
 
         # Short response after tau_p
-
         # Calculating the midpoint price return and the self response function
         trade_sign_tau_short = trade_sign[:-tau_p - 1]
         trade_sign_no_0_len_short = len(trade_sign_tau_short
@@ -200,15 +196,16 @@ def taq_self_response_day_time_short_long_tau_data(ticker, date, tau, tau_p):
         print('No data')
         print(e)
         print()
-        return None
+        zeros = np.zeros(tau)
+        return (zeros, zeros)
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_time_short_long_tau_data(ticker, year, tau, tau_p):
-    """Computes the self response of a year.
+def taq_self_response_year_responses_physical_short_long_data(ticker, year, tau, tau_p):
+    """Computes the self-response of a year.
 
-    Using the taq_self_response_day_responses_time_short_long_data function
+    Using the taq_self_response_day_responses_physical_short_long_data function
     computes the self-response function for a year.
 
     :param ticker: string of the abbreviation of stock to be analized
@@ -220,72 +217,57 @@ def taq_self_response_year_time_short_long_tau_data(ticker, year, tau, tau_p):
      a value.
     """
 
-    function_name = taq_self_response_year_time_short_long_tau_data.__name__
-    taq_data_tools_responses_time_short_long \
-        .taq_function_header_print_data(function_name, ticker, ticker,
-                                        year, '', '')
+    function_name = taq_self_response_year_responses_physical_short_long_data \
+        .__name__
+    taq_data_tools_responses_physical_short_long \
+        .taq_function_header_print_data(function_name, ticker, ticker, year,
+                                        '', '')
 
-    dates = taq_data_tools_responses_time_short_long.taq_bussiness_days(year)
+    dates = taq_data_tools_responses_physical_short_long \
+        .taq_bussiness_days(year)
 
-    # Arrays to store the results
-    self_short = np.zeros(tau)
-    self_long = np.zeros(tau)
-    self_response = np.zeros(tau)
-    self_shuffle = np.zeros(tau)
-    num_short = []
-    num_long = []
-    num_response = []
-    num_shuffle = []
+    self_values = []
+    args_prod = iprod([ticker], dates, [tau], [tau_p])
 
-    for date in dates:
+    # Parallel computation of the self-responses. Every result is appended to
+    # a list
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        self_values.append(pool.starmap(
+            taq_self_response_day_responses_physical_short_long_data,
+            args_prod))
 
-        try:
-            (data_short, avg_num_short,
-             data_long, avg_num_long,
-             data_resp, avg_num_resp,
-             data_shuffle, avg_num_shuffle) = \
-                 taq_self_response_day_time_short_long_tau_data(ticker, date,
-                                                                tau, tau_p)
+    # To obtain the total self-response, I sum over all the self-response
+    # values and all the amount of trades (averaging values)
+    self_v_final = np.sum(self_values[0], axis=0)
+    print(len(self_v_final[0]))
 
-            self_short += data_short
-            self_long += data_long
-            self_response += data_resp
-            self_shuffle += data_shuffle
-            num_short.append(avg_num_short)
-            num_long.append(avg_num_long)
-            num_response.append(avg_num_resp)
-            num_shuffle.append(avg_num_shuffle)
-
-        except TypeError:
-            pass
-
-    num_short = np.asarray(num_short)
-    num_long = np.asarray(num_long)
-    num_response = np.asarray(num_response)
-    num_shuffle = np.asarray(num_shuffle)
-    num_short_t = np.sum(num_short, axis=0)
-    num_long_t = np.sum(num_long, axis=0)
-    num_response_t = np.sum(num_response, axis=0)
-    num_shuffle_t = np.sum(num_shuffle, axis=0)
+    self_response_short_val = self_v_final[0] / self_v_final[1]
+    self_response_short_avg = self_v_final[1]
+    self_response_long_val = self_v_final[2] / self_v_final[3]
+    self_response_long_avg = self_v_final[3]
+    self_response_resp_val = self_v_final[4] / self_v_final[5]
+    self_response_resp_avg = self_v_final[5]
+    self_response_shuffle_val = self_v_final[6] / self_v_final[7]
+    self_response_shuffle_avg = self_v_final[7]
 
     # Saving data
-    taq_data_tools_responses_time_short_long \
-        .taq_save_data('{}_tau_{}_tau_p_{}'.format(function_name, tau, tau_p),
-                       (self_short / num_short_t,
-                        self_long / num_long_t,
-                        self_response / num_response_t,
-                        self_shuffle / num_shuffle_t),
+    taq_data_tools_responses_physical_short_long \
+        .taq_save_data(f'{function_name}_tau_{tau}_tau_p_{tau_p}',
+                       (self_response_short_val,
+                        self_response_long_val,
+                        self_response_resp_val,
+                        self_response_shuffle_val),
                        ticker, ticker, year, '', '')
 
-    return (self_short / num_short_t,
-            self_long / num_long_t,
-            self_response / num_response_t,
-            self_shuffle / num_shuffle_t)
+    return (self_response_short_val,
+            self_response_long_val,
+            self_response_resp_val,
+            self_response_shuffle_val)
 
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_day_time_short_long_tau_data(ticker_i, ticker_j, date,
+def taq_cross_response_day_physical_short_long_tau_data(ticker_i, ticker_j, date,
                                                     tau, tau_p):
     """Computes the cross response of a day.
 
@@ -317,21 +299,21 @@ def taq_cross_response_day_time_short_long_tau_data(ticker_i, ticker_j, date,
 
     else:
         try:
-            function_name = taq_cross_response_day_time_short_long_tau_data. \
+            function_name = taq_cross_response_day_physical_short_long_tau_data. \
                             __name__
-            taq_data_tools_responses_time_short_long \
+            taq_data_tools_responses_physical_short_long \
                 .taq_function_header_print_data(function_name, ticker_i,
                                                 ticker_j, year, month, day)
 
             # Load data
             midpoint_i = pickle.load(open(''.join((
                     '../../taq_data/article_reproduction_data_{1}/taq'
-                    + '_midpoint_time_data/taq_midpoint_time_data'
+                    + '_midpoint_physical_data/taq_midpoint_physical_data'
                     + '_midpoint_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_i, year, month, day), 'rb'))
             _, _, trade_sign_j = pickle.load(open("".join((
                     '../../taq_data/article_reproduction_data_2008/taq_trade_'
-                    + 'signs_time_data/taq_trade_signs_time_data'
+                    + 'signs_physical_data/taq_trade_signs_physical_data'
                     + '_{1}{2}{3}_{0}.pickle').split())
                     .format(ticker_j, year, month, day), 'rb'))
 
@@ -466,11 +448,11 @@ def taq_cross_response_day_time_short_long_tau_data(ticker_i, ticker_j, date,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_time_short_long_tau_data(ticker_i, ticker_j, year,
+def taq_cross_response_year_physical_short_long_tau_data(ticker_i, ticker_j, year,
                                                      tau, tau_p):
     """Computes the cross response of a year.
 
-    Using the taq_cross_response_day_responses_time_trades_minutes_data
+    Using the taq_cross_response_day_responses_physical_trades_minutes_data
     function computes the cross-response function for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -490,13 +472,13 @@ def taq_cross_response_year_time_short_long_tau_data(ticker_i, ticker_j, year,
         return None
 
     else:
-        function_name = taq_cross_response_year_time_short_long_tau_data. \
+        function_name = taq_cross_response_year_physical_short_long_tau_data. \
             __name__
-        taq_data_tools_responses_time_short_long \
+        taq_data_tools_responses_physical_short_long \
             .taq_function_header_print_data(function_name, ticker_i, ticker_j,
                                             year, '', '')
 
-        dates = taq_data_tools_responses_time_short_long \
+        dates = taq_data_tools_responses_physical_short_long \
             .taq_bussiness_days(year)
 
         # Arrays to store the results
@@ -516,7 +498,7 @@ def taq_cross_response_year_time_short_long_tau_data(ticker_i, ticker_j, year,
                  data_long, avg_num_long,
                  data_resp, avg_num_resp,
                  data_shuffle, avg_num_shuffle) = \
-                    taq_cross_response_day_time_short_long_tau_data(ticker_i,
+                    taq_cross_response_day_physical_short_long_tau_data(ticker_i,
                                                                     ticker_j,
                                                                     date, tau,
                                                                     tau_p)
@@ -543,7 +525,7 @@ def taq_cross_response_year_time_short_long_tau_data(ticker_i, ticker_j, year,
         num_shuffle_t = np.sum(num_shuffle, axis=0)
 
         # Saving data
-        taq_data_tools_responses_time_short_long \
+        taq_data_tools_responses_physical_short_long \
             .taq_save_data('{}_tau_{}_tau_p_{}'
                            .format(function_name, tau, tau_p),
                            (cross_short / num_short_t,
@@ -568,8 +550,10 @@ def main():
     :return: None.
     """
 
-    pass
-
+    taq_self_response_year_responses_physical_short_long_data('AAPL', '2008', 1000, 50)
+    # (x,y,z,w, k, l, m, n) =taq_self_response_day_responses_physical_short_long_data('AAPL', '2008-01-02', 1000, 50)
+    # print(x)
+    # print(y)
     return None
 
 # ----------------------------------------------------------------------------
