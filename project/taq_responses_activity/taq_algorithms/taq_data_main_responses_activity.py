@@ -3,12 +3,13 @@
 The functions in the module run the complete analysis and plot of the TAQ data.
 
 This script requires the following modules:
-    * itertools
+    * itertools.product
     * multiprocessing
     * pandas
-    * taq_data_analysis_responses_time_activity
-    * taq_data_plot_responses_time_activity
-    * taq_data_tools_responses_time_activity
+    * pickle
+    * taq_data_analysis_responses_activity
+    * taq_data_plot_responses_activity
+    * taq_data_tools_responses_activity
 
 The module contains the following functions:
     * taq_data_plot_generator - generates all the analysis and plots from the
@@ -21,18 +22,14 @@ The module contains the following functions:
 # -----------------------------------------------------------------------------
 # Modules
 
-from itertools import product
+from itertools import product as iprod
 import multiprocessing as mp
-import os
 import pandas as pd
 import pickle
-import subprocess
 
-import taq_data_analysis_responses_time_activity
-import taq_data_plot_responses_time_activity
-import taq_data_tools_responses_time_activity
-
-__tau__ = 1000
+import taq_data_analysis_responses_activity
+import taq_data_plot_responses_activity
+import taq_data_tools_responses_activity
 
 # -----------------------------------------------------------------------------
 
@@ -47,28 +44,40 @@ def taq_data_plot_generator(tickers, year):
      a value.
     """
 
-    date_list = taq_data_tools_responses_time_activity.taq_bussiness_days(year)
+    date_list = taq_data_tools_responses_activity.taq_bussiness_days(year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        pool.starmap(taq_data_analysis_responses_time_activity
-                     .taq_trades_count_responses_time_activity_data,
+        pool.starmap(taq_data_analysis_responses_activity
+                     .taq_trades_count_responses_activity_data,
                      product(tickers, date_list))
 
-        # Especific functions
-        pool.starmap(taq_data_analysis_responses_time_activity.
-                     taq_self_response_year_responses_time_activity_data,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_analysis_responses_time_activity.
-                     taq_cross_response_year_responses_time_activity_data,
-                     product(tickers, tickers, [year]))
+    # Especific functions
+    # Self-response
+    for ticker in tickers:
 
-        pool.starmap(taq_data_plot_responses_time_activity
+        taq_data_analysis_responses_activity \
+            .taq_self_response_year_responses_activity_data(ticker, year)
+
+    ticker_prod = iprod(tickers, tickers)
+
+    # Cross-response
+    for ticks in ticker_prod:
+
+        taq_data_analysis_responses_activity \
+            .taq_cross_response_year_responses_activity_data(ticks[0],
+                                                             ticks[1], [year])
+
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+
+        # Plot
+        pool.starmap(taq_data_plot_responses_activity
                      .taq_self_response_year_avg_plot,
                      product(tickers, [year]))
-        pool.starmap(taq_data_plot_responses_time_activity
+        pool.starmap(taq_data_plot_responses_activity
                      .taq_cross_response_year_avg_plot,
                      product(tickers, tickers, [year]))
 
@@ -86,13 +95,13 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'MSFT', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
-    year = '2008'
+    year, tickers = taq_data_tools_responses_activity.taq_initial_data()
 
     # Basic folders
-    taq_data_tools_responses_time_activity.taq_start_folders(year)
+    taq_data_tools_responses_activity.taq_start_folders(year)
 
     # Run analysis
+    # Analysis and plot
     taq_data_plot_generator(tickers, year)
 
     print('Ay vamos!!')
