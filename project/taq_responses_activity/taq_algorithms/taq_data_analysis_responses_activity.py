@@ -27,7 +27,7 @@ The module contains the following functions:
 # ----------------------------------------------------------------------------
 # Modules
 
-from itertools imp product as iprod
+from itertools import product as iprod
 import multiprocessing as mp
 import numpy as np
 import pandas as pd
