@@ -6,6 +6,7 @@ the TAQ data.
 This script requires the following modules:
     * itertools.product
     * multiprocessing
+    * os
     * pandas
     * taq_data_analysis_responses_physical
     * taq_data_plot_responses_physical
