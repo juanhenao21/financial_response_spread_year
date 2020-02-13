@@ -168,7 +168,7 @@ def taq_self_response_year_trade_shift_data(ticker, year, tau):
     # a list
     with mp.Pool(processes=mp.cpu_count()) as pool:
         self_values.append(pool.starmap(
-            taq_self_response_day_physical_shift_data, args_prod))
+            taq_self_response_day_trade_shift_data, args_prod))
 
     # To obtain the total self-response, I sum over all the self-response
     # values and all the amount of trades (averaging values)
@@ -178,7 +178,7 @@ def taq_self_response_year_trade_shift_data(ticker, year, tau):
     self_response_avg = self_v_final[1]
 
     # Saving data
-    taq_data_tools_physical_shift \
+    taq_data_tools_trade_shift \
         .taq_save_data(f'{function_name}_tau_{tau}', self_response_val, ticker,
                        ticker, year, '', '')
 
@@ -339,7 +339,7 @@ def taq_cross_response_year_trade_shift_data(ticker_i, ticker_j, year, tau):
         # to a list
         with mp.Pool(processes=mp.cpu_count()) as pool:
             cross_values.append(pool.starmap(
-                taq_cross_response_day_physical_shift_data, args_prod))
+                taq_cross_response_day_trade_shift_data, args_prod))
 
         # To obtain the total cross-response, I sum over all the cross-response
         # values and all the amount of trades (averaging values)
@@ -349,7 +349,7 @@ def taq_cross_response_year_trade_shift_data(ticker_i, ticker_j, year, tau):
         cross_response_avg = cross_v_final[1]
 
         # Saving data
-        taq_data_tools_physical_shift \
+        taq_data_tools_trade_shift \
             .taq_save_data(f'{function_name}_tau_{tau}', cross_response_val,
                            ticker_i, ticker_j, year, '', '')
 

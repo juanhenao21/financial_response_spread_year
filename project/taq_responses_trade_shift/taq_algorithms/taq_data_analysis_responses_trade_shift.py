@@ -79,8 +79,8 @@ def taq_self_response_day_responses_trade_shift_data(ticker, date, shift):
         midpoint_i = midpoint_i[1:]
         time_m = np.array(range(34801, 57000))
 
-        assert not np.sum(trade_sign == 0)
-        assert not np.sum(midpoint == 0)
+        assert not np.sum(trade_sign_i == 0)
+        assert not np.sum(midpoint_i == 0)
 
         # Array of the average of each tau. 10^3 s is used in the paper
         self_response_tau = np.zeros(__tau__)
