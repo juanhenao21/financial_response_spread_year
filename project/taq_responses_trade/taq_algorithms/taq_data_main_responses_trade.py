@@ -46,12 +46,12 @@ def taq_data_plot_generator(tickers, year):
     date_list = taq_data_tools_responses_trade.taq_bussiness_days(year)
 
     # Parallel computing
-    with mp.Pool(processes=mp.cpu_count()) as pool:
+    # with mp.Pool(processes=mp.cpu_count()) as pool:
 
         # Basic functions
-        pool.starmap(taq_data_analysis_responses_trade
-                     .taq_trade_signs_trade_data,
-                     iprod(tickers, date_list))
+        # pool.starmap(taq_data_analysis_responses_trade
+        #              .taq_trade_signs_trade_data,
+        #              iprod(tickers, date_list))
 
     # Especific functions
     # Self-response
@@ -60,7 +60,11 @@ def taq_data_plot_generator(tickers, year):
         taq_data_analysis_responses_trade \
             .taq_self_response_year_responses_trade_data(ticker, year)
 
-    ticker_prod = iprod(tickers, tickers)
+    # ticker_prod = iprod(tickers, tickers)
+    ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
+                   ('GS', 'JPM'), ('JPM', 'GS'),
+                   ('CVX', 'XOM'), ('XOM', 'CVX')]
+
 
     # Cross-response
     for ticks in ticker_prod:
@@ -94,7 +98,9 @@ def main():
     """
 
     # Tickers and days to analyze
-    year, tickers = taq_data_tools_responses_trade.taq_initial_data()
+    # year, tickers = taq_data_tools_responses_trade.taq_initial_data()
+    year = '2008'
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM']
 
     # Basic folders
     # taq_data_tools_responses_trade.taq_start_folders(year)
