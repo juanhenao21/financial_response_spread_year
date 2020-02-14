@@ -1,19 +1,18 @@
 '''TAQ data main module.
 
-The functions in the module run the complete analysis and plot of the TAQ data.
+The functions in the module run the complete analysis of the TAQ data.
 
 This script requires the following modules:
     * itertools.product
     * multiprocessing
     * pandas
     * pickle
-    * taq_data_analysis_responses_activity
-    * taq_data_plot_responses_activity
-    * taq_data_tools_responses_activity
+    * taq_data_analysis_statistics
+    * taq_data_plot_statistics
+    * taq_data_tools_statistics
 
 The module contains the following functions:
-    * taq_data_plot_generator - generates all the analysis and plots from the
-      TAQ data.
+    * taq_data_generator - generates all the analysis of the TAQ data.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
@@ -25,17 +24,16 @@ The module contains the following functions:
 from itertools import product as iprod
 import multiprocessing as mp
 import pandas as pd
-import pickle
 
-import taq_data_analysis_responses_activity
-import taq_data_plot_responses_activity
-import taq_data_tools_responses_activity
+import taq_data_analysis_statistics
+# import taq_data_plot_statistics
+import taq_data_tools_statistics
 
 # -----------------------------------------------------------------------------
 
 
-def taq_data_plot_generator(tickers, year):
-    """Generates all the analysis and plots from the TAQ data.
+def taq_data_generator(tickers, year):
+    """Generates all the analysis of the TAQ data.
 
     :param tickers: list of the string abbreviation of the stocks to be
      analized (i.e. ['AAPL', 'MSFT']).
@@ -44,48 +42,9 @@ def taq_data_plot_generator(tickers, year):
      a value.
     """
 
-    date_list = taq_data_tools_responses_activity.taq_bussiness_days(year)
-
-    # Parallel computing
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-
-        # Basic functions
-        pool.starmap(taq_data_analysis_responses_activity
-                     .taq_trades_count_responses_activity_data,
-                     product(tickers, date_list))
-
-    # Especific functions
-    # Self-response
-    for ticker in tickers:
-
-        taq_data_analysis_responses_activity \
-            .taq_self_response_year_responses_activity_data(ticker, year)
-
-    # ticker_prod = iprod(tickers, tickers)
-    ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
-                   ('GS', 'JPM'), ('JPM', 'GS'),
-                   ('CVX', 'XOM'), ('XOM', 'CVX'),
-                   ('GOOG', 'MA'), ('MA', 'GOOG'),
-                   ('CME', 'GS'), ('GS', 'CME'),
-                   ('RIG', 'APA'), ('APA', 'RIG')]
-
-    # Cross-response
-    for ticks in ticker_prod:
-
-        taq_data_analysis_responses_activity \
-            .taq_cross_response_year_responses_activity_data(ticks[0],
-                                                             ticks[1], [year])
-
-    # Parallel computing
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-
-        # Plot
-        pool.starmap(taq_data_plot_responses_activity
-                     .taq_self_response_year_avg_plot,
-                     product(tickers, [year]))
-        pool.starmap(taq_data_plot_responses_activity
-                     .taq_cross_response_year_avg_plot,
-                     product(tickers, tickers, [year]))
+    # Statistics of the quotes and trades
+    taq_data_analysis_statistics \
+        .taq_quotes_trades_year_statistics_data(tickers, year)
 
     return None
 
@@ -101,17 +60,17 @@ def main():
     """
 
     # Tickers and days to analyze
-    # year, tickers = taq_data_tools_responses_activity.taq_initial_data()
+    # year, tickers = taq_data_tools_statistics.taq_initial_data()
     year = '2008'
     tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
                'GOOG', 'MA', 'CME', 'RIG', 'APA']
 
     # Basic folders
-    # taq_data_tools_responses_activity.taq_start_folders(year)
+    # taq_data_tools_statistics.taq_start_folders(year)
 
     # Run analysis
     # Analysis and plot
-    taq_data_plot_generator(tickers, year)
+    taq_data_generator(tickers, year)
 
     print('Ay vamos!!')
 
