@@ -79,7 +79,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
     else:
 
         pickle.dump(data, open(f'../../taq_data/responses_activity_data_{year}'
-                    + f'/{function_name}/{function_name}_{year}{month}{year}'
+                    + f'/{function_name}/{function_name}_{year}{month}{day}'
                     + f'_{ticker_i}.pickle', 'wb'))
 
     print('Data Saved')
