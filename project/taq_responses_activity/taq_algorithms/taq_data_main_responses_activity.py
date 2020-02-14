@@ -52,7 +52,7 @@ def taq_data_plot_generator(tickers, year):
         # Basic functions
         pool.starmap(taq_data_analysis_responses_activity
                      .taq_trades_count_responses_activity_data,
-                     product(tickers, date_list))
+                     iprod(tickers, date_list))
 
     # Especific functions
     # Self-response
@@ -74,7 +74,7 @@ def taq_data_plot_generator(tickers, year):
 
         taq_data_analysis_responses_activity \
             .taq_cross_response_year_responses_activity_data(ticks[0],
-                                                             ticks[1], [year])
+                                                             ticks[1], year)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
@@ -82,10 +82,10 @@ def taq_data_plot_generator(tickers, year):
         # Plot
         pool.starmap(taq_data_plot_responses_activity
                      .taq_self_response_year_avg_plot,
-                     product(tickers, [year]))
+                     iprod(tickers, [year]))
         pool.starmap(taq_data_plot_responses_activity
                      .taq_cross_response_year_avg_plot,
-                     product(tickers, tickers, [year]))
+                     iprod(tickers, tickers, [year]))
 
     return None
 
