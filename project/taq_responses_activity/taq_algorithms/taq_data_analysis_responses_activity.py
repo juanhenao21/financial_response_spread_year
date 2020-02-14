@@ -20,6 +20,7 @@ The module contains the following functions:
      response of a day.
     * taq_cross_response_year_responses_activity_data_data - computes the
      cross-response of a year.
+    * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
