@@ -56,7 +56,13 @@ def taq_data_plot_generator(tickers, year, taus):
             taq_data_analysis_physical_shift \
                 .taq_self_response_year_physical_shift_data(ticker, year, tau)
 
-    ticker_prod = iprod(tickers, tickers)
+    # ticker_prod = iprod(tickers, tickers)
+    ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
+                   ('GS', 'JPM'), ('JPM', 'GS'),
+                   ('CVX', 'XOM'), ('XOM', 'CVX'),
+                   ('GOOG', 'MA'), ('MA', 'GOOG'),
+                   ('CME', 'GS'), ('GS', 'CME'),
+                   ('RIG', 'APA'), ('APA', 'RIG')]
 
     # Cross-response
     for ticks in ticker_prod:
@@ -90,7 +96,11 @@ def main():
     """
 
     # Tickers and days to analyze
-    year, tickers, taus = taq_data_tools_physical_shift.taq_initial_data()
+    # year, tickers, taus = taq_data_tools_physical_shift.taq_initial_data()
+    year = '2008'
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
+               'GOOG', 'MA', 'CME', 'RIG', 'APA']
+    taus = [1, 10, 100, 1000]
 
     # Basic folders
     # taq_data_tools_physical_shift.taq_start_folders('2008')
