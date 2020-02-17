@@ -63,8 +63,10 @@ def taq_data_plot_generator(tickers, year):
     # ticker_prod = iprod(tickers, tickers)
     ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
                    ('GS', 'JPM'), ('JPM', 'GS'),
-                   ('CVX', 'XOM'), ('XOM', 'CVX')]
-
+                   ('CVX', 'XOM'), ('XOM', 'CVX'),
+                   ('GOOG', 'MA'), ('MA', 'GOOG'),
+                   ('CME', 'GS'), ('GS', 'CME'),
+                   ('RIG', 'APA'), ('APA', 'RIG')]
 
     # Cross-response
     for ticks in ticker_prod:
@@ -100,7 +102,8 @@ def main():
     # Tickers and days to analyze
     # year, tickers = taq_data_tools_responses_trade.taq_initial_data()
     year = '2008'
-    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM']
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
+               'GOOG', 'MA', 'CME', 'RIG', 'APA']
 
     # Basic folders
     # taq_data_tools_responses_trade.taq_start_folders(year)
