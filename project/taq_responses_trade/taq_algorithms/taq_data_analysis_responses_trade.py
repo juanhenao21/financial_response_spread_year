@@ -305,7 +305,7 @@ def taq_cross_response_day_responses_trade_data(ticker_i, ticker_j, date):
             # their time is [34200, 57599], I set the time equal to the
             # midpoint price
             time_m = np.array(range(34800, 57000))
-            cond_1 = (time_t >= 34800) * (time_t < 57000)
+            cond_1 = (time_t >= 34801) * (time_t < 57001)
             time_t = time_t[cond_1]
             trade_sign_j = trade_sign[cond_1]
 
