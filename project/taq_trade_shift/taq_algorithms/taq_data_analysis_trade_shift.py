@@ -70,12 +70,14 @@ def taq_self_response_day_trade_shift_data(ticker, date, tau):
             + f'_data/taq_trade_signs_trade_data_{year}{month}{day}_{ticker}'
             + f'.pickle', 'rb'))
 
-        # As the data is loaded from the responses physical module results,
-        # the data have a shift of 1 second. To correct this I changed the
-        # midpoint [34801, 56999]. As the association of the values depends
-        # only on the midpoint, the trade signs remain the same
-        midpoint = midpoint[1:]
-        time_m = np.array(range(34801, 57000))
+        # As the midpoint price values are loaded from the responses physical
+        # module and their time is [34800, 56999] and the trade signs values
+        # are loaded from the responses trade module and their time is
+        # [34200, 57599], I set the time equal to the midpoint price
+        time_m = np.array(range(34800, 57000))
+        cond_1 = (time_t >= 34800) * (time_t < 57000)
+        time_t = time_t[cond_1]
+        trade_sign = trade_sign[cond_1]
 
         assert not np.sum(trade_sign == 0)
         assert not np.sum(midpoint == 0)
@@ -232,13 +234,15 @@ def taq_cross_response_day_trade_shift_data(ticker_i, ticker_j, date, tau):
                     + f'_signs_trade_data/taq_trade_signs_trade_data'
                     + f'_{year}{month}{day}_{ticker_j}.pickle', 'rb'))
 
-            # As the data is loaded from the responses physical module
-            # results, the data have a shift of 1 second. To correct this
-            # I changed the midpoint [34801, 56999]. As the association of the
-            # values depends only on the midpoint, the trade signs remain the
-            # same
-            midpoint_i = midpoint_i[1:]
-            time_m = np.array(range(34801, 57000))
+            # As the midpoint price values are loaded from the responses
+            # physical # module and their time is [34800, 56999] and the trade
+            # signs values # are loaded from the responses trade module and
+            # their time is [34200, 57599], I set the time equal to the
+            # midpoint price
+            time_m = np.array(range(34800, 57000))
+            cond_1 = (time_t >= 34800) * (time_t < 57000)
+            time_t = time_t[cond_1]
+            trade_sign_j = trade_sign[cond_1]
 
             assert not np.sum(trade_sign_j == 0)
             assert not np.sum(midpoint_i == 0)

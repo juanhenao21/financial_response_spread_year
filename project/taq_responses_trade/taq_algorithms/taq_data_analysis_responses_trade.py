@@ -157,10 +157,14 @@ def taq_self_response_day_responses_trade_data(ticker, date):
             + f'_data/taq_trade_signs_trade_data_{year}{month}{day}_{ticker}'
             + f'.pickle', 'rb'))
 
-        # As the trade signs data only reach the second 56999, the midpoint
-        # data must be cut to 56998 seconds
-        time_m = np.array(range(34800, 56999))
-        midpoint = midpoint[:-1]
+        # As the midpoint price values are loaded from the responses physical
+        # module and their time is [34800, 56999] and the trade signs values
+        # are loaded from the responses trade module and their time is
+        # [34200, 57599], I set the time with reference to the midpoint price
+        time_m = np.array(range(34800, 57000))
+        cond_1 = (time_t >= 34801) * (time_t < 57001)
+        time_t = time_t[cond_1]
+        trade_sign = trade_sign[cond_1]
 
         # Array of the average of each tau. 10^3 s is used in the paper
         self_response_tau = np.zeros(__tau__)
@@ -295,10 +299,15 @@ def taq_cross_response_day_responses_trade_data(ticker_i, ticker_j, date):
                     + f'_signs_trade_data/taq_trade_signs_trade_data'
                     + f'_{year}{month}{day}_{ticker_j}.pickle', 'rb'))
 
-            # As the trade signs data only reach the second 56999, the midpoint
-            # data must be cut to 56998 seconds
-            time_m = np.array(range(34800, 56999))
-            midpoint_i = midpoint_i[:-1]
+            # As the midpoint price values are loaded from the responses
+            # physical # module and their time is [34800, 56999] and the trade
+            # signs values # are loaded from the responses trade module and
+            # their time is [34200, 57599], I set the time equal to the
+            # midpoint price
+            time_m = np.array(range(34800, 57000))
+            cond_1 = (time_t >= 34800) * (time_t < 57000)
+            time_t = time_t[cond_1]
+            trade_sign_j = trade_sign[cond_1]
 
             # Array of the average of each tau. 10^3 s is used in the paper
             cross_response_tau = np.zeros(__tau__)
