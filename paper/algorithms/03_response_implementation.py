@@ -19,20 +19,176 @@ The module contains the following functions:
 
 # ----------------------------------------------------------------------------
 # Modules
-from matplotlib import pyplot as plt
-import multiprocessing as mp
-import numpy as np
-import os
-import pickle
-from itertools import product
 
-__tau__ = 1000
+from matplotlib import pyplot as plt
+import pickle
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_plot(ticker, year):
-    """Plots the self-response average for a year.
+def taq_trade_scale_response_year_avg_plot(tickers, sectors, year):
+    """Plots the avg self- and cross-response for a year in trade time scale.
+
+    :param tickers: list of strings of the abbreviation of the stocks to be
+     analized (i.e. 'AAPL').
+    :param sectors: list of lists with the strings of the abbreviation of the
+     stocks to be analized and the year
+     (i.e. [['AAPL', 'MSFT', '2008], ['CVX', 'XOM', '2008]]).
+    :param year: string of the year to be analized (i.e. '2008')
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
+    """
+
+    try:
+        figure = plt.figure(figsize=(16, 6))
+        ax1 = plt.subplot(1, 2, 1)
+        ax2 = plt.subplot(1, 2, 2)
+
+        for ticker_i in tickers:
+
+            # Load data
+            self_resp = pickle.load(open(
+                f'../../project/taq_data/responses_trade_data_{year}/taq_self'
+                + f'_response_year_responses_trade_data/taq_self_response'
+                + f'_year_responses_trade_data_{year}_{ticker_i}.pickle','rb'))
+
+            ax1.semilogx(self_resp, linewidth=5, label=f'{ticker_i}')
+
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=15)
+        ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax1.set_ylabel(r'$R^{t}_{ii}(\tau)$', fontsize=15)
+        ax1.tick_params(axis='x', labelsize=10)
+        ax1.tick_params(axis='y', labelsize=10)
+        ax1.set_xlim(1, 1000)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(10)
+        ax1.grid(True)
+
+        for sector in sectors:
+
+            # Load data
+            cross_resp = pickle.load(open(''.join((
+                f'../../project/taq_data/responses_trade_data_{year}/taq_cross'
+                + f'_response_year_responses_trade_data/taq_cross_response'
+                + f'_year_responses_trade_data_{year}_{sector[0]}i_{sector[1]}'
+                + f'j.pickle').split()), 'rb'))
+
+            ax2.semilogx(cross_resp, linewidth=5,
+                         label=f'{sector[0]} - {sector[1]}')
+
+        ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=15)
+        ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax2.set_ylabel(r'$R^{t}_{ij}(\tau)$', fontsize=15)
+        ax2.tick_params(axis='x', labelsize=10)
+        ax2.tick_params(axis='y', labelsize=10)
+        ax2.set_xlim(1, 1000)
+        # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(10)
+        ax2.grid(True)
+
+        plt.tight_layout()
+
+        # Save Plot
+        figure.savefig(f'../plot/03_responses_trade_scale_{year}.png')
+
+        return None
+
+    except FileNotFoundError as e:
+        print('No data')
+        print(e)
+        return None
+
+# ----------------------------------------------------------------------------
+
+
+def taq_physical_scale_response_year_avg_plot(tickers, sectors, year):
+    """Plots the avg self- and cross-response for a year in physical time
+       scale.
+
+    :param tickers: list of strings of the abbreviation of the stocks to be
+     analized (i.e. 'AAPL').
+    :param sectors: list of lists with the strings of the abbreviation of the
+     stocks to be analized and the year
+     (i.e. [['AAPL', 'MSFT', '2008], ['CVX', 'XOM', '2008]]).
+    :return: None -- The function saves the plot in a file and does not return
+     a value.
+    """
+
+    try:
+        figure = plt.figure(figsize=(16, 6))
+        ax1 = plt.subplot(1, 2, 1)
+        ax2 = plt.subplot(1, 2, 2)
+
+        for ticker_i in tickers:
+
+            # Load data
+            self_resp = pickle.load(open(
+                        f'../../project/taq_data/responses_physical_data'
+                        + f'_{year}/taq_self_response_year_responses_physical'
+                        + f'_data/taq_self_response_year_responses_physical'
+                        + f'_data_{year}_{ticker_i}.pickle', 'rb'))
+
+            ax1.semilogx(self_resp, linewidth=5, label=f'{ticker_i}')
+
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=15)
+        ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax1.set_ylabel(r'$R^{p}_{ii}(\tau)$', fontsize=15)
+        ax1.tick_params(axis='x', labelsize=10)
+        ax1.tick_params(axis='y', labelsize=10)
+        ax1.set_xlim(1, 1000)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(10)
+        ax1.grid(True)
+
+        for sector in sectors:
+
+            # Load data
+            cross_resp = pickle.load(open(
+                        f'../../project/taq_data/responses_physical_data'
+                        + f'_{year}/taq_cross_response_year_responses'
+                        + f'_physical_data/taq_cross_response_year'
+                        + f'_responses_physical_data_{year}_{sector[0]}i'
+                        + f'_{sector[1]}j.pickle', 'rb'))
+
+            ax2.semilogx(cross_resp, linewidth=5, label='{} - {}'
+                         .format(sector[0], sector[1]))
+
+        ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=15)
+        ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax2.set_ylabel(r'$R^{p}_{ij}(\tau)$', fontsize=15)
+        ax2.tick_params(axis='x', labelsize=10)
+        ax2.tick_params(axis='y', labelsize=10)
+        ax2.set_xlim(1, 1000)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(10)
+        ax2.grid(True)
+
+        plt.tight_layout()
+
+        # Save plot
+        figure.savefig(f'../plot/03_responses_physical_scale_{year}.png')
+
+        return None
+
+    except FileNotFoundError as e:
+        print('No data')
+        print(e)
+        return None
+
+# ----------------------------------------------------------------------------
+
+
+
+def taq_response_year_avg_comparison_plot(ticker_i, ticker_j, year):
+    """Plots the comparison of self-response for different time scales.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -42,46 +198,84 @@ def taq_self_response_year_avg_plot(ticker, year):
     """
 
     try:
-        function_name = taq_self_response_year_avg_plot.__name__
+        figure = plt.figure(figsize=(16, 6))
+        ax1 = plt.subplot(1, 2, 1)
+        ax2 = plt.subplot(1, 2, 2)
+
 
         # Load data
-        self_time = pickle.load(open(''.join((
-                        f'../../project/taq_data/article_reproduction_data'
-                        + f'_{year}/taq_self_response_year_data/taq_self'
-                        + f'_response_year_data_{year}_{ticker}.pickle')
-                        .split()), 'rb'))
-        self_event = pickle.load(open(''.join((
-                        f'../../project/taq_data/responses_event_data_{year}/'
-                        + f'taq_self_response_year_responses_event_data/taq'
-                        + f'_self_response_year_responses_event_data_{year}'
-                        + f'_{ticker}.pickle').split()), 'rb'))
-        self_activity = pickle.load(open(''.join((
-                        f'../../project/taq_data/responses_time_activity_data'
-                        + f'_{year}/taq_self_response_year_responses_time'
-                        + f'_activity_data/taq_self_response_year_responses'
-                        + f'_time_activity_data_{year}_{ticker}.pickle')
-                        .split()), 'rb'))
+        self_physical = pickle.load(open(
+                        f'../../project/taq_data/responses_physical_data'
+                        + f'_{year}/taq_self_response_year_responses_physical'
+                        + f'_data/taq_self_response_year_responses_physical'
+                        + f'_data_{year}_{ticker_i}.pickle', 'rb'))
+        self_trade = pickle.load(open(
+                        f'../../project/taq_data/responses_trade_data_{year}/'
+                        + f'taq_self_response_year_responses_trade_data/taq'
+                        + f'_self_response_year_responses_trade_data_{year}'
+                        + f'_{ticker_i}.pickle', 'rb'))
+        self_activity = pickle.load(open(
+                        f'../../project/taq_data/responses_activity_data'
+                        + f'_{year}/taq_self_response_year_responses_activity'
+                        + f'_data/taq_self_response_year_responses_activity'
+                        + f'_data_{year}_{ticker_i}.pickle', 'rb'))
 
-        figure = plt.figure(figsize=(16, 9))
-        ax = figure.add_subplot(111)
-        plt.semilogx(self_time, linewidth=5, label=f'Time')
-        plt.semilogx(self_event, linewidth=5, label=f'Event')
-        plt.semilogx(self_activity, linewidth=5, label=f'Activity')
-        plt.legend(loc='best', fontsize=35)
-        # plt.title(f'Self-response {ticker}', fontsize=40)
-        plt.xlabel(r'$\tau \, [s]$', fontsize=40)
-        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=40)
-        plt.xticks(fontsize=35)
-        plt.yticks(fontsize=35)
-        plt.xlim(1, 1000)
+        ax1.semilogx(self_physical, linewidth=5, label=r'$R_{ij}^{p}(\tau)$')
+        ax1.semilogx(self_trade, linewidth=5, label=r'$R_{ij}^{t}(\tau)$')
+        ax1.semilogx(self_activity, linewidth=5, label=r'$R_{ij}^{a}(\tau)$')
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=15)
+        ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax1.set_ylabel(r'$R_{ii}(\tau)$ %s' %(ticker_i), fontsize=15)
+        ax1.tick_params(axis='x', labelsize=10)
+        ax1.tick_params(axis='y', labelsize=10)
+        ax1.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        ax.yaxis.offsetText.set_fontsize(35)
-        plt.grid(True)
+        ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax1.yaxis.offsetText.set_fontsize(10)
+        ax1.grid(True)
+
+        # Load data
+        cross_physical = pickle.load(open(
+                        f'../../project/taq_data/responses_physical_data'
+                        + f'_{year}/taq_cross_response_year_responses'
+                        + f'_physical_data/taq_cross_response_year'
+                        + f'_responses_physical_data_{year}_{ticker_i}i'
+                        + f'_{ticker_j}j.pickle', 'rb'))
+        cross_trade = pickle.load(open(
+                        f'../../project/taq_data/responses_trade_data'
+                        + f'_{year}/taq_cross_response_year_responses'
+                        + f'_trade_data/taq_cross_response_year_responses'
+                        + f'_trade_data_{year}_{ticker_i}i_{ticker_j}j'
+                        + f'.pickle', 'rb'))
+        cross_activity = pickle.load(open(
+                        f'../../project/taq_data/responses_activity_data'
+                        + f'_{year}/taq_cross_response_year_responses'
+                        + f'_activity_data/taq_cross_response_year'
+                        + f'_responses_activity_data_{year}_{ticker_i}i'
+                        + f'_{ticker_j}j.pickle', 'rb'))
+
+        ax2.semilogx(cross_physical, linewidth=5, label=r'$R_{ij}^{p}(\tau)$')
+        ax2.semilogx(cross_trade, linewidth=5, label=r'$R_{ij}^{t}(\tau)$')
+        ax2.semilogx(cross_activity, linewidth=5, label=r'$R_{ij}^{a}(\tau)$')
+        ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=15)
+        ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax2.set_ylabel(r'$R_{ij}(\tau)$ %s - %s' %(ticker_i, ticker_j),
+                       fontsize=15)
+        ax2.tick_params(axis='x', labelsize=10)
+        ax2.tick_params(axis='y', labelsize=10)
+        ax2.set_xlim(1, 1000)
+        # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax2.yaxis.offsetText.set_fontsize(10)
+        ax2.grid(True)
+
         plt.tight_layout()
 
         # Plotting
-        plt.savefig(f'../plot/03_self_response_implementation_{year}.png')
+        plt.savefig(f'../plot/03_response_comparison_{year}_{ticker_i}i'
+                    + f'_{ticker_j}j.png')
 
         return None
 
@@ -90,78 +284,6 @@ def taq_self_response_year_avg_plot(ticker, year):
         print(e)
         print()
         return None
-
-# ----------------------------------------------------------------------------
-
-
-def taq_cross_response_year_avg_plot(ticker_i, ticker_j, year):
-    """Plots the cross-response average for a year.
-
-    :param ticker_i: string of the abbreviation of the stock to be analized
-     (i.e. 'AAPL')
-    :param ticker_j: string of the abbreviation of the stock to be analized
-     (i.e. 'AAPL')
-    :param year: string of the year to be analized (i.e '2008')
-    :return: None -- The function saves the plot in a file and does not return
-     a value.
-    """
-
-    if (ticker_i == ticker_j):
-
-        # Self-response
-        return None
-
-    else:
-        try:
-            function_name = taq_cross_response_year_avg_plot.__name__
-
-            cross_time = pickle.load(open(''.join((
-                            f'../../project/taq_data/article_reproduction_data'
-                            + f'_{year}/taq_cross_response_year_data/taq_cross'
-                            + f'_response_year_data_{year}_{ticker_i}i'
-                            + f'_{ticker_j}j.pickle').split()), 'rb'))
-            cross_event = pickle.load(open(''.join((
-                            f'../../project/taq_data/responses_event_data'
-                            + f'_{year}/taq_cross_response_year_responses'
-                            + f'_event_data/taq_cross_response_year_responses'
-                            + f'_event_data_{year}_{ticker_i}i_{ticker_j}j'
-                            + f'.pickle').split()), 'rb'))
-            cross_activity = pickle.load(open(''.join((
-                            f'../../project/taq_data/responses_time_activity'
-                            + f'_data_{year}/taq_cross_response_year_responses'
-                            + f'_time_activity_data/taq_cross_response_year'
-                            + f'_responses_time_activity_data_{year}'
-                            + f'_{ticker_i}i_{ticker_j}j.pickle').split()),
-                            'rb'))
-
-            figure = plt.figure(figsize=(16, 9))
-            ax = figure.add_subplot(111)
-            plt.semilogx(cross_time, linewidth=5, label='Time')
-            plt.semilogx(cross_event, linewidth=5, label='Event')
-            plt.semilogx(cross_activity, linewidth=5, label='Activity')
-            plt.legend(loc='best', fontsize=35)
-            # plt.title(f'Cross-response {ticker_i}-{ticker_j}', fontsize=40)
-            plt.xlabel(r'$\tau \, [s]$', fontsize=45)
-            plt.ylabel(r'$R_{ij}(\tau)$', fontsize=45)
-            plt.xticks(fontsize=35)
-            plt.yticks(fontsize=35)
-            plt.xlim(1, 1000)
-            # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-            plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-            ax.yaxis.offsetText.set_fontsize(35)
-            plt.grid(True)
-            plt.tight_layout()
-
-            # Plotting
-            plt.savefig(f'../plot/03_cross_response_implementation_{year}.png')
-
-            return None
-
-        except FileNotFoundError as e:
-            print('No data')
-            print(e)
-            print()
-            return None
 
 # ----------------------------------------------------------------------------
 
@@ -176,10 +298,15 @@ def main():
 
     ticker_i = 'AAPL'
     ticker_j = 'MSFT'
+    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
+    sectors = [['AAPL', 'MSFT'], ['MSFT', 'AAPL'],
+               ['XOM', 'CVX'], ['CVX', 'XOM'],
+               ['GS', 'JPM'], ['JPM', 'GS']]
     year = '2008'
 
-    taq_self_response_year_avg_plot(ticker_i, year)
-    taq_cross_response_year_avg_plot(ticker_i, ticker_j, year)
+    taq_response_year_avg_comparison_plot(ticker_i, ticker_j, year)
+    taq_trade_scale_response_year_avg_plot(tickers, sectors, year)
+    taq_physical_scale_response_year_avg_plot(tickers, sectors, year)
 
     return None
 
