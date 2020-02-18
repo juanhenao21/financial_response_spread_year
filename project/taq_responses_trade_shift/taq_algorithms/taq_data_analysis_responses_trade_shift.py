@@ -22,6 +22,7 @@ The module contains the following functions:
       a day.
     * taq_cross_response_year_trade_shift_data - computes the cross response
       of a year.
+    * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
