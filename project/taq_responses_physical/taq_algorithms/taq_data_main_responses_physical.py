@@ -162,7 +162,13 @@ def taq_data_plot_generator(tickers, year):
             .taq_trade_sign_self_correlator_year_responses_physical_data(
                 ticker, year)
 
-    ticker_prod = iprod(tickers, tickers)
+    # ticker_prod = iprod(tickers, tickers)
+    ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
+                   ('GS', 'JPM'), ('JPM', 'GS'),
+                   ('CVX', 'XOM'), ('XOM', 'CVX'),
+                   ('GOOG', 'MA'), ('MA', 'GOOG'),
+                   ('CME', 'GS'), ('GS', 'CME'),
+                   ('RIG', 'APA'), ('APA', 'RIG')]
 
     # Cross-response and cross-correlator
     for ticks in ticker_prod:
@@ -205,16 +211,19 @@ def main():
     """
 
     # Tickers and days to analyze
-    year, tickers = taq_data_tools_responses_physical.taq_initial_data()
+    # year, tickers = taq_data_tools_responses_physical.taq_initial_data()
+    year = '2008'
+    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
+               'GOOG', 'MA', 'CME', 'RIG', 'APA']
 
     # Basic folders
-    taq_data_tools_responses_physical.taq_start_folders(year)
+    # taq_data_tools_responses_physical.taq_start_folders(year)
 
     # Run analysis
     # Use the following function if you have all the C++ modules
-    taq_build_from_scratch(tickers, year)
+    # taq_build_from_scratch(tickers, year)
     # Use this function if you have the year csv files of the stocks
-    taq_dayly_data_extract(tickers, year)
+    # taq_dayly_data_extract(tickers, year)
 
     # Analysis and plot
     taq_data_plot_generator(tickers, year)
