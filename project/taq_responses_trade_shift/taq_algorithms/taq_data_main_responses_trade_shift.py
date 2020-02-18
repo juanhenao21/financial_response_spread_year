@@ -79,10 +79,10 @@ def taq_data_plot_generator(tickers, year, shifts):
         # Plot
         pool.starmap(taq_data_plot_responses_trade_shift
                      .taq_self_response_year_avg_responses_trade_shift_plot,
-                     product(tickers, [year], [shifts]))
+                     iprod(tickers, [year], [shifts]))
         pool.starmap(taq_data_plot_responses_trade_shift
                      .taq_cross_response_year_avg_responses_trade_shift_plot,
-                     product(tickers, tickers, [year], [shifts]))
+                     iprod(tickers, tickers, [year], [shifts]))
 
     return None
 
