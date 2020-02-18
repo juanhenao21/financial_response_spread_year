@@ -1,17 +1,18 @@
 '''TAQ data plot module.
 
 The functions in the module plot the data obtained in the
-taq_data_analysis_responses_time_short_long module.
+taq_data_analysis_responses_physical_short_long module.
 
 This script requires the following modules:
     * matplotlib
     * numpy
-    * taq_data_tools_responses_time_short_long
+    * pickle
+    * taq_data_tools_responses_physical_short_long
 
 The module contains the following functions:
-    * taq_self_response_year_avg_responses_time_short_long_plot - plots
+    * taq_self_response_year_avg_responses_physical_short_long_plot - plots
       the self-response average for a year.
-    * taq_cross_response_year_avg_responses_time_short_long_plot - plots
+    * taq_cross_response_year_avg_responses_physical_short_long_plot - plots
       the cross-response average for a year.
     * main - the main function of the script.
 
@@ -23,22 +24,22 @@ The module contains the following functions:
 
 from matplotlib import pyplot as plt
 import numpy as np
-import os
 import pickle
 
-import taq_data_tools_responses_time_short_long
+import taq_data_tools_responses_physical_short_long
 
 # ----------------------------------------------------------------------------
 
 
-def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
-                                                              tau, tau_p):
+def taq_self_response_year_avg_responses_physical_short_long_plot(ticker, year,
+                                                                  tau, tau_p):
     """Plots the self-response average for a year.
 
     :param ticker: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
     :param year: string of the year to be analized (i.e '2008').
     :param tau: integer greater than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -46,9 +47,9 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
     try:
 
         function_name = \
-            taq_self_response_year_avg_responses_time_short_long_plot. \
+            taq_self_response_year_avg_responses_physical_short_long_plot. \
             __name__
-        taq_data_tools_responses_time_short_long \
+        taq_data_tools_responses_physical_short_long \
             .taq_function_header_print_plot(function_name, ticker, ticker,
                                             year, '', '')
 
@@ -56,14 +57,11 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
         (self_short,
          self_long,
          self_response,
-         self_shuffle) = pickle.load(open(''.join((
-                                     '../../taq_data/responses_time_short'
-                                     + '_long_data_{1}/taq_self_response_year'
-                                     + '_time_short_long_tau_data_tau_{2}_tau'
-                                     + '_p_{3}/taq_self_response_year_time'
-                                     + '_short_long_tau_data_tau_{2}_tau_p_{3}'
-                                     + '_{1}_{0}.pickle').split())
-                                     .format(ticker, year, tau, tau_p), 'rb'))
+         self_shuffle) = pickle.load(open(
+             f'../../taq_data/responses_physical_short_long_data_{year}/taq'
+             + f'_self_response_year_physical_short_long_tau_data_tau_{tau}'
+             + f'_tau_p_{tau_p}/taq_self_response_year_physical_short_long_tau'
+             + f'_data_tau_{tau}_tau_p_{tau_p}_{year}_{ticker}.pickle', 'rb'))
 
         # Addition of the short and long response signal
         sum = np.zeros(tau)
@@ -71,14 +69,12 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
         sum[tau_p + 1:] = self_short[tau_p + 1:] + self_long[tau_p + 1:]
 
         figure = plt.figure(figsize=(16, 9))
-        plt.semilogx(self_short, linewidth=5, label='{} - Short'
-                     .format(ticker))
-        plt.semilogx(self_long, linewidth=5, label='{} - Long'.format(ticker))
-        plt.semilogx(sum, linewidth=5, label='{} - Sum'.format(ticker))
-        plt.semilogx(self_response, linewidth=5, label='{} - Self-response'
-                     .format(ticker))
-        plt.semilogx(self_shuffle, linewidth=5, label='{} - Shuffle'
-                     .format(ticker))
+        plt.semilogx(self_short, linewidth=5, label=f'{ticker} - Short')
+        plt.semilogx(self_long, linewidth=5, label=f'{ticker} - Long')
+        plt.semilogx(sum, linewidth=5, label=f'{ticker} - Sum')
+        plt.semilogx(self_response, linewidth=5,
+                     label=f'{ticker} - Self-response')
+        plt.semilogx(self_shuffle, linewidth=5, label=f'{ticker} - Shuffle')
         plt.plot((tau_p, tau_p), (0, max(self_short)), '--',
                  label=r"$\tau' $ = {}".format(tau_p))
         plt.legend(loc='best', fontsize=25)
@@ -94,10 +90,9 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
         plt.tight_layout()
 
         # Plotting
-        taq_data_tools_responses_time_short_long \
-            .taq_save_plot('{}_tau_{}_tau_p_{}'
-                           .format(function_name, tau, tau_p),
-                           figure, ticker, ticker, year, '')
+        taq_data_tools_responses_physical_short_long \
+            .taq_save_plot(f'{function_name}_tau_{tau}_tau_p_{tau_p}', figure,
+                           ticker, ticker, year, '')
 
         return None
 
@@ -110,9 +105,10 @@ def taq_self_response_year_avg_responses_time_short_long_plot(ticker, year,
 # ----------------------------------------------------------------------------
 
 
-def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
-                                                               ticker_j, year,
-                                                               tau, tau_p):
+def taq_cross_response_year_avg_responses_physical_short_long_plot(ticker_i,
+                                                                   ticker_j,
+                                                                   year, tau,
+                                                                   tau_p):
     """Plots the cross-response average for a year.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
@@ -121,6 +117,7 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
      (i.e. 'AAPL')
     :param year: string of the year to be analized (i.e '2008')
     :param tau: integer greater than zero (i.e. 50).
+    :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -133,9 +130,9 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
     else:
         try:
             function_name = \
-                taq_cross_response_year_avg_responses_time_short_long_plot. \
+                taq_cross_response_year_avg_responses_physical_short_long_plot. \
                 __name__
-            taq_data_tools_responses_time_short_long \
+            taq_data_tools_responses_physical_short_long \
                 .taq_function_header_print_plot(function_name, ticker_i,
                                                 ticker_j, year, '', '')
 
@@ -143,16 +140,12 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
             (cross_short,
              cross_long,
              cross_response,
-             cross_shuffle) = pickle.load(open(''.join((
-                                          '../../taq_data/responses_time'
-                                          + '_short_long_data_{2}/taq_cross'
-                                          + '_response_year_time_short_long'
-                                          + '_tau_data_tau_{3}_tau_p_{4}/taq'
-                                          + '_cross_response_year_time_short'
-                                          + '_long_tau_data_tau_{3}_tau_p_{4}'
-                                          + '_{2}_{0}i_{1}j.pickle').split())
-                                          .format(ticker_i, ticker_j, year,
-                                                  tau, tau_p), 'rb'))
+             cross_shuffle) = pickle.load(open(
+                f'../../taq_data/responses_physical_short_long_data_{year}/taq'
+                + f'_cross_response_year_physical_short_long_tau_data_tau'
+                + f'_{tau}_tau_p_{tau_p}/taq_cross_response_year_physical'
+                + f'_short_long_tau_data_tau_{tau}_tau_p_{tau_p}_{year}'
+                + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
             # Addition of the short and long response signal
             sum = np.zeros(tau)
@@ -160,17 +153,16 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
             sum[tau_p + 1:] = cross_short[tau_p + 1:] + cross_long[tau_p + 1:]
 
             figure = plt.figure(figsize=(16, 9))
-            plt.semilogx(cross_short, linewidth=5, label='{} - {} - Short'
-                         .format(ticker_i, ticker_j))
-            plt.semilogx(cross_long, linewidth=5, label='{} - {} - Long'
-                         .format(ticker_i, ticker_j))
-            plt.semilogx(sum, linewidth=5, label='{} - {} - Sum'
-                         .format(ticker_i, ticker_j))
+            plt.semilogx(cross_short, linewidth=5,
+                         label=f'{ticker_i} - {ticker_j} - Short')
+            plt.semilogx(cross_long, linewidth=5,
+                         label=f'{ticker_i} - {ticker_j} - Long')
+            plt.semilogx(sum, linewidth=5,
+                         label=f'{ticker_i} - {ticker_j} - Sum')
             plt.semilogx(cross_response, linewidth=5,
-                         label='{} - {} - Cross-response'.format(ticker_i,
-                                                                 ticker_j))
-            plt.semilogx(cross_shuffle, linewidth=5, label='{} - {} - Shuffle'
-                         .format(ticker_i, ticker_j))
+                         label=f'{ticker_i} - {ticker_j} - Cross-response')
+            plt.semilogx(cross_shuffle, linewidth=5,
+                         label=f'{ticker_i} - {ticker_j} - Shuffle')
             plt.plot((tau_p, tau_p), (0, max(cross_short)), '--',
                      label=r"$\tau' $ = {}".format(tau_p))
             plt.legend(loc='best', fontsize=25)
@@ -186,9 +178,8 @@ def taq_cross_response_year_avg_responses_time_short_long_plot(ticker_i,
             plt.tight_layout()
 
             # Plotting
-            taq_data_tools_responses_time_short_long \
-                .taq_save_plot('{}_tau_{}_tau_p_{}'
-                               .format(function_name, tau, tau_p),
+            taq_data_tools_responses_physical_short_long \
+                .taq_save_plot(f'{function_name}_tau_{tau}_tau_p_{tau_p}',
                                figure, ticker_i, ticker_j, year, '')
 
             return None
