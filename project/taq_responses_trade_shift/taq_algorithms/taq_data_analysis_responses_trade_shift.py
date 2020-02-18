@@ -81,7 +81,7 @@ def taq_self_response_day_responses_trade_shift_data(ticker, date, shift):
         time_m = np.array(range(34800, 57000))
         cond_1 = (time_t >= 34800) * (time_t < 57000)
         time_t = time_t[cond_1]
-        trade_sign_i = trade_sign[cond_1]
+        trade_sign_i = trade_sign_i[cond_1]
 
         assert not np.sum(trade_sign_i == 0)
         assert not np.sum(midpoint_i == 0)
@@ -235,7 +235,7 @@ def taq_cross_response_day_responses_trade_shift_data(ticker_i, ticker_j, date,
             time_m = np.array(range(34800, 57000))
             cond_1 = (time_t >= 34800) * (time_t < 57000)
             time_t = time_t[cond_1]
-            trade_sign_j = trade_sign[cond_1]
+            trade_sign_j = trade_sign_j[cond_1]
 
             assert not np.sum(trade_sign_j == 0)
             assert not np.sum(midpoint_i == 0)

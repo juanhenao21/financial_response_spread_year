@@ -219,11 +219,6 @@ def taq_cross_response_day_trade_shift_data(ticker_i, ticker_j, date, tau):
 
     else:
         try:
-            function_name = taq_cross_response_day_trade_shift_data.__name__
-            taq_data_tools_trade_shift \
-                .taq_function_header_print_data(function_name, ticker_i,
-                                                ticker_j, year, month, day)
-
             # Load data
             midpoint_i = pickle.load(open(
                     f'../../taq_data/responses_physical_data_{year}/taq'
@@ -242,7 +237,7 @@ def taq_cross_response_day_trade_shift_data(ticker_i, ticker_j, date, tau):
             time_m = np.array(range(34800, 57000))
             cond_1 = (time_t >= 34800) * (time_t < 57000)
             time_t = time_t[cond_1]
-            trade_sign_j = trade_sign[cond_1]
+            trade_sign_j = trade_sign_j[cond_1]
 
             assert not np.sum(trade_sign_j == 0)
             assert not np.sum(midpoint_i == 0)

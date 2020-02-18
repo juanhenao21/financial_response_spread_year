@@ -1,10 +1,29 @@
-'''Event and physical shift figures
+'''TAQ trade and physical shift figures
 
-Plot the trade and physical shift for the stocks AAPL, CVX, GS, JPM, MSFT, and XOM.
+Plots the figures of the trade and physical shift implementation for the paper.
+
+This script requires the following modules:
+    * matplotlib
+    * numpy
+    * pickle
+
+The module contains the following functions:
+    * taq_trade_scale_shift_year_avg_plot - plots the shift for a year in trade
+      time scale.
+    * taq_physical_scale_shift_year_avg_plot - plots the shift for a year in
+      physical time scale.
+    * taq_trade_scale_responses_year_avg_shift_plot - plots the shifted
+      response for a year in trade time scale.
+    * taq_physical_scale_responses_year_avg_shift_plot - plots the shifted
+      response for a year in physical time scale.
+    * main - the main function of the script.
+
+.. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
 # ----------------------------------------------------------------------------
 # Modules
+
 from matplotlib import pyplot as plt
 from matplotlib import ticker
 import numpy as np
@@ -14,7 +33,8 @@ import pickle
 
 
 def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
-    """Plots the self- and cross-response for a year in trade physical scale.
+    """Plots the shift in self- and cross-response for a year in trade physical
+       scale.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL').
@@ -50,7 +70,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 f'../../project/taq_data/trade_shift_data_{year}/taq_self'
                 + f'_response_year_trade_shift_data_tau_{taus[0]}/taq_self'
                 + f'_response_year_trade_shift_data_tau_{taus[0]}_{year}'
-                + f'_{ticker_i}.pickle' ,'rb'))
+                + f'_{ticker_i}.pickle', 'rb'))
 
             max_pos_ax1 = np.where(max(self_trade_ax1) == self_trade_ax1)[0][0]
 
@@ -76,12 +96,12 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 f'../../project/taq_data/trade_shift_data_{year}/taq_self'
                 + f'_response_year_trade_shift_data_tau_{taus[1]}/taq_self'
                 + f'_response_year_trade_shift_data_tau_{taus[1]}_{year}'
-                + f'_{ticker_i}.pickle','rb'))
+                + f'_{ticker_i}.pickle', 'rb'))
 
             max_pos_ax2 = np.where(max(self_trade_ax2) == self_trade_ax2)[0][0]
 
             ax2.plot(t_ax_2_6, self_trade_ax2, linewidth=5,
-                    label=r'$\tau = %d trades$' % (taus[1]))
+                     label=r'$\tau = %d trades$' % (taus[1]))
 
             # Plot line in the peak of the figure
             ax2.plot((t_ax_2_6[max_pos_ax2], t_ax_2_6[max_pos_ax2]),
@@ -102,7 +122,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax3 = np.where(max(self_trade_ax3) == self_trade_ax3)[0][0]
 
             ax3.plot(t_ax_3_7, self_trade_ax3, linewidth=5,
-                    label=r'$\tau_{seconds} = %d$' % (taus[2]))
+                     label=r'$\tau_{seconds} = %d$' % (taus[2]))
 
             # Plot line in the peak of the figure
             ax3.plot((t_ax_3_7[max_pos_ax3], t_ax_3_7[max_pos_ax3]),
@@ -123,13 +143,13 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax4 = np.where(max(self_trade_ax4) == self_trade_ax4)[0][0]
 
             ax4.plot(t_ax_4_8, self_trade_ax4, linewidth=5,
-                    label=r'$\tau = %d trades$' % (taus[3]))
+                     label=r'$\tau = %d trades$' % (taus[3]))
 
             # Plot line in the peak of the figure
             ax4.plot((t_ax_4_8[max_pos_ax4], t_ax_4_8[max_pos_ax4]),
-                    (0, self_trade_ax4[max_pos_ax4]), '--',
-                    label=r'Max $t$ = {} trades'
-                    .format(max_pos_ax4 - 10 * taus[3]))
+                     (0, self_trade_ax4[max_pos_ax4]), '--',
+                     label=r'Max $t$ = {} trades'
+                     .format(max_pos_ax4 - 10 * taus[3]))
 
             ax4.legend(loc='upper left', fontsize=15)
             ax4.grid(True)
@@ -145,7 +165,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax5)[0][0]
 
             ax5.plot(t_ax_1_5, cross_trade_ax5, linewidth=5,
-                    label=r'$\tau = %d trades$' % (taus[0]))
+                     label=r'$\tau = %d trades$' % (taus[0]))
             # Plot line in the peak of the figure
             ax5.plot((t_ax_1_5[max_pos_ax5], t_ax_1_5[max_pos_ax5]),
                      (0, cross_trade_ax5[max_pos_ax5]),
@@ -173,7 +193,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax6)[0][0]
 
             ax6.plot(t_ax_2_6, cross_trade_ax6, linewidth=5,
-                    label=r'$\tau = %d trades$' % (taus[1]))
+                     label=r'$\tau = %d trades$' % (taus[1]))
             # Plot line in the peak of the figure
             ax6.plot((t_ax_2_6[max_pos_ax6], t_ax_2_6[max_pos_ax6]),
                      (0, cross_trade_ax6[max_pos_ax6]),
@@ -188,20 +208,20 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             # Load data
             cross_trade_ax7 = pickle.load(open(
                 f'../../project/taq_data/trade_shift_data'
-                + f'_{year}/taq_cross_response_year_trade_shift_data_tau_{taus[2]}'
-                + f'/taq_cross_response_year_trade_shift_data_tau_{taus[2]}'
-                + f'_{year}_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
+                + f'_{year}/taq_cross_response_year_trade_shift_data_tau'
+                + f'_{taus[2]}/taq_cross_response_year_trade_shift_data_tau'
+                + f'_{taus[2]}_{year}_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
             max_pos_ax7 = np.where(max(cross_trade_ax7)
                                    == cross_trade_ax7)[0][0]
 
             ax7.plot(t_ax_3_7, cross_trade_ax7, linewidth=5,
-                    label=r'$\tau = %d trades$' % (taus[2]))
+                     label=r'$\tau = %d trades$' % (taus[2]))
             # Plot line in the peak of the figure
             ax7.plot((t_ax_3_7[max_pos_ax7], t_ax_3_7[max_pos_ax7]),
-                    (0, cross_trade_ax7[max_pos_ax7]),
-                    '--', label=r'Max $t$ = {} trades'
-                    .format(max_pos_ax7 - 10 * taus[2]))
+                     (0, cross_trade_ax7[max_pos_ax7]),
+                     '--', label=r'Max $t$ = {} trades'
+                     .format(max_pos_ax7 - 10 * taus[2]))
             ax7.legend(loc='upper left', fontsize=15)
             ax7.set_xlabel(r'Trade shift [trades]', fontsize=15)
             ax7.tick_params(axis='x', labelsize=10)
@@ -219,7 +239,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax8)[0][0]
 
             ax8.plot(t_ax_4_8, cross_trade_ax8, linewidth=5,
-                    label=r'$\tau = %d trades$' % (taus[3]))
+                     label=r'$\tau = %d trades$' % (taus[3]))
             # Plot line in the peak of the figure
             ax8.plot((t_ax_4_8[max_pos_ax8], t_ax_4_8[max_pos_ax8]),
                      (0, cross_trade_ax8[max_pos_ax8]),
@@ -247,9 +267,9 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
 # ----------------------------------------------------------------------------
 
 
-def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year,
-                                       taus):
-    """Plots the self- and cross-response for a year in second physical scale.
+def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
+    """Plots the shift in self- and cross-response for a year in second
+       physical scale.
 
     :param ticker_i: string of the abbreviation of the stock to be analized
      (i.e. 'AAPL')
@@ -285,7 +305,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year,
                 f'../../project/taq_data/physical_shift_data_{year}/taq_self'
                 + f'_response_year_physical_shift_data_tau_{taus[0]}/taq_self'
                 + f'_response_year_physical_shift_data_tau_{taus[0]}_{year}'
-                + f'_{ticker_i}.pickle','rb'))
+                + f'_{ticker_i}.pickle', 'rb'))
 
             max_pos_ax1 = np.where(max(self_physical_ax1)
                                    == self_physical_ax1)[0][0]
@@ -486,14 +506,15 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year,
 # ----------------------------------------------------------------------------
 
 
-def taq_trade_scale_responses_year_avg_shift_plot(ticker_i, ticker_j, year,
+def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                                                   shifts):
     """Plots the responses average for a year with trade physical shifts.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
-     (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
-     (i.e. 'AAPL').
+    :param tickers: list of strings of the abbreviation of the stocks to be
+     analized (i.e. 'AAPL').
+    :param sectors: list of lists with the strings of the abbreviation of the
+     stocks to be analized and the year
+     (i.e. [['AAPL', 'MSFT', '2008], ['CVX', 'XOM', '2008]]).
     :param year: string of the year to be analized (i.e. '2008')
     :param shifts: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
@@ -576,10 +597,11 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                                                      shifts):
     """Plots the average of the responses average for a year for each shift.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
-     (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
-     (i.e. 'AAPL').
+    :param tickers: list of strings of the abbreviation of the stocks to be
+     analized (i.e. 'AAPL').
+    :param sectors: list of lists with the strings of the abbreviation of the
+     stocks to be analized and the year
+     (i.e. [['AAPL', 'MSFT', '2008], ['CVX', 'XOM', '2008]]).
     :param year: string of the year to be analized (i.e. '2008')
     :param shifts: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
@@ -587,11 +609,11 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
     """
 
     try:
-        figure, axs = plt.subplots(2, 2, figsize=(16, 6), sharex='col',
+        figure, axs = plt.subplots(2, 2, figsize=(16, 9), sharex='col',
                                    sharey='row',
                                    gridspec_kw={'hspace': 0, 'wspace': 0})
 
-        (ax1, ax2) , (ax3, ax4) = axs
+        (ax1, ax2), (ax3, ax4) = axs
 
         # Figure with different plots for different shifts
 
@@ -611,7 +633,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                 + f'_{ticker}.pickle', 'rb'))
 
             ax1.semilogx(self_physical_1, linewidth=3, alpha=0.3,
-                        label=f'Shift {shifts[0]}s')
+                         label=f'{ticker}')
             avg_val_self_1 += self_physical_1
 
             # Load data
@@ -623,7 +645,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                 + f'_{ticker}.pickle', 'rb'))
 
             ax2.semilogx(self_physical_2, linewidth=3, alpha=0.3,
-                        label=f'Shift {shifts[1]}s')
+                         label=f'{ticker}')
             avg_val_self_2 += self_physical_2
 
         for sector in sectors:
@@ -637,7 +659,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                 + f'_{sector[0]}i_{sector[1]}j.pickle', 'rb'))
 
             ax3.semilogx(cross_physical_1, linewidth=5, alpha=0.3,
-                        label=f'Shift {shifts[0]}s')
+                         label=f'{sector[0]} - {sector[1]}')
             avg_val_cross_1 += cross_physical_1
 
             # Load data
@@ -649,10 +671,13 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                 + f'_{sector[0]}i_{sector[1]}j.pickle', 'rb'))
 
             ax4.semilogx(cross_physical_2, linewidth=5, alpha=0.3,
-                        label=f'Shift {shifts[1]}s')
+                         label=f'{sector[0]} - {sector[1]}')
             avg_val_cross_2 += cross_physical_2
 
-        ax1.semilogx(avg_val_self_1, linewidth=5, label=f'Average')
+        ax1.semilogx(avg_val_self_1 / len(tickers), '-k', linewidth=5,
+                     label=f'Average')
+        ax1.legend(loc='upper center', bbox_to_anchor=(1.0, 1.3), ncol=4,
+                   fontsize=15)
         ax1.set_ylabel(r'$R^{p}_{ii}(\tau)$', fontsize=15)
         ax1.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
@@ -661,15 +686,16 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax1.yaxis.offsetText.set_fontsize(10)
         ax1.grid(True)
 
-        ax2.semilogx(avg_val_self_2, linewidth=5, label=f'Average')
-        ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
-                fontsize=15)
+        ax2.semilogx(avg_val_self_2 / len(tickers), '-k', linewidth=5,
+                     label=f'Average')
         ax2.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax2.grid(True)
 
-        ax3.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
-                fontsize=15)
+        ax3.semilogx(avg_val_cross_1 / len(sectors), '-k', linewidth=5,
+                     label=f'Average')
+        ax3.legend(loc='upper center', bbox_to_anchor=(1.0, -0.2), ncol=4,
+                   fontsize=15)
         ax3.set_xlabel(r'$\tau \, [s]$', fontsize=15)
         ax3.set_ylabel(r'$R^{p}_{ij}(\tau)$', fontsize=15)
         ax3.set_xlim(1, 1000)
@@ -680,8 +706,9 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax3.yaxis.offsetText.set_fontsize(0)
         ax3.grid(True)
 
-        ax4.semilogx(avg_val_cross_2, linewidth=5, label=f'Average')
-        ax4.set_xlabel(r'$\tau \, [s]$', fontsize=20)
+        ax4.semilogx(avg_val_cross_2 / len(sectors), '-k', linewidth=5,
+                     label=f'Average')
+        ax4.set_xlabel(r'$\tau \, [s]$', fontsize=15)
         ax4.set_xlim(1, 1000)
         # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
         ax4.tick_params(axis='x', labelsize=10)
@@ -719,7 +746,7 @@ def main():
     taq_trade_scale_shift_year_avg_plot('GS', 'JPM', year, taus)
     taq_physical_scale_shift_year_avg_plot('GS', 'JPM', year, taus)
     taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
-                                                     [10,100])
+                                                     [10, 100])
 
     return None
 
