@@ -100,7 +100,7 @@ def main():
     year = '2008'
     tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
                'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    shifts = [1, 10, 100, 500]
+    shifts = [10, 100]
 
     # Basic folders
     # taq_data_tools_responses_trade_shift.taq_start_folders('2008')
