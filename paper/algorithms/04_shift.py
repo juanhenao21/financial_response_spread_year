@@ -75,12 +75,12 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax1 = np.where(max(self_trade_ax1) == self_trade_ax1)[0][0]
 
             ax1.plot(t_ax_1_5, self_trade_ax1, linewidth=5,
-                     label=r'$\tau= %d trades$' % (taus[0]))
+                     label=r'$\tau= %d$ trades' % (taus[0]))
 
             # Plot line in the peak of the figure
             ax1.plot((t_ax_1_5[max_pos_ax1], t_ax_1_5[max_pos_ax1]),
                      (0, self_trade_ax1[max_pos_ax1]), '--',
-                     label=r'Max $t$ = {}s'
+                     label=r'Max $t$ = {} trades'
                      .format(max_pos_ax1 - 10 * taus[0]))
 
             ax1.legend(loc='upper left', fontsize=15)
@@ -101,7 +101,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax2 = np.where(max(self_trade_ax2) == self_trade_ax2)[0][0]
 
             ax2.plot(t_ax_2_6, self_trade_ax2, linewidth=5,
-                     label=r'$\tau = %d trades$' % (taus[1]))
+                     label=r'$\tau = %d$ trades' % (taus[1]))
 
             # Plot line in the peak of the figure
             ax2.plot((t_ax_2_6[max_pos_ax2], t_ax_2_6[max_pos_ax2]),
@@ -122,7 +122,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax3 = np.where(max(self_trade_ax3) == self_trade_ax3)[0][0]
 
             ax3.plot(t_ax_3_7, self_trade_ax3, linewidth=5,
-                     label=r'$\tau_{seconds} = %d$' % (taus[2]))
+                     label=r'$\tau = %d$ trades' % (taus[2]))
 
             # Plot line in the peak of the figure
             ax3.plot((t_ax_3_7[max_pos_ax3], t_ax_3_7[max_pos_ax3]),
@@ -143,7 +143,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax4 = np.where(max(self_trade_ax4) == self_trade_ax4)[0][0]
 
             ax4.plot(t_ax_4_8, self_trade_ax4, linewidth=5,
-                     label=r'$\tau = %d trades$' % (taus[3]))
+                     label=r'$\tau = %d$ trades' % (taus[3]))
 
             # Plot line in the peak of the figure
             ax4.plot((t_ax_4_8[max_pos_ax4], t_ax_4_8[max_pos_ax4]),
@@ -165,7 +165,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax5)[0][0]
 
             ax5.plot(t_ax_1_5, cross_trade_ax5, linewidth=5,
-                     label=r'$\tau = %d trades$' % (taus[0]))
+                     label=r'$\tau = %d$ trades' % (taus[0]))
             # Plot line in the peak of the figure
             ax5.plot((t_ax_1_5[max_pos_ax5], t_ax_1_5[max_pos_ax5]),
                      (0, cross_trade_ax5[max_pos_ax5]),
@@ -193,7 +193,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax6)[0][0]
 
             ax6.plot(t_ax_2_6, cross_trade_ax6, linewidth=5,
-                     label=r'$\tau = %d trades$' % (taus[1]))
+                     label=r'$\tau = %d$ trades' % (taus[1]))
             # Plot line in the peak of the figure
             ax6.plot((t_ax_2_6[max_pos_ax6], t_ax_2_6[max_pos_ax6]),
                      (0, cross_trade_ax6[max_pos_ax6]),
@@ -216,7 +216,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax7)[0][0]
 
             ax7.plot(t_ax_3_7, cross_trade_ax7, linewidth=5,
-                     label=r'$\tau = %d trades$' % (taus[2]))
+                     label=r'$\tau = %d$ trades' % (taus[2]))
             # Plot line in the peak of the figure
             ax7.plot((t_ax_3_7[max_pos_ax7], t_ax_3_7[max_pos_ax7]),
                      (0, cross_trade_ax7[max_pos_ax7]),
@@ -239,7 +239,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax8)[0][0]
 
             ax8.plot(t_ax_4_8, cross_trade_ax8, linewidth=5,
-                     label=r'$\tau = %d trades$' % (taus[3]))
+                     label=r'$\tau = %d$ trades' % (taus[3]))
             # Plot line in the peak of the figure
             ax8.plot((t_ax_4_8[max_pos_ax8], t_ax_4_8[max_pos_ax8]),
                      (0, cross_trade_ax8[max_pos_ax8]),
@@ -254,7 +254,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             plt.tight_layout()
 
             # Save plot
-            figure.savefig('../plot/04_shift_trade.png')
+            figure.savefig(f'../plot/04_shift_trade_{ticker_i}_{ticker_j}.png')
 
             return None
 
@@ -493,7 +493,8 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             plt.tight_layout()
 
             # Save plot
-            figure.savefig('../plot/04_shift_physical.png')
+            figure.savefig(f'../plot/04_shift_physical_{ticker_i}_{ticker_j}'
+                           + f'.png')
 
             return None
 
@@ -508,7 +509,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
 
 def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                                                   shifts):
-    """Plots the responses average for a year with trade physical shifts.
+    """Plots the average of the responses average for a year for each shift.
 
     :param tickers: list of strings of the abbreviation of the stocks to be
      analized (i.e. 'AAPL').
@@ -522,67 +523,121 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
     """
 
     try:
-        figure = plt.figure(figsize=(16, 9))
-        ax1 = plt.subplot(1, 2, 1)
-        ax2 = plt.subplot(1, 2, 2)
+        figure, axs = plt.subplots(2, 2, figsize=(16, 9), sharex='col',
+                                   sharey='row',
+                                   gridspec_kw={'hspace': 0, 'wspace': 0})
+
+        (ax1, ax2), (ax3, ax4) = axs
 
         # Figure with different plots for different shifts
-        for shift in shifts:
+
+        avg_val_self_1 = np.zeros(1000)
+        avg_val_self_2 = np.zeros(1000)
+        avg_val_cross_1 = np.zeros(1000)
+        avg_val_cross_2 = np.zeros(1000)
+
+        for ticker in tickers:
 
             # Load data
-            self_trade = pickle.load(open(''.join((
-                '../../project/taq_data/responses_trade_shift_data'
-                + '_{1}/taq_self_response_year_responses_trade'
-                + '_shift_data_shift_{2}/taq_self_response_year'
-                + '_responses_trade_shift_data_shift_{2}_{1}_{0}'
-                + '.pickle').split())
-                .format(ticker_i, year, shift), 'rb'))
+            self_trade_1 = pickle.load(open(
+                f'../../project/taq_data/responses_trade_shift_data'
+                + f'_{year}/taq_self_response_year_responses_trade'
+                + f'_shift_data_shift_{shifts[0]}/taq_self_response_year'
+                + f'_responses_trade_shift_data_shift_{shifts[0]}_{year}'
+                + f'_{ticker}.pickle', 'rb'))
 
-            ax1.semilogx(self_trade, linewidth=5, label='Shift {} s'
-                         .format(shift))
+            ax1.semilogx(self_trade_1, linewidth=3, alpha=0.3,
+                         label=f'{ticker}')
+            avg_val_self_1 += self_trade_1
 
-            cross_trade = pickle.load(open(''.join((
-                '../../project/taq_data/responses_trade_shift_data_{2}/'
-                + 'taq_cross_response_year_responses_trade_shift'
-                + '_data_shift_{3}/taq_cross_response_year'
-                + '_responses_trade_shift_data_shift_{3}_{2}_{0}i'
-                + '_{1}j.pickle').split())
-                .format(ticker_i, ticker_j, year, shift),
-                'rb'))
+            # Load data
+            self_trade_2 = pickle.load(open(
+                f'../../project/taq_data/responses_trade_shift_data'
+                + f'_{year}/taq_self_response_year_responses_trade'
+                + f'_shift_data_shift_{shifts[1]}/taq_self_response_year'
+                + f'_responses_trade_shift_data_shift_{shifts[1]}_{year}'
+                + f'_{ticker}.pickle', 'rb'))
 
-            ax2.semilogx(cross_trade, linewidth=5, label='Shift {} s'
-                         .format(shift))
+            ax2.semilogx(self_trade_2, linewidth=3, alpha=0.3,
+                         label=f'{ticker}')
+            avg_val_self_2 += self_trade_2
 
-        ax1.legend(loc='upper left', fontsize=20)
-        ax1.set_title('{}'.format(ticker_i), fontsize=40)
-        ax1.set_xlabel(r'$\tau \, [s]$', fontsize=20)
-        ax1.set_ylabel(r'$R^{trades}_{ii}(\tau)$', fontsize=20)
-        ax1.set_xlim(1, 10000)
-        # ax1.ylim(13 * 10 ** -5, 16 * 10 ** -5)
-        ax1.tick_params(axis='x', labelsize=15)
-        ax1.tick_params(axis='y', labelsize=15)
+        for sector in sectors:
+
+            # Load data
+            cross_trade_1 = pickle.load(open(
+                f'../../project/taq_data/responses_trade_shift_data'
+                + f'_{year}/taq_cross_response_year_responses_trade'
+                + f'_shift_data_shift_{shifts[0]}/taq_cross_response_year'
+                + f'_responses_trade_shift_data_shift_{shifts[0]}_{year}'
+                + f'_{sector[0]}i_{sector[1]}j.pickle', 'rb'))
+
+            ax3.semilogx(cross_trade_1, linewidth=5, alpha=0.3,
+                         label=f'{sector[0]} - {sector[1]}')
+            avg_val_cross_1 += cross_trade_1
+
+            # Load data
+            cross_trade_2 = pickle.load(open(
+                f'../../project/taq_data/responses_trade_shift_data'
+                + f'_{year}/taq_cross_response_year_responses_trade'
+                + f'_shift_data_shift_{shifts[1]}/taq_cross_response_year'
+                + f'_responses_trade_shift_data_shift_{shifts[1]}_{year}'
+                + f'_{sector[0]}i_{sector[1]}j.pickle', 'rb'))
+
+            ax4.semilogx(cross_trade_2, linewidth=5, alpha=0.3,
+                         label=f'{sector[0]} - {sector[1]}')
+            avg_val_cross_2 += cross_trade_2
+
+        ax1.semilogx(avg_val_self_1 / len(tickers), '-k', linewidth=5,
+                     label=f'Average')
+        ax1.legend(loc='upper center', bbox_to_anchor=(1.0, 1.3), ncol=4,
+                   fontsize=15)
+        ax1.set_ylabel(r'$R^{t}_{ii}(\tau)$', fontsize=15)
+        ax1.set_xlim(1, 1000)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.tick_params(axis='y', labelsize=10)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        ax1.yaxis.offsetText.set_fontsize(15)
+        ax1.yaxis.offsetText.set_fontsize(10)
         ax1.grid(True)
 
-        ax2.legend(loc='upper left', fontsize=20)
-        ax2.set_title('{} - {}'.format(ticker_i, ticker_j), fontsize=40)
-        ax2.set_xlabel(r'$\tau \, [s]$', fontsize=20)
-        ax2.set_ylabel(r'$R^{trades}_{ij}(\tau)$', fontsize=20)
-        ax2.set_xlim(1, 10000)
-        # plt.ylim(4 * 10 ** -5, 9 * 10 ** -5)
-        ax2.tick_params(axis='x', labelsize=15)
-        ax2.tick_params(axis='y', labelsize=15)
-        ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        ax2.yaxis.offsetText.set_fontsize(15)
+        ax2.semilogx(avg_val_self_2 / len(tickers), '-k', linewidth=5,
+                     label=f'Average')
+        ax2.set_xlim(1, 1000)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax2.grid(True)
+
+        ax3.semilogx(avg_val_cross_1 / len(sectors), '-k', linewidth=5,
+                     label=f'Average')
+        ax3.legend(loc='upper center', bbox_to_anchor=(1.0, -0.2), ncol=4,
+                   fontsize=15)
+        ax3.set_xlabel(r'$\tau \, [trades]$', fontsize=15)
+        ax3.set_ylabel(r'$R^{t}_{ij}(\tau)$', fontsize=15)
+        ax3.set_xlim(1, 1000)
+        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax3.tick_params(axis='x', labelsize=10)
+        ax3.tick_params(axis='y', labelsize=10)
+        ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax3.yaxis.offsetText.set_fontsize(0)
+        ax3.grid(True)
+
+        ax4.semilogx(avg_val_cross_2 / len(sectors), '-k', linewidth=5,
+                     label=f'Average')
+        ax4.set_xlabel(r'$\tau \, [trades]$', fontsize=15)
+        ax4.set_xlim(1, 1000)
+        # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax4.tick_params(axis='x', labelsize=10)
+        ax4.tick_params(axis='y', labelsize=10)
+        ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax4.yaxis.offsetText.set_fontsize(0)
+        ax4.grid(True)
 
         plt.tight_layout()
 
         # Save plot
-        figure.savefig('../plot/04_shift_responses_trades.png')
+        figure.savefig('../plot/04_shift_responses_trade.png')
 
         return None
+
 
     except FileNotFoundError as e:
         print('No data')
@@ -737,15 +792,21 @@ def main():
 
     taus = [1, 10, 100, 1000]
     shifts = [1, 10, 100, 1000, 5000]
-    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
-    sectors = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
-               ('GS', 'JPM'), ('JPM', 'GS'),
-               ('CVX', 'XOM'), ('XOM', 'CVX')]
+    tickers = ['GOOG', 'MA', 'CME', 'GS', 'RIG', 'APA']
+    sectors = [('GOOG', 'MA'), ('MA', 'GOOG'),
+               ('CME', 'GS'), ('GS', 'CME'),
+               ('RIG', 'APA'), ('APA', 'RIG')]
     year = '2008'
 
-    taq_trade_scale_shift_year_avg_plot('GS', 'JPM', year, taus)
-    taq_physical_scale_shift_year_avg_plot('GS', 'JPM', year, taus)
+    for sector in sectors:
+        taq_trade_scale_shift_year_avg_plot(sector[0], sector[1], year,
+                                            taus)
+        taq_physical_scale_shift_year_avg_plot(sector[0], sector[1], year,
+                                               taus)
+
     taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
+                                                     [10, 100])
+    taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                                                      [10, 100])
 
     return None
