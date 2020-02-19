@@ -75,10 +75,10 @@ def taq_data_plot_generator(tickers, year, taus, taus_p):
         # Plot
         pool.starmap(taq_data_plot_responses_physical_short_long
             .taq_self_response_year_avg_responses_physical_short_long_plot,
-            product(tickers, [year], [taus], taus_p))
+            iprod(tickers, [year], [taus], taus_p))
         pool.starmap(taq_data_plot_responses_physical_short_long
             .taq_cross_response_year_avg_responses_physical_short_long_plot,
-            product(tickers, tickers, [year], [taus], taus_p))
+            iprod(tickers, tickers, [year], [taus], taus_p))
 
     return None
 
@@ -97,7 +97,8 @@ def main():
     tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM',
                'GOOG', 'MA', 'CME', 'RIG', 'APA']
     year = '2008'
-    taus_p = [x for x in range(10, 101, 10)]
+    # taus_p = [x for x in range(10, 101, 10)]
+    taus_p = [40]
     taus = 1000
 
     # Basic folders
