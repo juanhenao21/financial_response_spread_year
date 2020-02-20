@@ -75,7 +75,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             max_pos_ax1 = np.where(max(self_trade_ax1) == self_trade_ax1)[0][0]
 
             ax1.plot(t_ax_1_5, self_trade_ax1, linewidth=5,
-                     label=r'$\tau= %d$ trades' % (taus[0]))
+                     label=r'$\tau= %d$ trade' % (taus[0]))
 
             # Plot line in the peak of the figure
             ax1.plot((t_ax_1_5[max_pos_ax1], t_ax_1_5[max_pos_ax1]),
@@ -84,7 +84,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      .format(max_pos_ax1 - 10 * taus[0]))
 
             ax1.legend(loc='upper left', fontsize=15)
-            ax1.set_ylabel(r'$R^{t}_{ii}(\tau)$', fontsize=15)
+            ax1.set_ylabel(r'$R^{s,t}_{ii}(\tau)$', fontsize=15)
             ax1.tick_params(axis='y', labelsize=10)
             ax1.set_ylim(-0.5 * 10**-4, 7 * 10**-4)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
@@ -165,7 +165,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                                    == cross_trade_ax5)[0][0]
 
             ax5.plot(t_ax_1_5, cross_trade_ax5, linewidth=5,
-                     label=r'$\tau = %d$ trades' % (taus[0]))
+                     label=r'$\tau = %d$ trade' % (taus[0]))
             # Plot line in the peak of the figure
             ax5.plot((t_ax_1_5[max_pos_ax5], t_ax_1_5[max_pos_ax5]),
                      (0, cross_trade_ax5[max_pos_ax5]),
@@ -173,7 +173,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      .format(max_pos_ax5 - 10 * taus[0]))
             ax5.legend(loc='upper left', fontsize=15)
             ax5.set_xlabel(r'Trade shift [trades]', fontsize=15)
-            ax5.set_ylabel(r'$R^{t}_{ij}(\tau)$', fontsize=15)
+            ax5.set_ylabel(r'$R^{s,t}_{ij}(\tau)$', fontsize=15)
             ax5.tick_params(axis='x', labelsize=10)
             ax5.tick_params(axis='y', labelsize=10)
             ax5.set_ylim(-0.025 * 10**-4, 3 * 10**-4)
@@ -316,11 +316,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             # Plot line in the peak of the figure
             ax1.plot((t_ax_1_5[max_pos_ax1], t_ax_1_5[max_pos_ax1]),
                      (0, self_physical_ax1[max_pos_ax1]), '--',
-                     label=r'Max $t$ = {} s'
+                     label=r'Max $t$ = {}s'
                      .format(max_pos_ax1 - 10 * taus[0]))
 
             ax1.legend(loc='upper left', fontsize=15)
-            ax1.set_ylabel(r'$R^{p}_{ii}(\tau)$', fontsize=15)
+            ax1.set_ylabel(r'$R^{s,p}_{ii}(\tau)$', fontsize=15)
             ax1.tick_params(axis='y', labelsize=10)
             ax1.set_ylim(-0.5 * 10**-4, 8 * 10**-4)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
@@ -412,7 +412,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      .format(max_pos_ax5 - 10 * taus[0]))
             ax5.legend(loc='upper left', fontsize=15)
             ax5.set_xlabel(r'Time shift $[s]$', fontsize=15)
-            ax5.set_ylabel(r'$R^{p}_{ij}(\tau)$', fontsize=15)
+            ax5.set_ylabel(r'$R^{s,p}_{ij}(\tau)$', fontsize=15)
             ax5.tick_params(axis='x', labelsize=10)
             ax5.tick_params(axis='y', labelsize=10)
             ax5.set_ylim(-0.025 * 10**-4, 4.5 * 10**-4)
