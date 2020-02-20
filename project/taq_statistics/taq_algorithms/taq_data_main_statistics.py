@@ -45,6 +45,9 @@ def taq_data_generator(tickers, year):
     # Statistics of the quotes and trades
     taq_data_analysis_statistics \
         .taq_quotes_trades_year_statistics_data(tickers, year)
+    # Statistics midpoint
+    taq_data_analysis_statistics \
+        .taq_midpoint_year_statistics_data(tickers, year)
 
     return None
 
