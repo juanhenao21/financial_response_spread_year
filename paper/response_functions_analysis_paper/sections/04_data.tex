@@ -45,6 +45,38 @@ ten minutes of trading in a given day
 Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
 New York local time.
 
+
+\begin{table*}[htbp]
+\begin{threeparttable}
+\caption{Analyzed companies average number of quotes in a day.}
+\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
+\toprule
+\bf{Company} & \bf{Symbol} & \bf{Sector} & \bf{Quotes}\tnote{1} &
+\bf{Trades}\tnote{2} & \bf{Spread}\tnote{3}\tabularnewline
+\midrule
+Alphabet Inc. & GOOG & Information Technology (IT) & $164489$ & $19029$ &
+$\$0.04$\tabularnewline
+Mastercard Inc. & MA & Information Technology (IT) & $98909$ & $6977$ &
+$\$0.38$\tabularnewline
+CME Group Inc. & CME & Financials (F) & $98188$ & $3032$ &
+$\$1.08$\tabularnewline
+Goldman Sachs Group Inc. & GS & Financials (F) & $160470$ & $26227$ &
+$\$0.11$\tabularnewline
+Transocean Ltd. & RIG & Energy (E) & $107092$ & $11641$ &
+$\$0.12$\tabularnewline
+Apache Corp. & APA & Energy (E) & $103074$ & $8889$ & $\$0.13$\tabularnewline
+\bottomrule
+\end{tabular*}
+\begin{tablenotes}\footnotesize
+\item[1] Average number of quotes from 9:40:00 to 15:50:00 New York time.
+\item[2] Average number of trades from 9:40:00 to 15:50:00 New York time.
+\item[3] Average spread from 9:40:00 to 15:50:00 New York time.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
 
@@ -79,7 +111,7 @@ is made in the trade signs and in the midpoint prices.
 Facing the impossibility to relate midpoint prices and trade signs with the TAQ
 data in trade time scale, we will use the midpoint price of the previous second
 with all the trade signs of the current second. This will be our definition of
-trade time scale analysis.
+trade time scale analysis for the response function analysis.
 
 For physical time scale, as we can sampling, we relate the unique value of
 midpoint price of a previous second with the unique trade sign value of the
@@ -134,9 +166,9 @@ trades. In Fig. \ref{fig:relation_trades_midpoint_trade_scale}, the last
 midpoint price (circle) between the second $-1$ and $0$ is related with all the
 trades (squares and triangles) in the second $0$ to $1$, and so on. It is worth
 to note, in the seconds that there are no changes in the quotes, it is used the
-value of the previous second (vertical line over the second interval). Thus,
-all the seconds in the open market time have a midpoint price value, and in
-consequence returns values. We assume that as there was not a change in the
+value of the previous second (vertical line over the physical time interval).
+Thus, all the seconds in the open market time have a midpoint price value, and
+in consequence returns values. We assume that as there was not a change in the
 quotes, the midpoint price remain the same as the last one.
 
 \begin{figure}[htbp]
@@ -200,8 +232,10 @@ decrease the real value of the net return.
 In all the cases we choose the last change in the midpoint price in a second
 interval as described before
 (Fig. \ref{fig:relation_trades_midpoint_trade_scale}). We use this method
-knowing that the variation in one second of the midpoint price is not large, so
-it can give us valuable information about the response functions.
+knowing that the variation in one second of the midpoint price is not large
+(in average, the last midpoint price of a second differ with the average
+midpoint of that second in $0.007\%$), so it can give us valuable information
+about the response functions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Physical time scale}\label{subsubsec:physical_time}
