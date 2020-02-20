@@ -43,12 +43,13 @@ closing of the market, we systematically discarded the first ten and the last
 ten minutes of trading in a given day
 \cite{spread_changes_affect,Bouchaud_2004,Wang_2016_cross,large_prices_changes}.
 Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
-New York local time.
+New York local time. We will refer to this interval of time as the ``market
+time".
 
 
 \begin{table*}[htbp]
 \begin{threeparttable}
-\caption{Analyzed companies average number of quotes in a day.}
+\caption{Analyzed companies.}
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
 \toprule
 \bf{Company} & \bf{Symbol} & \bf{Sector} & \bf{Quotes}\tnote{1} &
@@ -67,6 +68,7 @@ $\$0.12$\tabularnewline
 Apache Corp. & APA & Energy (E) & $103074$ & $8889$ & $\$0.13$\tabularnewline
 \bottomrule
 \end{tabular*}
+\label{tab:companies}
 \begin{tablenotes}\footnotesize
 \item[1] Average number of quotes from 9:40:00 to 15:50:00 New York time.
 \item[2] Average number of trades from 9:40:00 to 15:50:00 New York time.
@@ -75,7 +77,12 @@ Apache Corp. & APA & Energy (E) & $103074$ & $8889$ & $\$0.13$\tabularnewline
 \end{threeparttable}
 \end{table*}
 
-
+Table \ref{tab:companies} shows the companies analyzed with their corresponding
+symbol and sector. The highest average number of quotes per day and the most
+liquid stock on average from our selection for the year 2008 is Alphabet Inc.
+The most traded stock on average from the group was Goldam Sachs Group Inc.
+On the other side, the stock with the less quotes, less traded and less
+liquidity on average for the analyzed year was CME Group Inc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
