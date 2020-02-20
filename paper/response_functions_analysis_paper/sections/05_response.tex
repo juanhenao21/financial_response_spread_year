@@ -78,6 +78,13 @@ Where
 
 is a weight function that depends on the normalization of the response.
 
+To compute the response functions in trade time scale, we used all the trade
+signs during a day in market time. As we can not associate an individual
+midpoint price with their corresponding trade signs, all the trade signs in one
+second are associated with the midpoint price of the previous second.
+As $\tau$ depends on the midpoint price, even if we are using trade signs in
+trade time scale, the value of $\tau$ is in seconds.
+
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\textwidth]
@@ -94,8 +101,9 @@ is a weight function that depends on the normalization of the response.
 The results of Fig. \ref{fig:response_function_trade_scale} show the self-
 responses of the six stocks used in the analysis and the cross-responses for
 pairs of stocks representing three different economic sectors. Compared with
-the market response in second time scale, the market response in trade time
-scale is almost one order of magnitude smaller.
+the market response in second time scale, the response functions in trade time
+scale is almost one order of magnitude smaller compared with the physical time
+scale.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Response functions in physical time scale}
