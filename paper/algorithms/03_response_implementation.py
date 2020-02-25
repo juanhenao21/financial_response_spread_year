@@ -297,12 +297,12 @@ def main():
     :return: None.
     """
 
-    ticker_i = 'AAPL'
-    ticker_j = 'MSFT'
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM']
-    sectors = [['AAPL', 'MSFT'], ['MSFT', 'AAPL'],
-               ['XOM', 'CVX'], ['CVX', 'XOM'],
-               ['GS', 'JPM'], ['JPM', 'GS']]
+    ticker_i = 'APA'
+    ticker_j = 'RIG'
+    tickers = ['GOOG', 'MA', 'GS', 'CME', 'APA', 'XOM']
+    sectors = [['GOOG', 'MA'], ['MA', 'GOOG'],
+               ['GS', 'CME'], ['CME', 'GS'],
+               ['APA', 'RIG'], ['RIG', 'APA']]
     year = '2008'
 
     taq_trade_scale_response_year_avg_plot(tickers, sectors, year)

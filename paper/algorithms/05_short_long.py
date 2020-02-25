@@ -83,7 +83,7 @@ def taq_responses_physical_short_long_year_plot(ticker_i, ticker_j, year, tau,
             ax1.tick_params(axis='x', labelsize=10)
             ax1.tick_params(axis='y', labelsize=10)
             ax1.set_xlim(1, 1000)
-            ax1.set_ylim(-0.2 * 10 ** -4, 1.6 * 10 ** -4)
+            ax1.set_ylim(-0.4 * 10 ** -4, 2.5 * 10 ** -4)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax1.yaxis.offsetText.set_fontsize(10)
             ax1.grid(True)
@@ -119,7 +119,7 @@ def taq_responses_physical_short_long_year_plot(ticker_i, ticker_j, year, tau,
             ax2.tick_params(axis='x', labelsize=10)
             ax2.tick_params(axis='y', labelsize=10)
             ax2.set_xlim(1, 1000)
-            ax2.set_ylim(-5 * 10 ** -5, 9 * 10 ** -5)
+            ax2.set_ylim(-1 * 10 ** -5, 1 * 10 ** -4)
             ax2.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax2.yaxis.offsetText.set_fontsize(10)
             ax2.grid(True)
@@ -144,7 +144,7 @@ def main():
 
     year = '2008'
 
-    taq_responses_physical_short_long_year_plot('AAPL', 'MSFT', year, 1000, 50)
+    taq_responses_physical_short_long_year_plot('GOOG', 'MA', year, 1000, 40)
 
     return None
 

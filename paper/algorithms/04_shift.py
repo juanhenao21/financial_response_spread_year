@@ -72,7 +72,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[0]}_{year}'
                 + f'_{ticker_i}.pickle', 'rb'))
 
-            max_pos_ax1 = np.where(max(self_trade_ax1) == self_trade_ax1)[0][0]
+            if np.where(max(self_trade_ax1) == self_trade_ax1)[0]:
+                max_pos_ax1 = np.where(max(self_trade_ax1)
+                                    == self_trade_ax1)[0][0]
+            else:
+                max_pos_ax1 = 0
 
             ax1.plot(t_ax_1_5, self_trade_ax1, linewidth=5,
                      label=r'$\tau= %d$ trade' % (taus[0]))
@@ -86,7 +90,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax1.legend(loc='upper left', fontsize=15)
             ax1.set_ylabel(r'$R^{s,t}_{ii}(\tau)$', fontsize=15)
             ax1.tick_params(axis='y', labelsize=10)
-            ax1.set_ylim(-0.5 * 10**-4, 7 * 10**-4)
+            ax1.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax1.yaxis.offsetText.set_fontsize(10)
             ax1.grid(True)
@@ -98,7 +102,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[1]}_{year}'
                 + f'_{ticker_i}.pickle', 'rb'))
 
-            max_pos_ax2 = np.where(max(self_trade_ax2) == self_trade_ax2)[0][0]
+            if np.where(max(self_trade_ax2) == self_trade_ax2)[0]:
+                max_pos_ax2 = np.where(max(self_trade_ax2)
+                                    == self_trade_ax2)[0][0]
+            else:
+                max_pos_ax2 = 0
 
             ax2.plot(t_ax_2_6, self_trade_ax2, linewidth=5,
                      label=r'$\tau = %d$ trades' % (taus[1]))
@@ -119,7 +127,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[2]}_{year}'
                 + f'_{ticker_i}.pickle', 'rb'))
 
-            max_pos_ax3 = np.where(max(self_trade_ax3) == self_trade_ax3)[0][0]
+            if np.where(max(self_trade_ax3) == self_trade_ax3)[0]:
+                max_pos_ax3 = np.where(max(self_trade_ax3)
+                                    == self_trade_ax3)[0][0]
+            else:
+                max_pos_ax3 = 0
 
             ax3.plot(t_ax_3_7, self_trade_ax3, linewidth=5,
                      label=r'$\tau = %d$ trades' % (taus[2]))
@@ -140,7 +152,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[3]}_{year}'
                 + f'_{ticker_i}.pickle', 'rb'))
 
-            max_pos_ax4 = np.where(max(self_trade_ax4) == self_trade_ax4)[0][0]
+            if np.where(max(self_trade_ax4) == self_trade_ax4)[0]:
+                max_pos_ax4 = np.where(max(self_trade_ax4)
+                                    == self_trade_ax4)[0][0]
+            else:
+                max_pos_ax4 = 0
 
             ax4.plot(t_ax_4_8, self_trade_ax4, linewidth=5,
                      label=r'$\tau = %d$ trades' % (taus[3]))
@@ -161,8 +177,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[0]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax5 = np.where(max(cross_trade_ax5)
-                                   == cross_trade_ax5)[0][0]
+            if np.where(max(cross_trade_ax5) == cross_trade_ax5)[0]:
+                max_pos_ax5 = np.where(max(cross_trade_ax5)
+                                    == cross_trade_ax5)[0][0]
+            else:
+                max_pos_ax5 = 0
 
             ax5.plot(t_ax_1_5, cross_trade_ax5, linewidth=5,
                      label=r'$\tau = %d$ trade' % (taus[0]))
@@ -176,7 +195,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax5.set_ylabel(r'$R^{s,t}_{ij}(\tau)$', fontsize=15)
             ax5.tick_params(axis='x', labelsize=10)
             ax5.tick_params(axis='y', labelsize=10)
-            ax5.set_ylim(-0.025 * 10**-4, 3 * 10**-4)
+            ax5.set_ylim(-0.025 * 10**-4, 7 * 10**-4)
             ax5.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax5.yaxis.offsetText.set_fontsize(0)
             ax5.xaxis.set_major_locator(ticker.MaxNLocator(4))
@@ -189,8 +208,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[1]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax6 = np.where(max(cross_trade_ax6)
-                                   == cross_trade_ax6)[0][0]
+            if np.where(max(cross_trade_ax6) == cross_trade_ax6)[0]:
+                max_pos_ax6 = np.where(max(cross_trade_ax6)
+                                    == cross_trade_ax6)[0][0]
+            else:
+                max_pos_ax6 = 0
 
             ax6.plot(t_ax_2_6, cross_trade_ax6, linewidth=5,
                      label=r'$\tau = %d$ trades' % (taus[1]))
@@ -212,8 +234,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_{taus[2]}/taq_cross_response_year_trade_shift_data_tau'
                 + f'_{taus[2]}_{year}_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax7 = np.where(max(cross_trade_ax7)
-                                   == cross_trade_ax7)[0][0]
+            if np.where(max(cross_trade_ax7) == cross_trade_ax7)[0]:
+                max_pos_ax7 = np.where(max(cross_trade_ax7)
+                                    == cross_trade_ax7)[0][0]
+            else:
+                max_pos_ax7 = 0
 
             ax7.plot(t_ax_3_7, cross_trade_ax7, linewidth=5,
                      label=r'$\tau = %d$ trades' % (taus[2]))
@@ -235,8 +260,11 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_trade_shift_data_tau_{taus[3]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax8 = np.where(max(cross_trade_ax8)
-                                   == cross_trade_ax8)[0][0]
+            if np.where(max(cross_trade_ax8) == cross_trade_ax8)[0]:
+                max_pos_ax8 = np.where(max(cross_trade_ax8)
+                                    == cross_trade_ax8)[0][0]
+            else:
+                max_pos_ax8 = 0
 
             ax8.plot(t_ax_4_8, cross_trade_ax8, linewidth=5,
                      label=r'$\tau = %d$ trades' % (taus[3]))
@@ -307,8 +335,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[0]}_{year}'
                 + f'_{ticker_i}.pickle', 'rb'))
 
-            max_pos_ax1 = np.where(max(self_physical_ax1)
-                                   == self_physical_ax1)[0][0]
+            if np.where(max(self_physical_ax1) == self_physical_ax1)[0]:
+                max_pos_ax1 = np.where(max(self_physical_ax1)
+                                    == self_physical_ax1)[0][0]
+            else:
+                max_pos_ax1 = 0
 
             ax1.plot(t_ax_1_5, self_physical_ax1, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[0]))
@@ -322,7 +353,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax1.legend(loc='upper left', fontsize=15)
             ax1.set_ylabel(r'$R^{s,p}_{ii}(\tau)$', fontsize=15)
             ax1.tick_params(axis='y', labelsize=10)
-            ax1.set_ylim(-0.5 * 10**-4, 8 * 10**-4)
+            ax1.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax1.yaxis.offsetText.set_fontsize(10)
             ax1.grid(True)
@@ -334,8 +365,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[1]}_{year}'
                 + f'_{ticker_i}.pickle', 'rb'))
 
-            max_pos_ax2 = np.where(max(self_physical_ax2)
-                                   == self_physical_ax2)[0][0]
+            if np.where(max(self_physical_ax2) == self_physical_ax2)[0]:
+                max_pos_ax2 = np.where(max(self_physical_ax2)
+                                    == self_physical_ax2)[0][0]
+            else:
+                max_pos_ax2 = 0
 
             ax2.plot(t_ax_2_6, self_physical_ax2, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[1]))
@@ -356,8 +390,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[2]}_{year}'
                 + f'_{ticker_i}.pickle').split()), 'rb'))
 
-            max_pos_ax3 = np.where(max(self_physical_ax3)
-                                   == self_physical_ax3)[0][0]
+            if np.where(max(self_physical_ax3) == self_physical_ax3)[0]:
+                max_pos_ax3 = np.where(max(self_physical_ax3)
+                                    == self_physical_ax3)[0][0]
+            else:
+                max_pos_ax3 = 0
 
             ax3.plot(t_ax_3_7, self_physical_ax3, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[2]))
@@ -378,8 +415,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[3]}_{year}'
                 + f'_{ticker_i}.pickle').split()), 'rb'))
 
-            max_pos_ax4 = np.where(max(self_physical_ax4)
-                                   == self_physical_ax4)[0][0]
+            if np.where(max(self_physical_ax4) == self_physical_ax4)[0]:
+                max_pos_ax4 = np.where(max(self_physical_ax4)
+                                    == self_physical_ax4)[0][0]
+            else:
+                max_pos_ax4 = 0
 
             ax4.plot(t_ax_4_8, self_physical_ax4, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[3]))
@@ -400,8 +440,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[0]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax5 = np.where(max(cross_physical_ax5)
-                                   == cross_physical_ax5)[0][0]
+            if np.where(max(cross_physical_ax5) == cross_physical_ax5)[0]:
+                max_pos_ax5 = np.where(max(cross_physical_ax5)
+                                    == cross_physical_ax5)[0][0]
+            else:
+                max_pos_ax5 = 0
 
             ax5.plot(t_ax_1_5, cross_physical_ax5, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[0]))
@@ -415,7 +458,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax5.set_ylabel(r'$R^{s,p}_{ij}(\tau)$', fontsize=15)
             ax5.tick_params(axis='x', labelsize=10)
             ax5.tick_params(axis='y', labelsize=10)
-            ax5.set_ylim(-0.025 * 10**-4, 4.5 * 10**-4)
+            ax5.set_ylim(-0.025 * 10**-4, 6 * 10**-4)
             ax5.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax5.yaxis.offsetText.set_fontsize(0)
             ax5.xaxis.set_major_locator(ticker.MaxNLocator(4))
@@ -428,8 +471,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[1]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax6 = np.where(max(cross_physical_ax6)
-                                   == cross_physical_ax6)[0][0]
+            if np.where(max(cross_physical_ax6) == cross_physical_ax6)[0]:
+                max_pos_ax6 = np.where(max(cross_physical_ax6)
+                                    == cross_physical_ax6)[0][0]
+            else:
+                max_pos_ax6 = 0
 
             ax6.plot(t_ax_2_6, cross_physical_ax6, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[1]))
@@ -451,8 +497,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[2]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax7 = np.where(max(cross_physical_ax7)
-                                   == cross_physical_ax7)[0][0]
+            if np.where(max(cross_physical_ax7) == cross_physical_ax7)[0]:
+                max_pos_ax7 = np.where(max(cross_physical_ax7)
+                                    == cross_physical_ax7)[0][0]
+            else:
+                max_pos_ax7 = 0
 
             ax7.plot(t_ax_3_7, cross_physical_ax7, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[2]))
@@ -474,8 +523,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                 + f'_response_year_physical_shift_data_tau_{taus[3]}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
-            max_pos_ax8 = np.where(max(cross_physical_ax8)
-                                   == cross_physical_ax8)[0][0]
+            if np.where(max(cross_physical_ax8) == cross_physical_ax8)[0]:
+                max_pos_ax8 = np.where(max(cross_physical_ax8)
+                                    == cross_physical_ax8)[0][0]
+            else:
+                max_pos_ax8 = 0
 
             ax8.plot(t_ax_4_8, cross_physical_ax8, linewidth=5,
                      label=r'$\tau = %d s$' % (taus[3]))
