@@ -299,7 +299,7 @@ def main():
 
     ticker_i = 'APA'
     ticker_j = 'RIG'
-    tickers = ['GOOG', 'MA', 'GS', 'CME', 'APA', 'XOM']
+    tickers = ['GOOG', 'MA', 'GS', 'CME', 'APA', 'RIG']
     sectors = [['GOOG', 'MA'], ['MA', 'GOOG'],
                ['GS', 'CME'], ['CME', 'GS'],
                ['APA', 'RIG'], ['RIG', 'APA']]
