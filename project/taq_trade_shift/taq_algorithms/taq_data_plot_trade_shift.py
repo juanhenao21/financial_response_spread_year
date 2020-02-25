@@ -64,7 +64,10 @@ def taq_self_response_year_avg_trade_shift_plot(ticker, year, taus):
                                + f'_shift_data_tau_{tau_val}_{year}_{ticker}'
                                + f'.pickle', 'rb'))
 
-            max_pos = np.where(max(self_) == self_)[0][0]
+            if np.where(max(self_) == self_)[0]:
+                max_pos = np.where(max(self_) == self_)[0][0]
+            else:
+                max_pos = 0
 
             ax.plot(times, self_, linewidth=5, label=r'{}'.format(ticker))
             # Plot line in the peak of the figure
@@ -140,7 +143,10 @@ def taq_cross_response_year_avg_trade_shift_plot(ticker_i, ticker_j, year,
                                    + f'_{year}_{ticker_i}i_{ticker_j}j.pickle',
                                    'rb'))
 
-                max_pos = np.where(max(cross) == cross)[0][0]
+                if np.where(max(cross) == cross)[0]:
+                    max_pos = np.where(max(cross) == cross)[0][0]
+                else:
+                    max_pos = 0
 
                 ax.plot(times, cross, linewidth=5, label=r'{} - {}'
                         .format(ticker_i, ticker_j))
