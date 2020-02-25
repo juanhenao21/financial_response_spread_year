@@ -1,8 +1,8 @@
 \section{Response functions}\label{sec:response_functions}
 
 The main objective of this work is to analyze the response functions. In
-general we define the self- and cross-response in a correlated financial market
-as
+general we define the self- and cross-response functions in a correlated
+financial market as
 
 \begin{equation}\label{eq:response_general}
     R^{scale}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1,
@@ -10,7 +10,8 @@ as
     _{scale}
 \end{equation}
 
-where the index $i$ and $j$ correspond to stocks in the market,
+where the index $i$ and $j$ correspond to stocks in the market, the superscript
+$p$ refers to the physical time scale,
 $r^{p}_{i}$ is the return of the stock $i$ in a time lag $\tau$ and
 $\varepsilon^{scale}_{j}$ is the trade sign of the stock $j$ in the
 corresponding scale. The subscript and superscript $scale$ refer to the time
@@ -52,7 +53,8 @@ response is
     \right)\cdot\varepsilon_{j}^{t} \left(t, n\right)\right\rangle _{t}
 \end{equation}
 
-However, to be explicit with the way the averaging is made, the function reads
+where the superscript $t$ refers to the trade time scale. However, to be
+explicit with the way the averaging is made, the function reads
 
 \begin{align}\label{eq:response_trades_explicit}
     R_{ij}^{t}\left(\tau\right)&=\frac{1}{\sum_{d=d_{0}}^{d_{f}}
@@ -92,18 +94,27 @@ trade time scale, the value of $\tau$ is in seconds.
     \caption{Self- and cross-response functions
              $R^{t}_{ij}\left(\tau\right)$ excluding
              $\varepsilon^{t}_{j}\left(t\right) = 0$ in 2008 versus time
-             lag $\tau$ on a logarithmic scale in trade time scale. Self-
-             responses (left) of individual stocks and cross-response (right)
-             of stock pairs from the same economic sector.}
+             lag $\tau$ on a logarithmic scale in trade time scale.
+             Self-response functions (left) of individual stocks and
+             cross-response functions (right) of stock pairs from the same
+             economic sector.}
     \label{fig:response_function_trade_scale}
 \end{figure*}
 
 The results of Fig. \ref{fig:response_function_trade_scale} show the self-
 responses of the six stocks used in the analysis and the cross-responses for
-pairs of stocks representing three different economic sectors. Compared with
-the market response in second time scale, the response functions in trade time
-scale is almost one order of magnitude smaller compared with the physical time
-scale.
+pairs of stocks representing three different economic sectors.
+
+The self-response functions increase to a maximum and then slowly decrease. In
+some stocks this behavior is more pronounced than in others. For our selected
+tickers, a time lag of $\tau = 10^{3}$ is enough to see an increase to a maximum
+followed by a decrease. Thus, the trend in the self-response functions is
+eventually reversed.
+On the other hand, the cross-response functions have smaller signal strength
+than the self-response functions. For our cross-response functions of stocks in
+the same sectors, some couples exhibit the increase-decrease behavior inside a
+time lag of $\tau = 10^{3}$. Other couples seems to need a larger time lag to
+reach the decrease behavior.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Response functions in physical time scale}
@@ -120,7 +131,7 @@ $\varepsilon^{p}_j \left( t\right) = 0$ does not change the trend of price
 reversion versus the time lag, but it does affect the response function
 strength \cite{Wang_2016_avg}.
 
-Regarding the definition of the cross-response functions in- and excluding
+Regarding the definition of the response functions in- and excluding
 $\varepsilon^{p}_j \left( t\right) = 0$, the general averaging is
 
 \begin{equation}\label{eq:response_inc}
@@ -218,15 +229,23 @@ is a weight function that depends on the normalization of the response.
     \caption{Self- and cross-response functions $R^{p}_{ij}\left(\tau\right)$
              excluding $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus
              time lag $\tau$ on a logarithmic scale in second time scale.
-             Self-responses (left) of individual stocks and cross-response
-             (right) of stock pairs from the same economic sector.}
+             Self-response functions (left) of individual stocks and
+             cross-response functions (right) of stock pairs from the same
+             economic sector.}
     \label{fig:market_response_time_scale}
 \end{figure*}
 
-The results showed in Figure \ref{fig:market_response_time_scale} are identical
-with the ones showed in \cite{Wang_2016_cross} for the same data. We can say
-again that in all cases, an increase to a maximum is followed by a decrease,
+The results showed in Figure \ref{fig:market_response_time_scale} are the
+self- and cross-response functions in physical time scale. For the self-response
+functions we can say again that in almost all the cases, an increase to a
+maximum is followed by a decrease,
 i.e. the trend in the self- and cross-response is eventually reversed.
+In the cross-response functions, we have a similar behavior with the previous
+subsection, where the time lag was not enough to see the decrease in all the
+stock pairs.
+
+Compared with the response functions in trade time scale, the response functions
+in physical time scale are larger.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Activity response functions in physical time scale}
@@ -244,7 +263,8 @@ response is
     \right\rangle _{p}
 \end{equation}
 
-And the corresponding explicit expression reads
+where the superscript $a$ refers to the activity response function. The
+corresponding explicit expression reads
 
 \begin{align}
     R_{ij}^{a}\left(\tau\right)&=\frac{1}{\sum_{d=d_{0}}^{d_{f}}
@@ -291,11 +311,14 @@ influence in the responses.
     \caption{Self- and cross-response functions
              $R^{scale}_{ij}\left(\tau\right)$ excluding
              $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus time lag
-             $\tau$ on a logarithmic scale. a) self-response function of Apple
-             Inc. stock, b) cross-response function of Apple Inc-Microsoft
-             Corp. stocks.}
+             $\tau$ on a logarithmic scale. Self-response functions (left) of
+             Goldman Sachs Group Inc. stock and cross-response functions
+             (right) of Goldman Sachs Group Inc.-CME Group Inc. stocks.}
     \label{fig:relation_responses}
 \end{figure*}
 
 As predicted by the weights, the event response is weaker than the physical
 response, and the activity response is the strongest response.
+
+In the three curves in the figure can be seen the increase-decrease behavior of
+the response functions.
