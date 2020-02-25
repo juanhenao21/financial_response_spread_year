@@ -1,19 +1,35 @@
 \section{Time shift response functions}\label{sec:time_shift}
 
-We used the definition of the response function from \cite{Wang_2016_cross} that
-is showed in Equation \ref{eq:Wang_2016}. To see the impact of the time shift I
-analyzed the TAQ data in the year 2008. I used different time shifts in the
+The relative position between midpoint prices and trade signs directly impact
+the result of the response functions. Shifting the values to the right or to
+left either in trade time scale or physical time scale have approximately the
+same effect.
+
+To test this claim, we used the definition of the response function from
+\cite{Wang_2016_cross} that is showed in Equation \ref{eq:Wang_2016} and added
+a parameter $t_{s}$ that shifts the position between midpoint prices and trade
+signs. To see the impact of the time shift I analyzed the stocks showed in
+Table \ref{tab:companies} in the year 2008. I used different time shifts in the
 response function
 
 \begin{equation}\label{eq:time_shift_general}
-    R_{ij}^{s, escale}\left(\tau\right)=\left\langle r_{i}
+    R_{ij}^{s, scale}\left(\tau\right)=\left\langle r^{scale}_{i}
     \left(t-t_{s},\tau\right) \cdot\varepsilon^{scale}_{j}
     \left(t\right)\right\rangle _{scale}
 \end{equation}
 
-Making $\tau$ constant, and varying $t_{s}$ I obtained values for self- and
-cross-responses. CORREGIR As $t_{shift}$ is related with the response, the shift is in
-seconds for both scales.
+where the index $i$ and $j$ correspond to stocks in the market, $r^{scale}_{i}$
+is the return of the stock $i$ in a time lag $\tau$ with a time shift
+$t_{shift}$ in the corresponding scale and $\varepsilon^{scale}_{j}$ is the
+trade sign of the stock $j$ in the corresponding scale. The subscript and
+superscript $scale$ refer to the time scale used, wether physical time scale or
+trade time scale and $R_{ij}^{s,scale}$ is the time shift response function, where the
+superscript $s$ refers to the time shift. Finally, we average the product over the physical time or
+trade time depending on the time scale.
+
+We compute the response functions according to two cases. In one case we set
+$\tau$ to a constant value and vary $t_{s}$, and in th other case we set
+$t_{s}$ to a constant value and vary $\tau$.
 
 In Sect. \ref{subsec:time_shift_trade} we analyze the influence of the time
 shift between the trade signs and returns in trade time scale and in Sect.
@@ -24,14 +40,18 @@ between the trade signs and returns in physical time scale.
 \subsection{Trade time scale shift response functions}
 \label{subsec:time_shift_trade}
 
-In Fig. \ref{fig:shift_trade_scale}, for fixed $\tau$ values, there is a peak
-in a position related to $\tau$.
+In the trade time scale we compute the response function
 
-In the trade time scale, I tested the response function for different shifted
-times (Fig. \ref{fig:shift_responses_trade_scale}). The one second shift curve
-is the control curve. From small $\tau$ values to a $\tau_{max}$ value the
-response grows. Then it starts to decay, but not under the original value of
-$t_{shift} = 1$.
+\begin{equation}\label{eq:time_shift_trade}
+    R_{ij}^{s, t}\left(\tau\right)=\left\langle r^{t}_{i}
+    \left(t-t_{s},\tau\right) \cdot\varepsilon^{t}_{j}
+    \left(t\right)\right\rangle _{t}
+\end{equation}
+
+In this case for $r^t{t}_{i}$, we associate all the trade signs to a return
+value and create pseudo midpoint price values in trade time scale. Then, we shift
+the trade signs and the returns by trades. Hence, the
+time lag and time shift are in trade time scale.
 
 \begin{figure*}[htbp]
     \centering
@@ -46,6 +66,14 @@ $t_{shift} = 1$.
     \label{fig:shift_trade_scale}
 \end{figure*}
 
+In Fig. \ref{fig:shift_trade_scale}, it can be seen the response functions results
+for fixed $\tau$ values while $t_{s}$ is variable. In the different $\tau$ values
+figures, the results are almost the same. The response functions are zero either if the
+time shift is larger than $\tau$, or if the time shift is smaller than zero.
+For values between zero and $\tau$ there is a peak in a position related to $\tau$.
+The response function grows and decrease relatively fast. However, related on the
+time lag, there is a zone where the signal is different to zero.
+
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/04_shift_responses_trade.png}
@@ -59,14 +87,28 @@ $t_{shift} = 1$.
     \label{fig:shift_responses_trade_scale}
 \end{figure*}
 
+I tested the response function for fixed time shift values while $\tau$ is variable.
+For every time shift (Fig. \ref{fig:shift_responses_trade_scale}), both, self- and cross-response
+results are qualitatively the same. It can be seen
+that the response functions have a zero signal before the time shift, and after the
+returns and trade signs find their corresponding order the signals grow. In comparison
+with the values obtained in Fig. \ref{fig:response_function_trade_scale}, it looks
+like the response function values are stronger. However, this is an effect of the
+averaging of the functions. As the returns and trade signs are shifted, they are
+less values to average, and then the signals look bigger. Anyway, the figure shows the
+importance of the relation between the trade signs and returns to compute the response function.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical time scale shift response functions}
 \label{subsec:time_shift_physical}
 
-For every $\tau$ value, there is a peak. The peak grows fast and decay slowly
-for $\tau < 10$, and grows and decays fast for large $\tau$. The response
-signal usually starts to grow on zero or a little bit earlier and grows to
-around $\tau$.
+In the physical time scale we compute the response function
+
+\begin{equation}\label{eq:time_shift_physical}
+    R_{ij}^{s, p}\left(\tau\right)=\left\langle r^{p}_{i}
+    \left(t-t_{s},\tau\right) \cdot\varepsilon^{p}_{j}
+    \left(t\right)\right\rangle _{t}
+\end{equation}
 
 \begin{figure*}[htbp]
     \centering
@@ -81,10 +123,14 @@ around $\tau$.
     \label{fig:shift_physical_scale}
 \end{figure*}
 
-I tested the response function for different shifted times (Fig.
-\ref{fig:shift_responses_physical_scale}). The one second shift curve is the control curve. From small
-$\tau$ values to a $\tau_{max}$ value the response grows. Then it starts to decay, but not under the
-original value of $t_{shift} = 1$.
+Similar to the results in Subsect. \ref{subsec:time_shift_trade}, Fig. \ref{fig:shift_physical_scale}
+shows the responses functions for fixed $\tau$ values while $t_{s}$ is variable.
+Again, the response functions are zero if the time shift is larger than the time lag, or if
+the time shift is smaller than zero.
+For every $\tau$ value, there is a peak. The peak grows and decay relatively fast.
+The response
+signal usually starts to grow in zero or a little bit earlier and grows to
+a value around to $\tau$. In this zone the response functions are different to zero.
 
 \begin{figure*}[htbp]
     \centering
@@ -99,10 +145,19 @@ original value of $t_{shift} = 1$.
     \label{fig:shift_responses_physical_scale}
 \end{figure*}
 
-My interpretation for the rise of the signal in the different cases, is that there is a zone of the
-beginning of the shifted signals where there is not relevant information, which make the response
-zero. When the signal reach the one or two event/second shift, the response have again relevant
-information, and the response is different to zero.
+The results for fixed time shift values and variable time lag are shown in Fig.
+\ref{fig:shift_responses_physical_scale}. The self- and cross-response results
+are qualitatively the same. As seen in the previous subsection, the response
+functions are zero before the time shift value. After the returns and the trade
+signs reach their order, the signals grow. The same effect of the apparent stronger
+signal can be seen here, and again, it is due to the averaging values.
 
-When the $\tau$ value grows, the averaging value decrease, hence the apparent response is bigger.
-This explains that in larger values the signal seems to be large.
+The results in trade time scale and physical time scale can be explained understanding
+the the dynamics of the market. A trade can o can not change the price of a ticker. Therefore,
+when a change in price happens, a change in midpoint price, and consequently in returns happens.
+Thus, it is extremely important to keep the order of the events and the relation between them.
+When we shift the trade signs and returns, this order is temporarily lost and as
+outcome the signal does not have any meaningful information. When the order is
+recovered during the shift, the signal grows again, showing response function
+values different to zero. In this section we were interested only in the order (shift)
+and not in the responses values, which were analyzed in Sect. \ref{sec:response_functions}.
