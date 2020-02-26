@@ -1,27 +1,29 @@
 \section{Short and long response functions}\label{sec:short_long}
 
 Regarding Equation \ref{eq:return_general}, we use a time lag $\tau$ in the
-returns to see the gains or loses in a future time. We divide the time lag
-$\tau$ as show in Fig. \ref{fig:tau_short_long}. As
+returns to see the gains or loses in a future time. However, the strenght of the return in the time lag
+should not be equal along its length. Then, we divide the full range time lag $\tau$ in an
+immediate time lag and in a late time lag as show in Fig. \ref{fig:tau_short_long}, where
 
 \begin{equation}\label{eq:tau_short_long}
     \tau = \tau' + \left( \tau - \tau' \right)
 \end{equation}
 
-for $\tau' < \tau$. This distinguish the response depending in the time lag as
-the short (immediate) response $\tau'$ with the long response $\tau$.
+for $\tau' < \tau$. This distinguish the returns depending in the time lag as
+the short (immediate) return $\tau'$ with the long return $\tau - \tau'$.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{figures/05_tau_short_long.png}
-    \caption{$\tau$ value divide in short and long response.}
+    \caption{$\tau$ value divided in short and long time lag.}
     \label{fig:tau_short_long}
 \end{figure}
 
-To compute the short and long response, we start redefining the returns as
+To use the short and long time lag, we rewrite the returns in physical
+time scale as
 
 \begin{align}\label{eq:short_long_return}
-    r^{p}_{i}\left(t,\tau\right)&=\ln\left(\frac{m_{i}\left(t+\tau\right)}
+    r^{sl,p}_{i}\left(t,\tau\right)&=\ln\left(\frac{m_{i}\left(t+\tau\right)}
     {m_{i} \left(t\right)}\right) \nonumber \\
     &=\ln\left(\frac{m_{i}\left(t+\tau\right)}{m_{i}\left(t+\tau'\right)}
     \cdot\frac{m_{i} \left(t+\tau'\right)}{m_{i}\left(t\right)}\right)
@@ -34,20 +36,18 @@ To compute the short and long response, we start redefining the returns as
     \left(t\right)}{m_{i}\left(t\right)}
 \end{align}
 
-The second term of the right part is constant with respect to $\tau$. That
-means, the main signal of the return come from the short return. The long
-return does not give a significant contribution to the complete return.
-Replacing Equation \ref{eq:short_long_return} in the response function we have
+where $sl$ refers to short-long and the second term of the right part is constant with respect to $\tau$.
+Replacing Equation \ref{eq:short_long_return} in the response function (Eq. \ref{eq:response_functions_time_scale_general}) we have
 
 \begin{align}\label{eq:short_long_response}
-    R^{p}_{ij}\left(\tau\right)&=\left\langle r^{p}_{i}\left(t, \tau\right)
+    R^{sl,p}_{ij}\left(\tau\right)&=\left\langle r^{sl,p}_{i}\left(t - 1, \tau\right)
     \cdot\varepsilon^{p}_{j}\left(t\right)\right\rangle _{p} \nonumber \\
-    &\approx\left\langle \frac{m_{i}\left(t+\tau\right)-m_{i}
-    \left(t+\tau'\right)} {m_{i}\left(t+\tau'\right)}\cdot\varepsilon_{j}
-    \left(t\right)\right\rangle _{t\in\tau-\tau'} \nonumber \\
+    &\approx\left\langle \frac{m_{i}\left(t - 1 +\tau\right)-m_{i}
+    \left(t - 1 +\tau'\right)} {m_{i}\left(t - 1 +\tau'\right)}\cdot\varepsilon_{j}
+    \left(t\right)\right\rangle _{p} \nonumber \\
     & +\left\langle \frac{m_{i}
-    \left(t+\tau'\right)-m_{i}\left(t\right)}{m_{i}\left(t\right)}
-    \cdot\varepsilon_{j}\left(t\right)\right\rangle _{t\in\tau'}
+    \left(t - 1 +\tau'\right)-m_{i}\left(t - 1\right)}{m_{i}\left(t - 1\right)}
+    \cdot\varepsilon_{j}\left(t\right)\right\rangle _{p}
 \end{align}
 
 Where the first term in the right side of Equation \ref{eq:short_long_response}
@@ -58,37 +58,41 @@ term of Equation \ref{eq:short_long_response} is independent of $\tau$.
     \centering
     \includegraphics[width=\textwidth]
     {figures/05_short_long_GOOG_MA.png}
-    \caption{Cross-response}
-    \label{fig:short_long_cross-response}
+    \caption{Self- and cross-response functions $R^{p}_{ij}\left(\tau\right)$ excluding
+            $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus time lag $\tau$ on a
+            logarithmic scale using a $\tau'=40$. a) self-response function of Apple Inc. stock,
+            b) cross-response function of Apple Inc-Microsoft Corp. stocks.}
+    \label{fig:short_long_responses}
 \end{figure*}
-% \caption{Self- and cross-response functions $R^{p}_{ij}\left(\tau\right)$ excluding
-%          $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus time lag $\tau$ on a
-%          logarithmic scale using a $\tau'=40$. a) self-response function of Apple Inc. stock,
-%          b) cross-response function of Apple Inc-Microsoft Corp. stocks.}
-% \label{fig:short_long_responses}
-
-\textcolor{red}{Check the legend position of the figure, change the scale to
-                seconds in the axis, find a way to make more general the
-                results. Maybe the average can help. Maybe repeat the analysis
-                for the trade time scale.}
 
 The results in Fig. \ref{fig:short_long_responses} show the short response, the
 long response, the addition of the short response and long response (Sum), the
 original response, a random response and the value of $\tau'$.
 
+The main signal of the response function come from the short response. Depending
+on the stock and the value of $\tau'$ the long response can increase or decrease
+the short response signal, but in general the long response does not give a
+significant contribution to the complete response.
+
 Before $\tau'$, the short response and long response are the same, as the self
-and cross-response definition do not define these values for values smaller
-than $\tau '$, so it is computed as the original response. After $\tau'$, the
+and cross-response definition do not define values smaller
+than $\tau '$, so it is computed as the original response. In the figure, the
+curves of the short and long response are under the curve of the original response. After $\tau'$, the
 short response is a strong constant signal. On the other hand, the long
 response immediately fades, showing the small contribution to the final
-response. To compare the significance of the long response, I added a random
+response. To compare the significance of the long response, We added a random
 response made with the trade signs used to compute the response but with a
 shuffle order. The long response and the random response are comparable, and
-show how the long response is not representative in the final response.
+show how the long response is not that representative in the final response.
 If we add the short and long response, we obtain the original response. In Fig.
 \ref{fig:short_long_responses}, the original response (red line) has the same
-shape to the addition of the short and long response (green line). I analyzed
-the short and long responses with different $\tau '$ values
-($10s, 20s, 30s, 40s, 50s, 60s, 70s, 80s, 90s, 100s$). On average, the maximum
-response is around $\tau = 40$. That means the long response before this value
-have some positive values and after this value have all negative values.
+shape to the addition of the short and long response (green line).
+
+For the response functions that show the increase-decrease behavior in between
+the time lag $\tau = 10^{3}$, the peak is usually between $\tau = 10^{1}$ and
+$\tau = 10^{2}$. In these cases the long response is always negative after the
+$\tau'$ value and is comparable in magnitude with the random signal.
+
+On the other hand, the response functions that requires a bigger time lag to
+show the increase-decrease behavior, have non negative long responses, but still
+they are comparable in magnitude with the random signal.
