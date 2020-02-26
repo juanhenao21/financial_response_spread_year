@@ -299,11 +299,11 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
     """Plots the shift in self- and cross-response for a year in second
        physical scale.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param year: string of the year to be analized (i.e '2008')
+    :param year: string of the year to be analyzed (i.e '2008')
     :param taus: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
      a value.
@@ -644,7 +644,7 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                      label=f'Average')
         ax1.legend(loc='upper center', bbox_to_anchor=(1.0, 1.3), ncol=4,
                    fontsize=15)
-        ax1.set_ylabel(r'$R^{t}_{ii}(\tau)$', fontsize=15)
+        ax1.set_ylabel(r'$R^{s,t}_{ii}(\tau)$', fontsize=15)
         ax1.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax1.tick_params(axis='y', labelsize=10)
@@ -663,7 +663,7 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax3.legend(loc='upper center', bbox_to_anchor=(1.0, -0.2), ncol=4,
                    fontsize=15)
         ax3.set_xlabel(r'$\tau \, [trades]$', fontsize=15)
-        ax3.set_ylabel(r'$R^{t}_{ij}(\tau)$', fontsize=15)
+        ax3.set_ylabel(r'$R^{s,t}_{ij}(\tau)$', fontsize=15)
         ax3.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax3.tick_params(axis='x', labelsize=10)
@@ -785,7 +785,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                      label=f'Average')
         ax1.legend(loc='upper center', bbox_to_anchor=(1.0, 1.3), ncol=4,
                    fontsize=15)
-        ax1.set_ylabel(r'$R^{p}_{ii}(\tau)$', fontsize=15)
+        ax1.set_ylabel(r'$R^{s,p}_{ii}(\tau)$', fontsize=15)
         ax1.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax1.tick_params(axis='y', labelsize=10)
@@ -804,7 +804,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax3.legend(loc='upper center', bbox_to_anchor=(1.0, -0.2), ncol=4,
                    fontsize=15)
         ax3.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax3.set_ylabel(r'$R^{p}_{ij}(\tau)$', fontsize=15)
+        ax3.set_ylabel(r'$R^{s,p}_{ij}(\tau)$', fontsize=15)
         ax3.set_xlim(1, 1000)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax3.tick_params(axis='x', labelsize=10)

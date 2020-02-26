@@ -79,7 +79,7 @@ def taq_responses_physical_short_long_year_plot(ticker_i, ticker_j, year, tau,
             ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                        fontsize=15)
             ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-            ax1.set_ylabel(r'$R^{sl}_{ii}(\tau)$', fontsize=15)
+            ax1.set_ylabel(r'$R^{sl,p}_{ii}(\tau)$', fontsize=15)
             ax1.tick_params(axis='x', labelsize=10)
             ax1.tick_params(axis='y', labelsize=10)
             ax1.set_xlim(1, 1000)
@@ -115,7 +115,7 @@ def taq_responses_physical_short_long_year_plot(ticker_i, ticker_j, year, tau,
             ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                        fontsize=15)
             ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-            ax2.set_ylabel(r'$R^{sl}_{ij}(\tau)$', fontsize=15)
+            ax2.set_ylabel(r'$R^{sl,p}_{ij}(\tau)$', fontsize=15)
             ax2.tick_params(axis='x', labelsize=10)
             ax2.tick_params(axis='y', labelsize=10)
             ax2.set_xlim(1, 1000)
