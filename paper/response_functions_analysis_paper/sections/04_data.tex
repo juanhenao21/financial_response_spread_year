@@ -27,10 +27,7 @@ the directly preceding quote. Hence, we cannot determine the trade sign by
 comparing the traded price and the preceding midpoint price
 \cite{Wang_2016_cross}. In this case we need to do a preprocessing of the data
 to relate the midpoint prices with the trade signs in trade time scale and in
-physical time scale. Observe that we will not be discussing the returns, but
-the midpoint price. This because both are intrinsically related, as explained
-before, and it is more intuitive to understand the changes in midpoint prices
-than in returns.
+physical time scale.
 
 To analyze the response functions across different liquid stocks, we select the
 six companies with the largest average market capitalization (AMC) (Alphabet
@@ -80,7 +77,7 @@ Apache Corp. & APA & Energy (E) & $103074$ & $8889$ & $\$0.13$\tabularnewline
 Table \ref{tab:companies} shows the companies analyzed with their corresponding
 symbol and sector. The highest average number of quotes per day and the most
 liquid stock on average from our selection for the year 2008 is Alphabet Inc.
-The most traded stock on average from the group was Goldam Sachs Group Inc.
+The most traded stock on average from the group was Goldman Sachs Group Inc.
 On the other side, the stock with the less quotes, less traded and less
 liquidity on average for the analyzed year was CME Group Inc.
 
@@ -88,7 +85,7 @@ liquidity on average for the analyzed year was CME Group Inc.
 \subsection{Time definition}\label{subsec:time_definition}
 
 A key concept in the analysis of the response functions is the time. Due to the
-nature of the data, they are several options to define the time.
+nature of the data, they are several options to define it.
 
 In general, the time series are indexed in calendar time (hours, minutes,
 seconds, milliseconds). Moreover, tick-by-tick data available on financial
@@ -175,8 +172,9 @@ trades (squares and triangles) in the second $0$ to $1$, and so on. It is worth
 to note, in the seconds that there are no changes in the quotes, it is used the
 value of the previous second (vertical line over the physical time interval).
 Thus, all the seconds in the open market time have a midpoint price value, and
-in consequence returns values. We assume that as there was not a change in the
-quotes, the midpoint price remain the same as the last one.
+in consequence returns values. We assume that as long as they were not changes
+in the quotes, the midpoint price remain the same as the one of the previous
+second.
 
 \begin{figure}[htbp]
     \centering
@@ -200,9 +198,9 @@ trade time scale. A drawback in the computation could come from the fact that
 the return of a given second is composed by the contribution of small returns
 corresponding to each change in the midpoint price during a second. As we are
 assuming only one value for the returns in each second, we are supposing  all
-the returns in one second interval to be positive or negative, which could not
-be the case. This could increase or decrease the response signal at the end of
-the computation.
+the returns in one second interval to be positive or negative with the same
+magnitude, which could not be the case. This could increase or decrease the
+response signal at the end of the computation.
 
 \begin{figure}[htbp]
     \centering
@@ -223,11 +221,11 @@ Figure \ref{fig:return_contributions} illustrate with one example this point.
 Suppose one second interval, in which they are three different midpoint prices,
 and as result, three different returns for this three midpoint price
 values. Furthermore, consider that the volume of limit orders that have the
-corresponding midpoint price are the same in the bid and in the ask (so the
-impact have the same magnitude). In the case of the top left (top right)
+corresponding midpoint prices are the same in the bid and in the ask (so the
+returns have the same magnitude). In the case of the top left (top right)
 sketch, all the changes are due to the rise (decrease) of the midpoint price,
 that means, consumption of the best ask (bid), so all the contributions of the
-individual returns in the second are positive (negative), and in repercussion,
+individual returns in the second are positive (negative), and in consequence,
 the net return is positive (negative). In the case of the bottom, the changes
 are due to a combination of increase and decrease of the midpoint price, so in
 the end the individual returns sum up to a net return, which can be positive or
