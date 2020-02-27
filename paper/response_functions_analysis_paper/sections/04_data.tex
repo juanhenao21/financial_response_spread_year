@@ -41,7 +41,7 @@ financials and energy) of the S\&P index in 2008.
 In order to avoid overnight effects and any artifact due to the opening and
 closing of the market, we systematically discarded the first ten and the last
 ten minutes of trading in a given day
-\cite{spread_changes_affect,Bouchaud_2004,Wang_2016_cross,large_prices_changes}.
+\cite{Bouchaud_2004,large_prices_changes,spread_changes_affect,Wang_2016_cross}.
 Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
 New York local time. We will refer to this interval of time as the ``market
 time".
@@ -111,7 +111,7 @@ not increase the time by one unit. The main outcome of trade time scale is its
 
 The physical time scale is increased by one unit each time a second passes.
 This means that computing the responses in this scale involves sampling
-\cite{Wang_2016_cross,sampling_returns}, which has to be done carefully when
+\cite{sampling_returns,Wang_2016_cross}, which has to be done carefully when
 dealing for example with several stocks with different liquidity. This sampling
 is made in the trade signs and in the midpoint prices.
 
@@ -132,7 +132,7 @@ scale and returns will be only used in physical time scale.
 
 We use the trade sign classification in trade time scale proposed by S. Wang et
 al. in \cite{Wang_2016_cross} and used in
-\cite{Wang_2016_avg,Wang_2017,Wang_2018_copulas} that reads
+\cite{Wang_2017,Wang_2018_copulas,Wang_2016_avg} that reads
 
 \begin{equation}\label{eq:trade_signs_trade}
     \varepsilon^{t}\left(t,n\right)=\left\{
@@ -249,7 +249,7 @@ about the response functions.
 
 We use the trade sign definition in physical time scale proposed by
 S. Wang et al. in \cite{Wang_2016_cross} and used in
-\cite{Wang_2016_avg,Wang_2017}, that depends on the classification in
+\cite{Wang_2017,Wang_2016_avg}, that depends on the classification in
 Eq. \ref{eq:trade_signs_trade} and reads
 
 \begin{equation}\label{eq:trade_signs_physical}
