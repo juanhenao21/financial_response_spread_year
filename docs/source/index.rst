@@ -27,11 +27,9 @@ The main objective of this work is to analyze the response functions. In
 general we define the self- and cross-response functions in a correlated
 financial market as
 
-\begin{equation}\label{eq:response_general}
-    R^{scale}_{ij}\left(\tau\right)=\left\langle r^{scale}_{i}\left(t-1,
+.. math::  R^{scale}_{ij}\left(\tau\right)=\left\langle r^{scale}_{i}\left(t-1,
     \tau\right) \cdot\varepsilon^{scale}_{j} \left(t\right)\right\rangle
     _{scale}
-\end{equation}
 
 In the following can be seen the documentation of all the project code.
 
@@ -45,7 +43,7 @@ In the following can be seen the documentation of all the project code.
 
    03_taq_responses_physical_shift
 
-   04_taq_response_activity
+   04_taq_responses_activity
 
    05_taq_responses_physical_short_long
 
