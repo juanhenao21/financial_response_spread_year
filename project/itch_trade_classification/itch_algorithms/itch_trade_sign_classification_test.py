@@ -27,11 +27,11 @@ def itch_trade_classification_data(ticker, year, month, day):
     TotalView-ITCH file. These data is used to test the trade sign
     classification equations.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2008').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2008').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -165,13 +165,13 @@ def itch_trade_classification_eq1_data(ticker, trade_signs, price_signs, year,
     Obtain the experimental trade signs based on the change of prices. To
     compute the trades signs are used consecutive trades in the ITCH data.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param trade_signs: array of empirical trade signs from ITCH data.
     :param price_signs: array of the price of the trades.
-    :param year: string of the year to be analized (i.e '2008').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2008').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: array -- The function returns a numpy array.
     """
 
@@ -212,14 +212,14 @@ def itch_trade_classification_eq2_data(ticker, times_signs, trade_signs,
     <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
     Obtain the experimental trade signs based on Eq. 1 classification using
     the ITCH data.
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param times_signs: array of the time of the trades.
     :param trade_signs: array of the empirical trade signs from ITCH data.
     :param identified_trades: array of the trade signs from Eq. 1.
-    :param year: string of the year to be analized (i.e '2008').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2008').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -267,15 +267,15 @@ def itch_trade_classification_eq3_data(ticker, times_signs, trade_signs,
     <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
     Obtain the experimental trade signs based on Eq. 1 classification using
     the ITCH data.
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param times_signs: array of the time of the trades.
     :param trade_signs: array of the theoric trade signs from ITCH data.
     :param volume_signs: array of the volume of the trades.
     :param identified_trades: array of the trades signs from Eq. 1.
-    :param year: string of the year to be analized (i.e '2008').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2008').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 

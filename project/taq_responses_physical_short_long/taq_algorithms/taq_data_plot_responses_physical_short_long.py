@@ -35,9 +35,9 @@ def taq_self_response_year_avg_responses_physical_short_long_plot(ticker, year,
                                                                   tau, tau_p):
     """Plots the self-response average for a year.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2008').
+    :param year: string of the year to be analyzed (i.e '2008').
     :param tau: integer greater than zero (i.e. 50).
     :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None -- The function saves the plot in a file and does not return
@@ -111,11 +111,11 @@ def taq_cross_response_year_avg_responses_physical_short_long_plot(ticker_i,
                                                                    tau_p):
     """Plots the cross-response average for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param year: string of the year to be analized (i.e '2008')
+    :param year: string of the year to be analyzed (i.e '2008')
     :param tau: integer greater than zero (i.e. 50).
     :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None -- The function saves the plot in a file and does not return

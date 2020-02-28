@@ -67,7 +67,7 @@ def taq_data_extract(ticker, type, year):
     the information of a whole year. The time range for each day is from 9:30
     to 16:00, that means, the open market time.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param type: string with the type of the data to be extracted
      (i.e. 'trades' or 'quotes').
@@ -169,7 +169,7 @@ def taq_midpoint_trade_data(ticker, date):
     day. For further calculations, the function returns the values for the time
     range from 9h40 to 15h50.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -226,7 +226,7 @@ def taq_midpoint_physical_data(ticker, date):
     every second. To fill the time spaces when nothing happens I replicate the
     last value calculated until a change in the price happens.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -322,7 +322,7 @@ def taq_trade_signs_trade_data(ticker, date):
     For further calculations, the function returns the values for the time
     range from 9h40 to 15h50.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
         (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -400,7 +400,7 @@ def taq_trade_signs_physical_data(ticker, date):
     To fill the time spaces when nothing happens I added zeros indicating that
     there were neither a buy nor a sell.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -460,7 +460,7 @@ def taq_self_response_day_responses_physical_data(ticker, date):
     Using the midpoint price and trade signs of a ticker computes the self-
     response during different time lags (:math:`\\tau`) for a day.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -529,9 +529,9 @@ def taq_self_response_year_responses_physical_data(ticker, year):
     Using the taq_self_response_day_responses_physical_data function computes
     the self-response function for a year.
 
-    :param ticker: string of the abbreviation of stock to be analized
+    :param ticker: string of the abbreviation of stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -574,9 +574,9 @@ def taq_cross_response_day_responses_physical_data(ticker_i, ticker_j, date):
     Using the midpoint price of ticker i and trade signs of ticker j computes
     the cross-response during different time lags (:math:`\\tau`) for a day.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -651,11 +651,11 @@ def taq_cross_response_year_responses_physical_data(ticker_i, ticker_j, year):
     Using the taq_cross_response_day_responses_physical_data function computes
     the cross-response function for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -705,7 +705,7 @@ def taq_trade_sign_self_correlator_day_responses_physical_data(ticker, date):
     Using the trade signs of a ticker computes the self-correlator during
     different time lags (:math:`\\tau`) for a day.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -761,9 +761,9 @@ def taq_trade_sign_self_correlator_year_responses_physical_data(ticker, year):
     Using the taq_trade_sign_self_correlator_day_responses_physical_data
     function computes the self-correlator function for a year.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -810,9 +810,9 @@ def taq_trade_sign_cross_correlator_day_responses_physical_data(ticker_i,
     Using the trade signs of ticker i and trade signs of ticker j computes the
     cross-correlator during different time lags (:math:`\\tau`) for a day.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02).
@@ -880,11 +880,11 @@ def taq_trade_sign_cross_correlator_year_responses_physical_data(ticker_i,
     Using the taq_trade_sign_cross_correlator_day_responses_physical_data
     function computes the cross-correlator function for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 

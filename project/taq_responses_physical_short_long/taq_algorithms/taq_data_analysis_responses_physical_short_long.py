@@ -47,7 +47,7 @@ def taq_self_response_day_responses_physical_short_long_data(ticker, date, tau,
     response for a day. There is a constant :math:`\\tau` and :math:`\\tau'`
     that must be set in the parameters.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -211,9 +211,9 @@ def taq_self_response_year_responses_physical_short_long_data(ticker, year,
     Using the taq_self_response_day_responses_physical_short_long_data function
     computes the self-response function for a year.
 
-    :param ticker: string of the abbreviation of stock to be analized
+    :param ticker: string of the abbreviation of stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :param tau: integer great than zero (i.e. 50).
     :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None – The function saves the data in a file and does not return
@@ -278,9 +278,9 @@ def taq_cross_response_day_responses_physical_short_long_data(ticker_i,
     the cross-response for a day. There is a constant :math:`\\tau` and
     :math:`\\tau'` that must be set in the parameters.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -452,11 +452,11 @@ def taq_cross_response_year_responses_physical_short_long_data(ticker_i,
     Using the taq_cross_response_day_responses_physical_short_long_data
     function computes the cross-response function for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :param tau: integer great than zero (i.e. 50).
     :param tau_p: integer greater than zero and smaller than tau (i.e. 10).
     :return: None – The function saves the data in a file and does not return a

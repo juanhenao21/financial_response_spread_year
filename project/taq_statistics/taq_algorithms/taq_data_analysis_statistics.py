@@ -38,7 +38,7 @@ def taq_quotes_trades_day_statistics_data(ticker, date):
     Using the quotes files, obtain the statistics of the average spread, number
     of quotes and number of trades for a day.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -92,8 +92,8 @@ def taq_quotes_trades_year_statistics_data(tickers, year):
     for a year.
 
     :param tickers: list of the string abbreviation of the stocks to be
-     analized (i.e. ['AAPL', 'MSFT']).
-    :param year: string of the year to be analized (i.e '2016').
+     analyzed (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: None -- The function saves the data in a file and does not return
      a value.
     """
@@ -144,7 +144,7 @@ def taq_midpoint_day_statistics_data(ticker, date):
     change between the last midpoint price in a second and the average midpoint
     price of the second.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -201,8 +201,8 @@ def taq_midpoint_year_statistics_data(tickers, year):
     of the second for a year.
 
     :param tickers: list of the string abbreviation of the stocks to be
-     analized (i.e. ['AAPL', 'MSFT']).
-    :param year: string of the year to be analized (i.e '2016').
+     analyzed (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: None -- The function saves the data in a file and does not return
      a value.
     """

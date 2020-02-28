@@ -38,9 +38,9 @@ import taq_data_tools_responses_physical
 def taq_self_response_year_avg_responses_physical_plot(ticker, year):
     """Plots the self-response average for a year.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2008').
+    :param year: string of the year to be analyzed (i.e '2008').
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -92,11 +92,11 @@ def taq_cross_response_year_avg_responses_physical_plot(ticker_i, ticker_j,
                                                         year):
     """Plots the cross-response average for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param year: string of the year to be analized (i.e '2008')
+    :param year: string of the year to be analyzed (i.e '2008')
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -155,9 +155,9 @@ def taq_trade_sign_self_correlator_year_avg_responses_physical_plot(ticker,
                                                                     year):
     """Plots the trade sign self-correlator average for a year.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2008').
+    :param year: string of the year to be analyzed (i.e '2008').
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """
@@ -210,11 +210,11 @@ def taq_trade_sign_cross_correlator_year_avg_responses_physical_plot(ticker_i,
                                                                      year):
     """Plots the trade sign cross-correlator average for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param year: string of the year to be analized (i.e '2008')
+    :param year: string of the year to be analyzed (i.e '2008')
     :return: None -- The function saves the plot in a file and does not return
      a value.
     """

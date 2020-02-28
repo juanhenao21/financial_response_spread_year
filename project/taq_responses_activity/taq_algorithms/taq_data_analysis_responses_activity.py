@@ -48,7 +48,7 @@ def taq_trades_count_responses_activity_data(ticker, date):
     implemented in the taq_data_analysis responses_trade, counts the number
     of trades per second.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -101,7 +101,7 @@ def taq_self_response_day_responses_activity_data(ticker, date):
     Using the midpoint price and trade signs of a ticker computes the self-
     response during different time lags (:math:`\tau`) for a day.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -177,9 +177,9 @@ def taq_self_response_year_responses_activity_data(ticker, year):
     Using the taq_self_response_day_responses_activity_data function
     computes the self-response function for a year.
 
-    :param ticker: string of the abbreviation of stock to be analized
+    :param ticker: string of the abbreviation of stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 
@@ -223,9 +223,9 @@ def taq_cross_response_day_responses_activity_data(ticker_i, ticker_j, date):
     Using the midpoint price of ticker i and trade signs of ticker j computes
     the cross-response during different time lags (:math:`\tau`) for a day.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -307,11 +307,11 @@ def taq_cross_response_year_responses_activity_data(ticker_i, ticker_j, year):
     Using the taq_cross_response_day_responses_activity_data function computes
     the cross-response function for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
 

@@ -50,7 +50,7 @@ def taq_self_response_day_responses_trade_shift_data(ticker, date, shift):
     response during different trade shifts for a day. There is a constant
     *shift* that most be set in the parameters.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -147,9 +147,9 @@ def taq_self_response_year_responses_trade_shift_data(ticker, year, shift):
     Using the taq_self_response_day_responses_trade_shift_data function
     computes the self-response function for a year.
 
-    :param ticker: string of the abbreviation of stock to be analized
+    :param ticker: string of the abbreviation of stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :param shift: integer great than zero (i.e. 50).
     :return: tuple -- The function returns a tuple with numpy arrays.
     """
@@ -195,9 +195,9 @@ def taq_cross_response_day_responses_trade_shift_data(ticker_i, ticker_j, date,
     the cross-response during different trade shifts for a day. There is a
     constant *shift* that most be set in the parameters.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
     :param date: string with the date of the data to be extracted
      (i.e. '2008-01-02').
@@ -302,11 +302,11 @@ def taq_cross_response_year_responses_trade_shift_data(ticker_i, ticker_j,
     Using the taq_cross_response_day_responses_trade_shift_data function
     computes the cross-response function for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :param shift: integer great than zero (i.e. 50).
     :return: tuple -- The function returns a tuple with numpy arrays.
     """

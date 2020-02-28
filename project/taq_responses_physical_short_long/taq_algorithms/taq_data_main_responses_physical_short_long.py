@@ -36,8 +36,8 @@ def taq_data_plot_generator(tickers, year, taus, taus_p):
     """Generates all the analysis and plots from the TAQ data.
 
     :param tickers: list of the string abbreviation of the stocks to be
-     analized (i.e. ['AAPL', 'MSFT']).
-    :param year: string of the year to be analized (i.e '2016').
+     analyzed (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analyzed (i.e '2016').
     :param taus: Integer great than zero (i.e. 1000).
     :param taus_p: list of integers great than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the data in a file and does not return

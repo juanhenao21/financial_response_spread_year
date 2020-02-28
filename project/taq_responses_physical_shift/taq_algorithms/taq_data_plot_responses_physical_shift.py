@@ -36,9 +36,9 @@ def taq_self_response_year_avg_responses_physical_shift_plot(ticker, year,
                                                              shifts):
     """Plots the self-response average for a year.
 
-    :param ticker: string of the abbreviation of the stock to be analized
+    :param ticker: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2008').
+    :param year: string of the year to be analyzed (i.e '2008').
     :param shifts: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
      a value.
@@ -98,11 +98,11 @@ def taq_cross_response_year_avg_responses_physical_shift_plot(ticker_i,
                                                               shifts):
     """Plots the cross-response average for a year.
 
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL')
-    :param year: string of the year to be analized (i.e '2008')
+    :param year: string of the year to be analyzed (i.e '2008')
     :param shifts: list of integers greater than zero (i.e. [1, 10, 50]).
     :return: None -- The function saves the plot in a file and does not return
      a value.
