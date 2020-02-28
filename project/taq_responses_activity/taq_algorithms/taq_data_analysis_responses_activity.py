@@ -13,13 +13,13 @@ This script requires the following modules:
 
 The module contains the following functions:
     * taq_self_response_day_responses_activity_data - computes the self
-     response of a day.
+      response of a day.
     * taq_self_response_year_responses_activity_data_data - computes the
-     self-response of a year.
+      self-response of a year.
     * taq_cross_response_day_responses_activity_data - computes the cross
-     response of a day.
+      response of a day.
     * taq_cross_response_year_responses_activity_data_data - computes the
-     cross-response of a year.
+      cross-response of a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>

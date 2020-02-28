@@ -23,7 +23,7 @@ The module contains the following functions:
     * taq_trade_signs_trade_data - computes the trade signs of every trade.
     * taq_trade_signs_physical_data - computes the trade signs of every second.
     * taq_self_response_day_responses_physical_data - computes the self
-     response of a day.
+      response of a day.
     * taq_self_response_year_responses_physical_data - computes the self
       response of a year.
     * taq_cross_response_day_responses_physical_data - computes the cross
