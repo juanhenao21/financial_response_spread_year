@@ -1,3 +1,5 @@
+.. _taq_responses_physical:
+
 TAQ Responses Physical
 **********************
 
@@ -7,8 +9,9 @@ stocks
 <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
 
 All the results obtained with the **TAQ Responses Physical** modules are the
-base to the other implementations (TAQ Physical Shift, TAQ Responses Physical
-Shift, TAQ Responses Activity and TAQ Responses Physical Short Long).
+base to the other implementations (:ref:`taq_physical_shift`,
+:ref:`taq_responses_physical_shift`, :ref:`taq_responses_activity` and
+:ref:`taq_responses_physical_short_long`).
 
 Run the code
 ============
