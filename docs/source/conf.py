@@ -14,18 +14,19 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../project/taq_responses_second/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_shift/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_shift/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_event_shift/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_time_shift/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_responses_event_trades_minute/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_trades_minute/taq_algorithms/'))
-# sys.path.insert(0, os.path.abspath('../../project/taq_responses_time_short_long/taq_algorithms/'))
+
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_physical/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_physical_shift/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_physical_shift/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_activity/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_physical_short_long/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_trade/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_trade_shift/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_responses_trade_shift/taq_algorithms/'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Market response analysis'
+project = 'Response functions analysis'
 copyright = '2019, Juan Camilo Henao Londono'
 author = 'Juan Camilo Henao Londono'
 
@@ -33,7 +34,6 @@ author = 'Juan Camilo Henao Londono'
 version = ''
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -80,7 +80,6 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -111,11 +110,10 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 
-
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Responsefunctionanalyisisdoc'
+htmlhelp_basename = 'Responsefunctionsanalysisdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -142,20 +140,20 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'marketresponseanalysis.tex', 'Market response analysis Documentation',
+    (master_doc, 'responsefunctionsanalysis.tex',
+     'Response functions analysis Documentation',
      'Juan Camilo Henao Londono', 'manual'),
 ]
-
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'marketresponseanalysis', 'Market response analysis Documentation',
+    (master_doc, 'responsefunctionsanalysis',
+     'Response functions analysis Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -163,11 +161,11 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'marketresponseanalysis', 'Market response analysis Documentation',
-     author, 'marketresponseanalysis', 'Market response analysis.',
+    (master_doc, 'responsefunctionsanalysis',
+     'Response functions analysis Documentation',
+     author, 'responsefunctionsanalysis', 'Response functions analysis.',
      'Miscellaneous'),
 ]
-
 
 # -- Options for Epub output -------------------------------------------------
 
@@ -188,7 +186,6 @@ epub_copyright = copyright
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
-
 
 # -- Extension configuration -------------------------------------------------
 
