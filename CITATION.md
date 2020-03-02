@@ -1,4 +1,4 @@
-To reference the code, process or results in publications, please cite the one of the following you used:
+To reference the code, process or results in publications, please cite:
 
 IN PROCESS TO START PUBLICATIONS
 
