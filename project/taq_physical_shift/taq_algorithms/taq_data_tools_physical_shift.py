@@ -270,7 +270,7 @@ def taq_initial_data():
 
     for _ in range(n_tau):
 
-        print(f'Insert the tau value (i.e. 10):')
+        print(f'Insert the time lag value (i.e. 10):')
         res = int(input())
 
         taus.append(res)

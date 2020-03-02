@@ -264,7 +264,7 @@ def taq_initial_data():
 
     print()
 
-    print('How many tau values do you want to use?')
+    print('How many time lag values do you want to use?')
     n_tau = int(input())
     taus = []
 

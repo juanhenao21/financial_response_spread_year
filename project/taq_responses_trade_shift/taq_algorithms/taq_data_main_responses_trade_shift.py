@@ -97,6 +97,7 @@ def main():
     # Tickers and days to analyze
     year, tickers, shifts = taq_data_tools_responses_trade_shift \
         .taq_initial_data()
+    # To be used when run in server
     # year = '2008'
     # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
     #            'GOOG', 'MA', 'CME', 'RIG', 'APA']

@@ -32,7 +32,7 @@ import taq_data_tools_responses_physical_short_long
 # -----------------------------------------------------------------------------
 
 
-def taq_data_plot_generator(tickers, year, taus, taus_p):
+def taq_data_plot_generator(tickers, year, tau, taus_p):
     """Generates all the analysis and plots from the TAQ data.
 
     :param tickers: list of the string abbreviation of the stocks to be
@@ -44,22 +44,22 @@ def taq_data_plot_generator(tickers, year, taus, taus_p):
      a value.
     """
 
-    # Especific functions
+    # Specific functions
     # Self-response
     for ticker in tickers:
         for tau_p in taus_p:
 
             taq_data_analysis_responses_physical_short_long \
                 .taq_self_response_year_responses_physical_short_long_data(
-                    ticker, year, taus, tau_p)
+                    ticker, year, tau, tau_p)
 
-    # ticker_prod = iprod(tickers, tickers)
-    ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
-                   ('GS', 'JPM'), ('JPM', 'GS'),
-                   ('CVX', 'XOM'), ('XOM', 'CVX'),
-                   ('GOOG', 'MA'), ('MA', 'GOOG'),
-                   ('CME', 'GS'), ('GS', 'CME'),
-                   ('RIG', 'APA'), ('APA', 'RIG')]
+    ticker_prod = iprod(tickers, tickers)
+    # ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
+    #                ('GS', 'JPM'), ('JPM', 'GS'),
+    #                ('CVX', 'XOM'), ('XOM', 'CVX'),
+    #                ('GOOG', 'MA'), ('MA', 'GOOG'),
+    #                ('CME', 'GS'), ('GS', 'CME'),
+    #                ('RIG', 'APA'), ('APA', 'RIG')]
 
     # Cross-response and cross-correlator
     for ticks in ticker_prod:
@@ -67,7 +67,7 @@ def taq_data_plot_generator(tickers, year, taus, taus_p):
 
             taq_data_analysis_responses_physical_short_long \
                 .taq_cross_response_year_responses_physical_short_long_data(
-                    ticks[0], ticks[1], year, taus, tau_p)
+                    ticks[0], ticks[1], year, tau, tau_p)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
@@ -78,7 +78,7 @@ def taq_data_plot_generator(tickers, year, taus, taus_p):
             iprod(tickers, [year], [taus], taus_p))
         pool.starmap(taq_data_plot_responses_physical_short_long
             .taq_cross_response_year_avg_responses_physical_short_long_plot,
-            iprod(tickers, tickers, [year], [taus], taus_p))
+            iprod(tickers, tickers, [year], [tau], taus_p))
 
     return None
 
@@ -94,18 +94,21 @@ def main():
     """
 
     # Tickers and days to analyze
-    tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM',
-               'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    year = '2008'
+    year, tickers, tau, taus_p = taq_data_tools_responses_physical_short_long \
+        .taq_initial_data()
+    # To be used when run server
+    # tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM',
+    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
+    # year = '2008'
     # taus_p = [x for x in range(10, 101, 10)]
-    taus_p = [40]
-    taus = 1000
+    # taus_p = [40]
+    # tau = 1000
 
     # Basic folders
-    # taq_data_tools_responses_physical_short_long.taq_start_folders('2008')
+    taq_data_tools_responses_physical_short_long.taq_start_folders(year)
 
     # Run analysis
-    taq_data_plot_generator(tickers, year, taus, taus_p)
+    taq_data_plot_generator(tickers, year, tau, taus_p)
 
     print('Ay vamos!!')
 
