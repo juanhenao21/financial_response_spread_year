@@ -251,31 +251,32 @@ def taq_initial_data():
     print('More information in:')
     print('  * https://juanhenao21.github.io/')
     print('  * https://github.com/juanhenao21/response_functions_year')
+    print('  * https://response-functions-year.readthedocs.io/en/latest/')
     print()
 
-    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
+    print('How many tickers do you want to analyze?')
+    n_tick = int(input())
+    tickers = []
 
-    for ticker in tickers[:]:
+    for _ in range(n_tick):
 
-        print(f'Do you want to use the {ticker} ticker? (yes/no)')
+        print(f'Insert the symbol of the ticker (i.e. GOOG):')
         res = input()
 
-        if (res == 'no'):
-            tickers.remove(ticker)
+        tickers.append(res)
 
     print()
 
+    print('How many shift values do you want to use?')
+    n_tau = int(input())
     shifts = []
-    cond = True
-    while (cond):
-        print('Do you want to add a shift value? (yes/no)')
-        res = input()
 
-        if (res == "yes"):
-            print('Add the value')
-            shifts.append(int(input()))
-        else:
-            cond = False
+    for _ in range(n_tau):
+
+        print(f'Insert the shift value (i.e. 10):')
+        res = int(input())
+
+        shifts.append(res)
 
     print()
     print('Please enter the year to be analyzed (i.e. 2008): ')

@@ -55,13 +55,13 @@ def taq_data_plot_generator(tickers, year, shifts):
                 .taq_self_response_year_responses_trade_shift_data(ticker,
                                                                    year, shift)
 
-    # ticker_prod = iprod(tickers, tickers)
-    ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
-                   ('GS', 'JPM'), ('JPM', 'GS'),
-                   ('CVX', 'XOM'), ('XOM', 'CVX'),
-                   ('GOOG', 'MA'), ('MA', 'GOOG'),
-                   ('CME', 'GS'), ('GS', 'CME'),
-                   ('RIG', 'APA'), ('APA', 'RIG')]
+    ticker_prod = iprod(tickers, tickers)
+    # ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
+    #                ('GS', 'JPM'), ('JPM', 'GS'),
+    #                ('CVX', 'XOM'), ('XOM', 'CVX'),
+    #                ('GOOG', 'MA'), ('MA', 'GOOG'),
+    #                ('CME', 'GS'), ('GS', 'CME'),
+    #                ('RIG', 'APA'), ('APA', 'RIG')]
 
     # Cross-response
     for ticks in ticker_prod:
@@ -95,15 +95,15 @@ def main():
     """
 
     # Tickers and days to analyze
-    # year, tickers, shifts = taq_data_tools_responses_trade_shift \
-    #     .taq_initial_data()
-    year = '2008'
-    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-               'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    shifts = [10, 100]
+    year, tickers, shifts = taq_data_tools_responses_trade_shift \
+        .taq_initial_data()
+    # year = '2008'
+    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
+    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
+    # shifts = [10, 100]
 
     # Basic folders
-    # taq_data_tools_responses_trade_shift.taq_start_folders('2008')
+    taq_data_tools_responses_trade_shift.taq_start_folders('2008')
 
     # Run analysis
     # Analysis and plot

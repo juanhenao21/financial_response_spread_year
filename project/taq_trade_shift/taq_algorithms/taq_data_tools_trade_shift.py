@@ -44,13 +44,13 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     :param function_name: name of the function that generates the data.
     :param data: data to be saved. The data can be of different types.
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2016').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: None -- The function saves the data in a file and does not return
      a value.
     """
@@ -98,12 +98,12 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     :param function_name: name of the function that generates the plot.
     :param figure: figure object that is going to be save.
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
-    :param month: string of the month to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2016').
+    :param month: string of the month to be analyzed (i.e '07').
     :return: None -- The function save the plot in a file and does not return
      a value.
     """
@@ -148,13 +148,13 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     """Prints a header of a function that generates data when it is running.
 
     :param function_name: name of the function that generates the data.
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2016').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: None -- The function prints a message and does not return a
      value.
     """
@@ -181,13 +181,13 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     """Prints a header of a function that generates a plot when it is running.
 
     :param function_name: name of the function that generates the plot.
-    :param ticker_i: string of the abbreviation of the stock to be analized
+    :param ticker_i: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analized
+    :param ticker_j: string of the abbreviation of the stock to be analyzed
      (i.e. 'AAPL').
-    :param year: string of the year to be analized (i.e '2016').
-    :param month: string of the month to be analized (i.e '07').
-    :param day: string of the day to be analized (i.e '07').
+    :param year: string of the year to be analyzed (i.e '2016').
+    :param month: string of the month to be analyzed (i.e '07').
+    :param day: string of the day to be analyzed (i.e '07').
     :return: None -- The function prints a message and does not return a
      value.
     """
@@ -212,7 +212,7 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
 def taq_start_folders(year):
     """Creates the initial folders to save the data and plots.
 
-    :param year: string of the year to be analized (i.e '2016').
+    :param year: string of the year to be analyzed (i.e '2016').
     :return: None -- The function creates folders and does not return a value.
     """
 
@@ -235,7 +235,7 @@ def taq_initial_data():
     """Takes the initial values for the analysis
 
     :return: Tuple -- The function return a tuple with a string with the year
-     to be analized and a list with the name of the tickers.
+     to be analyzed and a list with the name of the tickers.
     """
 
     print()
@@ -251,30 +251,31 @@ def taq_initial_data():
     print('  * https://github.com/juanhenao21/response_functions_year')
     print()
 
-    tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'XOM', 'CVX']
+    print('How many tickers do you want to analyze?')
+    n_tick = int(input())
+    tickers = []
 
-    for ticker in tickers[:]:
+    for _ in range(n_tick):
 
-        print(f'Do you want to use the {ticker} ticker? (yes/no)')
+        print(f'Insert the symbol of the ticker (i.e. GOOG):')
         res = input()
 
-        if (res == 'no'):
-            tickers.remove(ticker)
+        tickers.append(res)
 
     print()
 
+    print('How many tau values do you want to use?')
+    n_tau = int(input())
     taus = []
-    cond = True
-    while (cond):
-        print('Do you want to add a tau value? (yes/no)')
-        res = input()
 
-        if (res == "yes"):
-            print('Add the value')
-            taus.append(int(input()))
-        else:
-            cond = False
+    for _ in range(n_tau):
 
+        print(f'Insert the tau value (i.e. 10):')
+        res = int(input())
+
+        taus.append(res)
+
+    print()
     print('Please enter the year to be analyzed (i.e. 2008): ')
     year = input()
     print()
@@ -287,7 +288,7 @@ def taq_initial_data():
 def taq_bussiness_days(year):
     """Generates a list with the dates of the bussiness days in a year
 
-    :param year: string of the year to be analized (i.e '2008').
+    :param year: string of the year to be analyzed (i.e '2008').
     :return: list.
     """
 
