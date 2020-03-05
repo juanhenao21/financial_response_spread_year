@@ -118,10 +118,10 @@ def taq_data_extract(ticker, type, year):
                                 'Corr', 'Cond']}
 
         # Save data
-        if (not os.path.isdir(f'../../taq_data/hdf5_dayly_data_{year}/')):
+        if (not os.path.isdir(f'../../taq_data/hdf5_daily_data_{year}/')):
 
             try:
-                os.mkdir(f'../../taq_data/hdf5_dayly_data_{year}/')
+                os.mkdir(f'../../taq_data/hdf5_daily_data_{year}/')
                 print('Folder to save data created')
 
             except FileExistsError:
@@ -144,7 +144,7 @@ def taq_data_extract(ticker, type, year):
                                & (chunk['Time'] < 57600)]
 
                 if not df.empty:
-                    df.to_hdf(f'../../taq_data/hdf5_dayly_data_{year}/taq_'
+                    df.to_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq_'
                               + f'{ticker}_{type}_{date}.h5', key=type,
                               format='table', append=True)
 
@@ -165,7 +165,7 @@ def taq_data_extract(ticker, type, year):
 def taq_midpoint_trade_data(ticker, date):
     """Computes the midpoint price of every trade.
 
-    Using the dayly TAQ data computes the midpoint price of every trade in a
+    Using the daily TAQ data computes the midpoint price of every trade in a
     day. For further calculations, the function returns the values for the time
     range from 9h40 to 15h50.
 
@@ -191,7 +191,7 @@ def taq_midpoint_trade_data(ticker, date):
         # Take the path from the start to the project folder
         root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
         data_quotes_trade = pd.read_hdf(root_path
-                                        + f'/taq_data/hdf5_dayly_data_{year}/'
+                                        + f'/taq_data/hdf5_daily_data_{year}/'
                                         + f'taq_{ticker}_quotes_{date}.h5',
                                         key='/quotes')
 
@@ -313,7 +313,7 @@ def taq_midpoint_physical_data(ticker, date):
 def taq_trade_signs_trade_data(ticker, date):
     """Computes the trade signs of every trade.
 
-    Using the dayly TAQ data computes the trade signs of every trade in a day.
+    Using the daily TAQ data computes the trade signs of every trade in a day.
     The trade signs are computed using Eq. 1 of the
     `paper
     <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
@@ -344,7 +344,7 @@ def taq_trade_signs_trade_data(ticker, date):
         # Take the path from the start to the project folder
         root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
         data_trades_trade = pd.read_hdf(root_path
-                                        + f'/taq_data/hdf5_dayly_data_{year}/'
+                                        + f'/taq_data/hdf5_daily_data_{year}/'
                                         + f'taq_{ticker}_trades_{date}.h5',
                                         key='/trades')
 
