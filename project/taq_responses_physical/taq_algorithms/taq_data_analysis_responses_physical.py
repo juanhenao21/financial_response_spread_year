@@ -318,7 +318,7 @@ def taq_trade_signs_trade_data(ticker, date):
     `paper
     <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
     As the trades signs are not directly given by the TAQ data, they must be
-    infered by the trades prices.
+    inferred by the trades prices.
     For further calculations, the function returns the values for the time
     range from 9h40 to 15h50.
 
