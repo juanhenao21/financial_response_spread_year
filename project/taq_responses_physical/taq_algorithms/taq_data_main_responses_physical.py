@@ -8,6 +8,8 @@ This script requires the following modules:
     * multiprocessing
     * os
     * pandas
+    * pickle
+    * subprocess
     * taq_data_analysis_responses_physical
     * taq_data_plot_responses_physical
     * taq_data_tools_responses_physical
