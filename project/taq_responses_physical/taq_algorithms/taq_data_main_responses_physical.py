@@ -14,6 +14,7 @@ This script requires the following modules:
 
 The module contains the following functions:
     * taq_build_from_scratch - extract data to daily CSV files.
+    * taq_daily_data_extract - parallelize the taq_data_extract function.
     * taq_data_plot_generator - generates all the analysis and plots from the
       TAQ data.
     * main - the main function of the script.
