@@ -53,10 +53,10 @@ def taq_quotes_trades_day_statistics_data(ticker, date):
 
     try:
         # Load data
-        data_quotes = pd.read_hdf(f'../../taq_data/hdf5_dayly_data_{year}/taq'
+        data_quotes = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
                               + f'_{ticker}_quotes_{date}.h5', key='/quotes',
                               columns=['Bid', 'Ask'])
-        data_trades = pd.read_hdf(f'../../taq_data/hdf5_dayly_data_{year}/taq'
+        data_trades = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
                               + f'_{ticker}_trades_{date}.h5', key='/trades',
                               columns=['Ask'])
 
@@ -159,7 +159,7 @@ def taq_midpoint_day_statistics_data(ticker, date):
 
     try:
         # Load data
-        data_quotes = pd.read_hdf(f'../../taq_data/hdf5_dayly_data_{year}/taq'
+        data_quotes = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
                               + f'_{ticker}_quotes_{date}.h5', key='/quotes',
                               columns=['Time', 'Bid', 'Ask'])
 
