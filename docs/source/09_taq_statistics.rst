@@ -3,7 +3,7 @@
 TAQ Statistics
 **************
 
-Compute some statistics of the data as average quotes, average trades, average
+Computes some statistics of the data as average quotes, average trades, average
 spread and change in the midpoint price.
 
 To run this part of the code is necessary to have the results from the module
