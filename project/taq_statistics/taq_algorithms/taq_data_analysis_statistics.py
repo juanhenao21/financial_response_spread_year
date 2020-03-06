@@ -12,8 +12,12 @@ This script requires the following modules:
     * taq_data_tools_statistics
 
 The module contains the following functions:
-    * taq_self_response_day_statistics_data - computes the self
-     response of a day.
+    * taq_quotes_trades_day_statistics_data - statistics of quotes and trades
+      for a day.
+    * taq_quotes_trades_year_statistics_data - statistics of quotes and trades
+      for a year.
+    * taq_midpoint_day_statistics_data - statistics midpoint price day
+    * taq_midpoint_year_statistics_data - statistics midpoint price year
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
