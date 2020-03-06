@@ -53,6 +53,8 @@ In the following can be seen the documentation of all the project code.
 
    08_taq_responses_trade_shift
 
+   09_taq_statistics
+
 Indices and tables
 ==================
 

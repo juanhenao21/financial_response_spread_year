@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.abspath('../../project/taq_responses_physical_short_l
 sys.path.insert(0, os.path.abspath('../../project/taq_responses_trade/taq_algorithms/'))
 sys.path.insert(0, os.path.abspath('../../project/taq_trade_shift/taq_algorithms/'))
 sys.path.insert(0, os.path.abspath('../../project/taq_responses_trade_shift/taq_algorithms/'))
+sys.path.insert(0, os.path.abspath('../../project/taq_statistics/taq_algorithms/'))
 
 # -- Project information -----------------------------------------------------
 
