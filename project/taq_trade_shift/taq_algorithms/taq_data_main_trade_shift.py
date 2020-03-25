@@ -48,7 +48,7 @@ def taq_data_plot_generator(tickers, year, taus):
      a value.
     """
 
-    # Especific functions
+    # Specific functions
     # Self-response
     for ticker in tickers:
         for tau in taus:
@@ -77,6 +77,9 @@ def taq_data_plot_generator(tickers, year, taus):
         pool.starmap(taq_data_plot_trade_shift
                      .taq_self_response_year_avg_trade_shift_plot,
                      iprod(tickers, [year], [taus]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_trade_shift
                      .taq_cross_response_year_avg_trade_shift_plot,
                      iprod(tickers, tickers, [year], [taus]))

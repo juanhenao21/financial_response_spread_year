@@ -77,6 +77,9 @@ def taq_data_plot_generator(tickers, year, shifts):
         pool.starmap(taq_data_plot_responses_trade_shift
                      .taq_self_response_year_avg_responses_trade_shift_plot,
                      iprod(tickers, [year], [shifts]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_responses_trade_shift
                      .taq_cross_response_year_avg_responses_trade_shift_plot,
                      iprod(tickers, tickers, [year], [shifts]))

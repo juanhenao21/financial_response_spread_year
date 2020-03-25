@@ -360,8 +360,7 @@ def main():
     :return: None.
     """
 
-    taq_self_response_year_responses_trade_shift_data('GS', '2008', 1)
-    taq_cross_response_year_responses_trade_shift_data('GS', 'JPM', '2008', 1)
+    pass
 
     return None
 

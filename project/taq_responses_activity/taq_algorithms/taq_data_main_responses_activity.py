@@ -48,7 +48,6 @@ def taq_data_plot_generator(tickers, year):
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
         # Basic functions
         pool.starmap(taq_data_analysis_responses_activity
                      .taq_trades_count_responses_activity_data,
@@ -78,11 +77,13 @@ def taq_data_plot_generator(tickers, year):
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
         # Plot
         pool.starmap(taq_data_plot_responses_activity
                      .taq_self_response_year_avg_plot,
                      iprod(tickers, [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_responses_activity
                      .taq_cross_response_year_avg_plot,
                      iprod(tickers, tickers, [year]))

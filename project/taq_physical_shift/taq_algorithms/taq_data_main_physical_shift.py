@@ -78,6 +78,9 @@ def taq_data_plot_generator(tickers, year, taus):
         pool.starmap(taq_data_plot_physical_shift
                      .taq_self_response_year_avg_physical_shift_plot,
                      iprod(tickers, [year], [taus]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_physical_shift
                      .taq_cross_response_year_avg_physical_shift_plot,
                      iprod(tickers, tickers, [year], [taus]))

@@ -90,6 +90,7 @@ def taq_build_from_scratch(tickers, year):
             print('Extracting quotes')
             pool.starmap(taq_data_tools_responses_physical.taq_decompress,
                          iprod(tickers_rm, [year], ['quotes']))
+        # Parallel computing
         with mp.Pool(processes=mp.cpu_count()) as pool:
             print('Extracting trades')
             pool.starmap(taq_data_tools_responses_physical.taq_decompress,
@@ -119,11 +120,16 @@ def taq_daily_data_extract(tickers, year):
      a value.
     """
 
-    # Extract daily data
+    print('Extracting daily data')
+
+    # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        print('Extracting daily data')
+        # Extract daily data
         pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
                      iprod(tickers, ['quotes'], [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Extract daily data
         pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
                      iprod(tickers, ['trades'], [year]))
 
@@ -146,11 +152,13 @@ def taq_data_plot_generator(tickers, year):
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
         # Basic functions
         pool.starmap(taq_data_analysis_responses_physical
                      .taq_midpoint_physical_data,
                      iprod(tickers, date_list))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Basic functions
         pool.starmap(taq_data_analysis_responses_physical
                      .taq_trade_signs_physical_data,
                      iprod(tickers, date_list))
@@ -185,17 +193,25 @@ def taq_data_plot_generator(tickers, year):
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
         # Plot
         pool.starmap(taq_data_plot_responses_physical
                      .taq_self_response_year_avg_responses_physical_plot,
                      iprod(tickers, [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_responses_physical
                      .taq_cross_response_year_avg_responses_physical_plot,
                      iprod(tickers, tickers, [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_responses_physical
             .taq_trade_sign_self_correlator_year_avg_responses_physical_plot,
             iprod(tickers, [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_responses_physical
             .taq_trade_sign_cross_correlator_year_avg_responses_physical_plot,
             iprod(tickers, tickers, [year]))

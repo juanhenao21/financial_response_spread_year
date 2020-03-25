@@ -46,12 +46,11 @@ def taq_data_plot_generator(tickers, year):
     date_list = taq_data_tools_responses_trade.taq_bussiness_days(year)
 
     # Parallel computing
-    # with mp.Pool(processes=mp.cpu_count()) as pool:
-
+    with mp.Pool(processes=mp.cpu_count()) as pool:
         # Basic functions
-        # pool.starmap(taq_data_analysis_responses_trade
-        #              .taq_trade_signs_trade_data,
-        #              iprod(tickers, date_list))
+        pool.starmap(taq_data_analysis_responses_trade
+                     .taq_trade_signs_trade_data,
+                     iprod(tickers, date_list))
 
     # Specific functions
     # Self-response
@@ -77,11 +76,13 @@ def taq_data_plot_generator(tickers, year):
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-
         # Plot
         pool.starmap(taq_data_plot_responses_trade
                      .taq_self_response_year_avg_responses_trade_plot,
                      iprod(tickers, [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        # Plot
         pool.starmap(taq_data_plot_responses_trade
                      .taq_cross_response_year_avg_responses_trade_plot,
                      iprod(tickers, tickers, [year]))

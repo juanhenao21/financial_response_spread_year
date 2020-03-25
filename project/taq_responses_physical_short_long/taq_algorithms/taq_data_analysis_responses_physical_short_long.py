@@ -515,20 +515,6 @@ def taq_cross_response_year_responses_physical_short_long_data(ticker_i,
                 cross_response_long_val,
                 cross_response_resp_val,
                 cross_response_shuffle_val)
-        # Saving data
-        taq_data_tools_responses_physical_short_long \
-            .taq_save_data('{}_tau_{}_tau_p_{}'
-                           .format(function_name, tau, tau_p),
-                           (cross_short / num_short_t,
-                            cross_long / num_long_t,
-                            cross_response / num_response_t,
-                            cross_shuffle / num_shuffle_t),
-                           ticker_i, ticker_j, year, '', '')
-
-        return (cross_short / num_short_t,
-                cross_long / num_long_t,
-                cross_response / num_response_t,
-                cross_shuffle / num_shuffle_t)
 
 # ----------------------------------------------------------------------------
 

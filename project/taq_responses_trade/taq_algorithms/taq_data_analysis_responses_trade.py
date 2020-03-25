@@ -76,7 +76,7 @@ def taq_trade_signs_trade_data(ticker, date):
         # Load data
         # The module is used in other folders, so it is necessary to use
         # absolute paths instead of relative paths
-        # Obtain the absolut path of the current file and split it
+        # Obtain the absolute path of the current file and split it
         abs_path = os.path.abspath(__file__).split('/')
         # Take the path from the start to the project folder
         root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
@@ -307,7 +307,7 @@ def taq_cross_response_day_responses_trade_data(ticker_i, ticker_j, date):
             time_m = np.array(range(34800, 57000))
             cond_1 = (time_t >= 34801) * (time_t < 57001)
             time_t = time_t[cond_1]
-            trade_sign_j = trade_sign[cond_1]
+            trade_sign_j = trade_sign_j[cond_1]
 
             # Array of the average of each tau. 10^3 s is used in the paper
             cross_response_tau = np.zeros(__tau__)
