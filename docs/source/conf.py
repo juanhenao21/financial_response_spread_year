@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.abspath('../../project/taq_statistics/taq_algorithms/
 
 # -- Project information -----------------------------------------------------
 
-project = 'Response functions analysis'
+project = 'Response function analysis'
 copyright = '2019, Juan Camilo Henao Londono'
 author = 'Juan Camilo Henao Londono'
 
@@ -114,7 +114,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Responsefunctionsanalysisdoc'
+htmlhelp_basename = 'Responsefunctionanalysisdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -141,8 +141,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'responsefunctionsanalysis.tex',
-     'Response functions analysis Documentation',
+    (master_doc, 'responsefunctionanalysis.tex',
+     'Response function analysis Documentation',
      'Juan Camilo Henao Londono', 'manual'),
 ]
 
@@ -151,8 +151,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'responsefunctionsanalysis',
-     'Response functions analysis Documentation',
+    (master_doc, 'responsefunctionanalysis',
+     'Response function analysis Documentation',
      [author], 1)
 ]
 
@@ -162,9 +162,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'responsefunctionsanalysis',
-     'Response functions analysis Documentation',
-     author, 'responsefunctionsanalysis', 'Response functions analysis.',
+    (master_doc, 'responsefunctionanalysis',
+     'Response function analysis Documentation',
+     author, 'responsefunctionanalysis', 'Response function analysis.',
      'Miscellaneous'),
 ]
 
