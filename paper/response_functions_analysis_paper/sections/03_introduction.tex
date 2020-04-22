@@ -40,10 +40,15 @@ the information about what is offered on the market.
 Buy limit orders are called ``bids", and sell limit orders are called ``asks".
 At any given time there is a best (lowest) offer to sell with price
 $a\left(t\right)$, and a best (highest) bid to buy with price
-$b\left(t\right)$ \cite{subtle_nature}. These are also called the inside quotes
-or the best prices. The price gap between them is called the spread
-$s\left(t\right) = a\left(t\right)-b\left(t\right)$
-\cite{subtle_nature,Bouchaud_2004,large_prices_changes}.
+$b\left(t\right)$ \cite{subtle_nature,account_spread,limit_ord_spread}. These
+are also called the inside quotes or the best prices. The price gap between
+them is called the spread $s\left(t\right) = a\left(t\right)-b\left(t\right)$
+\cite{subtle_nature,Bouchaud_2004,large_prices_changes,account_spread}.
+Spreads are significantly positively related to price and significantly
+negatively related to trading volume. Firms with more liquidity tend to have
+lower spreads.
+\cite{account_spread,effects_spread,components_spread,components_spread_tokyo}.
+
 
 The average of the best ask and the best bid is the midpoint price, which is
 defined as \cite{subtle_nature,Bouchaud_2004,large_prices_changes}
@@ -201,6 +206,7 @@ analyze the definition of the response functions in Sect.
 \ref{sec:response_functions}, and compute them for several stocks and pairs of
 stocks. In Sect. \ref{sec:time_shift} we show how the relative position between
 trade signs and returns has a huge impact in the results of the computation of
-the response functions. Finally, in Sect. \ref{sec:short_long} we explain in
-detail how the time lag $\tau$ behaves in the response functions. Our
-conclusions follows in Sect. \ref{sec:conclusion}.
+the response functions. In Sect. \ref{sec:short_long} we explain in detail how
+the time lag $\tau$ behaves in the response functions. Finally, in Sect.
+\ref{sec:spread_impact} analyze the spread impact in the response functions.
+ Our conclusions follows in Sect. \ref{sec:conclusion}.
