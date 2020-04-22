@@ -702,3 +702,34 @@ apply, if this trader wants to sell shares. The traded price is then the best
 bid, $S(t) = b(t)$, and due to $b(t) < m(t)$, we have $\varepsilon(t) = -1$.
 Hence, a trade triggered by a market order to sell yields $\varepsilon(t) = -1$.
 
+**The Effects of Beta, Bid-Ask Spread, Residual Risk, and Size on Stock Returns**
+The bid-ask spread is related to the number of investors holding the asset,
+which reflects the availability of information about it. A larger number of
+shareholders brings about a narrower spread. Studies found the transaction
+volume (which is more readily available than the number of shareholders) to be
+highly correlated with the spread. The bid-ask spread also decreases when more
+information is publicly available about the asset, since market makers set the
+spread so as to compensate for their losses to better informed investors. Thus,
+the incompleteness of public information about an asset, is reflected in its
+bid-ask spread. In addition, the spread is negatively correlated with the firm
+size. The bid-ask spread is also related to the residual risk, which may serve
+as another measure of incomplete information. Risk-averse market makers charge
+a higher spread on assets with higher variance to compensate for the risk of
+their stock positions.
+(Causes of the spread)
+
+**Accounting Informotion and Bid-Ask Spreads**
+the spread is comprised of three types of costs facing the dealer:
+order-processing costs, inventory holding costs and adverse selection costs.
+The order-processing costs are the dealer's costs of arranging trades and
+clearing transactions. Tbe inventory holding costs are the dealer's costs of
+arrying the necessary inventory of stock to be able to trade on demand, while
+the adverse selection component of the spread is closely related to
+information flows in capital markets
+(Spread types of costs)
+
+Firms with deeper (more liquid) markets tend to have lower spreads.
+Specifically, quoted spreads are lower for larger, more actively-traded firms
+with multiple dealers. Order processing and inventory costs are lower for more
+actively-followed and actively-traded firms.
+(Lower spreads)
