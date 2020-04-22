@@ -29,20 +29,12 @@ comparing the traded price and the preceding midpoint price
 to relate the midpoint prices with the trade signs in trade time scale and in
 physical time scale.
 
-To analyze the response functions across different liquid stocks, we select the
-six companies with the largest average market capitalization (AMC) (Alphabet
-Inc., Mastercard Inc., CME Group Inc., Goldman Sachs Group Inc., Transocean
-Ltd. and Apache Corp.) in three economic sectors (information technology,
-financials and energy) of the S\&P index in 2008.
-
-In order to avoid overnight effects and any artifact due to the opening and
-closing of the market, we systematically discarded the first ten and the last
-ten minutes of trading in a given day
-\cite{Bouchaud_2004,large_prices_changes,spread_changes_affect,Wang_2016_cross}.
-Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
-New York local time. We will refer to this interval of time as the ``market
-time".
-
+To analyze the response functions across different liquid stocks in Sects.
+\ref{sec:response_functions}, \ref{sec:time_shift} and \ref{sec:short_long},
+we select the six companies with the largest average market capitalization
+(AMC) (Alphabet Inc., Mastercard Inc., CME Group Inc., Goldman Sachs Group
+Inc., Transocean Ltd. and Apache Corp.) in three economic sectors (information
+technology, financials and energy) of the S\&P index in 2008.
 
 \begin{table*}[htbp]
 \begin{threeparttable}
@@ -80,6 +72,19 @@ liquid stock on average from our selection for the year 2008 is Alphabet Inc.
 The most traded stock on average from the group was Goldman Sachs Group Inc.
 On the other side, the stock with the less quotes, less traded and less
 liquidity on average for the analyzed year was CME Group Inc.
+
+To analyze the spread impact in response functions (Sect.
+\ref{sec:spread_impact}), we select 530 stocks in the NASDAQ stock market for
+the year 2008. The selected stocks are listed in Appendix
+\ref{app:spread_impact}.
+
+In order to avoid overnight effects and any artifact due to the opening and
+closing of the market, we systematically discarded the first ten and the last
+ten minutes of trading in a given day
+\cite{Bouchaud_2004,large_prices_changes,spread_changes_affect,Wang_2016_cross}.
+Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
+New York local time. We will refer to this interval of time as the ``market
+time".
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
