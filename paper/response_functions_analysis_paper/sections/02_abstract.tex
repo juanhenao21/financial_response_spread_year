@@ -1,24 +1,23 @@
 \abstract{
-Using Trades and Quotes (TAQ) data from the NASDAQ stock market, we analyzed
-the response functions of six companies with the largest average market
-capitalization in three economic sectors of the S\&P index in 2008. We used two
-time definitions to compute the response functions: trade time scale and
-physical time scale. We computed the self-response functions for the six
-companies and the cross-response functions for the three sectors. Both
-responses increase to a maximum and then slowly decrease. Hence, the trend in
-the response functions is eventually reversed. To analyze the influence of the
-relative position between trade signs and returns, we added a parameter time
-shift $\left( t_{s}\right)$ to the response function expression. For negative
-and large values of the time shift the information contained between the trade
-signs and returns is lost. We also analyzed the impact of the time lag in the
-response functions. We divided the time lag in an immediate and late component
-and compute the self- and cross-response. The influence of the immediate time
-lag is larger than the late time lag. Finally, we analyzed the spread impact in
-the response functions for 530 companies in the NASDAQ stock market. We found
-that the impact in the response function is bigger when the spread is large.
+Recent research about the response of stock prices to trading activity
+revealed long lasting effects, even across stocks of different companies.
+These results implies non-markovian effects in price formation and reveal
+the consequences of trading many stocks at the same time, from trading
+costs to price correlations.
+How the price response is measured depends on the data set and research
+focus. However, it is still unclear, how the details of the price
+response definition modify the results. Here, we evaluate different price
+response implementations for the Trades and Quotes (TAQ) data set from
+the NASDAQ stock market and find that the results are qualitatevily the
+same for two different definitions of time scale, but the response can
+vary by up to a factor of two. Further, we confirm the dominating
+contribution of immediate price response directly after a trade, as we
+find that delayed responses are suppresed. Finally, we test the impact
+of the spread in the price response, spotting that large spreads have larger
+impact.
 \PACS{
       {89.65.Gh}{Econophysics} \and
       {89.75.-k}{Complex systems} \and
       {05.10.Gg}{Statistical physics}
-     } % end of PACS codes
+} % end of PACS codes
 } %end of abstract
