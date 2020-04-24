@@ -87,222 +87,37 @@ New York local time. We will refer to this interval of time as the ``market
 time".
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Time definition}\label{subsec:time_definition}
 
-A key concept in the analysis of the response functions is the time. Due to the
-nature of the data, they are several options to define it.
+In a modern financial market, there is a double continuous auction. To find
+possible buyers and sellers in the market, agents can place different types of
+instructions (known as orders) to buy or to sell a given number of shares, that
+can be grouped into two categories: market orders and limit orders.
 
-In general, the time series are indexed in calendar time (hours, minutes,
-seconds, milliseconds). Moreover, tick-by-tick data available on financial
-markets all over the world is time stamped up to the millisecond, but the order
-of magnitude of the guaranteed precision is much larger, usually one second or
-a few hundreds of milliseconds \cite{empirical_facts}. In several papers are
-used different time definitions (calendar time, physical time, event time,
-trade time, tick time) \cite{empirical_facts,sampling_returns,market_making}.
-The TAQ data used in the analysis has the characteristic that the trades and
-quotes can not be directly related due to the time stamp resolution of only one
-second \cite{Wang_2016_cross}. Hence, it is impossible to match each trade with
-the directly preceding quote. However, using a classification for the trade
-signs, we can compute trade signs in two scales: trade time scale and physical
-time scale.
+Market orders will go into market to execute at the best available buy or sell
+price, they are executed as fast as possible and only after the purchase of the
+stock is possible to know the exact price \cite{large_prices_changes,predictive_pow}.
 
-The trade time scale is increased by one unit each time a transaction happens.
-The advantage of this count is that limit orders far away in the order book do
-not increase the time by one unit. The main outcome of trade time scale is its
-``smoothing" of data and the aggregational normality \cite{empirical_facts}.
+Limit orders allow to set a maximum purchase price for a buy order, or a
+minimum sale price for a sell order. If the market does not reach the limit
+price, the order will not be executed \cite{large_prices_changes,predictive_pow}.
 
-The physical time scale is increased by one unit each time a second passes.
-This means that computing the responses in this scale involves sampling
-\cite{sampling_returns,Wang_2016_cross}, which has to be done carefully when
-dealing for example with several stocks with different liquidity. This sampling
-is made in the trade signs and in the midpoint prices.
+Limit orders often fail to result in an immediate transaction, and are stored
+in a queue called the limit order book \cite{prop_order_book,stat_prop,predictive_pow}. An order book is an electronic list of
+buy and sell orders for a specific security or financial instrument organized
+by price level. An order book lists the number of shares being bid or offered
+at each price point. It also identifies the market participants behind the buy
+and sell orders, although some choose to remain anonymous. The order book is
+visible for all traders, its main purpose is to ensure that all traders have
+the information about what is offered on the market.
 
-Facing the impossibility to relate midpoint prices and trade signs with the TAQ
-data in trade time scale, we will use the midpoint price of the previous second
-with all the trade signs of the current second. This will be our definition of
-trade time scale analysis for the response function analysis.
-
-For physical time scale, as we can sampling, we relate the unique value of
-midpoint price of a previous second with the unique trade sign value of the
-current second.
-
-Thus, trade sign values will be used in trade time scale and physical time
-scale and returns will be only used in physical time scale.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Trade time scale}\label{subsubsec:trade_time}
-
-We use the trade sign classification in trade time scale proposed by S. Wang et
-al. in \cite{Wang_2016_cross} and used in
-\cite{Wang_2017,Wang_2018_copulas,Wang_2016_avg} that reads
-
-\begin{equation}\label{eq:trade_signs_trade}
-    \varepsilon^{t}\left(t,n\right)=\left\{
-    \begin{array}{cc}
-    \text{sgn}\left(S\left(t,n\right)-S\left(t,n-1\right)\right),
-    & \text{if }\\ S\left(t,n\right) \ne S\left(t,n-1\right)\\
-    \varepsilon\left(t,n-1\right),
-    & \text{otherwise}
-    \end{array}\right.
-\end{equation}
-
-$\varepsilon^{t}\left( t,n \right) = +1$ implies a trade triggered by a market
-order to buy, and a value $\varepsilon^{t}\left( t,n \right) = -1$ indicates a
-trade triggered by a market order to sell.
-
-In the second case of the classification, if two consecutive trades with the
-same trading direction did not exhaust all the available volume at the best
-quote, the trades would have the same price, and in consequence they will have
-the same trade sign.
-
-With this classification we obtain trade signs for every single trade in the
-data set. According to \cite{Wang_2016_cross}, the average accuracy of the
-classification is $85\%$ for the trade time scale.
-
-TAQ time step is one second, and as it is impossible to find the
-correspondences between trades and midpoint prices values inside a second step,
-We used the last midpoint price of every second as the representative value of
-each second. This introduce an apparent shift between trade signs and returns.
-In fact, we set the last midpoint price from the previous second as the first
-midpoint price of the current second, as explained in \cite{Wang_2016_cross}.
-
-As we know the second in which the trades were made, we can relate the trade
-signs and the midpoint prices as shown in Fig.
-\ref{fig:relation_trades_midpoint_trade_scale}. For the trade time scale, they
-are in general, several midpoint prices in a second. For each second we
-select the last midpoint price value, and we relate it to the next second
-trades. In Fig. \ref{fig:relation_trades_midpoint_trade_scale}, the last
-midpoint price (circle) between the second $-1$ and $0$ is related with all the
-trades (squares and triangles) in the second $0$ to $1$, and so on. It is worth
-to note, in the seconds that there are no changes in the quotes, it is used the
-value of the previous second (vertical line over the physical time interval).
-Thus, all the seconds in the open market time have a midpoint price value, and
-in consequence returns values. We assume that as long as they were not changes
-in the quotes, the midpoint price remain the same as the one of the previous
-second.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\columnwidth]
-    {figures/02_relation_trades_quotes_trade_scale.png}
-    \caption{Sketch of data processing for trade time scale. In the midpoint
-             price time line, the vertical lines represent the change in price
-             of the quotes and the circles represent the last price change in a
-             quote in a second. In the trade signs time line, the squares
-             represent the buy market orders and the triangles represent the
-             sell market orders. The midpoint price time line and the trade
-             sign time line are shifted in one second.}
-    \label{fig:relation_trades_midpoint_trade_scale}
-\end{figure}
-
-We computed all the analysis for the trade time scale using Equations
-\ref{eq:midpoint_price_return} and \ref{eq:trade_signs_trade}.
-
-The methodology described is an approximation to compute the response in the
-trade time scale. A drawback in the computation could come from the fact that
-the return of a given second is composed by the contribution of small returns
-corresponding to each change in the midpoint price during a second. As we are
-assuming only one value for the returns in each second, we are supposing  all
-the returns in one second interval to be positive or negative with the same
-magnitude, which could not be the case. This could increase or decrease the
-response signal at the end of the computation.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/02_return_contributions.png}
-    \caption{Sketch of the return contributions from every midpoint price
-             change in a second. The squares represent the rise of the price of
-             the midpoint price and the triangles represent the decrease of the
-             price of the midpoint price. We illustrate three cases: (top left)
-             the changes of the midpoint prices and return are due to the rise
-             of the prices, (top right) the changes of the midpoint prices and
-             return are due to the decrease of the prices, and (bottom) the
-             changes of the midpoint prices and return are due to a combination
-             of rise and decrease of the prices.}
-    \label{fig:return_contributions}
-\end{figure}
-
-Figure \ref{fig:return_contributions} illustrate with one example this point.
-Suppose one second interval, in which they are three different midpoint prices,
-and as result, three different returns for this three midpoint price
-values. Furthermore, consider that the volume of limit orders that have the
-corresponding midpoint prices are the same in the bid and in the ask (so the
-returns have the same magnitude). In the case of the top left (top right)
-sketch, all the changes are due to the rise (decrease) of the midpoint price,
-that means, consumption of the best ask (bid), so all the contributions of the
-individual returns in the second are positive (negative), and in consequence,
-the net return is positive (negative). In the case of the bottom, the changes
-are due to a combination of increase and decrease of the midpoint price, so in
-the end the individual returns sum up to a net return, which can be positive or
-negative, depending of the type of midpoint price values in the interval. Thus,
-in this case, we are assuming at the end that all the returns were positive or
-negative, what probably was not the case, and in consequence will increase or
-decrease the real value of the net return.
-
-In all the cases we choose the last change in the midpoint price in a second
-interval as described before
-(Fig. \ref{fig:relation_trades_midpoint_trade_scale}). We use this method
-knowing that the variation in one second of the midpoint price is not large
-(in average, the last midpoint price of a second differ with the average
-midpoint of that second in $0.007\%$), so it can give us valuable information
-about the response functions.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Physical time scale}\label{subsubsec:physical_time}
-
-We use the trade sign definition in physical time scale proposed by
-S. Wang et al. in \cite{Wang_2016_cross} and used in
-\cite{Wang_2017,Wang_2016_avg}, that depends on the classification in
-Eq. \ref{eq:trade_signs_trade} and reads
-
-\begin{equation}\label{eq:trade_signs_physical}
-    \varepsilon^{p}\left(t\right)=\left\{
-    \begin{array}{cc}
-    \text{sgn}\left(\sum_{n=1}^{N\left(t\right)}\varepsilon^{t}
-    \left(t,n\right)\right),
-    & \text{If }N \left(t\right)>0\\
-    0, & \text{If }N\left(t\right)=0
-    \end{array}\right.
-\end{equation}
-
-Where $N \left(t \right)$ is the number of trades in a second interval.
-$\varepsilon^{p}\left( t \right) = +1$ implies that the majority of
-trades in second $t$ were triggered by a market order to buy, and a value
-$\varepsilon^{p}\left( t \right) = -1$ indicates a majority of sell
-market orders. In this definition, they are two ways to obtain
-$\varepsilon^{p}\left( t \right) = 0$. One way is that in a particular
-second there is not trades, and then no trade sign. The other  way is that the
-addition of the trade signs ($+1$ and $-1$) in a second be equal to zero. In
-this case, there is a balance of buy and sell market orders.
-
-Market orders show opposite trade directions to limit order executed
-simultaneously. An executed sell limit order corresponds to a buyer-initiated
-market order. An executed buy limit order corresponds to a seller-initiated
-market order.
-
-As in the trade time scale, in the physical time scale we use the same strategy
-to obtain the midpoint price for every second, so all the seconds in the open
-market time have a midpoint price value. It is worth to note again, that even
-if the second does not have a change in quotes, it will has still a midpoint
-price value and a return value.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\columnwidth]
-    {figures/02_relation_trades_quotes_time_scale.png}
-    \caption{Sketch of data processing for physical time scale. In the midpoint
-             price time line, the horizontal lines between seconds represent
-             the midpoint prices. In the trade signs time line, the horizontal
-             lines between seconds represent the trade sign values. The
-             midpoint price time line and the trade sign time line are shifted
-             in one second.}
-    \label{fig:relation_trades_midpoint_time_scale}
-\end{figure}
-
-In this case we do not compare every single trade sign in a second, but the net
-trade sign obtained for every second with the definition. This can be seen in
-Fig. \ref{fig:relation_trades_midpoint_time_scale}, we related the midpoint
-price of the previous second with the trade sign of the current second.
-
-According to \cite{Wang_2016_cross}, this definition has an average
-accuracy up to $82\%$ in the physical time scale.
+Buy limit orders are called ``bids", and sell limit orders are called ``asks".
+At any given time there is a best (lowest) offer to sell with price
+$a\left(t\right)$, and a best (highest) bid to buy with price
+$b\left(t\right)$ \cite{subtle_nature,account_spread,limit_ord_spread,prop_order_book}. These
+are also called the inside quotes or the best prices. The price gap between
+them is called the spread $s\left(t\right) = a\left(t\right)-b\left(t\right)$
+\cite{subtle_nature,Bouchaud_2004,large_prices_changes,account_spread,market_digest}.
+Spreads are significantly positively related to price and significantly
+negatively related to trading volume. Firms with more liquidity tend to have
+lower spreads.
+\cite{account_spread,effects_spread,components_spread,components_spread_tokyo}.
