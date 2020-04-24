@@ -1,194 +1,34 @@
 \section{Introduction}\label{sec:introduction}
 
-Shares are the equal parts in which the capital of a company is divided.
-A share is an indivisible unit of capital, expressing the ownership
-relationship between a company and a shareholder. The shareholder owns a
-percentage of the company depending on the amount of shares he possesses.
-Shares are issued in two moments: when the company is created and when the
-company want to raise funds.
+reference EMH - \cite{EMH_lillo}
 
-The shares can be taken as an investment, and receive dividends from them, or
-they can be traded at any time.  This second possibility is the one that
-concerns us.
+In this paper, we want to discuss, based on a series of detailed empirical
+results obtained on trade by trade data, that the variation in the details of
+the parameters used in the price response definition modify the characteristics
+of the results. Aspects like time scale, time shift, time lag and spread used
+in the price response calculation have a large impact on the outcomes.
 
-To trade the stocks they are markets where the buyers and sellers meet. sellers
-transfer (in exchange for money) the ownership of equities to buyers. This
-requires these two parties to agree on a price.
+There are diverse studies focused on the price response \cite{EMH_lillo,Bouchaud_2004,Wang_2016_cross,Wang_2016_avg,Wang_2018_a,Wang_2018_b,large_prices_changes,theory_market_impact,dissecting_cross,spread_changes_affect,quant_stock_price_response,master_curve,ori_pow_law,pow_law_dist,prop_order_book},
+but they concentrate on a general definition and discuss the results without
+going deep in the specific details of the price response measurements.
 
-In a modern financial market, there is a double continuous auction. To find
-possible buyers and sellers in the market, agents can place different types of
-instructions (known as orders) to buy or to sell a given number of shares, that
-can be grouped into two categories: market orders and limit orders.
-
-Market orders will go into market to execute at the best available buy or sell
-price, they are executed as fast as possible and only after the purchase of the
-stock is possible to know the exact price \cite{large_prices_changes}.
-
-Limit orders allow to set a maximum purchase price for a buy order, or a
-minimum sale price for a sell order. If the market does not reach the limit
-price, the order will not be executed \cite{large_prices_changes}.
-
-Limit orders often fail to result in an immediate transaction, and are stored
-in a queue called the limit order book. An order book is an electronic list of
-buy and sell orders for a specific security or financial instrument organized
-by price level. An order book lists the number of shares being bid or offered
-at each price point. It also identifies the market participants behind the buy
-and sell orders, although some choose to remain anonymous. The order book is
-visible for all traders, its main purpose is to ensure that all traders have
-the information about what is offered on the market.
-
-Buy limit orders are called ``bids", and sell limit orders are called ``asks".
-At any given time there is a best (lowest) offer to sell with price
-$a\left(t\right)$, and a best (highest) bid to buy with price
-$b\left(t\right)$ \cite{subtle_nature,account_spread,limit_ord_spread}. These
-are also called the inside quotes or the best prices. The price gap between
-them is called the spread $s\left(t\right) = a\left(t\right)-b\left(t\right)$
-\cite{subtle_nature,Bouchaud_2004,large_prices_changes,account_spread}.
-Spreads are significantly positively related to price and significantly
-negatively related to trading volume. Firms with more liquidity tend to have
-lower spreads.
-\cite{account_spread,effects_spread,components_spread,components_spread_tokyo}.
+Here, we delve into the key details needed to compute the price response
+functions, and investigate their corresponding roles. We perform a empirical
+study in different time scales using financial data and find that using
+different implementations of the price response, the results are qualitatively
+the same, but the response can vary up to a factor of two. We show that the
+order between the trade signs and the returns have a key importance in the
+price response signal and suggest an interval where the time shift have to be
+set. We split the time lag to understand the contribution of the immediate
+returns and the late returns. The price response is highly influenced by the
+instantaneous returns and as the time lag grows, the influence starts to
+decrease. We shed light on the spread impact in the response functions for
+single stocks. We prove that when the spread is large, the price response tend
+to be large.
 
 
-The average of the best ask and the best bid is the midpoint price, which is
-defined as \cite{subtle_nature,Bouchaud_2004,large_prices_changes}
 
-\begin{equation}\label{eq:midpoint_price}
-    m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
-\end{equation}
-
-As the midpoint price depends on the quotes, it changes if the quotes change.
-The midpoint price grows if the best ask or the best bid grow. This happen if
-someone buys and consumes all the volume of the sell limit order with the price
-of the best ask, or someone sets a buy limit order with a bigger price than the
-previous best bid, or there is a cancellation of the best ask.
-
-On the other hand, the midpoint price decreases if the best ask or the best bid
-decrease. This happen if someone sells and consumes all the volume of the buy
-limit order with the price of the best bid, or someone sets a sell limit order
-with a lower price than the previous best bid, or there is a cancellation of
-the best bid.
-
-The midpoint price will not change if there is no activity in the market.
-
-Price changes are typically characterized as returns. If one denotes
-$S\left( t\right)$ the price of an asset at time $t$, the return
-$r\left(t\right)$, at time $t$ and time lag $\tau$ is simply the relative
-variation of the price from $t$ to $t + \tau$
-\cite{subtle_nature,empirical_facts,asynchrony_effects_corr,tick_size_impact,causes_epps_effect},
-
-\begin{equation}\label{eq:return_general}
-    r^{g} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
-    - S\left(t\right)}{S\left(t\right)}
-\end{equation}
-
-It is also common to define the returns as
-\cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,theory_market_impact,spread_changes_affect,fluctions_market_friction}
-
-\begin{equation}\label{eq:log_return_general}
-    r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
-    - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
-\end{equation}
-
-Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} coincide
-if $\tau$ is small enough \cite{subtle_nature,empirical_facts}.
-
-At longer timescales, midpoint prices and transaction prices rarely differ by
-more than half the spread. The midpoint price is more convenient to study
-because it avoids problems associated with the tendency of transaction prices
-to bounce back and forth between the best bid and ask
-\cite{large_prices_changes}.
-
-We define the returns via the midpoint price as
-
-\begin{equation}\label{eq:midpoint_price_return}
-    r\left(t,\tau\right) = \frac{m\left(t+\tau\right)-m\left(t\right)}
-    {m\left(t\right)}
-\end{equation}
-
-The distribution of returns is strongly non-Gaussian and its shape continuously
-depends on the return period $\tau$. Small $\tau$ values have fat tails return
-distributions \cite{subtle_nature}.
-
-Then we can expect three kind of values of the returns. The returns are
-positive values, when the midpoint price
-$m\left(t+\tau\right) > m\left(t\right)$, hence, there is a buy in the market
-or there is a cancellation of the best ask or an addition in the best bid
-during the time lag $\tau$. The returns are negative values, when the midpoint
-price $m\left(t+\tau\right) < m\left(t\right)$, thus, there is a sell in the
-market, or there is a cancellation of the best bid or an addition in the best
-ask during the time lag $\tau$. The returns are zero when there is no activity
-during the time lag $\tau$.
-
-The trade signs are defined for general cases as
-
-\begin{equation}\label{eq:trade_sign_general}
-    \varepsilon\left(t\right)=\text{sign}\left(S\left(t\right)
-    -m\left(t-\delta\right)\right)
-\end{equation}
-
-where $\delta$ is a positive time increment. Hence we have
-
-\begin{equation}\label{eq:trade_sign_results}
-    \varepsilon\left(t\right)=\left\{
-    \begin{array}{cc}
-    +1, & \text{If } S\left(t\right)
-    \text{ is higher than the last } m\left( t \right)\\
-    -1, & \text{If } S\left(t\right)
-    \text{ is lower than the last } m\left( t \right)
-    \end{array}\right.
-\end{equation}
-
-$\varepsilon(t) = +1$ indicates that the trade was triggered by a market order
-to buy and a trade triggered by a market order to sell yields
-$\varepsilon(t) = -1$
-\cite{subtle_nature,Bouchaud_2004,spread_changes_affect,quant_stock_price_response,order_flow_persistent}.
-
-It is well-known that the series of the trade signs on a given stock exhibit
-large autocorrelation. A very plausible explanation of this phenomenon relies
-on the execution strategies of some major brokers on given markets. These
-brokers have large transactions to execute on the account of some clients. In
-order to avoid market making move because of an inconsiderable large order,
-they tend to split large orders into small ones \cite{empirical_facts}.
-
-The response function is used to study the mutual dependence between stocks. In
-\cite{r_walks_liquidity,Bouchaud_2004}, Bouchaud et al. use the response
-function that only depends on the time lag $\tau$
-
-\begin{equation}\label{eq:Bouchaud_2004}
-    R\left(\tau\right)=\left\langle \left(S_{n+\tau}-S_{n}\right) \cdot
-    \varepsilon_{n}\right\rangle_{trades}
-\end{equation}
-
-Where $\varepsilon_{n}$ is the sign of the $n^{th}$ trade and the price $S_n$
-is defined as the midpoint just before the $n^{th}$ trade
-($S_{n} \equiv m_{n^{-}}$).
-The quantity $R\left(\tau\right)$ measures how much, on average, the price
-moves up (down) at time $\tau$ conditioned to a buy (sell) order at time zero.
-
-In a later work \cite{Wang_2016_cross}, S. Wang et al. use the logarithmic
-return for stock $i$ and time lag $\tau$, defined via the midpoint price
-$m_{i} \left( t \right)$. The cross-response function is then defined as
-
-\begin{equation}\label{eq:Wang_2016}
-    R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot
-    \varepsilon_{j} \left(t\right) \right\rangle _{t}
-\end{equation}
-
-Finally, in \cite{Wang_2018_b}, S. Wang et al. define the response function as
-
-\begin{equation}\label{eq:Wang_2018_b}
-    R_{ij} = \left\langle \left(\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-
-    \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right)\cdot\varepsilon_{j}
-    \left(t_{j}\right)\right\rangle _{t_{j}}
-\end{equation}
-
-For the price change of stock $i$ caused by a trade of stock $j$.
-
-Here, $m_{i}^{\left(p\right)}\left(t_{j}\right)$ is the midpoint price of stock
-$i$ previous to the trade of stock $j$ at its event time $t_j$ and
-$m_{i}^{\left(f\right)}\left(t_{j}\right)$ is the midpoint price of stock $i$
-following that trade.
+Acá empieza ...
 
 The difference between the definition in \cite{Wang_2016_cross} and in
 \cite{Wang_2018_b}, is that \cite{Wang_2016_cross} measures how a buy or sell
