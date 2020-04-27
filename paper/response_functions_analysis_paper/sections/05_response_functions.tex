@@ -223,7 +223,7 @@ accuracy up to $82\%$ in the physical time scale.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The average of the best ask and the best bid is the midpoint price, which is
-defined as \cite{subtle_nature,Bouchaud_2004,large_prices_changes,prop_order_book}
+defined as \cite{subtle_nature,Bouchaud_2004,large_prices_changes,prop_order_book,stat_theory}
 
 \begin{equation}\label{eq:midpoint_price}
     m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
@@ -323,10 +323,20 @@ brokers have large transactions to execute on the account of some clients. In
 order to avoid market making move because of an inconsiderable large order,
 they tend to split large orders into small ones \cite{empirical_facts}.
 
-INCLUDE response function from \cite{prop_order_book}
+In \cite{dissecting_cross} they use a market response $R_{\tau}^{i}$ defined as
+
+\begin{equation}\label{eq:dissecting_cross}
+    R_{\tau}^{ij} = \mathbf{E} \left[ \left( X_{t+\tau}^{i} - X_{t}^{i}
+    \right) \varepsilon_{t}^{j} \right]
+\end{equation}
+
+measures the
+average price change of contract $i$ at time $t+\tau$, after experiencing a
+sign imbalance $\varepsilon_{j}\left(t\right)$ in contract $j$ at time $t$.
+
 
 The response function is used to study the mutual dependence between stocks. In
-\cite{r_walks_liquidity,Bouchaud_2004}, Bouchaud et al. use the response
+\cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a self-response
 function that only depends on the time lag $\tau$
 
 \begin{equation}\label{eq:Bouchaud_2004}
@@ -339,8 +349,37 @@ is defined as the midpoint just before the $n^{th}$ trade
 ($S_{n} \equiv m_{n^{-}}$).
 The quantity $R\left(\tau\right)$ measures how much, on average, the price
 moves up (down) at time $\tau$ conditioned to a buy (sell) order at time zero.
+They found for France Telecom that $R\left(\tau \right)$ increases by a factor $~2$ between $\tau = 1$
+and $\tau = \tau^{*} \approx 1000$, before decreasing back. Using larger $\tau$,
+they also confirm that $R\left(\tau\right)$ drecreases, and even becomes negative
+beyond $\tau \approx 5000$.
 
-In a later work \cite{Wang_2016_cross}, S. Wang et al. use the logarithmic
+In \cite{theory_market_impact}, the price impact function, $f \left(\cdot\right)$,
+is defined as the average price response due to a transaction as a function of the
+transaction's volume
+
+\begin{equation}\label{eq:theory_market_impact}
+    f \left(v_{i}\right) \equiv \mathbf{E} \left[\varepsilon_{i} r_{i} | v_{i}\right]
+\end{equation}
+
+Empirically they found  the function is highly concave. The curvature of
+$f \left(v_{i}\right)$ is entirely due to the probability that a transaction causes
+a nonzero impact - the larger the size of the transaction, the larger the probability.
+,s
+In \cite{prop_order_book}, the response function is given by
+
+\begin{align}\label{eq:prop_order_book}
+    R \left(V, \tau\right) &= \left\langle \varepsilon \left(t\right) \cdot
+    \left[m \left(t + \tau\right) - m \left(t\right)\right] |V \right\rangle \\
+    &= R \left(\tau\right) \ln V
+\end{align}
+
+They found that $R \left(t\right)$ for three French stocks first increases
+from $\tau = 10s$ to a few hundred seconds, and then appears to decrease back
+to a finite value.
+
+In a later work \cite{Wang_2016_cross,spread_changes_affect}, S. Wang et al. and
+Grimm et al. use the logarithmic
 return for stock $i$ and time lag $\tau$, defined via the midpoint price
 $m_{i} \left( t \right)$. The cross-response function is then defined as
 
@@ -348,6 +387,9 @@ $m_{i} \left( t \right)$. The cross-response function is then defined as
     R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot
     \varepsilon_{j} \left(t\right) \right\rangle _{t}
 \end{equation}
+
+They found that in all cases, an increase  to a maximum is followed by a decrease. The
+trend is eventually reversed.
 
 Finally, in \cite{Wang_2018_b}, S. Wang et al. define the response function as
 
@@ -363,3 +405,13 @@ Here, $m_{i}^{\left(p\right)}\left(t_{j}\right)$ is the midpoint price of stock
 $i$ previous to the trade of stock $j$ at its event time $t_j$ and
 $m_{i}^{\left(f\right)}\left(t_{j}\right)$ is the midpoint price of stock $i$
 following that trade.
+
+The difference between the definition in \cite{Wang_2016_cross} and in
+\cite{Wang_2018_b}, is that \cite{Wang_2016_cross} measures how a buy or sell
+order at time $t$ influences on average the price at a later time $t + \tau$.
+The physical time scale was chosen since the trades in different stocks are not
+synchronous (TAQ data). In \cite{Wang_2018_b}, it was used a response function
+on a trade time scale (Totalview data), as the interest is to analyze the
+immediate responses. In \cite{Wang_2018_b} the time lag $\tau$ is restricted to
+one, such that the price response quantifies the price impact of a single
+trade.
