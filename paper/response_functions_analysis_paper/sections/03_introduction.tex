@@ -1,16 +1,60 @@
 \section{Introduction}\label{sec:introduction}
 
-reference EMH - \cite{EMH_lillo}
+\subsection{EMH - Zero Intelligence}
+
+Financial markets uses order books to list the number of shares being bid or
+offered at each price point. An order book is an electronic list of buy and
+sell orders for a specific security or financial instrument organized by price
+level. Agents can place different types of instructions (orders) to buy or to
+sell a given number of shares.
+
+In general, the dynamics of the prices follow a pure random walk. There are two
+extreme models that can describe this behavior: the Efficient Market Hypothesis
+(EMH) and the Zero Intelligence Trading (ZIT). The EMH affirms that all
+available information is included in prices and price changes can only be the
+result of unanticipated news, which by definition are totally unpredictable
+\cite{EMH_lillo,subtle_nature}. On the other hand, the ZIT assumes that agents
+instead of being fully rational, have "zero intelligence” and randomly buy or
+sell. It is supposed that their actions are interpreted by other agents as
+potentially containing some information. In both cases the outcome is the same,
+the prices follow a random walk \cite{subtle_nature,Wang_2016_cross}.
+In the real life, the will not behave as one of these extreme scenarios, but
+somewhere in between.
+
+FALTA REDONDEAR LA IDEA
+
+
+\subsection{Other works} DONE
+
+There are diverse studies focused on the price response
+\cite{dissecting_cross,r_walks_liquidity,subtle_nature,Bouchaud_2004,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,master_curve,EMH_lillo,quant_stock_price_response,ori_pow_law,prop_order_book,Wang_2018_b,Wang_2018_a,Wang_2016_avg,Wang_2016_cross},
+but they concentrate on a general definition and discuss the results without
+going deep in the specific details of the price response measurements.
+
+In \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. found
+for a price self-response function an increase to a maximum followed by a
+decrease as the time lag grows. In \cite{theory_market_impact}, the researchers
+found that larger sized transactions have a larger absolute impact than smaller
+sized transactions but a much smaller relative impact.
+In \cite{prop_order_book}, the results show that the impact of small trades on
+the price is, in relative terms, much larger than that of large trades and the
+impact of trading on the price is quasi-permanent.
+
+For price cross-responses functions, \cite{dissecting_cross} found that the
+diagonal terms are on average larger than the off-diagonal ones by a factor
+$~5$. The response at positive times is roughly constant, consistently with the
+hypothesis of a statistically efficient price. In other words, the current sign
+does not predict future returns. In \cite{Wang_2016_cross} the results show the
+trends in the cross-responses does not depend on whether or not the stock pairs
+are in the same economic sector or extend over two sectors.
+
+\subsection{Our work} DONE
 
 In this paper, we want to discuss, based on a series of detailed empirical
 results obtained on trade by trade data, that the variation in the details of
 the parameters used in the price response definition modify the characteristics
 of the results. Aspects like time scale, time shift, time lag and spread used
 in the price response calculation have a large impact on the outcomes.
-
-There are diverse studies focused on the price response \cite{EMH_lillo,Bouchaud_2004,Wang_2016_cross,Wang_2016_avg,Wang_2018_a,Wang_2018_b,large_prices_changes,theory_market_impact,dissecting_cross,spread_changes_affect,quant_stock_price_response,master_curve,ori_pow_law,pow_law_dist,prop_order_book},
-but they concentrate on a general definition and discuss the results without
-going deep in the specific details of the price response measurements.
 
 Here, we delve into the key details needed to compute the price response
 functions, and investigate their corresponding roles. We perform a empirical
@@ -23,22 +67,8 @@ set. We split the time lag to understand the contribution of the immediate
 returns and the late returns. The price response is highly influenced by the
 instantaneous returns and as the time lag grows, the influence starts to
 decrease. We shed light on the spread impact in the response functions for
-single stocks. We prove that when the spread is large, the price response tend
+single stocks. We check that when the spread is large, the price response tend
 to be large.
-
-
-
-Acá empieza ...
-
-The difference between the definition in \cite{Wang_2016_cross} and in
-\cite{Wang_2018_b}, is that \cite{Wang_2016_cross} measures how a buy or sell
-order at time $t$ influences on average the price at a later time $t + \tau$.
-The physical time scale was chosen since the trades in different stocks are not
-synchronous (TAQ data). In \cite{Wang_2018_b}, it was used a response function
-on a trade time scale (Totalview data), as the interest is to analyze the
-immediate responses. In \cite{Wang_2018_b} the time lag $\tau$ is restricted to
-one, such that the price response quantifies the price impact of a single
-trade.
 
 The paper is organized as follows: in Sect. \ref{sec:data_time} we present our
 data set of stocks and describe the physical and trade time. We then
