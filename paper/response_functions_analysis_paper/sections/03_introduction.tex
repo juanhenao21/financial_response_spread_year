@@ -1,8 +1,6 @@
 \section{Introduction}\label{sec:introduction}
 
-\subsection{EMH - Zero Intelligence}
-
-Financial markets uses order books to list the number of shares being bid or
+Financial markets use order books to list the number of shares being bid or
 offered at each price point. An order book is an electronic list of buy and
 sell orders for a specific security or financial instrument organized by price
 level. Agents can place different types of instructions (orders) to buy or to
@@ -16,39 +14,34 @@ result of unanticipated news, which by definition are totally unpredictable
 \cite{EMH_lillo,subtle_nature}. On the other hand, the ZIT assumes that agents
 instead of being fully rational, have "zero intelligence” and randomly buy or
 sell. It is supposed that their actions are interpreted by other agents as
-potentially containing some information. In both cases the outcome is the same,
-the prices follow a random walk \cite{subtle_nature,Wang_2016_cross}.
-In the real life, the will not behave as one of these extreme scenarios, but
+potentially containing some information \cite{subtle_nature,Wang_2016_cross}.
+In both cases the outcome is the same, the prices follow a random walk.
+In real life, they will not behave as one of these extreme scenarios, but
 somewhere in between.
-
-FALTA REDONDEAR LA IDEA
-
-
-\subsection{Other works} DONE
 
 There are diverse studies focused on the price response
 \cite{dissecting_cross,r_walks_liquidity,subtle_nature,Bouchaud_2004,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,master_curve,EMH_lillo,quant_stock_price_response,ori_pow_law,prop_order_book,Wang_2018_b,Wang_2018_a,Wang_2016_avg,Wang_2016_cross},
 but they concentrate on a general definition and discuss the results without
-going deep in the specific details of the price response measurements.
+going deep in the specific details of the price response measurements and how
+these aspects of the price response definition modify the results.
 
-In \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. found
-for a price self-response function an increase to a maximum followed by a
-decrease as the time lag grows. In \cite{theory_market_impact}, the researchers
-found that larger sized transactions have a larger absolute impact than smaller
-sized transactions but a much smaller relative impact.
-In \cite{prop_order_book}, the results show that the impact of small trades on
-the price is, in relative terms, much larger than that of large trades and the
-impact of trading on the price is quasi-permanent.
+Regarding price self-response functions,
+\cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. found
+an increase to a maximum followed by a decrease as the time lag grows.
+In \cite{theory_market_impact}, the researchers found that larger sized
+transactions have a larger absolute impact than smaller sized transactions but
+a much smaller relative impact. In \cite{prop_order_book}, the results show
+that the impact of small trades on the price is, in relative terms, much larger
+than that of large trades and the impact of trading on the price is
+quasi-permanent.
 
 For price cross-responses functions, \cite{dissecting_cross} found that the
 diagonal terms are on average larger than the off-diagonal ones by a factor
-$~5$. The response at positive times is roughly constant, consistently with the
-hypothesis of a statistically efficient price. In other words, the current sign
-does not predict future returns. In \cite{Wang_2016_cross} the results show the
-trends in the cross-responses does not depend on whether or not the stock pairs
-are in the same economic sector or extend over two sectors.
-
-\subsection{Our work} DONE
+$\sim 5$. The response at positive times is roughly constant, consistently with
+the hypothesis of a statistically efficient price. In other words, the current
+sign does not predict future returns. In \cite{Wang_2016_cross} the results
+show the trends in the cross-responses does not depend on whether or not the
+stock pairs are in the same economic sector or extend over two sectors.
 
 In this paper, we want to discuss, based on a series of detailed empirical
 results obtained on trade by trade data, that the variation in the details of
@@ -70,13 +63,14 @@ decrease. We shed light on the spread impact in the response functions for
 single stocks. We check that when the spread is large, the price response tend
 to be large.
 
-The paper is organized as follows: in Sect. \ref{sec:data_time} we present our
-data set of stocks and describe the physical and trade time. We then
-analyze the definition of the response functions in Sect.
-\ref{sec:response_functions}, and compute them for several stocks and pairs of
-stocks. In Sect. \ref{sec:time_shift} we show how the relative position between
-trade signs and returns has a huge impact in the results of the computation of
-the response functions. In Sect. \ref{sec:short_long} we explain in detail how
-the time lag $\tau$ behaves in the response functions. Finally, in Sect.
-\ref{sec:spread_impact} analyze the spread impact in the response functions.
+The paper is organized as follows: in Sect. \ref{sec:data} we present our data
+set of stocks. We then analyze the definition of the price response functions
+and describe the physical and trade time in Sect.
+\ref{sec:response_functions_def}. We implement different price responses for
+several stocks and pairs of stocks in Sect. \ref{sec:response_functions_imp}.
+In Sect. \ref{sec:time_shift} we show how the relative position between trade
+signs and returns has a huge impact in the results of the computation of the
+response functions. In Sect. \ref{sec:short_long} we explain in detail how the
+time lag $\tau$ behaves in the response functions. Finally, in Sect.
+\ref{sec:spread_impact} we analyze the spread impact in the response functions.
  Our conclusions follows in Sect. \ref{sec:conclusion}.
