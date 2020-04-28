@@ -15,15 +15,16 @@ In general, the time series are indexed in calendar time (hours, minutes,
 seconds, milliseconds). Moreover, tick-by-tick data available on financial
 markets all over the world is time stamped up to the millisecond, but the order
 of magnitude of the guaranteed precision is much larger, usually one second or
-a few hundreds of milliseconds \cite{empirical_facts,market_digest}. In several papers are
-used different time definitions (calendar time, physical time, event time,
-trade time, tick time) \cite{empirical_facts,sampling_returns,market_making}.
-The TAQ data used in the analysis has the characteristic that the trades and
-quotes can not be directly related due to the time stamp resolution of only one
-second \cite{Wang_2016_cross}. Hence, it is impossible to match each trade with
-the directly preceding quote. However, using a classification for the trade
-signs, we can compute trade signs in two scales: trade time scale and physical
-time scale.
+a few hundreds of milliseconds \cite{market_digest,empirical_facts}. In several
+papers are used different time definitions (calendar time, physical time, event
+time, trade time, tick time)
+\cite{empirical_facts,sampling_returns,market_making}. The TAQ data used in the
+analysis has the characteristic that the trades and quotes can not be directly
+related due to the time stamp resolution of only one second
+\cite{Wang_2016_cross}. Hence, it is impossible to match each trade with the
+directly preceding quote. However, using a classification for the trade signs,
+we can compute trade signs in two scales: trade time scale and physical time
+scale.
 
 The trade time scale is increased by one unit each time a transaction happens.
 The advantage of this count is that limit orders far away in the order book do
@@ -230,25 +231,17 @@ accuracy up to $82\%$ in the physical time scale.
 
 \subsection{Response function definitions}\label{subsec:response_def}
 The average of the best ask and the best bid is the midpoint price, which is
-defined as \cite{subtle_nature,Bouchaud_2004,large_prices_changes,prop_order_book,stat_theory}
+defined as
+\cite{subtle_nature,Bouchaud_2004,large_prices_changes,prop_order_book,stat_theory}
 
 \begin{equation}\label{eq:midpoint_price}
     m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
 \end{equation}
 
 As the midpoint price depends on the quotes, it changes if the quotes change.
-The midpoint price grows if the best ask or the best bid grow. This happen if
-someone buys and consumes all the volume of the sell limit order with the price
-of the best ask, or someone sets a buy limit order with a bigger price than the
-previous best bid, or there is a cancellation of the best ask.
-
-On the other hand, the midpoint price decreases if the best ask or the best bid
-decrease. This happen if someone sells and consumes all the volume of the buy
-limit order with the price of the best bid, or someone sets a sell limit order
-with a lower price than the previous best bid, or there is a cancellation of
-the best bid.
-
-The midpoint price will not change if there is no activity in the market.
+The midpoint price grows if the best ask or the best bid grow. On the other
+hand, the midpoint price decreases if the best ask or the best bid
+decrease.
 
 Price changes are typically characterized as returns. If one denotes
 $S\left( t\right)$ the price of an asset at time $t$, the return
@@ -262,7 +255,7 @@ variation of the price from $t$ to $t + \tau$
 \end{equation}
 
 It is also common to define the returns as
-\cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,theory_market_impact,spread_changes_affect,fluctions_market_friction,pow_law_dist,rand_mat}
+\cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,rand_mat,fluctions_market_friction}
 
 \begin{equation}\label{eq:log_return_general}
     r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
@@ -288,16 +281,6 @@ We define the returns via the midpoint price as
 The distribution of returns is strongly non-Gaussian and its shape continuously
 depends on the return period $\tau$. Small $\tau$ values have fat tails return
 distributions \cite{subtle_nature}.
-
-Then we can expect three kind of values of the returns. The returns are
-positive values, when the midpoint price
-$m\left(t+\tau\right) > m\left(t\right)$, hence, there is a buy in the market
-or there is a cancellation of the best ask or an addition in the best bid
-during the time lag $\tau$. The returns are negative values, when the midpoint
-price $m\left(t+\tau\right) < m\left(t\right)$, thus, there is a sell in the
-market, or there is a cancellation of the best bid or an addition in the best
-ask during the time lag $\tau$. The returns are zero when there is no activity
-during the time lag $\tau$.
 
 The trade signs are defined for general cases as
 
@@ -333,8 +316,8 @@ they tend to split large orders into small ones \cite{empirical_facts}.
 In \cite{dissecting_cross} they use a market response $R_{\tau}^{i}$ defined as
 
 \begin{equation}\label{eq:dissecting_cross}
-    R_{\tau}^{ij} = \mathbf{E} \left[ \left( X_{t+\tau}^{i} - X_{t}^{i}
-    \right) \varepsilon_{t}^{j} \right]
+    R_{\tau}^{ij} = \mathbf{E} \left[ \left( \ln S_{i}(t+\tau) - \ln S_{i}(t)
+    \right) \varepsilon_{j}(t) \right]
 \end{equation}
 
 measures the
@@ -352,28 +335,27 @@ function that only depends on the time lag $\tau$
 \end{equation}
 
 Where $\varepsilon_{n}$ is the sign of the $n^{th}$ trade and the price $S_n$
-is defined as the midpoint just before the $n^{th}$ trade
-($S_{n} \equiv m_{n^{-}}$).
+is defined as the midpoint just before the $n^{th}$ trade.
 The quantity $R\left(\tau\right)$ measures how much, on average, the price
 moves up (down) at time $\tau$ conditioned to a buy (sell) order at time zero.
-They found for France Telecom that $R\left(\tau \right)$ increases by a factor $~2$ between $\tau = 1$
-and $\tau = \tau^{*} \approx 1000$, before decreasing back. Using larger $\tau$,
-they also confirm that $R\left(\tau\right)$ drecreases, and even becomes negative
-beyond $\tau \approx 5000$.
+They found for France Telecom that $R\left(\tau \right)$ increases by a factor
+$~2$ between $\tau = 1$ and $\tau \approx 1000$, before decreasing back. Using
+larger $\tau$, they also confirm that $R\left(\tau\right)$ decreases, and even
+becomes negative beyond $\tau \approx 5000$.
 
-In \cite{theory_market_impact}, the price impact function, $f \left(\cdot\right)$,
-is defined as the average price response due to a transaction as a function of the
-transaction's volume
+In \cite{theory_market_impact}, the price impact function,
+$f \left(\cdot\right)$, is defined as the average price response due to a
+transaction as a function of the transaction's volume $v_{i}$
 
 \begin{equation}\label{eq:theory_market_impact}
-    f \left(v_{i}\right) \equiv \mathbf{E} \left[\varepsilon_{i} r_{i} | v_{i}\right]
+    f \left(v_{i}\right) \equiv \mathbf{E} \left[\varepsilon_{i} r^{l}_{i} |
+    v_{i}\right]
 \end{equation}
 
 Empirically they found  the function is highly concave. The curvature of
-$f \left(v_{i}\right)$ is entirely due to the probability that a transaction causes
-a nonzero impact - the larger the size of the transaction, the larger the probability.
-,s
-In \cite{prop_order_book}, the response function is given by
+$f \left(v_{i}\right)$ is entirely due to the probability that a transaction
+causes a nonzero impact - the larger the size of the transaction, the larger
+the probability. In \cite{prop_order_book}, the response function is given by
 
 \begin{align}\label{eq:prop_order_book}
     R \left(V, \tau\right) &= \left\langle \varepsilon \left(t\right) \cdot
@@ -385,18 +367,18 @@ They found that $R \left(t\right)$ for three French stocks first increases
 from $\tau = 10s$ to a few hundred seconds, and then appears to decrease back
 to a finite value.
 
-In a later work \cite{Wang_2016_cross,spread_changes_affect}, S. Wang et al. and
-Grimm et al. use the logarithmic
-return for stock $i$ and time lag $\tau$, defined via the midpoint price
-$m_{i} \left( t \right)$. The cross-response function is then defined as
+In a later work \cite{spread_changes_affect,Wang_2016_cross}, S. Wang et al.
+and Grimm et al. use the logarithmic return for stock $i$ and time lag $\tau$,
+defined via the midpoint price $m_{i} \left( t \right)$. The cross-response
+function is then defined as
 
 \begin{equation}\label{eq:Wang_2016}
     R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot
     \varepsilon_{j} \left(t\right) \right\rangle _{t}
 \end{equation}
 
-They found that in all cases, an increase  to a maximum is followed by a decrease. The
-trend is eventually reversed.
+They found that in all cases, an increase  to a maximum is followed by a
+decrease. The trend is eventually reversed.
 
 Finally, in \cite{Wang_2018_b}, S. Wang et al. define the response function as
 
