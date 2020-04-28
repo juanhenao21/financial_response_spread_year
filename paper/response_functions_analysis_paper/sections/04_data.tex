@@ -1,18 +1,43 @@
-\section{Data set and time definition}\label{sec:data_time}
+\section{Data set}\label{sec:data}
 
-In Sect. \ref{subsec:data_set} we introduce the data set used in the paper. In
-Sect. \ref{subsec:time_definition} we describe the physical time scale and the
-trade time scale.
+In a modern financial market, there is a double continuous auction. To find
+possible buyers and sellers in the market, agents can place different types of
+orders to buy or to sell a given number of shares, that can be grouped into
+two categories: market orders and limit orders.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Data set}\label{subsec:data_set}
+Market orders will go into market to execute at the best available buy or sell
+price \cite{large_prices_changes,predictive_pow,stat_theory}. Limit orders
+allow to set a maximum purchase price for a buy order, or a minimum sale price
+for a sell order. If the market does not reach the limit price, the order will
+not be executed \cite{large_prices_changes,predictive_pow,stat_theory}.
+
+Limit orders often fail to result in an immediate transaction, and are stored
+in a queue called the limit order book
+\cite{prop_order_book,stat_prop,predictive_pow}. An order book is an electronic
+list of buy and sell orders for a specific security or financial instrument
+organized by price level. An order book lists the number of shares being bid or
+offered at each price point. It also identifies the market participants behind
+the buy and sell orders, although some choose to remain anonymous. The order
+book is visible for all traders, its main purpose is to ensure that all traders
+have the information about what is offered on the market.
+
+Buy limit orders are called ``bids", and sell limit orders are called ``asks".
+At any given time there is a best (lowest) offer to sell with price
+$a\left(t\right)$, and a best (highest) bid to buy with price $b\left(t\right)$
+\cite{subtle_nature,account_spread,limit_ord_spread,prop_order_book,stat_theory}.
+The price gap between them is called the spread
+$s\left(t\right) = a\left(t\right)-b\left(t\right)$
+\cite{subtle_nature,Bouchaud_2004,large_prices_changes,account_spread,market_digest,stat_theory}.
+Spreads are significantly positively related to price and significantly
+negatively related to trading volume. Firms with more liquidity tend to have
+lower spreads.
+\cite{account_spread,effects_spread,components_spread,components_spread_tokyo}.
 
 In this study, we have analyzed trades and quotes (TAQ) data from the NASDAQ
-Stock Market. We selected NASDAQ because it is an electronic exchange where
+stock market. We selected NASDAQ because it is an electronic exchange where
 stocks are traded through an automated network of computers instead of a
-trading floor, which makes trading more efficient, fast and accurate.
-NASDAQ is the second largest stock exchange based on market capitalization in
-the world.
+trading floor, which makes trading more efficient, fast and accurate. NASDAQ is
+the second largest stock exchange based on market capitalization in the world.
 
 In the TAQ data set, there are two data files for each stock. One gives the
 list of all successive quotes. Thus, we have the best bid price, best ask
@@ -30,11 +55,13 @@ to relate the midpoint prices with the trade signs in trade time scale and in
 physical time scale.
 
 To analyze the response functions across different liquid stocks in Sects.
-\ref{sec:response_functions}, \ref{sec:time_shift} and \ref{sec:short_long},
+\ref{sec:response_functions_imp}, \ref{sec:time_shift} and \ref{sec:short_long},
 we select the six companies with the largest average market capitalization
 (AMC) (Alphabet Inc., Mastercard Inc., CME Group Inc., Goldman Sachs Group
 Inc., Transocean Ltd. and Apache Corp.) in three economic sectors (information
-technology, financials and energy) of the S\&P index in 2008.
+technology, financials and energy) of the S\&P index in 2008. Table
+\ref{tab:companies} shows the companies analyzed with their corresponding
+symbol and sector, and three average values for a year.
 
 \begin{table*}[htbp]
 \begin{threeparttable}
@@ -45,7 +72,7 @@ technology, financials and energy) of the S\&P index in 2008.
 \bf{Trades}\tnote{2} & \bf{Spread}\tnote{3}\tabularnewline
 \midrule
 Alphabet Inc. & GOOG & Information Technology (IT) & $164489$ & $19029$ &
-$\$0.04$\tabularnewline
+$\$0.40$\tabularnewline
 Mastercard Inc. & MA & Information Technology (IT) & $98909$ & $6977$ &
 $\$0.38$\tabularnewline
 CME Group Inc. & CME & Financials (F) & $98188$ & $3032$ &
@@ -59,19 +86,14 @@ Apache Corp. & APA & Energy (E) & $103074$ & $8889$ & $\$0.13$\tabularnewline
 \end{tabular*}
 \label{tab:companies}
 \begin{tablenotes}\footnotesize
-\item[1] Average number of quotes from 9:40:00 to 15:50:00 New York time.
-\item[2] Average number of trades from 9:40:00 to 15:50:00 New York time.
-\item[3] Average spread from 9:40:00 to 15:50:00 New York time.
+\item[1] Average number of quotes from 9:40:00 to 15:50:00 New York time during
+ 2008.
+\item[2] Average number of trades from 9:40:00 to 15:50:00 New York time during
+ 2008.
+\item[3] Average spread from 9:40:00 to 15:50:00 New York time during 2008.
 \end{tablenotes}
 \end{threeparttable}
 \end{table*}
-
-Table \ref{tab:companies} shows the companies analyzed with their corresponding
-symbol and sector. The highest average number of quotes per day and the most
-liquid stock on average from our selection for the year 2008 is Alphabet Inc.
-The most traded stock on average from the group was Goldman Sachs Group Inc.
-On the other side, the stock with the less quotes, less traded and less
-liquidity on average for the analyzed year was CME Group Inc.
 
 To analyze the spread impact in response functions (Sect.
 \ref{sec:spread_impact}), we select 530 stocks in the NASDAQ stock market for
@@ -85,39 +107,3 @@ ten minutes of trading in a given day
 Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
 New York local time. We will refer to this interval of time as the ``market
 time".
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-In a modern financial market, there is a double continuous auction. To find
-possible buyers and sellers in the market, agents can place different types of
-instructions (known as orders) to buy or to sell a given number of shares, that
-can be grouped into two categories: market orders and limit orders.
-
-Market orders will go into market to execute at the best available buy or sell
-price, they are executed as fast as possible and only after the purchase of the
-stock is possible to know the exact price \cite{large_prices_changes,predictive_pow,stat_theory}.
-
-Limit orders allow to set a maximum purchase price for a buy order, or a
-minimum sale price for a sell order. If the market does not reach the limit
-price, the order will not be executed \cite{large_prices_changes,predictive_pow,stat_theory}.
-
-Limit orders often fail to result in an immediate transaction, and are stored
-in a queue called the limit order book \cite{prop_order_book,stat_prop,predictive_pow}. An order book is an electronic list of
-buy and sell orders for a specific security or financial instrument organized
-by price level. An order book lists the number of shares being bid or offered
-at each price point. It also identifies the market participants behind the buy
-and sell orders, although some choose to remain anonymous. The order book is
-visible for all traders, its main purpose is to ensure that all traders have
-the information about what is offered on the market.
-
-Buy limit orders are called ``bids", and sell limit orders are called ``asks".
-At any given time there is a best (lowest) offer to sell with price
-$a\left(t\right)$, and a best (highest) bid to buy with price
-$b\left(t\right)$ \cite{subtle_nature,account_spread,limit_ord_spread,prop_order_book,stat_theory}. These
-are also called the inside quotes or the best prices. The price gap between
-them is called the spread $s\left(t\right) = a\left(t\right)-b\left(t\right)$
-\cite{subtle_nature,Bouchaud_2004,large_prices_changes,account_spread,market_digest,stat_theory}.
-Spreads are significantly positively related to price and significantly
-negatively related to trading volume. Firms with more liquidity tend to have
-lower spreads.
-\cite{account_spread,effects_spread,components_spread,components_spread_tokyo}.
