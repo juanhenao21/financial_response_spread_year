@@ -6,9 +6,8 @@ cross-correlator functions. This module reproduces the sections 3.1 and 3.2 of
 the `paper
 <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
 
-
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * numpy
     * os
@@ -186,7 +185,7 @@ def taq_midpoint_trade_data(ticker, date):
         # Load data
         # The module is used in other folders, so it is necessary to use
         # absolute paths instead of relative paths
-        # Obtain the absolut path of the current file and split it
+        # Obtain the absolute path of the current file and split it
         abs_path = os.path.abspath(__file__).split('/')
         # Take the path from the start to the project folder
         root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
@@ -240,9 +239,6 @@ def taq_midpoint_physical_data(ticker, date):
     day = date_sep[2]
 
     function_name = taq_midpoint_physical_data.__name__
-    taq_data_tools_responses_physical \
-        .taq_function_header_print_data(function_name, ticker, ticker, year,
-                                        month, day)
 
     try:
         # Calculate the values of the midpoint price for all the events
@@ -305,6 +301,9 @@ def taq_midpoint_physical_data(ticker, date):
         return (full_time, midpoint)
 
     except TypeError as e:
+        print('Type Error')
+        print(e)
+        print()
         return None
 
 # ----------------------------------------------------------------------------
@@ -414,16 +413,13 @@ def taq_trade_signs_physical_data(ticker, date):
     day = date_sep[2]
 
     function_name = taq_trade_signs_physical_data.__name__
-    taq_data_tools_responses_physical \
-        .taq_function_header_print_data(function_name, ticker, ticker, year,
-                                        month, day)
 
     try:
         # Calculate the values of the trade signs for all the events
         (time_t, ask_t,
          identified_trades) = taq_trade_signs_trade_data(ticker, date)
 
-        # Reproducing the paper time values. In her results the time interval
+        # Reproducing the paper time values. In the results the time interval
         # for the trade signs is [34801, 57000]
         full_time = np.array(range(34801, 57001))
         trade_signs = 0. * full_time
@@ -449,6 +445,9 @@ def taq_trade_signs_physical_data(ticker, date):
         return (full_time, price_signs, trade_signs)
 
     except TypeError as e:
+        print('Type Error')
+        print(e)
+        print()
         return None
 
 # ----------------------------------------------------------------------------
