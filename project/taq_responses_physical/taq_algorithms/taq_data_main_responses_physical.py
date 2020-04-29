@@ -4,7 +4,7 @@ The functions in the module run the complete extraction, analysis and plot of
 the TAQ data.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * os
     * pandas
@@ -228,22 +228,21 @@ def main():
 
     :return: None.
     """
+    # Initial message
+    taq_data_tools_responses_physical.taq_initial_message()
 
     # Tickers and days to analyze
-    year, tickers = taq_data_tools_responses_physical.taq_initial_data()
-    # To be used when run in server
-    # year = '2008'
-    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
 
     # Basic folders
     taq_data_tools_responses_physical.taq_start_folders(year)
 
     # Run analysis
-    # Use the following function if you have all the C++ modules
+    # Comment the function taq_build_from_scratch if you do not have the C++
+    # modules
     taq_build_from_scratch(tickers, year)
-    # Use this function if you have the year csv files of the stocks
-    # taq_daily_data_extract(tickers, year)
+    taq_daily_data_extract(tickers, year)
 
     # Analysis and plot
     taq_data_plot_generator(tickers, year)
