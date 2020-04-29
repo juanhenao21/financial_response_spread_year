@@ -1,13 +1,13 @@
 # Response Functions Analysis
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://response-functions-year.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://financial-response-spread-year.readthedocs.io/en/latest/)
 
 In this repository, I analyze the response functions of the NASDAQ TAQ data for
 the year 2008, however, it is possible to analyze other years with the
 corresponding data.
 
-I reproduce in the [taq_responses_physical](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_physical)
+I reproduce in the [taq_responses_physical](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_physical)
 folder the sections 3.1 and 3.2 of the paper
 [Cross-response in correlated financial markets: individual stocks](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf)
 to obtain the midpoint prices, trade signs, self-responses, cross-responses,
@@ -29,7 +29,7 @@ and the influence of the time lag
 ([taq_responses_physical_short_long](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_physical_short_long/taq_algorithms))
 in the response functions.
 
-You can find [here](https://response-functions-year.readthedocs.io/en/latest/)
+You can find [here](https://financial-response-spread-year.readthedocs.io/en/latest/)
 a detailed documentation of the code.
 
 ## Getting Started
