@@ -35,41 +35,36 @@ def taq_self_response_year_avg_responses_physical_plot(year):
     """
 
     try:
-        function_name = taq_self_response_year_avg_responses_physical_plot \
-            .__name__
-        taq_data_tools_avg_responses_physical \
-            .taq_function_header_print_plot(function_name, '', '', year, '',
-                                            '')
-
         # Load data
-        resp_g1, resp_g2, resp_g3, resp_g4, resp_g5 = pickle.load(open(
-            f'../../taq_data/avg_responses_physical_data_{year}/taq_self'
-            + f'_response_year_avg_responses_physical_data/taq_self_response'
-            + f'_year_avg_responses_physical_data_{year}_.pickle', 'rb'))
+        resp_g1, resp_g2, resp_g3 = pickle.load(open(
+            f'../../project/taq_data/avg_responses_physical_data_{year}/taq'
+            + f'_self_response_year_avg_responses_physical_data/taq_self'
+            + f'_response_year_avg_responses_physical_data_{year}_.pickle',
+            'rb'))
 
         figure = plt.figure(figsize=(16, 9))
+        ax = plt.subplot(111)
 
         plt.semilogx(resp_g1, linewidth=5, label=f'Group 1')
         plt.semilogx(resp_g2, linewidth=5, label=f'Group 2')
         plt.semilogx(resp_g3, linewidth=5, label=f'Group 3')
-        plt.semilogx(resp_g4, linewidth=5, label=f'Group 4')
-        plt.semilogx(resp_g5, linewidth=5, label=f'Group 5')
 
-        plt.legend(loc='best', fontsize=25)
-        plt.title('Self-response', fontsize=40)
-        plt.xlabel(r'$\tau \, [s]$', fontsize=35)
-        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=35)
-        plt.xticks(fontsize=25)
-        plt.yticks(fontsize=25)
-        plt.xlim(1, 10000)
+        plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
+                   fontsize=30)
+        plt.xlabel(r'$\tau \, [s]$', fontsize=30)
+        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=30)
+        plt.xticks(fontsize=20)
+        plt.yticks(fontsize=20)
+        plt.xlim(1, 1000)
+        plt.ylim(19 * 10 ** -5, 32 * 10 ** -5)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        ax.yaxis.offsetText.set_fontsize(20)
         plt.grid(True)
         plt.tight_layout()
 
-        # Plotting
-        taq_data_tools_avg_responses_physical \
-            .taq_save_plot(function_name, figure, '', '', year, '')
+        # Save Plot
+        figure.savefig(f'../plot/06_spread_impact_{year}.png')
 
         return None
 
@@ -86,7 +81,7 @@ def main():
 
     year = '2008'
 
-    taq_responses_physical_short_long_year_plot('GOOG', 'MA', year, 1000, 40)
+    taq_self_response_year_avg_responses_physical_plot(year)
 
     return None
 
