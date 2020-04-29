@@ -56,6 +56,10 @@ project.
 
    09_taq_statistics
 
+   10_taq_avg_spread
+
+   11_taq_avg_responses_physical
+
 Indices and tables
 ==================
 
