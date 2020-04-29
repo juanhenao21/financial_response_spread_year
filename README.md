@@ -52,10 +52,10 @@ Research group Guhr members).
 
 ## Running the code
 
-The first step is clone the repository
+The first step is to clone the repository
 
 ```bash
-$ git clone https://github.com/juanhenao21/response_functions_year.git
+$ git clone https://github.com/juanhenao21/financial_response_spread_year.git
 ```
 
 To install all the `Pyton` packages needed I recommend to create a virtual
@@ -70,52 +70,70 @@ $ pip install -r requirements.txt
 
 ### TAQ Responses Physical
 
+After you clone the repository, you need to create two folders inside the
+`financial_response_spread_year/project` folder, one folder with the name
+`taq_data` and another folder with the name `taq_plot`.
+
 #### For the members of the research group Guhr
 
 To run the code from the scratch and reproduce the results in section 2.3 and
 2.4 of the
 [paper](https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf),
-you need to move (cd) to the folder
-`response_functions_year/project/taq_responses_physical/taq_algorithms/` and
-run the module `taq_data_main_responses_physical.py`. In Linux, using the
-terminal the command looks like
+you need to copy the folder `decompress_original_data_2008` to the folder
+`financial_response_spread_year/project/taq_data`.
+Then you need to create a folder with the name `original_year_data_2008` inside
+`financial_response_spread_year/project/taq_data` and copy the original
+`.quotes` and `.trades` files of the tickers you want to analyze.
+
+Then, you need to move (cd) to the folder
+`financial_response_spread_year/project/taq_responses_physical/taq_algorithms/`
+and in the `main()` function of the module
+`taq_data_main_responses_physical.py`, edit the tickers list with the stocks
+you want to analyze (in this case the symbols of the files of the tickers you
+copy in the previous step).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
+
+Finally, you need to run the module. In Linux, using the terminal the command
+looks like
 
 ```bash
 $ python3 taq_data_main_responses_physical.py
 ```
 
-The program will ask you which tickers will be used during the analysis and the
-year of the analysis. After that, the program will ask you to move the
-`.quotes` and `.trades` files of the tickers you want to analyze into the
-folder `response_functions_year/project/taq_data/original_year_data_2008`, and
-the `decompress_original_data_2008` folder to the
-`response_functions_year/project/taq_data` folder.
-After you move the folder to the location, the program will obtain and plot the
-data for the corresponding stocks.
+The program will obtain and plot the data for the corresponding stocks.
 
 #### For the users with the year CSV data files
 
-If you have the CSV data files, go to the
-`response_functions_year/project/taq_responses_physical/taq_algorithms/taq_data_main_responses_physical.py`
+If you have the CSV data files, you need to create a folder with the name
+`csv_year_data_2008` inside `financial_response_spread_year/project/taq_data`,
+and copy the CSV files inside. Then go to the
+`financial_response_spread_year/project/taq_responses_physical/taq_algorithms/taq_data_main_responses_physical.py`
 file and comment the line in the `main` function
 
 ```Python
 # taq_build_from_scratch(tickers, year)
 ```
 
-Then you need to run the module. In Linux, using the terminal, the command look
-like
+Edit the tickers list with the stocks you want to analyze (in this case the
+symbols of the files of the tickers you copy in the previous step).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
+
+Finally, you need to run the module. In Linux, using the terminal, the command
+look like
 
 ```bash
 $ python3 taq_data_main_responses_physical.py
 ```
 
-The program will ask you to move the `CSV` files of the tickers you want to
-analyze into the folder `csv_year_data_2008`.
-After you move the files to the corresponding place, the program will obtain
-and plot the data for the stocks.
+The program will obtain and plot the data for the corresponding stocks.
 
-The following analysis depends directly from the results of this section, so if
+All following analysis depends directly from the results of this section. If
 you want to run them, you need to run this section first.
 
 ### TAQ Responses Trade
