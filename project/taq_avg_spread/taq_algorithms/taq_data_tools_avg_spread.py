@@ -12,9 +12,7 @@ This script requires the following modules:
     * pickle
 
 The module contains the following functions:
-    * taq_save_data - saves computed data.
     * taq_function_header_print_data - prints info about the function running.
-    * taq_start_folders - creates folders to save data and plots.
     * taq_initial_data - takes the initial values for the analysis.
     * taq_business_days - creates a list of week days for a year.
     * taq_get_tickers_data - gets the available ticker names.
@@ -31,60 +29,6 @@ import numpy as np
 import os
 import pandas as pd
 import pickle
-
-# -----------------------------------------------------------------------------
-
-
-def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
-    """ Saves computed data in pickle files.
-
-    Saves the data generated in the functions of the
-    taq_data_analysis_avg_spread module in pickle files.
-
-    :param function_name: name of the function that generates the data.
-    :param data: data to be saved. The data can be of different types.
-    :param ticker_i: string of the abbreviation of the stock to be analyzed
-     (i.e. 'AAPL').
-    :param ticker_j: string of the abbreviation of the stock to be analyzed
-     (i.e. 'AAPL').
-    :param year: string of the year to be analyzed (i.e '2016').
-    :param month: string of the month to be analyzed (i.e '07').
-    :param day: string of the day to be analyzed (i.e '07').
-    :return: None -- The function saves the data in a file and does not return
-     a value.
-    """
-
-    # Saving data
-
-    if (not os.path.isdir(f'../../taq_data/avg_spread_data_{year}/'
-                          + f'{function_name}/')):
-
-        try:
-            os.mkdir(f'../../taq_data/avg_spread_data_{year}/'
-                     + f'{function_name}/')
-            print('Folder to save data created')
-
-        except FileExistsError:
-            print('Folder exists. The folder was not created')
-
-    # Cross-response data
-    if (ticker_i != ticker_j):
-
-        pickle.dump(data, open(f'../../taq_data/avg_spread_data_{year}'
-                    + f'/{function_name}/{function_name}_{year}{month}{day}'
-                    + f'_{ticker_i}i_{ticker_j}j.pickle', 'wb'))
-
-    # Self-response data
-    else:
-
-        pickle.dump(data, open(f'../../taq_data/avg_spread_data_{year}'
-                    + f'/{function_name}/{function_name}_{year}{month}{year}'
-                    + f'_{ticker_i}.pickle', 'wb'))
-
-    print('Data Saved')
-    print()
-
-    return None
 
 # -----------------------------------------------------------------------------
 
@@ -116,27 +60,6 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     else:
         print(f'Processing data for the stock {ticker_i} the '
               + f'{year}.{month}.{day}')
-
-    return None
-
-# -----------------------------------------------------------------------------
-
-
-def taq_start_folders(year):
-    """Creates the initial folders to save the data and plots.
-
-    :param year: string of the year to be analyzed (i.e '2016').
-    :return: None -- The function creates folders and does not return a value.
-    """
-
-    try:
-        os.mkdir(f'../../taq_data/avg_spread_data_{year}')
-        print('Folder to save data created')
-
-    except FileExistsError as e:
-        print('Folder exists. The folder was not created')
-        print(e)
-        # raise Exception('Check the folders')
 
     return None
 
