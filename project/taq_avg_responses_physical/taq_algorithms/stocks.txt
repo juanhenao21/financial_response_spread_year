@@ -222,9 +222,6 @@ UNM
 ORLY
 SVU
 EMR
-Number of tickers group 1: 223
-
-GROUP 2
 MI
 AEP
 NEM
@@ -325,6 +322,9 @@ CL
 ECL
 MKC
 AOC
+Number of tickers group 1: 323
+
+GROUP 2
 TXT
 CSX
 PNW
@@ -361,9 +361,6 @@ CAM
 RAI
 NOC
 PLL
-Number of tickers group 2: 136
-
-GROUP 3
 SYK
 SRE
 TIF
@@ -442,9 +439,6 @@ SHW
 BDX
 VAR
 TEG
-Number of tickers group 3: 78
-
-GROUP 4
 PH
 ACE
 BNI
@@ -462,6 +456,9 @@ HRS
 COG
 PPG
 MEE
+Number of tickers group 2: 131
+
+GROUP 3
 HP
 DVN
 IFF
@@ -507,9 +504,6 @@ GWW
 WHR
 MOS
 SPG
-Number of tickers group 4: 62
-
-GROUP 5
 EOG
 VMC
 X
@@ -535,5 +529,5 @@ ICE
 MA
 FSLR
 CMG
-Number of tickers group 5: 25
+Number of tickers group 3: 70
 
