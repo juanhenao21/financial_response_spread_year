@@ -58,26 +58,26 @@ def taq_tickers_spread_data(year):
 
         tickers = []
 
-        g1 = spread_data[spread_data['Avg_Spread'] < 0.03]
+        g1 = spread_data[spread_data['Avg_Spread'] < 0.05]
         tickers_g1 = tuple(g1['Ticker'].tolist())
-        g2 = spread_data[(spread_data['Avg_Spread'] >= 0.03)
-                         & (spread_data['Avg_Spread'] < 0.06)]
+        g2 = spread_data[(spread_data['Avg_Spread'] >= 0.05)
+                         & (spread_data['Avg_Spread'] < 0.10)]
         tickers_g2 = tuple(g2['Ticker'].tolist())
-        g3 = spread_data[(spread_data['Avg_Spread'] >= 0.06)
-                         & (spread_data['Avg_Spread'] < 0.09)]
+        g3 = spread_data[(spread_data['Avg_Spread'] >= 0.10)
+                         & (spread_data['Avg_Spread'] < 0.40)]
         tickers_g3 = tuple(g3['Ticker'].tolist())
-        g4 = spread_data[(spread_data['Avg_Spread'] >= 0.09)
-                         & (spread_data['Avg_Spread'] < 0.15)]
-        tickers_g4 = tuple(g4['Ticker'].tolist())
-        g5 = spread_data[(spread_data['Avg_Spread'] >= 0.15)
-                         & (spread_data['Avg_Spread'] < 0.4)]
-        tickers_g5 = tuple(g5['Ticker'].tolist())
+        # g4 = spread_data[(spread_data['Avg_Spread'] >= 0.09)
+        #                  & (spread_data['Avg_Spread'] < 0.15)]
+        # tickers_g4 = tuple(g4['Ticker'].tolist())
+        # g5 = spread_data[(spread_data['Avg_Spread'] >= 0.15)
+        #                  & (spread_data['Avg_Spread'] < 0.4)]
+        # tickers_g5 = tuple(g5['Ticker'].tolist())
 
         tickers.append(tickers_g1)
         tickers.append(tickers_g2)
         tickers.append(tickers_g3)
-        tickers.append(tickers_g4)
-        tickers.append(tickers_g5)
+        # tickers.append(tickers_g4)
+        # tickers.append(tickers_g5)
 
         return tickers
 
