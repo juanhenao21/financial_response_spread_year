@@ -15,18 +15,18 @@ trade sign self-correlators and trade sign cross-correlators values for
 different stocks.
 
 Based on these values, I analyze responses functions in trade time scale
-([taq_responses_trade](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_trade/taq_algorithms))
+([taq_responses_trade](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_trade/taq_algorithms))
 and the influence of the number of trades in a second in the response functions
-([taq_responses_activity](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_activity/taq_algorithms)).
+([taq_responses_activity](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_activity/taq_algorithms)).
 I also analyze the influence of the time shift between trade signs and midpoint
 prices
-([taq_physical_shift](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_physical_shift/taq_algorithms),
-[taq_responses_physical_shift](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_physical_shift/taq_algorithms),
-[taq_trade_shift](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_trade_shift/taq_algorithms)
+([taq_physical_shift](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_physical_shift/taq_algorithms),
+[taq_responses_physical_shift](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_physical_shift/taq_algorithms),
+[taq_trade_shift](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_trade_shift/taq_algorithms)
 and
-[taq_responses_trade_shift](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_trade_shift/taq_algorithms))
+[taq_responses_trade_shift](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_trade_shift/taq_algorithms))
 and the influence of the time lag
-([taq_responses_physical_short_long](https://github.com/juanhenao21/response_functions_year/tree/master/project/taq_responses_physical_short_long/taq_algorithms))
+([taq_responses_physical_short_long](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_physical_short_long/taq_algorithms))
 in the response functions.
 
 You can find [here](https://financial-response-spread-year.readthedocs.io/en/latest/)
@@ -143,9 +143,9 @@ you want to run them, you need to run this section first.
 ### TAQ Responses Trade
 
 To run this part of the code, you need to move (cd) to the folder
-`response_functions_year/project/taq_responses_trade/taq_algorithms/` and run
+`financial_response_spread_year/project/taq_responses_trade/taq_algorithms/` and run
 the module `taq_data_main_responses_trade.py`. In Linux, using the terminal the
-command looks
+command looks like
 
 ```bash
 $ python3 taq_data_main_responses_trade.py
@@ -154,9 +154,9 @@ $ python3 taq_data_main_responses_trade.py
 ### TAQ Responses Activity
 
 To run this part of the code, you need to move (cd) to the folder
-`response_functions_year/project/taq_responses_activity/taq_algorithms/` and
+`financial_response_spread_year/project/taq_responses_activity/taq_algorithms/` and
 run the module `taq_data_main_responses_activity.py`. In Linux, using the
-terminal the command looks
+terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_trade.py
@@ -165,14 +165,14 @@ $ python3 taq_data_main_responses_trade.py
 ### TAQ Time Shift
 
 The TAQ time shift analysis is divided in two time scales and in two modules.
-The modules have to be ran in the order shown.
+The modules have to be executed in the order shown.
 
 #### Physical time scale
 
 To run this part of the code, you need to move (cd) to the folder
-`response_functions_year/project/taq_physical_shift/taq_algorithms/` and run
+`financial_response_spread_year/project/taq_physical_shift/taq_algorithms/` and run
 the module `taq_data_main_physical_shift.py`. In Linux, using the terminal the
-command looks
+command looks like
 
 ```bash
 $ python3 taq_data_main_physical_shift.py
@@ -180,9 +180,9 @@ $ python3 taq_data_main_physical_shift.py
 
 After run the `taq_data_main_physical_shift.py` module, you can move (cd) to
 the folder
-`response_functions_year/project/taq_responses_physical_shift/taq_algorithms/`
+`financial_response_spread_year/project/taq_responses_physical_shift/taq_algorithms/`
 and run the module `taq_data_main_responses_physical_shift.py`. In Linux, using
-the terminal the command looks
+the terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_physical_shift.py
@@ -191,9 +191,9 @@ $ python3 taq_data_main_responses_physical_shift.py
 #### Trade time scale
 
 To run this part of the code, you need to move (cd) to the folder
-`response_functions_year/project/taq_trade_shift/taq_algorithms/` and run the
+`financial_response_spread_year/project/taq_trade_shift/taq_algorithms/` and run the
 module `taq_data_main_trade_shift.py`. In Linux, using the terminal the
-command looks
+command looks like
 
 ```bash
 $ python3 taq_data_main_trade_shift.py
@@ -201,9 +201,9 @@ $ python3 taq_data_main_trade_shift.py
 
 After run the `taq_data_main_trade_shift.py` module, you can move (cd) to the
 folder
-`response_functions_year/project/taq_responses_trade_shift/taq_algorithms/`
+`financial_response_spread_year/project/taq_responses_trade_shift/taq_algorithms/`
 and run the module `taq_data_main_responses_trade_shift.py`. In Linux, using
-the terminal the command looks
+the terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_trade_shift.py
@@ -212,9 +212,9 @@ $ python3 taq_data_main_responses_trade_shift.py
 ### TAQ Responses Short Long
 
 To run this part of the code, you need to move (cd) to the folder
-`response_functions_year/project/taq_responses_physical_short_long/taq_algorithms/`
+`financial_response_spread_year/project/taq_responses_physical_short_long/taq_algorithms/`
 and run the module `taq_data_main_responses_physical_short_long.py`. In Linux,
-using the terminal the command looks
+using the terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_physical_short_long.py
@@ -244,5 +244,5 @@ the long component.
 
 ## Acknowledgments
 
-* Research Group Guhr
+* Research Group Guhr [Website](http://www.theo.physik.uni-duisburg-essen.de/tp/ags/guhr_dir/index.html)
 * DAAD Research Grants - Doctoral Programmes in Germany
