@@ -23,7 +23,7 @@ The module contains the following functions:
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Modules
 
 from matplotlib import pyplot as plt
@@ -31,7 +31,7 @@ import os
 import pandas as pd
 import pickle
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
@@ -85,7 +85,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
@@ -138,7 +138,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
@@ -171,7 +171,7 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
