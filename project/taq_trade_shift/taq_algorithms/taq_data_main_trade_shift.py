@@ -7,7 +7,7 @@ from the TAQ Responses Physical module and the trade signs for trade time scale
 from the TAQ Responses Trade module.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * pandas
     * taq_data_analysis_trade_shift
@@ -28,7 +28,6 @@ The module contains the following functions:
 from itertools import product as iprod
 import multiprocessing as mp
 import pandas as pd
-import pickle
 
 import taq_data_analysis_trade_shift
 import taq_data_plot_trade_shift
@@ -97,22 +96,22 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_trade_shift.taq_initial_message()
+
     # Tickers and days to analyze
-    year, tickers, taus = taq_data_tools_trade_shift.taq_initial_data()
-    # To be used when run in server
-    # year = '2008'
-    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    # taus = [1, 10, 100, 1000]
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
+    taus = [1, 10, 100, 1000]
 
     # Basic folders
-    taq_data_tools_trade_shift.taq_start_folders('2008')
+    taq_data_tools_trade_shift.taq_start_folders(year)
 
     # Run analysis
     # Analysis and plot
     taq_data_plot_generator(tickers, year, taus)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 
