@@ -3,7 +3,7 @@
 The functions in the module run the complete analysis and plot of the TAQ data.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * pandas
     * taq_data_analysis_responses_physical_shift
@@ -24,7 +24,6 @@ The module contains the following functions:
 from itertools import product as iprod
 import multiprocessing as mp
 import pandas as pd
-import pickle
 
 import taq_data_analysis_responses_physical_shift
 import taq_data_plot_responses_physical_shift
@@ -99,23 +98,22 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_responses_physical_shift.taq_initial_message()
+
     # Tickers and days to analyze
-    year, tickers, shifts = taq_data_tools_responses_physical_shift \
-        .taq_initial_data()
-    # To be used when run in server
-    # year = '2008'
-    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    # shifts = [10, 100]
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
+    shifts = [10, 100]
 
     # Basic folders
-    taq_data_tools_responses_physical_shift.taq_start_folders('2008')
+    taq_data_tools_responses_physical_shift.taq_start_folders(year)
 
     # Run analysis
     # Analysis and plot
     taq_data_plot_generator(tickers, year, shifts)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 
