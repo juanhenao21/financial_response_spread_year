@@ -6,7 +6,7 @@ is necessary to have the files of the midpoint prices and trade signs for
 physical time scale from the TAQ Responses Physical module.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * pandas
     * taq_data_analysis_physical_shift
@@ -98,16 +98,16 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_physical_shift.taq_initial_message()
+
     # Tickers and days to analyze
-    year, tickers, taus = taq_data_tools_physical_shift.taq_initial_data()
-    # To be used when run in server
-    # year = '2008'
-    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    # taus = [1, 10, 100, 1000]
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
+    taus = [1, 10, 100, 1000]
 
     # Basic folders
-    taq_data_tools_physical_shift.taq_start_folders('2008')
+    taq_data_tools_physical_shift.taq_start_folders(year)
 
     # Run analysis
     # Analysis and plot
