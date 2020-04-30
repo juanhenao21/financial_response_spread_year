@@ -260,12 +260,10 @@ def taq_daily_data_extract(tickers, year):
     print('Extracting daily data')
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
-                     iprod(tickers, ['quotes'], [year]))
+        pool.starmap(taq_data_extract, iprod(tickers, ['quotes'], [year]))
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
-                     iprod(tickers, ['trades'], [year]))
+        pool.starmap(taq_data_extract, iprod(tickers, ['trades'], [year]))
 
     # Delete CSV folder
     # Obtain the absolute path of the current file and split it
