@@ -58,7 +58,7 @@ The first step is to clone the repository
 $ git clone https://github.com/juanhenao21/financial_response_spread_year.git
 ```
 
-To install all the `Pyton` packages needed I recommend to create a virtual
+To install all the `Python` packages needed I recommend to create a virtual
 environment and install them from the `requirements.txt` file. To install the
 packages from terminal, you can use
 
@@ -82,8 +82,10 @@ To run the code from the scratch and reproduce the results in section 2.3 and
 you need to copy the folder `decompress_original_data_2008` to the folder
 `financial_response_spread_year/project/taq_data`.
 Then you need to create a folder with the name `original_year_data_2008` inside
-`financial_response_spread_year/project/taq_data` and copy the original
-`.quotes` and `.trades` files of the tickers you want to analyze.
+`financial_response_spread_year/project/taq_data` and move the `.quotes` and
+`.trades` files of the tickers you want to analyze. Make sure you move a copy
+of the files and not the originals, because when you run the code, it will
+delete these files to free space.
 
 Then, you need to move (cd) to the folder
 `financial_response_spread_year/project/taq_responses_physical/taq_algorithms/`
@@ -109,7 +111,9 @@ The program will obtain and plot the data for the corresponding stocks.
 
 If you have the CSV data files, you need to create a folder with the name
 `csv_year_data_2008` inside `financial_response_spread_year/project/taq_data`,
-and copy the CSV files inside. Then go to the
+and move the CSV files inside.  Make sure you move a copy of the files and not
+the originals, because when you run the code, it will delete these files to
+free space. Then go to the
 `financial_response_spread_year/project/taq_responses_physical/taq_algorithms/taq_data_main_responses_physical.py`
 file and comment the line in the `main` function
 
@@ -125,7 +129,7 @@ tickers = ['AAPL', 'MSFT']
 ```
 
 Finally, you need to run the module. In Linux, using the terminal, the command
-look like
+looks like
 
 ```bash
 $ python3 taq_data_main_responses_physical.py
@@ -133,7 +137,7 @@ $ python3 taq_data_main_responses_physical.py
 
 The program will obtain and plot the data for the corresponding stocks.
 
-All following analysis depends directly from the results of this section. If
+All the following analysis depend directly from the results of this section. If
 you want to run them, you need to run this section first.
 
 ### TAQ Responses Trade
