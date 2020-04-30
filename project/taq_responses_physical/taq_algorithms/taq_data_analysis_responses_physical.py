@@ -13,6 +13,7 @@ This script requires the following modules:
     * os
     * pandas
     * pickle
+    * subprocess
     * taq_data_tools_responses_physical
 
 The module contains the following functions:
@@ -53,6 +54,7 @@ import numpy as np
 import os
 import pandas as pd
 import pickle
+import subprocess
 
 import taq_data_tools_responses_physical
 

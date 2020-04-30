@@ -9,7 +9,6 @@ This script requires the following modules:
     * os
     * pandas
     * pickle
-    * subprocess
     * taq_data_analysis_responses_physical
     * taq_data_plot_responses_physical
     * taq_data_tools_responses_physical
@@ -30,7 +29,6 @@ import multiprocessing as mp
 import os
 import pandas as pd
 import pickle
-import subprocess
 
 import taq_data_analysis_responses_physical
 import taq_data_plot_responses_physical
