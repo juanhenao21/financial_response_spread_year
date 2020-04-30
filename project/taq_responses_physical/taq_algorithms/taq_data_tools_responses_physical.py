@@ -166,7 +166,7 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     # Cross-response data
     if (ticker_i != ticker_j):
         print(f'Processing data for the stock i {ticker_i} and stock j '
-              + f'{ticker_j} the {year}.{month}.{day}')
+              + f'{ticker_j} the {year}.{month}.{day}.')
     # Self-response data
     else:
         print(f'Processing data for the stock {ticker_i} the '
@@ -199,7 +199,7 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     # Cross-response data
     if (ticker_i != ticker_j):
         print(f'Processing plot for the stock i {ticker_i} and stock j '
-              + f'{ticker_j} the {year}.{month}.{day}')
+              + f'{ticker_j} the {year}.{month}.{day}.')
     # Self-response data
     else:
         print(f'Processing plot for the stock {ticker_i} the '
