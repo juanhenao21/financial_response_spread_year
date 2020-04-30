@@ -81,7 +81,7 @@ def taq_trade_signs_trade_data(ticker, date):
         # Take the path from the start to the project folder
         root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
         data_trades_trade = pd.read_hdf(root_path
-                                        + f'/taq_data/hdf5_dayly_data_{year}/'
+                                        + f'/taq_data/hdf5_daily_data_{year}/'
                                         + f'taq_{ticker}_trades_{date}.h5',
                                         key='/trades')
 
