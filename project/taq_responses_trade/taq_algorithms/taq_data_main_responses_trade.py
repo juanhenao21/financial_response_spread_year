@@ -100,7 +100,7 @@ def main():
     """
 
     # Initial message
-    taq_data_tools_responses_physical.taq_initial_message()
+    taq_data_tools_responses_trade.taq_initial_message()
 
     # Tickers and days to analyze
     year = '2008'
