@@ -121,7 +121,7 @@ def taq_build_from_scratch(tickers, year):
         subprocess.call('rm decompress.out', shell=True)
         subprocess.call(f'mkdir ../csv_year_data_{year}/', shell=True)
         subprocess.call(f'mv *.csv ../csv_year_data_{year}/', shell=True)
-        subprocess.cal(f'rm -r ../original_year_data_{year}', shell=True)
+        subprocess.call(f'rm -r ../original_year_data_{year}', shell=True)
 
     else:
         print('All the tickers have trades and quotes csv files')
