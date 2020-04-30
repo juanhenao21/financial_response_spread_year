@@ -16,7 +16,9 @@ This script requires the following modules:
     * taq_data_tools_responses_physical
 
 The module contains the following functions:
+    * taq_build_from_scratch - extract data to daily CSV files.
     * taq_data_extract - extracts the data for every day in a year.
+    * taq_daily_data_extract - parallelize the taq_data_extract function.
     * taq_midpoint_trade_data - computes the midpoint price of every trade.
     * taq_midpoint_physical_data - computes the midpoint price of every second.
     * taq_trade_signs_trade_data - computes the trade signs of every trade.
@@ -57,6 +59,74 @@ import taq_data_tools_responses_physical
 __tau__ = 1000
 
 # ----------------------------------------------------------------------------
+
+
+def taq_build_from_scratch(tickers, year):
+    """ Extracts data to year CSV files.
+
+    The original data must be decompressed. The function runs a script in
+    C++ to decompress and then extract and filter the data for a year in CSV
+    files.
+
+    :param tickers: list of the string abbreviation of the stocks to be
+     analyzed (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analyzed (i.e '2016').
+    :return: None -- The function saves the data in a file and does not return
+     a value.
+    """
+
+    tickers_rm = tickers[:]
+
+    # Check if there are extracted files from the list of stocks
+    for ticker in tickers:
+        if(os.path.isfile(
+            f'../../taq_data/csv_year_data_{year}/{ticker}_{year}_NASDAQ'
+            + f'_quotes.csv')
+           and os.path.isfile(
+                f'../../taq_data/csv_year_data_{year}/{ticker}_{year}_NASDAQ'
+                + f'_trades.csv')):
+
+            print(f'The ticker {ticker} has already the trades and quotes '
+                  + f'csv files')
+            tickers_rm.remove(ticker)
+
+    if (len(tickers_rm)):
+        # Compile and run the C++ script to decompress
+        os.chdir(f'../../taq_data/decompress_original_data_{year}/'
+                 + f'armadillo-3.920.3/')
+        subprocess.call('rm CMakeCache.txt', shell=True)
+        subprocess.call('cmake .', shell=True)
+        subprocess.call('make', shell=True)
+        os.chdir('../')
+        abs_path = os.path.abspath('.')
+        os.system(
+            'g++ main.cpp -std=c++11 -lboost_date_time -lz '
+            + f'-I {abs_path}/armadillo-3.920.3/include -o decompress.out')
+        os.system(f'mv decompress.out ../original_year_data_{year}/')
+        os.chdir(f'../original_year_data_{year}')
+
+        print('Extracting quotes')
+        # Parallel computing
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            pool.starmap(taq_data_tools_responses_physical.taq_decompress,
+                         iprod(tickers_rm, [year], ['quotes']))
+        print('Extracting trades')
+        # Parallel computing
+        with mp.Pool(processes=mp.cpu_count()) as pool:
+            pool.starmap(taq_data_tools_responses_physical.taq_decompress,
+                         iprod(tickers_rm, [year], ['trades']))
+
+        subprocess.call('rm decompress.out', shell=True)
+        subprocess.call(f'mkdir ../csv_year_data_{year}/', shell=True)
+        subprocess.call(f'mv *.csv ../csv_year_data_{year}/', shell=True)
+        subprocess.cal(f'rm -r ../original_year_data_{year}', shell=True)
+
+    else:
+        print('All the tickers have trades and quotes csv files')
+
+    return None
+
+# -----------------------------------------------------------------------------
 
 
 def taq_data_extract(ticker, type, year):
@@ -150,6 +220,17 @@ def taq_data_extract(ticker, type, year):
         print('Data Saved')
         print()
 
+        # Delete CSV file
+        # Obtain the absolute path of the current file and split it
+        abs_path = os.path.abspath(__file__).split('/')
+        # Take the path from the start to the project folder
+        root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
+        # CSV file
+        f_path = root_path + f'/taq_data/csv_year_data_{year}/{ticker}_{year}'\
+            + f'_NASDAQ_{type}.csv'
+        # Remove CSV file
+        subprocess.call(f'rm {f_path}', shell=True)
+
         return None
 
     except FileNotFoundError as e:
@@ -159,6 +240,43 @@ def taq_data_extract(ticker, type, year):
         return None
 
 # ----------------------------------------------------------------------------
+
+
+def taq_daily_data_extract(tickers, year):
+    """ Extracts data to daily CSV files.
+
+    Extract and filter the data for every day of a year in HDF5 files.
+
+    :param tickers: list of the string abbreviation of the stocks to be
+     analyzed (i.e. ['AAPL', 'MSFT']).
+    :param year: string of the year to be analyzed (i.e '2016').
+    :return: None -- The function saves the data in a file and does not return
+     a value.
+    """
+
+    # Extract daily data
+    print('Extracting daily data')
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
+                     iprod(tickers, ['quotes'], [year]))
+    # Parallel computing
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
+                     iprod(tickers, ['trades'], [year]))
+
+    # Delete CSV folder
+    # Obtain the absolute path of the current file and split it
+    abs_path = os.path.abspath(__file__).split('/')
+    # Take the path from the start to the project folder
+    root_path = '/'.join(abs_path[:abs_path.index('project') + 1])
+    f_path = root_path + f'/taq_data/csv_year_data_{year}/'
+    # Remove CSV folder
+    subprocess.call(f'rm -r {f_path}', shell=True)
+
+    return None
+
+# -----------------------------------------------------------------------------
 
 
 def taq_midpoint_trade_data(ticker, date):

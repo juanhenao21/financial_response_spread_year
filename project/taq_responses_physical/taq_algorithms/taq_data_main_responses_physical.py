@@ -15,8 +15,6 @@ This script requires the following modules:
     * taq_data_tools_responses_physical
 
 The module contains the following functions:
-    * taq_build_from_scratch - extract data to daily CSV files.
-    * taq_daily_data_extract - parallelize the taq_data_extract function.
     * taq_data_plot_generator - generates all the analysis and plots from the
       TAQ data.
     * main - the main function of the script.
@@ -37,103 +35,6 @@ import subprocess
 import taq_data_analysis_responses_physical
 import taq_data_plot_responses_physical
 import taq_data_tools_responses_physical
-
-# -----------------------------------------------------------------------------
-
-
-def taq_build_from_scratch(tickers, year):
-    """ Extracts data to year CSV files.
-
-    The original data must be decompressed. The function runs a script in
-    C++ to decompress and then extract and filter the data for a year in CSV
-    files.
-
-    :param tickers: list of the string abbreviation of the stocks to be
-     analyzed (i.e. ['AAPL', 'MSFT']).
-    :param year: string of the year to be analyzed (i.e '2016').
-    :return: None -- The function saves the data in a file and does not return
-     a value.
-    """
-
-    tickers_rm = tickers[:]
-
-    # Check if there are extracted files from the list of stocks
-    for ticker in tickers:
-        if(os.path.isfile(
-            f'../../taq_data/csv_year_data_{year}/{ticker}_{year}_NASDAQ'
-            + f'_quotes.csv')
-           and os.path.isfile(
-                f'../../taq_data/csv_year_data_{year}/{ticker}_{year}_NASDAQ'
-                + f'_trades.csv')):
-
-            print(f'The ticker {ticker} has already the trades and quotes '
-                  + f'csv files')
-            tickers_rm.remove(ticker)
-
-    if (len(tickers_rm)):
-        # Compile and run the C++ script to decompress
-        os.chdir(f'../../taq_data/decompress_original_data_{year}/'
-                 + f'armadillo-3.920.3/')
-        subprocess.call('rm CMakeCache.txt', shell=True)
-        subprocess.call('cmake .', shell=True)
-        subprocess.call('make', shell=True)
-        os.chdir('../')
-        abs_path = os.path.abspath('.')
-        os.system(
-            'g++ main.cpp -std=c++11 -lboost_date_time -lz '
-            + f'-I {abs_path}/armadillo-3.920.3/include -o decompress.out')
-        os.system(f'mv decompress.out ../original_year_data_{year}/')
-        os.chdir(f'../original_year_data_{year}')
-
-        # Parallel computing
-        with mp.Pool(processes=mp.cpu_count()) as pool:
-            print('Extracting quotes')
-            pool.starmap(taq_data_tools_responses_physical.taq_decompress,
-                         iprod(tickers_rm, [year], ['quotes']))
-        # Parallel computing
-        with mp.Pool(processes=mp.cpu_count()) as pool:
-            print('Extracting trades')
-            pool.starmap(taq_data_tools_responses_physical.taq_decompress,
-                         iprod(tickers_rm, [year], ['trades']))
-
-        subprocess.call('rm decompress.out', shell=True)
-        subprocess.call(f'mkdir ../csv_year_data_{year}/', shell=True)
-        subprocess.call(f'mv *.csv ../csv_year_data_{year}/', shell=True)
-
-    else:
-        print('All the tickers have trades and quotes csv files')
-
-    return None
-
-# -----------------------------------------------------------------------------
-
-
-def taq_daily_data_extract(tickers, year):
-    """ Extracts data to daily CSV files.
-
-    Extract and filter the data for every day of a year in HDF5 files.
-
-    :param tickers: list of the string abbreviation of the stocks to be
-     analyzed (i.e. ['AAPL', 'MSFT']).
-    :param year: string of the year to be analyzed (i.e '2016').
-    :return: None -- The function saves the data in a file and does not return
-     a value.
-    """
-
-    print('Extracting daily data')
-
-    # Parallel computing
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        # Extract daily data
-        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
-                     iprod(tickers, ['quotes'], [year]))
-    # Parallel computing
-    with mp.Pool(processes=mp.cpu_count()) as pool:
-        # Extract daily data
-        pool.starmap(taq_data_analysis_responses_physical.taq_data_extract,
-                     iprod(tickers, ['trades'], [year]))
-
-    return None
 
 # -----------------------------------------------------------------------------
 
@@ -228,6 +129,7 @@ def main():
 
     :return: None.
     """
+
     # Initial message
     taq_data_tools_responses_physical.taq_initial_message()
 
@@ -241,8 +143,8 @@ def main():
     # Run analysis
     # Comment the function taq_build_from_scratch if you do not have the C++
     # modules
-    taq_build_from_scratch(tickers, year)
-    taq_daily_data_extract(tickers, year)
+    taq_data_analysis_responses_physical.taq_build_from_scratch(tickers, year)
+    taq_data_analysis_responses_physical.taq_daily_data_extract(tickers, year)
 
     # Analysis and plot
     taq_data_plot_generator(tickers, year)
