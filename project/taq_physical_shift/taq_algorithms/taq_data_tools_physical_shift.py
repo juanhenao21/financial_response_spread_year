@@ -6,7 +6,6 @@ in the modules that use them.
 
 This script requires the following modules:
     * matplotlib
-    * numpy
     * os
     * pandas
     * pickle
@@ -17,22 +16,22 @@ The module contains the following functions:
     * taq_function_header_print_data - prints info about the function running.
     * taq_function_header_print_plot - prints info about the plot.
     * taq_start_folders - creates folders to save data and plots.
+    * taq_initial_message - prints the initial message with basic information.
     * taq_business_days - creates a list of week days for a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Modules
 
 from matplotlib import pyplot as plt
-import numpy as np
 import os
 import pandas as pd
 import pickle
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
@@ -86,7 +85,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
@@ -138,7 +137,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
@@ -171,7 +170,7 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
@@ -229,12 +228,10 @@ def taq_start_folders(year):
 # -----------------------------------------------------------------------------
 
 
-def taq_initial_data():
-    """Takes the initial values for the analysis
+def taq_initial_message():
+    """Prints the initial message with basic information.
 
-    :return: Tuple -- The function return a tuple with a string with the year
-     to be analyzed, a list with the name of the tickers and a list with the
-     :math:`\\tau` values.
+    :return: None -- The function prints a message and does not return a value.
     """
 
     print()
@@ -246,41 +243,12 @@ def taq_initial_data():
     print('University of Duisburg-Essen')
     print('Author: Juan Camilo Henao Londono')
     print('More information in:')
-    print('  * https://juanhenao21.github.io/')
-    print('  * https://github.com/juanhenao21/response_functions_year')
-    print('  * https://response-functions-year.readthedocs.io/en/latest/')
+    print('* https://juanhenao21.github.io/')
+    print('* https://github.com/juanhenao21/financial_response_spread_year')
+    print('* https://financial-response-spread-year.readthedocs.io/en/latest/')
     print()
 
-    print('How many tickers do you want to analyze?')
-    n_tick = int(input())
-    tickers = []
-
-    for _ in range(n_tick):
-
-        print(f'Insert the symbol of the ticker (i.e. GOOG):')
-        res = input()
-
-        tickers.append(res)
-
-    print()
-
-    print('How many tau values do you want to use?')
-    n_tau = int(input())
-    taus = []
-
-    for _ in range(n_tau):
-
-        print(f'Insert the time lag value (i.e. 10):')
-        res = int(input())
-
-        taus.append(res)
-
-    print()
-    print('Please enter the year to be analyzed (i.e. 2008): ')
-    year = input()
-    print()
-
-    return (year, tickers, taus)
+    return None
 
 # -----------------------------------------------------------------------------
 
