@@ -8,7 +8,6 @@ This script requires the following modules:
     * multiprocessing
     * os
     * pandas
-    * pickle
     * taq_data_analysis_responses_physical
     * taq_data_plot_responses_physical
     * taq_data_tools_responses_physical
@@ -28,7 +27,6 @@ from itertools import product as iprod
 import multiprocessing as mp
 import os
 import pandas as pd
-import pickle
 
 import taq_data_analysis_responses_physical
 import taq_data_plot_responses_physical
@@ -147,7 +145,7 @@ def main():
     # Analysis and plot
     taq_data_plot_generator(tickers, year)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 

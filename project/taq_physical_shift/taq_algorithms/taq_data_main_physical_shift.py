@@ -27,7 +27,6 @@ The module contains the following functions:
 from itertools import product as iprod
 import multiprocessing as mp
 import pandas as pd
-import pickle
 
 import taq_data_analysis_physical_shift
 import taq_data_plot_physical_shift
@@ -112,7 +111,7 @@ def main():
     # Analysis and plot
     taq_data_plot_generator(tickers, year, taus)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 
