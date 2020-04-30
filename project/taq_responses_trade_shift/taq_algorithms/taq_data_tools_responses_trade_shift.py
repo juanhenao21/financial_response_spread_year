@@ -6,7 +6,6 @@ in the modules that use them.
 
 This script requires the following modules:
     * matplotlib
-    * numpy
     * os
     * pandas
     * pickle
@@ -17,23 +16,22 @@ The module contains the following functions:
     * taq_function_header_print_data - prints info about the function running.
     * taq_function_header_print_plot - prints info about the plot.
     * taq_start_folders - creates folders to save data and plots.
-    * taq_initial_data - takes the initial values for the analysis.
+    * taq_initial_message - prints the initial message with basic information.
     * taq_business_days - creates a list of week days for a year.
     * main - the main function of the script.
 
 .. moduleauthor:: Juan Camilo Henao Londono <www.github.com/juanhenao21>
 '''
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Modules
 
 from matplotlib import pyplot as plt
-import numpy as np
 import os
 import pandas as pd
 import pickle
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
@@ -88,7 +86,7 @@ def taq_save_data(function_name, data, ticker_i, ticker_j, year, month, day):
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
@@ -141,7 +139,7 @@ def taq_save_plot(function_name, figure, ticker_i, ticker_j, year, month):
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
@@ -166,15 +164,15 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     # Cross-response data
     if (ticker_i != ticker_j):
         print(f'Processing data for the stock i {ticker_i} and stock j '
-              + f'{ticker_j} the {year}.{month}.{day}')
+              + f'{ticker_j} the {year}.{month}.{day}.')
     # Self-response data
     else:
         print(f'Processing data for the stock {ticker_i} the '
-              + f'{year}.{month}.{day}')
+              + f'{year}.{month}.{day}.')
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
@@ -199,15 +197,15 @@ def taq_function_header_print_plot(function_name, ticker_i, ticker_j, year,
     # Cross-response data
     if (ticker_i != ticker_j):
         print(f'Processing plot for the stock i {ticker_i} and stock j '
-              + f'{ticker_j} the {year}.{month}.{day}')
+              + f'{ticker_j} the {year}.{month}.{day}.')
     # Self-response data
     else:
         print(f'Processing plot for the stock {ticker_i} the '
-              + f'{year}.{month}.{day}')
+              + f'{year}.{month}.{day}.')
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def taq_start_folders(year):
@@ -232,61 +230,27 @@ def taq_start_folders(year):
 # -----------------------------------------------------------------------------
 
 
-def taq_initial_data():
-    """Takes the initial values for the analysis
+def taq_initial_message():
+    """Prints the initial message with basic information.
 
-    :return: Tuple -- The function return a tuple with a string with the year
-     to be analyzed and a list with the name of the tickers.
+    :return: None -- The function prints a message and does not return a value.
     """
 
     print()
-    print('############################################')
-    print('Response Functions Trade Time Shift Analysis')
-    print('############################################')
+    print('##################################################')
+    print('Price Response Functions Trade Time Shift Analysis')
+    print('##################################################')
     print('AG Guhr')
     print('Faculty of Physics')
     print('University of Duisburg-Essen')
     print('Author: Juan Camilo Henao Londono')
     print('More information in:')
-    print('  * https://juanhenao21.github.io/')
-    print('  * https://github.com/juanhenao21/response_functions_year')
-    print('  * https://response-functions-year.readthedocs.io/en/latest/')
+    print('* https://juanhenao21.github.io/')
+    print('* https://github.com/juanhenao21/financial_response_spread_year')
+    print('* https://financial-response-spread-year.readthedocs.io/en/latest/')
     print()
 
-    print('How many tickers do you want to analyze?')
-    n_tick = int(input())
-    tickers = []
-
-    for _ in range(n_tick):
-
-        print(f'Insert the symbol of the ticker (i.e. GOOG):')
-        res = input()
-
-        tickers.append(res)
-
-    print()
-
-    print('How many shift values do you want to use?')
-    n_tau = int(input())
-    shifts = []
-
-    for _ in range(n_tau):
-
-        print(f'Insert the shift value (i.e. 10):')
-        res = int(input())
-
-        shifts.append(res)
-
-    print()
-
-    shifts = []
-
-    print()
-    print('Please enter the year to be analyzed (i.e. 2008): ')
-    year = input()
-    print()
-
-    return (year, tickers, shifts)
+    return None
 
 # -----------------------------------------------------------------------------
 
@@ -308,7 +272,7 @@ def taq_bussiness_days(year):
 
     return date_list
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def main():
@@ -323,7 +287,7 @@ def main():
 
     return None
 
-# ---------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 if __name__ == '__main__':
