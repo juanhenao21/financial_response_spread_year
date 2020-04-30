@@ -47,7 +47,6 @@ def taq_data_plot_generator(tickers, year, taus):
      a value.
     """
 
-
     # Specific functions
     # Self-response
     for ticker in tickers:
