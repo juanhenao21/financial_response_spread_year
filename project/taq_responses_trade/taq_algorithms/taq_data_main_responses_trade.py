@@ -24,7 +24,6 @@ The module contains the following functions:
 from itertools import product as iprod
 import multiprocessing as mp
 import pandas as pd
-import pickle
 
 import taq_data_analysis_responses_trade
 import taq_data_plot_responses_trade
@@ -100,12 +99,12 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_responses_physical.taq_initial_message()
+
     # Tickers and days to analyze
-    year, tickers = taq_data_tools_responses_trade.taq_initial_data()
-    # To be used when run in server
-    # year = '2008'
-    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
 
     # Basic folders
     taq_data_tools_responses_trade.taq_start_folders(year)
@@ -114,7 +113,7 @@ def main():
     # Analysis and plot
     taq_data_plot_generator(tickers, year)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 

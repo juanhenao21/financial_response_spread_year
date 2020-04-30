@@ -4,7 +4,7 @@ The functions in the module analyze the data from the NASDAQ stock market,
 computing the self- and cross-response functions.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * numpy
     * os
