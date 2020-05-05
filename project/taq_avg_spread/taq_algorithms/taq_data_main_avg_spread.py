@@ -64,9 +64,6 @@ def main():
     tickers = taq_data_tools_avg_spread.taq_get_tickers_data(year)
     tickers.sort()
 
-    # Basic folders
-    taq_data_tools_avg_spread.taq_start_folders(year)
-
     # Run analysis
     # Analysis and plot
     taq_data_generator(tickers, year)
