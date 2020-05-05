@@ -4,11 +4,10 @@ The functions in the module analyze the statistics from the NASDAQ stock
 market.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * numpy
     * pandas
-    * pickle
     * taq_data_tools_statistics
 
 The module contains the following functions:
@@ -58,11 +57,11 @@ def taq_quotes_trades_day_statistics_data(ticker, date):
     try:
         # Load data
         data_quotes = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
-                              + f'_{ticker}_quotes_{date}.h5', key='/quotes',
-                              columns=['Bid', 'Ask'])
+                                  + f'_{ticker}_quotes_{date}.h5',
+                                  key='/quotes', columns=['Bid', 'Ask'])
         data_trades = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
-                              + f'_{ticker}_trades_{date}.h5', key='/trades',
-                              columns=['Ask'])
+                                  + f'_{ticker}_trades_{date}.h5',
+                                  key='/trades', columns=['Ask'])
 
         # Some files are corrupted, so there are some zero values that does not
         # have sense
@@ -104,7 +103,6 @@ def taq_quotes_trades_year_statistics_data(tickers, year):
 
     function_name = taq_quotes_trades_year_statistics_data.__name__
 
-
     # Create a file to save the info
     file = open('../taq_quotes_trades_year_statistics_data.csv', 'a+')
     file.write('Ticker, avg_quotes, avg_trades, avg_spread\n')
@@ -113,7 +111,7 @@ def taq_quotes_trades_year_statistics_data(tickers, year):
 
         taq_data_tools_statistics \
             .taq_function_header_print_data(function_name, ticker, ticker,
-                                             year, '', '')
+                                            year, '', '')
 
         dates = taq_data_tools_statistics.taq_bussiness_days(year)
 
@@ -132,7 +130,7 @@ def taq_quotes_trades_year_statistics_data(tickers, year):
 
         # Write data in file
         file.write(f'{ticker}, {stat_year[0]:.0f}, {stat_year[1]:.0f},'
-                + f' {stat_year[2]:.2f}\n')
+                   + f' {stat_year[2]:.2f}\n')
 
     file.close
 
@@ -164,8 +162,9 @@ def taq_midpoint_day_statistics_data(ticker, date):
     try:
         # Load data
         data_quotes = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
-                              + f'_{ticker}_quotes_{date}.h5', key='/quotes',
-                              columns=['Time', 'Bid', 'Ask'])
+                                  + f'_{ticker}_quotes_{date}.h5',
+                                  key='/quotes',
+                                  columns=['Time', 'Bid', 'Ask'])
 
         # Some files are corrupted, so there are some zero values that does not
         # have sense
@@ -213,7 +212,6 @@ def taq_midpoint_year_statistics_data(tickers, year):
 
     function_name = taq_quotes_trades_year_statistics_data.__name__
 
-
     # Create a file to save the info
     file = open('../taq_midpoint_year_statistics_data.csv', 'a+')
     file.write('Ticker, Difference\n')
@@ -222,7 +220,7 @@ def taq_midpoint_year_statistics_data(tickers, year):
 
         taq_data_tools_statistics \
             .taq_function_header_print_data(function_name, ticker, ticker,
-                                             year, '', '')
+                                            year, '', '')
 
         dates = taq_data_tools_statistics.taq_bussiness_days(year)
 
