@@ -6,7 +6,6 @@ in the modules that use them.
 
 This script requires the following modules:
     * matplotlib
-    * numpy
     * os
     * pandas
     * pickle
@@ -17,7 +16,7 @@ The module contains the following functions:
     * taq_function_header_print_data - prints info about the function running.
     * taq_function_header_print_plot - prints info about the plot.
     * taq_start_folders - creates folders to save data and plots.
-    * taq_initial_data - takes the initial values for the analysis.
+    * taq_initial_message - prints the initial message with basic information.
     * taq_business_days - creates a list of week days for a year.
     * main - the main function of the script.
 
@@ -28,7 +27,6 @@ The module contains the following functions:
 # Modules
 
 from matplotlib import pyplot as plt
-import numpy as np
 import os
 import pandas as pd
 import pickle
@@ -226,32 +224,30 @@ def taq_start_folders(year):
     except FileExistsError as e:
         print('Folder exists. The folder was not created')
         print(e)
-        # raise Exception('Check the folders')
 
     return None
 
 # -----------------------------------------------------------------------------
 
 
-def taq_initial_data():
-    """Takes the initial values for the analysis
+def taq_initial_message():
+    """Prints the initial message with basic information.
 
-    :return: None -- The function prints the message and does not return a
-     value.
+    :return: None -- The function prints a message and does not return a value.
     """
 
     print()
-    print('#################################################')
-    print('Average Response Functions Physical Time Analysis')
-    print('#################################################')
+    print('#######################################################')
+    print('Average Price Response Functions Physical Time Analysis')
+    print('#######################################################')
     print('AG Guhr')
     print('Faculty of Physics')
     print('University of Duisburg-Essen')
     print('Author: Juan Camilo Henao Londono')
     print('More information in:')
-    print('  * https://juanhenao21.github.io/')
-    print('  * https://github.com/juanhenao21/spread_impact_analysis')
-    print('  * https://spread-impact-analysis.readthedocs.io/en/latest/')
+    print('* https://juanhenao21.github.io/')
+    print('* https://github.com/juanhenao21/financial_response_spread_year')
+    print('* https://financial-response-spread-year.readthedocs.io/en/latest/')
     print()
 
     return None
