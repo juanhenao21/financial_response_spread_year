@@ -4,9 +4,8 @@ The functions in the module run the complete extraction, analysis and plot of
 the TAQ data.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
-    * os
     * pandas
     * pickle
     * taq_data_analysis_avg_responses_physical
@@ -26,7 +25,6 @@ The module contains the following functions:
 
 from itertools import product as iprod
 import multiprocessing as mp
-import os
 import pandas as pd
 import pickle
 
@@ -82,6 +80,10 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_avg_responses_physical.taq_initial_message()
+
+    # Year to analyze
     year = '2008'
 
     # Basic folders
@@ -91,7 +93,7 @@ def main():
     # Analysis and plot
     taq_data_plot_generator(year)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 

@@ -5,7 +5,6 @@ taq_data_analysis_avg_responses_physical module.
 
 This script requires the following modules:
     * matplotlib
-    * numpy
     * pickle
     * taq_data_tools_avg_responses_physical
 
@@ -23,7 +22,6 @@ The module contains the following functions:
 # Modules
 
 from matplotlib import pyplot as plt
-import numpy as np
 import pickle
 
 import taq_data_tools_avg_responses_physical
@@ -34,8 +32,6 @@ import taq_data_tools_avg_responses_physical
 def taq_self_response_year_avg_responses_physical_plot(year):
     """Plots the self-response average for a year.
 
-    :param ticker: string of the abbreviation of the stock to be analyzed
-     (i.e. 'AAPL').
     :param year: string of the year to be analyzed (i.e '2008').
     :return: None -- The function saves the plot in a file and does not return
      a value.
@@ -69,7 +65,7 @@ def taq_self_response_year_avg_responses_physical_plot(year):
         plt.xticks(fontsize=25)
         plt.yticks(fontsize=25)
         plt.xlim(1, 1000)
-        plt.ylim(19 * 10 ** -5, 32 * 10 ** -5)
+        # plt.ylim(19 * 10 ** -5, 32 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.grid(True)
         plt.tight_layout()

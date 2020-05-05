@@ -1,11 +1,8 @@
 '''TAQ data analysis module.
 
 The functions in the module analyze the data from the NASDAQ stock market,
-computing the self- and cross-response functions and the trade sign self- and
-cross-correlator functions. This module reproduces the sections 3.1 and 3.2 of
-the `paper
-<https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
-
+computing the average self-response functions for a year grouping the stocks
+depending on the spread.
 
 This script requires the following modules:
     * numpy
@@ -32,7 +29,7 @@ import pickle
 
 import taq_data_tools_avg_responses_physical
 
-__tau__ = 10000
+__tau__ = 1000
 
 # ----------------------------------------------------------------------------
 
@@ -40,7 +37,6 @@ __tau__ = 10000
 def taq_tickers_spread_data(year):
     """Obtains the tickers and the spread range for the classification.
 
-    :param div: integer of the number of divisions in the tickers (i.e. 5).
     :param year: string of the year to be analyzed (i.e. '2016').
     :return: tuple -- The function returns a tuple with a numpy array and a
      list.
