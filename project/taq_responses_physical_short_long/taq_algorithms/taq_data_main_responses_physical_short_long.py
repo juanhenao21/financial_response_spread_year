@@ -46,12 +46,12 @@ def taq_data_plot_generator(tickers, year, tau, taus_p):
 
     # Specific functions
     # Self-response
-    for ticker in tickers:
-        for tau_p in taus_p:
+    # for ticker in tickers:
+    #     for tau_p in taus_p:
 
-            taq_data_analysis_responses_physical_short_long \
-                .taq_self_response_year_responses_physical_short_long_data(
-                    ticker, year, tau, tau_p)
+    #         taq_data_analysis_responses_physical_short_long \
+    #             .taq_self_response_year_responses_physical_short_long_data(
+    #                 ticker, year, tau, tau_p)
 
     ticker_prod = iprod(tickers, tickers)
     # ticker_prod = [('AAPL', 'MSFT'), ('MSFT', 'AAPL'),
@@ -62,12 +62,12 @@ def taq_data_plot_generator(tickers, year, tau, taus_p):
     #                ('RIG', 'APA'), ('APA', 'RIG')]
 
     # Cross-response and cross-correlator
-    for ticks in ticker_prod:
-        for tau_p in taus_p:
+    # for ticks in ticker_prod:
+    #     for tau_p in taus_p:
 
-            taq_data_analysis_responses_physical_short_long \
-                .taq_cross_response_year_responses_physical_short_long_data(
-                    ticks[0], ticks[1], year, tau, tau_p)
+    #         taq_data_analysis_responses_physical_short_long \
+    #             .taq_cross_response_year_responses_physical_short_long_data(
+    #                 ticks[0], ticks[1], year, tau, tau_p)
 
     # Parallel computing
     with mp.Pool(processes=mp.cpu_count()) as pool:
