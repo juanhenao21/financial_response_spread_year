@@ -6,14 +6,13 @@ in the modules that use them.
 
 This script requires the following modules:
     * matplotlib
-    * numpy
     * os
     * pandas
     * pickle
 
 The module contains the following functions:
     * taq_function_header_print_data - prints info about the function running.
-    * taq_initial_data - takes the initial values for the analysis.
+    * taq_initial_message - prints the initial message with basic information.
     * taq_business_days - creates a list of week days for a year.
     * taq_get_tickers_data - gets the available ticker names.
     * main - the main function of the script.
@@ -25,7 +24,6 @@ The module contains the following functions:
 # Modules
 
 from matplotlib import pyplot as plt
-import numpy as np
 import os
 import pandas as pd
 import pickle
@@ -55,22 +53,21 @@ def taq_function_header_print_data(function_name, ticker_i, ticker_j, year,
     # Cross-response data
     if (ticker_i != ticker_j):
         print(f'Processing data for the stock i {ticker_i} and stock j '
-              + f'{ticker_j} the {year}.{month}.{day}')
+              + f'{ticker_j} the {year}.{month}.{day}.')
     # Self-response data
     else:
         print(f'Processing data for the stock {ticker_i} the '
-              + f'{year}.{month}.{day}')
+              + f'{year}.{month}.{day}.')
 
     return None
 
 # -----------------------------------------------------------------------------
 
 
-def taq_initial_data():
-    """Takes the initial values for the analysis
+def taq_initial_message():
+    """Prints the initial message with basic information.
 
-    :return: String -- The function returns a string with the year to be
-     analyzed.
+    :return: None -- The function prints a message and does not return a value.
     """
 
     print()
@@ -82,16 +79,12 @@ def taq_initial_data():
     print('University of Duisburg-Essen')
     print('Author: Juan Camilo Henao Londono')
     print('More information in:')
-    print('  * https://juanhenao21.github.io/')
-    print('  * https://github.com/juanhenao21/spread_impact_analysis')
-    print('  * https://spread-impact-analysis.readthedocs.io/en/latest/')
+    print('* https://juanhenao21.github.io/')
+    print('* https://github.com/juanhenao21/financial_response_spread_year')
+    print('* https://financial-response-spread-year.readthedocs.io/en/latest/')
     print()
 
-    print('Please enter the year to be analyzed (i.e. 2008): ')
-    year = input()
-    print()
-
-    return year
+    return None
 
 # -----------------------------------------------------------------------------
 
