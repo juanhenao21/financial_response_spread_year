@@ -59,8 +59,8 @@ def taq_self_response_year_avg_responses_physical_short_long_plot(ticker, year,
          self_response,
          self_shuffle) = pickle.load(open(
              f'../../taq_data/responses_physical_short_long_data_{year}/taq'
-             + f'_self_response_year_physical_short_long_tau_data_tau_{tau}'
-             + f'_tau_p_{tau_p}/taq_self_response_year_physical_short_long_tau'
+             + f'_self_response_year_physical_short_long_data_tau_{tau}_tau_p'
+             + f'_{tau_p}/taq_self_response_year_responses_physical_short_long'
              + f'_data_tau_{tau}_tau_p_{tau_p}_{year}_{ticker}.pickle', 'rb'))
 
         # Addition of the short and long response signal
@@ -142,9 +142,9 @@ def taq_cross_response_year_avg_responses_physical_short_long_plot(ticker_i,
              cross_response,
              cross_shuffle) = pickle.load(open(
                 f'../../taq_data/responses_physical_short_long_data_{year}/taq'
-                + f'_cross_response_year_physical_short_long_tau_data_tau'
-                + f'_{tau}_tau_p_{tau_p}/taq_cross_response_year_physical'
-                + f'_short_long_tau_data_tau_{tau}_tau_p_{tau_p}_{year}'
+                + f'_cross_response_year_responses_physical_short_long_data'
+                + f'_tau_{tau}_tau_p_{tau_p}/taq_cross_response_year_responses'
+                + f'_physical_short_long_data_tau_{tau}_tau_p_{tau_p}_{year}'
                 + f'_{ticker_i}i_{ticker_j}j.pickle', 'rb'))
 
             # Addition of the short and long response signal
