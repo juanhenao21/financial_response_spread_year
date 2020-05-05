@@ -1,10 +1,10 @@
-.. Response function analysis documentation master file, created by
-   sphinx-quickstart on Thu Aug 15 12:26:40 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Price response functions and spread impact in correlated financial markets
+   documentation master file, created by sphinx-quickstart on Thu Aug 15
+   12:26:40 2019. You can adapt this file completely to your liking, but it
+   should at least contain the root `toctree` directive.
 
-Response function analysis' documentation!
-==========================================
+Price response functions and spread impact in correlated financial markets
+==========================================================================
 In this study, we have analyzed trades and quotes (TAQ) data from the NASDAQ
 Stock Market.
 
@@ -44,21 +44,23 @@ project.
 
    03_taq_responses_physical_shift
 
-   04_taq_responses_activity
+   04_taq_responses_trade
 
-   05_taq_responses_physical_short_long
+   05_taq_trade_shift
 
-   06_taq_responses_trade
+   06_taq_responses_trade_shift
 
-   07_taq_trade_shift
+   07_taq_responses_activity
 
-   08_taq_responses_trade_shift
+   08_taq_responses_physical_short_long
 
-   09_taq_statistics
+   09_taq_avg_spread
 
-   10_taq_avg_spread
+   10_taq_avg_responses_physical
 
-   11_taq_avg_responses_physical
+   11_taq_statistics
+
+
 
 Indices and tables
 ==================

@@ -8,16 +8,20 @@ of the paper `Cross–response in correlated financial markets:  individual
 stocks
 <https://link.springer.com/content/pdf/10.1140/epjb/e2016-60818-y.pdf>`_.
 
-All the results obtained with the **TAQ Responses Physical** modules are the
+All the results obtained with the **TAQ Responses Physical** module are the
 base to the other implementations (:ref:`taq_physical_shift`,
-:ref:`taq_responses_physical_shift`, :ref:`taq_responses_activity` and
-:ref:`taq_responses_physical_short_long`).
+:ref:`taq_responses_physical_shift`, :ref:`taq_responses_trade`,
+:ref:`taq_trade_shift`, :ref:`taq_responses_trade_shift`,
+:ref:`taq_responses_activity`, :ref:`taq_responses_physical_short_long`,
+:ref:`taq_avg_spread`, :ref:`taq_avg_responses_physical` and
+:ref:`taq_statistics`).
 
 Run the code
 ============
 
 To run the code, please follow the instructions of the README.md in the
-`GitHub <https://github.com/juanhenao21/response_functions_year>`_ repository.
+`GitHub <https://github.com/juanhenao21/financial_response_spread_year>`_
+repository.
 
 Modules
 =======
