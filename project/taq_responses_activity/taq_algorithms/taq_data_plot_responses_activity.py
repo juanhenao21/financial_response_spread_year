@@ -48,8 +48,8 @@ def taq_self_response_year_avg_plot(ticker, year):
         self_ = pickle.load(open(
                         f'../../taq_data/responses_activity_data_{year}'
                         + f'/taq_self_response_year_responses_activity'
-                        + f'_data/taq_self_response_year_responses_time'
-                        + f'_activity_data_{year}_{ticker}.pickle', 'rb'))
+                        + f'_data/taq_self_response_year_responses_activity'
+                        + f'_data_{year}_{ticker}.pickle', 'rb'))
 
         figure = plt.figure(figsize=(16, 9))
         plt.semilogx(self_, linewidth=5, label='{}'.format(ticker))
