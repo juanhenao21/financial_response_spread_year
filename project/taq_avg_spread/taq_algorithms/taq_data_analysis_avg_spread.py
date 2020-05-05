@@ -4,11 +4,10 @@ The functions in the module analyze the statistics from the NASDAQ stock
 market and compute the average spread of the stocks.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * numpy
     * pandas
-    * pickle
     * taq_data_tools_avg_spread
 
 The module contains the following functions:
@@ -56,11 +55,11 @@ def taq_quotes_trades_day_avg_spread_data(ticker, date):
     try:
         # Load data
         data_quotes = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
-                              + f'_{ticker}_quotes_{date}.h5', key='/quotes',
-                              columns=['Bid', 'Ask'])
+                                  + f'_{ticker}_quotes_{date}.h5',
+                                  key='/quotes', columns=['Bid', 'Ask'])
         data_trades = pd.read_hdf(f'../../taq_data/hdf5_daily_data_{year}/taq'
-                              + f'_{ticker}_trades_{date}.h5', key='/trades',
-                              columns=['Ask'])
+                                  + f'_{ticker}_trades_{date}.h5',
+                                  key='/trades', columns=['Ask'])
 
         # Some files are corrupted, so there are some zero values that does not
         # have sense
@@ -112,7 +111,7 @@ def taq_quotes_trades_year_avg_spread_data(tickers, year):
 
         taq_data_tools_avg_spread \
             .taq_function_header_print_data(function_name, ticker, ticker,
-                                             year, '', '')
+                                            year, '', '')
 
         stat = []
         args_prod = iprod([ticker], dates)

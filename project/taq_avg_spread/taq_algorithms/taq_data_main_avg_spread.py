@@ -3,12 +3,10 @@
 The functions in the module run the complete analysis of the TAQ data.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * pandas
-    * pickle
     * taq_data_analysis_avg_spread
-    * taq_data_plot_avg_spread
     * taq_data_tools_avg_spread
 
 The module contains the following functions:
@@ -26,7 +24,6 @@ import multiprocessing as mp
 import pandas as pd
 
 import taq_data_analysis_avg_spread
-# import taq_data_plot_avg_spread
 import taq_data_tools_avg_spread
 
 # -----------------------------------------------------------------------------
@@ -59,9 +56,10 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_avg_spread.taq_initial_message()
+
     # Tickers and days to analyze
-    # year = taq_data_tools_avg_spread.taq_initial_data()
-    # To be used when run in server
     year = '2008'
     tickers = taq_data_tools_avg_spread.taq_get_tickers_data(year)
     tickers.sort()
@@ -73,7 +71,7 @@ def main():
     # Analysis and plot
     taq_data_generator(tickers, year)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 
