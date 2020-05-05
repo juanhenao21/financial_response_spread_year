@@ -3,7 +3,7 @@
 The functions in the module run the complete analysis and plot of the TAQ data.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * pickle
     * taq_data_analysis_responses_physical_short_long
@@ -95,16 +95,14 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_responses_physical_short_long.taq_initial_message()
+
     # Tickers and days to analyze
-    year, tickers, tau, taus_p = taq_data_tools_responses_physical_short_long \
-        .taq_initial_data()
-    # To be used when run server
-    # tickers = ['AAPL', 'CVX', 'GS', 'JPM', 'MSFT', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
-    # year = '2008'
-    # taus_p = [x for x in range(10, 101, 10)]
-    # taus_p = [40]
-    # tau = 1000
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
+    taus_p = [x for x in range(10, 101, 10)]
+    tau = 1000
 
     # Basic folders
     taq_data_tools_responses_physical_short_long.taq_start_folders(year)
@@ -112,7 +110,7 @@ def main():
     # Run analysis
     taq_data_plot_generator(tickers, year, tau, taus_p)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 
