@@ -235,9 +235,9 @@ def taq_initial_message():
     """
 
     print()
-    print('####################################')
-    print('Response Functions Activity Analysis')
-    print('####################################')
+    print('##########################################')
+    print('Price Response Functions Activity Analysis')
+    print('##########################################')
     print('AG Guhr')
     print('Faculty of Physics')
     print('University of Duisburg-Essen')
