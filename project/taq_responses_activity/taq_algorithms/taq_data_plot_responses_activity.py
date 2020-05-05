@@ -5,7 +5,6 @@ taq_data_analysis_responses_activity module.
 
 This script requires the following modules:
     * matplotlib
-    * numpy
     * pickle
     * taq_data_tools_responses_activity
 
@@ -22,7 +21,6 @@ The module contains the following functions:
 # ----------------------------------------------------------------------------
 # Modules
 from matplotlib import pyplot as plt
-import numpy as np
 import pickle
 
 import taq_data_tools_responses_activity

@@ -3,7 +3,7 @@
 The functions in the module run the complete analysis and plot of the TAQ data.
 
 This script requires the following modules:
-    * itertools.product
+    * itertools
     * multiprocessing
     * pandas
     * pickle
@@ -101,12 +101,12 @@ def main():
     :return: None.
     """
 
+    # Initial message
+    taq_data_tools_responses_activity.taq_initial_message()
+
     # Tickers and days to analyze
-    year, tickers = taq_data_tools_responses_activity.taq_initial_data()
-    # To be used when run in server
-    # year = '2008'
-    # tickers = ['AAPL', 'MSFT', 'GS', 'JPM', 'CVX', 'XOM',
-    #            'GOOG', 'MA', 'CME', 'RIG', 'APA']
+    year = '2008'
+    tickers = ['AAPL', 'GOOG']
 
     # Basic folders
     taq_data_tools_responses_activity.taq_start_folders(year)
@@ -115,7 +115,7 @@ def main():
     # Analysis and plot
     taq_data_plot_generator(tickers, year)
 
-    print('Ay vamos!!')
+    print('Ay vamos!!!')
 
     return None
 
