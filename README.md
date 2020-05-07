@@ -4,8 +4,8 @@
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://financial-response-spread-year.readthedocs.io/en/latest/)
 
 In this repository, I analyze the price response functions of the NASDAQ TAQ
-data for the year 2008, however, it is possible to analyze other years with the
-corresponding data.
+financial market data for the year 2008, however, it is possible to analyze
+other years with the corresponding data.
 
 I reproduce in the
 [taq_responses_physical](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_physical)
