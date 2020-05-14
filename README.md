@@ -15,8 +15,10 @@ to obtain the midpoint prices, trade signs, self-responses, cross-responses,
 trade sign self-correlators and trade sign cross-correlators values for
 different stocks.
 
-Based on these values, I analyze responses functions in trade time scale
-([taq_responses_trade](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_trade/taq_algorithms))
+Based on these values, I analyzed the price response functions in trade and
+physical time scale
+([taq_responses_trade](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_trade/taq_algorithms),
+[taq_responses_physical](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_phyisical/taq_algorithms))
 and the influence of the number of trades in a second in the response functions
 ([taq_responses_activity](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_activity/taq_algorithms)).
 I also analyze the influence of the time shift between trade signs and midpoint
@@ -28,9 +30,13 @@ and
 [taq_responses_trade_shift](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_trade_shift/taq_algorithms)),
 the influence of the time lag
 ([taq_responses_physical_short_long](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_physical_short_long/taq_algorithms))
-in the response functions and the impact of the spread
+in the response functions in physical time scale and the impact of the spread
 ([taq_avg_responses_physical](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_avg_responses_physical/taq_algorithms))
-in the strength of the response functions.
+in the strength of the response functions in physical time scale.
+
+All the results and figures obtained using the modules in the repository will
+be saved in the folders `financial_response_spread_year/project/taq_data` and
+`financial_response_spread_year/project/taq_plot`.
 
 You can find
 [here](https://financial-response-spread-year.readthedocs.io/en/latest/)
@@ -148,9 +154,16 @@ you want to run them, you need to run this section first.
 ### TAQ Responses Trade
 
 To run this part of the code, you need to move (cd) to the folder
-`financial_response_spread_year/project/taq_responses_trade/taq_algorithms/` and run
-the module `taq_data_main_responses_trade.py`. In Linux, using the terminal the
-command looks like
+`financial_response_spread_year/project/taq_responses_trade/taq_algorithms/`
+and edit the tickers list with the stocks you want to analyze (in this case the
+symbols of the files of the tickers you use in the previous section).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
+
+Then you need to run the module `taq_data_main_responses_trade.py`. In Linux,
+using the terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_trade.py
@@ -163,8 +176,15 @@ stocks in this time scale.
 
 To run this part of the code, you need to move (cd) to the folder
 `financial_response_spread_year/project/taq_responses_activity/taq_algorithms/`
-and run the module `taq_data_main_responses_activity.py`. In Linux, using the
-terminal the command looks like
+and edit the tickers list with the stocks you want to analyze (in this case the
+symbols of the files of the tickers you use in the previous section).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
+
+Then you need to run the module `taq_data_main_responses_activity.py`. In
+Linux, using the terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_trade.py
@@ -174,6 +194,14 @@ $ python3 taq_data_main_responses_trade.py
 
 The TAQ time shift analysis is divided in two time scales and in two modules.
 The modules have to be executed in the order shown.
+
+In both cases you need to edit the tickers list with the stocks you want to
+analyze (in this case the symbols of the files of the tickers you use in the
+previous section).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
 
 #### Physical time scale
 
@@ -221,8 +249,16 @@ $ python3 taq_data_main_responses_trade_shift.py
 
 To run this part of the code, you need to move (cd) to the folder
 `financial_response_spread_year/project/taq_responses_physical_short_long/taq_algorithms/`
-and run the module `taq_data_main_responses_physical_short_long.py`. In Linux,
-using the terminal the command looks like
+and edit the tickers list with the stocks you want to analyze (in this case the
+symbols of the files of the tickers you use in the previous section).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
+
+Then you need to run the module
+`taq_data_main_responses_physical_short_long.py`. In Linux, using the terminal
+the command looks like
 
 ```bash
 $ python3 taq_data_main_responses_physical_short_long.py
@@ -232,8 +268,15 @@ $ python3 taq_data_main_responses_physical_short_long.py
 
 To run this part of the code, you need to move (cd) to the folder
 `financial_response_spread_year/project/taq_avg_spread/taq_algorithms/`
-and run the module `taq_data_main_avg_spread.py`. In Linux,
-using the terminal the command looks like
+and edit the tickers list with the stocks you want to analyze (in this case the
+symbols of the files of the tickers you use in the previous section).
+
+```Python
+tickers = ['AAPL', 'MSFT']
+```
+
+Then you need to run the module `taq_data_main_avg_spread.py`. In Linux, using
+the terminal the command looks like
 
 ```bash
 $ python3 taq_data_main_avg_spread.py
