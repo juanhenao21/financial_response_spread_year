@@ -1,9 +1,96 @@
 \section{Price response function definitions}
 \label{sec:response_functions_def}
 
-In Sect. \ref{subsec:time_definition} we describe the physical time scale and
-the trade time scale. We introduce the price response functions used in
-literature in Sect. \ref{subsec:response_def}.
+In Sect. \ref{subsec:key_concepts} we establish the fundamental quantities used
+in the price response definitions. In Sect. \ref{subsec:time_definition} we
+describe the physical time scale and the trade time scale. We introduce the
+price response functions used in literature in Sect. \ref{subsec:response_def}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Key concepts}\label{subsec:key_concepts}
+
+The average of the best ask and the best bid is the midpoint price, which is
+defined as
+\cite{subtle_nature,Bouchaud_2004,large_prices_changes,prop_order_book,stat_theory}
+
+\begin{equation}\label{eq:midpoint_price}
+    m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
+\end{equation}
+
+As the midpoint price depends on the quotes, it changes if the quotes change.
+The midpoint price grows if the best ask or the best bid grow. On the other
+hand, the midpoint price decreases if the best ask or the best bid
+decrease.
+
+Price changes are typically characterized as returns. If one denotes
+$S\left( t\right)$ the price of an asset at time $t$, the return
+$r\left(t\right)$, at time $t$ and time lag $\tau$ is simply the relative
+variation of the price from $t$ to $t + \tau$
+\cite{subtle_nature,empirical_facts,asynchrony_effects_corr,tick_size_impact,causes_epps_effect,non_stationarity},
+
+\begin{equation}\label{eq:return_general}
+    r^{g} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
+    - S\left(t\right)}{S\left(t\right)}
+\end{equation}
+
+It is also common to define the returns as
+\cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,rand_mat,fluctions_market_friction}
+
+\begin{equation}\label{eq:log_return_general}
+    r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
+    - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
+\end{equation}
+
+Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} coincide
+if $\tau$ is small enough \cite{subtle_nature,empirical_facts}.
+
+At longer timescales, midpoint prices and transaction prices rarely differ by
+more than half the spread. The midpoint price is more convenient to study
+because it avoids problems associated with the tendency of transaction prices
+to bounce back and forth between the best bid and ask
+\cite{large_prices_changes}.
+
+We define the returns via the midpoint price as
+
+\begin{equation}\label{eq:midpoint_price_return}
+    r\left(t,\tau\right) = \frac{m\left(t+\tau\right)-m\left(t\right)}
+    {m\left(t\right)}
+\end{equation}
+
+The distribution of returns is strongly non-Gaussian and its shape continuously
+depends on the return period $\tau$. Small $\tau$ values have fat tails return
+distributions \cite{subtle_nature}.
+
+The trade signs are defined for general cases as
+
+\begin{equation}\label{eq:trade_sign_general}
+    \varepsilon\left(t\right)=\text{sign}\left(S\left(t\right)
+    -m\left(t-\delta\right)\right)
+\end{equation}
+
+where $\delta$ is a positive time increment. Hence we have
+
+\begin{equation}\label{eq:trade_sign_results}
+    \varepsilon\left(t\right)=\left\{
+    \begin{array}{cc}
+    +1, & \text{If } S\left(t\right)
+    \text{ is higher than the last } m\left( t \right)\\
+    -1, & \text{If } S\left(t\right)
+    \text{ is lower than the last } m\left( t \right)
+    \end{array}\right.
+\end{equation}
+
+$\varepsilon(t) = +1$ indicates that the trade was triggered by a market order
+to buy and a trade triggered by a market order to sell yields
+$\varepsilon(t) = -1$
+\cite{subtle_nature,Bouchaud_2004,spread_changes_affect,quant_stock_price_response,order_flow_persistent}.
+
+It is well-known that the series of the trade signs on a given stock exhibit
+large autocorrelation. A very plausible explanation of this phenomenon relies
+on the execution strategies of some major brokers on given markets. These
+brokers have large transactions to execute on the account of some clients. In
+order to avoid market making move because of an inconsiderable large order,
+they tend to split large orders into small ones \cite{empirical_facts}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
@@ -115,9 +202,6 @@ second.
     \label{fig:relation_trades_midpoint_trade_scale}
 \end{figure}
 
-We computed all the analysis for the trade time scale using Equations
-\ref{eq:midpoint_price_return} and \ref{eq:trade_signs_trade}.
-
 The methodology described is an approximation to compute the response in the
 trade time scale. A drawback in the computation could come from the fact that
 the return of a given second is composed by the contribution of small returns
@@ -159,13 +243,13 @@ in this case, we are assuming at the end that all the returns were positive or
 negative, what probably was not the case, and in consequence will increase or
 decrease the real value of the net return.
 
-In all the cases we choose the last change in the midpoint price in a second
+In all the cases, we choose the last change in the midpoint price in a second
 interval as described before
 (Fig. \ref{fig:relation_trades_midpoint_trade_scale}). We use this method
 knowing that the variation in one second of the midpoint price is not large
 (in average, the last midpoint price of a second differ with the average
-midpoint of that second in $0.007\%$), so it can give us valuable information
-about the response functions.
+midpoint of that second in $0.007\%$), so it can give us representative
+information about the response functions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Physical time scale}\label{subsubsec:physical_time}
@@ -220,7 +304,8 @@ price value and a return value.
 \end{figure}
 
 In this case we do not compare every single trade sign in a second, but the net
-trade sign obtained for every second with the definition. This can be seen in
+trade sign obtained for every second with the definition
+(Eq. \ref{eq:trade_signs_physical}). This can be seen in
 Fig. \ref{fig:relation_trades_midpoint_time_scale}, we related the midpoint
 price of the previous second with the trade sign of the current second.
 
@@ -230,99 +315,17 @@ accuracy up to $82\%$ in the physical time scale.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Response function definitions}\label{subsec:response_def}
-The average of the best ask and the best bid is the midpoint price, which is
-defined as
-\cite{subtle_nature,Bouchaud_2004,large_prices_changes,prop_order_book,stat_theory}
 
-\begin{equation}\label{eq:midpoint_price}
-    m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
-\end{equation}
-
-As the midpoint price depends on the quotes, it changes if the quotes change.
-The midpoint price grows if the best ask or the best bid grow. On the other
-hand, the midpoint price decreases if the best ask or the best bid
-decrease.
-
-Price changes are typically characterized as returns. If one denotes
-$S\left( t\right)$ the price of an asset at time $t$, the return
-$r\left(t\right)$, at time $t$ and time lag $\tau$ is simply the relative
-variation of the price from $t$ to $t + \tau$
-\cite{subtle_nature,empirical_facts,asynchrony_effects_corr,tick_size_impact,causes_epps_effect,non_stationarity},
-
-\begin{equation}\label{eq:return_general}
-    r^{g} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
-    - S\left(t\right)}{S\left(t\right)}
-\end{equation}
-
-It is also common to define the returns as
-\cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,rand_mat,fluctions_market_friction}
-
-\begin{equation}\label{eq:log_return_general}
-    r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
-    - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
-\end{equation}
-
-Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} coincide
-if $\tau$ is small enough \cite{subtle_nature,empirical_facts}.
-
-At longer timescales, midpoint prices and transaction prices rarely differ by
-more than half the spread. The midpoint price is more convenient to study
-because it avoids problems associated with the tendency of transaction prices
-to bounce back and forth between the best bid and ask
-\cite{large_prices_changes}.
-
-We define the returns via the midpoint price as
-
-\begin{equation}\label{eq:midpoint_price_return}
-    r\left(t,\tau\right) = \frac{m\left(t+\tau\right)-m\left(t\right)}
-    {m\left(t\right)}
-\end{equation}
-
-The distribution of returns is strongly non-Gaussian and its shape continuously
-depends on the return period $\tau$. Small $\tau$ values have fat tails return
-distributions \cite{subtle_nature}.
-
-The trade signs are defined for general cases as
-
-\begin{equation}\label{eq:trade_sign_general}
-    \varepsilon\left(t\right)=\text{sign}\left(S\left(t\right)
-    -m\left(t-\delta\right)\right)
-\end{equation}
-
-where $\delta$ is a positive time increment. Hence we have
-
-\begin{equation}\label{eq:trade_sign_results}
-    \varepsilon\left(t\right)=\left\{
-    \begin{array}{cc}
-    +1, & \text{If } S\left(t\right)
-    \text{ is higher than the last } m\left( t \right)\\
-    -1, & \text{If } S\left(t\right)
-    \text{ is lower than the last } m\left( t \right)
-    \end{array}\right.
-\end{equation}
-
-$\varepsilon(t) = +1$ indicates that the trade was triggered by a market order
-to buy and a trade triggered by a market order to sell yields
-$\varepsilon(t) = -1$
-\cite{subtle_nature,Bouchaud_2004,spread_changes_affect,quant_stock_price_response,order_flow_persistent}.
-
-It is well-known that the series of the trade signs on a given stock exhibit
-large autocorrelation. A very plausible explanation of this phenomenon relies
-on the execution strategies of some major brokers on given markets. These
-brokers have large transactions to execute on the account of some clients. In
-order to avoid market making move because of an inconsiderable large order,
-they tend to split large orders into small ones \cite{empirical_facts}.
-
-In \cite{dissecting_cross} they use a market response $R_{\tau}^{i}$ defined as
+In \cite{dissecting_cross} they use a market response defined as
 
 \begin{equation}\label{eq:dissecting_cross}
-    R_{\tau}^{ij} = \mathbf{E} \left[ \left( \ln S_{i}(t+\tau) - \ln S_{i}(t)
-    \right) \varepsilon_{j}(t) \right]
+    R_{ij}(\tau) =  \left\langle \left[ \ln S_{i}(t+\tau) - \ln S_{i}(t)
+    \right] \cdot \varepsilon_{j}(t) \right\rangle
 \end{equation}
 
-measures the
-average price change of contract $i$ at time $t+\tau$, after experiencing a
-sign imbalance $\varepsilon_{j}\left(t\right)$ in contract $j$ at time $t$.
+The response measures the average price change of contract $i$ at time
+$t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
+in contract $j$ at time $t$.
 
 
 The response function is used to study the mutual dependence between stocks. In
@@ -348,8 +351,8 @@ $f \left(\cdot\right)$, is defined as the average price response due to a
 transaction as a function of the transaction's volume $v_{i}$
 
 \begin{equation}\label{eq:theory_market_impact}
-    f \left(v_{i}\right) \equiv \mathbf{E} \left[\varepsilon_{i} r^{l}_{i} |
-    v_{i}\right]
+    f \left(v_{i}\right) \equiv \left\langle \varepsilon_{i} r^{l}_{i} |
+    v_{i}\right\rangle
 \end{equation}
 
 Empirically they found  the function is highly concave. The curvature of
@@ -383,8 +386,8 @@ decrease. The trend is eventually reversed.
 Finally, in \cite{Wang_2018_b}, S. Wang et al. define the response function as
 
 \begin{equation}\label{eq:Wang_2018_b}
-    R_{ij} = \left\langle \left(\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-
-    \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right)\cdot\varepsilon_{j}
+    R_{ij} = \left\langle \left[\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-
+    \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right]\cdot\varepsilon_{j}
     \left(t_{j}\right)\right\rangle _{t_{j}}
 \end{equation}
 
