@@ -117,6 +117,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      label=r'Max $t$ = {} trades'
                      .format(max_pos_ax2 - 10 * taus[1]))
 
+            ax2.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax2.legend(loc='upper left', fontsize=15)
             ax2.grid(True)
 
@@ -142,6 +143,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      label=r'Max $t$ = {} trades'
                      .format(max_pos_ax3 - 10 * taus[2]))
 
+            ax3.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax3.legend(loc='upper left', fontsize=15)
             ax3.grid(True)
 
@@ -167,6 +169,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      label=r'Max $t$ = {} trades'
                      .format(max_pos_ax4 - 10 * taus[3]))
 
+            ax4.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax4.legend(loc='upper left', fontsize=15)
             ax4.grid(True)
 
@@ -195,7 +198,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax5.set_ylabel(r'$R^{s,t}_{ij}(\tau)$', fontsize=15)
             ax5.tick_params(axis='x', labelsize=10)
             ax5.tick_params(axis='y', labelsize=10)
-            ax5.set_ylim(-0.025 * 10**-4, 7 * 10**-4)
+            ax5.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax5.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax5.yaxis.offsetText.set_fontsize(0)
             ax5.xaxis.set_major_locator(ticker.MaxNLocator(4))
@@ -224,6 +227,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax6.legend(loc='upper left', fontsize=15)
             ax6.set_xlabel(r'Trade shift [trades]', fontsize=15)
             ax6.tick_params(axis='x', labelsize=10)
+            ax6.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax6.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax6.grid(True)
 
@@ -250,6 +254,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax7.legend(loc='upper left', fontsize=15)
             ax7.set_xlabel(r'Trade shift [trades]', fontsize=15)
             ax7.tick_params(axis='x', labelsize=10)
+            ax7.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax7.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax7.grid(True)
 
@@ -276,6 +281,7 @@ def taq_trade_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax8.legend(loc='upper left', fontsize=15)
             ax8.set_xlabel(r'Trade shift [trades]', fontsize=15)
             ax8.tick_params(axis='x', labelsize=10)
+            ax8.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax8.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax8.grid(True)
 
@@ -380,6 +386,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      label=r'Max $t$ = {}s'
                      .format(max_pos_ax2 - 10 * taus[1]))
 
+            ax2.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax2.legend(loc='upper left', fontsize=15)
             ax2.grid(True)
 
@@ -405,6 +412,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      label=r'Max $t$ = {}s'
                      .format(max_pos_ax3 - 10 * taus[2]))
 
+            ax3.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax3.legend(loc='upper left', fontsize=15)
             ax3.grid(True)
 
@@ -430,6 +438,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
                      label=r'Max $t$ = {}s'
                      .format(max_pos_ax4 - 10 * taus[3]))
 
+            ax4.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax4.legend(loc='upper left', fontsize=15)
             ax4.grid(True)
 
@@ -458,7 +467,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax5.set_ylabel(r'$R^{s,p}_{ij}(\tau)$', fontsize=15)
             ax5.tick_params(axis='x', labelsize=10)
             ax5.tick_params(axis='y', labelsize=10)
-            ax5.set_ylim(-0.025 * 10**-4, 6 * 10**-4)
+            ax5.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax5.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
             ax5.yaxis.offsetText.set_fontsize(0)
             ax5.xaxis.set_major_locator(ticker.MaxNLocator(4))
@@ -487,6 +496,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax6.legend(loc='upper left', fontsize=15)
             ax6.set_xlabel(r'Time shift $[s]$', fontsize=15)
             ax6.tick_params(axis='x', labelsize=10)
+            ax6.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax6.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax6.grid(True)
 
@@ -513,6 +523,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax7.legend(loc='upper left', fontsize=15)
             ax7.set_xlabel(r'Time shift $[s]$', fontsize=15)
             ax7.tick_params(axis='x', labelsize=10)
+            ax7.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax7.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax7.grid(True)
 
@@ -539,6 +550,7 @@ def taq_physical_scale_shift_year_avg_plot(ticker_i, ticker_j, year, taus):
             ax8.legend(loc='upper left', fontsize=15)
             ax8.set_xlabel(r'Time shift $[s]$', fontsize=15)
             ax8.tick_params(axis='x', labelsize=10)
+            ax8.set_ylim(-0.5 * 10**-4, 9 * 10**-4)
             ax8.xaxis.set_major_locator(ticker.MaxNLocator(4))
             ax8.grid(True)
 
@@ -646,7 +658,7 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                    fontsize=15)
         ax1.set_ylabel(r'$R^{s,t}_{ii}(\tau)$', fontsize=15)
         ax1.set_xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax1.tick_params(axis='y', labelsize=10)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         ax1.yaxis.offsetText.set_fontsize(10)
@@ -655,7 +667,7 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax2.semilogx(avg_val_self_2 / len(tickers), '-k', linewidth=5,
                      label=f'Average')
         ax2.set_xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax2.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax2.grid(True)
 
         ax3.semilogx(avg_val_cross_1 / len(sectors), '-k', linewidth=5,
@@ -665,7 +677,7 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax3.set_xlabel(r'$\tau \, [trades]$', fontsize=15)
         ax3.set_ylabel(r'$R^{s,t}_{ij}(\tau)$', fontsize=15)
         ax3.set_xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax3.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax3.tick_params(axis='x', labelsize=10)
         ax3.tick_params(axis='y', labelsize=10)
         ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
@@ -676,7 +688,7 @@ def taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                      label=f'Average')
         ax4.set_xlabel(r'$\tau \, [trades]$', fontsize=15)
         ax4.set_xlim(1, 1000)
-        # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax4.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax4.tick_params(axis='x', labelsize=10)
         ax4.tick_params(axis='y', labelsize=10)
         ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
@@ -787,7 +799,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                    fontsize=15)
         ax1.set_ylabel(r'$R^{s,p}_{ii}(\tau)$', fontsize=15)
         ax1.set_xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax1.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax1.tick_params(axis='y', labelsize=10)
         ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         ax1.yaxis.offsetText.set_fontsize(10)
@@ -796,7 +808,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax2.semilogx(avg_val_self_2 / len(tickers), '-k', linewidth=5,
                      label=f'Average')
         ax2.set_xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax2.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax2.grid(True)
 
         ax3.semilogx(avg_val_cross_1 / len(sectors), '-k', linewidth=5,
@@ -804,9 +816,9 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax3.legend(loc='upper center', bbox_to_anchor=(1.0, -0.2), ncol=4,
                    fontsize=15)
         ax3.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax3.set_ylabel(r'$R^{s,p}_{ij}(\tau)$', fontsize=15)
+        ax3.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax3.set_xlim(1, 1000)
-        # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
+        ax3.set_ylim(13 * 10 ** -5, 16 * 10 ** -5)
         ax3.tick_params(axis='x', labelsize=10)
         ax3.tick_params(axis='y', labelsize=10)
         ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
@@ -817,7 +829,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                      label=f'Average')
         ax4.set_xlabel(r'$\tau \, [s]$', fontsize=15)
         ax4.set_xlim(1, 1000)
-        # ax4.ylim(4 * 10 ** -5, 9 * 10 ** -5)
+        ax4.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax4.tick_params(axis='x', labelsize=10)
         ax4.tick_params(axis='y', labelsize=10)
         ax4.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
