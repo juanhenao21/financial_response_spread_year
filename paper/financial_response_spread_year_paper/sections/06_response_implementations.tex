@@ -1,7 +1,7 @@
 \section{Price response function implementations}
 \label{sec:response_functions_imp}
 
-The main objective of this work is to analyze the response functions. In
+The main objective of this work is to analyze the price response functions. In
 general we define the self- and cross-response functions in a correlated
 financial market as
 
@@ -15,9 +15,9 @@ where the index $i$ and $j$ correspond to stocks in the market,
 $r^{scale}_{i}$ is the return of the stock $i$ in a time lag $\tau$ in the
 corresponding scale and $\varepsilon^{scale}_{j}$ is the trade sign of the
 stock $j$ in the corresponding scale. The subscript and superscript $scale$
-refer to the time scale used, whether physical time scale or trade time scale.
-Finally, we average the product over the physical time or trade time depending
-on the time scale.
+refer to the time scale used, whether physical time scale ($scale = p$) or
+trade time scale ($scale = t$). Finally, we average the product over the
+physical time or trade time depending on the time scale.
 
 We use the returns and the trade signs to define three response functions:
 trade time scale response, physical time scale response and activity response.
@@ -26,18 +26,20 @@ To compare the three response functions, we define the following quantities
 
 \begin{align}
     E_{j,d}\left(t\right)&=\sum_{n=1}^{N\left(t\right)}
-    \varepsilon_{j,d}^{t}\left(t,n\right)\\
-    E_{j,d}\left(t\right)&=\text{sgn}\left(E_{j,d}\left(t\right)\right)
-    \cdot\left|E_{j,d}\left(t\right)\right|\\
-    \varepsilon_{j,d}^{p}\left(t\right)&=
+    \varepsilon_{j,d}^{t}\left(t,n\right) =
     \text{sgn}\left(E_{j,d}\left(t\right)\right)
+    \cdot\left|E_{j,d}\left(t\right)\right|\label{eq:sum_trades}\\
+    \varepsilon_{j,d}^{p}\left(t\right)&=
+    \text{sgn}\left(E_{j,d}\left(t\right)\right)\label{eq:sign_sum_trades}
 \end{align}
 
 Where the subscript $d$ refers to the days used in the response computation.
+We use Eq. \ref{eq:sum_trades} to make easier the comparison between the
+results, as all the defined responses use the trade sign term.
 
 In Sect. \ref{subsec:response_function_trade} we analyze the responses
 functions in trade time scale, in Sect. \ref{subsec:response_function_physical}
-we analyze the responses functions in trade time scale and in Sect.
+we analyze the responses functions in physical time scale and in Sect.
 \ref{subsec:activity_response_function} we define a response function to
 analyze the influence of the frequency of trades in a second.
 
@@ -106,13 +108,13 @@ pairs of stocks representing three different economic sectors.
 
 The self-response functions increase to a maximum and then slowly decrease. In
 some stocks this behavior is more pronounced than in others. For our selected
-tickers, a time lag of $\tau = 10^{3}$ is enough to see an increase to a maximum
-followed by a decrease. Thus, the trend in the self-response functions is
-eventually reversed.
+tickers, a time lag of $\tau = 10^{3}s$ is enough to see an increase to a
+maximum followed by a decrease. Thus, the trend in the self-response functions
+is eventually reversed.
 On the other hand, the cross-response functions have smaller signal strength
 than the self-response functions. For our cross-response functions of stocks in
 the same sectors, some couples exhibit the increase-decrease behavior inside a
-time lag of $\tau = 10^{3}$. Other couples seems to need a larger time lag to
+time lag of $\tau = 10^{3}s$. Other couples seems to need a larger time lag to
 reach the decrease behavior.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
