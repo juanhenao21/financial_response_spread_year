@@ -816,6 +816,7 @@ def taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
         ax3.legend(loc='upper center', bbox_to_anchor=(1.0, -0.2), ncol=4,
                    fontsize=15)
         ax3.set_xlabel(r'$\tau \, [s]$', fontsize=15)
+        ax3.set_ylabel(r'$R^{s,t}_{ij}(\tau)$', fontsize=15)
         ax3.set_ylim(-0.5 * 10 ** -4, 10 * 10 ** -4)
         ax3.set_xlim(1, 1000)
         ax3.set_ylim(13 * 10 ** -5, 16 * 10 ** -5)
@@ -862,16 +863,16 @@ def main():
                ('RIG', 'APA'), ('APA', 'RIG')]
     year = '2008'
 
-    for sector in sectors:
-        taq_trade_scale_shift_year_avg_plot(sector[0], sector[1], year,
-                                            taus)
-        taq_physical_scale_shift_year_avg_plot(sector[0], sector[1], year,
-                                               taus)
+    # for sector in sectors:
+    #     taq_trade_scale_shift_year_avg_plot(sector[0], sector[1], year,
+    #                                         taus)
+    #     taq_physical_scale_shift_year_avg_plot(sector[0], sector[1], year,
+    #                                            taus)
 
     taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                                                      [10, 100])
-    taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
-                                                     [10, 100])
+    # taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
+    #                                                  [10, 100])
 
     return None
 
