@@ -221,9 +221,9 @@ def taq_response_year_avg_comparison_plot(ticker_i, ticker_j, year):
                         + f'_data/taq_self_response_year_responses_activity'
                         + f'_data_{year}_{ticker_i}.pickle', 'rb'))
 
-        ax1.semilogx(self_physical, linewidth=5, label=r'$R_{ij}^{p}(\tau)$')
-        ax1.semilogx(self_trade, linewidth=5, label=r'$R_{ij}^{t}(\tau)$')
-        ax1.semilogx(self_activity, linewidth=5, label=r'$R_{ij}^{a}(\tau)$')
+        ax1.semilogx(self_physical, linewidth=5, label=r'$R_{ii}^{p}(\tau)$')
+        ax1.semilogx(self_trade, linewidth=5, label=r'$R_{ii}^{t}(\tau)$')
+        ax1.semilogx(self_activity, linewidth=5, label=r'$R_{ii}^{a}(\tau)$')
         ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
