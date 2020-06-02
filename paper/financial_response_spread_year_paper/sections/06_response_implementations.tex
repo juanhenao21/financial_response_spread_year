@@ -48,8 +48,15 @@ analyze the influence of the frequency of trades in a second.
 \label{subsec:response_function_trade}
 
 We define the self- and cross-response functions in trade time scale, using the
-trade signs in trade time scale and the returns in physical time scale. The
-response is
+trade signs in trade time scale and the returns in physical time scale. We use
+this strategy considering that the price response in trade time scale can not
+be directly compared with the price response in physical time scale. In this
+case we related each trade sign in one second with the midpoint price of the
+previous second. Then, to compute the returns, instead of using trades as the
+time lag (it would make no sense as all the midpoint price are the same in one
+second) we use seconds. Thus, we force the response in trade time scale to have
+a physical time lag, and then, be able to compare with the physical time scale
+response. The response is
 
 \begin{equation}\label{eq:response_functions_trade_scale_general}
     R^{t}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1,\tau
@@ -237,7 +244,7 @@ is a weight function that depends on the normalization of the response.
     \label{fig:market_response_time_scale}
 \end{figure*}
 
-The results showed in Figure \ref{fig:market_response_time_scale} are the
+The results showed in Fig. \ref{fig:market_response_time_scale} are the
 self- and cross-response functions in physical time scale. For the
 self-response functions we can say again that in almost all the cases, an
 increase to a maximum is followed by a decrease. Thus, the trend in the self-
@@ -301,7 +308,7 @@ second are buys $(+1)$.
 The trade weight reduces noises, The physical weight gives every step the same
 weight, and the activity weight emphasizes seconds with large activity.
 
-In Figure \ref{fig:relation_responses}, we can see how the three
+In Fig. \ref{fig:relation_responses}, we can see how the three
 responses have approximately the same shape, but the strength of the signal
 varies depending on the definition. The frequency of trades have a large
 influence in the responses.
@@ -324,3 +331,9 @@ response, and the activity response is the strongest response.
 
 In the three curves in the figure can be seen the increase-decrease behavior of
 the response functions.
+
+Our results are consistent with the current literature, where the results
+differ about a factor of two depending on the time scale. We most note that the
+activity implementation is only a test and was never defined in previous works.
+That is why the factor of two difference can not be seen in Fig.
+\ref{fig:relation_responses} for $R_{ij}^{a} \left( \tau \right)$.
