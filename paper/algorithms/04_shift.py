@@ -863,16 +863,16 @@ def main():
                ('RIG', 'APA'), ('APA', 'RIG')]
     year = '2008'
 
-    # for sector in sectors:
-    #     taq_trade_scale_shift_year_avg_plot(sector[0], sector[1], year,
-    #                                         taus)
-    #     taq_physical_scale_shift_year_avg_plot(sector[0], sector[1], year,
-    #                                            taus)
+    for sector in sectors:
+        taq_trade_scale_shift_year_avg_plot(sector[0], sector[1], year,
+                                            taus)
+        taq_physical_scale_shift_year_avg_plot(sector[0], sector[1], year,
+                                               taus)
 
     taq_physical_scale_responses_year_avg_shift_plot(tickers, sectors, year,
                                                      [10, 100])
-    # taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
-    #                                                  [10, 100])
+    taq_trade_scale_responses_year_avg_shift_plot(tickers, sectors, year,
+                                                     [10, 100])
 
     return None
 
