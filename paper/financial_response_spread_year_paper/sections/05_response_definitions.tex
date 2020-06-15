@@ -316,6 +316,9 @@ accuracy up to $82\%$ in the physical time scale.
 
 \subsection{Response function definitions}\label{subsec:response_def}
 
+In general, the different works in price response functions use the returns and
+the trade signs with variations in the quantities and the time scale.
+
 In \cite{dissecting_cross} they use a market response defined as
 
 \begin{equation}\label{eq:dissecting_cross}
@@ -327,10 +330,9 @@ The response measures the average price change of contract $i$ at time
 $t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
 in contract $j$ at time $t$.
 
-
 The response function is used to study the mutual dependence between stocks. In
-\cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a self-response
-function that only depends on the time lag $\tau$
+\cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a
+self-response function that only depends on the time lag $\tau$
 
 \begin{equation}\label{eq:Bouchaud_2004}
     R\left(\tau\right)=\left\langle \left(S_{n+\tau}-S_{n}\right) \cdot
