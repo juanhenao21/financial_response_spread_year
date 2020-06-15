@@ -125,6 +125,7 @@ def taq_quotes_trades_year_avg_spread_data(tickers, year):
         # To obtain the average of the year, I average all the results of the
         # corresponding values (number quotes, trades and avg spread)
         stat_year = np.nanmean(stat[0], axis=0)
+        stat_year = np.round(stat_year, decimals=2)
 
         spread_stats.loc[idx] = [ticker] + list(stat_year)
 

@@ -29,7 +29,7 @@ import pickle
 
 import taq_data_tools_avg_responses_physical
 
-__tau__ = 1000
+__tau__ = 10000
 
 # ----------------------------------------------------------------------------
 
@@ -49,8 +49,10 @@ def taq_tickers_spread_data(year):
     try:
         # load data
         spread_data = pd.read_csv(
-            '../../taq_avg_spread/taq_avg_spread_2008.csv',
+            '../../taq_avg_spread/taq_avg_spread_2008_all.csv',
             usecols=['Ticker', 'Avg_Spread'])
+        spread_data['Avg_Spread'] = np.round(spread_data['Avg_Spread'],
+                                             decimals=2)
 
         tickers = []
 
