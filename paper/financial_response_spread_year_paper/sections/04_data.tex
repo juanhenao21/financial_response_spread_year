@@ -6,20 +6,22 @@ orders to buy or to sell a given number of shares, that can be grouped into
 two categories: market orders and limit orders.
 
 Market orders will go into market to execute at the best available buy or sell
-price \cite{large_prices_changes,predictive_pow,intro_market_micro,stat_theory}. Limit orders
-allow to set a maximum purchase price for a buy order, or a minimum sale price
-for a sell order. If the market does not reach the limit price, the order will
-not be executed \cite{large_prices_changes,predictive_pow,intro_market_micro,stat_theory}.
+price. Limit orders allow to set a maximum purchase price for a buy order, or a
+minimum sale price for a sell order. If the market does not reach the limit
+price, the order will not be executed
+\cite{large_prices_changes,predictive_pow,intro_market_micro,stat_theory}.
 
 Limit orders often fail to result in an immediate transaction, and are stored
 in a queue called the limit order book
-\cite{stat_prop,predictive_pow,intro_market_micro,prop_order_book}. An order book is an electronic
-list of buy and sell orders for a specific security or financial instrument
-organized by price level. An order book lists the number of shares being bid or
-offered at each price point. It also identifies the market participants behind
-the buy and sell orders, although some choose to remain anonymous. The order
-book is visible for all traders and its main purpose is to ensure that all
-traders have the information about what is offered on the market.
+\cite{stat_prop,predictive_pow,intro_market_micro,prop_order_book}. An order
+book is an electronic list of buy and sell orders for a specific security or
+financial instrument organized by price level. An order book lists the number
+of shares being bid or offered at each price point. It also identifies the
+market participants behind the buy and sell orders, although some choose to
+remain anonymous. The order book is visible for all traders and its main
+purpose is to ensure that all traders have the information about what is
+offered on the market. The order book is the ultimate microscopic level of
+description of financial markets.
 
 Buy limit orders are called ``bids", and sell limit orders are called ``asks".
 At any given time there is a best (lowest) offer to sell with price
@@ -29,16 +31,16 @@ The price gap between them is called the spread
 $s\left(t\right) = a\left(t\right)-b\left(t\right)$
 \cite{subtle_nature,market_digest,Bouchaud_2004,account_spread,large_prices_changes,stat_theory}.
 Spreads are significantly positively related to price and significantly
-negatively related to trading volume. Firms with more liquidity tend to have
-lower spreads
+negatively related to trading volume. Companies with more liquidity tend to
+have lower spreads
 \cite{components_spread_tokyo,effects_spread,account_spread,components_spread}.
 
-In this study, we have analyzed trades and quotes (TAQ) data from the NASDAQ
-stock market. We selected NASDAQ because it is an electronic exchange where
-stocks are traded through an automated network of computers instead of a
-trading floor, which makes trading more efficient, fast and accurate.
-Furthermore, NASDAQ is the second largest stock exchange based on market
-capitalization in the world.
+In this study, we analyzed trades and quotes (TAQ) data from the NASDAQ stock
+market. We selected NASDAQ because it is an electronic exchange where stocks
+are traded through an automated network of computers instead of a trading
+floor, which makes trading more efficient, fast and accurate. Furthermore,
+NASDAQ is the second largest stock exchange based on market capitalization
+in the world.
 
 In the TAQ data set, there are two data files for each stock. One gives the
 list of all successive quotes. Thus, we have the best bid price, best ask
@@ -97,7 +99,7 @@ Apache Corp. & APA & Energy (E) & $103074$ & $8889$ & $0.13\$$\tabularnewline
 \end{table*}
 
 To analyze the spread impact in response functions (Sect.
-\ref{sec:spread_impact}), we select 530 stocks in the NASDAQ stock market for
+\ref{sec:spread_impact}), we select 524 stocks in the NASDAQ stock market for
 the year 2008. The selected stocks are listed in Appendix
 \ref{app:spread_impact}.
 
@@ -107,4 +109,4 @@ ten minutes of trading in a given day
 \cite{Bouchaud_2004,large_prices_changes,spread_changes_affect,Wang_2016_cross}.
 Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
 New York local time. We will refer to this interval of time as the ``market
-time".
+time". The year period 2008 corresponds to 253 bussiness days.

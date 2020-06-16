@@ -8,7 +8,7 @@ sell a given number of shares.
 
 In general, the dynamics of the prices follow a pure random walk. There are two
 extreme models that can describe this behavior: the Efficient Market Hypothesis
-(EMH) and the Zero Intelligence Trading (ZIT). The EMH affirms that all
+(EMH) and the Zero Intelligence Trading (ZIT). The EMH declares that all
 available information is included in prices and price changes can only be the
 result of unanticipated news, which by definition are totally unpredictable
 \cite{subtle_nature,Bouchaud_2004,EMH_lillo,stat_theory}. On the other hand,
@@ -24,9 +24,9 @@ There are diverse studies focused on the price response
 \cite{dissecting_cross,r_walks_liquidity,subtle_nature,Bouchaud_2004,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,master_curve,EMH_lillo,quant_stock_price_response,ori_pow_law,prop_order_book,Wang_2018_b,Wang_2018_a,Wang_2016_avg,Wang_2016_cross},
 but they concentrate on a general definition and discuss the results without
 going deep in the specific details of the price response measurements and how
-these aspects of the price response definition modify the results.
+these aspects of the price response definition affect the results.
 
-Regarding price self-response functions,
+Regarding price self-response functions
 \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. found
 an increase to a maximum followed by a decrease as the time lag grows.
 In \cite{theory_market_impact}, the researchers found that larger sized
@@ -44,14 +44,16 @@ sign does not predict future returns. In \cite{Wang_2016_cross} the results
 show the trends in the cross-responses does not depend on whether or not the
 stock pairs are in the same economic sector or extend over two sectors.
 
-In this paper, we want to discuss, based on a series of detailed empirical
-results obtained on trade by trade data, that the variation in the details of
-the parameters used in the price response definition modify the characteristics
-of the results. Aspects like time scale, time shift, time lag and spread used
-in the price response calculation have a large impact on the outcomes.
+In this paper\footnote{To facilitate the reproduction of our results, the
+source code for the data analysis is available at ...}, we want to discuss,
+based on a series of detailed empirical results obtained on trade by trade
+data, that the variation in the details of the parameters used in the price
+response definition modify the characteristics of the results. Aspects like
+time scale, time shift, time lag and spread used in the price response
+calculation have an influence on the outcomes.
 
 Here, we delve into the key details needed to compute the price response
-functions, and investigate their corresponding roles. We perform a empirical
+functions, and explore their corresponding roles. We perform a empirical
 study in different time scales using financial data and find that using
 different implementations of the price response, the results are qualitatively
 the same, but the response can vary up to a factor of two. We show that the
@@ -67,13 +69,14 @@ to be large.
 A direct comparison between the trade time scale and the physical time scale is
 not possible. To compare them directly we need to assume whether the midpoint
 price or the trade signs are in the same scale. In our case, in Sect.
-\ref{sec:response_functions_imp}, we assume that the trade time scale have the
-same scale of midpoint prices in the physical time scale, so the time lag for
-both computations is in seconds. This approximation allow us to directly
-compare both scales to have an idea of the difference and similarities they
-have. In the other sections, as we are not directly comparing the time scales,
-the corresponding quantities of each time scale are not mixed. Thus physical
-time scale is measured in seconds and trade time scale is measured in trades.
+\ref{sec:response_functions_imp}, we assume the midpoint prices in the trade
+time scale to be the same as the midpoint prices in physical time scale.
+Therefore, we have the time lag for both computations in seconds. This
+approximation allow us to directly compare both scales to have an idea of the
+difference and similarities they have. In the other sections, as we are not
+directly comparing the time scales, the corresponding quantities of each time
+scale are not mixed. Thus physical time scale is measured in seconds and trade
+time scale is measured in trades.
 
 The paper is organized as follows: in Sect. \ref{sec:data} we present our data
 set of stocks. We then analyze the definition of the price response functions
@@ -81,8 +84,8 @@ and describe the physical and trade time in Sect.
 \ref{sec:response_functions_def}. We implement different price responses for
 several stocks and pairs of stocks in Sect. \ref{sec:response_functions_imp}.
 In Sect. \ref{sec:time_shift} we show how the relative position between trade
-signs and returns has a huge impact in the results of the computation of the
+signs and returns has a huge influence in the results of the computation of the
 response functions. In Sect. \ref{sec:short_long} we explain in detail how the
 time lag $\tau$ behaves in the response functions. Finally, in Sect.
-\ref{sec:spread_impact} we analyze the spread impact in the response functions.
- Our conclusions follows in Sect. \ref{sec:conclusion}.
+\ref{sec:spread_impact} we analyze the spread impact in the price response
+functions. Our conclusions follows in Sect. \ref{sec:conclusion}.

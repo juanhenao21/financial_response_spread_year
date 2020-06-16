@@ -24,8 +24,8 @@ decrease.
 
 Price changes are typically characterized as returns. If one denotes
 $S\left( t\right)$ the price of an asset at time $t$, the return
-$r\left(t\right)$, at time $t$ and time lag $\tau$ is simply the relative
-variation of the price from $t$ to $t + \tau$
+$r^{g}\left(t, \tau\right)$, at time $t$ and time lag $\tau$ is simply the
+relative variation of the price from $t$ to $t + \tau$
 \cite{subtle_nature,empirical_facts,asynchrony_effects_corr,tick_size_impact,causes_epps_effect,non_stationarity},
 
 \begin{equation}\label{eq:return_general}
@@ -41,8 +41,8 @@ It is also common to define the returns as
     - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
 \end{equation}
 
-Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} coincide
-if $\tau$ is small enough \cite{subtle_nature,empirical_facts}.
+Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} agree if
+$\tau$ is small enough \cite{subtle_nature,empirical_facts}.
 
 At longer timescales, midpoint prices and transaction prices rarely differ by
 more than half the spread. The midpoint price is more convenient to study
@@ -133,9 +133,6 @@ For physical time scale, as we can sampling, we relate the unique value of
 midpoint price of a previous second with the unique trade sign value of the
 current second.
 
-Thus, trade sign values will be used in trade time scale and physical time
-scale and returns will be only used in physical time scale.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Trade time scale}\label{subsubsec:trade_time}
 
@@ -222,7 +219,8 @@ response signal at the end of the computation.
              of the prices, (top right) the changes of the midpoint prices and
              return are due to the decrease of the prices, and (bottom) the
              changes of the midpoint prices and return are due to a combination
-             of rise and decrease of the prices.}
+             of rise and decrease of the prices. The blue vertical line
+             represents the net return in each case.}
     \label{fig:return_contributions}
 \end{figure}
 
@@ -237,11 +235,11 @@ that means, consumption of the best ask (bid), so all the contributions of the
 individual returns in the second are positive (negative), and in consequence,
 the net return is positive (negative). In the case of the bottom, the changes
 are due to a combination of increase and decrease of the midpoint price, so in
-the end the individual returns sum up to a net return, which can be positive or
-negative, depending of the type of midpoint price values in the interval. Thus,
-in this case, we are assuming at the end that all the returns were positive or
-negative, what probably was not the case, and in consequence will increase or
-decrease the real value of the net return.
+the end, the individual returns sum up to a net return, which can be positive
+or negative, depending of the type of midpoint price values in the interval.
+Thus, in this case, we are assuming in the end that all the returns were
+positive or negative, what probably was not the case, and in consequence will
+increase or decrease the real value of the net return.
 
 In all the cases, we choose the last change in the midpoint price in a second
 interval as described before
@@ -306,8 +304,9 @@ price value and a return value.
 In this case we do not compare every single trade sign in a second, but the net
 trade sign obtained for every second with the definition
 (Eq. \ref{eq:trade_signs_physical}). This can be seen in
-Fig. \ref{fig:relation_trades_midpoint_time_scale}, we related the midpoint
-price of the previous second with the trade sign of the current second.
+Fig. \ref{fig:relation_trades_midpoint_time_scale}, where we related the
+midpoint price of the previous second with the trade sign of the current
+second.
 
 According to \cite{Wang_2016_cross}, this definition has an average
 accuracy up to $82\%$ in the physical time scale.
