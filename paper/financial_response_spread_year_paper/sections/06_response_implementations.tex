@@ -48,15 +48,18 @@ analyze the influence of the frequency of trades in a second.
 \label{subsec:response_function_trade}
 
 We define the self- and cross-response functions in trade time scale, using the
-trade signs in trade time scale and the returns in physical time scale. We use
-this strategy considering that the price response in trade time scale can not
+trade signs in trade time scale and for the returns, we select the last
+midpoint price of every second and compute them. We use this strategy with the
+TAQ data set considering that the price response in trade time scale can not
 be directly compared with the price response in physical time scale. In this
 case we related each trade sign in one second with the midpoint price of the
 previous second. Then, to compute the returns, instead of using trades as the
 time lag (it would make no sense as all the midpoint price are the same in one
 second) we use seconds. Thus, we force the response in trade time scale to have
 a physical time lag, and then, be able to compare with the physical time scale
-response. The response is
+response. This approximation is feasible considering the facts explained in
+Sect. \ref{sec:response_functions_def}. The price response function in trade
+time scaled is defined as
 
 \begin{equation}\label{eq:response_functions_trade_scale_general}
     R^{t}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1,\tau
@@ -184,7 +187,8 @@ Then, we will only take in account the cross-response function excluding
 $\varepsilon^{p}_j \left( t\right) = 0$.
 
 We define the self- and cross-response functions in physical time scale, using
-the trade signs and the returns in physical time scale. The response is
+the trade signs and the returns in physical time scale. The price response
+function in physical time scale is defined as
 
 \begin{equation}\label{eq:response_functions_time_scale_general}
     R^{p}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1, \tau\right)
@@ -263,8 +267,8 @@ in physical time scale are stronger.
 Finally, we define the activity self- and cross-response functions in physical
 time scale, using the trade signs and the returns in physical time scale.
 We add a factor $N_{j,d} \left(t \right)$ to check the influence of the
-frequency of trades in a second in the response functions. The activity
-response is
+frequency of trades in a second in the response functions. The activity price
+response function is defined as
 
 \begin{equation}\label{eq:activity_response_functions_general}
     R^{a}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1, \tau\right)
@@ -305,8 +309,10 @@ $N_{j,d}\left(t\right) \ge E_{j,d}\left(t\right)$.
 $N_{j,d}\left(t\right) = E_{j,d}\left(t\right)$ only when all the trades in a
 second are buys $(+1)$.
 
-The trade weight reduces noises, The physical weight gives every step the same
-weight, and the activity weight emphasizes seconds with large activity.
+The trade weight $w_{j,d}^{t}\left(t\right)$ reduces noises, The physical
+weight $w_{j,d}^{p}\left(t\right)$ gives every step the same weight, and the
+activity weight $w_{j,d}^{a}\left(t\right)$ emphasizes seconds with large
+activity.
 
 In Fig. \ref{fig:relation_responses}, we can see how the three
 responses have approximately the same shape, but the strength of the signal
@@ -333,7 +339,7 @@ In the three curves in the figure can be seen the increase-decrease behavior of
 the response functions.
 
 Our results are consistent with the current literature, where the results
-differ about a factor of two depending on the time scale. We most note that the
+differ about a factor of two depending on the time scale. We must note that the
 activity implementation is only a test and was never defined in previous works.
 That is why the factor of two difference can not be seen in Fig.
 \ref{fig:relation_responses} for $R_{ij}^{a} \left( \tau \right)$.

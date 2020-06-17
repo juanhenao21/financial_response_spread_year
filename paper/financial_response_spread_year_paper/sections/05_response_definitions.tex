@@ -318,46 +318,38 @@ accuracy up to $82\%$ in the physical time scale.
 In general, the different works in price response functions use the returns and
 the trade signs with variations in the quantities and the time scale.
 
-In \cite{dissecting_cross} they use a market response defined as
-
-\begin{equation}\label{eq:dissecting_cross}
-    R_{ij}(\tau) =  \left\langle \left[ \ln S_{i}(t+\tau) - \ln S_{i}(t)
-    \right] \cdot \varepsilon_{j}(t) \right\rangle
-\end{equation}
-
-The response measures the average price change of contract $i$ at time
-$t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
-in contract $j$ at time $t$.
-
 The response function is used to study the mutual dependence between stocks. In
 \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a
 self-response function that only depends on the time lag $\tau$
 
 \begin{equation}\label{eq:Bouchaud_2004}
     R\left(\tau\right)=\left\langle \left(S_{n+\tau}-S_{n}\right) \cdot
-    \varepsilon_{n}\right\rangle_{trades}
+    \varepsilon_{n}\right\rangle_{t}
 \end{equation}
 
 Where $\varepsilon_{n}$ is the sign of the $n^{th}$ trade and the price $S_n$
-is defined as the midpoint just before the $n^{th}$ trade.
+is defined as the midpoint just before the $n^{th}$ trade, all averaged in
+trade time scale.
 The quantity $R\left(\tau\right)$ measures how much, on average, the price
 moves up (down) at time $\tau$ conditioned to a buy (sell) order at time zero.
 They found for France Telecom that $R\left(\tau \right)$ increases by a factor
 $~2$ between $\tau = 1$ and $\tau \approx 1000$, before decreasing back. Using
 larger $\tau$, they also confirm that $R\left(\tau\right)$ decreases, and even
-becomes negative beyond $\tau \approx 5000$.
+becomes negative beyond $\tau \approx 5000$. However, in some cases the maximum
+is not observed and rather $R\left(\tau\right)$ keeps increasing mildly
+\cite{subtle_nature}.
 
 In \cite{theory_market_impact}, the price impact function,
-$f \left(\cdot\right)$, is defined as the average price response due to a
+$R \left(\cdot\right)$, is defined as the average price response due to a
 transaction as a function of the transaction's volume $v_{i}$
 
 \begin{equation}\label{eq:theory_market_impact}
-    f \left(v_{i}\right) \equiv \left\langle \varepsilon_{i} r^{l}_{i} |
+    R \left(v_{i}\right) \equiv \left\langle \varepsilon_{i} r^{l}_{i} |
     v_{i}\right\rangle
 \end{equation}
 
 Empirically they found  the function is highly concave. The curvature of
-$f \left(v_{i}\right)$ is entirely due to the probability that a transaction
+$R \left(v_{i}\right)$ is entirely due to the probability that a transaction
 causes a nonzero impact - the larger the size of the transaction, the larger
 the probability. In \cite{prop_order_book}, the response function is given by
 
@@ -367,9 +359,21 @@ the probability. In \cite{prop_order_book}, the response function is given by
     &= R \left(\tau\right) \ln V
 \end{align}
 
-They found that $R \left(t\right)$ for three French stocks first increases
-from $\tau = 10s$ to a few hundred seconds, and then appears to decrease back
-to a finite value.
+Where $V$ is the volume. They found that $R \left(\tau\right)$ for three French
+stocks first increases from $\tau = 10s$ to a few hundred seconds, and then
+appears to decrease back to a finite value.
+
+In \cite{dissecting_cross} they use a market response defined as
+
+\begin{equation}\label{eq:dissecting_cross}
+    R_{ij}(\tau) =  \left\langle \left[ \ln S_{i}(t+\tau) - \ln S_{i}(t)
+    \right] \cdot \varepsilon_{j}(t) \right\rangle_{p}
+\end{equation}
+
+The response measures the average price change of contract $i$ at time
+$t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
+in contract $j$ at time $t$. In this work $\tau$ is used in units of five
+minutes.
 
 In a later work \cite{spread_changes_affect,Wang_2016_cross}, S. Wang et al.
 and Grimm et al. use the logarithmic return for stock $i$ and time lag $\tau$,
@@ -378,7 +382,7 @@ function is then defined as
 
 \begin{equation}\label{eq:Wang_2016}
     R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot
-    \varepsilon_{j} \left(t\right) \right\rangle _{t}
+    \varepsilon_{j} \left(t\right) \right\rangle
 \end{equation}
 
 They found that in all cases, an increase  to a maximum is followed by a

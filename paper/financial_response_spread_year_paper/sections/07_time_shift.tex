@@ -23,9 +23,10 @@ is the return of the stock $i$ in a time lag $\tau$ with a time shift
 $t_{shift}$ in the corresponding scale and $\varepsilon^{scale}_{j}$ is the
 trade sign of the stock $j$ in the corresponding scale. The subscript and
 superscript $scale$ refer to the time scale used, whether physical time scale
-or trade time scale and $R_{ij}^{s,scale}$ is the time shift response function,
-where the superscript $s$ refers to the time shift. Finally, we average the
-product over the physical time or trade time depending on the time scale.
+or trade time scale and $R_{ij}^{s,scale}$ is the time shift price response
+function, where the superscript $s$ refers to the time shift. Finally, we
+average the product over the physical time or trade time depending on the time
+scale.
 
 We compute the response functions according to two cases. In one case we set
 $\tau$ to a constant value and vary $t_{s}$, and in the other case we set
@@ -58,10 +59,9 @@ shift are in trade time scale.
     \includegraphics[width=\textwidth]{figures/04_shift_trade_RIG_APA.png}
     \caption{Self-response functions $R_{ii}^{t}\left(\tau\right)$ in 2008
              versus shift for the Transocean Ltd. stock (top) and
-             cross-response functions $R_{ij}^{t}\left(\tau\right)$ excluding
-             $\varepsilon^{t}_{j}\left(t\right) = 0$ in 2008 versus shift for
-             the Transocean Ltd.-Apache Corp. stocks (bottom) in trade time
-             scale.}
+             cross-response functions $R_{ij}^{t}\left(\tau\right)$ in 2008
+             versus shift for the Transocean Ltd.-Apache Corp. stocks (bottom)
+             in trade time scale.}
     \label{fig:shift_trade_scale}
 \end{figure*}
 
@@ -69,10 +69,10 @@ In Fig. \ref{fig:shift_trade_scale}, it can be seen the response functions
 results for fixed $\tau$ values while $t_{s}$ is variable. In the different
 $\tau$ values figures, the results are almost the same. The response functions
 are zero either if the time shift is larger than $\tau$, or if the time shift
-is smaller than zero. For values between zero and $\tau$ there is a peak in a
-position related to $\tau$. The response function grows and decrease relatively
-fast. However, related on the time lag, there is a zone where the signal is
-different to zero.
+is smaller than zero. However, related on the time lag, there is a zone where
+the signal is different to zero. For values between zero and $\tau$ there is a
+peak in a position related to $\tau$. The response function grows and decrease
+relatively fast.
 
 \begin{figure*}[htbp]
     \centering
@@ -80,23 +80,24 @@ different to zero.
     \caption{Self- and cross-response functions $R^{t}_{ij}\left(\tau\right)$
              in 2008 versus time lag $\tau$ on a logarithmic scale for
              different shifts in trade time scale. Self-response functions
-             (left) of individual stocks and cross-response functions (right)
-             of stocks pairs from the same economic sector.}
+             (top) of individual stocks and cross-response functions (bottom)
+             of stocks pairs from the same economic sector. We use time lag
+             values $\tau=10$ trades (left) and $\tau=100$ (right).}
     \label{fig:shift_responses_trade_scale}
 \end{figure*}
 
 We tested the response function for fixed time shift values while $\tau$ is
-variable. For every time shift (Fig. \ref{fig:shift_responses_trade_scale}),
-both, self- and cross-response results are qualitatively the same. It can be
-seen that the response functions have a zero signal before the time shift.
-After the returns and trade signs find their corresponding order the signals
-grow. In comparison with the values obtained in Fig.
-\ref{fig:response_function_trade_scale}, it looks like the response function
-values are stronger. However, this is an effect of the averaging of the
-functions. As the returns and trade signs are shifted, they are less values to
-average, and then the signals are stronger. Anyway, the figure shows the
-importance of the relation between the trade signs and returns to compute the
-response function.
+variable. In Fig. \ref{fig:shift_responses_trade_scale}) we use a time shift of
+$10$ trades (left) and $100$ trades (right). In both, self- and cross-response
+results are qualitatively the same. It can be seen that the response functions
+have a zero signal before the time shift. After the returns and trade signs
+find their corresponding order the signals grow. In comparison with the values
+obtained in Fig. \ref{fig:response_function_trade_scale}, it looks like the
+response function values with large time shift are stronger. However, this is
+an effect of the averaging of the functions. As the returns and trade signs are
+shifted, they are less values to average, and then the signals are stronger.
+Anyway, the figure shows the importance of the position order between the trade
+signs and returns to compute the response function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical time scale shift response functions}
@@ -138,18 +139,20 @@ functions are different to zero.
     \caption{Self- and cross-response functions $R^{p}_{ij}\left(\tau\right)$
              excluding $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus
              time lag $\tau$ on a logarithmic scale for different shifts in
-             physical time scale. Self-responses functions (left) of individual
-             stocks and cross-response functions (right) of stocks pairs from
-             the same economic sector.}
+             physical time scale. Self-responses functions (top) of individual
+             stocks and cross-response functions (bottom) of stocks pairs from
+             the same economic sector. We use time lag values $\tau=10$ trades
+             (left) and $\tau=100$ (right).}
     \label{fig:shift_responses_physical_scale}
 \end{figure*}
 
-The results for fixed time shift values and variable time lag are shown in Fig.
-\ref{fig:shift_responses_physical_scale}. The self- and cross-response results
-are qualitatively the same. As seen in the previous subsection, the response
-functions are zero before the time shift value. After the returns and the trade
-signs reach their order, the signals grow. The same effect of the apparent
-stronger signal can be seen here, and again, it is due to the averaging values.
+The results for fixed time shift values and variable time lag ($t_{s}=10s$ and
+$t_{s}=100s$) are shown in Fig. \ref{fig:shift_responses_physical_scale}. The
+self- and cross-response results are qualitatively the same compared with the
+previous subsection. The response functions are zero before the time shift
+value. After the returns and the trade signs reach their order, the signals
+grow. The same effect of the apparent stronger signal can be seen here, and
+again, it is due to the averaging values.
 
 The results in trade time scale and physical time scale can be explained
 understanding the dynamics of the market. A trade can or can not change the
@@ -161,15 +164,20 @@ outcome the signal does not have any meaningful information. When the order is
 recovered during the shift, the signal grows again, showing response function
 values different to zero. In this section we were interested only in the order
 (shift) and not in the responses values, which were analyzed in Sect.
-\ref{sec:response_functions_imp}.
+\ref{sec:response_functions_imp}. A time shift smaller than zero does not have
+any useful information about the response. If the time shift is equal to zero,
+the signal is weak, due to the time needed by the market to react to the new
+information. On the other hand, a time shift larger than two steps shows the
+information is lost and the signal only grows when the original order is
+resumed.
 
 Then the question is what is the ideal time shift to compute the response
-functions. Our approach in Sect. \ref{sec:response_functions_imp} takes in account
-that the changes in the quotes are the ones that attract the agents to buy or
-sell their shares. Hence, they directly impact the trade signs. According to
-the results, the response can take up to two time steps in the corresponding
-scale to react to the change in quotes. Thus, a time shift larger than two time
-steps makes no sense.
+functions. Our approach in Sect. \ref{sec:response_functions_imp} takes in
+account that the changes in the quotes are the ones that attract the agents to
+buy or sell their shares. Hence, they directly impact the trade signs.
+According to the results, the response can take up to two time steps in the
+corresponding scale to react to the change in quotes. Thus, a time shift
+larger than two time steps makes no sense.
 On the other hand, in the case of the physical time scale, where a sampling is
 used, to assure the selection of a midpoint price at the beginning of a second,
 it is a good strategy to use the last midpoint of the previous second as the
