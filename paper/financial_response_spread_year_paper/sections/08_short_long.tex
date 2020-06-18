@@ -1,4 +1,4 @@
-\section{Short and long response functions}\label{sec:short_long}
+\section{Time lag analysis}\label{sec:short_long}
 
 Regarding Equation \ref{eq:return_general}, we use a time lag $\tau$ in the
 returns to see the gains or loses in a future time. However, the strength of
@@ -6,19 +6,19 @@ the return in the time lag should not be equal along its length. Then, we
 divide the full range time lag $\tau$ in an immediate time lag and in a late
 time lag as show in Fig. \ref{fig:tau_short_long}, where
 
-\begin{equation}\label{eq:tau_short_long}
-    \tau = \tau' + \left( \tau - \tau' \right)
-\end{equation}
-
-for $\tau' < \tau$. This distinguish the returns depending in the time lag as
-the short (immediate) return $\tau'$ with the long return $\tau - \tau'$.
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{figures/05_tau_short_long.png}
     \caption{$\tau$ value divided in short and long time lag.}
     \label{fig:tau_short_long}
 \end{figure}
+
+\begin{equation}\label{eq:tau_short_long}
+    \tau = \tau' + \left( \tau - \tau' \right)
+\end{equation}
+
+for $\tau' < \tau$. This distinguish the returns depending in the time lag as
+the short (immediate) return $\tau'$ with the long return $\tau - \tau'$.
 
 To use the short and long time lag, we rewrite the returns in physical time
 scale as
@@ -37,10 +37,10 @@ scale as
     \left(t\right)}{m_{i}\left(t\right)}
 \end{align}
 
-where $sl$ refers to short-long and the second term of the right part is
-constant with respect to $\tau$. Replacing Equation \ref{eq:short_long_return}
-in the response function (Eq. \ref{eq:response_functions_time_scale_general})
-we have
+where the superscript $sl$ refers to short-long and the second term of the
+right part is constant with respect to $\tau$. Replacing Eq.
+\ref{eq:short_long_return} in the price response function in physical time
+scale (Eq. \ref{eq:response_functions_time_scale_general}) we have
 
 \begin{align}\label{eq:short_long_response}
     R^{sl,p}_{ij}\left(\tau\right)&=\left\langle

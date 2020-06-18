@@ -56,7 +56,7 @@ def taq_self_response_year_avg_responses_physical_plot(year):
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)
         plt.xlim(1, 1000)
-        plt.ylim(19 * 10 ** -5, 32 * 10 ** -5)
+        plt.ylim(19.5 * 10 ** -5, 32.5 * 10 ** -5)
         # plt.ylim(13 * 10 ** -5, 16 * 10 ** -5)
         plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         ax.yaxis.offsetText.set_fontsize(20)
