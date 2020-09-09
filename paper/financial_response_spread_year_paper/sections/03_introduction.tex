@@ -1,77 +1,72 @@
 \section{Introduction}\label{sec:introduction}
 
-Financial markets use order books to list the number of shares being bid or
-offered at each price point. An order book is an electronic list of buy and
-sell orders for a specific security or financial instrument organized by price
-level. Agents can place different types of instructions (orders) to buy or to
-sell a given number of shares.
+Financial markets use order books to list the number of shares bid or asked at
+each price. An order book is an electronic list of buy and sell orders for a
+specific security or financial instrument organized by price level, agents can
+place different types of instructions (orders).
 
-In general, the dynamics of the prices follow a pure random walk. There are two
+In general, the dynamics of the prices follow a random walk. There are two
 extreme models that can describe this behavior: the Efficient Market Hypothesis
-(EMH) and the Zero Intelligence Trading (ZIT). The EMH declares that all
-available information is included in prices and price changes can only be the
-result of unanticipated news, which by definition are totally unpredictable
+(EMH) and the Zero Intelligence Trading (ZIT). The EMH states that all
+available information is included in the price and price changes can only be
+the result of unanticipated news, which by definition are totally unpredictable
 \cite{subtle_nature,Bouchaud_2004,EMH_lillo,stat_theory}. On the other hand,
 the ZIT assumes that agents instead of being fully rational, have ``zero
 intelligence” and randomly buy or sell. It is supposed that their actions are
 interpreted by other agents as potentially containing some information
 \cite{subtle_nature,Bouchaud_2004,stat_theory,Wang_2016_cross}.
-In both cases the outcome is the same, the prices follow a random walk.
-In real life, they will not behave as one of these extreme scenarios, but
-somewhere in between \cite{Bouchaud_2004,stat_theory}.
+In both cases the outcome is the same, the prices follow a random walk. Reality
+is somewhere in-between \cite{Bouchaud_2004,stat_theory}, and non-Markovian
+effects due to stategies or liquidity costs are not contained either.
 
 There are diverse studies focused on the price response
 \cite{dissecting_cross,r_walks_liquidity,subtle_nature,Bouchaud_2004,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,master_curve,EMH_lillo,quant_stock_price_response,ori_pow_law,prop_order_book,Wang_2018_b,Wang_2018_a,Wang_2016_avg,Wang_2016_cross},
-but they concentrate on a general definition and discuss the results without
-going deep in the specific details of the price response measurements and how
-these aspects of the price response definition affect the results.
+In our opinion, a critical investigation of definitions and methods and how
+they affect the results is called for.
 
 Regarding price self-response functions
-\cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. found
-an increase to a maximum followed by a decrease as the time lag grows.
-In \cite{theory_market_impact}, the researchers found that larger sized
-transactions have a larger absolute impact than smaller sized transactions but
-a much smaller relative impact. In \cite{prop_order_book}, the results show
-that the impact of small trades on the price is, in relative terms, much larger
-than that of large trades and the impact of trading on the price is
-quasi-permanent.
+\cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. found an
+increase to a maximum followed by a decrease as the time lag grows.
+In Ref. \cite{theory_market_impact}, Gerig found that larger sized transactions
+have a larger absolute impact than smaller sized transactions but a much
+smaller relative impact. In Ref. \cite{prop_order_book}, it is found that the
+impact of small trades on the price is, in relative terms, much larger than
+that of large trades and the impact of trading on the price is quasi-permanent.
 
-For price cross-responses functions, \cite{dissecting_cross} found that the
-diagonal terms are on average larger than the off-diagonal ones by a factor
-$\sim 5$. The response at positive times is roughly constant, consistently with
-the hypothesis of a statistically efficient price. In other words, the current
-sign does not predict future returns. In \cite{Wang_2016_cross} the results
-show the trends in the cross-responses does not depend on whether or not the
-stock pairs are in the same economic sector or extend over two sectors.
+For price cross-responses functions, Refs.
+\cite{dissecting_cross,Wang_2016_cross} found that the diagonal terms are on
+average larger than the off-diagonal ones by a factor $\sim 5$. The response at
+positive times is roughly constant, what is consistent with the hypothesis of a
+statistically efficient price. Thus, the current sign does not predict future
+returns. In Ref. \cite{Wang_2016_cross} the trends in the cross-responses were
+found not to depend on whether or not the stock pairs are in the same economic
+sector or extend over two sectors.
 
-In this paper\footnote{To facilitate the reproduction of our results, the
-source code for the data analysis is available at ...}, we want to discuss,
-based on a series of detailed empirical results obtained on trade by trade
-data, that the variation in the details of the parameters used in the price
-response definition modify the characteristics of the results. Aspects like
-time scale, time shift, time lag and spread used in the price response
-calculation have an influence on the outcomes.
 
-Here, we delve into the key details needed to compute the price response
-functions, and explore their corresponding roles. We perform a empirical
-study in different time scales using financial data and find that using
-different implementations of the price response, the results are qualitatively
-the same, but the response can vary up to a factor of two. We show that the
-order between the trade signs and the returns have a key importance in the
-price response signal and suggest an interval where the time shift have to be
-set. We split the time lag to understand the contribution of the immediate
-returns and the late returns. The price response is highly influenced by the
-instantaneous returns and as the time lag grows, the influence starts to
-decrease. We shed light on the spread impact in the response functions for
-single stocks. We check that when the spread is large, the price response tend
-to be large.
+Here, we want to discuss, based on a series of detailed empirical results
+obtained on trade by trade data, that the variation in the details of the
+parameters used in the price response definition modify the characteristics of
+the results. Aspects like time scale, time shift, time lag and spread used in
+the price response calculation have an influence on the outcomes.
+
+We delve into the key details needed to compute the price response functions,
+and explore their corresponding roles. We perform a empirical study in
+different time scales and find that using different implementations of the
+price response, the results are qualitatively the same, but the response can
+vary up to a factor of two. We show that the order between the trade signs and
+the returns have a key importance in the price response signal and suggest an
+interval where the time shift have to be set. We split the time lag to
+understand the contribution of the immediate returns and the late returns. The
+price response is highly influenced by the instantaneous returns and as the
+time lag grows, the influence starts to decrease. We shed light on the spread
+impact in the response functions for single stocks. We check that when the
+spread is large, the price response tend to be large.
 
 A direct comparison between the trade time scale and the physical time scale is
 not possible. To compare them directly we need to assume whether the midpoint
-price or the trade signs are in the same scale. In our case, in Sect.
-\ref{sec:response_functions_imp}, we assume the midpoint prices in the trade
-time scale to be the same as the midpoint prices in physical time scale.
-Therefore, we have the time lag for both computations in seconds. This
+price or the trade signs are on the same scale. We assume the midpoint prices
+in the trade time scale to be the same as the midpoint prices in physical time
+scale. Therefore, we have the time lag for both computations in seconds. This
 approximation allow us to directly compare both scales to have an idea of the
 difference and similarities they have. In the other sections, as we are not
 directly comparing the time scales, the corresponding quantities of each time
@@ -88,4 +83,4 @@ signs and returns has a huge influence in the results of the computation of the
 response functions. In Sect. \ref{sec:short_long} we explain in detail how the
 time lag $\tau$ behaves in the response functions. Finally, in Sect.
 \ref{sec:spread_impact} we analyze the spread impact in the price response
-functions. Our conclusions follows in Sect. \ref{sec:conclusion}.
+functions. Our conclusions follow in Sect. \ref{sec:conclusion}.

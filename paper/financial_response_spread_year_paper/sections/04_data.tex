@@ -1,27 +1,22 @@
 \section{Data set}\label{sec:data}
 
-In a modern financial market, there is a double continuous auction. To find
-possible buyers and sellers in the market, agents can place different types of
-orders to buy or to sell a given number of shares, that can be grouped into
-two categories: market orders and limit orders.
+Modern financial markets, are organized as a double continuous auctions. Agents
+can place different types of orders to buy or to sell a given number of shares,
+roughly categorized as market orders and limit orders.
 
-Market orders will go into market to execute at the best available buy or sell
-price. Limit orders allow to set a maximum purchase price for a buy order, or a
-minimum sale price for a sell order. If the market does not reach the limit
-price, the order will not be executed
+Market orders are execute at the best available buy or sell price, limit orders
+set a maximum purchase price for a buy order, or a minimum sale price for a
+sell order. If the limit price is not matched, the order will not be carried
+out
 \cite{large_prices_changes,predictive_pow,intro_market_micro,stat_theory}.
-
 Limit orders often fail to result in an immediate transaction, and are stored
 in a queue called the limit order book
-\cite{stat_prop,predictive_pow,intro_market_micro,prop_order_book}. An order
-book is an electronic list of buy and sell orders for a specific security or
-financial instrument organized by price level. An order book lists the number
-of shares being bid or offered at each price point. It also identifies the
-market participants behind the buy and sell orders, although some choose to
-remain anonymous. The order book is visible for all traders and its main
-purpose is to ensure that all traders have the information about what is
-offered on the market. The order book is the ultimate microscopic level of
-description of financial markets.
+\cite{stat_prop,predictive_pow,intro_market_micro,prop_order_book}. The order
+book also identifies the market participants behind the buy and sell orders,
+although some choose to remain anonymous. The order book is visible for all
+traders and its main purpose is to ensure that all traders have the same
+information on what is offered on the market. The order book is the ultimate
+microscopic level of description of financial markets.
 
 Buy limit orders are called ``bids", and sell limit orders are called ``asks".
 At any given time there is a best (lowest) offer to sell with price
@@ -53,18 +48,15 @@ in the same second.
 Due to the the time stamp accuracy, it is not possible to match each trade with
 the directly preceding quote. Hence, we cannot determine the trade sign by
 comparing the traded price and the preceding midpoint price
-\cite{Wang_2016_cross}. In this case we need to do a preprocessing of the data
-to relate the midpoint prices with the trade signs in trade time scale and in
-physical time scale.
+\cite{Wang_2016_cross}. We have to preprocess the data to relate the midpoint
+prices with the trade signs in trade time scale and in physical time scale.
 
-To analyze the response functions across different liquid stocks in Sects.
-\ref{sec:response_functions_imp}, \ref{sec:time_shift} and \ref{sec:short_long},
-we select the six companies with the largest average market capitalization
-(AMC) (Alphabet Inc., Mastercard Inc., CME Group Inc., Goldman Sachs Group
-Inc., Transocean Ltd. and Apache Corp.) in three economic sectors (information
-technology, financials and energy) of the S\&P index in 2008. Table
-\ref{tab:companies} shows the companies analyzed with their corresponding
-symbol and sector, and three average values for a year.
+To analyze the response functions across different stocks in Sects.
+\ref{sec:response_functions_imp}, \ref{sec:time_shift} and
+\ref{sec:short_long}, we select the six companies with the largest average
+market capitalization (AMC) in three economic sectors of the S\&P index in
+2008. Table \ref{tab:companies} shows the companies analyzed with their
+corresponding symbol and sector, and three average values for a year.
 
 \begin{table*}[htbp]
 \begin{threeparttable}
@@ -104,9 +96,9 @@ the year 2008. The selected stocks are listed in Appendix
 \ref{app:spread_impact}.
 
 In order to avoid overnight effects and any artifact due to the opening and
-closing of the market, we systematically discarded the first ten and the last
+closing of the market, we systematically discard the first ten and the last
 ten minutes of trading in a given day
 \cite{Bouchaud_2004,large_prices_changes,spread_changes_affect,Wang_2016_cross}.
 Therefore, we only consider trades of the same day from 9:40:00 to 15:50:00
 New York local time. We will refer to this interval of time as the ``market
-time". The year period 2008 corresponds to 253 bussiness days.
+time". The year 2008 corresponds to 253 bussiness days.
