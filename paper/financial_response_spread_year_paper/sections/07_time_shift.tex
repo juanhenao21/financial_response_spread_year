@@ -20,7 +20,7 @@ response function
 
 where the index $i$ and $j$ correspond to stocks in the market, $r^{scale}_{i}$
 is the return of the stock $i$ in a time lag $\tau$ with a time shift
-$t_{shift}$ in the corresponding scale and $\varepsilon^{scale}_{j}$ is the
+$t_{s}$ in the corresponding scale and $\varepsilon^{scale}_{j}$ is the
 trade sign of the stock $j$ in the corresponding scale. The subscript and
 superscript $scale$ refer to the time scale used, whether physical time scale
 or trade time scale and $R_{ij}^{s,scale}$ is the time shift price response
@@ -41,7 +41,7 @@ between the trade signs and returns in physical time scale.
 \subsection{Trade time scale shift response functions}
 \label{subsec:time_shift_trade}
 
-In the trade time scale we compute the response function
+On the trade time scale we compute the response function
 
 \begin{equation}\label{eq:time_shift_trade}
     R_{ij}^{s, t}\left(\tau\right)=\left\langle r^{t}_{i}
@@ -77,17 +77,17 @@ shift are in trade time scale.
     \label{fig:shift_responses_trade_scale}
 \end{figure*}
 
-In Fig. \ref{fig:shift_trade_scale}, it can be seen the response functions
-results for fixed $\tau$ values while $t_{s}$ is variable. In the different
-$\tau$ values figures, the results are almost the same. The response functions
-are zero either if the time shift is larger than $\tau$, or if the time shift
-is smaller than zero. However, related on the time lag, there is a zone where
-the signal is different to zero. For values between zero and $\tau$ there is a
-peak in a position related to $\tau$. The response function grows and decrease
+In Fig. \ref{fig:shift_trade_scale}, we show the response functions results for
+fixed $\tau$ values while $t_{s}$ is variable. In the different $\tau$ values
+figures, the results are almost the same. The response functions are zero
+either if the time shift is larger than $\tau$, or if the time shift is smaller
+than zero. However, related to the time lag, there is a zone where the signal
+is different from zero. For values between zero and $\tau$ there is a peak in a
+position related to $\tau$. The response function grows and decreases
 relatively fast.
 
 We tested the response function for fixed time shift values while $\tau$ is
-variable. In Fig. \ref{fig:shift_responses_trade_scale}) we use a time shift of
+variable. In Fig. \ref{fig:shift_responses_trade_scale} we use a time shift of
 $10$ trades (left) and $100$ trades (right). In both, self- and cross-response
 results are qualitatively the same. It can be seen that the response functions
 have a zero signal before the time shift. After the returns and trade signs

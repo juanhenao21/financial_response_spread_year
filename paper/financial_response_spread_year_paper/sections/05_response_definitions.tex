@@ -1,7 +1,7 @@
 \section{Price response function definitions}
 \label{sec:response_functions_def}
 
-In Sect. \ref{subsec:key_concepts} we establish the fundamental quantities used
+In Sect. \ref{subsec:key_concepts} we introduce the fundamental quantities used
 in the price response definitions. In Sect. \ref{subsec:time_definition} we
 describe the physical time scale and the trade time scale. We introduce the
 price response functions used in literature in Sect. \ref{subsec:response_def}.
@@ -12,11 +12,9 @@ price response functions used in literature in Sect. \ref{subsec:response_def}.
 The average of the best ask and the best bid is the midpoint price, which is
 defined as
 \cite{subtle_nature,Bouchaud_2004,large_prices_changes,em_stylized_facts,prop_order_book,stat_theory}
-
 \begin{equation}\label{eq:midpoint_price}
     m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
 \end{equation}
-
 As the midpoint price depends on the quotes, it changes if the quotes change.
 The midpoint price grows if the best ask or the best bid grow. On the other
 hand, the midpoint price decreases if the best ask or the best bid
@@ -27,20 +25,16 @@ $S\left( t\right)$ the price of an asset at time $t$, the return
 $r^{g}\left(t, \tau\right)$, at time $t$ and time lag $\tau$ is simply the
 relative variation of the price from $t$ to $t + \tau$
 \cite{subtle_nature,empirical_facts,asynchrony_effects_corr,tick_size_impact,causes_epps_effect,non_stationarity},
-
 \begin{equation}\label{eq:return_general}
     r^{g} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
     - S\left(t\right)}{S\left(t\right)}
 \end{equation}
-
 It is also common to define the returns as
 \cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,rand_mat,fluctions_market_friction}
-
 \begin{equation}\label{eq:log_return_general}
     r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
     - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
 \end{equation}
-
 Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} agree if
 $\tau$ is small enough \cite{subtle_nature,empirical_facts}.
 
@@ -51,25 +45,19 @@ to bounce back and forth between the best bid and ask
 \cite{large_prices_changes}.
 
 We define the returns via the midpoint price as
-
 \begin{equation}\label{eq:midpoint_price_return}
     r\left(t,\tau\right) = \frac{m\left(t+\tau\right)-m\left(t\right)}
     {m\left(t\right)}
 \end{equation}
-
 The distribution of returns is strongly non-Gaussian and its shape continuously
 depends on the return period $\tau$. Small $\tau$ values have fat tails return
-distributions \cite{subtle_nature}.
-
-The trade signs are defined for general cases as
-
+distributions \cite{subtle_nature}. The trade signs are defined for general
+cases as
 \begin{equation}\label{eq:trade_sign_general}
     \varepsilon\left(t\right)=\text{sign}\left(S\left(t\right)
     -m\left(t-\delta\right)\right)
 \end{equation}
-
 where $\delta$ is a positive time increment. Hence we have
-
 \begin{equation}\label{eq:trade_sign_results}
     \varepsilon\left(t\right)=\left\{
     \begin{array}{cc}
@@ -79,7 +67,6 @@ where $\delta$ is a positive time increment. Hence we have
     \text{ is lower than the last } m\left( t \right)
     \end{array}\right.
 \end{equation}
-
 $\varepsilon(t) = +1$ indicates that the trade was triggered by a market order
 to buy and a trade triggered by a market order to sell yields
 $\varepsilon(t) = -1$
@@ -95,8 +82,8 @@ they tend to split large orders into small ones \cite{empirical_facts}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
 
-A key concept in the analysis of the response functions is the time. Due to the
-nature of the data, they are several options to define it.
+Due to the nature of the data, they are several options to define time for
+analyzing data.
 
 In general, the time series are indexed in calendar time (hours, minutes,
 seconds, milliseconds). Moreover, tick-by-tick data available on financial
@@ -134,10 +121,10 @@ midpoint price of a previous second with the unique trade sign value of the
 current second.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Trade time scale}\label{subsubsec:trade_time}
+\subsubsection*{Trade time scale}\label{subsubsec:trade_time}
 
-We use the trade sign classification in trade time scale proposed by S. Wang et
-al. in \cite{Wang_2016_cross} and used in
+We use the trade sign classification in trade time scale proposed in Ref.
+\cite{Wang_2016_cross} and used in Refs.
 \cite{Wang_2017,Wang_2018_copulas,Wang_2016_avg} that reads
 
 \begin{equation}\label{eq:trade_signs_trade}
@@ -145,7 +132,7 @@ al. in \cite{Wang_2016_cross} and used in
     \begin{array}{cc}
     \text{sgn}\left(S\left(t,n\right)-S\left(t,n-1\right)\right),
     & \text{if }\\ S\left(t,n\right) \ne S\left(t,n-1\right)\\
-    \varepsilon\left(t,n-1\right),
+    \varepsilon^{t}\left(t,n-1\right),
     & \text{otherwise}
     \end{array}\right.
 \end{equation}
@@ -154,36 +141,35 @@ $\varepsilon^{t}\left( t,n \right) = +1$ implies a trade triggered by a market
 order to buy, and a value $\varepsilon^{t}\left( t,n \right) = -1$ indicates a
 trade triggered by a market order to sell.
 
-In the second case of the classification, if two consecutive trades with the
-same trading direction did not exhaust all the available volume at the best
-quote, the trades would have the same price, and in consequence they will have
-the same trade sign.
+In the second case of definition \ref{eq:trade_signs_trade}, if two consecutive
+trades with the same trading direction did not exhaust all the available volume
+at the best quote, the trades would have the same price, and in consequence
+they will have the same trade sign.
 
 With this classification we obtain trade signs for every single trade in the
-data set. According to \cite{Wang_2016_cross}, the average accuracy of the
+data set. According to Ref. \cite{Wang_2016_cross}, the average accuracy of the
 classification is $85\%$ for the trade time scale.
 
-TAQ time step is one second, and as it is impossible to find the
+The TAQ time step is one second, and as it is impossible to find the
 correspondences between trades and midpoint prices values inside a second step,
 We used the last midpoint price of every second as the representative value of
 each second. This introduce an apparent shift between trade signs and returns.
 In fact, we set the last midpoint price from the previous second as the first
-midpoint price of the current second, as explained in \cite{Wang_2016_cross}.
+midpoint price of the current second \cite{Wang_2016_cross}.
 
 As we know the second in which the trades were made, we can relate the trade
 signs and the midpoint prices as shown in Fig.
-\ref{fig:relation_trades_midpoint_trade_scale}. For the trade time scale, they
-are in general, several midpoint prices in a second. For each second we
-select the last midpoint price value, and we relate it to the next second
-trades. In Fig. \ref{fig:relation_trades_midpoint_trade_scale}, the last
-midpoint price (circle) between the second $-1$ and $0$ is related with all the
-trades (squares and triangles) in the second $0$ to $1$, and so on. It is worth
-to note, in the seconds that there are no changes in the quotes, it is used the
-value of the previous second (vertical line over the physical time interval).
-Thus, all the seconds in the open market time have a midpoint price value, and
-in consequence returns values. We assume that as long as they were not changes
-in the quotes, the midpoint price remain the same as the one of the previous
-second.
+\ref{fig:relation_trades_midpoint_trade_scale}. For the trade time scale, there
+are in general, several midpoint prices in a second. For each second we select
+the last midpoint price value, and we relate it to the next second trades. In
+Fig. \ref{fig:relation_trades_midpoint_trade_scale}, the last midpoint price
+(circle) between the second $-1$ and $0$ is related to all the trades (squares
+and triangles) in the second $0$ to $1$, and so on. In the seconds when the
+quotes do not change, the value of the previous second (vertical line over the
+physical time interval) is used. Thus, all the seconds in the open market time
+have a midpoint price value, and in consequence returns values. We assume that
+as long as no changes ocurred in the quotes, the midpoint price remains the
+same as in the previous second.
 
 \begin{figure}[htbp]
     \centering
@@ -224,39 +210,38 @@ response signal at the end of the computation.
     \label{fig:return_contributions}
 \end{figure}
 
-Figure \ref{fig:return_contributions} illustrate with one example this point.
-Suppose one second interval, in which they are three different midpoint prices,
-and as result, three different returns for this three midpoint price
-values. Furthermore, consider that the volume of limit orders that have the
-corresponding midpoint prices are the same in the bid and in the ask (so the
-returns have the same magnitude). In the case of the top left (top right)
-sketch, all the changes are due to the rise (decrease) of the midpoint price,
-that means, consumption of the best ask (bid), so all the contributions of the
-individual returns in the second are positive (negative), and in consequence,
-the net return is positive (negative). In the case of the bottom, the changes
-are due to a combination of increase and decrease of the midpoint price, so in
-the end, the individual returns sum up to a net return, which can be positive
-or negative, depending of the type of midpoint price values in the interval.
-Thus, in this case, we are assuming in the end that all the returns were
-positive or negative, what probably was not the case, and in consequence will
-increase or decrease the real value of the net return.
+Figure \ref{fig:return_contributions} illustrate this point. Suppose there are
+three different midpoint prices in a one second interval and thus, three
+different returns for these three midpoint price values. Furthermore, suppose
+that the volume of limit orders with the corresponding midpoint prices are the
+same in the bid and in the ask (the returns have the same magnitude). In the
+case of the top left (top right) sketch, all the changes are due to the rise
+(decrease) of the midpoint price, that means, consumption of the best ask
+(bid), so all the contributions of the individual returns in the second are
+positive (negative), and in consequence, the net return is positive (negative).
+In the case of the bottom, the changes are due to a combination of increase and
+decrease of the midpoint price, so in the end, the individual returns sum up to
+a net return, which can be positive or negative, depending of the type of
+midpoint price values in the interval. Thus, in this case, we are assuming in
+the end that all the returns were positive or negative, which probably was not
+the case, and in consequence will increase or decrease the real value of the
+net return.
 
-In all the cases, we choose the last change in the midpoint price in a second
+In all cases, we choose the last change in the midpoint price in a second
 interval as described before
 (Fig. \ref{fig:relation_trades_midpoint_trade_scale}). We use this method
 knowing that the variation in one second of the midpoint price is not large
 (in average, the last midpoint price of a second differ with the average
-midpoint of that second in $0.007\%$), so it can give us representative
-information about the response functions.
+midpoint of that second in $0.007\%$), hence it can give us representative
+information on the response functions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Physical time scale}\label{subsubsec:physical_time}
+\subsubsection*{Physical time scale}\label{subsubsec:physical_time}
 
-We use the trade sign definition in physical time scale proposed by
-S. Wang et al. in \cite{Wang_2016_cross} and used in
+We use the trade sign definition in physical time scale proposed in Ref.
+\cite{Wang_2016_cross} and used in Refs.
 \cite{Wang_2017,Wang_2016_avg}, that depends on the classification in
 Eq. \ref{eq:trade_signs_trade} and reads
-
 \begin{equation}\label{eq:trade_signs_physical}
     \varepsilon^{p}\left(t\right)=\left\{
     \begin{array}{cc}
@@ -266,7 +251,6 @@ Eq. \ref{eq:trade_signs_trade} and reads
     0, & \text{If }N\left(t\right)=0
     \end{array}\right.
 \end{equation}
-
 Where $N \left(t \right)$ is the number of trades in a second interval.
 $\varepsilon^{p}\left( t \right) = +1$ implies that the majority of
 trades in second $t$ were triggered by a market order to buy, and a value
@@ -282,11 +266,10 @@ simultaneously. An executed sell limit order corresponds to a buyer-initiated
 market order. An executed buy limit order corresponds to a seller-initiated
 market order.
 
-As in the trade time scale, in the physical time scale we use the same strategy
+As the trade time scale, on the physical time scale we use the same strategy
 to obtain the midpoint price for every second, so all the seconds in the open
-market time have a midpoint price value. It is worth to note again, that even
-if the second does not have a change in quotes, it will has still a midpoint
-price value and a return value.
+market time have a midpoint price value. Even if there is no change of quotes
+in a second, it still has a midpoint price value and return value.
 
 \begin{figure}[htbp]
     \centering
@@ -302,74 +285,64 @@ price value and a return value.
 \end{figure}
 
 In this case we do not compare every single trade sign in a second, but the net
-trade sign obtained for every second with the definition
-(Eq. \ref{eq:trade_signs_physical}). This can be seen in
+trade sign obtained for every second with the definition, see
+Eq. (\ref{eq:trade_signs_physical}). This can be seen in
 Fig. \ref{fig:relation_trades_midpoint_time_scale}, where we related the
 midpoint price of the previous second with the trade sign of the current
-second.
-
-According to \cite{Wang_2016_cross}, this definition has an average
+second. According to \cite{Wang_2016_cross}, this definition has an average
 accuracy up to $82\%$ in the physical time scale.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Response function definitions}\label{subsec:response_def}
 
-In general, the different works in price response functions use the returns and
-the trade signs with variations in the quantities and the time scale.
-
-The response function is used to study the mutual dependence between stocks. In
+The response function measures price changes resulting from execution of market
+orders. In
 \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a
 self-response function that only depends on the time lag $\tau$
 
 \begin{equation}\label{eq:Bouchaud_2004}
-    R\left(\tau\right)=\left\langle \left(S_{n+\tau}-S_{n}\right) \cdot
-    \varepsilon_{n}\right\rangle_{t}
+    R\left(\tau\right)=\left\langle \left(S \left(t+\tau, n\right)
+    - S \left(t, n\right)\right) \cdot \varepsilon^{t} \left(t, n\right)
+    \right\rangle_{t}
 \end{equation}
 
 Where $\varepsilon_{n}$ is the sign of the $n^{th}$ trade and the price $S_n$
 is defined as the midpoint just before the $n^{th}$ trade, all averaged in
-trade time scale.
-The quantity $R\left(\tau\right)$ measures how much, on average, the price
-moves up (down) at time $\tau$ conditioned to a buy (sell) order at time zero.
-They found for France Telecom that $R\left(\tau \right)$ increases by a factor
-$~2$ between $\tau = 1$ and $\tau \approx 1000$, before decreasing back. Using
-larger $\tau$, they also confirm that $R\left(\tau\right)$ decreases, and even
-becomes negative beyond $\tau \approx 5000$. However, in some cases the maximum
-is not observed and rather $R\left(\tau\right)$ keeps increasing mildly
+trade time scale. The quantity $R\left(\tau\right)$ measures how much, on
+average, the price moves up (down) at time $\tau$ conditioned to a buy (sell)
+order at time zero. They found for France Telecom that $R\left(\tau \right)$
+increases by a factor $~2$ between $\tau = 1$ and $\tau \approx 1000$ trades,
+before decreasing back. For larger $\tau$, $R\left(\tau\right)$ decreases, and
+even becomes negative beyond $\tau \approx 5000$. However, in some cases the
+maximum is not observed and rather $R\left(\tau\right)$ keeps increasing mildly
 \cite{subtle_nature}.
 
-In \cite{theory_market_impact}, the price impact function,
+In Ref. \cite{theory_market_impact}, the price impact function,
 $R \left(\cdot\right)$, is defined as the average price response due to a
 transaction as a function of the transaction's volume $v_{i}$
-
 \begin{equation}\label{eq:theory_market_impact}
     R \left(v_{i}\right) \equiv \left\langle \varepsilon_{i} r^{l}_{i} |
     v_{i}\right\rangle
 \end{equation}
-
-Empirically they found  the function is highly concave. The curvature of
+Empirically the function is highly concave. The curvature of
 $R \left(v_{i}\right)$ is entirely due to the probability that a transaction
 causes a nonzero impact - the larger the size of the transaction, the larger
 the probability. In \cite{prop_order_book}, the response function is given by
-
 \begin{align}\label{eq:prop_order_book}
-    R \left(V, \tau\right) &= \left\langle \varepsilon \left(t\right) \cdot
+    R \left(V, \tau\right) &= \left\langle \varepsilon \left(t\right)
     \left[m \left(t + \tau\right) - m \left(t\right)\right] |V \right\rangle \\
-    &= R \left(\tau\right) \ln V
+    &\approx R \left(\tau\right) \ln V
 \end{align}
-
 Where $V$ is the volume. They found that $R \left(\tau\right)$ for three French
 stocks first increases from $\tau = 10s$ to a few hundred seconds, and then
 appears to decrease back to a finite value.
 
-In \cite{dissecting_cross} they use a market response defined as
-
+In Ref. \cite{dissecting_cross} they use a market response defined as
 \begin{equation}\label{eq:dissecting_cross}
     R_{ij}(\tau) =  \left\langle \left[ \ln S_{i}(t+\tau) - \ln S_{i}(t)
     \right] \cdot \varepsilon_{j}(t) \right\rangle_{p}
 \end{equation}
-
 The response measures the average price change of contract $i$ at time
 $t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
 in contract $j$ at time $t$. In this work $\tau$ is used in units of five
@@ -379,23 +352,19 @@ In a later work \cite{spread_changes_affect,Wang_2016_cross}, S. Wang et al.
 and Grimm et al. use the logarithmic return for stock $i$ and time lag $\tau$,
 defined via the midpoint price $m_{i} \left( t \right)$. The cross-response
 function is then defined as
-
 \begin{equation}\label{eq:Wang_2016}
     R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot
     \varepsilon_{j} \left(t\right) \right\rangle
 \end{equation}
-
 They found that in all cases, an increase  to a maximum is followed by a
 decrease. The trend is eventually reversed.
 
-Finally, in \cite{Wang_2018_b}, S. Wang et al. define the response function as
-
+Finally, in \cite{Wang_2018_b}, Wang et al. define the response function as
 \begin{equation}\label{eq:Wang_2018_b}
     R_{ij} = \left\langle \left[\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-
     \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right]\cdot\varepsilon_{j}
     \left(t_{j}\right)\right\rangle _{t_{j}}
 \end{equation}
-
 For the price change of stock $i$ caused by a trade of stock $j$.
 
 Here, $m_{i}^{\left(p\right)}\left(t_{j}\right)$ is the midpoint price of stock
