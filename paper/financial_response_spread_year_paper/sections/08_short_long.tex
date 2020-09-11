@@ -1,6 +1,6 @@
 \section{Time lag analysis}\label{sec:short_long}
 
-Regarding Equation \ref{eq:return_general}, we use a time lag $\tau$ in the
+Regarding Equation (\ref{eq:return_general}), we use a time lag $\tau$ in the
 returns to see the gains or loses in a future time. However, the strength of
 the return in the time lag should not be equal along its length. Then, we
 divide the full range time lag $\tau$ in an immediate time lag and in a late
@@ -18,10 +18,10 @@ time lag as show in Fig. \ref{fig:tau_short_long}, where
 \end{equation}
 for $\tau' < \tau$. This distinguish the returns depending on the time lag as
 the short (immediate) return $\tau'$ with the long return $\tau - \tau'$.
-This approach is similar to the concept used in \cite{Wang_2018_b}, where the
-price impact for a single trade is estimated by the immediate response on an
-event time scale. In our case, we check all over the range of the time lag in
-the price response function on a physical time scale.
+This approach is similar to the concept used in Ref. \cite{Wang_2018_b}, where
+the price impact for a single trade is estimated by the immediate response on
+an event time scale. In our case, we check all over the range of the time lag
+in the price response function on a physical time scale.
 
 To use the short and long time lag, we rewrite the returns in physical time
 scale as
@@ -29,8 +29,9 @@ scale as
 \begin{align}\label{eq:short_long_return}
     r^{sl,p}_{i}\left(t,\tau\right)&=\ln\left(\frac{m_{i}\left(t+\tau\right)}
     {m_{i} \left(t\right)}\right) \nonumber \\
-    &=\ln\left(\frac{m_{i}\left(t+\tau\right)}{m_{i}\left(t+\tau'\right)}
-    \cdot\frac{m_{i} \left(t+\tau'\right)}{m_{i}\left(t\right)}\right)
+    &=\ln\left[\left(\frac{m_{i}\left(t+\tau\right)}{m_{i}\left(t+\tau'\right)}
+    \right)
+    \left(\frac{m_{i} \left(t+\tau'\right)}{m_{i}\left(t\right)}\right)\right]
     \nonumber \\
     &=\ln\left(\frac{m_{i}\left(t+\tau\right)}{m_{i}\left(t+\tau'\right)}
     \right)+ \ln\left(\frac{m_{i}\left(t+\tau'\right)}{m_{i}\left(t\right)}
@@ -48,13 +49,13 @@ scale (Eq. (\ref{eq:response_functions_time_scale_general})) we have
 \begin{align}\label{eq:short_long_response}
     R^{sl,p}_{ij}\left(\tau\right)&=\left\langle
     r^{sl,p}_{i}\left(t - 1, \tau\right)
-    \cdot\varepsilon^{p}_{j}\left(t\right)\right\rangle _{p} \nonumber \\
+    \varepsilon^{p}_{j}\left(t\right)\right\rangle _{p} \nonumber \\
     &\approx\left\langle \frac{m_{i}\left(t - 1 +\tau\right)-m_{i}
     \left(t - 1 +\tau'\right)} {m_{i}\left(t - 1 +\tau'\right)}
-    \cdot\varepsilon_{j} \left(t\right)\right\rangle _{p} \nonumber \\
+    \varepsilon_{j} \left(t\right)\right\rangle _{p} \nonumber \\
     & +\left\langle \frac{m_{i} \left(t - 1 +\tau'\right)-m_{i}
     \left(t - 1\right)}{m_{i}\left(t - 1\right)}
-    \cdot\varepsilon_{j}\left(t\right)\right\rangle _{p}
+    \varepsilon_{j}\left(t\right)\right\rangle _{p}
 \end{align}
 
 Where the first term in the right side of Eq. (\ref{eq:short_long_response})

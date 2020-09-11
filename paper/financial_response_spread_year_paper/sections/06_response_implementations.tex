@@ -5,17 +5,18 @@ The main objective of this work is to analyze the price response functions. In
 general we define the self- and cross-response functions in a correlated
 financial market as
 \begin{equation}\label{eq:response_general}
-    R^{scale}_{ij}\left(\tau\right)=\left\langle r^{scale}_{i}\left(t-1,
-    \tau\right) \cdot\varepsilon^{scale}_{j} \left(t\right)\right\rangle
-    _{scale}
+    R^{\left(average, scale\right)}_{ij}\left(\tau\right)=\left\langle r^{scale}_{i}\left(t-1,
+    \tau\right) \varepsilon^{scale}_{j} \left(t\right)\right\rangle
+    _{average}
 \end{equation}
 where the index $i$ and $j$ correspond to stocks in the market,
 $r^{scale}_{i}$ is the return of the stock $i$ in a time lag $\tau$ in the
 corresponding scale and $\varepsilon^{scale}_{j}$ is the trade sign of the
-stock $j$ in the corresponding scale. The subscript and superscript $scale$
-refer to the time scale used, whether physical time scale ($scale = p$) or
-trade time scale ($scale = t$). Finally, we average the product over the
-physical time or trade time depending on the time scale.
+stock $j$ in the corresponding scale. The superscript $scale$ refers to the
+time scale used, whether physical time scale ($scale = p$) or trade time scale
+($scale = t$). Finally, The subscript and superscript $average$ refers to the
+way to average the price response, whether relative to the physical time scale
+($average = P$) or relative to the trade time scale ($average = T$).
 
 We use the returns and the trade signs to define three response functions:
 trade time scale response, physical time scale response and activity response.
@@ -58,23 +59,23 @@ response. This approximation is feasible considering the discussion in Sect.
 scaled is defined as
 \begin{equation}\label{eq:response_functions_trade_scale_general}
     R^{t}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1,\tau
-    \right)\cdot\varepsilon_{j}^{t} \left(t, n\right)\right\rangle _{t}
+    \right)\varepsilon_{j}^{t} \left(t, n\right)\right\rangle _{t}
 \end{equation}
 where the superscript $t$ refers to the trade time scale. We explicitly
 calculate the average in Eq. (\ref{eq:response_functions_trade_scale_general}),
 \begin{align}\label{eq:response_trades_explicit}
     R_{ij}^{t}\left(\tau\right)&=\frac{1}{\sum_{d=d_{0}}^{d_{f}}
     \sum_{t=t_{0}}^{t_{f}}N_{j,d} \left(t \right)} \nonumber \\
-    &\cdot\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}\sum_{n=1}
-    ^{N\left(t\right)} r^{p}_{i,d}\left(t-1, \tau\right)\cdot
+    &\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}\sum_{n=1}
+    ^{N\left(t\right)} r^{p}_{i,d}\left(t-1, \tau\right)
     \varepsilon_{j,d}^{t}\left(t,n\right)\\
     &=\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}} r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot\frac{\sum_{n=1}^{N\left(t\right)}
+    \left(t-1,\tau\right) \frac{\sum_{n=1}^{N\left(t\right)}
     \varepsilon_{j,d}^{t}\left(t,n \right)} {\sum_{d=d_{0}}^{d_{f}}
     \sum_{t=t_{0}}^{t_{f}}N_{j,d}\left(t\right)} \nonumber \\
     &=\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot \text{sgn}\left(E_{j,d}\left(t\right)\right)
-    \cdot w_{j,d}^{t}\left(t\right)
+    \left(t-1,\tau\right) \text{sgn}\left(E_{j,d}\left(t\right)\right)
+    w_{j,d}^{t}\left(t\right)
 \end{align}
 where
 \begin{equation}\label{eq:trade_weight}
@@ -137,13 +138,13 @@ $\varepsilon^{p}_j \left( t\right) = 0$, the general averaging is
 \begin{equation}\label{eq:response_inc}
     R_{ij}^{\left(\text{inc. }0\right)}\left(\tau\right)=
     \frac{\sum_{t=1}^{T_{j}+T_{j,n}} r^{p}_{i}\left(t - 1,\tau\right)
-    \cdot\varepsilon_{j}^{p}\left(t \right)}{T_{j}+T_{j,n}}
+    \varepsilon_{j}^{p}\left(t \right)}{T_{j}+T_{j,n}}
 \end{equation}
 
 \begin{equation}\label{eq:response_exc}
     R_{ij}^{\left(\text{exc. }0\right)}\left(\tau\right)=
     \frac{\sum_{t=1}^{T_{j}} r^{p}_{i}\left(t - 1,\tau\right)
-    \cdot\varepsilon_{j}^{p} \left(t\right)}{T_{j}}
+    \varepsilon_{j}^{p} \left(t\right)}{T_{j}}
 \end{equation}
 where the superscript inc. and exc. refers to including and excluding
 $\varepsilon^{p}_j \left( t\right) = 0$. For stock $j$, $T_j$  is the total
@@ -155,14 +156,14 @@ buy sell balance. The numerators in Eqs. \ref{eq:response_inc} and
 Hence,
 \begin{equation}\label{eq:relation_response_inc_exc}
     R_{ij}^{\left(\text{inc. }0\right)}\left(\tau\right)=f_{j}
-    \cdot R_{ij}^{\left(\text{exc. }0\right)}\left(\tau\right)
+    R_{ij}^{\left(\text{exc. }0\right)}\left(\tau\right)
 \end{equation}
 where the relative trading frequency is defined as \cite{Wang_2016_avg}
 \begin{equation}\label{eq:response_trading_frequency}
     f_{j}=\frac{T_{j}}{T_{j}+T_{j,n}}
 \end{equation}
 the most frequently traded stocks have $f_{i} = 1$, because the time $T_{j,n}$
-is zero. According to Eq. \ref{eq:relation_response_inc_exc}, the
+is zero. According to Eq. (\ref{eq:relation_response_inc_exc}), the
 cross-response including $\varepsilon^{p}_j \left( t\right) = 0$ is the one
 excluding $\varepsilon^{p}_j \left( t\right) = 0$ scaled by a proper
 probability. Then, we will only take in account the cross-response function
@@ -173,7 +174,7 @@ the trade signs and the returns in physical time scale. The price response
 function on physical time scale is defined as
 \begin{equation}\label{eq:response_functions_time_scale_general}
     R^{p}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1, \tau\right)
-    \cdot\varepsilon_{j}^{p} \left(t\right)
+    \varepsilon_{j}^{p} \left(t\right)
     \right\rangle _{p}
 \end{equation}
 where the superscript $p$ refers to the physical time scale. The explicit
@@ -183,21 +184,19 @@ expression corresponding to Eq.
     R_{ij}^{p}\left(\tau\right)&=\frac{1}{\sum_{d=d_{0}}^{d_{f}}
     \sum_{t=t_{0}}^{t_{f}} \eta\left[ \varepsilon_{j,d}^{p}
     \left(t\right)\right]} \nonumber \\
-    &\cdot\sum_{d=d_{0}}^{d_{f}} \sum_{t=t_{0}}^{t_{f}}
-    r^{p}_{i,d}\left(t-1,\tau\right) \cdot\varepsilon_{j,d}^{p}\left(t\right)
-    \cdot\eta\left[\varepsilon_{j}^{p} \left(t\right)\right] \\
+    &\sum_{d=d_{0}}^{d_{f}} \sum_{t=t_{0}}^{t_{f}}
+    r^{p}_{i,d}\left(t-1,\tau\right) \varepsilon_{j,d}^{p}\left(t\right)
+    \eta\left[\varepsilon_{j}^{p} \left(t\right)\right] \\
     &=\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot\frac{\varepsilon_{j,d}^{p}\left(t\right)
-    \cdot\eta\left[\varepsilon_{j,d}^{p} \left( t\right)\right]}
+    \left(t-1,\tau\right) \frac{\varepsilon_{j,d}^{p}\left(t\right)
+    \eta\left[\varepsilon_{j,d}^{p} \left( t\right)\right]}
     {\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}\eta
     \left[\varepsilon_{j,d}^{p} \left(t\right)\right]} \nonumber \\
     &=\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot\text{sgn}\left(E_{j,d}\left(t\right)\right)
-    \cdot w_{j,d}^{p}\left(t\right)
+    \left(t-1,\tau\right) \text{sgn}\left(E_{j,d}\left(t\right)\right)
+    w_{j,d}^{p}\left(t\right)
 \end{align}
-
-Where
-
+where
 \begin{equation}
     \eta\left(x\right)=\left\{ \begin{array}{cc}
     1, & \text{If }x\ne0 \\
@@ -252,7 +251,7 @@ response function is defined as
 
 \begin{equation}\label{eq:activity_response_functions_general}
     R^{a}_{ij}\left(\tau\right)=\left\langle r^{p}_{i}\left(t-1, \tau\right)
-    \cdot\varepsilon_{j}^{p} \left(t\right) \cdot N \left(t \right)
+    \varepsilon_{j}^{p} \left(t\right) N \left(t \right)
     \right\rangle _{p}
 \end{equation}
 
@@ -262,20 +261,18 @@ corresponding explicit expression reads
 \begin{align}
     R_{ij}^{a}\left(\tau\right)&=\frac{1}{\sum_{d=d_{0}}^{d_{f}}
     \sum_{t=t_{0}}^{t_{f}}N_{j,d} \left(t\right)} \nonumber \\
-    &\cdot\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot\varepsilon_{j,d}^{p}\left(t\right)\cdot N_{j,d}
+    &\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
+    \left(t-1,\tau\right) \varepsilon_{j,d}^{p}\left(t\right) N_{j,d}
     \left(t\right)\\
     &=\sum_{d=d_{0}}^{d_{f}} \sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot\frac{\varepsilon_{j,d}^{p}\left(t \right)
-    \cdot N_{j,d}\left(t\right)} {\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}
+    \left(t-1,\tau\right) \frac{\varepsilon_{j,d}^{p}\left(t \right)
+    N_{j,d}\left(t\right)} {\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}
     N_{j,d}\left(t \right)} \nonumber \\
     &=\sum_{d=d_{0}}^{d_{f}} \sum_{t=t_{0}}^{t_{f}}r^{p}_{i,d}
-    \left(t-1,\tau\right) \cdot\text{sgn}\left(E_{j,d}\left(t\right)\right)
-    \cdot w_{j,d}^{a}\left(t\right)
+    \left(t-1,\tau\right) \text{sgn}\left(E_{j,d}\left(t\right)\right)
+    w_{j,d}^{a}\left(t\right)
 \end{align}
-
-Where
-
+where
 \begin{equation}
     w_{j,d}^{a}\left(t\right) = \frac{N_{j,d}\left(t \right)}
     {\sum_{d=d_{0}}^{d_{f}}\sum_{t=t_{0}}^{t_{f}}N_{j,d}\left(t\right)}

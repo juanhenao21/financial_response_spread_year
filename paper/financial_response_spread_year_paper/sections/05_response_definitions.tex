@@ -11,7 +11,7 @@ price response functions used in literature in Sect. \ref{subsec:response_def}.
 
 The average of the best ask and the best bid is the midpoint price, which is
 defined as
-\cite{subtle_nature,Bouchaud_2004,large_prices_changes,em_stylized_facts,prop_order_book,stat_theory}
+\cite{prop_order_book,subtle_nature,Bouchaud_2004,large_prices_changes,em_stylized_facts,stat_theory}
 \begin{equation}\label{eq:midpoint_price}
     m\left(t\right)=\frac{a\left(t\right)+b\left(t\right)}{2}
 \end{equation}
@@ -228,12 +228,12 @@ the case, and in consequence will increase or decrease the real value of the
 net return.
 
 In all cases, we choose the last change in the midpoint price in a second
-interval as described before
-(Fig. \ref{fig:relation_trades_midpoint_trade_scale}). We use this method
-knowing that the variation in one second of the midpoint price is not large
-(in average, the last midpoint price of a second differ with the average
-midpoint of that second in $0.007\%$), hence it can give us representative
-information on the response functions.
+interval as described before in Fig.
+\ref{fig:relation_trades_midpoint_trade_scale}. We use this method knowing that
+the variation in one second of the midpoint price is not large (in average, the
+last midpoint price of a second differ with the average midpoint of that second
+in $0.007\%$), hence it can give us representative information on the response
+functions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Physical time scale}\label{subsubsec:physical_time}
@@ -289,21 +289,21 @@ trade sign obtained for every second with the definition, see
 Eq. (\ref{eq:trade_signs_physical}). This can be seen in
 Fig. \ref{fig:relation_trades_midpoint_time_scale}, where we related the
 midpoint price of the previous second with the trade sign of the current
-second. According to \cite{Wang_2016_cross}, this definition has an average
-accuracy up to $82\%$ in the physical time scale.
+second. According to Ref. \cite{Wang_2016_cross}, this definition has an
+average accuracy up to $82\%$ in the physical time scale.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Response function definitions}\label{subsec:response_def}
 
 The response function measures price changes resulting from execution of market
-orders. In
+orders. In Refs.
 \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a
 self-response function that only depends on the time lag $\tau$
 
 \begin{equation}\label{eq:Bouchaud_2004}
     R\left(\tau\right)=\left\langle \left(S \left(t+\tau, n\right)
-    - S \left(t, n\right)\right) \cdot \varepsilon^{t} \left(t, n\right)
+    - S \left(t, n\right)\right) \varepsilon^{t} \left(t, n\right)
     \right\rangle_{t}
 \end{equation}
 
@@ -328,7 +328,8 @@ transaction as a function of the transaction's volume $v_{i}$
 Empirically the function is highly concave. The curvature of
 $R \left(v_{i}\right)$ is entirely due to the probability that a transaction
 causes a nonzero impact - the larger the size of the transaction, the larger
-the probability. In \cite{prop_order_book}, the response function is given by
+the probability. In Ref. \cite{prop_order_book}, the response function is given
+by
 \begin{align}\label{eq:prop_order_book}
     R \left(V, \tau\right) &= \left\langle \varepsilon \left(t\right)
     \left[m \left(t + \tau\right) - m \left(t\right)\right] |V \right\rangle \\
@@ -341,28 +342,29 @@ appears to decrease back to a finite value.
 In Ref. \cite{dissecting_cross} they use a market response defined as
 \begin{equation}\label{eq:dissecting_cross}
     R_{ij}(\tau) =  \left\langle \left[ \ln S_{i}(t+\tau) - \ln S_{i}(t)
-    \right] \cdot \varepsilon_{j}(t) \right\rangle_{p}
+    \right] \varepsilon_{j}(t) \right\rangle_{p}
 \end{equation}
 The response measures the average price change of contract $i$ at time
 $t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
 in contract $j$ at time $t$. In this work $\tau$ is used in units of five
 minutes.
 
-In a later work \cite{spread_changes_affect,Wang_2016_cross}, S. Wang et al.
-and Grimm et al. use the logarithmic return for stock $i$ and time lag $\tau$,
+In later works \cite{spread_changes_affect,Wang_2016_cross}, Grimm et al.
+and Wang et al. use the logarithmic return for stock $i$ and time lag $\tau$,
 defined via the midpoint price $m_{i} \left( t \right)$. The cross-response
 function is then defined as
 \begin{equation}\label{eq:Wang_2016}
-    R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)\cdot
+    R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)
     \varepsilon_{j} \left(t\right) \right\rangle
 \end{equation}
 They found that in all cases, an increase  to a maximum is followed by a
 decrease. The trend is eventually reversed.
 
-Finally, in \cite{Wang_2018_b}, Wang et al. define the response function as
+Finally, in Ref. \cite{Wang_2018_b}, Wang et al. define the response function
+as
 \begin{equation}\label{eq:Wang_2018_b}
     R_{ij} = \left\langle \left[\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-
-    \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right]\cdot\varepsilon_{j}
+    \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right]\varepsilon_{j}
     \left(t_{j}\right)\right\rangle _{t_{j}}
 \end{equation}
 For the price change of stock $i$ caused by a trade of stock $j$.
@@ -372,12 +374,12 @@ $i$ previous to the trade of stock $j$ at its event time $t_j$ and
 $m_{i}^{\left(f\right)}\left(t_{j}\right)$ is the midpoint price of stock $i$
 following that trade.
 
-The difference between the definition in \cite{Wang_2016_cross} and in
-\cite{Wang_2018_b}, is that \cite{Wang_2016_cross} measures how a buy or sell
-order at time $t$ influences on average the price at a later time $t + \tau$.
+The difference between the definition in Ref. \cite{Wang_2016_cross} and in
+Ref. \cite{Wang_2018_b}, is that \cite{Wang_2016_cross} measures how a buy or
+sell order at time $t$ influences on average the price at a later time
+$t + \tau$.
 The physical time scale was chosen since the trades in different stocks are not
-synchronous (TAQ data). In \cite{Wang_2018_b}, it was used a response function
+synchronous (TAQ data). In Ref. \cite{Wang_2018_b}, it was used a response function
 on a trade time scale (Totalview data), as the interest is to analyze the
-immediate responses. In \cite{Wang_2018_b} the time lag $\tau$ is restricted to
-one, such that the price response quantifies the price impact of a single
-trade.
+immediate responses. Here, the time lag $\tau$ is restricted to one trade, such
+that the price response quantifies the price impact of a single trade.
