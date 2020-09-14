@@ -27,7 +27,7 @@ To use the short and long time lag, we rewrite the returns in physical time
 scale as
 
 \begin{align}\label{eq:short_long_return}
-    r^{sl,p}_{i}\left(t,\tau\right)&=\ln\left(\frac{m_{i}\left(t+\tau\right)}
+    r^{\left(p, sl\right)}_{i}\left(t,\tau\right)&=\ln\left(\frac{m_{i}\left(t+\tau\right)}
     {m_{i} \left(t\right)}\right) \nonumber \\
     &=\ln\left[\left(\frac{m_{i}\left(t+\tau\right)}{m_{i}\left(t+\tau'\right)}
     \right)
@@ -47,15 +47,15 @@ right part is constant with respect to $\tau$. Replacing Eq.
 scale (Eq. (\ref{eq:response_functions_time_scale_general})) we have
 
 \begin{align}\label{eq:short_long_response}
-    R^{sl,p}_{ij}\left(\tau\right)&=\left\langle
-    r^{sl,p}_{i}\left(t - 1, \tau\right)
-    \varepsilon^{p}_{j}\left(t\right)\right\rangle _{p} \nonumber \\
+    R^{\left(p, sl\right)}_{ij}\left(\tau\right)&=\left\langle
+    r^{\left(p, sl\right)}_{i}\left(t - 1, \tau\right)
+    \varepsilon^{\left(p\right)}_{j}\left(t\right)\right\rangle _{P}\nonumber\\
     &\approx\left\langle \frac{m_{i}\left(t - 1 +\tau\right)-m_{i}
     \left(t - 1 +\tau'\right)} {m_{i}\left(t - 1 +\tau'\right)}
-    \varepsilon_{j} \left(t\right)\right\rangle _{p} \nonumber \\
+    \varepsilon^{\left(p\right)}_{j} \left(t\right)\right\rangle_{P}\nonumber\\
     & +\left\langle \frac{m_{i} \left(t - 1 +\tau'\right)-m_{i}
     \left(t - 1\right)}{m_{i}\left(t - 1\right)}
-    \varepsilon_{j}\left(t\right)\right\rangle _{p}
+    \varepsilon^{\left(p\right)}_{j}\left(t\right)\right\rangle _{P}
 \end{align}
 
 Where the first term in the right side of Eq. (\ref{eq:short_long_response})
@@ -67,12 +67,12 @@ term of Eq. (\ref{eq:short_long_response}) is independent of $\tau$.
     \includegraphics[width=\textwidth]
     {figures/05_short_long_GOOG_MA.png}
     \caption{Self- and cross-response functions
-             $R^{sl,p}_{ij}\left(\tau\right)$ excluding
-             $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus time lag
-             $\tau$ on a logarithmic scale using a $\tau'=40$ in physical time
-             scale. Self-response functions (left) of Alphabet Inc. stock and
-             cross-response functions (right) of Alphabet Inc.-Mastercard Inc.
-             stocks.}
+             $R^{\left(p, sl\right)}_{ij}\left(\tau\right)$ excluding
+             $\varepsilon^{\left(p\right)}_{j}\left(t\right) = 0$ in 2008
+             versus time lag $\tau$ on a logarithmic scale using a $\tau'=40$
+             in physical time scale. Self-response functions (left) of Alphabet
+             Inc. stock and cross-response functions (right) of Alphabet
+             Inc.-Mastercard Inc. stocks.}
     \label{fig:short_long_responses}
 \end{figure*}
 

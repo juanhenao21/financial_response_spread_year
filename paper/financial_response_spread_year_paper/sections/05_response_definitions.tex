@@ -9,6 +9,32 @@ price response functions used in literature in Sect. \ref{subsec:response_def}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Key concepts}\label{subsec:key_concepts}
 
+Market orders are execute at the best available buy or sell price, limit orders
+set a maximum purchase price for a buy order, or a minimum sale price for a
+sell order. If the limit price is not matched, the order will not be carried
+out
+\cite{large_prices_changes,predictive_pow,intro_market_micro,stat_theory}.
+Limit orders often fail to result in an immediate transaction, and are stored
+in a queue called the limit order book
+\cite{prop_order_book,stat_prop,predictive_pow,intro_market_micro}. The order
+book also identifies the market participants behind the buy and sell orders,
+although some choose to remain anonymous. The order book is visible for all
+traders and its main purpose is to ensure that all traders have the same
+information on what is offered on the market. The order book is the ultimate
+microscopic level of description of financial markets.
+
+Buy limit orders are called ``bids", and sell limit orders are called ``asks".
+At any given time there is a best (lowest) offer to sell with price
+$a\left(t\right)$, and a best (highest) bid to buy with price $b\left(t\right)$
+\cite{prop_order_book,subtle_nature,account_spread,limit_ord_spread,stat_theory}.
+The price gap between them is called the spread
+$s\left(t\right) = a\left(t\right)-b\left(t\right)$
+\cite{subtle_nature,market_digest,Bouchaud_2004,account_spread,em_stylized_facts,large_prices_changes,stat_theory}.
+Spreads are significantly positively related to price and significantly
+negatively related to trading volume. Companies with more liquidity tend to
+have lower spreads
+\cite{components_spread_tokyo,effects_spread,account_spread,components_spread}.
+
 The average of the best ask and the best bid is the midpoint price, which is
 defined as
 \cite{prop_order_book,subtle_nature,Bouchaud_2004,large_prices_changes,em_stylized_facts,stat_theory}
@@ -22,17 +48,17 @@ decrease.
 
 Price changes are typically characterized as returns. If one denotes
 $S\left( t\right)$ the price of an asset at time $t$, the return
-$r^{g}\left(t, \tau\right)$, at time $t$ and time lag $\tau$ is simply the
-relative variation of the price from $t$ to $t + \tau$
+$r^{\left(g\right)}\left(t, \tau\right)$, at time $t$ and time lag $\tau$ is
+simply the relative variation of the price from $t$ to $t + \tau$
 \cite{subtle_nature,empirical_facts,asynchrony_effects_corr,tick_size_impact,causes_epps_effect,non_stationarity},
 \begin{equation}\label{eq:return_general}
-    r^{g} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
+    r^{\left(g\right)} \left(t, \tau \right) = \frac{S\left(t + \tau\right)
     - S\left(t\right)}{S\left(t\right)}
 \end{equation}
 It is also common to define the returns as
 \cite{dissecting_cross,subtle_nature,empirical_facts,empirical_properties,large_prices_changes,pow_law_dist,theory_market_impact,spread_changes_affect,rand_mat,fluctions_market_friction}
 \begin{equation}\label{eq:log_return_general}
-    r^{l}\left(t,\tau\right) = \ln S\left(t + \tau\right)
+    r^{\left(l\right)}\left(t,\tau\right) = \ln S\left(t + \tau\right)
     - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
 \end{equation}
 Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} agree if
@@ -82,6 +108,17 @@ they tend to split large orders into small ones \cite{empirical_facts}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
 
+A direct comparison between the trade time scale and the physical time scale is
+not possible. To compare them directly we need to assume whether the midpoint
+price or the trade signs are on the same scale. We assume the midpoint prices
+in the trade time scale to be the same as the midpoint prices in physical time
+scale. Therefore, we have the time lag for both computations in seconds. This
+approximation allow us to directly compare both scales to have an idea of the
+difference and similarities they have. In the other sections, as we are not
+directly comparing the time scales, the corresponding quantities of each time
+scale are not mixed. Thus physical time scale is measured in seconds and trade
+time scale is measured in trades.
+
 Due to the nature of the data, they are several options to define time for
 analyzing data.
 
@@ -128,7 +165,7 @@ We use the trade sign classification in trade time scale proposed in Ref.
 \cite{Wang_2017,Wang_2018_copulas,Wang_2016_avg} that reads
 
 \begin{equation}\label{eq:trade_signs_trade}
-    \varepsilon^{t}\left(t,n\right)=\left\{
+    \varepsilon^{\left(t\right)}\left(t,n\right)=\left\{
     \begin{array}{cc}
     \text{sgn}\left(S\left(t,n\right)-S\left(t,n-1\right)\right),
     & \text{if }\\ S\left(t,n\right) \ne S\left(t,n-1\right)\\
@@ -137,9 +174,10 @@ We use the trade sign classification in trade time scale proposed in Ref.
     \end{array}\right.
 \end{equation}
 
-$\varepsilon^{t}\left( t,n \right) = +1$ implies a trade triggered by a market
-order to buy, and a value $\varepsilon^{t}\left( t,n \right) = -1$ indicates a
-trade triggered by a market order to sell.
+$\varepsilon^{\left(t\right)}\left( t,n \right) = +1$ implies a trade triggered
+by a market order to buy, and a value
+$\varepsilon^{\left(t\right)}\left( t,n \right) = -1$ indicates a trade
+triggered by a market order to sell.
 
 In the second case of definition \ref{eq:trade_signs_trade}, if two consecutive
 trades with the same trading direction did not exhaust all the available volume
@@ -243,7 +281,7 @@ We use the trade sign definition in physical time scale proposed in Ref.
 \cite{Wang_2017,Wang_2016_avg}, that depends on the classification in
 Eq. \ref{eq:trade_signs_trade} and reads
 \begin{equation}\label{eq:trade_signs_physical}
-    \varepsilon^{p}\left(t\right)=\left\{
+    \varepsilon^{\left(p\right)}\left(t\right)=\left\{
     \begin{array}{cc}
     \text{sgn}\left(\sum_{n=1}^{N\left(t\right)}\varepsilon^{t}
     \left(t,n\right)\right),
@@ -252,14 +290,14 @@ Eq. \ref{eq:trade_signs_trade} and reads
     \end{array}\right.
 \end{equation}
 Where $N \left(t \right)$ is the number of trades in a second interval.
-$\varepsilon^{p}\left( t \right) = +1$ implies that the majority of
-trades in second $t$ were triggered by a market order to buy, and a value
-$\varepsilon^{p}\left( t \right) = -1$ indicates a majority of sell
-market orders. In this definition, they are two ways to obtain
-$\varepsilon^{p}\left( t \right) = 0$. One way is that in a particular
-second there is not trades, and then no trade sign. The other  way is that the
-addition of the trade signs ($+1$ and $-1$) in a second be equal to zero. In
-this case, there is a balance of buy and sell market orders.
+$\varepsilon^{\left(p\right)}\left( t \right) = +1$ implies that the majority
+of trades in second $t$ were triggered by a market order to buy, and a value
+$\varepsilon^{\left(p\right)}\left( t \right) = -1$ indicates a majority of
+sell market orders. In this definition, they are two ways to obtain
+$\varepsilon^{\left(p\right)}\left( t \right) = 0$. One way is that in a
+particular second there is not trades, and then no trade sign. The other way is
+that the addition of the trade signs ($+1$ and $-1$) in a second be equal to
+zero. In this case, there is a balance of buy and sell market orders.
 
 Market orders show opposite trade directions to limit order executed
 simultaneously. An executed sell limit order corresponds to a buyer-initiated
@@ -299,87 +337,41 @@ average accuracy up to $82\%$ in the physical time scale.
 The response function measures price changes resulting from execution of market
 orders. In Refs.
 \cite{r_walks_liquidity,subtle_nature,Bouchaud_2004}, Bouchaud et al. use a
-self-response function that only depends on the time lag $\tau$
-
-\begin{equation}\label{eq:Bouchaud_2004}
-    R\left(\tau\right)=\left\langle \left(S \left(t+\tau, n\right)
-    - S \left(t, n\right)\right) \varepsilon^{t} \left(t, n\right)
-    \right\rangle_{t}
-\end{equation}
-
-Where $\varepsilon_{n}$ is the sign of the $n^{th}$ trade and the price $S_n$
-is defined as the midpoint just before the $n^{th}$ trade, all averaged in
-trade time scale. The quantity $R\left(\tau\right)$ measures how much, on
-average, the price moves up (down) at time $\tau$ conditioned to a buy (sell)
-order at time zero. They found for France Telecom that $R\left(\tau \right)$
-increases by a factor $~2$ between $\tau = 1$ and $\tau \approx 1000$ trades,
-before decreasing back. For larger $\tau$, $R\left(\tau\right)$ decreases, and
-even becomes negative beyond $\tau \approx 5000$. However, in some cases the
-maximum is not observed and rather $R\left(\tau\right)$ keeps increasing mildly
+self-response function that only depends on the time lag $\tau$. This function
+measures how much, on average, the price moves up (down) at time $\tau$
+conditioned to a buy (sell) order at time zero. They found for France Telecom
+that the response function increases by a factor $~2$ between $\tau = 1$ and
+$\tau \approx 1000$ trades, before decreasing back. For larger $\tau$, the
+response function decreases, and even becomes negative beyond
+$\tau \approx 5000$. However, in some cases the maximum is not observed and
+rather the price response function keeps increasing mildly
 \cite{subtle_nature}.
 
-In Ref. \cite{theory_market_impact}, the price impact function,
-$R \left(\cdot\right)$, is defined as the average price response due to a
-transaction as a function of the transaction's volume $v_{i}$
-\begin{equation}\label{eq:theory_market_impact}
-    R \left(v_{i}\right) \equiv \left\langle \varepsilon_{i} r^{l}_{i} |
-    v_{i}\right\rangle
-\end{equation}
-Empirically the function is highly concave. The curvature of
-$R \left(v_{i}\right)$ is entirely due to the probability that a transaction
-causes a nonzero impact - the larger the size of the transaction, the larger
-the probability. In Ref. \cite{prop_order_book}, the response function is given
-by
-\begin{align}\label{eq:prop_order_book}
-    R \left(V, \tau\right) &= \left\langle \varepsilon \left(t\right)
-    \left[m \left(t + \tau\right) - m \left(t\right)\right] |V \right\rangle \\
-    &\approx R \left(\tau\right) \ln V
-\end{align}
-Where $V$ is the volume. They found that $R \left(\tau\right)$ for three French
+In Ref. \cite{theory_market_impact}, the price impact function, is defined as
+the average price response due to a transaction as a function of the
+transaction's volume. Empirically the function is highly concave
+\cite{theory_market_impact}. The curvature of the price impact function is
+entirely due to the probability that a transaction causes a nonzero impact. The
+larger the size of the transaction, the larger the probability. In Ref.
+\cite{prop_order_book}, they found that the response function for three French
 stocks first increases from $\tau = 10s$ to a few hundred seconds, and then
 appears to decrease back to a finite value.
 
-In Ref. \cite{dissecting_cross} they use a market response defined as
-\begin{equation}\label{eq:dissecting_cross}
-    R_{ij}(\tau) =  \left\langle \left[ \ln S_{i}(t+\tau) - \ln S_{i}(t)
-    \right] \varepsilon_{j}(t) \right\rangle_{p}
-\end{equation}
-The response measures the average price change of contract $i$ at time
-$t+\tau$, after experiencing a sign imbalance $\varepsilon_{j}\left(t\right)$
-in contract $j$ at time $t$. In this work $\tau$ is used in units of five
-minutes.
+In Ref. \cite{dissecting_cross} they defined a response function who measures
+the average price change of a contract $i$ at time $t+\tau$, after experiencing
+a sign imbalance in contract $j$ at time $t$. In this work $\tau$ is used in
+units of five minutes.
 
 In later works \cite{spread_changes_affect,Wang_2016_cross}, Grimm et al.
 and Wang et al. use the logarithmic return for stock $i$ and time lag $\tau$,
-defined via the midpoint price $m_{i} \left( t \right)$. The cross-response
-function is then defined as
-\begin{equation}\label{eq:Wang_2016}
-    R_{ij}\left(\tau\right)=\left\langle r_{i}\left(t-1,\tau\right)
-    \varepsilon_{j} \left(t\right) \right\rangle
-\end{equation}
-They found that in all cases, an increase  to a maximum is followed by a
-decrease. The trend is eventually reversed.
+defined via the midpoint price $m_{i} \left( t \right)$ to define a
+cross-response function. The response function measures how a buy or sell order
+at time $t$ influences on average the price at a later time $t + \tau$.
+The physical time scale was chosen since the trades in different stocks are not
+synchronous (TAQ data). They found that in all cases, an increase  to a
+maximum is followed by a decrease. The trend is eventually reversed.
 
 Finally, in Ref. \cite{Wang_2018_b}, Wang et al. define the response function
-as
-\begin{equation}\label{eq:Wang_2018_b}
-    R_{ij} = \left\langle \left[\ln m_{i}^{\left(f\right)}\left(t_{j}\right)-
-    \ln m_{i}^{\left(p\right)} \left(t_{j}\right) \right]\varepsilon_{j}
-    \left(t_{j}\right)\right\rangle _{t_{j}}
-\end{equation}
-For the price change of stock $i$ caused by a trade of stock $j$.
-
-Here, $m_{i}^{\left(p\right)}\left(t_{j}\right)$ is the midpoint price of stock
-$i$ previous to the trade of stock $j$ at its event time $t_j$ and
-$m_{i}^{\left(f\right)}\left(t_{j}\right)$ is the midpoint price of stock $i$
-following that trade.
-
-The difference between the definition in Ref. \cite{Wang_2016_cross} and in
-Ref. \cite{Wang_2018_b}, is that \cite{Wang_2016_cross} measures how a buy or
-sell order at time $t$ influences on average the price at a later time
-$t + \tau$.
-The physical time scale was chosen since the trades in different stocks are not
-synchronous (TAQ data). In Ref. \cite{Wang_2018_b}, it was used a response function
 on a trade time scale (Totalview data), as the interest is to analyze the
 immediate responses. Here, the time lag $\tau$ is restricted to one trade, such
 that the price response quantifies the price impact of a single trade.

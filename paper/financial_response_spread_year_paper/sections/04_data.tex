@@ -4,32 +4,6 @@ Modern financial markets, are organized as a double continuous auctions. Agents
 can place different types of orders to buy or to sell a given number of shares,
 roughly categorized as market orders and limit orders.
 
-Market orders are execute at the best available buy or sell price, limit orders
-set a maximum purchase price for a buy order, or a minimum sale price for a
-sell order. If the limit price is not matched, the order will not be carried
-out
-\cite{large_prices_changes,predictive_pow,intro_market_micro,stat_theory}.
-Limit orders often fail to result in an immediate transaction, and are stored
-in a queue called the limit order book
-\cite{prop_order_book,stat_prop,predictive_pow,intro_market_micro}. The order
-book also identifies the market participants behind the buy and sell orders,
-although some choose to remain anonymous. The order book is visible for all
-traders and its main purpose is to ensure that all traders have the same
-information on what is offered on the market. The order book is the ultimate
-microscopic level of description of financial markets.
-
-Buy limit orders are called ``bids", and sell limit orders are called ``asks".
-At any given time there is a best (lowest) offer to sell with price
-$a\left(t\right)$, and a best (highest) bid to buy with price $b\left(t\right)$
-\cite{prop_order_book,subtle_nature,account_spread,limit_ord_spread,stat_theory}.
-The price gap between them is called the spread
-$s\left(t\right) = a\left(t\right)-b\left(t\right)$
-\cite{subtle_nature,market_digest,Bouchaud_2004,account_spread,em_stylized_facts,large_prices_changes,stat_theory}.
-Spreads are significantly positively related to price and significantly
-negatively related to trading volume. Companies with more liquidity tend to
-have lower spreads
-\cite{components_spread_tokyo,effects_spread,account_spread,components_spread}.
-
 In this study, we analyzed trades and quotes (TAQ) data from the NASDAQ stock
 market. We selected NASDAQ because it is an electronic exchange where stocks
 are traded through an automated network of computers instead of a trading
@@ -44,12 +18,6 @@ data file is the list of all successive trades, with the traded price, traded
 volume and time stamp accurate to the second. Despite the one second accuracy
 of the time stamps, in both files more than one quote or trade may be recorded
 in the same second.
-
-Due to the the time stamp accuracy, it is not possible to match each trade with
-the directly preceding quote. Hence, we cannot determine the trade sign by
-comparing the traded price and the preceding midpoint price
-\cite{Wang_2016_cross}. We have to preprocess the data to relate the midpoint
-prices with the trade signs in trade time scale and in physical time scale.
 
 To analyze the response functions across different stocks in Sects.
 \ref{sec:response_functions_imp}, \ref{sec:time_shift} and

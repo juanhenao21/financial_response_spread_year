@@ -6,27 +6,26 @@ left either in trade time scale or physical time scale have approximately the
 same effect.
 
 To test this claim, we used the definition of the response function from Ref.
-\cite{Wang_2016_cross} that is showed in Eq. (\ref{eq:Wang_2016}) and added
-a parameter $t_{s}$ that shifts the position between returns and trade signs.
-To see the impact of the time shift we analyzed the stocks showed in Table
-\ref{tab:companies} in the year 2008. We used different time shifts in the
-response function
-
+\cite{Wang_2016_cross} and add a parameter $t_{s}$ that shifts the position
+between returns and trade signs. To see the impact of the time shift we
+analyzed the stocks showed in Table \ref{tab:companies} in the year 2008. We
+used different time shifts in the response function
 \begin{equation}\label{eq:time_shift_general}
-    R_{ij}^{s, scale}\left(\tau\right)=\left\langle r^{scale}_{i}
-    \left(t-t_{s},\tau\right) \varepsilon^{scale}_{j}
-    \left(t\right)\right\rangle _{scale}
+    R_{ij}^{\left(scale, s\right)}\left(\tau\right)=\left\langle
+    r^{\left(scale\right)}_{i} \left(t-t_{s},\tau\right)
+    \varepsilon^{\left(scale\right)}_{j} \left(t\right)\right\rangle_{average}
 \end{equation}
-
-where the index $i$ and $j$ correspond to stocks in the market, $r^{scale}_{i}$
-is the return of the stock $i$ in a time lag $\tau$ with a time shift
-$t_{s}$ in the corresponding scale and $\varepsilon^{scale}_{j}$ is the
-trade sign of the stock $j$ in the corresponding scale. The subscript and
-superscript $scale$ refer to the time scale used, whether physical time scale
-or trade time scale and $R_{ij}^{s,scale}$ is the time shift price response
-function, where the superscript $s$ refers to the time shift. Finally, we
-average the product over the physical time or trade time depending on the time
-scale.
+where the index $i$ and $j$ correspond to stocks in the market,
+$r^{\left(scale\right)}_{i}$ is the return of the stock $i$ in a time lag
+$\tau$ with a time shift $t_{s}$ in the corresponding scale and
+$\varepsilon^{\left(scale\right)}_{j}$ is the trade sign of the stock $j$ in
+the corresponding scale.  The superscript $scale$ refers to the time scale
+used, whether physical time scale ($scale = p$) or trade time scale
+($scale = t$). $R_{ij}^{\left(scale, s\right)}$ is the time shift price
+response function, where the superscript $s$ refers to the time shift. Finally,
+The subscript $average$ refers to the way to average the price response,
+whether relative to the physical time scale ($average = P$) or relative to the
+trade time scale ($average = T$).
 
 We compute the response functions according to two cases. In one case we set
 $\tau$ to a constant value and vary $t_{s}$, and in the other case we set
@@ -44,36 +43,38 @@ between the trade signs and returns in physical time scale.
 On the trade time scale we compute the response function
 
 \begin{equation}\label{eq:time_shift_trade}
-    R_{ij}^{s, t}\left(\tau\right)=\left\langle r^{t}_{i}
-    \left(t-t_{s},\tau\right) \varepsilon^{t}_{j}
+    R_{ij}^{\left(t, s\right)}\left(\tau\right)=\left\langle r^{\left(t\right)}
+    _{i} \left(t-t_{s},\tau\right) \varepsilon^{\left(t\right)}_{j}
     \left(t\right)\right\rangle _{t}
 \end{equation}
 
-In this case for $r^{t}_{i}$, we associate all the trade signs to a return
-value and create pseudo midpoint price values in trade time scale. Then, we
-shift the trade signs and the returns by trades. Hence, the time lag and time
-shift are in trade time scale.
+In this case for $r^{\left(t\right)}_{i}$, we associate all the trade signs to
+a return value and create pseudo midpoint price values in trade time scale.
+Then, we shift the trade signs and the returns by trades. Hence, the time lag
+and time shift are in trade time scale.
 
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/04_shift_trade_RIG_APA.png}
-    \caption{Self-response functions $R_{ii}^{t}\left(\tau\right)$ in 2008
-             versus shift for the Transocean Ltd. stock (top) and
-             cross-response functions $R_{ij}^{t}\left(\tau\right)$ in 2008
-             versus shift for the Transocean Ltd.-Apache Corp. stocks (bottom)
-             in trade time scale.}
+    \caption{Self-response functions
+             $R_{ii}^{\left(t, s\right)}\left(\tau\right)$ in 2008 versus shift
+             for the Transocean Ltd. stock (top) and cross-response functions
+             $R_{ij}^{\left(t, s\right)}\left(\tau\right)$ in 2008 versus shift
+             for the Transocean Ltd.-Apache Corp. stocks (bottom) in trade time
+             scale.}
     \label{fig:shift_trade_scale}
 \end{figure*}
 
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/04_shift_responses_trade.png}
-    \caption{Self- and cross-response functions $R^{t}_{ij}\left(\tau\right)$
-             in 2008 versus time lag $\tau$ on a logarithmic scale for
-             different shifts in trade time scale. Self-response functions
-             (top) of individual stocks and cross-response functions (bottom)
-             of stocks pairs from the same economic sector. We use time lag
-             values $\tau=10$ trades (left) and $\tau=100$ (right).}
+    \caption{Self- and cross-response functions
+             $R^{\left(t, s\right)}_{ij}\left(\tau\right)$ in 2008 versus time
+             lag $\tau$ on a logarithmic scale for different shifts in trade
+             time scale. Self-response functions (top) of individual stocks and
+             cross-response functions (bottom) of stocks pairs from the same
+             economic sector. We use time lag values $\tau=10$ trades (left)
+             and $\tau=100$ (right).}
     \label{fig:shift_responses_trade_scale}
 \end{figure*}
 
@@ -106,34 +107,37 @@ signs and returns to compute the response function.
 In the physical time scale we compute the response function
 
 \begin{equation}\label{eq:time_shift_physical}
-    R_{ij}^{s, p}\left(\tau\right)=\left\langle r^{p}_{i}
-    \left(t-t_{s},\tau\right) \varepsilon^{p}_{j}
+    R_{ij}^{\left(p, s\right)}\left(\tau\right)=\left\langle r^{\left(p\right)}
+    _{i} \left(t-t_{s},\tau\right) \varepsilon^{\left(p\right)}_{j}
     \left(t\right)\right\rangle _{t}
 \end{equation}
 
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/04_shift_physical_RIG_APA.png}
-    \caption{Self-response functions $R_{ii}^{p}\left(\tau\right)$ excluding
-             $\varepsilon^{p}_{i}\left(t\right) = 0$ in 2008 versus shift for
-             the Transocean Ltd. stock (top) and cross-response functions
-             $R_{ij}^{p}\left(\tau\right)$ excluding
-             $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus shift for
-             the Transocean Ltd.-Apache Corp. stocks (bottom) in physical time
-             scale.}
+    \caption{Self-response functions
+             $R_{ii}^{\left(p, s\right)}\left(\tau\right)$ excluding
+             $\varepsilon^{\left(p\right)}_{i}\left(t\right) = 0$ in 2008
+             versus shift for the Transocean Ltd. stock (top) and
+             cross-response functions
+             $R_{ij}^{\left(p, s\right)}\left(\tau\right)$ excluding
+             $\varepsilon^{\left(p\right)}_{j}\left(t\right) = 0$ in 2008
+             versus shift for the Transocean Ltd.-Apache Corp. stocks (bottom)
+             in physical time scale.}
     \label{fig:shift_physical_scale}
 \end{figure*}
 
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/04_shift_responses_physical.png}
-    \caption{Self- and cross-response functions $R^{p}_{ij}\left(\tau\right)$
-             excluding $\varepsilon^{p}_{j}\left(t\right) = 0$ in 2008 versus
-             time lag $\tau$ on a logarithmic scale for different shifts in
-             physical time scale. Self-responses functions (top) of individual
-             stocks and cross-response functions (bottom) of stocks pairs from
-             the same economic sector. We use time lag values $\tau=10$ trades
-             (left) and $\tau=100$ (right).}
+    \caption{Self- and cross-response functions
+             $R^{\left(p, s\right)}_{ij}\left(\tau\right)$ excluding
+             $\varepsilon^{\left(p\right)}_{j}\left(t\right) = 0$ in 2008
+             versus time lag $\tau$ on a logarithmic scale for different shifts
+             in physical time scale. Self-responses functions (top) of
+             individual stocks and cross-response functions (bottom) of stocks
+             pairs from the same economic sector. We use time lag values
+             $\tau=10$ trades (left) and $\tau=100$ (right).}
     \label{fig:shift_responses_physical_scale}
 \end{figure*}
 
