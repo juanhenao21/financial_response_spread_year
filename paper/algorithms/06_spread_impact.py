@@ -52,7 +52,7 @@ def taq_self_response_year_avg_responses_physical_plot(year):
         plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=30)
         plt.xlabel(r'$\tau \, [s]$', fontsize=30)
-        plt.ylabel(r'$R_{ii}(\tau)$', fontsize=30)
+        plt.ylabel(r'$R^{\left(p\right)}_{ii}(\tau)$', fontsize=30)
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)
         plt.xlim(1, 1000)

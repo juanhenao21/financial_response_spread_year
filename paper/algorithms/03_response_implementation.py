@@ -58,7 +58,7 @@ def taq_trade_scale_response_year_avg_plot(tickers, sectors, year):
         ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax1.set_ylabel(r'$R^{t}_{ii}(\tau)$', fontsize=15)
+        ax1.set_ylabel(r'$R^{\left(t\right)}_{ii}(\tau)$', fontsize=15)
         ax1.tick_params(axis='x', labelsize=10)
         ax1.tick_params(axis='y', labelsize=10)
         ax1.set_xlim(1, 1000)
@@ -82,7 +82,7 @@ def taq_trade_scale_response_year_avg_plot(tickers, sectors, year):
         ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax2.set_ylabel(r'$R^{t}_{ij}(\tau)$', fontsize=15)
+        ax2.set_ylabel(r'$R^{\left(t\right)}_{ij}(\tau)$', fontsize=15)
         ax2.tick_params(axis='x', labelsize=10)
         ax2.tick_params(axis='y', labelsize=10)
         ax2.set_xlim(1, 1000)
@@ -138,7 +138,7 @@ def taq_physical_scale_response_year_avg_plot(tickers, sectors, year):
         ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax1.set_ylabel(r'$R^{p}_{ii}(\tau)$', fontsize=15)
+        ax1.set_ylabel(r'$R^{\left(p\right)}_{ii}(\tau)$', fontsize=15)
         ax1.tick_params(axis='x', labelsize=10)
         ax1.tick_params(axis='y', labelsize=10)
         ax1.set_xlim(1, 1000)
@@ -163,7 +163,7 @@ def taq_physical_scale_response_year_avg_plot(tickers, sectors, year):
         ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax2.set_ylabel(r'$R^{p}_{ij}(\tau)$', fontsize=15)
+        ax2.set_ylabel(r'$R^{\left(p\right)}_{ij}(\tau)$', fontsize=15)
         ax2.tick_params(axis='x', labelsize=10)
         ax2.tick_params(axis='y', labelsize=10)
         ax2.set_xlim(1, 1000)
@@ -221,13 +221,17 @@ def taq_response_year_avg_comparison_plot(ticker_i, ticker_j, year):
                         + f'_data/taq_self_response_year_responses_activity'
                         + f'_data_{year}_{ticker_i}.pickle', 'rb'))
 
-        ax1.semilogx(self_physical, linewidth=5, label=r'$R_{ii}^{p}(\tau)$')
-        ax1.semilogx(self_trade, linewidth=5, label=r'$R_{ii}^{t}(\tau)$')
-        ax1.semilogx(self_activity, linewidth=5, label=r'$R_{ii}^{a}(\tau)$')
+        ax1.semilogx(self_physical, linewidth=5,
+                     label=r'$R_{ii}^{\left(p\right)}(\tau)$')
+        ax1.semilogx(self_trade, linewidth=5,
+                     label=r'$R_{ii}^{\left(t\right)}(\tau)$')
+        ax1.semilogx(self_activity, linewidth=5,
+                     label=r'$R_{ii}^{\left(p, a\right)}(\tau)$')
         ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax1.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax1.set_ylabel(r'$R_{ii}(\tau)$ %s' % (ticker_i), fontsize=15)
+        ax1.set_ylabel(r'$R^{\left(scale\right)}_{ii}(\tau)$ %s' % (ticker_i),
+                       fontsize=15)
         ax1.tick_params(axis='x', labelsize=10)
         ax1.tick_params(axis='y', labelsize=10)
         ax1.set_xlim(1, 1000)
@@ -256,14 +260,17 @@ def taq_response_year_avg_comparison_plot(ticker_i, ticker_j, year):
                         + f'_responses_activity_data_{year}_{ticker_i}i'
                         + f'_{ticker_j}j.pickle', 'rb'))
 
-        ax2.semilogx(cross_physical, linewidth=5, label=r'$R_{ij}^{p}(\tau)$')
-        ax2.semilogx(cross_trade, linewidth=5, label=r'$R_{ij}^{t}(\tau)$')
-        ax2.semilogx(cross_activity, linewidth=5, label=r'$R_{ij}^{a}(\tau)$')
+        ax2.semilogx(cross_physical, linewidth=5,
+                     label=r'$R_{ij}^{\left(p\right)}(\tau)$')
+        ax2.semilogx(cross_trade, linewidth=5,
+                     label=r'$R_{ij}^{\left(t\right)}(\tau)$')
+        ax2.semilogx(cross_activity, linewidth=5,
+                     label=r'$R_{ij}^{\left(p, a\right)}(\tau)$')
         ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3,
                    fontsize=15)
         ax2.set_xlabel(r'$\tau \, [s]$', fontsize=15)
-        ax2.set_ylabel(r'$R_{ij}(\tau)$ %s - %s' % (ticker_i, ticker_j),
-                       fontsize=15)
+        ax2.set_ylabel(r'$R_{ij}^{\left(scale\right)}(\tau)$ %s - %s'
+                       % (ticker_i, ticker_j), fontsize=15)
         ax2.tick_params(axis='x', labelsize=10)
         ax2.tick_params(axis='y', labelsize=10)
         ax2.set_xlim(1, 1000)
@@ -297,8 +304,8 @@ def main():
     :return: None.
     """
 
-    ticker_i = 'APA'
-    ticker_j = 'RIG'
+    ticker_i = 'GS'
+    ticker_j = 'CME'
     tickers = ['GOOG', 'MA', 'GS', 'CME', 'APA', 'RIG']
     sectors = [['GOOG', 'MA'], ['MA', 'GOOG'],
                ['GS', 'CME'], ['CME', 'GS'],
