@@ -31,7 +31,7 @@ To compare the three response functions, we define the following quantities
     \varepsilon_{j,d}^{\left(p\right)}\left(t\right)&=
     \text{sgn}\left(E_{j,d}\left(t\right)\right)\label{eq:sign_sum_trades}
 \end{align}
-Where the subscript $d$ refers to the days used in the response computation.
+where the subscript $d$ refers to the days used in the response computation.
 We use Eq. (\ref{eq:sum_trades}) to make easier the comparison between the
 results, as all the defined responses use the trade sign term.
 
@@ -46,16 +46,16 @@ analyze the influence of the frequency of trades in a second.
 \label{subsec:response_function_trade}
 
 We define the self- and cross-response functions in trade time scale, using the
-trade signs in trade time scale and for the returns, we select the last
-midpoint price of every second and compute them. We use this strategy with the
-TAQ data set considering that the price response in trade time scale can not
-be directly compared with the price response in physical time scale. In this
-case we relate each trade sign in one second with the midpoint price of the
-previous second. Then, to compute the returns, instead of using trades as the
-time lag (it would make no sense as all the midpoint price are the same in one
-second) we use seconds. Thus, we force the response in trade time scale to have
-a physical time lag, and then, be able to compare with the physical time scale
-response. This approximation is feasible considering the discussion in Sect.
+trade signs in trade time scale. For the returns, we select the last midpoint
+price of every second and compute them. We use this strategy with the TAQ data
+set considering that the price response in trade time scale can not be directly
+compared with the price response in physical time scale. In this case we relate
+each trade sign in one second with the midpoint price of the previous second.
+Then, to compute the returns, instead of using trades as the time lag (it would
+make no sense as all the midpoint price are the same in one second) we use
+seconds. Thus, we force the response in trade time scale to have a physical
+time lag, and then, be able to compare with the physical time scale response.
+This approximation is feasible considering the discussion in Sect.
 \ref{sec:response_functions_def}. The price response function in trade time
 scaled is defined as
 \begin{equation}\label{eq:response_functions_trade_scale_general}
@@ -286,12 +286,16 @@ influence in the responses.
 As predicted by the weights, the event response is weaker than the physical
 response, and the activity response is the strongest response.
 
-In the three curves in the figure can be seen the increase-decrease behavior of
-the response functions.
+We propose a methodology to directly compare price response functions in trade
+time scale and physical time scale. Additionally, we suggest a new definition
+to measure the impact of the number of trades in physical time scale. In the
+three curves in the figure can be seen the increase-decrease behavior of the
+response functions.
 
 Our results are consistent with the current literature, where the results
 differ about a factor of two depending on the time scale. We note that the
 activity response function implementation is only a test and was never defined
-in previous works. That is why the factor of two difference can not be seen in
-Fig. \ref{fig:relation_responses} for
+in previous works. That is why the difference of a factor of two can not be
+seen in Fig. \ref{fig:relation_responses} for
 $R_{ij}^{\left(p,a\right)} \left( \tau \right)$.
+

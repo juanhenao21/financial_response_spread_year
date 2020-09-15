@@ -29,7 +29,7 @@ $a\left(t\right)$, and a best (highest) bid to buy with price $b\left(t\right)$
 \cite{prop_order_book,subtle_nature,account_spread,limit_ord_spread,stat_theory}.
 The price gap between them is called the spread
 $s\left(t\right) = a\left(t\right)-b\left(t\right)$
-\cite{subtle_nature,market_digest,Bouchaud_2004,account_spread,em_stylized_facts,large_prices_changes,stat_theory}.
+\cite{subtle_nature,market_digest,Bouchaud_2004,account_spread,large_prices_changes,em_stylized_facts,stat_theory}.
 Spreads are significantly positively related to price and significantly
 negatively related to trading volume. Companies with more liquidity tend to
 have lower spreads
@@ -61,7 +61,7 @@ It is also common to define the returns as
     r^{\left(l\right)}\left(t,\tau\right) = \ln S\left(t + \tau\right)
     - \ln S\left(t\right) = \ln \frac{S\left(t + \tau\right)}{S\left(t\right)}
 \end{equation}
-Equation \ref{eq:return_general} and Eq. \ref{eq:log_return_general} agree if
+Equations (\ref{eq:return_general}) and (\ref{eq:log_return_general}) agree if
 $\tau$ is small enough \cite{subtle_nature,empirical_facts}.
 
 At longer timescales, midpoint prices and transaction prices rarely differ by
@@ -102,8 +102,8 @@ It is well-known that the series of the trade signs on a given stock exhibit
 large autocorrelation. A very plausible explanation of this phenomenon relies
 on the execution strategies of some major brokers on given markets. These
 brokers have large transactions to execute on the account of some clients. In
-order to avoid market making move because of an inconsiderable large order,
-they tend to split large orders into small ones \cite{empirical_facts}.
+order to avoid market making movements because of an inconsiderable large
+order, they tend to split large orders into small ones \cite{empirical_facts}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Time definition}\label{subsec:time_definition}
@@ -169,7 +169,7 @@ We use the trade sign classification in trade time scale proposed in Ref.
     \begin{array}{cc}
     \text{sgn}\left(S\left(t,n\right)-S\left(t,n-1\right)\right),
     & \text{if }\\ S\left(t,n\right) \ne S\left(t,n-1\right)\\
-    \varepsilon^{t}\left(t,n-1\right),
+    \varepsilon^{\left(t\right)}\left(t,n-1\right),
     & \text{otherwise}
     \end{array}\right.
 \end{equation}
@@ -227,8 +227,8 @@ The methodology described is an approximation to compute the response in the
 trade time scale. A drawback in the computation could come from the fact that
 the return of a given second is composed by the contribution of small returns
 corresponding to each change in the midpoint price during a second. As we are
-assuming only one value for the returns in each second, we are supposing  all
-the returns in one second interval to be positive or negative with the same
+assuming only one value for the returns in each second, we consider all the
+returns in one second interval to be positive or negative with the same
 magnitude, which could not be the case. This could increase or decrease the
 response signal at the end of the computation.
 
@@ -249,7 +249,7 @@ response signal at the end of the computation.
 \end{figure}
 
 Figure \ref{fig:return_contributions} illustrate this point. Suppose there are
-three different midpoint prices in a one second interval and thus, three
+three different midpoint prices in one second interval and thus, three
 different returns for these three midpoint price values. Furthermore, suppose
 that the volume of limit orders with the corresponding midpoint prices are the
 same in the bid and in the ask (the returns have the same magnitude). In the
@@ -279,23 +279,23 @@ functions.
 We use the trade sign definition in physical time scale proposed in Ref.
 \cite{Wang_2016_cross} and used in Refs.
 \cite{Wang_2017,Wang_2016_avg}, that depends on the classification in
-Eq. \ref{eq:trade_signs_trade} and reads
+Eq. (\ref{eq:trade_signs_trade}) and reads
 \begin{equation}\label{eq:trade_signs_physical}
     \varepsilon^{\left(p\right)}\left(t\right)=\left\{
     \begin{array}{cc}
-    \text{sgn}\left(\sum_{n=1}^{N\left(t\right)}\varepsilon^{t}
+    \text{sgn}\left(\sum_{n=1}^{N\left(t\right)}\varepsilon^{\left(t\right)}
     \left(t,n\right)\right),
     & \text{If }N \left(t\right)>0\\
     0, & \text{If }N\left(t\right)=0
     \end{array}\right.
 \end{equation}
-Where $N \left(t \right)$ is the number of trades in a second interval.
+where $N \left(t \right)$ is the number of trades in a second interval.
 $\varepsilon^{\left(p\right)}\left( t \right) = +1$ implies that the majority
 of trades in second $t$ were triggered by a market order to buy, and a value
 $\varepsilon^{\left(p\right)}\left( t \right) = -1$ indicates a majority of
 sell market orders. In this definition, they are two ways to obtain
 $\varepsilon^{\left(p\right)}\left( t \right) = 0$. One way is that in a
-particular second there is not trades, and then no trade sign. The other way is
+particular second there are no trades, and then no trade sign. The other way is
 that the addition of the trade signs ($+1$ and $-1$) in a second be equal to
 zero. In this case, there is a balance of buy and sell market orders.
 
