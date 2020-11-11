@@ -5,8 +5,8 @@
 
 Price response functions and spread impact in correlated financial markets
 ==========================================================================
-In this study, we have analyzed trades and quotes (TAQ) data from the NASDAQ
-Stock Market.
+In this study, we analyzed trades and quotes (TAQ) data from the NASDAQ Stock
+Market.
 
 In the TAQ data set, there are two data files for each stock. One gives the
 list of all successive quotes. Thus, we have the best bid price, best ask
