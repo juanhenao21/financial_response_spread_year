@@ -328,5 +328,5 @@ functions. Liquid stocks have smaller price responses.
 
 ## Acknowledgments
 
-* Research Group Guhr [Website](http://www.theo.physik.uni-duisburg-essen.de/tp/ags/guhr_dir/index.html)
+* Research Group Guhr - [Website](http://www.theo.physik.uni-duisburg-essen.de/tp/ags/guhr_dir/index.html)
 * DAAD Research Grants - Doctoral Programmes in Germany
