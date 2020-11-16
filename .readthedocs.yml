@@ -17,9 +17,9 @@ formats: []
 # Python configuration
 python:
   version: 3.6
-  # install:
-  #   - requirements: ./requirements.txt
-  #   - method: pip
+  install:
+    - requirements: ./requirements.txt
+    - method: pip
   #     path: .
 
 # Build process
