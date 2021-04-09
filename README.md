@@ -14,7 +14,9 @@ financial market data for the year 2008.
 A research paper made using the code in this repository and published in The
 European Journal of Physics B can be found [here](https://rdcu.be/cilHT). A
 preprint version of the paper can be found
-[here](https://arxiv.org/abs/2010.15105).
+[here](https://arxiv.org/abs/2010.15105). To
+[cite](https://github.com/juanhenao21/financial_response_spread_year/blob/master/CITATION.md)
+the papers or the code you can use the following BibTeX suggestions.
 
 
 I reproduce in the

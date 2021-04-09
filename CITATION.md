@@ -18,7 +18,7 @@ To cite the regular article published in
   issn = {1434-6036},
 }
 
-To cite a [preprint](https://arxiv.org/abs/2010.15105) version of the work
+To cite the [preprint](https://arxiv.org/abs/2010.15105) version of the work
 
 @misc{my_paper_response_financial_arxiv,
   title={Price response functions and spread impact in correlated financial
