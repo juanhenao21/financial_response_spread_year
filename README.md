@@ -3,11 +3,19 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://financial-response-spread-year.readthedocs.io/en/latest/)
 [![DOI](https://zenodo.org/badge/158874831.svg)](https://zenodo.org/badge/latestdoi/158874831)
+[![GitHub version](https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/Naereen/StrapDown.js)
+[![ForTheBadge built-with-science](http://ForTheBadge.com/images/badges/built-with-science.svg)](https://GitHub.com/Naereen/)
 
 
 
 In this repository, I analyze the price response functions of the NASDAQ TAQ
 financial market data for the year 2008.
+
+A research paper made using the code in this repository and published in The
+European Journal of Physics B can be found [here](https://rdcu.be/cilHT). A
+preprint version of the paper can be found
+[here](https://arxiv.org/abs/2010.15105).
+
 
 I reproduce in the
 [taq_responses_physical](https://github.com/juanhenao21/financial_response_spread_year/tree/master/project/taq_responses_physical)
@@ -299,8 +307,8 @@ $ python3 taq_data_main_avg_responses_physical.py
 ## Expected results
 
 A complete explanation of this work can be found in this
-[paper](https://arxiv.org/abs/2010.15105). In general for the response
-functions, an increase to a maximum followed by a slowly decrease is expected.
+[paper](https://rdcu.be/cilHT). In general for the response functions, an
+increase to a maximum followed by a slowly decrease is expected.
 
 ![Response functions](paper/financial_response_spread_year_paper/figures/03_responses_physical_scale_2008.png)
 
