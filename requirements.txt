@@ -1,5 +1,5 @@
 matplotlib==3.1.1
-numpy==1.17.2
+numpy==1.22.0
 pandas==0.25.3
 pandocfilters==1.4.2
 tables==3.6.1
